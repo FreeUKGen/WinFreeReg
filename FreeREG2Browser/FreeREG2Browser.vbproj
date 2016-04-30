@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{38629534-0DF4-4C0D-AFE3-B90114DDEEDB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>WinREG</RootNamespace>
+    <AssemblyName>FreeREG2Browser</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionStrict>Off</OptionStrict>
+    <OptionInfer>On</OptionInfer>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>WinFreeReg.snk</AssemblyOriginatorKeyFile>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>FreeREG2Browser.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>FreeREG2Browser.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DocumentationFile>FreeREG2Browser.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>FreeREG2Browser.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Visual Studio 2008\HtmlAgilityPack.1.4.6\Net20\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="regexlib">
+      <HintPath>..\..\..\..\Visual Studio 2008\Projects\WinREG_3.2\WinREG_3\bin\x86\Release\regexlib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\TestFreeREG2Browser\ErrorMessages.Designer.vb">
+      <Link>ErrorMessages.Designer.vb</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessages.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="AppSettings.vb" />
+    <Compile Include="BackgroundWorkerException.vb" />
+    <Compile Include="Batches.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Batches.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Batches.vb">
+      <DependentUpon>Batches.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="classTranscriptionFile.vb" />
+    <Compile Include="classUncorrectedErrors.vb" />
+    <Compile Include="CookieAwareWebClient.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="dlgCorrectTableError.Designer.vb">
+      <DependentUpon>dlgCorrectTableError.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgCorrectTableError.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formStartNewFile.Designer.vb">
+      <DependentUpon>formStartNewFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formStartNewFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formBaptismRecord.Designer.vb">
+      <DependentUpon>formBaptismRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formBaptismRecord.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formBatchContents.Designer.vb">
+      <DependentUpon>formBatchContents.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formBatchContents.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formBurialRecord.Designer.vb">
+      <DependentUpon>formBurialRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formBurialRecord.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formFileDetails.Designer.vb">
+      <DependentUpon>formFileDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formFileDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formFileWorkspace.Designer.vb">
+      <DependentUpon>formFileWorkspace.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formFileWorkspace.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formFreeregTables.Designer.vb">
+      <DependentUpon>formFreeregTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formFreeregTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formLogin.Designer.vb">
+      <DependentUpon>formLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formMarriageRecord.Designer.vb">
+      <DependentUpon>formMarriageRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formMarriageRecord.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formPageReceived.Designer.vb">
+      <DependentUpon>formPageReceived.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formPageReceived.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formTablesErrors.Designer.vb">
+      <DependentUpon>formTablesErrors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formTablesErrors.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formUserDetails.Designer.vb">
+      <DependentUpon>formUserDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formUserDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="formUserTables.Designer.vb">
+      <DependentUpon>formUserTables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formUserTables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FreeREG2Browser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FreeregTables.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FreeregTables.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="FreeregTables.vb">
+      <DependentUpon>FreeregTables.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="UserDetails.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDetails.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="UserDetails.vb">
+      <DependentUpon>UserDetails.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="dlgCorrectTableError.resx">
+      <DependentUpon>dlgCorrectTableError.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formStartNewFile.resx">
+      <DependentUpon>formStartNewFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formBaptismRecord.resx">
+      <DependentUpon>formBaptismRecord.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formBatchContents.resx">
+      <DependentUpon>formBatchContents.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formBurialRecord.resx">
+      <DependentUpon>formBurialRecord.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formFileDetails.resx">
+      <DependentUpon>formFileDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formFileWorkspace.resx">
+      <DependentUpon>formFileWorkspace.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formFreeregTables.resx">
+      <DependentUpon>formFreeregTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formLogin.resx">
+      <DependentUpon>formLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMarriageRecord.resx">
+      <DependentUpon>formMarriageRecord.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formPageReceived.resx">
+      <DependentUpon>formPageReceived.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formTablesErrors.resx">
+      <DependentUpon>formTablesErrors.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formUserDetails.resx">
+      <DependentUpon>formUserDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formUserTables.resx">
+      <DependentUpon>formUserTables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FreeREG2Browser.resx">
+      <DependentUpon>FreeREG2Browser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Batches.xsc">
+      <DependentUpon>Batches.xsd</DependentUpon>
+    </None>
+    <None Include="Batches.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Batches.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="Batches.xss">
+      <DependentUpon>Batches.xsd</DependentUpon>
+    </None>
+    <None Include="FreeregTables.xsc">
+      <DependentUpon>FreeregTables.xsd</DependentUpon>
+    </None>
+    <None Include="FreeregTables.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>FreeregTables.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="FreeregTables.xss">
+      <DependentUpon>FreeregTables.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="UserDetails.xsc">
+      <DependentUpon>UserDetails.xsd</DependentUpon>
+    </None>
+    <None Include="UserDetails.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>UserDetails.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="UserDetails.xss">
+      <DependentUpon>UserDetails.xsd</DependentUpon>
+    </None>
+    <None Include="WinFreeReg.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\ObjectListViewFull-2.9.0\ObjectListViewDemo\ObjectListView\ObjectListView2008.csproj">
+      <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
+      <Name>ObjectListView2008</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LookupTables\LookupTables.vbproj">
+      <Project>{C3EAF49A-E864-4234-8860-DBDD335778F0}</Project>
+      <Name>LookupTables</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TranscriptionTables\TranscriptionTables.vbproj">
+      <Project>{88B014CC-B9C9-4CD5-BF08-AF67453D31E9}</Project>
+      <Name>TranscriptionTables</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\DataSources\LookupTables.datasource" />
+    <None Include="My Project\DataSources\TranscriptionTables.datasource" />
+    <None Include="Resources\save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{94E38DFF-614B-4CBD-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\TestFreeREG2Browser\ErrorMessages.xsc">
+      <Link>ErrorMessages.xsc</Link>
+      <DependentUpon>ErrorMessages.xsd</DependentUpon>
+    </None>
+    <None Include="..\TestFreeREG2Browser\ErrorMessages.xsd">
+      <Link>ErrorMessages.xsd</Link>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ErrorMessages.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="..\TestFreeREG2Browser\ErrorMessages.xss">
+      <Link>ErrorMessages.xss</Link>
+      <DependentUpon>ErrorMessages.xsd</DependentUpon>
+    </None>
+    <None Include="My Project\DataSources\classUncorrectedErrors.datasource" />
+    <None Include="My Project\DataSources\TranscriptionFileClass.datasource" />
+    <None Include="Resources\appico.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\..\..\FreeREG\WinREG for Windows\ErrorMessages.xml">
+      <Link>Other Files\ErrorMessages.xml</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="FreeregTables" targetNamespace="http://tempuri.org/FreeregTables.xsd" xmlns:mstns="http://tempuri.org/FreeregTables.xsd" xmlns="http://tempuri.org/FreeregTables.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="FreeregTables" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="FreeregTables" msprop:Generator_DataSetName="FreeregTables" msprop:EnableTableAdapterManager="true">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="RegisterTypes" msprop:Generator_UserTableName="RegisterTypes" msprop:Generator_RowDeletedName="RegisterTypesRowDeleted" msprop:Generator_RowChangedName="RegisterTypesRowChanged" msprop:Generator_RowClassName="RegisterTypesRow" msprop:Generator_RowChangingName="RegisterTypesRowChanging" msprop:Generator_RowEvArgName="RegisterTypesRowChangeEvent" msprop:Generator_RowEvHandlerName="RegisterTypesRowChangeEventHandler" msprop:Generator_TableClassName="RegisterTypesDataTable" msprop:Generator_TableVarName="tableRegisterTypes" msprop:Generator_RowDeletingName="RegisterTypesRowDeleting" msprop:Generator_TablePropName="RegisterTypes">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Type" msprop:Generator_UserColumnName="Type" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_ColumnPropNameInRow="Type">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:Generator_UserColumnName="Description" msprop:nullValue="_empty" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_ColumnPropNameInRow="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Counties" msprop:Generator_UserTableName="Counties" msprop:Generator_RowDeletedName="CountiesRowDeleted" msprop:Generator_RowChangedName="CountiesRowChanged" msprop:Generator_RowClassName="CountiesRow" msprop:Generator_RowChangingName="CountiesRowChanging" msprop:Generator_RowEvArgName="CountiesRowChangeEvent" msprop:Generator_RowEvHandlerName="CountiesRowChangeEventHandler" msprop:Generator_TableClassName="CountiesDataTable" msprop:Generator_TableVarName="tableCounties" msprop:Generator_RowDeletingName="CountiesRowDeleting" msprop:Generator_TablePropName="Counties">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ChapmanCode" msdata:Caption="Chapman Code" msprop:Generator_UserColumnName="ChapmanCode" msprop:Generator_ColumnVarNameInTable="columnChapmanCode" msprop:Generator_ColumnPropNameInRow="ChapmanCode" msprop:Generator_ColumnPropNameInTable="ChapmanCodeColumn">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CountyName" msprop:Generator_UserColumnName="CountyName" msprop:Generator_ColumnVarNameInTable="columnCountyName" msprop:Generator_ColumnPropNameInRow="CountyName" msprop:Generator_ColumnPropNameInTable="CountyNameColumn" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Notes" msprop:Generator_UserColumnName="Notes" msprop:Generator_ColumnVarNameInTable="columnNotes" msprop:Generator_ColumnPropNameInRow="Notes" msprop:Generator_ColumnPropNameInTable="NotesColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Places" msprop:Generator_UserTableName="Places" msprop:Generator_RowDeletedName="PlacesRowDeleted" msprop:Generator_RowChangedName="PlacesRowChanged" msprop:Generator_RowClassName="PlacesRow" msprop:Generator_RowChangingName="PlacesRowChanging" msprop:Generator_RowEvArgName="PlacesRowChangeEvent" msprop:Generator_RowEvHandlerName="PlacesRowChangeEventHandler" msprop:Generator_TableClassName="PlacesDataTable" msprop:Generator_TableVarName="tablePlaces" msprop:Generator_RowDeletingName="PlacesRowDeleting" msprop:Generator_TablePropName="Places">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PlaceName" msprop:Generator_UserColumnName="PlaceName" msprop:Generator_ColumnPropNameInRow="PlaceName" msprop:Generator_ColumnVarNameInTable="columnPlaceName" msprop:Generator_ColumnPropNameInTable="PlaceNameColumn" type="xs:string" />
+              <xs:element name="ChapmanCode" msprop:Generator_UserColumnName="ChapmanCode" msprop:Generator_ColumnVarNameInTable="columnChapmanCode" msprop:Generator_ColumnPropNameInRow="ChapmanCode" msprop:Generator_ColumnPropNameInTable="ChapmanCodeColumn" type="xs:string" />
+              <xs:element name="Country" msprop:Generator_UserColumnName="Country" msprop:Generator_ColumnPropNameInRow="Country" msprop:Generator_ColumnVarNameInTable="columnCountry" msprop:Generator_ColumnPropNameInTable="CountryColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="CountyName" msprop:Generator_UserColumnName="CountyName" msprop:Generator_ColumnPropNameInRow="CountyName" msprop:Generator_ColumnVarNameInTable="columnCountyName" msprop:Generator_ColumnPropNameInTable="CountyNameColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Notes" msprop:Generator_UserColumnName="Notes" msprop:Generator_ColumnPropNameInRow="Notes" msprop:Generator_ColumnVarNameInTable="columnNotes" msprop:Generator_ColumnPropNameInTable="NotesColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Churches" msprop:Generator_UserTableName="Churches" msprop:Generator_RowDeletedName="ChurchesRowDeleted" msprop:Generator_RowChangedName="ChurchesRowChanged" msprop:Generator_RowClassName="ChurchesRow" msprop:Generator_RowChangingName="ChurchesRowChanging" msprop:Generator_RowEvArgName="ChurchesRowChangeEvent" msprop:Generator_RowEvHandlerName="ChurchesRowChangeEventHandler" msprop:Generator_TableClassName="ChurchesDataTable" msprop:Generator_TableVarName="tableChurches" msprop:Generator_RowDeletingName="ChurchesRowDeleting" msprop:Generator_TablePropName="Churches">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ChurchName" msprop:Generator_UserColumnName="ChurchName" msprop:Generator_ColumnVarNameInTable="columnChurchName" msprop:Generator_ColumnPropNameInRow="ChurchName" msprop:Generator_ColumnPropNameInTable="ChurchNameColumn" type="xs:string" />
+              <xs:element name="ChapmanCode" msprop:Generator_UserColumnName="ChapmanCode" msprop:Generator_ColumnVarNameInTable="columnChapmanCode" msprop:Generator_ColumnPropNameInRow="ChapmanCode" msprop:Generator_ColumnPropNameInTable="ChapmanCodeColumn" type="xs:string" />
+              <xs:element name="PlaceName" msprop:Generator_UserColumnName="PlaceName" msprop:Generator_ColumnVarNameInTable="columnPlaceName" msprop:Generator_ColumnPropNameInRow="PlaceName" msprop:Generator_ColumnPropNameInTable="PlaceNameColumn" type="xs:string" />
+              <xs:element name="Location" msprop:Generator_UserColumnName="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Denomination" msprop:Generator_UserColumnName="Denomination" msprop:Generator_ColumnVarNameInTable="columnDenomination" msprop:Generator_ColumnPropNameInRow="Denomination" msprop:Generator_ColumnPropNameInTable="DenominationColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Website" msprop:Generator_UserColumnName="Website" msprop:Generator_ColumnVarNameInTable="columnWebsite" msprop:Generator_ColumnPropNameInRow="Website" msprop:Generator_ColumnPropNameInTable="WebsiteColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="LastAmended" msprop:Generator_UserColumnName="LastAmended" msprop:Generator_ColumnVarNameInTable="columnLastAmended" msprop:Generator_ColumnPropNameInRow="LastAmended" msprop:Generator_ColumnPropNameInTable="LastAmendedColumn" type="xs:string" minOccurs="0" />
+              <xs:element name="Notes" msprop:Generator_UserColumnName="Notes" msprop:Generator_ColumnVarNameInTable="columnNotes" msprop:Generator_ColumnPropNameInRow="Notes" msprop:Generator_ColumnPropNameInTable="NotesColumn" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="RegisterTypeKey" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:RegisterTypes" />
+      <xs:field xpath="mstns:Type" />
+    </xs:unique>
+    <xs:unique name="CountyKey" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Counties" />
+      <xs:field xpath="mstns:ChapmanCode" />
+    </xs:unique>
+    <xs:unique name="PlaceKey" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Places" />
+      <xs:field xpath="mstns:PlaceName" />
+      <xs:field xpath="mstns:ChapmanCode" />
+    </xs:unique>
+    <xs:unique name="ChurchKey" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:Churches" />
+      <xs:field xpath="mstns:ChurchName" />
+      <xs:field xpath="mstns:ChapmanCode" />
+      <xs:field xpath="mstns:PlaceName" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
