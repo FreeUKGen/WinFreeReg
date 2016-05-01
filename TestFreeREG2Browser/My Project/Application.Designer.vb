@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.WinREG.frmTestBrowser
+         Me.MainForm = Global.WinFreeReg.frmTestBrowser
         End Sub
     End Class
 End Namespace

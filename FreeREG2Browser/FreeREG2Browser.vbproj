@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{38629534-0DF4-4C0D-AFE3-B90114DDEEDB}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>WinREG</RootNamespace>
+    <RootNamespace>WinFreeReg</RootNamespace>
     <AssemblyName>FreeREG2Browser</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>

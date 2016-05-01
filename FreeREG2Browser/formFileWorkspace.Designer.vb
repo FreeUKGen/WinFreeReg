@@ -866,16 +866,16 @@ Partial Class formFileWorkspace
 		'BindingNavigatorSaveFile
 		'
 		Me.BindingNavigatorSaveFile.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.BindingNavigatorSaveFile.Image = Global.WinREG.My.Resources.Resources.save
-		Me.BindingNavigatorSaveFile.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.BindingNavigatorSaveFile.Name = "BindingNavigatorSaveFile"
-		Me.BindingNavigatorSaveFile.Size = New System.Drawing.Size(23, 22)
-		Me.BindingNavigatorSaveFile.Text = "Save File"
-		'
-		'BindingNavigatorFileDetails
-		'
-		Me.BindingNavigatorFileDetails.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.BindingNavigatorFileDetails.Image = Global.WinREG.My.Resources.Resources.appico
+      Me.BindingNavigatorSaveFile.Image = Global.WinFreeReg.My.Resources.Resources.save
+      Me.BindingNavigatorSaveFile.ImageTransparentColor = System.Drawing.Color.Magenta
+      Me.BindingNavigatorSaveFile.Name = "BindingNavigatorSaveFile"
+      Me.BindingNavigatorSaveFile.Size = New System.Drawing.Size(23, 22)
+      Me.BindingNavigatorSaveFile.Text = "Save File"
+      '
+      'BindingNavigatorFileDetails
+      '
+      Me.BindingNavigatorFileDetails.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+      Me.BindingNavigatorFileDetails.Image = Global.WinFreeReg.My.Resources.Resources.appico
 		Me.BindingNavigatorFileDetails.ImageTransparentColor = System.Drawing.Color.Magenta
 		Me.BindingNavigatorFileDetails.Name = "BindingNavigatorFileDetails"
 		Me.BindingNavigatorFileDetails.Size = New System.Drawing.Size(23, 22)

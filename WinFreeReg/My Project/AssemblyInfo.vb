@@ -10,9 +10,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("WinFreeReg")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyCompany("FreeUKGenealogy")> 
 <Assembly: AssemblyProduct("WinFreeReg")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016")> 
+<Assembly: AssemblyCopyright("Copyright ©  2016 Free UK Genealogy")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

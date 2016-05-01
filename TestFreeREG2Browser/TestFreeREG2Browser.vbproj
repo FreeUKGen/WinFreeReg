@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{3C4FFB01-9F5B-4688-94AB-49BFEB4633DE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>WinREG.My.MyApplication</StartupObject>
-    <RootNamespace>WinREG</RootNamespace>
+    <StartupObject>WinFreeReg.My.MyApplication</StartupObject>
+    <RootNamespace>WinFreeReg</RootNamespace>
     <AssemblyName>TestFreeREG2Browser</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>

@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{88B014CC-B9C9-4CD5-BF08-AF67453D31E9}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>WinREG</RootNamespace>
+    <RootNamespace>WinFreeReg</RootNamespace>
     <AssemblyName>TranscriptionTables</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>

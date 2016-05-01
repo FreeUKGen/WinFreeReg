@@ -1,33 +1,34 @@
 ﻿Imports System.IO
+Imports WinFreeReg
 
 Public Class frmTestBrowser
 
 
-	Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
+   Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
 
-		Using frm As New FreeREG2Browser()
-			frm.ShowDialog()
-		End Using
+      Using frm As New FreeREG2Browser()
+         frm.ShowDialog()
+      End Using
 
-	End Sub
+   End Sub
 
-	Private Sub frmTestBrowser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+   Private Sub frmTestBrowser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-	End Sub
+   End Sub
 
-	Private Sub btnErrorMessages_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnErrorMessages.Click
-		Try
-			Dim BaseDataDirectory = String.Format("{0}\{1}\{2}", My.Computer.FileSystem.SpecialDirectories.MyDocuments, Application.CompanyName, Application.ProductName)
-			Dim ErrorMEssageFileName As String = Path.Combine(BaseDataDirectory, "ErrorMessages.xml")
+   Private Sub btnErrorMessages_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnErrorMessages.Click
+      Try
+         Dim BaseDataDirectory = String.Format("{0}\{1}\{2}", My.Computer.FileSystem.SpecialDirectories.MyDocuments, Application.CompanyName, Application.ProductName)
+         Dim ErrorMEssageFileName As String = Path.Combine(BaseDataDirectory, "ErrorMessages.xml")
 
-			Using dlg As New dlgErrorMessage(ErrorMEssageFileName)
-				dlg.ShowDialog()
-			End Using
+         Using dlg As New dlgErrorMessage(ErrorMEssageFileName)
+            dlg.ShowDialog()
+         End Using
 
-		Catch ex As ArgumentNullException
+      Catch ex As ArgumentNullException
 
-		Catch ex As Exception
+      Catch ex As Exception
 
-		End Try
-	End Sub
+      End Try
+   End Sub
 End Class

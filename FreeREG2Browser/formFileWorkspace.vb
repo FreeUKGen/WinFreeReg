@@ -38,15 +38,15 @@ Public Class formFileWorkspace
 		End Set
 	End Property
 
-	Private m_ErrorMessageTable As WinREG.ErrorMessages.ErrorMessagesDataTable
-	Public Property ErrorMessageTable() As WinREG.ErrorMessages.ErrorMessagesDataTable
-		Get
-			Return m_ErrorMessageTable
-		End Get
-		Set(ByVal value As WinREG.ErrorMessages.ErrorMessagesDataTable)
-			m_ErrorMessageTable = value
-		End Set
-	End Property
+   Private m_ErrorMessageTable As WinFreeReg.ErrorMessages.ErrorMessagesDataTable
+   Public Property ErrorMessageTable() As WinFreeReg.ErrorMessages.ErrorMessagesDataTable
+      Get
+         Return m_ErrorMessageTable
+      End Get
+      Set(ByVal value As WinFreeReg.ErrorMessages.ErrorMessagesDataTable)
+         m_ErrorMessageTable = value
+      End Set
+   End Property
 
 	Private m_fname As String
 	Private m_dlvStates()() As Byte = New Byte(3)() {}

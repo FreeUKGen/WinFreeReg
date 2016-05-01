@@ -6,7 +6,7 @@ Imports System.Xml
 Imports System.Text
 Imports System.IO
 Imports System.Net
-Imports WinREG.FreeREG2Browser
+Imports WinFreeReg.FreeREG2Browser
 Imports System.Collections.Specialized
 
 Public Class formFreeregTables

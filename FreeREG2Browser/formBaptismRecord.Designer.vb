@@ -239,7 +239,7 @@ Partial Class formBaptismRecord
 		'BaptismSexBindingSource
 		'
 		Me.BaptismSexBindingSource.DataMember = "BaptismSex"
-		Me.BaptismSexBindingSource.DataSource = GetType(WinREG.LookupTables)
+      Me.BaptismSexBindingSource.DataSource = GetType(WinFreeReg.LookupTables)
 		'
 		'FathersNameTextBox
 		'

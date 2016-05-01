@@ -437,72 +437,72 @@ Partial Class formMarriageRecord
 		'GroomConditionBindingSource
 		'
 		Me.GroomConditionBindingSource.DataMember = "GroomCondition"
-		Me.GroomConditionBindingSource.DataSource = GetType(WinREG.LookupTables)
-		'
-		'GroomOccupationTextBox
-		'
-		Me.GroomOccupationTextBox.Location = New System.Drawing.Point(156, 199)
-		Me.GroomOccupationTextBox.Name = "GroomOccupationTextBox"
-		Me.GroomOccupationTextBox.Size = New System.Drawing.Size(121, 20)
-		Me.GroomOccupationTextBox.TabIndex = 16
-		Me.GroomOccupationTextBox.Tag = "GroomOccupation"
-		'
-		'GroomAbodeTextBox
-		'
-		Me.GroomAbodeTextBox.Location = New System.Drawing.Point(156, 225)
-		Me.GroomAbodeTextBox.Name = "GroomAbodeTextBox"
-		Me.GroomAbodeTextBox.Size = New System.Drawing.Size(121, 20)
-		Me.GroomAbodeTextBox.TabIndex = 18
-		Me.GroomAbodeTextBox.Tag = "GroomAbode"
-		'
-		'BrideForenamesTextBox
-		'
-		Me.BrideForenamesTextBox.Location = New System.Drawing.Point(438, 68)
-		Me.BrideForenamesTextBox.Name = "BrideForenamesTextBox"
-		Me.BrideForenamesTextBox.Size = New System.Drawing.Size(121, 20)
-		Me.BrideForenamesTextBox.TabIndex = 20
-		Me.BrideForenamesTextBox.Tag = "BrideForenames"
-		'
-		'BrideSurnameTextBox
-		'
-		Me.BrideSurnameTextBox.Location = New System.Drawing.Point(438, 94)
-		Me.BrideSurnameTextBox.Name = "BrideSurnameTextBox"
-		Me.BrideSurnameTextBox.Size = New System.Drawing.Size(121, 20)
-		Me.BrideSurnameTextBox.TabIndex = 22
-		Me.BrideSurnameTextBox.Tag = "BrideSurname"
-		'
-		'BrideAgeTextBox
-		'
-		Me.BrideAgeTextBox.Location = New System.Drawing.Point(438, 120)
-		Me.BrideAgeTextBox.Name = "BrideAgeTextBox"
-		Me.BrideAgeTextBox.Size = New System.Drawing.Size(121, 20)
-		Me.BrideAgeTextBox.TabIndex = 24
-		Me.BrideAgeTextBox.Tag = "BrideAge"
-		'
-		'BrideParishTextBox
-		'
-		Me.BrideParishTextBox.Location = New System.Drawing.Point(438, 146)
-		Me.BrideParishTextBox.Name = "BrideParishTextBox"
-		Me.BrideParishTextBox.Size = New System.Drawing.Size(121, 20)
-		Me.BrideParishTextBox.TabIndex = 26
-		Me.BrideParishTextBox.Tag = "BrideParish"
-		'
-		'BrideConditionComboBox
-		'
-		Me.BrideConditionComboBox.DataSource = Me.BrideConditionBindingSource
-		Me.BrideConditionComboBox.DisplayMember = "DisplayValue"
-		Me.BrideConditionComboBox.FormattingEnabled = True
-		Me.BrideConditionComboBox.Location = New System.Drawing.Point(438, 172)
-		Me.BrideConditionComboBox.Name = "BrideConditionComboBox"
-		Me.BrideConditionComboBox.Size = New System.Drawing.Size(121, 21)
-		Me.BrideConditionComboBox.TabIndex = 28
-		Me.BrideConditionComboBox.Tag = "BrideCondition"
-		Me.BrideConditionComboBox.ValueMember = "FileValue"
-		'
-		'BrideConditionBindingSource
-		'
-		Me.BrideConditionBindingSource.DataMember = "BrideCondition"
-		Me.BrideConditionBindingSource.DataSource = GetType(WinREG.LookupTables)
+      Me.GroomConditionBindingSource.DataSource = GetType(WinFreeReg.LookupTables)
+      '
+      'GroomOccupationTextBox
+      '
+      Me.GroomOccupationTextBox.Location = New System.Drawing.Point(156, 199)
+      Me.GroomOccupationTextBox.Name = "GroomOccupationTextBox"
+      Me.GroomOccupationTextBox.Size = New System.Drawing.Size(121, 20)
+      Me.GroomOccupationTextBox.TabIndex = 16
+      Me.GroomOccupationTextBox.Tag = "GroomOccupation"
+      '
+      'GroomAbodeTextBox
+      '
+      Me.GroomAbodeTextBox.Location = New System.Drawing.Point(156, 225)
+      Me.GroomAbodeTextBox.Name = "GroomAbodeTextBox"
+      Me.GroomAbodeTextBox.Size = New System.Drawing.Size(121, 20)
+      Me.GroomAbodeTextBox.TabIndex = 18
+      Me.GroomAbodeTextBox.Tag = "GroomAbode"
+      '
+      'BrideForenamesTextBox
+      '
+      Me.BrideForenamesTextBox.Location = New System.Drawing.Point(438, 68)
+      Me.BrideForenamesTextBox.Name = "BrideForenamesTextBox"
+      Me.BrideForenamesTextBox.Size = New System.Drawing.Size(121, 20)
+      Me.BrideForenamesTextBox.TabIndex = 20
+      Me.BrideForenamesTextBox.Tag = "BrideForenames"
+      '
+      'BrideSurnameTextBox
+      '
+      Me.BrideSurnameTextBox.Location = New System.Drawing.Point(438, 94)
+      Me.BrideSurnameTextBox.Name = "BrideSurnameTextBox"
+      Me.BrideSurnameTextBox.Size = New System.Drawing.Size(121, 20)
+      Me.BrideSurnameTextBox.TabIndex = 22
+      Me.BrideSurnameTextBox.Tag = "BrideSurname"
+      '
+      'BrideAgeTextBox
+      '
+      Me.BrideAgeTextBox.Location = New System.Drawing.Point(438, 120)
+      Me.BrideAgeTextBox.Name = "BrideAgeTextBox"
+      Me.BrideAgeTextBox.Size = New System.Drawing.Size(121, 20)
+      Me.BrideAgeTextBox.TabIndex = 24
+      Me.BrideAgeTextBox.Tag = "BrideAge"
+      '
+      'BrideParishTextBox
+      '
+      Me.BrideParishTextBox.Location = New System.Drawing.Point(438, 146)
+      Me.BrideParishTextBox.Name = "BrideParishTextBox"
+      Me.BrideParishTextBox.Size = New System.Drawing.Size(121, 20)
+      Me.BrideParishTextBox.TabIndex = 26
+      Me.BrideParishTextBox.Tag = "BrideParish"
+      '
+      'BrideConditionComboBox
+      '
+      Me.BrideConditionComboBox.DataSource = Me.BrideConditionBindingSource
+      Me.BrideConditionComboBox.DisplayMember = "DisplayValue"
+      Me.BrideConditionComboBox.FormattingEnabled = True
+      Me.BrideConditionComboBox.Location = New System.Drawing.Point(438, 172)
+      Me.BrideConditionComboBox.Name = "BrideConditionComboBox"
+      Me.BrideConditionComboBox.Size = New System.Drawing.Size(121, 21)
+      Me.BrideConditionComboBox.TabIndex = 28
+      Me.BrideConditionComboBox.Tag = "BrideCondition"
+      Me.BrideConditionComboBox.ValueMember = "FileValue"
+      '
+      'BrideConditionBindingSource
+      '
+      Me.BrideConditionBindingSource.DataMember = "BrideCondition"
+      Me.BrideConditionBindingSource.DataSource = GetType(WinFreeReg.LookupTables)
 		'
 		'BrideOccupationTextBox
 		'

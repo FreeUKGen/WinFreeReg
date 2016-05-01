@@ -40,15 +40,15 @@ Public Class dlgErrorMessage
 		If Me.DialogResult = Windows.Forms.DialogResult.Cancel Then Exit Sub
 
 		If ErrorMessages.Tables("ErrorMessages").HasErrors Then
-			Dim errors As WinREG.ErrorMessages.ErrorMessagesRow() = ErrorMessages.Tables("ErrorMessages").GetErrors()
-			e.Cancel = True
-		Else
-			Dim changes As WinREG.ErrorMessages.ErrorMessagesDataTable = CType(ErrorMessages.Tables("ErrorMessages"), WinREG.ErrorMessages.ErrorMessagesDataTable).GetChanges()
-			If changes IsNot Nothing Then
-				For Each row In changes.Rows
-					Beep()
-				Next
-			End If
+         Dim errors As WinFreeReg.ErrorMessages.ErrorMessagesRow() = ErrorMessages.Tables("ErrorMessages").GetErrors()
+         e.Cancel = True
+      Else
+         Dim changes As WinFreeReg.ErrorMessages.ErrorMessagesDataTable = CType(ErrorMessages.Tables("ErrorMessages"), WinFreeReg.ErrorMessages.ErrorMessagesDataTable).GetChanges()
+         If changes IsNot Nothing Then
+            For Each row In changes.Rows
+               Beep()
+            Next
+         End If
 		End If
 	End Sub
 

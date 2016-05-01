@@ -219,7 +219,7 @@ Partial Class formBurialRecord
 		'BurialRelationshipBindingSource
 		'
 		Me.BurialRelationshipBindingSource.DataMember = "BurialRelationship"
-		Me.BurialRelationshipBindingSource.DataSource = GetType(WinREG.LookupTables)
+      Me.BurialRelationshipBindingSource.DataSource = GetType(WinFreeReg.LookupTables)
 		'
 		'MaleForenamesTextBox
 		'

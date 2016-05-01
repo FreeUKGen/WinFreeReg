@@ -10,9 +10,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("LookupTables")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyCompany("FreeUKGenealogy")> 
 <Assembly: AssemblyProduct("LookupTables")> 
-<Assembly: AssemblyCopyright("Copyright ©  2010-2015 EmJay Software")> 
+<Assembly: AssemblyCopyright("Copyright ©  2016 Free UK Genealogy")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

@@ -10,9 +10,9 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("FreeREG2Browser")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("FreeREG")> 
+<Assembly: AssemblyCompany("FreeUKGenealogy")> 
 <Assembly: AssemblyProduct("FreeREG2Browser")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016")> 
+<Assembly: AssemblyCopyright("Copyright ©  2016 Free UK Genealogy")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

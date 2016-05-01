@@ -207,268 +207,268 @@ Partial Class formUserTables
 		'BindingNavigatorSaveChanges
 		'
 		Me.BindingNavigatorSaveChanges.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-		Me.BindingNavigatorSaveChanges.Image = Global.WinREG.My.Resources.Resources.save
-		Me.BindingNavigatorSaveChanges.ImageTransparentColor = System.Drawing.Color.Magenta
-		Me.BindingNavigatorSaveChanges.Name = "BindingNavigatorSaveChanges"
-		Me.BindingNavigatorSaveChanges.Size = New System.Drawing.Size(23, 22)
-		Me.BindingNavigatorSaveChanges.Text = "Save"
-		'
-		'UserTablesTabControl
-		'
-		Me.UserTablesTabControl.Controls.Add(Me.tabBaptismSex)
-		Me.UserTablesTabControl.Controls.Add(Me.tabBurialRelationship)
-		Me.UserTablesTabControl.Controls.Add(Me.tabGroomCondition)
-		Me.UserTablesTabControl.Controls.Add(Me.tabBrideCondition)
-		Me.UserTablesTabControl.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.UserTablesTabControl.Location = New System.Drawing.Point(0, 0)
-		Me.UserTablesTabControl.Name = "UserTablesTabControl"
-		Me.UserTablesTabControl.SelectedIndex = 0
-		Me.UserTablesTabControl.Size = New System.Drawing.Size(542, 311)
-		Me.UserTablesTabControl.TabIndex = 0
-		'
-		'tabBaptismSex
-		'
-		Me.tabBaptismSex.Controls.Add(Me.dlvBaptismSex)
-		Me.tabBaptismSex.Location = New System.Drawing.Point(4, 22)
-		Me.tabBaptismSex.Name = "tabBaptismSex"
-		Me.tabBaptismSex.Padding = New System.Windows.Forms.Padding(3)
-		Me.tabBaptismSex.Size = New System.Drawing.Size(534, 285)
-		Me.tabBaptismSex.TabIndex = 0
-		Me.tabBaptismSex.Text = "Baptism Sex"
-		Me.tabBaptismSex.UseVisualStyleBackColor = True
-		'
-		'dlvBaptismSex
-		'
-		Me.dlvBaptismSex.AllColumns.Add(Me.olvcCode)
-		Me.dlvBaptismSex.AllColumns.Add(Me.olvcType)
-		Me.dlvBaptismSex.AllColumns.Add(Me.olvcDescription)
-		Me.dlvBaptismSex.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
-		Me.dlvBaptismSex.CellEditUseWholeCell = False
-		Me.dlvBaptismSex.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcCode, Me.olvcDescription})
-		Me.dlvBaptismSex.Cursor = System.Windows.Forms.Cursors.Default
-		Me.dlvBaptismSex.DataSource = Me.bsBaptismSex
-		Me.dlvBaptismSex.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.dlvBaptismSex.FullRowSelect = True
-		Me.dlvBaptismSex.GridLines = True
-		Me.dlvBaptismSex.HighlightBackgroundColor = System.Drawing.Color.Empty
-		Me.dlvBaptismSex.HighlightForegroundColor = System.Drawing.Color.Empty
-		Me.dlvBaptismSex.Location = New System.Drawing.Point(3, 3)
-		Me.dlvBaptismSex.MultiSelect = False
-		Me.dlvBaptismSex.Name = "dlvBaptismSex"
-		Me.dlvBaptismSex.ShowGroups = False
-		Me.dlvBaptismSex.Size = New System.Drawing.Size(528, 279)
-		Me.dlvBaptismSex.TabIndex = 0
-		Me.dlvBaptismSex.UseCompatibleStateImageBehavior = False
-		Me.dlvBaptismSex.View = System.Windows.Forms.View.Details
-		'
-		'olvcCode
-		'
-		Me.olvcCode.AspectName = "Code"
-		Me.olvcCode.Groupable = False
-		Me.olvcCode.Text = "Code"
-		Me.olvcCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		'
-		'olvcType
-		'
-		Me.olvcType.AspectName = "Type"
-		Me.olvcType.IsVisible = False
-		Me.olvcType.Text = "Type"
-		'
-		'olvcDescription
-		'
-		Me.olvcDescription.AspectName = "Description"
-		Me.olvcDescription.FillsFreeSpace = True
-		Me.olvcDescription.Groupable = False
-		Me.olvcDescription.Text = "Description"
-		'
-		'bsBaptismSex
-		'
-		Me.bsBaptismSex.DataMember = "BaptismSex"
-		Me.bsBaptismSex.DataSource = GetType(WinREG.LookupTables)
-		'
-		'tabBurialRelationship
-		'
-		Me.tabBurialRelationship.Controls.Add(Me.dlvBurialRelationship)
-		Me.tabBurialRelationship.Location = New System.Drawing.Point(4, 22)
-		Me.tabBurialRelationship.Name = "tabBurialRelationship"
-		Me.tabBurialRelationship.Padding = New System.Windows.Forms.Padding(3)
-		Me.tabBurialRelationship.Size = New System.Drawing.Size(534, 285)
-		Me.tabBurialRelationship.TabIndex = 1
-		Me.tabBurialRelationship.Text = "Burial Relationships"
-		Me.tabBurialRelationship.UseVisualStyleBackColor = True
-		'
-		'dlvBurialRelationship
-		'
-		Me.dlvBurialRelationship.AllColumns.Add(Me.olvcFileValue1)
-		Me.dlvBurialRelationship.AllColumns.Add(Me.olvcType1)
-		Me.dlvBurialRelationship.AllColumns.Add(Me.olvcDisplayValue1)
-		Me.dlvBurialRelationship.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
-		Me.dlvBurialRelationship.CellEditUseWholeCell = False
-		Me.dlvBurialRelationship.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcFileValue1, Me.olvcDisplayValue1})
-		Me.dlvBurialRelationship.Cursor = System.Windows.Forms.Cursors.Default
-		Me.dlvBurialRelationship.DataSource = Me.bsBurialRelationship
-		Me.dlvBurialRelationship.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.dlvBurialRelationship.FullRowSelect = True
-		Me.dlvBurialRelationship.GridLines = True
-		Me.dlvBurialRelationship.HighlightBackgroundColor = System.Drawing.Color.Empty
-		Me.dlvBurialRelationship.HighlightForegroundColor = System.Drawing.Color.Empty
-		Me.dlvBurialRelationship.Location = New System.Drawing.Point(3, 3)
-		Me.dlvBurialRelationship.MultiSelect = False
-		Me.dlvBurialRelationship.Name = "dlvBurialRelationship"
-		Me.dlvBurialRelationship.ShowGroups = False
-		Me.dlvBurialRelationship.Size = New System.Drawing.Size(528, 279)
-		Me.dlvBurialRelationship.TabIndex = 0
-		Me.dlvBurialRelationship.UseCompatibleStateImageBehavior = False
-		Me.dlvBurialRelationship.View = System.Windows.Forms.View.Details
-		'
-		'olvcFileValue1
-		'
-		Me.olvcFileValue1.AspectName = "FileValue"
-		Me.olvcFileValue1.Groupable = False
-		Me.olvcFileValue1.Text = "Code"
-		Me.olvcFileValue1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		'
-		'olvcType1
-		'
-		Me.olvcType1.AspectName = "Type"
-		Me.olvcType1.DisplayIndex = 0
-		Me.olvcType1.Groupable = False
-		Me.olvcType1.IsVisible = False
-		Me.olvcType1.Text = "Type"
-		'
-		'olvcDisplayValue1
-		'
-		Me.olvcDisplayValue1.AspectName = "DisplayValue"
-		Me.olvcDisplayValue1.FillsFreeSpace = True
-		Me.olvcDisplayValue1.Groupable = False
-		Me.olvcDisplayValue1.Text = "Description"
-		'
-		'bsBurialRelationship
-		'
-		Me.bsBurialRelationship.DataMember = "BurialRelationship"
-		Me.bsBurialRelationship.DataSource = GetType(WinREG.LookupTables)
-		'
-		'tabGroomCondition
-		'
-		Me.tabGroomCondition.Controls.Add(Me.dlvGroomCondition)
-		Me.tabGroomCondition.Location = New System.Drawing.Point(4, 22)
-		Me.tabGroomCondition.Name = "tabGroomCondition"
-		Me.tabGroomCondition.Padding = New System.Windows.Forms.Padding(3)
-		Me.tabGroomCondition.Size = New System.Drawing.Size(534, 285)
-		Me.tabGroomCondition.TabIndex = 2
-		Me.tabGroomCondition.Text = "Groom Conditions"
-		Me.tabGroomCondition.UseVisualStyleBackColor = True
-		'
-		'dlvGroomCondition
-		'
-		Me.dlvGroomCondition.AllColumns.Add(Me.olvcFileValue2)
-		Me.dlvGroomCondition.AllColumns.Add(Me.olvcType2)
-		Me.dlvGroomCondition.AllColumns.Add(Me.olvcDisplayValue2)
-		Me.dlvGroomCondition.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
-		Me.dlvGroomCondition.CellEditUseWholeCell = False
-		Me.dlvGroomCondition.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcFileValue2, Me.olvcDisplayValue2})
-		Me.dlvGroomCondition.Cursor = System.Windows.Forms.Cursors.Default
-		Me.dlvGroomCondition.DataSource = Me.bsGroomCondition
-		Me.dlvGroomCondition.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.dlvGroomCondition.FullRowSelect = True
-		Me.dlvGroomCondition.GridLines = True
-		Me.dlvGroomCondition.HighlightBackgroundColor = System.Drawing.Color.Empty
-		Me.dlvGroomCondition.HighlightForegroundColor = System.Drawing.Color.Empty
-		Me.dlvGroomCondition.Location = New System.Drawing.Point(3, 3)
-		Me.dlvGroomCondition.MultiSelect = False
-		Me.dlvGroomCondition.Name = "dlvGroomCondition"
-		Me.dlvGroomCondition.ShowGroups = False
-		Me.dlvGroomCondition.Size = New System.Drawing.Size(528, 279)
-		Me.dlvGroomCondition.TabIndex = 0
-		Me.dlvGroomCondition.UseCompatibleStateImageBehavior = False
-		Me.dlvGroomCondition.View = System.Windows.Forms.View.Details
-		'
-		'olvcFileValue2
-		'
-		Me.olvcFileValue2.AspectName = "FileValue"
-		Me.olvcFileValue2.Groupable = False
-		Me.olvcFileValue2.Text = "Code"
-		Me.olvcFileValue2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		'
-		'olvcType2
-		'
-		Me.olvcType2.AspectName = "Type"
-		Me.olvcType2.Groupable = False
-		Me.olvcType2.IsVisible = False
-		Me.olvcType2.Text = "Type"
-		'
-		'olvcDisplayValue2
-		'
-		Me.olvcDisplayValue2.AspectName = "DisplayValue"
-		Me.olvcDisplayValue2.FillsFreeSpace = True
-		Me.olvcDisplayValue2.Groupable = False
-		Me.olvcDisplayValue2.Text = "Description"
-		'
-		'bsGroomCondition
-		'
-		Me.bsGroomCondition.DataMember = "GroomCondition"
-		Me.bsGroomCondition.DataSource = GetType(WinREG.LookupTables)
-		'
-		'tabBrideCondition
-		'
-		Me.tabBrideCondition.Controls.Add(Me.dlvBrideCondition)
-		Me.tabBrideCondition.Location = New System.Drawing.Point(4, 22)
-		Me.tabBrideCondition.Name = "tabBrideCondition"
-		Me.tabBrideCondition.Padding = New System.Windows.Forms.Padding(3)
-		Me.tabBrideCondition.Size = New System.Drawing.Size(534, 285)
-		Me.tabBrideCondition.TabIndex = 3
-		Me.tabBrideCondition.Text = "Bride Conditions"
-		Me.tabBrideCondition.UseVisualStyleBackColor = True
-		'
-		'dlvBrideCondition
-		'
-		Me.dlvBrideCondition.AllColumns.Add(Me.olvcFileValue3)
-		Me.dlvBrideCondition.AllColumns.Add(Me.olvcType3)
-		Me.dlvBrideCondition.AllColumns.Add(Me.olvcDisplayValue3)
-		Me.dlvBrideCondition.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
-		Me.dlvBrideCondition.CellEditUseWholeCell = False
-		Me.dlvBrideCondition.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcFileValue3, Me.olvcDisplayValue3})
-		Me.dlvBrideCondition.Cursor = System.Windows.Forms.Cursors.Default
-		Me.dlvBrideCondition.DataSource = Me.bsBrideCOndition
-		Me.dlvBrideCondition.Dock = System.Windows.Forms.DockStyle.Fill
-		Me.dlvBrideCondition.FullRowSelect = True
-		Me.dlvBrideCondition.GridLines = True
-		Me.dlvBrideCondition.HighlightBackgroundColor = System.Drawing.Color.Empty
-		Me.dlvBrideCondition.HighlightForegroundColor = System.Drawing.Color.Empty
-		Me.dlvBrideCondition.Location = New System.Drawing.Point(3, 3)
-		Me.dlvBrideCondition.MultiSelect = False
-		Me.dlvBrideCondition.Name = "dlvBrideCondition"
-		Me.dlvBrideCondition.ShowGroups = False
-		Me.dlvBrideCondition.Size = New System.Drawing.Size(528, 279)
-		Me.dlvBrideCondition.TabIndex = 0
-		Me.dlvBrideCondition.UseCompatibleStateImageBehavior = False
-		Me.dlvBrideCondition.View = System.Windows.Forms.View.Details
-		'
-		'olvcFileValue3
-		'
-		Me.olvcFileValue3.AspectName = "FileValue"
-		Me.olvcFileValue3.Groupable = False
-		Me.olvcFileValue3.Text = "Code"
-		Me.olvcFileValue3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-		'
-		'olvcType3
-		'
-		Me.olvcType3.AspectName = "Type"
-		Me.olvcType3.Groupable = False
-		Me.olvcType3.IsVisible = False
-		Me.olvcType3.Text = "Type"
-		'
-		'olvcDisplayValue3
-		'
-		Me.olvcDisplayValue3.AspectName = "DisplayValue"
-		Me.olvcDisplayValue3.FillsFreeSpace = True
-		Me.olvcDisplayValue3.Groupable = False
-		Me.olvcDisplayValue3.Text = "Description"
-		'
-		'bsBrideCOndition
-		'
-		Me.bsBrideCOndition.DataMember = "BrideCondition"
-		Me.bsBrideCOndition.DataSource = GetType(WinREG.LookupTables)
+      Me.BindingNavigatorSaveChanges.Image = Global.WinFreeReg.My.Resources.Resources.save
+      Me.BindingNavigatorSaveChanges.ImageTransparentColor = System.Drawing.Color.Magenta
+      Me.BindingNavigatorSaveChanges.Name = "BindingNavigatorSaveChanges"
+      Me.BindingNavigatorSaveChanges.Size = New System.Drawing.Size(23, 22)
+      Me.BindingNavigatorSaveChanges.Text = "Save"
+      '
+      'UserTablesTabControl
+      '
+      Me.UserTablesTabControl.Controls.Add(Me.tabBaptismSex)
+      Me.UserTablesTabControl.Controls.Add(Me.tabBurialRelationship)
+      Me.UserTablesTabControl.Controls.Add(Me.tabGroomCondition)
+      Me.UserTablesTabControl.Controls.Add(Me.tabBrideCondition)
+      Me.UserTablesTabControl.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.UserTablesTabControl.Location = New System.Drawing.Point(0, 0)
+      Me.UserTablesTabControl.Name = "UserTablesTabControl"
+      Me.UserTablesTabControl.SelectedIndex = 0
+      Me.UserTablesTabControl.Size = New System.Drawing.Size(542, 311)
+      Me.UserTablesTabControl.TabIndex = 0
+      '
+      'tabBaptismSex
+      '
+      Me.tabBaptismSex.Controls.Add(Me.dlvBaptismSex)
+      Me.tabBaptismSex.Location = New System.Drawing.Point(4, 22)
+      Me.tabBaptismSex.Name = "tabBaptismSex"
+      Me.tabBaptismSex.Padding = New System.Windows.Forms.Padding(3)
+      Me.tabBaptismSex.Size = New System.Drawing.Size(534, 285)
+      Me.tabBaptismSex.TabIndex = 0
+      Me.tabBaptismSex.Text = "Baptism Sex"
+      Me.tabBaptismSex.UseVisualStyleBackColor = True
+      '
+      'dlvBaptismSex
+      '
+      Me.dlvBaptismSex.AllColumns.Add(Me.olvcCode)
+      Me.dlvBaptismSex.AllColumns.Add(Me.olvcType)
+      Me.dlvBaptismSex.AllColumns.Add(Me.olvcDescription)
+      Me.dlvBaptismSex.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
+      Me.dlvBaptismSex.CellEditUseWholeCell = False
+      Me.dlvBaptismSex.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcCode, Me.olvcDescription})
+      Me.dlvBaptismSex.Cursor = System.Windows.Forms.Cursors.Default
+      Me.dlvBaptismSex.DataSource = Me.bsBaptismSex
+      Me.dlvBaptismSex.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvBaptismSex.FullRowSelect = True
+      Me.dlvBaptismSex.GridLines = True
+      Me.dlvBaptismSex.HighlightBackgroundColor = System.Drawing.Color.Empty
+      Me.dlvBaptismSex.HighlightForegroundColor = System.Drawing.Color.Empty
+      Me.dlvBaptismSex.Location = New System.Drawing.Point(3, 3)
+      Me.dlvBaptismSex.MultiSelect = False
+      Me.dlvBaptismSex.Name = "dlvBaptismSex"
+      Me.dlvBaptismSex.ShowGroups = False
+      Me.dlvBaptismSex.Size = New System.Drawing.Size(528, 279)
+      Me.dlvBaptismSex.TabIndex = 0
+      Me.dlvBaptismSex.UseCompatibleStateImageBehavior = False
+      Me.dlvBaptismSex.View = System.Windows.Forms.View.Details
+      '
+      'olvcCode
+      '
+      Me.olvcCode.AspectName = "Code"
+      Me.olvcCode.Groupable = False
+      Me.olvcCode.Text = "Code"
+      Me.olvcCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcType
+      '
+      Me.olvcType.AspectName = "Type"
+      Me.olvcType.IsVisible = False
+      Me.olvcType.Text = "Type"
+      '
+      'olvcDescription
+      '
+      Me.olvcDescription.AspectName = "Description"
+      Me.olvcDescription.FillsFreeSpace = True
+      Me.olvcDescription.Groupable = False
+      Me.olvcDescription.Text = "Description"
+      '
+      'bsBaptismSex
+      '
+      Me.bsBaptismSex.DataMember = "BaptismSex"
+      Me.bsBaptismSex.DataSource = GetType(WinFreeReg.LookupTables)
+      '
+      'tabBurialRelationship
+      '
+      Me.tabBurialRelationship.Controls.Add(Me.dlvBurialRelationship)
+      Me.tabBurialRelationship.Location = New System.Drawing.Point(4, 22)
+      Me.tabBurialRelationship.Name = "tabBurialRelationship"
+      Me.tabBurialRelationship.Padding = New System.Windows.Forms.Padding(3)
+      Me.tabBurialRelationship.Size = New System.Drawing.Size(534, 285)
+      Me.tabBurialRelationship.TabIndex = 1
+      Me.tabBurialRelationship.Text = "Burial Relationships"
+      Me.tabBurialRelationship.UseVisualStyleBackColor = True
+      '
+      'dlvBurialRelationship
+      '
+      Me.dlvBurialRelationship.AllColumns.Add(Me.olvcFileValue1)
+      Me.dlvBurialRelationship.AllColumns.Add(Me.olvcType1)
+      Me.dlvBurialRelationship.AllColumns.Add(Me.olvcDisplayValue1)
+      Me.dlvBurialRelationship.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
+      Me.dlvBurialRelationship.CellEditUseWholeCell = False
+      Me.dlvBurialRelationship.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcFileValue1, Me.olvcDisplayValue1})
+      Me.dlvBurialRelationship.Cursor = System.Windows.Forms.Cursors.Default
+      Me.dlvBurialRelationship.DataSource = Me.bsBurialRelationship
+      Me.dlvBurialRelationship.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvBurialRelationship.FullRowSelect = True
+      Me.dlvBurialRelationship.GridLines = True
+      Me.dlvBurialRelationship.HighlightBackgroundColor = System.Drawing.Color.Empty
+      Me.dlvBurialRelationship.HighlightForegroundColor = System.Drawing.Color.Empty
+      Me.dlvBurialRelationship.Location = New System.Drawing.Point(3, 3)
+      Me.dlvBurialRelationship.MultiSelect = False
+      Me.dlvBurialRelationship.Name = "dlvBurialRelationship"
+      Me.dlvBurialRelationship.ShowGroups = False
+      Me.dlvBurialRelationship.Size = New System.Drawing.Size(528, 279)
+      Me.dlvBurialRelationship.TabIndex = 0
+      Me.dlvBurialRelationship.UseCompatibleStateImageBehavior = False
+      Me.dlvBurialRelationship.View = System.Windows.Forms.View.Details
+      '
+      'olvcFileValue1
+      '
+      Me.olvcFileValue1.AspectName = "FileValue"
+      Me.olvcFileValue1.Groupable = False
+      Me.olvcFileValue1.Text = "Code"
+      Me.olvcFileValue1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcType1
+      '
+      Me.olvcType1.AspectName = "Type"
+      Me.olvcType1.DisplayIndex = 0
+      Me.olvcType1.Groupable = False
+      Me.olvcType1.IsVisible = False
+      Me.olvcType1.Text = "Type"
+      '
+      'olvcDisplayValue1
+      '
+      Me.olvcDisplayValue1.AspectName = "DisplayValue"
+      Me.olvcDisplayValue1.FillsFreeSpace = True
+      Me.olvcDisplayValue1.Groupable = False
+      Me.olvcDisplayValue1.Text = "Description"
+      '
+      'bsBurialRelationship
+      '
+      Me.bsBurialRelationship.DataMember = "BurialRelationship"
+      Me.bsBurialRelationship.DataSource = GetType(WinFreeReg.LookupTables)
+      '
+      'tabGroomCondition
+      '
+      Me.tabGroomCondition.Controls.Add(Me.dlvGroomCondition)
+      Me.tabGroomCondition.Location = New System.Drawing.Point(4, 22)
+      Me.tabGroomCondition.Name = "tabGroomCondition"
+      Me.tabGroomCondition.Padding = New System.Windows.Forms.Padding(3)
+      Me.tabGroomCondition.Size = New System.Drawing.Size(534, 285)
+      Me.tabGroomCondition.TabIndex = 2
+      Me.tabGroomCondition.Text = "Groom Conditions"
+      Me.tabGroomCondition.UseVisualStyleBackColor = True
+      '
+      'dlvGroomCondition
+      '
+      Me.dlvGroomCondition.AllColumns.Add(Me.olvcFileValue2)
+      Me.dlvGroomCondition.AllColumns.Add(Me.olvcType2)
+      Me.dlvGroomCondition.AllColumns.Add(Me.olvcDisplayValue2)
+      Me.dlvGroomCondition.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
+      Me.dlvGroomCondition.CellEditUseWholeCell = False
+      Me.dlvGroomCondition.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcFileValue2, Me.olvcDisplayValue2})
+      Me.dlvGroomCondition.Cursor = System.Windows.Forms.Cursors.Default
+      Me.dlvGroomCondition.DataSource = Me.bsGroomCondition
+      Me.dlvGroomCondition.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvGroomCondition.FullRowSelect = True
+      Me.dlvGroomCondition.GridLines = True
+      Me.dlvGroomCondition.HighlightBackgroundColor = System.Drawing.Color.Empty
+      Me.dlvGroomCondition.HighlightForegroundColor = System.Drawing.Color.Empty
+      Me.dlvGroomCondition.Location = New System.Drawing.Point(3, 3)
+      Me.dlvGroomCondition.MultiSelect = False
+      Me.dlvGroomCondition.Name = "dlvGroomCondition"
+      Me.dlvGroomCondition.ShowGroups = False
+      Me.dlvGroomCondition.Size = New System.Drawing.Size(528, 279)
+      Me.dlvGroomCondition.TabIndex = 0
+      Me.dlvGroomCondition.UseCompatibleStateImageBehavior = False
+      Me.dlvGroomCondition.View = System.Windows.Forms.View.Details
+      '
+      'olvcFileValue2
+      '
+      Me.olvcFileValue2.AspectName = "FileValue"
+      Me.olvcFileValue2.Groupable = False
+      Me.olvcFileValue2.Text = "Code"
+      Me.olvcFileValue2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcType2
+      '
+      Me.olvcType2.AspectName = "Type"
+      Me.olvcType2.Groupable = False
+      Me.olvcType2.IsVisible = False
+      Me.olvcType2.Text = "Type"
+      '
+      'olvcDisplayValue2
+      '
+      Me.olvcDisplayValue2.AspectName = "DisplayValue"
+      Me.olvcDisplayValue2.FillsFreeSpace = True
+      Me.olvcDisplayValue2.Groupable = False
+      Me.olvcDisplayValue2.Text = "Description"
+      '
+      'bsGroomCondition
+      '
+      Me.bsGroomCondition.DataMember = "GroomCondition"
+      Me.bsGroomCondition.DataSource = GetType(WinFreeReg.LookupTables)
+      '
+      'tabBrideCondition
+      '
+      Me.tabBrideCondition.Controls.Add(Me.dlvBrideCondition)
+      Me.tabBrideCondition.Location = New System.Drawing.Point(4, 22)
+      Me.tabBrideCondition.Name = "tabBrideCondition"
+      Me.tabBrideCondition.Padding = New System.Windows.Forms.Padding(3)
+      Me.tabBrideCondition.Size = New System.Drawing.Size(534, 285)
+      Me.tabBrideCondition.TabIndex = 3
+      Me.tabBrideCondition.Text = "Bride Conditions"
+      Me.tabBrideCondition.UseVisualStyleBackColor = True
+      '
+      'dlvBrideCondition
+      '
+      Me.dlvBrideCondition.AllColumns.Add(Me.olvcFileValue3)
+      Me.dlvBrideCondition.AllColumns.Add(Me.olvcType3)
+      Me.dlvBrideCondition.AllColumns.Add(Me.olvcDisplayValue3)
+      Me.dlvBrideCondition.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
+      Me.dlvBrideCondition.CellEditUseWholeCell = False
+      Me.dlvBrideCondition.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcFileValue3, Me.olvcDisplayValue3})
+      Me.dlvBrideCondition.Cursor = System.Windows.Forms.Cursors.Default
+      Me.dlvBrideCondition.DataSource = Me.bsBrideCOndition
+      Me.dlvBrideCondition.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvBrideCondition.FullRowSelect = True
+      Me.dlvBrideCondition.GridLines = True
+      Me.dlvBrideCondition.HighlightBackgroundColor = System.Drawing.Color.Empty
+      Me.dlvBrideCondition.HighlightForegroundColor = System.Drawing.Color.Empty
+      Me.dlvBrideCondition.Location = New System.Drawing.Point(3, 3)
+      Me.dlvBrideCondition.MultiSelect = False
+      Me.dlvBrideCondition.Name = "dlvBrideCondition"
+      Me.dlvBrideCondition.ShowGroups = False
+      Me.dlvBrideCondition.Size = New System.Drawing.Size(528, 279)
+      Me.dlvBrideCondition.TabIndex = 0
+      Me.dlvBrideCondition.UseCompatibleStateImageBehavior = False
+      Me.dlvBrideCondition.View = System.Windows.Forms.View.Details
+      '
+      'olvcFileValue3
+      '
+      Me.olvcFileValue3.AspectName = "FileValue"
+      Me.olvcFileValue3.Groupable = False
+      Me.olvcFileValue3.Text = "Code"
+      Me.olvcFileValue3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcType3
+      '
+      Me.olvcType3.AspectName = "Type"
+      Me.olvcType3.Groupable = False
+      Me.olvcType3.IsVisible = False
+      Me.olvcType3.Text = "Type"
+      '
+      'olvcDisplayValue3
+      '
+      Me.olvcDisplayValue3.AspectName = "DisplayValue"
+      Me.olvcDisplayValue3.FillsFreeSpace = True
+      Me.olvcDisplayValue3.Groupable = False
+      Me.olvcDisplayValue3.Text = "Description"
+      '
+      'bsBrideCOndition
+      '
+      Me.bsBrideCOndition.DataMember = "BrideCondition"
+      Me.bsBrideCOndition.DataSource = GetType(WinFreeReg.LookupTables)
 		'
 		'formUserTables
 		'

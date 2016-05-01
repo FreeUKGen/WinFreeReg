@@ -2,15 +2,15 @@
 
 Public Class formMarriageRecord
 
-	Private m_Lookups As WinREG.LookupTables
-	Public Property Lookups() As WinREG.LookupTables
-		Get
-			Return m_Lookups
-		End Get
-		Set(ByVal value As WinREG.LookupTables)
-			m_Lookups = value
-		End Set
-	End Property
+   Private m_Lookups As WinFreeReg.LookupTables
+   Public Property Lookups() As WinFreeReg.LookupTables
+      Get
+         Return m_Lookups
+      End Get
+      Set(ByVal value As WinFreeReg.LookupTables)
+         m_Lookups = value
+      End Set
+   End Property
 
 	Private m_ErrorRecord As classUncorrectedErrors
 	Public Property ErrorRecord() As classUncorrectedErrors

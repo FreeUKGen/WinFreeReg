@@ -6,7 +6,7 @@
 '
 
 Imports System.IO
-Imports WinREG.LookupTables
+Imports WinFreeReg.LookupTables
 
 Partial Class TranscriptionTables
 	Private Shared MyLeadingZeroOnDates As Boolean
