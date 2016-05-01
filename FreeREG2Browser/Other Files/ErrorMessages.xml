@@ -1,0 +1,393 @@
+<?xml version="1.0" standalone="yes"?>
+<ErrorMessages xmlns="http://tempuri.org/ErrorMessages.xsd">
+  <xs:schema id="ErrorMessages" targetNamespace="http://tempuri.org/ErrorMessages.xsd" xmlns:mstns="http://tempuri.org/ErrorMessages.xsd" xmlns="http://tempuri.org/ErrorMessages.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+    <xs:element name="ErrorMessages" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+      <xs:complexType>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element name="ErrorMessages" msprop:Generator_UserTableName="ErrorMessages" msprop:Generator_TablePropName="_ErrorMessages">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Number" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" type="xs:int" />
+                <xs:element name="Message" type="xs:string" minOccurs="0" />
+                <xs:element name="Explanation" type="xs:string" minOccurs="0" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:choice>
+      </xs:complexType>
+      <xs:unique name="PrimaryKey" msdata:PrimaryKey="true">
+        <xs:selector xpath=".//mstns:ErrorMessages" />
+        <xs:field xpath="mstns:Number" />
+      </xs:unique>
+    </xs:element>
+  </xs:schema>
+  <ErrorMessages>
+    <Number>1</Number>
+    <Message>Exception when opening existing file</Message>
+    <Explanation>An unexpected error has been encountered whilst opening a transcription file.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>2</Number>
+    <Message>Transcription file not found</Message>
+    <Explanation>This message appears when there is an attempt to open a transcription file that doesn't exist. Because of the way in which the user selects an existing file to be opened, this can really only happen, and even then the message is unlikely to occur, when double-clicking on the icon of CSV file Perhpas the only real way in which this message can occur is if the user creates a Windows shortcut to open a specific file and mis-spells the filename.
+In any event, the message is fairly self-explanatory.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>3</Number>
+    <Message>header {0} is not correct according to the FreeREG specifications:-{1}{2}{1}{1}{3}</Message>
+    <Explanation>In general, when reading an existing file into the program, WinREG attempts to verify the basic format of the first 4 or 5 header records of the file. This is done because there is no guarantee that the file was previously written by WinREG, and so the contents can not just be accepted as is.
+Where discrepancies between the actual file data and the specifications of the header records given on the FreeREG website (Header Information Required By FreeREG) are found, this message will appear. The various placeholders ({n}) will provide further information as to what the discrepancy is and in which record it occurs. </Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>4</Number>
+    <Message>The Burial Age is badly formatted</Message>
+    <Explanation>The age field is usually an integer number representing the age in years. Alternative formulations involve an integer followed by d (for days),w (for weeks) or m (for months) or y (for years). The only valid text permitted is "infant" or "child". No special characters are permitted in this field. Combinations of the various 'units' are allowed: e.g. 3y6m2w3d.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>5</Number>
+    <Message>The Age of the Bride is invalid. The accepted format is: [number][d|w|m], [number]y[number][d|w|m], minor, of age, full age or of full age.</Message>
+    <Explanation>The age field is usually an integer number representing the age in years.
+Normally text is NOT permitted in this field. However, the term "Minor" which means under 21 years is permitted. Also permitted are "of age", "of full age" and "full age". Complex ages, involving units of years, months, weeks and days, although unlikely, are also permitted. No special characters are permitted in this field.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>6</Number>
+    <Message>The Age of the Groom is invalid. The accepted format is: [number][d|w|m], [number]y[number][d|w|m], minor, of age, full age or of full age.</Message>
+    <Explanation>The age field is usually an integer number representing the age in years.
+Normally text is NOT permitted in this field. However, the term "Minor" which means under 21 years is permitted. Also permitted are "of age", "of full age" and "full age". Complex ages, involving units of years, months, weeks and days, although unlikely, are also permitted. No special characters are permitted in this field.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>7</Number>
+    <Message>The Place Name field must be at least 3 characters in length.</Message>
+    <Explanation>When creating a new Transcription file, the user selects and enters data corresponding to the various parts of the file name. These parts must conform to the naming standards defined by FreeREG.
+One of these parts is a code relating to the ame of the place from which the records being transcribed come from. By default, WinREG will construct this code from the first 3 characters of the full place name. Consequently, the place name must be at least 3 characters in length.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>8</Number>
+    <Message>You must select one of the available record types.</Message>
+    <Explanation>The user should never see this message, because it can only happen when creating a new file, and the creation process is quite restrictive. Basically, it would occur if the user tries to create a file in which the designated record type is not one of the three types as laid down by FreeREG, viz.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>9</Number>
+    <Message>You must select one of the available counties.</Message>
+    <Explanation>The selected Chapman Code is not one of those in the list of accepted codes.
+The user should in course of normal events, never see this message, because they can only select a code from the accepted list.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>10</Number>
+    <Message>The WinREG Tables file can not be found. A re-installation of the product is recommended.</Message>
+    <Explanation>WinREG/3 keeps various pieces of common data (county names, Chapman Codes etc) in a set of tables that are themselves kept in a file named winreg.tables, and which is stored in the base data folder
+(\My Documents\FreeREG\WinREG for Windows)
+Without this file, WinREG can't run.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>11</Number>
+    <Message>The entered date is badly formatted</Message>
+    <Explanation>WinREG can not make sense of what has been entered as a date.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>12</Number>
+    <Message>The entered month name is invalid</Message>
+    <Explanation>WinREG either can not make out which part of the entered date is the month, or, the month has been entered incorrectly. The following is a complete list of what is acceptable as a month
+•01	Jan	January
+•02	Feb	February
+•03	Mar	March
+•04	Apr	April
+•05	May
+•06	Jun	June
+•07	Jul	July
+•08	Aug	August
+•09	Sep	September
+•10	Oct	October
+•11	Nov	November
+•12	Dec	December
+</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>13</Number>
+    <Message>Invalid month name abbreviation</Message>
+    <Explanation>When entering a date and using the abbreviated form of the month name, the only acceptable abbreviations are
+Jan Feb Mar Apr May Jun
+Jul Aug Sep Oct Nov Dec</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>14</Number>
+    <Message>A non-numeric month name must be 3 or more characters in length</Message>
+    <Explanation>When entering dates, it is permitted to enter the month as a number or as an abbreviation or as the full month name. One outcome of this, is the fact that the abbreviated month can not be less than 3 characters in length.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>15</Number>
+    <Message>In September 1752, the 3rd through to 13th inclusive were omitted from the calendar</Message>
+    <Explanation>In order to bring the Julian calendar that was used n Engalnd &amp; Wales up until 1752, into line with the current, Gregorian calendar, a number of days had to be 'lost' from the calendar in order to account for the missing leap-year days that the Julian calendar had not accounted for. It was decided that these 11 days would be dropped from September 1752 and simply not exist. Consequently, it should not be possible to enter any date between 3rd September 1752 and 13th September 1752, inclusive.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>16</Number>
+    <Message>Month is invalid when used in double-dating. Only Jan, Feb and Mar are allowed.</Message>
+    <Explanation>The Ecclesiastical year runs from  March 25th of one year through to 24th March the next year. This fact, coincidentally, is the reason why the historic fiscal and legal years (4 terms) are also similar. Add back the original, missing 11 days from 1752, and you have the reason why the fiscal year started on 6th April.
+Old Parish Registers were begun as a result of decree issued by Henry VIII in 1538, which was in the days when the Julian calendar was in widespread use. Entries in these registers tend to follow the Ecclesiastical year where the year number changes on March 25th. Nowadays, the year number changes on January 1st. As a result it can be difficult to know whether a date based on the Julian calendar is in one year or the next.
+The solution to this is a system of "double-dating" where dates between January 1st and March 24th gain a second year and are expressed along the lines of 01 Jan 1601/02, where 1601 is the the year from the Julian calendar, and 1602 is the year from the Gregorian calendar. Naturally, this only affects the months of January, February and March.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>17</Number>
+    <Message>March 25th and after can not be double-dated</Message>
+    <Explanation>The Ecclesiastical year runs from  March 25th of one year through to 24th March the next year. This fact, coincidentally, is the reason why the historic fiscal and legal years (4 terms) are also similar. Add back the original, missing 11 days from 1752, and you have the reason why the fiscal year started on 6th April.
+Old Parish Registers were begun as a result of decree issued by Henry VIII in 1538, which was in the days when the Julian calendar was in widespread use. Entries in these registers tend to follow the Ecclesiastical year where the year number changes on March 25th. Nowadays, the year number changes on January 1st. As a result it can be difficult to know whether a date based on the Julian calendar is in one year or the next.
+The solution to this is a system of "double-dating" where dates between January 1st and March 24th gain a second year and are expressed along the lines of 01 Jan 1601/02, where 1601 is the the year from the Julian calendar, and 1602 is the year from the Gregorian calendar. Dates in March from the 25th onwards are not affected.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>18</Number>
+    <Message>Turn of century should be expressed with 00</Message>
+    <Explanation>Should not be encountered in a message box.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>19</Number>
+    <Message>The double-year entry is invalid. The second part should be one greater than the first part.</Message>
+    <Explanation>In order for the program to accept a valid date during the months of January, February and March, prior to 1752, it must have the year expressed as a double-date where the two parts are related by value. Basically the second part must be one greater than the first. Except at the turn of a century, where the first part is 99 and the second part 00.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>20</Number>
+    <Message>Double-year can not be greater than 99</Message>
+    <Explanation>Should not be encountered in a message box.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>21</Number>
+    <Message>Double-year must be numeric</Message>
+    <Explanation>Should not be encountered in a message box.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>22</Number>
+    <Message>Year must be numeric</Message>
+    <Explanation>Alphabetic characters are generally not allowed in the 'year' part of a date. Other than the specific cases indicating where characters are unreadable, only digits are acceptable. In many very old registers, dates can be found, expressed in the form of a Saint's Feast day. The user must take steps to translate the words denoting the day into a number. The words should be placed in the Notes part of the record.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>23</Number>
+    <Message>This date should be double-dated</Message>
+    <Explanation>This is just a gentle reminder that the date being entered is prior to 1752 when the Julian calendar and Ecclesiastical year ruled, and hence requires the year to be 'double-dated'.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>24</Number>
+    <Message>Day number should be numeric</Message>
+    <Explanation>Alphabetic characters are generally not allowed in the 'day' part of a date. Other than the specific cases indicating where characters are unreadable, only digits are acceptable. In many very old registers, dates can be found, expressed in the form of a Saint's Feast day. The user must take steps to translate the words denoting the day into a number. The words should be placed in the Notes part of the record.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>25</Number>
+    <Message>After 1751, double-dating does not apply</Message>
+    <Explanation>A gentle reminder that dates from 1752 onwards are using the Gregorian calendar, and thus do not need any "double-dating". Only dates in the Julian calendar (1751 and previous) need to be "double-dated".</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>26</Number>
+    <Message>Year was not a leap-year</Message>
+    <Explanation>To be a leap year, and thus have a 29th February, a year must firstly be divisible by 4. Special rules apply to the end of century years (those ending in 00) which conform to this first rule. Not all end of century years are leap years, and thus, do not possess a 29th February. If the year is divisible by 100, then it is only a leap year if it is also divisible by 400. Thus, 1600 and 2000 are leap years, but 1700, 1800 and 1900 were not.
+It was this, addition of too many leap year days in the Julian calendar, that allowed it to drift with respect to the astronomical seasons, which necessitated the adoption of the Gregorian calendar which tends to follow the astonomical seasons more closely.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>27</Number>
+    <Message>Century was not a leap-year</Message>
+    <Explanation>Despite being divisible by 4 (the basic means to identify a leap-year), not all end of century years are leap years, and thus, do not possess a 29th February. If the year is divisible by 100 (an end of century year), then it is only a leap year if it is also divisible by 400. Thus, 1600 and 2000 are leap years, but 1700, 1800 and 1900 were not.
+It was this, addition of too many leap year days in the Julian calendar, that allowed it to drift with respect to the astronomical seasons, which necessitated the adoption of the Gregorian calendar which tends to follow the astonomical seasons more closely.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>28</Number>
+    <Message>The updater program, '{0}' is not present. Automatic program updates will not be available.</Message>
+    <Explanation>WinREG/3 makes use of a 3rd party tool as its' installer (Advanced Installer from Caphyon Ltd.). An essential part of this installer is the facility for WinREG/3 to upgrade itself over the Internet. To this end, a small program is installed along with WinREG/3 named updater.exe.
+When starting up, WinREG/3 checks to see if updater.exe exists in the same folder from which it was started. If it doesn't, then the automatic check for updates and subsequent download and upgrade can not take place. This message is the result of that check failing.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>29</Number>
+    <Message>The updater configuration file, '{0}' can not be found. Automatic program updates will not be available.</Message>
+    <Explanation>WinREG/3 makes use of a 3rd party tool as its' installer (Advanced Installer from Caphyon Ltd.). An essential part of this installer is the facility for WinREG/3 to upgrade itself over the Internet. To this end, a small program is installed along with WinREG/3 named updater.exe. This program uses a configuration file named updater.ini.
+When starting up, WinREG/3 checks to see if updater.ini exists in the same folder from which it was started. If it doesn't, then the automatic check for updates and subsequent download and upgrade can not take place. This message is the result of that check failing.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>30</Number>
+    <Message>In order to validate the contents of a file, you must have opened it in the first place</Message>
+    <Explanation>Self-explanatory! In order to start the validation process on a file, that file must have first been opened by the user.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>31</Number>
+    <Message>The data grid is not sortable by the '{0}' column</Message>
+    <Explanation>Although the data grid may be sorted on just about any column, the column that the user has selected has not been enabled for sorting purposes.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>32</Number>
+    <Message>Oops! Don't know how to sort the '{0}' column.</Message>
+    <Explanation>Even though the selected column has been enabled for sorting the data, the program has not been invested with the code necessary to carry out the sort.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>33</Number>
+    <Message>Only alphabetic and numeric characters are allowed in this part of the filename</Message>
+    <Explanation>This message can only occur when renaming an existing file. It serves to remind users that names of transcription files are restricted to the alphabetic letters and numeric digits. No special characters are permitted.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>34</Number>
+    <Message>You must complete the entry of your User Details before you can proceed any further</Message>
+    <Explanation>Before transcibing of records can begin, the program needs to be told certain pieces of information. These items are generally of a personal nature and serve to identify the user to FreeREG. They are:-
+•Name
+•Email address
+•Syndicate
+•FreeREG User ID &amp; Password
+Go to Settings --&gt; Options --&gt; User &amp; Program Options, select the tab labelled My Information and fill in the required information.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>35</Number>
+    <Message>The Excel spreadsheet file contains more than one sheet. The program is currently unable to handle a multi-sheet file. Select another file or alter the file so that it only has a single sheet in it.</Message>
+    <Explanation>The program can import certain Excel spreadsheet files, provided that they conform to the conditions detailed on the FreeREG web site. A spreadsheet file can contain one or wore worksheets. A worksheet is equivalent to a transcription file. Unfortunately, WinREG/3 can only handle a single transcription file at a time.
+The spreadsheet file that has been selected for importing contains two or more worksheets, only one of which can be handled in a single import operation. Select one of the identified worksheets, or cancel the import action.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>36</Number>
+    <Message>The last, empty line is reserved for adding a new record, it can not be deleted.</Message>
+    <Explanation>The last, empty line of the datagrid can not be deleted. It does not indicate an empty record, but is used for starting a new record.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>37</Number>
+    <Message>The following is a list of dates that are somewhat problematical when it comes to sorting them:-</Message>
+    <Explanation>Due to the nature of some dates that have missing components or that have been entered using the '*' and '_' characters to indicate where it is difficult to decipher a digit, the ability to sort the records by date is somtimes compromised.
+The dates included in the message are those that make the sorting awkward and which have thus been excluded from the sort.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>38</Number>
+    <Message>Please correct these dates if you can. If not, email these dates to the development team.</Message>
+    <Explanation>During the sorting of the data by a date column, errors have been encountered with one or more dates. These dates need to be corrected before the sort can be carried out with 100% success. These dates may or may not prevent the successful uploading of the file to FreeREG.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>39</Number>
+    <Message>If separator characters (/- .) are used within a date, then they must be used consistently. They can not be mixed.</Message>
+    <Explanation>When entering dates, many different formats for entering the data are available. Some of these make use of separator characters to delimit the various parts of the date. This is particularly applicable to dates entered as all numbers where the month can be separated from the days and the year by either the '/', '-', '.' or ' ' characters. If used, the separators should be used in a consistent manner: i.e. both separators the same character.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>40</Number>
+    <Message>You must enter 3 characters to complete this part of the file name</Message>
+    <Explanation>Should not be encountered.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>41</Number>
+    <Message>Warning: The Age at Burial is over 100 years and is thus suspect</Message>
+    <Explanation>In the past, people generally did not live such long lives as they now seem to do. Ages of 100 and over are fairly common nowadays, whilst in the past, this was a very great rarity. Consequently, the program tries to prevent the inadvertent entry of a bad Age At Burial by cathing any age of 100 and over and alerting the user of the fact. Hopefully, this should prevent an age of 100 reaching the FreeREG database when it refers to a child who actually died at the age of 10!</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>42</Number>
+    <Message>Text must consist of letters, numbers, spaces and the following punctuation: ?!:;.,+=*</Message>
+    <Explanation>The Source and Comments fields that can be entered as part of the file header data, can only consist of the basic alphanumeric characters and a limited set of punctuation characters. You have tried to use a character that is not allowed. This prevents FreeREG from marking the file in error when you upload it.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>43</Number>
+    <Message>Your file ({0}) has been successfully renamed internally to {1}. To make the change of name permanent, you must save the file.</Message>
+    <Explanation>Self explanatory. The file has been renamed.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>44</Number>
+    <Message>The Updater has encountered the error '{0}'. Please notify the developers.</Message>
+    <Explanation>An error has been encountered by the background task checking for any updates to the program. Please make a note of the actual error (or take a screenshot) and notify the developers. If possible, please also attach the appropriate message log file.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>45</Number>
+    <Message>The Place Code field must be 3 characters in length.</Message>
+    <Explanation>In creating a  ne transcription file, a component of the file name is a code designating the place to which the transcription refers. By default, this place code is derived from the place name, but can be specified directly by the user. If so, then the place code must be 3 characters (alphbetic or numeric) in length.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>46</Number>
+    <Message>WinREG can only read or write comma separated files that have an extension of .CSV. </Message>
+    <Explanation>When opening a transcription file, an attempt has been made to open a file that does not have the CSV extension. This is just a cursory check to ensure that the file name conforms to the FreeREG standards.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>47</Number>
+    <Message>WinREG can only read spreadsheet files that have an extension of .XLS or .XSLX.</Message>
+    <Explanation>When importing a spreadsheet file, the user has selected a file that doesn't have either the XLS or XSLX extensions. This is a cursory check to ensure that no attempt is made to try and import a non-spreadsheet file into the program.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>48</Number>
+    <Message>All files that can be opened by WinREG must have names that conform to the standard of &lt;county&gt;&lt;place&gt;&lt;type&gt;[suffix]. {0}</Message>
+    <Explanation>Due to the file naming conventions imposed by FreeREG, all filenames (transcription and spreadsheet) must conform to the standard laid down on the FreeREG web site. As noted in the message, this means that WinREG will open files that have a name that conforms to
+&lt;county&gt;&lt;place&gt;&lt;type&gt;[&lt;suffix&gt;]
+Where
+&lt;county&gt;
+is the Chapman Code for the county
+&lt;place&gt;
+is a code uniquely identifying the place within the county
+&lt;type&gt;
+is a code denoting the type of records in the file (BA or BU or MA)
+&lt;suffix&gt;
+is an optional, numeric suffix, that permits all records of one type (across multiple registers) for a single place within the county to be split over several files
+</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>49</Number>
+    <Message>Date of Baptism is before the Date of Birth</Message>
+    <Explanation>Self-explanatory. Birth occurs before baptism, not the other way around.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>50</Number>
+    <Message>Unable to locate the .ERR file {0}. Button will henceforth be disabled for this transcription file.</Message>
+    <Explanation>You have clicked on the Display Errors button. WinREG is unable to locate a file with the .ERR extension that matches the open transcription file.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>51</Number>
+    <Message>Header record {0} is missing</Message>
+    <Explanation>The indicated (by number) header record is missing from the file.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>52</Number>
+    <Message>File header records are present and correct, but there is no data in the file</Message>
+    <Explanation>This will generally only occur with a file that was not written by WinREG. WinREG will not create or rewrite a file that has no data records in it.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>53</Number>
+    <Message>County code on first data record ({0}) doesn't match the Chapman code of the County name in the second header record ({1})</Message>
+    <Explanation>In all versions of  WinREG up until 3.1.7, a small, insignificant oversight went unnoticed.  The second header record contains a county name that is supposed to reflect the syndicate with which the user (and file) is associated. This had been filled in by WinREG as the Chapman Code for the county, rather than the actual county name itself.
+Whilst not creating any problems with FreeREG or the WinREG program itself, from version 3.1.8 steps have been taken to correct the slight inconsistency. All new files will contain the county name in header record 2. Existing files, when first opened, will be verified and where the Chapman Code on the first data record does not conform with the county in record 2, WinREG will update header record 2 to have the correct county name and not a Chapman Code.
+This alteration to the data in the file is the reason for the appearance of this message. And it will continue to appear each time the file opened, until the user saves the forced change.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>54</Number>
+    <Message>Data record 1 does not start with a valid Chapman Code</Message>
+    <Explanation>Every data record has, as it's first field, the Chapman Code for the county to which the transcription file belongs. There is a restricted number of valid Chapman Codes, and the code for the first record in this file is not in the list of valid codes.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>55</Number>
+    <Message>Problem clearing clipboard contents. Message is {0}. There is no need to worry, the problem is probably insignificant.</Message>
+    <Explanation>When the program starts up, one of the tasks it performs is to clear (empty out) the Windows clipboard. This is done to ensure that the user can not inadvertently paste anything inappropriate into the first file that the program opens.
+In doing this, the program has encountered an error. The error is insignificant, and will not affect the running of the program or the recording of data into the transcription file.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>56</Number>
+    <Message>County name in header record 2 has been corrected from {0} to {1}</Message>
+    <Explanation>In all versions of  WinREG up until 3.1.7, a small, but insignificant oversight went unnoticed.  The second header record contains a county name that is supposed to reflect the syndicate with which the user (and file) is associated. This had been filled in by WinREG as the Chapman Code for the county, rather than the actual county name itself.
+Whilst not creating any problems with FreeREG or the WinREG program itself, from version 3.1.8 steps have been taken to correct the slight inconsistency. All new files will contain the county name in header record 2. Existing files, when first opened, will be verified and where the Chapman Code on the first data record does not conform with the county in record 2, WinREG will update header record 2 to have the correct county name and not a Chapman Code.
+This alteration to the data in the file is the reason for the appearance of this message. And it will continue to appear each time the file opened, until the user saves the forced change.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>57</Number>
+    <Message>Line {0} is badly formed and can not be recognised as a valid CSV record. The file is most likely corrupt</Message>
+    <Explanation>The program is unable to parse the indicated header record as conforming with the correct format for comma separated values (CSV) file. Consequently, the program can do little else than assume that the file is either totally corrupt, or is not a FreeREG transcription file.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>58</Number>
+    <Message>The Brides Age at marriage is over 100!</Message>
+    <Explanation>The age of the Bride is being recorded as over 100 years old. This is extremely unlikely. You may ignore the error if the age is accurate. Otherwise, correct it.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>59</Number>
+    <Message>The Grooms Age at marriage is over 100!</Message>
+    <Explanation>The age of the Groom is being recorded as over 100 years old. This is extremely unlikely. You may ignore the error if the age is accurate. Otherwise, correct it.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>60</Number>
+    <Message>The support to import spreadsheet files is not present on your PC.</Message>
+    <Explanation>In order to import a spreadsheet file into WinREG, you must have a certain level of operating system and .NET support installed on the PC.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>61</Number>
+    <Message>You do not have the necessary support to import spreadsheet files with an extension of XLSX</Message>
+    <Explanation>XSLX files (Excel 2010 format) require a specific level of support to be installed on the PC. Your PC does not appear to have this support and so, you are prevented from importing any XSLX files.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>62</Number>
+    <Message>The record contains errors that may prevent the successful upload of the data. You can either save the data with the errors, go back and correct the errors, or discard whatever changes you have made to the record.</Message>
+    <Explanation>The record that you are attempting to save contains some errors that may prevent the successful uploading of the file to FreeREG. You can either a) save the record as it stands (Ignore) and run the risk of not being able to upload the file, b) discard all changes that you have made to the record (Abort) and start again, or c) go back (Retry) and correct  the errors.</Explanation>
+  </ErrorMessages>
+  <ErrorMessages>
+    <Number>63</Number>
+    <Message>{0} TranscriptFileWatcher: Filename:{1} Not recognisable as a transcription file</Message>
+    <Explanation />
+  </ErrorMessages>
+</ErrorMessages>
