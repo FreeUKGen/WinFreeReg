@@ -49,6 +49,7 @@ Public Class FreeREG2Browser
 	Private pathRoamingAppData As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
 	Private pathUserConfig As String = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath()
 	Private BaseDataDirectory = String.Format("{0}\{1}\{2}", My.Computer.FileSystem.SpecialDirectories.MyDocuments, Application.CompanyName, Application.ProductName)
+   Private OldBaseDataDirectory = String.Format("{0}\FreeREG\WinREG for Windows", My.Computer.FileSystem.SpecialDirectories.MyDocuments)
 
 	Private pgmState As ProgramState = ProgramState.Idle
 	Private authenticity_token As String = ""
@@ -141,7 +142,27 @@ Public Class FreeREG2Browser
    Friend WithEvents miUserTables As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents btnNewFile As System.Windows.Forms.Button
 
-   Public MyAppSettings As AppSettings
+   Public MyAppSettings As FreeReg2BrowserSettings
+
+   Private _myUsername As String
+   Public Property Username() As String
+      Get
+         Return _myUsername
+      End Get
+      Set(ByVal value As String)
+         _myUsername = value
+      End Set
+   End Property
+
+   Private _myPassword As String
+   Public Property Password() As String
+      Get
+         Return _myPassword
+      End Get
+      Set(ByVal value As String)
+         _myPassword = value
+      End Set
+   End Property
 
    Public Sub New()
       InitializeComponent()
@@ -1421,101 +1442,104 @@ Public Class FreeREG2Browser
 
    End Sub
 
-	Public Structure BackgroundResult
-		Dim Parameter As Object
-		Dim Result As String
-	End Structure
+   Public Structure BackgroundResult
+      Dim Parameter As Object
+      Dim Result As String
+   End Structure
 
-	Private Sub FreeREG2Browser_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
+   Private Sub FreeREG2Browser_FormClosed(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosedEventArgs) Handles Me.FormClosed
 
-		If BatchesDataSet.Batch.GetChanges() IsNot Nothing Then
-			If Not BatchesDataSet.Batch.HasErrors Then
-				BatchesDataSet.Batch.AcceptChanges()
-				BatchesDataSet.WriteXml(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
-			End If
-		End If
+      If BatchesDataSet.Batch.GetChanges() IsNot Nothing Then
+         If Not BatchesDataSet.Batch.HasErrors Then
+            BatchesDataSet.Batch.AcceptChanges()
+            BatchesDataSet.WriteXml(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
+         End If
+      End If
 
-		If LookUpsDataSet.GetChanges() IsNot Nothing Then
-			If Not LookUpsDataSet.HasErrors() Then
-				LookUpsDataSet.AcceptChanges()
-				LookUpsDataSet.WriteXml(LookupTablesFile, XmlWriteMode.WriteSchema)
-			End If
-		End If
+      If LookUpsDataSet.GetChanges() IsNot Nothing Then
+         If Not LookUpsDataSet.HasErrors() Then
+            LookUpsDataSet.AcceptChanges()
+            LookUpsDataSet.WriteXml(LookupTablesFile, XmlWriteMode.WriteSchema)
+         End If
+      End If
 
-		If TablesDataSet.GetChanges() IsNot Nothing Then
-			If Not TablesDataSet.HasErrors Then
-				TablesDataSet.AcceptChanges()
-				TablesDataSet.WriteXml(FreeregTablesFile, XmlWriteMode.WriteSchema)
-			End If
-		End If
+      If TablesDataSet.GetChanges() IsNot Nothing Then
+         If Not TablesDataSet.HasErrors Then
+            TablesDataSet.AcceptChanges()
+            TablesDataSet.WriteXml(FreeregTablesFile, XmlWriteMode.WriteSchema)
+         End If
+      End If
 
-		If UserDataSet.GetChanges() IsNot Nothing Then
-			If Not UserDataSet.HasErrors Then
-				UserDataSet.AcceptChanges()
-				UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
-			End If
-		End If
+      If UserDataSet.GetChanges() IsNot Nothing Then
+         If Not UserDataSet.HasErrors Then
+            UserDataSet.AcceptChanges()
+            UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
+         End If
+      End If
 
-		' Save Settings
-		'
-		Dim stream As Stream = Nothing
-		Try
-			stream = File.Open(SettingsFileName, FileMode.Create)
-			Dim bformatter As New BinaryFormatter()
-			bformatter.Serialize(stream, MyAppSettings)
+      ' Save Settings
+      '
+      Dim stream As Stream = Nothing
+      Try
+         stream = File.Open(SettingsFileName, FileMode.Create)
+         Dim bformatter As New BinaryFormatter()
+         bformatter.Serialize(stream, MyAppSettings)
 
-		Catch ex As Exception
-			Beep()
+      Catch ex As Exception
+         Beep()
 
-		Finally
-			If stream IsNot Nothing Then stream.Close()
-		End Try
-	End Sub
+      Finally
+         If stream IsNot Nothing Then stream.Close()
+      End Try
+   End Sub
 
-	Private Sub FreeREG2Browser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-		If File.Exists(SettingsFileName) Then
-			Dim stream As Stream = Nothing
-			Try
-				stream = File.Open(SettingsFileName, FileMode.Open)
-				Dim bformatter As New BinaryFormatter()
-				MyAppSettings = CType(bformatter.Deserialize(stream), AppSettings)
+   Private Sub FreeREG2Browser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+      If File.Exists(SettingsFileName) Then
+         Dim stream As Stream = Nothing
+         Try
+            stream = File.Open(SettingsFileName, FileMode.Open)
+            Dim bformatter As New BinaryFormatter()
+            MyAppSettings = CType(bformatter.Deserialize(stream), FreeReg2BrowserSettings)
 
-			Catch ex As Exception
-				Beep()
+         Catch ex As Exception
+            Beep()
 
-			Finally
-				If stream IsNot Nothing Then stream.Close()
-			End Try
-		Else
-			MyAppSettings = New AppSettings()
-		End If
+         Finally
+            If stream IsNot Nothing Then stream.Close()
+         End Try
+      Else
+         MyAppSettings = New FreeReg2BrowserSettings()
+      End If
+
+      MyAppSettings.UserId = _myUsername
+      MyAppSettings.Password = _myPassword
 
 #If DEBUG Then
-		MyAppSettings.BaseUrl = MyAppSettings.TestUrl
+      MyAppSettings.BaseUrl = MyAppSettings.TestUrl
 #Else
 		MyAppSettings.BaseUrl = MyAppSettings.LiveUrl
 #End If
 
-		If File.Exists(ErrorMessagesFileName) Then
-			ErrorMessagesDataSet.ReadXml(ErrorMessagesFileName, XmlReadMode.ReadSchema)
-			ErrorMessagesDataSet.AcceptChanges()
-		End If
-		If File.Exists(TranscriberProfileFile) Then
-			UserDataSet.ReadXml(TranscriberProfileFile, XmlReadMode.ReadSchema)
-			UserDataSet.AcceptChanges()
-		End If
-		If File.Exists(FreeregTablesFile) Then
-			TablesDataSet.ReadXml(FreeregTablesFile, XmlReadMode.ReadSchema)
-			TablesDataSet.AcceptChanges()
-		End If
-		If File.Exists(LookupTablesFile) Then LoadLookupTables()
-		If Not String.IsNullOrEmpty(MyAppSettings.UserId) Then
-			If File.Exists(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
-				BatchesDataSet.ReadXml(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId)))
-				BatchesDataSet.AcceptChanges()
-			End If
-		End If
-	End Sub
+      If File.Exists(ErrorMessagesFileName) Then
+         ErrorMessagesDataSet.ReadXml(ErrorMessagesFileName, XmlReadMode.ReadSchema)
+         ErrorMessagesDataSet.AcceptChanges()
+      End If
+      If File.Exists(TranscriberProfileFile) Then
+         UserDataSet.ReadXml(TranscriberProfileFile, XmlReadMode.ReadSchema)
+         UserDataSet.AcceptChanges()
+      End If
+      If File.Exists(FreeregTablesFile) Then
+         TablesDataSet.ReadXml(FreeregTablesFile, XmlReadMode.ReadSchema)
+         TablesDataSet.AcceptChanges()
+      End If
+      If File.Exists(LookupTablesFile) Then LoadLookupTables()
+      If Not String.IsNullOrEmpty(MyAppSettings.UserId) Then
+         If File.Exists(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
+            BatchesDataSet.ReadXml(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId)))
+            BatchesDataSet.AcceptChanges()
+         End If
+      End If
+   End Sub
 
 	Private Sub LoadLookupTables()
 		Dim fname As String
@@ -1685,10 +1709,10 @@ Public Class FreeREG2Browser
 	Private Sub miLocalFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLocalFiles.Click
 		labelStatus.Text = ""
 
-		Dim fileQuery = From file As FileInfo In ListFiles(BaseDataDirectory + "\Transcripts") _
-		  Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
-		  Order By file.Name _
-		  Select file
+      Dim fileQuery = From file As FileInfo In ListFiles(OldBaseDataDirectory + "\Transcripts") _
+        Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
+        Order By file.Name _
+        Select file
 
 		Dim tableLocalFiles As DataTable = CreateDataTable(Of FileInfo)(fileQuery)
 		If File.Exists(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
@@ -3236,10 +3260,10 @@ Public Class FreeREG2Browser
 				Dim contents As String = webClient.DownloadString(addrRequest)
 
 				If contents.StartsWith("+INFO") Then
-					Using dlg As New formBatchContents() With {.PersonalPath = BaseDataDirectory + "\Transcripts", .CurrentBatch = currentBatch, .Text = String.Format("Batch Contents - {0}", currentBatch.FileName)}
-						dlg.FileContentsTextBox.Text = contents
-						dlg.ShowDialog()
-					End Using
+               Using dlg As New formBatchContents() With {.PersonalPath = OldBaseDataDirectory + "\Transcripts", .CurrentBatch = currentBatch, .Text = String.Format("Batch Contents - {0}", currentBatch.FileName)}
+                  dlg.FileContentsTextBox.Text = contents
+                  dlg.ShowDialog()
+               End Using
 				Else
 					Dim xmlDoc As New XmlDocument()
 					xmlDoc.LoadXml(contents)
@@ -3327,17 +3351,17 @@ Public Class FreeREG2Browser
 
 	Private Sub dlvLocalFiles_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.ItemActivate
 		Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
-		Using dlg As New formFileWorkspace With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = BaseDataDirectory, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
-			Try
-				dlg.ShowDialog()
+      Using dlg As New formFileWorkspace With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = BaseDataDirectory, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+         Try
+            dlg.ShowDialog()
 
-			Catch ex As Exception
-				Beep()
+         Catch ex As Exception
+            Beep()
 
-			Finally
+         Finally
 
-			End Try
-		End Using
+         End Try
+      End Using
 	End Sub
 
 	Private Sub dlvLocalFiles_CellToolTipShowing(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.ToolTipShowingEventArgs) Handles dlvLocalFiles.CellToolTipShowing

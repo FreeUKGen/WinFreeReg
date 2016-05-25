@@ -36,15 +36,15 @@ Public Class formFreeregTables
 		End Set
 	End Property
 
-	Private _settings As AppSettings
-	Public Property Settings() As AppSettings
-		Get
-			Return _settings
-		End Get
-		Set(ByVal value As AppSettings)
-			_settings = value
-		End Set
-	End Property
+   Private _settings As FreeReg2BrowserSettings
+   Public Property Settings() As FreeReg2BrowserSettings
+      Get
+         Return _settings
+      End Get
+      Set(ByVal value As FreeReg2BrowserSettings)
+         _settings = value
+      End Set
+   End Property
 
 	Private Sub formFreeregTables_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 		ConfigureTextOverlay(dlvRegisterTypes.EmptyListMsgOverlay)
