@@ -1074,6 +1074,7 @@
 		<row><td>ISSelfRegisterCosting</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterCosting</td><td/><td/></row>
 		<row><td>ISSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFiles</td><td/><td/></row>
 		<row><td>ISSelfRegisterFinalize</td><td>1</td><td>ISSELFREG.DLL</td><td>ISSelfRegisterFinalize</td><td/><td/></row>
+		<row><td>ISSetAllUsers</td><td>257</td><td>SetAllUsers.dll</td><td>SetAllUsers</td><td/><td/></row>
 		<row><td>ISUnSelfRegisterFiles</td><td>3073</td><td>ISSELFREG.DLL</td><td>ISUnSelfRegisterFiles</td><td/><td/></row>
 		<row><td>SetARPINSTALLLOCATION</td><td>51</td><td>ARPINSTALLLOCATION</td><td>[INSTALLDIR]</td><td/><td/></row>
 		<row><td>SetAllUsersProfileNT</td><td>51</td><td>ALLUSERSPROFILE</td><td>[%SystemRoot]\Profiles\All Users</td><td/><td/></row>
@@ -1852,7 +1853,8 @@
 		<col def="S255">ProgId_</col>
 		<col def="S64">MIME_</col>
 		<col def="s38">Feature_</col>
-		<row><td>.csv</td><td>WinFreeReg.Primary_output</td><td/><td/><td>AlwaysInstall</td></row>
+		<row><td>NewExtension1</td><td>WinFreeReg.Primary_output</td><td/><td/><td>AlwaysInstall</td></row>
+		<row><td>NewExtension2</td><td>WinFreeReg.Primary_output</td><td/><td/><td>AlwaysInstall</td></row>
 	</table>
 
 	<table name="Feature">
@@ -2677,7 +2679,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>-484133206</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>-484161809</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
@@ -3778,8 +3780,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.FreeUKGenealogy.com</td><td>0</td><td/><td>-484133206</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>-484133206</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.FreeUKGenealogy.com</td><td>0</td><td/><td>-484161809</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>-484161809</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-484144821</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-484139350</td></row>
 	</table>
@@ -3898,6 +3900,7 @@
 		<row><td>_5EF099F0CFF542A8B395F7BEF1D73268.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_619DE9AD53524F41A47C0B944613B56F.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_65F865E93A5F465388D6CC9A05877A8C.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_6DF04D59E2DF4CC4854161F79C46C4F0.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_70AB872005E6462C886F902DCA78F40C.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_75DFD47C9B5B48918E79FB0189BC5C70.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_7FBA8BEA1294427CB7C66FEF1B543B7E.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
@@ -3911,6 +3914,7 @@
 		<row><td>_A5AE6152FC9C4B06BC80D58201BB5B5D.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_AED80E49A3CB41CA926109DD47617BE5.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_B729FF4321F14FB08BA05CABB772EB07.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_C01CEB90BEC54ED1A57657F2B1D426C4.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_C1EB12FE7EB945519226E3D501EF93A9.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_DEC46998A8F444E4ABD9F879253370D6.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_E5F913CA885041DD97DF8000D1FFBC0E.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
@@ -3962,6 +3966,7 @@
 		<row><td>ISSelfRegisterCosting</td><td/><td>2201</td><td/><td/></row>
 		<row><td>ISSelfRegisterFiles</td><td/><td>5601</td><td/><td/></row>
 		<row><td>ISSelfRegisterFinalize</td><td/><td>6601</td><td/><td/></row>
+		<row><td>ISSetAllUsers</td><td>Not Installed</td><td>10</td><td/><td/></row>
 		<row><td>ISUnSelfRegisterFiles</td><td/><td>2202</td><td/><td/></row>
 		<row><td>InstallFiles</td><td/><td>4000</td><td>InstallFiles</td><td/></row>
 		<row><td>InstallFinalize</td><td/><td>6600</td><td>InstallFinalize</td><td/></row>
@@ -4049,7 +4054,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{477BBFA6-AE14-4A6A-99C6-C01A82F94668}</td></row>
 		<row><td>ISUSSignature</td><td>{15E69C45-9616-46F5-B81C-C40B7BF2DD3C}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewObjects,viewProject,viewRealSetupDesign,viewSetupDesign,viewSetupTypes,viewUpdateService,viewUpgradePaths,viewAppFiles,viewFeatureFiles,viewDependencies,viewShortcuts</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewObjects,viewProject,viewRealSetupDesign,viewSetupDesign,viewSetupTypes,viewUpdateService,viewUpgradePaths,viewAppFiles,viewFeatureFiles,viewDependencies,viewShortcuts,viewUI,viewIniFiles,viewFileExtensions,viewEnvironmentVariables,viewVRoots,viewServices,viewBillboards,viewTextMessages,viewSystemSearch,viewCustomActions,viewRelease,viewISToday</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4082,6 +4087,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>FileCost</td><td/><td>900</td><td>FileCost</td><td/></row>
 		<row><td>FindRelatedProducts</td><td/><td>430</td><td>FindRelatedProducts</td><td/></row>
 		<row><td>ISPreventDowngrade</td><td>ISFOUNDNEWERPRODUCTVERSION</td><td>450</td><td>ISPreventDowngrade</td><td/></row>
+		<row><td>ISSetAllUsers</td><td>Not Installed</td><td>10</td><td/><td/></row>
 		<row><td>InstallWelcome</td><td>Not Installed</td><td>1210</td><td>InstallWelcome</td><td/></row>
 		<row><td>IsolateComponents</td><td/><td>950</td><td>IsolateComponents</td><td/></row>
 		<row><td>LaunchConditions</td><td>Not Installed</td><td>410</td><td>LaunchConditions</td><td/></row>
@@ -4721,7 +4727,6 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="I2">Sequence</col>
 		<col def="L255">Command</col>
 		<col def="L255">Argument</col>
-		<row><td>.csv</td><td>Open</td><td/><td/><td>"%1"</td></row>
 	</table>
 
 	<table name="_Validation">
