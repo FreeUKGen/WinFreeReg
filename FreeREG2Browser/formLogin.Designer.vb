@@ -29,6 +29,7 @@ Partial Class formLogin
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
+      Me.components = New System.ComponentModel.Container()
       Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formLogin))
       Me.UsernameLabel = New System.Windows.Forms.Label()
       Me.PasswordLabel = New System.Windows.Forms.Label()
@@ -38,6 +39,7 @@ Partial Class formLogin
       Me.Cancel_Button = New System.Windows.Forms.Button()
       Me.UrlLabel = New System.Windows.Forms.Label()
       Me.UrlTextBox = New System.Windows.Forms.TextBox()
+      Me.LoginToolTip = New System.Windows.Forms.ToolTip(Me.components)
       Me.SuspendLayout()
       '
       'UsernameLabel
@@ -62,6 +64,7 @@ Partial Class formLogin
       '
       'UsernameTextBox
       '
+      Me.UsernameTextBox.BackColor = System.Drawing.SystemColors.Control
       Me.UsernameTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.UsernameTextBox.Location = New System.Drawing.Point(11, 66)
       Me.UsernameTextBox.Name = "UsernameTextBox"
@@ -70,6 +73,7 @@ Partial Class formLogin
       '
       'PasswordTextBox
       '
+      Me.PasswordTextBox.BackColor = System.Drawing.SystemColors.Control
       Me.PasswordTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.PasswordTextBox.Location = New System.Drawing.Point(11, 116)
       Me.PasswordTextBox.Name = "PasswordTextBox"
@@ -107,12 +111,13 @@ Partial Class formLogin
       '
       'UrlTextBox
       '
+      Me.UrlTextBox.BackColor = System.Drawing.SystemColors.Control
       Me.UrlTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None
-      Me.UrlTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.UrlTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.UrlTextBox.Location = New System.Drawing.Point(42, 11)
       Me.UrlTextBox.Name = "UrlTextBox"
       Me.UrlTextBox.ReadOnly = True
-      Me.UrlTextBox.Size = New System.Drawing.Size(347, 19)
+      Me.UrlTextBox.Size = New System.Drawing.Size(347, 16)
       Me.UrlTextBox.TabIndex = 7
       '
       'formLogin
@@ -120,6 +125,7 @@ Partial Class formLogin
       Me.AcceptButton = Me.OK_Button
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+      Me.BackColor = System.Drawing.SystemColors.Control
       Me.CancelButton = Me.Cancel_Button
       Me.ClientSize = New System.Drawing.Size(401, 192)
       Me.Controls.Add(Me.UrlTextBox)
@@ -143,6 +149,7 @@ Partial Class formLogin
 
    End Sub
 	Friend WithEvents UrlLabel As System.Windows.Forms.Label
-	Friend WithEvents UrlTextBox As System.Windows.Forms.TextBox
+   Friend WithEvents UrlTextBox As System.Windows.Forms.TextBox
+   Friend WithEvents LoginToolTip As System.Windows.Forms.ToolTip
 
 End Class

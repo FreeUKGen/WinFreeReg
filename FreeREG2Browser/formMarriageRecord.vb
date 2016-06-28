@@ -117,7 +117,7 @@ Public Class formMarriageRecord
 			Dim c1 As DataColumn = col
 			Dim c As List(Of Control) = Controls().Cast(Of Control)().Where(Function(ctl As Control) ctl.Tag IsNot Nothing AndAlso ctl.Tag.ToString() = c1.ColumnName).ToList()
 			Dim errStr = row.GetColumnError(col.ColumnName)
-			ErrorProvider1.SetError(c(0), errStr)
+         MarriageErrorProvider.SetError(c(0), errStr)
 		Next
 	End Sub
 

@@ -13,18 +13,6 @@ Imports System.Security.Permissions
 <Serializable()> Public Class FreeReg2BrowserSettings
    Implements ISerializable
 
-   Public ReadOnly Property LiveUrl() As String
-      Get
-         Return "http://freereg2.freereg.org.uk"
-      End Get
-   End Property
-
-   Public ReadOnly Property TestUrl() As String
-      Get
-         Return "http://localhost:3000"
-      End Get
-   End Property
-
    Private _baseUrl As String = ""
    Private _userid As String
    Private _password As String

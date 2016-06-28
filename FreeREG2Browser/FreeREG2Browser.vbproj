@@ -47,6 +47,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>FreeREG2Browser.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
+    <DefineConstants>LOCAL=False</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -77,9 +78,13 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Visual Studio 2008\HtmlAgilityPack.1.4.6\Net20\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net20\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ObjectListView, Version=2.9.1.1072, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
+      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="regexlib">
       <HintPath>..\..\..\..\Visual Studio 2008\Projects\WinREG_3.2\WinREG_3\bin\x86\Release\regexlib.dll</HintPath>
@@ -333,11 +338,44 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\DataSources\classUncorrectedErrors.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BaptismSexDataTable.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BaptismSexRow.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BaptismSexRowChangeEvent.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BaptismSexRowChangeEventHandler.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BrideConditionDataTable.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BrideConditionRow.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BrideConditionRowChangeEvent.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BrideConditionRowChangeEventHandler.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BurialRelationshipDataTable.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BurialRelationshipRow.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BurialRelationshipRowChangeEvent.datasource" />
+    <None Include="My Project\DataSources\LookupTables.BurialRelationshipRowChangeEventHandler.datasource" />
+    <None Include="My Project\DataSources\LookupTables.ChapmanCodesDataTable.datasource" />
+    <None Include="My Project\DataSources\LookupTables.ChapmanCodesRow.datasource" />
+    <None Include="My Project\DataSources\LookupTables.ChapmanCodesRowChangeEvent.datasource" />
+    <None Include="My Project\DataSources\LookupTables.ChapmanCodesRowChangeEventHandler.datasource" />
+    <None Include="My Project\DataSources\LookupTables.datasource" />
+    <None Include="My Project\DataSources\LookupTables.GroomConditionDataTable.datasource" />
+    <None Include="My Project\DataSources\LookupTables.GroomConditionRow.datasource" />
+    <None Include="My Project\DataSources\LookupTables.GroomConditionRowChangeEvent.datasource" />
+    <None Include="My Project\DataSources\LookupTables.GroomConditionRowChangeEventHandler.datasource" />
+    <None Include="My Project\DataSources\LookupTables.RecordTypesDataTable.datasource" />
+    <None Include="My Project\DataSources\LookupTables.RecordTypesRow.datasource" />
+    <None Include="My Project\DataSources\LookupTables.RecordTypesRowChangeEvent.datasource" />
+    <None Include="My Project\DataSources\LookupTables.RecordTypesRowChangeEventHandler.datasource" />
+    <None Include="My Project\DataSources\LookupTables.RegisterTypesDataTable.datasource" />
+    <None Include="My Project\DataSources\LookupTables.RegisterTypesRow.datasource" />
+    <None Include="My Project\DataSources\LookupTables.RegisterTypesRowChangeEvent.datasource" />
+    <None Include="My Project\DataSources\LookupTables.RegisterTypesRowChangeEventHandler.datasource" />
+    <None Include="My Project\DataSources\TranscriptionFileClass.datasource" />
+    <None Include="My Project\DataSources\TranscriptionFileClass.FileHeaderClass.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="packages.config" />
     <None Include="UserDetails.xsc">
       <DependentUpon>UserDetails.xsd</DependentUpon>
     </None>
@@ -352,10 +390,6 @@
     <None Include="WinFreeReg.snk" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\ObjectListViewFull-2.9.0\ObjectListViewDemo\ObjectListView\ObjectListView2008.csproj">
-      <Project>{18FEDA0C-D147-4286-B39A-01204808106A}</Project>
-      <Name>ObjectListView2008</Name>
-    </ProjectReference>
     <ProjectReference Include="..\LookupTables\LookupTables.vbproj">
       <Project>{C3EAF49A-E864-4234-8860-DBDD335778F0}</Project>
       <Name>LookupTables</Name>
@@ -366,8 +400,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="My Project\DataSources\LookupTables.datasource" />
-    <None Include="My Project\DataSources\TranscriptionTables.datasource" />
     <None Include="Resources\save.png" />
   </ItemGroup>
   <ItemGroup>
@@ -388,8 +420,6 @@
       <Link>ErrorMessages.xss</Link>
       <DependentUpon>ErrorMessages.xsd</DependentUpon>
     </None>
-    <None Include="My Project\DataSources\classUncorrectedErrors.datasource" />
-    <None Include="My Project\DataSources\TranscriptionFileClass.datasource" />
     <None Include="Resources\appico.ico" />
   </ItemGroup>
   <ItemGroup>

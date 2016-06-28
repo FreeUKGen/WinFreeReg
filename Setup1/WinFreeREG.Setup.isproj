@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Project ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup>
+		<!-- Select a Product Configuration -->
+		<InstallShieldProductConfiguration>Express</InstallShieldProductConfiguration>
+		<!-- Select a Visual Studio Configuration / InstallShield Release -->
+		<Configuration>Debug</Configuration>
+		<InstallShieldRelease>$(Configuration)</InstallShieldRelease>
+	</PropertyGroup>
+	<ItemGroup>
+		<!-- The InstallShieldProject item selects the project to build -->
+		<InstallShieldProject Include="$(MSBuildProjectDirectory)\$(MSBuildProjectName).isl"/>
+		<!-- The InstallShieldReleaseFlags sets Release Flags -->
+		<!--<InstallShieldReleaseFlags Include=""/>-->
+		<!-- The InstallShieldMergeModulePath specifies what directories are
+		searched for Merge Modules -->
+		<!--<InstallShieldMergeModulePath Include=""/>-->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The ProjectReference items refer to any Visual Studio solutions you want to automatically probe for Project Output Groups.  -->
+	</ItemGroup>
+	<ItemGroup>
+		<!-- The TaggedOutputs items allow you to explicitly add extra files to output groups. Each item must include both Name and OutputGroup, as well as TargetPath metadata values. -->
+		<!--<TaggedOutputs Include="C:\My Test Exe.exe">
+			<Name>My Test Project</Name>
+			<OutputGroup>Primary output</OutputGroup>
+			<TargetPath>My Test Exe.exe</TargetPath>
+		</TaggedOutputs> -->
+	</ItemGroup>
+	<Import Project="$(MSBuildExtensionsPath32)\InstallShield\2013Limited\InstallShield.targets"/>
+	<ItemGroup>
+		<ProjectReference Include="..\FreeREG2Browser\FreeREG2Browser.vbproj">
+			<Name>FreeREG2Browser</Name>
+			<Project>{38629534-0DF4-4C0D-AFE3-B90114DDEEDB}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\LookupTables\LookupTables.vbproj">
+			<Name>LookupTables</Name>
+			<Project>{C3EAF49A-E864-4234-8860-DBDD335778F0}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\RegexUtilities\RegexUtilities.vbproj">
+			<Name>RegexUtilities</Name>
+			<Project>{C3FC6C01-E52B-4766-A53B-02179B406333}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\TranscriptionTables\TranscriptionTables.vbproj">
+			<Name>TranscriptionTables</Name>
+			<Project>{88B014CC-B9C9-4CD5-BF08-AF67453D31E9}</Project>
+		</ProjectReference>
+		<ProjectReference Include="..\WinFreeReg\WinFreeReg.vbproj">
+			<Name>WinFreeReg</Name>
+			<Project>{2C861969-D0E9-4E76-808C-1F64BAE12BE9}</Project>
+		</ProjectReference>
+	</ItemGroup>
+</Project>

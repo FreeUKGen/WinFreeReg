@@ -7,8 +7,8 @@ Partial Class LookupTables
 			Dim fi As FileInfo = New FileInfo(filename)
 			If fi.Exists Then
 				If fi.IsReadOnly Then fi.IsReadOnly = False
-				Me.ReadXml(filename, XmlReadMode.Auto)
-			End If
+            Me.ReadXml(filename, XmlReadMode.Auto)
+         End If
 
 			Try
 				If Me.RecordTypes.Rows.Count = 0 Then

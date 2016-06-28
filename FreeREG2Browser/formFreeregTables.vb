@@ -46,19 +46,32 @@ Public Class formFreeregTables
       End Set
    End Property
 
-	Private Sub formFreeregTables_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-		ConfigureTextOverlay(dlvRegisterTypes.EmptyListMsgOverlay)
-		ConfigureTextOverlay(dlvPlaces.EmptyListMsgOverlay)
-		ConfigureTextOverlay(dlvCounties.EmptyListMsgOverlay)
-		ConfigureTextOverlay(dlvChurches.EmptyListMsgOverlay)
+   Private _myDefaultCounty As WinFreeReg.LookupTables.ChapmanCodesRow
+   Public Property DefaultCounty() As WinFreeReg.LookupTables.ChapmanCodesRow
+      Get
+         Return _myDefaultCounty
+      End Get
+      Set(ByVal value As WinFreeReg.LookupTables.ChapmanCodesRow)
+         _myDefaultCounty = value
+      End Set
+   End Property
 
-		ConfigureRegisterTypesOLV()
-		ConfigureCountiesOLV()
-		ConfigurePlacesOLV()
-		ConfigureChurchesOLV()
+   Private currentCountyCode As String = Nothing
+   Private ignoreSelection As Integer = 2
 
-		TabControl1.SelectTab("tabCounties")
-	End Sub
+   Private Sub formFreeregTables_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+      ConfigureTextOverlay(dlvRegisterTypes.EmptyListMsgOverlay)
+      ConfigureTextOverlay(dlvPlaces.EmptyListMsgOverlay)
+      ConfigureTextOverlay(dlvCounties.EmptyListMsgOverlay)
+      ConfigureTextOverlay(dlvChurches.EmptyListMsgOverlay)
+
+      ConfigureRegisterTypesOLV()
+      ConfigureCountiesOLV()
+      ConfigurePlacesOLV()
+      ConfigureChurchesOLV()
+
+      TabControl1.SelectTab("tabCounties")
+   End Sub
 
 	Sub ConfigureRegisterTypesOLV()
 		Dim dlvcol As OLVColumn
@@ -81,7 +94,8 @@ Public Class formFreeregTables
 		Dim dlvcol As OLVColumn
 
 		dlvCounties.DataSource = _tables
-		dlvCounties.DataMember = "Counties"
+      dlvCounties.DataMember = "Counties"
+      dlvCounties.ShowGroups = False
 
 		dlvcol = CType(dlvCounties.Columns("ChapmanCode"), OLVColumn)
 		dlvcol.Width = 80
@@ -95,7 +109,8 @@ Public Class formFreeregTables
 		dlvcol.Sortable = False
 		dlvcol.FillsFreeSpace = True
 		dlvCounties.HeaderWordWrap = True
-		dlvCounties.RebuildColumns()
+      dlvCounties.RebuildColumns()
+      currentCountyCode = _myDefaultCounty.Code
 
 	End Sub
 
@@ -104,6 +119,7 @@ Public Class formFreeregTables
 
 		dlvPlaces.DataSource = _tables
 		dlvPlaces.DataMember = "Places"
+      dlvPlaces.ShowGroups = False
 
 		dlvcol = CType(dlvPlaces.Columns("ChapmanCode"), OLVColumn)
 		dlvcol.Width = 80
@@ -121,7 +137,12 @@ Public Class formFreeregTables
 		dlvcol.Groupable = False
 		dlvcol.Sortable = True
 
-		dlvcol = CType(dlvPlaces.Columns("Country"), OLVColumn)
+      dlvcol = CType(dlvPlaces.Columns("Code"), OLVColumn)
+      dlvcol.Width = 100
+      dlvcol.Groupable = False
+      dlvcol.Sortable = True
+
+      dlvcol = CType(dlvPlaces.Columns("Country"), OLVColumn)
 		dlvcol.Width = 65
 		dlvcol.Sortable = True
 		dlvcol.Groupable = True
@@ -147,31 +168,41 @@ Public Class formFreeregTables
 
 		dlvChurches.DataSource = _tables
 		dlvChurches.DataMember = "Churches"
+      dlvChurches.ShowGroups = False
 
 		dlvcol = CType(dlvChurches.Columns("ChapmanCode"), OLVColumn)
 		dlvcol.IsVisible = False
+      dlvcol.Groupable = True
+      dlvcol.Sortable = True
 
 		dlvcol = CType(dlvChurches.Columns("LastAmended"), OLVColumn)
 		dlvcol.IsVisible = False
+      dlvcol.Groupable = False
 
 		dlvcol = CType(dlvChurches.Columns("ChurchName"), OLVColumn)
 		dlvcol.Width = 58
+      dlvcol.Groupable = False
 
 		dlvcol = CType(dlvChurches.Columns("PlaceName"), OLVColumn)
 		dlvcol.Width = 53
+      dlvcol.Groupable = False
 
 		dlvcol = CType(dlvChurches.Columns("Location"), OLVColumn)
 		dlvcol.Width = 66
+      dlvcol.Groupable = False
 
 		dlvcol = CType(dlvChurches.Columns("Denomination"), OLVColumn)
 		dlvcol.Width = 99
+      dlvcol.Groupable = False
 
 		dlvcol = CType(dlvChurches.Columns("Website"), OLVColumn)
 		dlvcol.Width = 69
+      dlvcol.Groupable = False
 
 		dlvcol = CType(dlvChurches.Columns("Notes"), OLVColumn)
 		dlvcol.Sortable = False
-		dlvcol.FillsFreeSpace = True
+      dlvcol.Groupable = False
+      dlvcol.FillsFreeSpace = True
 		dlvChurches.HeaderWordWrap = True
 		dlvChurches.RebuildColumns()
 	End Sub
@@ -286,7 +317,8 @@ Public Class formFreeregTables
 		labCounty.Visible = True
 		cboxCounties.Visible = True
 		cboxCounties.DataSource = _tables.Counties
-		cboxCounties.DisplayMember = "ChapmanCode"
+      cboxCounties.DisplayMember = "ChapmanCode"
+      cboxCounties.SelectedIndex = cboxCounties.FindString(currentCountyCode)
 		If ShowPlaces Then
 			labPlace.Visible = True
 			cboxPlaces.Visible = True
@@ -603,16 +635,17 @@ Public Class formFreeregTables
 						ms.Close()
 
 						dlvPlaces.DataSource = Nothing
-						For Each row As DataRow In ds.Tables("Place").Rows
-							Dim drow As FreeregTables.PlacesRow = _tables.Places.FindByPlaceNameChapmanCode(row.Item("PlaceName"), row.Item("ChapmanCode"))
-							If drow Is Nothing Then
-								_tables.Places.AddPlacesRow(row.Item("PlaceName"), row.Item("ChapmanCode"), row.Item("Country"), row.Item("CountyName"), row.Item("Notes"))
-							Else
-								drow.Country = row.Item("Country")
-								drow.CountyName = row.Item("CountyName")
-								drow.Notes = row.Item("Notes")
-							End If
-						Next
+                  For Each row As DataRow In ds.Tables("Place").Rows
+                     Dim drow As FreeregTables.PlacesRow = _tables.Places.FindByPlaceNameChapmanCode(row.Item("PlaceName"), row.Item("ChapmanCode"))
+                     If drow Is Nothing Then
+                        _tables.Places.AddPlacesRow(row.Item("PlaceName"), row.Item("ChapmanCode"), row.Item("Country"), row.Item("CountyName"), row.Item("PlaceName").Substring(0, 3).ToUpper, row.Item("Notes"))
+                     Else
+                        drow.Country = row.Item("Country")
+                        drow.CountyName = row.Item("CountyName")
+                        drow.Notes = row.Item("Notes")
+                        If IsNothing(drow.Code) Or IsDBNull(drow.Code) Then drow.Code = row.Item("PlaceName").Substring(0, 3).ToUpper
+                     End If
+                  Next
 						_tables.Places.AcceptChanges()
 						_tables.WriteXml(_filename, XmlWriteMode.WriteSchema)
 					Else
@@ -739,8 +772,10 @@ Public Class formFreeregTables
 								End If
 							Next
 							_tables.Churches.AcceptChanges()
-							_tables.WriteXml(_filename, XmlWriteMode.WriteSchema)
-						End If
+                     _tables.WriteXml(_filename, XmlWriteMode.WriteSchema)
+                  Else
+                     Throw New BackgroundWorkerException(String.Format("No church information available for {0}", params.Place))
+                  End If
 					Else
 						Throw New BackgroundWorkerException("Getting Churches from FreeREG/2 failed - Not logged on")
 					End If
@@ -867,43 +902,51 @@ Public Class formFreeregTables
 		Select Case TabControl1.SelectedTab.Name
 			Case "tabRegisterTypes"
 			Case "tabCounties"
-			Case "tabPlaces"
-				If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
-					dlvPlaces.ModelFilter = Nothing
-					dlvPlaces.ModelFilter = New FilterPlacesByCounty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
-				Else
-					dlvPlaces.ModelFilter = Nothing
-				End If
+         Case "tabPlaces"
+            If ignoreSelection > 0 Then
+               dlvPlaces.ModelFilter = Nothing
+               dlvPlaces.ModelFilter = New FilterPlacesByCounty(_myDefaultCounty.Code)
+               ignoreSelection -= 1
+            Else
+               If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
+                  dlvPlaces.ModelFilter = Nothing
+                  dlvPlaces.ModelFilter = New FilterPlacesByCounty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
+                  currentCountyCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
+               Else
+                  dlvPlaces.ModelFilter = Nothing
+                  currentCountyCode = _myDefaultCounty.Code
+               End If
+            End If
 
-			Case "tabChurches"
-				If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
-					dlvChurches.ModelFilter = Nothing
-					Dim filterChurches = New FilterChurchesByCountyAndPlace()
+         Case "tabChurches"
+            If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
+               dlvChurches.ModelFilter = Nothing
+               Dim filterChurches = New FilterChurchesByCountyAndPlace()
 
-					Dim dt = _tables.Places.Where(Function(row As FreeregTables.PlacesRow) row.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
-					If dt.Count > 0 Then
-						cboxPlaces.DataSource = New BindingSource(dt, Nothing)
-						cboxPlaces.DisplayMember = "Placename"
-					Else
-						cboxPlaces.ValueMember = ""
-						cboxPlaces.SelectedValue = ""
-						cboxPlaces.DataSource = Nothing
-						cboxPlaces.DisplayMember = ""
-						cboxPlaces.Items.Clear()
-					End If
-					filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
+               Dim dt = _tables.Places.Where(Function(row As FreeregTables.PlacesRow) row.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
+               If dt.Count > 0 Then
+                  cboxPlaces.DataSource = New BindingSource(dt, Nothing)
+                  cboxPlaces.DisplayMember = "Placename"
+               Else
+                  cboxPlaces.ValueMember = ""
+                  cboxPlaces.SelectedValue = ""
+                  cboxPlaces.DataSource = Nothing
+                  cboxPlaces.DisplayMember = ""
+                  cboxPlaces.Items.Clear()
+               End If
+               filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
 
-					If cboxPlaces.SelectedItem IsNot Nothing Then
-						filterChurches.PlaceName = CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName
-					Else
-						filterChurches.PlaceName = ""
-					End If
+               If cboxPlaces.SelectedItem IsNot Nothing Then
+                  filterChurches.PlaceName = CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName
+               Else
+                  filterChurches.PlaceName = ""
+               End If
 
-					dlvChurches.ModelFilter = filterChurches
-				Else
-					dlvChurches.ModelFilter = Nothing
-				End If
-		End Select
+               dlvChurches.ModelFilter = filterChurches
+            Else
+               dlvChurches.ModelFilter = Nothing
+            End If
+      End Select
 	End Sub
 
 	Private Sub cboxPlaces_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboxPlaces.SelectedIndexChanged

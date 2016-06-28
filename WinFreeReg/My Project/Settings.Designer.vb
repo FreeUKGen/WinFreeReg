@@ -54,41 +54,128 @@ Namespace My
             End Get
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MyUserName() As String
-            Get
-                Return CType(Me("MyUserName"),String)
-            End Get
-            Set
-                Me("MyUserName") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MyPassword() As String
-            Get
-                Return CType(Me("MyPassword"),String)
-            End Get
-            Set
-                Me("MyPassword") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property MyTranscriptionLibrary() As String
-            Get
-                Return CType(Me("MyTranscriptionLibrary"),String)
-            End Get
-            Set
-                Me("MyTranscriptionLibrary") = value
-            End Set
-        End Property
+      <Global.System.Configuration.UserScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("")> _
+      Public Property MyUserId() As String
+         Get
+            Return CType(Me("MyUserId"), String)
+         End Get
+         Set(value As String)
+            Me("MyUserId") = value
+         End Set
+      End Property
+
+      <Global.System.Configuration.UserScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("")> _
+      Public Property MyPassword() As String
+         Get
+            Return CType(Me("MyPassword"), String)
+         End Get
+         Set(value As String)
+            Me("MyPassword") = value
+         End Set
+      End Property
+
+      <Global.System.Configuration.UserScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("")> _
+      Public Property MyTranscriptionLibrary() As String
+         Get
+            Return CType(Me("MyTranscriptionLibrary"), String)
+         End Get
+         Set(value As String)
+            Me("MyTranscriptionLibrary") = value
+         End Set
+      End Property
+
+      <Global.System.Configuration.UserScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("")> _
+      Public Property MyFreeREGUrl() As String
+         Get
+            Return CType(Me("MyFreeREGUrl"), String)
+         End Get
+         Set(value As String)
+            Me("MyFreeREGUrl") = value
+         End Set
+      End Property
+
+      <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("http://localhost:3000")> _
+      Public ReadOnly Property MyLocalUrl() As String
+         Get
+            Return CType(Me("MyLocalUrl"), String)
+         End Get
+      End Property
+
+      <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("http://test3.freereg.org.uk")> _
+      Public ReadOnly Property MyTestUrl() As String
+         Get
+            Return CType(Me("MyTestUrl"), String)
+         End Get
+      End Property
+
+      <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("http://freereg2.freereg.org.uk")> _
+      Public ReadOnly Property MyLiveUrl() As String
+         Get
+            Return CType(Me("MyLiveUrl"), String)
+         End Get
+      End Property
+
+      <Global.System.Configuration.UserScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("")> _
+      Public Property MyDefaultCounty() As String
+         Get
+            Return CType(Me("MyDefaultCounty"), String)
+         End Get
+         Set(value As String)
+            Me("MyDefaultCounty") = value
+         End Set
+      End Property
+
+      <Global.System.Configuration.UserScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("False")> _
+      Public Property MyNetworkTrace() As Boolean
+         Get
+            Return CType(Me("MyNetworkTrace"), Boolean)
+         End Get
+         Set(value As Boolean)
+            Me("MyNetworkTrace") = value
+         End Set
+      End Property
+
+      <Global.System.Configuration.UserScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("")> _
+      Public Property MyUserName() As String
+         Get
+            Return CType(Me("MyUserName"), String)
+         End Get
+         Set(value As String)
+            Me("MyUserName") = value
+         End Set
+      End Property
+
+      <Global.System.Configuration.UserScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("")> _
+      Public Property MyEmailAddress() As String
+         Get
+            Return CType(Me("MyEmailAddress"), String)
+         End Get
+         Set(value As String)
+            Me("MyEmailAddress") = value
+         End Set
+      End Property
     End Class
 End Namespace
 

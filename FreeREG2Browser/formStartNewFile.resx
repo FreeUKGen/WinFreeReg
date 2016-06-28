@@ -138,6 +138,15 @@
   <metadata name="RecordTypesBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>144, 56</value>
   </metadata>
+  <metadata name="NewFileToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>344, 56</value>
+  </metadata>
+  <data name="linkUpdate.ToolTip" xml:space="preserve">
+    <value>The Place Code has been changed and can now to stored on your PC. Click
+the link to cause the new Place Code record to be stored in the associated 
+Placsname record. All files created for this Placename will henceforth use
+this Place Code by default.</value>
+  </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

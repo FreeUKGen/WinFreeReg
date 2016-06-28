@@ -158,6 +158,19 @@ Public Class TranscriptionFileClass
 
    End Sub
 
+   Sub Create(ByVal strFileName As String, ByVal tableLookups As LookupTables, ByVal tableFreereg As FreeregTables, ByVal strFileType As String)
+      Dim NewFile As New TranscriptionFileClass()
+      FullFileName = strFileName
+      FileName = Path.GetFileName(strFileName)
+      PathName = Path.GetDirectoryName(strFileName)
+      LookupTables = tableLookups
+      FreeregTables = tableFreereg
+
+      FileHeader = New FileHeaderClass()
+      FileHeader.FileType = [Enum].Parse(GetType(FileTypes), strFileType, True)
+
+   End Sub
+
    Private Sub AddNewBaptismRecord(ByRef recordcollection As WinFreeReg.TranscriptionTables.BaptismsDataTable, ByVal rec As String())
       Dim recBaptism As TranscriptionTables.BaptismsRow
       recBaptism = recordcollection.NewBaptismsRow()
@@ -257,6 +270,7 @@ Public Class TranscriptionFileClass
       Dim DataLine As String
       Dim strFiche As String = "", strImage As String = ""
       Dim charComma As Char() = {","}
+      Dim strChurchName As String = String.Format("{0} {1}", m_fileHeader.Church, m_fileHeader.RegisterType).TrimEnd()
 
       Using fs As New FileStream(Path.ChangeExtension(m_fullFilename, ".tmp"), FileMode.Create, FileAccess.Write, FileShare.None)
          Using sw As New StreamWriter(fs, m_Encoding)
@@ -265,9 +279,9 @@ Public Class TranscriptionFileClass
                Case FileTypes.BAPTISMS
                   For Each recBaptism As TranscriptionTables.BaptismsRow In CType(m_recordcollection, TranscriptionTables.BaptismsDataTable).Rows
                      DataLine = ""
-                     If IsNothing(recBaptism.County) Or IsDBNull(recBaptism.County) Or String.IsNullOrEmpty(recBaptism.County) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(m_fileHeader.County)
-                     If IsNothing(recBaptism.Place) Or IsDBNull(recBaptism.Place) Or String.IsNullOrEmpty(recBaptism.Place) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(m_fileHeader.Place)
-                     If IsNothing(recBaptism.Church) Or IsDBNull(recBaptism.Church) Or String.IsNullOrEmpty(recBaptism.Church) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(m_fileHeader.Church)
+                     DataLine = DataLine & "," & QuoteString(m_fileHeader.County)
+                     DataLine = DataLine & "," & QuoteString(m_fileHeader.Place)
+                     DataLine = DataLine & "," & QuoteString(strChurchName)
                      If IsNothing(recBaptism.RegNo) Or IsDBNull(recBaptism.RegNo) Or String.IsNullOrEmpty(recBaptism.RegNo) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(recBaptism.RegNo)
 
                      If IsNothing(recBaptism.BirthDate) Or IsDBNull(recBaptism.BirthDate) Or String.IsNullOrEmpty(recBaptism.BirthDate) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(recBaptism.BirthDate)
@@ -305,9 +319,9 @@ Public Class TranscriptionFileClass
                Case FileTypes.BURIALS
                   For Each recBurial As TranscriptionTables.BurialsRow In CType(m_recordcollection, TranscriptionTables.BurialsDataTable).Rows
                      DataLine = ""
-                     If IsNothing(recBurial.County) Or IsDBNull(recBurial.County) Or String.IsNullOrEmpty(recBurial.County) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(m_fileHeader.County)
-                     If IsNothing(recBurial.Place) Or IsDBNull(recBurial.Place) Or String.IsNullOrEmpty(recBurial.Place) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(m_fileHeader.Place)
-                     If IsNothing(recBurial.Church) Or IsDBNull(recBurial.Church) Or String.IsNullOrEmpty(recBurial.Church) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(m_fileHeader.Church)
+                     DataLine = DataLine & "," & QuoteString(m_fileHeader.County)
+                     DataLine = DataLine & "," & QuoteString(m_fileHeader.Place)
+                     DataLine = DataLine & "," & QuoteString(strChurchName)
                      If IsNothing(recBurial.RegNo) Or IsDBNull(recBurial.RegNo) Or String.IsNullOrEmpty(recBurial.RegNo) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(recBurial.RegNo)
 
                      If IsNothing(recBurial.BurialDate) Or IsDBNull(recBurial.BurialDate) Or String.IsNullOrEmpty(recBurial.BurialDate) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(recBurial.BurialDate)
@@ -344,9 +358,9 @@ Public Class TranscriptionFileClass
                Case FileTypes.MARRIAGES
                   For Each recMarriage As TranscriptionTables.MarriagesRow In CType(m_recordcollection, TranscriptionTables.MarriagesDataTable).Rows
                      DataLine = ""
-                     If IsNothing(recMarriage.County) Or IsDBNull(recMarriage.County) Or String.IsNullOrEmpty(recMarriage.County) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(m_fileHeader.County)
-                     If IsNothing(recMarriage.Place) Or IsDBNull(recMarriage.Place) Or String.IsNullOrEmpty(recMarriage.Place) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(m_fileHeader.Place)
-                     If IsNothing(recMarriage.Church) Or IsDBNull(recMarriage.Church) Or String.IsNullOrEmpty(recMarriage.Church) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(m_fileHeader.Church)
+                     DataLine = DataLine & "," & QuoteString(m_fileHeader.County)
+                     DataLine = DataLine & "," & QuoteString(m_fileHeader.Place)
+                     DataLine = DataLine & "," & QuoteString(strChurchName)
                      If IsNothing(recMarriage.RegNo) Or IsDBNull(recMarriage.RegNo) Or String.IsNullOrEmpty(recMarriage.RegNo) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(recMarriage.RegNo)
 
                      If IsNothing(recMarriage.MarriageDate) Or IsDBNull(recMarriage.MarriageDate) Or String.IsNullOrEmpty(recMarriage.MarriageDate) Then DataLine = DataLine & "," Else DataLine = DataLine & "," & QuoteString(recMarriage.MarriageDate)
@@ -645,10 +659,14 @@ Public Class TranscriptionFileClass
          End Set
       End Property
 
-      Public ReadOnly Property isLDS() As Boolean
+      Private m_isLDS As Boolean
+      Public Property isLDS() As Boolean
          Get
-            Return _hdrLine5 IsNot Nothing AndAlso _hdrLine5.Length = 1 AndAlso _hdrLine5(0) = "+LDS"
+            Return m_isLDS
          End Get
+         Set(value As Boolean)
+            m_isLDS = value
+         End Set
       End Property
 
       Private _hdrLine1 As String()
@@ -696,8 +714,10 @@ Public Class TranscriptionFileClass
 
             _hdrLine5 = m_myReader.ReadFields()
             If _hdrLine5(0) = "+LDS" Then
+               m_isLDS = True
                FirstDataRecord = m_myReader.ReadFields()
             Else
+               m_isLDS = False
                FirstDataRecord = _hdrLine5
                _hdrLine5 = Nothing
             End If
@@ -731,9 +751,13 @@ Public Class TranscriptionFileClass
          End Select
 
          Line1 = "+INFO," & QuoteString(Me.m_myEmail) & "," & QuoteString(Me.m_myPassword) & ",SEQUENCED," & QuoteString([Enum].GetName(GetType(FileTypes), Me.m_fileType)) & cp & fv
+         _hdrLine1 = {"+INFO", QuoteString(Me.m_myEmail), QuoteString(Me.m_myPassword), "SEQUENCED", QuoteString([Enum].GetName(GetType(FileTypes), Me.m_fileType)), cp.Trim({","c}), fv.Trim({","c})}
          Line2 = "#,CCC," & QuoteString(Me.m_myName) & "," & QuoteString(Me.m_mySyndicate) & "," & QuoteString(Me.m_internalFilename) & "," & Me.m_dateCreated
+         _hdrLine2 = {"#", "CCC", QuoteString(Me.m_myName), QuoteString(Me.m_mySyndicate), QuoteString(Me.m_internalFilename), Me.m_dateCreated}
          Line3 = "#,CREDIT," & QuoteString(Me.m_creditName) & "," & QuoteString(Me.m_creditEmail)
+         _hdrLine3 = {"#", "CREDIT", QuoteString(Me.m_creditName), QuoteString(Me.m_creditEmail)}
          Line4 = "#," & Me.DateLastChanged & "," & QuoteString(Me.Comment1) & "," & QuoteString(Me.Comment2)
+         _hdrLine4 = {"#", Me.DateLastChanged, QuoteString(Me.Comment1), QuoteString(Me.Comment2)}
 
          sw.WriteLine(Line1)
          sw.WriteLine(Line2)
@@ -742,6 +766,7 @@ Public Class TranscriptionFileClass
 
          If isLDS Then
             sw.WriteLine("+LDS")
+            _hdrLine1(5) = "+LDS"
          End If
       End Sub
 

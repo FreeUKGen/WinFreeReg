@@ -25,8 +25,11 @@ Public Class formUserTables
    End Property
 
    Private Sub formUserTables_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+      Dim styleDisabled As New SimpleItemStyle() With {.ForeColor = Drawing.Color.DarkRed, .BackColor = Drawing.Color.Cornsilk}
+
       bsBaptismSex.DataSource = m_lookups
       dlvBaptismSex.RebuildColumns()
+      dlvBaptismSex.DisabledItemStyle = styleDisabled
       For Each model In dlvBaptismSex.Objects()
          If CType(CType(model, DataRowView).Row, LookupTables.BaptismSexRow).Type = "Application" Then
             dlvBaptismSex.DisableObject(model)
@@ -35,6 +38,7 @@ Public Class formUserTables
 
       bsBurialRelationship.DataSource = m_lookups
       dlvBurialRelationship.RebuildColumns()
+      dlvBurialRelationship.DisabledItemStyle = styleDisabled
       For Each model In dlvBurialRelationship.Objects()
          If CType(CType(model, DataRowView).Row, LookupTables.BurialRelationshipRow).Type = "Application" Then
             dlvBurialRelationship.DisableObject(model)
@@ -43,6 +47,7 @@ Public Class formUserTables
 
       bsGroomCondition.DataSource = m_lookups
       dlvGroomCondition.RebuildColumns()
+      dlvGroomCondition.DisabledItemStyle = styleDisabled
       For Each model In dlvGroomCondition.Objects()
          If CType(CType(model, DataRowView).Row, LookupTables.GroomConditionRow).Type = "Application" Then
             dlvGroomCondition.DisableObject(model)
@@ -51,6 +56,7 @@ Public Class formUserTables
 
       bsBrideCOndition.DataSource = m_lookups
       dlvBrideCondition.RebuildColumns()
+      dlvBrideCondition.DisabledItemStyle = styleDisabled
       For Each model In dlvBrideCondition.Objects()
          If CType(CType(model, DataRowView).Row, LookupTables.BrideConditionRow).Type = "Application" Then
             dlvBrideCondition.DisableObject(model)
@@ -58,7 +64,7 @@ Public Class formUserTables
       Next
 
       UserTablesTabControl.SelectTab(tabBaptismSex)
-      BindingNavigator1.BindingSource = bsBaptismSex
+      UserTablesBindingNavigator.BindingSource = bsBaptismSex
       BindingNavigatorAddNewItem.Enabled = False
       BindingNavigatorDeleteItem.Enabled = False
       BindingNavigatorSaveChanges.Enabled = LookupTables.HasChanges()
@@ -68,22 +74,22 @@ Public Class formUserTables
    Private Sub UserTablesTabControl_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UserTablesTabControl.SelectedIndexChanged
       Select Case UserTablesTabControl.SelectedTab.Name
          Case "tabBaptismSex"
-            BindingNavigator1.BindingSource = bsBaptismSex
+            UserTablesBindingNavigator.BindingSource = bsBaptismSex
             BindingNavigatorAddNewItem.Enabled = False
             BindingNavigatorDeleteItem.Enabled = False
 
          Case "tabBurialRelationship"
-            BindingNavigator1.BindingSource = bsBurialRelationship
+            UserTablesBindingNavigator.BindingSource = bsBurialRelationship
             BindingNavigatorAddNewItem.Enabled = True
             BindingNavigatorDeleteItem.Enabled = True
 
          Case "tabGroomCondition"
-            BindingNavigator1.BindingSource = bsGroomCondition
+            UserTablesBindingNavigator.BindingSource = bsGroomCondition
             BindingNavigatorAddNewItem.Enabled = True
             BindingNavigatorDeleteItem.Enabled = True
 
          Case "tabBrideCondition"
-            BindingNavigator1.BindingSource = bsBrideCOndition
+            UserTablesBindingNavigator.BindingSource = bsBrideCOndition
             BindingNavigatorAddNewItem.Enabled = True
             BindingNavigatorDeleteItem.Enabled = True
 
@@ -100,6 +106,7 @@ Public Class formUserTables
                If Not dlvBaptismSex.IsDisabled(objectToDelete) Then
                   If MessageBox.Show(My.Resources.msgConfirmDeleteObject, "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                      m_lookups.BaptismSex.RemoveBaptismSexRow(CType(objectToDelete, DataRowView).Row)
+                     BindingNavigatorSaveChanges.Enabled = True
                   End If
                End If
             End If
@@ -110,6 +117,7 @@ Public Class formUserTables
                If Not dlvBurialRelationship.IsDisabled(objectToDelete) Then
                   If MessageBox.Show(My.Resources.msgConfirmDeleteObject, "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                      m_lookups.BurialRelationship.RemoveBurialRelationshipRow(CType(objectToDelete, DataRowView).Row)
+                     BindingNavigatorSaveChanges.Enabled = True
                   End If
                End If
             End If
@@ -120,6 +128,7 @@ Public Class formUserTables
                If Not dlvGroomCondition.IsDisabled(objectToDelete) Then
                   If MessageBox.Show(My.Resources.msgConfirmDeleteObject, "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                      m_lookups.GroomCondition.RemoveGroomConditionRow(CType(objectToDelete, DataRowView).Row)
+                     BindingNavigatorSaveChanges.Enabled = True
                   End If
                End If
             End If
@@ -130,12 +139,12 @@ Public Class formUserTables
                If Not dlvBrideCondition.IsDisabled(objectToDelete) Then
                   If MessageBox.Show(My.Resources.msgConfirmDeleteObject, "Delete Record", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                      m_lookups.BrideCondition.RemoveBrideConditionRow(CType(objectToDelete, DataRowView).Row)
+                     BindingNavigatorSaveChanges.Enabled = True
                   End If
                End If
             End If
 
       End Select
-      BindingNavigatorSaveChanges.Enabled = LookupTables.HasChanges()
 
    End Sub
 
@@ -255,22 +264,8 @@ Public Class formUserTables
          Return
       End If
 
-      If LookupTables.HasChanges Then
-         Dim errString As New StringBuilder("unsaved changes in User Tables" + vbCrLf)
-
-         Dim changed As WinFreeReg.LookupTables = LookupTables.GetChanges()
-         For Each dt As DataTable In changed.Tables
-            Dim changes As DataTable = dt.GetChanges()
-            If changes IsNot Nothing Then
-               errString.AppendLine(String.Format("  {0}", dt.TableName))
-               For Each row As DataRow In changes.Rows
-                  errString.AppendLine(String.Format("    {0}-{1}", row(1), row(2)))
-               Next
-            End If
-         Next
-
-         MessageBox.Show(errString.ToString(), "Unsaved Changes", MessageBoxButtons.YesNo, MessageBoxIcon.Stop)
-      End If
+      LookupTables.AcceptChanges()
+      LookupTables.WriteXml(m_LookupsFilename, XmlWriteMode.WriteSchema)
    End Sub
 
 	Private Sub BindingNavigatorSaveChanges_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorSaveChanges.Click

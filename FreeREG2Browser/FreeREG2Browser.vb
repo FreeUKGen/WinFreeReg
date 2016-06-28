@@ -49,7 +49,6 @@ Public Class FreeREG2Browser
 	Private pathRoamingAppData As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
 	Private pathUserConfig As String = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath()
 	Private BaseDataDirectory = String.Format("{0}\{1}\{2}", My.Computer.FileSystem.SpecialDirectories.MyDocuments, Application.CompanyName, Application.ProductName)
-   Private OldBaseDataDirectory = String.Format("{0}\FreeREG\WinREG for Windows", My.Computer.FileSystem.SpecialDirectories.MyDocuments)
 
 	Private pgmState As ProgramState = ProgramState.Idle
 	Private authenticity_token As String = ""
@@ -63,8 +62,7 @@ Public Class FreeREG2Browser
 	Public SettingsFileName As String = Path.Combine(BaseDataDirectory, "FreeRegBrowserSetttings.dat")
 	Public TranscriberProfileFile As String = Path.Combine(BaseDataDirectory, "transcriber.xml")
 	Public FreeregTablesFile As String = Path.Combine(BaseDataDirectory, "FreeREGTables.xml")
-	Public LookupTablesFile As String = Path.Combine(BaseDataDirectory, "winreg.tables")
-	Public UserLookupTablesFile As String = Path.Combine(BaseDataDirectory, "winreg.user.tables")
+   Public LookupTablesFile As String = Path.Combine(BaseDataDirectory, "winfreereg.tables")
 
 	Friend WithEvents bnavShowData As System.Windows.Forms.BindingNavigator
 	Private components As System.ComponentModel.IContainer
@@ -144,13 +142,33 @@ Public Class FreeREG2Browser
 
    Public MyAppSettings As FreeReg2BrowserSettings
 
-   Private _myUsername As String
-   Public Property Username() As String
+   Private _myUserName As String
+   Public Property UserName() As String
       Get
-         Return _myUsername
+         Return _myUserName
       End Get
       Set(ByVal value As String)
-         _myUsername = value
+         _myUserName = value
+      End Set
+   End Property
+
+   Private _myEmailAddress As String
+   Public Property EmailAddress() As String
+      Get
+         Return _myEmailAddress
+      End Get
+      Set(ByVal value As String)
+         _myEmailAddress = value
+      End Set
+   End Property
+
+   Private _myUserId As String
+   Public Property UserId() As String
+      Get
+         Return _myUserId
+      End Get
+      Set(ByVal value As String)
+         _myUserId = value
       End Set
    End Property
 
@@ -164,12 +182,55 @@ Public Class FreeREG2Browser
       End Set
    End Property
 
+   Private _myUrl As String
+   Public Property FreeregUrl() As String
+      Get
+         Return _myUrl
+      End Get
+      Set(ByVal value As String)
+         _myUrl = value
+      End Set
+   End Property
+
+   Private _myDefaultCounty As WinFreeReg.LookupTables.ChapmanCodesRow
+   Public Property DefaultCounty() As WinFreeReg.LookupTables.ChapmanCodesRow
+      Get
+         Return _myDefaultCounty
+      End Get
+      Set(ByVal value As WinFreeReg.LookupTables.ChapmanCodesRow)
+         _myDefaultCounty = value
+      End Set
+   End Property
+
+   Private _myTranscriptionLibrary As String
+   Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents miNetworkTrace As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents BrowserToolTip As System.Windows.Forms.ToolTip
+   Public Property TranscriptionLibrary() As String
+      Get
+         Return _myTranscriptionLibrary
+      End Get
+      Set(ByVal value As String)
+         _myTranscriptionLibrary = value
+      End Set
+   End Property
+
+   Private _myNetworkTrace As Boolean
+   Public Property TraceNetwork() As Boolean
+      Get
+         Return _myNetworkTrace
+      End Get
+      Set(ByVal value As Boolean)
+         _myNetworkTrace = value
+      End Set
+   End Property
+
    Public Sub New()
       InitializeComponent()
    End Sub
 
    Private Sub InitializeComponent()
-      Me.components = New System.ComponentModel.Container
+      Me.components = New System.ComponentModel.Container()
       Dim IDLabel As System.Windows.Forms.Label
       Dim CountyNameLabel As System.Windows.Forms.Label
       Dim PlaceNameLabel As System.Windows.Forms.Label
@@ -201,127 +262,129 @@ Public Class FreeREG2Browser
       Dim AlternateRegisterNameLabel As System.Windows.Forms.Label
       Dim CsvFileLabel As System.Windows.Forms.Label
       Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FreeREG2Browser))
-      Me.BrowserMenuStrip = New System.Windows.Forms.MenuStrip
-      Me.miFreeREG = New System.Windows.Forms.ToolStripMenuItem
-      Me.miLogin = New System.Windows.Forms.ToolStripMenuItem
-      Me.miLogout = New System.Windows.Forms.ToolStripMenuItem
-      Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-      Me.miUserProfile = New System.Windows.Forms.ToolStripMenuItem
-      Me.miRefreshUser = New System.Windows.Forms.ToolStripMenuItem
-      Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
-      Me.miExit = New System.Windows.Forms.ToolStripMenuItem
-      Me.miTranscriptions = New System.Windows.Forms.ToolStripMenuItem
-      Me.miLocalFiles = New System.Windows.Forms.ToolStripMenuItem
-      Me.miUploadedFiles = New System.Windows.Forms.ToolStripMenuItem
-      Me.miTranscriptionData = New System.Windows.Forms.ToolStripMenuItem
-      Me.miFreeREG2Tables = New System.Windows.Forms.ToolStripMenuItem
-      Me.miUserTables = New System.Windows.Forms.ToolStripMenuItem
-      Me.BrowserStatusStrip = New System.Windows.Forms.StatusStrip
-      Me.labelStatus = New System.Windows.Forms.ToolStripStatusLabel
-      Me.backgroundLogon = New System.ComponentModel.BackgroundWorker
-      Me.backgroundLogout = New System.ComponentModel.BackgroundWorker
+      Me.BrowserMenuStrip = New System.Windows.Forms.MenuStrip()
+      Me.miFreeREG = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miLogin = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miLogout = New System.Windows.Forms.ToolStripMenuItem()
+      Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+      Me.miUserProfile = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miRefreshUser = New System.Windows.Forms.ToolStripMenuItem()
+      Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+      Me.miNetworkTrace = New System.Windows.Forms.ToolStripMenuItem()
+      Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+      Me.miExit = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miTranscriptions = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miLocalFiles = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miUploadedFiles = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miTranscriptionData = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miFreeREG2Tables = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miUserTables = New System.Windows.Forms.ToolStripMenuItem()
+      Me.BrowserStatusStrip = New System.Windows.Forms.StatusStrip()
+      Me.labelStatus = New System.Windows.Forms.ToolStripStatusLabel()
+      Me.backgroundLogon = New System.ComponentModel.BackgroundWorker()
+      Me.backgroundLogout = New System.ComponentModel.BackgroundWorker()
       Me.bnavShowData = New System.Windows.Forms.BindingNavigator(Me.components)
-      Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton
-      Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel
-      Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton
-      Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton
-      Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton
-      Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator
-      Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox
-      Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator
-      Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton
-      Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton
-      Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator
-      Me.dlvLocalFiles = New BrightIdeasSoftware.DataListView
+      Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
+      Me.BindingNavigatorCountItem = New System.Windows.Forms.ToolStripLabel()
+      Me.BindingNavigatorDeleteItem = New System.Windows.Forms.ToolStripButton()
+      Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
+      Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
+      Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
+      Me.BindingNavigatorPositionItem = New System.Windows.Forms.ToolStripTextBox()
+      Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+      Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
+      Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
+      Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
       Me.bsrcLocalFiles = New System.Windows.Forms.BindingSource(Me.components)
-      Me.backgroundBatches = New System.ComponentModel.BackgroundWorker
-      Me.panelUploadedFiles = New System.Windows.Forms.Panel
-      Me.IDTextBox = New System.Windows.Forms.TextBox
+      Me.backgroundBatches = New System.ComponentModel.BackgroundWorker()
+      Me.panelUploadedFiles = New System.Windows.Forms.Panel()
+      Me.IDTextBox = New System.Windows.Forms.TextBox()
       Me.BatchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-      Me.BatchesDataSet = New WinFreeReg.Batches
-      Me.CountyNameTextBox = New System.Windows.Forms.TextBox
-      Me.PlaceNameTextBox = New System.Windows.Forms.TextBox
-      Me.ChurchNameTextBox = New System.Windows.Forms.TextBox
-      Me.RegisterTypeTextBox = New System.Windows.Forms.TextBox
-      Me.RecordTypeTextBox = New System.Windows.Forms.TextBox
-      Me.RecordsTextBox = New System.Windows.Forms.TextBox
-      Me.DateMinTextBox = New System.Windows.Forms.TextBox
-      Me.DateMaxTextBox = New System.Windows.Forms.TextBox
-      Me.DateRangeTextBox = New System.Windows.Forms.TextBox
-      Me.UserIdTextBox = New System.Windows.Forms.TextBox
-      Me.UserIdLowerCaseTextBox = New System.Windows.Forms.TextBox
-      Me.FileNameTextBox = New System.Windows.Forms.TextBox
-      Me.TranscriberNameTextBox = New System.Windows.Forms.TextBox
-      Me.TranscriberEmailTextBox = New System.Windows.Forms.TextBox
-      Me.TranscriberSyndicateTextBox = New System.Windows.Forms.TextBox
-      Me.CreditEmailTextBox = New System.Windows.Forms.TextBox
-      Me.CreditNameTextBox = New System.Windows.Forms.TextBox
-      Me.FirstCommentTextBox = New System.Windows.Forms.TextBox
-      Me.SecondCommentTextBox = New System.Windows.Forms.TextBox
-      Me.TranscriptionDateTextBox = New System.Windows.Forms.TextBox
-      Me.ModificationDateTextBox = New System.Windows.Forms.TextBox
-      Me.UploadedDateTextBox = New System.Windows.Forms.TextBox
-      Me.ErrorTextBox = New System.Windows.Forms.TextBox
-      Me.DigestTextBox = New System.Windows.Forms.TextBox
-      Me.LockedByTranscriberCheckBox = New System.Windows.Forms.CheckBox
-      Me.LockedByCoordinatorCheckBox = New System.Windows.Forms.CheckBox
-      Me.LdsTextBox = New System.Windows.Forms.TextBox
-      Me.ActionTextBox = New System.Windows.Forms.TextBox
-      Me.CharacterSetTextBox = New System.Windows.Forms.TextBox
-      Me.AlternateRegisterNameTextBox = New System.Windows.Forms.TextBox
-      Me.CsvFileTextBox = New System.Windows.Forms.TextBox
-      Me.btnDeleteFile = New System.Windows.Forms.Button
-      Me.btnViewContents = New System.Windows.Forms.Button
-      Me.SplitContainer1 = New System.Windows.Forms.SplitContainer
-      Me.SplitContainer2 = New System.Windows.Forms.SplitContainer
-      Me.cboxProcess = New System.Windows.Forms.ComboBox
-      Me.labFilename = New System.Windows.Forms.Label
-      Me.Label1 = New System.Windows.Forms.Label
-      Me.btnUploadFile = New System.Windows.Forms.Button
-      Me.btnReplaceFile = New System.Windows.Forms.Button
-      Me.SplitContainer3 = New System.Windows.Forms.SplitContainer
-      Me.dlvUploadedFiles = New BrightIdeasSoftware.DataListView
-      Me.olvcFilename = New BrightIdeasSoftware.OLVColumn
-      Me.backgroundUpload = New System.ComponentModel.BackgroundWorker
-      Me.backgroundReplace = New System.ComponentModel.BackgroundWorker
-      Me.backgroundDelete = New System.ComponentModel.BackgroundWorker
-      Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables
-      Me.btnNewFile = New System.Windows.Forms.Button
-      IDLabel = New System.Windows.Forms.Label
-      CountyNameLabel = New System.Windows.Forms.Label
-      PlaceNameLabel = New System.Windows.Forms.Label
-      ChurchNameLabel = New System.Windows.Forms.Label
-      RegisterTypeLabel = New System.Windows.Forms.Label
-      RecordTypeLabel = New System.Windows.Forms.Label
-      RecordsLabel = New System.Windows.Forms.Label
-      DateMinLabel = New System.Windows.Forms.Label
-      DateMaxLabel = New System.Windows.Forms.Label
-      DateRangeLabel = New System.Windows.Forms.Label
-      UserIdLabel = New System.Windows.Forms.Label
-      UserIdLowerCaseLabel = New System.Windows.Forms.Label
-      FileNameLabel = New System.Windows.Forms.Label
-      TranscriberNameLabel = New System.Windows.Forms.Label
-      TranscriberEmailLabel = New System.Windows.Forms.Label
-      TranscriberSyndicateLabel = New System.Windows.Forms.Label
-      CreditEmailLabel = New System.Windows.Forms.Label
-      CreditNameLabel = New System.Windows.Forms.Label
-      FirstCommentLabel = New System.Windows.Forms.Label
-      SecondCommentLabel = New System.Windows.Forms.Label
-      TranscriptionDateLabel = New System.Windows.Forms.Label
-      ModificationDateLabel = New System.Windows.Forms.Label
-      UploadedDateLabel = New System.Windows.Forms.Label
-      ErrorLabel = New System.Windows.Forms.Label
-      DigestLabel = New System.Windows.Forms.Label
-      LdsLabel = New System.Windows.Forms.Label
-      ActionLabel = New System.Windows.Forms.Label
-      CharacterSetLabel = New System.Windows.Forms.Label
-      AlternateRegisterNameLabel = New System.Windows.Forms.Label
-      CsvFileLabel = New System.Windows.Forms.Label
+      Me.BatchesDataSet = New WinFreeReg.Batches()
+      Me.CountyNameTextBox = New System.Windows.Forms.TextBox()
+      Me.PlaceNameTextBox = New System.Windows.Forms.TextBox()
+      Me.ChurchNameTextBox = New System.Windows.Forms.TextBox()
+      Me.RegisterTypeTextBox = New System.Windows.Forms.TextBox()
+      Me.RecordTypeTextBox = New System.Windows.Forms.TextBox()
+      Me.RecordsTextBox = New System.Windows.Forms.TextBox()
+      Me.DateMinTextBox = New System.Windows.Forms.TextBox()
+      Me.DateMaxTextBox = New System.Windows.Forms.TextBox()
+      Me.DateRangeTextBox = New System.Windows.Forms.TextBox()
+      Me.UserIdTextBox = New System.Windows.Forms.TextBox()
+      Me.UserIdLowerCaseTextBox = New System.Windows.Forms.TextBox()
+      Me.FileNameTextBox = New System.Windows.Forms.TextBox()
+      Me.TranscriberNameTextBox = New System.Windows.Forms.TextBox()
+      Me.TranscriberEmailTextBox = New System.Windows.Forms.TextBox()
+      Me.TranscriberSyndicateTextBox = New System.Windows.Forms.TextBox()
+      Me.CreditEmailTextBox = New System.Windows.Forms.TextBox()
+      Me.CreditNameTextBox = New System.Windows.Forms.TextBox()
+      Me.FirstCommentTextBox = New System.Windows.Forms.TextBox()
+      Me.SecondCommentTextBox = New System.Windows.Forms.TextBox()
+      Me.TranscriptionDateTextBox = New System.Windows.Forms.TextBox()
+      Me.ModificationDateTextBox = New System.Windows.Forms.TextBox()
+      Me.UploadedDateTextBox = New System.Windows.Forms.TextBox()
+      Me.ErrorTextBox = New System.Windows.Forms.TextBox()
+      Me.DigestTextBox = New System.Windows.Forms.TextBox()
+      Me.LockedByTranscriberCheckBox = New System.Windows.Forms.CheckBox()
+      Me.LockedByCoordinatorCheckBox = New System.Windows.Forms.CheckBox()
+      Me.LdsTextBox = New System.Windows.Forms.TextBox()
+      Me.ActionTextBox = New System.Windows.Forms.TextBox()
+      Me.CharacterSetTextBox = New System.Windows.Forms.TextBox()
+      Me.AlternateRegisterNameTextBox = New System.Windows.Forms.TextBox()
+      Me.CsvFileTextBox = New System.Windows.Forms.TextBox()
+      Me.btnDeleteFile = New System.Windows.Forms.Button()
+      Me.btnViewContents = New System.Windows.Forms.Button()
+      Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+      Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
+      Me.dlvLocalFiles = New BrightIdeasSoftware.DataListView()
+      Me.btnNewFile = New System.Windows.Forms.Button()
+      Me.cboxProcess = New System.Windows.Forms.ComboBox()
+      Me.labFilename = New System.Windows.Forms.Label()
+      Me.Label1 = New System.Windows.Forms.Label()
+      Me.btnUploadFile = New System.Windows.Forms.Button()
+      Me.btnReplaceFile = New System.Windows.Forms.Button()
+      Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
+      Me.dlvUploadedFiles = New BrightIdeasSoftware.DataListView()
+      Me.olvcFilename = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.backgroundUpload = New System.ComponentModel.BackgroundWorker()
+      Me.backgroundReplace = New System.ComponentModel.BackgroundWorker()
+      Me.backgroundDelete = New System.ComponentModel.BackgroundWorker()
+      Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
+      Me.BrowserToolTip = New System.Windows.Forms.ToolTip(Me.components)
+      IDLabel = New System.Windows.Forms.Label()
+      CountyNameLabel = New System.Windows.Forms.Label()
+      PlaceNameLabel = New System.Windows.Forms.Label()
+      ChurchNameLabel = New System.Windows.Forms.Label()
+      RegisterTypeLabel = New System.Windows.Forms.Label()
+      RecordTypeLabel = New System.Windows.Forms.Label()
+      RecordsLabel = New System.Windows.Forms.Label()
+      DateMinLabel = New System.Windows.Forms.Label()
+      DateMaxLabel = New System.Windows.Forms.Label()
+      DateRangeLabel = New System.Windows.Forms.Label()
+      UserIdLabel = New System.Windows.Forms.Label()
+      UserIdLowerCaseLabel = New System.Windows.Forms.Label()
+      FileNameLabel = New System.Windows.Forms.Label()
+      TranscriberNameLabel = New System.Windows.Forms.Label()
+      TranscriberEmailLabel = New System.Windows.Forms.Label()
+      TranscriberSyndicateLabel = New System.Windows.Forms.Label()
+      CreditEmailLabel = New System.Windows.Forms.Label()
+      CreditNameLabel = New System.Windows.Forms.Label()
+      FirstCommentLabel = New System.Windows.Forms.Label()
+      SecondCommentLabel = New System.Windows.Forms.Label()
+      TranscriptionDateLabel = New System.Windows.Forms.Label()
+      ModificationDateLabel = New System.Windows.Forms.Label()
+      UploadedDateLabel = New System.Windows.Forms.Label()
+      ErrorLabel = New System.Windows.Forms.Label()
+      DigestLabel = New System.Windows.Forms.Label()
+      LdsLabel = New System.Windows.Forms.Label()
+      ActionLabel = New System.Windows.Forms.Label()
+      CharacterSetLabel = New System.Windows.Forms.Label()
+      AlternateRegisterNameLabel = New System.Windows.Forms.Label()
+      CsvFileLabel = New System.Windows.Forms.Label()
       Me.BrowserMenuStrip.SuspendLayout()
       Me.BrowserStatusStrip.SuspendLayout()
       CType(Me.bnavShowData, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.bnavShowData.SuspendLayout()
-      CType(Me.dlvLocalFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.panelUploadedFiles.SuspendLayout()
       CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -332,6 +395,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel1.SuspendLayout()
       Me.SplitContainer2.Panel2.SuspendLayout()
       Me.SplitContainer2.SuspendLayout()
+      CType(Me.dlvLocalFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SplitContainer3.Panel1.SuspendLayout()
       Me.SplitContainer3.Panel2.SuspendLayout()
       Me.SplitContainer3.SuspendLayout()
@@ -342,270 +406,300 @@ Public Class FreeREG2Browser
       'IDLabel
       '
       IDLabel.AutoSize = True
-      IDLabel.Location = New System.Drawing.Point(26, 10)
+      IDLabel.Location = New System.Drawing.Point(35, 12)
+      IDLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       IDLabel.Name = "IDLabel"
-      IDLabel.Size = New System.Drawing.Size(21, 13)
+      IDLabel.Size = New System.Drawing.Size(24, 16)
       IDLabel.TabIndex = 65
       IDLabel.Text = "ID:"
       '
       'CountyNameLabel
       '
       CountyNameLabel.AutoSize = True
-      CountyNameLabel.Location = New System.Drawing.Point(26, 36)
+      CountyNameLabel.Location = New System.Drawing.Point(35, 44)
+      CountyNameLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       CountyNameLabel.Name = "CountyNameLabel"
-      CountyNameLabel.Size = New System.Drawing.Size(74, 13)
+      CountyNameLabel.Size = New System.Drawing.Size(92, 16)
       CountyNameLabel.TabIndex = 67
       CountyNameLabel.Text = "County Name:"
       '
       'PlaceNameLabel
       '
       PlaceNameLabel.AutoSize = True
-      PlaceNameLabel.Location = New System.Drawing.Point(26, 62)
+      PlaceNameLabel.Location = New System.Drawing.Point(35, 76)
+      PlaceNameLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       PlaceNameLabel.Name = "PlaceNameLabel"
-      PlaceNameLabel.Size = New System.Drawing.Size(68, 13)
+      PlaceNameLabel.Size = New System.Drawing.Size(86, 16)
       PlaceNameLabel.TabIndex = 69
       PlaceNameLabel.Text = "Place Name:"
       '
       'ChurchNameLabel
       '
       ChurchNameLabel.AutoSize = True
-      ChurchNameLabel.Location = New System.Drawing.Point(26, 88)
+      ChurchNameLabel.Location = New System.Drawing.Point(35, 108)
+      ChurchNameLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       ChurchNameLabel.Name = "ChurchNameLabel"
-      ChurchNameLabel.Size = New System.Drawing.Size(75, 13)
+      ChurchNameLabel.Size = New System.Drawing.Size(92, 16)
       ChurchNameLabel.TabIndex = 71
       ChurchNameLabel.Text = "Church Name:"
       '
       'RegisterTypeLabel
       '
       RegisterTypeLabel.AutoSize = True
-      RegisterTypeLabel.Location = New System.Drawing.Point(26, 114)
+      RegisterTypeLabel.Location = New System.Drawing.Point(35, 140)
+      RegisterTypeLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       RegisterTypeLabel.Name = "RegisterTypeLabel"
-      RegisterTypeLabel.Size = New System.Drawing.Size(76, 13)
+      RegisterTypeLabel.Size = New System.Drawing.Size(97, 16)
       RegisterTypeLabel.TabIndex = 73
       RegisterTypeLabel.Text = "Register Type:"
       '
       'RecordTypeLabel
       '
       RecordTypeLabel.AutoSize = True
-      RecordTypeLabel.Location = New System.Drawing.Point(26, 140)
+      RecordTypeLabel.Location = New System.Drawing.Point(35, 172)
+      RecordTypeLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       RecordTypeLabel.Name = "RecordTypeLabel"
-      RecordTypeLabel.Size = New System.Drawing.Size(72, 13)
+      RecordTypeLabel.Size = New System.Drawing.Size(91, 16)
       RecordTypeLabel.TabIndex = 75
       RecordTypeLabel.Text = "Record Type:"
       '
       'RecordsLabel
       '
       RecordsLabel.AutoSize = True
-      RecordsLabel.Location = New System.Drawing.Point(26, 166)
+      RecordsLabel.Location = New System.Drawing.Point(35, 204)
+      RecordsLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       RecordsLabel.Name = "RecordsLabel"
-      RecordsLabel.Size = New System.Drawing.Size(50, 13)
+      RecordsLabel.Size = New System.Drawing.Size(63, 16)
       RecordsLabel.TabIndex = 77
       RecordsLabel.Text = "Records:"
       '
       'DateMinLabel
       '
       DateMinLabel.AutoSize = True
-      DateMinLabel.Location = New System.Drawing.Point(26, 192)
+      DateMinLabel.Location = New System.Drawing.Point(35, 236)
+      DateMinLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       DateMinLabel.Name = "DateMinLabel"
-      DateMinLabel.Size = New System.Drawing.Size(53, 13)
+      DateMinLabel.Size = New System.Drawing.Size(64, 16)
       DateMinLabel.TabIndex = 79
       DateMinLabel.Text = "Date Min:"
       '
       'DateMaxLabel
       '
       DateMaxLabel.AutoSize = True
-      DateMaxLabel.Location = New System.Drawing.Point(26, 218)
+      DateMaxLabel.Location = New System.Drawing.Point(35, 268)
+      DateMaxLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       DateMaxLabel.Name = "DateMaxLabel"
-      DateMaxLabel.Size = New System.Drawing.Size(56, 13)
+      DateMaxLabel.Size = New System.Drawing.Size(68, 16)
       DateMaxLabel.TabIndex = 81
       DateMaxLabel.Text = "Date Max:"
       '
       'DateRangeLabel
       '
       DateRangeLabel.AutoSize = True
-      DateRangeLabel.Location = New System.Drawing.Point(26, 244)
+      DateRangeLabel.Location = New System.Drawing.Point(35, 300)
+      DateRangeLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       DateRangeLabel.Name = "DateRangeLabel"
-      DateRangeLabel.Size = New System.Drawing.Size(68, 13)
+      DateRangeLabel.Size = New System.Drawing.Size(84, 16)
       DateRangeLabel.TabIndex = 83
       DateRangeLabel.Text = "Date Range:"
       '
       'UserIdLabel
       '
       UserIdLabel.AutoSize = True
-      UserIdLabel.Location = New System.Drawing.Point(26, 270)
+      UserIdLabel.Location = New System.Drawing.Point(35, 332)
+      UserIdLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       UserIdLabel.Name = "UserIdLabel"
-      UserIdLabel.Size = New System.Drawing.Size(44, 13)
+      UserIdLabel.Size = New System.Drawing.Size(54, 16)
       UserIdLabel.TabIndex = 85
       UserIdLabel.Text = "User Id:"
       '
       'UserIdLowerCaseLabel
       '
       UserIdLowerCaseLabel.AutoSize = True
-      UserIdLowerCaseLabel.Location = New System.Drawing.Point(26, 296)
+      UserIdLowerCaseLabel.Location = New System.Drawing.Point(35, 364)
+      UserIdLowerCaseLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       UserIdLowerCaseLabel.Name = "UserIdLowerCaseLabel"
-      UserIdLowerCaseLabel.Size = New System.Drawing.Size(103, 13)
+      UserIdLowerCaseLabel.Size = New System.Drawing.Size(128, 16)
       UserIdLowerCaseLabel.TabIndex = 87
       UserIdLowerCaseLabel.Text = "User Id Lower Case:"
       '
       'FileNameLabel
       '
       FileNameLabel.AutoSize = True
-      FileNameLabel.Location = New System.Drawing.Point(26, 322)
+      FileNameLabel.Location = New System.Drawing.Point(35, 396)
+      FileNameLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       FileNameLabel.Name = "FileNameLabel"
-      FileNameLabel.Size = New System.Drawing.Size(57, 13)
+      FileNameLabel.Size = New System.Drawing.Size(73, 16)
       FileNameLabel.TabIndex = 89
       FileNameLabel.Text = "File Name:"
       '
       'TranscriberNameLabel
       '
       TranscriberNameLabel.AutoSize = True
-      TranscriberNameLabel.Location = New System.Drawing.Point(26, 348)
+      TranscriberNameLabel.Location = New System.Drawing.Point(35, 428)
+      TranscriberNameLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       TranscriberNameLabel.Name = "TranscriberNameLabel"
-      TranscriberNameLabel.Size = New System.Drawing.Size(94, 13)
+      TranscriberNameLabel.Size = New System.Drawing.Size(120, 16)
       TranscriberNameLabel.TabIndex = 91
       TranscriberNameLabel.Text = "Transcriber Name:"
       '
       'TranscriberEmailLabel
       '
       TranscriberEmailLabel.AutoSize = True
-      TranscriberEmailLabel.Location = New System.Drawing.Point(26, 374)
+      TranscriberEmailLabel.Location = New System.Drawing.Point(35, 460)
+      TranscriberEmailLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       TranscriberEmailLabel.Name = "TranscriberEmailLabel"
-      TranscriberEmailLabel.Size = New System.Drawing.Size(91, 13)
+      TranscriberEmailLabel.Size = New System.Drawing.Size(117, 16)
       TranscriberEmailLabel.TabIndex = 93
       TranscriberEmailLabel.Text = "Transcriber Email:"
       '
       'TranscriberSyndicateLabel
       '
       TranscriberSyndicateLabel.AutoSize = True
-      TranscriberSyndicateLabel.Location = New System.Drawing.Point(26, 400)
+      TranscriberSyndicateLabel.Location = New System.Drawing.Point(35, 492)
+      TranscriberSyndicateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       TranscriberSyndicateLabel.Name = "TranscriberSyndicateLabel"
-      TranscriberSyndicateLabel.Size = New System.Drawing.Size(113, 13)
+      TranscriberSyndicateLabel.Size = New System.Drawing.Size(143, 16)
       TranscriberSyndicateLabel.TabIndex = 95
       TranscriberSyndicateLabel.Text = "Transcriber Syndicate:"
       '
       'CreditEmailLabel
       '
       CreditEmailLabel.AutoSize = True
-      CreditEmailLabel.Location = New System.Drawing.Point(382, 10)
+      CreditEmailLabel.Location = New System.Drawing.Point(509, 12)
+      CreditEmailLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       CreditEmailLabel.Name = "CreditEmailLabel"
-      CreditEmailLabel.Size = New System.Drawing.Size(65, 13)
+      CreditEmailLabel.Size = New System.Drawing.Size(83, 16)
       CreditEmailLabel.TabIndex = 97
       CreditEmailLabel.Text = "Credit Email:"
       '
       'CreditNameLabel
       '
       CreditNameLabel.AutoSize = True
-      CreditNameLabel.Location = New System.Drawing.Point(382, 36)
+      CreditNameLabel.Location = New System.Drawing.Point(509, 44)
+      CreditNameLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       CreditNameLabel.Name = "CreditNameLabel"
-      CreditNameLabel.Size = New System.Drawing.Size(68, 13)
+      CreditNameLabel.Size = New System.Drawing.Size(86, 16)
       CreditNameLabel.TabIndex = 99
       CreditNameLabel.Text = "Credit Name:"
       '
       'FirstCommentLabel
       '
       FirstCommentLabel.AutoSize = True
-      FirstCommentLabel.Location = New System.Drawing.Point(382, 62)
+      FirstCommentLabel.Location = New System.Drawing.Point(509, 76)
+      FirstCommentLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       FirstCommentLabel.Name = "FirstCommentLabel"
-      FirstCommentLabel.Size = New System.Drawing.Size(76, 13)
+      FirstCommentLabel.Size = New System.Drawing.Size(96, 16)
       FirstCommentLabel.TabIndex = 101
       FirstCommentLabel.Text = "First Comment:"
       '
       'SecondCommentLabel
       '
       SecondCommentLabel.AutoSize = True
-      SecondCommentLabel.Location = New System.Drawing.Point(382, 88)
+      SecondCommentLabel.Location = New System.Drawing.Point(509, 108)
+      SecondCommentLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       SecondCommentLabel.Name = "SecondCommentLabel"
-      SecondCommentLabel.Size = New System.Drawing.Size(94, 13)
+      SecondCommentLabel.Size = New System.Drawing.Size(118, 16)
       SecondCommentLabel.TabIndex = 103
       SecondCommentLabel.Text = "Second Comment:"
       '
       'TranscriptionDateLabel
       '
       TranscriptionDateLabel.AutoSize = True
-      TranscriptionDateLabel.Location = New System.Drawing.Point(382, 114)
+      TranscriptionDateLabel.Location = New System.Drawing.Point(509, 140)
+      TranscriptionDateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       TranscriptionDateLabel.Name = "TranscriptionDateLabel"
-      TranscriptionDateLabel.Size = New System.Drawing.Size(97, 13)
+      TranscriptionDateLabel.Size = New System.Drawing.Size(121, 16)
       TranscriptionDateLabel.TabIndex = 105
       TranscriptionDateLabel.Text = "Transcription Date:"
       '
       'ModificationDateLabel
       '
       ModificationDateLabel.AutoSize = True
-      ModificationDateLabel.Location = New System.Drawing.Point(382, 140)
+      ModificationDateLabel.Location = New System.Drawing.Point(509, 172)
+      ModificationDateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       ModificationDateLabel.Name = "ModificationDateLabel"
-      ModificationDateLabel.Size = New System.Drawing.Size(93, 13)
+      ModificationDateLabel.Size = New System.Drawing.Size(115, 16)
       ModificationDateLabel.TabIndex = 107
       ModificationDateLabel.Text = "Modification Date:"
       '
       'UploadedDateLabel
       '
       UploadedDateLabel.AutoSize = True
-      UploadedDateLabel.Location = New System.Drawing.Point(382, 166)
+      UploadedDateLabel.Location = New System.Drawing.Point(509, 204)
+      UploadedDateLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       UploadedDateLabel.Name = "UploadedDateLabel"
-      UploadedDateLabel.Size = New System.Drawing.Size(82, 13)
+      UploadedDateLabel.Size = New System.Drawing.Size(104, 16)
       UploadedDateLabel.TabIndex = 109
       UploadedDateLabel.Text = "Uploaded Date:"
       '
       'ErrorLabel
       '
       ErrorLabel.AutoSize = True
-      ErrorLabel.Location = New System.Drawing.Point(382, 192)
+      ErrorLabel.Location = New System.Drawing.Point(509, 236)
+      ErrorLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       ErrorLabel.Name = "ErrorLabel"
-      ErrorLabel.Size = New System.Drawing.Size(32, 13)
+      ErrorLabel.Size = New System.Drawing.Size(40, 16)
       ErrorLabel.TabIndex = 111
       ErrorLabel.Text = "Error:"
       '
       'DigestLabel
       '
       DigestLabel.AutoSize = True
-      DigestLabel.Location = New System.Drawing.Point(382, 218)
+      DigestLabel.Location = New System.Drawing.Point(509, 268)
+      DigestLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       DigestLabel.Name = "DigestLabel"
-      DigestLabel.Size = New System.Drawing.Size(40, 13)
+      DigestLabel.Size = New System.Drawing.Size(50, 16)
       DigestLabel.TabIndex = 113
       DigestLabel.Text = "Digest:"
       '
       'LdsLabel
       '
       LdsLabel.AutoSize = True
-      LdsLabel.Location = New System.Drawing.Point(382, 304)
+      LdsLabel.Location = New System.Drawing.Point(509, 374)
+      LdsLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       LdsLabel.Name = "LdsLabel"
-      LdsLabel.Size = New System.Drawing.Size(23, 13)
+      LdsLabel.Size = New System.Drawing.Size(29, 16)
       LdsLabel.TabIndex = 119
       LdsLabel.Text = "lds:"
       '
       'ActionLabel
       '
       ActionLabel.AutoSize = True
-      ActionLabel.Location = New System.Drawing.Point(382, 330)
+      ActionLabel.Location = New System.Drawing.Point(509, 406)
+      ActionLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       ActionLabel.Name = "ActionLabel"
-      ActionLabel.Size = New System.Drawing.Size(40, 13)
+      ActionLabel.Size = New System.Drawing.Size(48, 16)
       ActionLabel.TabIndex = 121
       ActionLabel.Text = "Action:"
       '
       'CharacterSetLabel
       '
       CharacterSetLabel.AutoSize = True
-      CharacterSetLabel.Location = New System.Drawing.Point(382, 356)
+      CharacterSetLabel.Location = New System.Drawing.Point(509, 438)
+      CharacterSetLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       CharacterSetLabel.Name = "CharacterSetLabel"
-      CharacterSetLabel.Size = New System.Drawing.Size(75, 13)
+      CharacterSetLabel.Size = New System.Drawing.Size(92, 16)
       CharacterSetLabel.TabIndex = 123
       CharacterSetLabel.Text = "Character Set:"
       '
       'AlternateRegisterNameLabel
       '
       AlternateRegisterNameLabel.AutoSize = True
-      AlternateRegisterNameLabel.Location = New System.Drawing.Point(382, 382)
+      AlternateRegisterNameLabel.Location = New System.Drawing.Point(509, 470)
+      AlternateRegisterNameLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       AlternateRegisterNameLabel.Name = "AlternateRegisterNameLabel"
-      AlternateRegisterNameLabel.Size = New System.Drawing.Size(125, 13)
+      AlternateRegisterNameLabel.Size = New System.Drawing.Size(158, 16)
       AlternateRegisterNameLabel.TabIndex = 125
       AlternateRegisterNameLabel.Text = "Alternate Register Name:"
       '
       'CsvFileLabel
       '
       CsvFileLabel.AutoSize = True
-      CsvFileLabel.Location = New System.Drawing.Point(382, 408)
+      CsvFileLabel.Location = New System.Drawing.Point(509, 502)
+      CsvFileLabel.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       CsvFileLabel.Name = "CsvFileLabel"
-      CsvFileLabel.Size = New System.Drawing.Size(47, 13)
+      CsvFileLabel.Size = New System.Drawing.Size(59, 16)
       CsvFileLabel.TabIndex = 127
       CsvFileLabel.Text = "Csv File:"
       '
@@ -614,13 +708,14 @@ Public Class FreeREG2Browser
       Me.BrowserMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG, Me.miTranscriptions, Me.miTranscriptionData})
       Me.BrowserMenuStrip.Location = New System.Drawing.Point(0, 0)
       Me.BrowserMenuStrip.Name = "BrowserMenuStrip"
-      Me.BrowserMenuStrip.Size = New System.Drawing.Size(922, 24)
+      Me.BrowserMenuStrip.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
+      Me.BrowserMenuStrip.Size = New System.Drawing.Size(1229, 24)
       Me.BrowserMenuStrip.TabIndex = 0
       Me.BrowserMenuStrip.Text = "MenuStrip1"
       '
       'miFreeREG
       '
-      Me.miFreeREG.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miLogin, Me.miLogout, Me.ToolStripSeparator1, Me.miUserProfile, Me.miRefreshUser, Me.ToolStripSeparator2, Me.miExit})
+      Me.miFreeREG.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miLogin, Me.miLogout, Me.ToolStripSeparator1, Me.miUserProfile, Me.miRefreshUser, Me.ToolStripSeparator2, Me.miNetworkTrace, Me.ToolStripSeparator3, Me.miExit})
       Me.miFreeREG.Name = "miFreeREG"
       Me.miFreeREG.Size = New System.Drawing.Size(62, 20)
       Me.miFreeREG.Text = "FreeREG"
@@ -628,42 +723,54 @@ Public Class FreeREG2Browser
       'miLogin
       '
       Me.miLogin.Name = "miLogin"
-      Me.miLogin.Size = New System.Drawing.Size(146, 22)
+      Me.miLogin.Size = New System.Drawing.Size(155, 22)
       Me.miLogin.Text = "Log on ..."
       '
       'miLogout
       '
       Me.miLogout.Name = "miLogout"
-      Me.miLogout.Size = New System.Drawing.Size(146, 22)
+      Me.miLogout.Size = New System.Drawing.Size(155, 22)
       Me.miLogout.Text = "Log off"
       '
       'ToolStripSeparator1
       '
       Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-      Me.ToolStripSeparator1.Size = New System.Drawing.Size(143, 6)
+      Me.ToolStripSeparator1.Size = New System.Drawing.Size(152, 6)
       '
       'miUserProfile
       '
       Me.miUserProfile.Name = "miUserProfile"
-      Me.miUserProfile.Size = New System.Drawing.Size(146, 22)
+      Me.miUserProfile.Size = New System.Drawing.Size(155, 22)
       Me.miUserProfile.Text = "User Profile ..."
       '
       'miRefreshUser
       '
       Me.miRefreshUser.Enabled = False
       Me.miRefreshUser.Name = "miRefreshUser"
-      Me.miRefreshUser.Size = New System.Drawing.Size(146, 22)
+      Me.miRefreshUser.Size = New System.Drawing.Size(155, 22)
       Me.miRefreshUser.Text = "Refresh user"
       '
       'ToolStripSeparator2
       '
       Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-      Me.ToolStripSeparator2.Size = New System.Drawing.Size(143, 6)
+      Me.ToolStripSeparator2.Size = New System.Drawing.Size(152, 6)
+      '
+      'miNetworkTrace
+      '
+      Me.miNetworkTrace.CheckOnClick = True
+      Me.miNetworkTrace.Name = "miNetworkTrace"
+      Me.miNetworkTrace.Size = New System.Drawing.Size(155, 22)
+      Me.miNetworkTrace.Text = "Network Trace?"
+      '
+      'ToolStripSeparator3
+      '
+      Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+      Me.ToolStripSeparator3.Size = New System.Drawing.Size(152, 6)
       '
       'miExit
       '
       Me.miExit.Name = "miExit"
-      Me.miExit.Size = New System.Drawing.Size(146, 22)
+      Me.miExit.Size = New System.Drawing.Size(155, 22)
       Me.miExit.Text = "Exit"
       '
       'miTranscriptions
@@ -707,9 +814,10 @@ Public Class FreeREG2Browser
       'BrowserStatusStrip
       '
       Me.BrowserStatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.labelStatus})
-      Me.BrowserStatusStrip.Location = New System.Drawing.Point(0, 519)
+      Me.BrowserStatusStrip.Location = New System.Drawing.Point(0, 644)
       Me.BrowserStatusStrip.Name = "BrowserStatusStrip"
-      Me.BrowserStatusStrip.Size = New System.Drawing.Size(922, 22)
+      Me.BrowserStatusStrip.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
+      Me.BrowserStatusStrip.Size = New System.Drawing.Size(1229, 22)
       Me.BrowserStatusStrip.TabIndex = 1
       Me.BrowserStatusStrip.Text = "StatusStrip1"
       '
@@ -740,7 +848,7 @@ Public Class FreeREG2Browser
       Me.bnavShowData.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
       Me.bnavShowData.Name = "bnavShowData"
       Me.bnavShowData.PositionItem = Me.BindingNavigatorPositionItem
-      Me.bnavShowData.Size = New System.Drawing.Size(922, 25)
+      Me.bnavShowData.Size = New System.Drawing.Size(1229, 31)
       Me.bnavShowData.TabIndex = 3
       Me.bnavShowData.Text = "BindingNavigator1"
       Me.bnavShowData.Visible = False
@@ -751,14 +859,14 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
       Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
+      Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 28)
       Me.BindingNavigatorAddNewItem.Text = "Add new"
       Me.BindingNavigatorAddNewItem.Visible = False
       '
       'BindingNavigatorCountItem
       '
       Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
-      Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 22)
+      Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 28)
       Me.BindingNavigatorCountItem.Text = "of {0}"
       Me.BindingNavigatorCountItem.ToolTipText = "Total number of items"
       '
@@ -768,7 +876,7 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
       Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
+      Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 28)
       Me.BindingNavigatorDeleteItem.Text = "Delete"
       Me.BindingNavigatorDeleteItem.Visible = False
       '
@@ -778,7 +886,7 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
       Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
+      Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 28)
       Me.BindingNavigatorMoveFirstItem.Text = "Move first"
       '
       'BindingNavigatorMovePreviousItem
@@ -787,27 +895,27 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
       Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
+      Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 28)
       Me.BindingNavigatorMovePreviousItem.Text = "Move previous"
       '
       'BindingNavigatorSeparator
       '
       Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
-      Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
+      Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 31)
       '
       'BindingNavigatorPositionItem
       '
       Me.BindingNavigatorPositionItem.AccessibleName = "Position"
       Me.BindingNavigatorPositionItem.AutoSize = False
       Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
-      Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(50, 23)
+      Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(85, 23)
       Me.BindingNavigatorPositionItem.Text = "0"
       Me.BindingNavigatorPositionItem.ToolTipText = "Current position"
       '
       'BindingNavigatorSeparator1
       '
       Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
-      Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
+      Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 31)
       '
       'BindingNavigatorMoveNextItem
       '
@@ -815,7 +923,7 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
       Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
+      Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 28)
       Me.BindingNavigatorMoveNextItem.Text = "Move next"
       '
       'BindingNavigatorMoveLastItem
@@ -824,43 +932,13 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
       Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
+      Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 28)
       Me.BindingNavigatorMoveLastItem.Text = "Move last"
       '
       'BindingNavigatorSeparator2
       '
       Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
-      Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 25)
-      '
-      'dlvLocalFiles
-      '
-      Me.dlvLocalFiles.AlternateRowBackColor = System.Drawing.Color.Wheat
-      Me.dlvLocalFiles.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
-      Me.dlvLocalFiles.CellEditUseWholeCell = False
-      Me.dlvLocalFiles.CheckedAspectName = ""
-      Me.dlvLocalFiles.Cursor = System.Windows.Forms.Cursors.Default
-      Me.dlvLocalFiles.DataSource = Me.bsrcLocalFiles
-      Me.dlvLocalFiles.Dock = System.Windows.Forms.DockStyle.Fill
-      Me.dlvLocalFiles.FullRowSelect = True
-      Me.dlvLocalFiles.GridLines = True
-      Me.dlvLocalFiles.HighlightBackgroundColor = System.Drawing.Color.Empty
-      Me.dlvLocalFiles.HighlightForegroundColor = System.Drawing.Color.Empty
-      Me.dlvLocalFiles.Location = New System.Drawing.Point(0, 0)
-      Me.dlvLocalFiles.MultiSelect = False
-      Me.dlvLocalFiles.Name = "dlvLocalFiles"
-      Me.dlvLocalFiles.SelectColumnsOnRightClick = False
-      Me.dlvLocalFiles.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None
-      Me.dlvLocalFiles.ShowCommandMenuOnRightClick = True
-      Me.dlvLocalFiles.ShowGroups = False
-      Me.dlvLocalFiles.ShowImagesOnSubItems = True
-      Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(922, 415)
-      Me.dlvLocalFiles.TabIndex = 4
-      Me.dlvLocalFiles.TintSortColumn = True
-      Me.dlvLocalFiles.UseAlternatingBackColors = True
-      Me.dlvLocalFiles.UseCompatibleStateImageBehavior = False
-      Me.dlvLocalFiles.UseSubItemCheckBoxes = True
-      Me.dlvLocalFiles.View = System.Windows.Forms.View.Details
+      Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 31)
       '
       'backgroundBatches
       '
@@ -935,16 +1013,18 @@ Public Class FreeREG2Browser
       Me.panelUploadedFiles.Controls.Add(Me.btnViewContents)
       Me.panelUploadedFiles.Dock = System.Windows.Forms.DockStyle.Fill
       Me.panelUploadedFiles.Location = New System.Drawing.Point(0, 0)
+      Me.panelUploadedFiles.Margin = New System.Windows.Forms.Padding(4)
       Me.panelUploadedFiles.Name = "panelUploadedFiles"
-      Me.panelUploadedFiles.Size = New System.Drawing.Size(789, 459)
+      Me.panelUploadedFiles.Size = New System.Drawing.Size(1095, 583)
       Me.panelUploadedFiles.TabIndex = 5
       '
       'IDTextBox
       '
       Me.IDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "ID", True))
-      Me.IDTextBox.Location = New System.Drawing.Point(157, 7)
+      Me.IDTextBox.Location = New System.Drawing.Point(209, 9)
+      Me.IDTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.IDTextBox.Name = "IDTextBox"
-      Me.IDTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.IDTextBox.Size = New System.Drawing.Size(269, 22)
       Me.IDTextBox.TabIndex = 66
       '
       'BatchBindingSource
@@ -961,201 +1041,226 @@ Public Class FreeREG2Browser
       'CountyNameTextBox
       '
       Me.CountyNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CountyName", True))
-      Me.CountyNameTextBox.Location = New System.Drawing.Point(157, 33)
+      Me.CountyNameTextBox.Location = New System.Drawing.Point(209, 41)
+      Me.CountyNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CountyNameTextBox.Name = "CountyNameTextBox"
-      Me.CountyNameTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.CountyNameTextBox.Size = New System.Drawing.Size(269, 22)
       Me.CountyNameTextBox.TabIndex = 68
       '
       'PlaceNameTextBox
       '
       Me.PlaceNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "PlaceName", True))
-      Me.PlaceNameTextBox.Location = New System.Drawing.Point(157, 59)
+      Me.PlaceNameTextBox.Location = New System.Drawing.Point(209, 73)
+      Me.PlaceNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.PlaceNameTextBox.Name = "PlaceNameTextBox"
-      Me.PlaceNameTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.PlaceNameTextBox.Size = New System.Drawing.Size(269, 22)
       Me.PlaceNameTextBox.TabIndex = 70
       '
       'ChurchNameTextBox
       '
       Me.ChurchNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "ChurchName", True))
-      Me.ChurchNameTextBox.Location = New System.Drawing.Point(157, 85)
+      Me.ChurchNameTextBox.Location = New System.Drawing.Point(209, 105)
+      Me.ChurchNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.ChurchNameTextBox.Name = "ChurchNameTextBox"
-      Me.ChurchNameTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.ChurchNameTextBox.Size = New System.Drawing.Size(269, 22)
       Me.ChurchNameTextBox.TabIndex = 72
       '
       'RegisterTypeTextBox
       '
       Me.RegisterTypeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "RegisterType", True))
-      Me.RegisterTypeTextBox.Location = New System.Drawing.Point(157, 111)
+      Me.RegisterTypeTextBox.Location = New System.Drawing.Point(209, 137)
+      Me.RegisterTypeTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.RegisterTypeTextBox.Name = "RegisterTypeTextBox"
-      Me.RegisterTypeTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.RegisterTypeTextBox.Size = New System.Drawing.Size(269, 22)
       Me.RegisterTypeTextBox.TabIndex = 74
       '
       'RecordTypeTextBox
       '
       Me.RecordTypeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "RecordType", True))
-      Me.RecordTypeTextBox.Location = New System.Drawing.Point(157, 137)
+      Me.RecordTypeTextBox.Location = New System.Drawing.Point(209, 169)
+      Me.RecordTypeTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.RecordTypeTextBox.Name = "RecordTypeTextBox"
-      Me.RecordTypeTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.RecordTypeTextBox.Size = New System.Drawing.Size(269, 22)
       Me.RecordTypeTextBox.TabIndex = 76
       '
       'RecordsTextBox
       '
       Me.RecordsTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "Records", True))
-      Me.RecordsTextBox.Location = New System.Drawing.Point(157, 163)
+      Me.RecordsTextBox.Location = New System.Drawing.Point(209, 201)
+      Me.RecordsTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.RecordsTextBox.Name = "RecordsTextBox"
-      Me.RecordsTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.RecordsTextBox.Size = New System.Drawing.Size(269, 22)
       Me.RecordsTextBox.TabIndex = 78
       '
       'DateMinTextBox
       '
       Me.DateMinTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "DateMin", True))
-      Me.DateMinTextBox.Location = New System.Drawing.Point(157, 189)
+      Me.DateMinTextBox.Location = New System.Drawing.Point(209, 233)
+      Me.DateMinTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.DateMinTextBox.Name = "DateMinTextBox"
-      Me.DateMinTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.DateMinTextBox.Size = New System.Drawing.Size(269, 22)
       Me.DateMinTextBox.TabIndex = 80
       '
       'DateMaxTextBox
       '
       Me.DateMaxTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "DateMax", True))
-      Me.DateMaxTextBox.Location = New System.Drawing.Point(157, 215)
+      Me.DateMaxTextBox.Location = New System.Drawing.Point(209, 265)
+      Me.DateMaxTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.DateMaxTextBox.Name = "DateMaxTextBox"
-      Me.DateMaxTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.DateMaxTextBox.Size = New System.Drawing.Size(269, 22)
       Me.DateMaxTextBox.TabIndex = 82
       '
       'DateRangeTextBox
       '
       Me.DateRangeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "DateRange", True))
-      Me.DateRangeTextBox.Location = New System.Drawing.Point(157, 241)
+      Me.DateRangeTextBox.Location = New System.Drawing.Point(209, 297)
+      Me.DateRangeTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.DateRangeTextBox.Name = "DateRangeTextBox"
-      Me.DateRangeTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.DateRangeTextBox.Size = New System.Drawing.Size(269, 22)
       Me.DateRangeTextBox.TabIndex = 84
       '
       'UserIdTextBox
       '
       Me.UserIdTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "UserId", True))
-      Me.UserIdTextBox.Location = New System.Drawing.Point(157, 267)
+      Me.UserIdTextBox.Location = New System.Drawing.Point(209, 329)
+      Me.UserIdTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.UserIdTextBox.Name = "UserIdTextBox"
-      Me.UserIdTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.UserIdTextBox.Size = New System.Drawing.Size(269, 22)
       Me.UserIdTextBox.TabIndex = 86
       '
       'UserIdLowerCaseTextBox
       '
       Me.UserIdLowerCaseTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "UserIdLowerCase", True))
-      Me.UserIdLowerCaseTextBox.Location = New System.Drawing.Point(157, 293)
+      Me.UserIdLowerCaseTextBox.Location = New System.Drawing.Point(209, 361)
+      Me.UserIdLowerCaseTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.UserIdLowerCaseTextBox.Name = "UserIdLowerCaseTextBox"
-      Me.UserIdLowerCaseTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.UserIdLowerCaseTextBox.Size = New System.Drawing.Size(269, 22)
       Me.UserIdLowerCaseTextBox.TabIndex = 88
       '
       'FileNameTextBox
       '
       Me.FileNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "FileName", True))
-      Me.FileNameTextBox.Location = New System.Drawing.Point(157, 319)
+      Me.FileNameTextBox.Location = New System.Drawing.Point(209, 393)
+      Me.FileNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.FileNameTextBox.Name = "FileNameTextBox"
-      Me.FileNameTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.FileNameTextBox.Size = New System.Drawing.Size(269, 22)
       Me.FileNameTextBox.TabIndex = 90
       '
       'TranscriberNameTextBox
       '
       Me.TranscriberNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "TranscriberName", True))
-      Me.TranscriberNameTextBox.Location = New System.Drawing.Point(157, 345)
+      Me.TranscriberNameTextBox.Location = New System.Drawing.Point(209, 425)
+      Me.TranscriberNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.TranscriberNameTextBox.Name = "TranscriberNameTextBox"
-      Me.TranscriberNameTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.TranscriberNameTextBox.Size = New System.Drawing.Size(269, 22)
       Me.TranscriberNameTextBox.TabIndex = 92
       '
       'TranscriberEmailTextBox
       '
       Me.TranscriberEmailTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "TranscriberEmail", True))
-      Me.TranscriberEmailTextBox.Location = New System.Drawing.Point(157, 371)
+      Me.TranscriberEmailTextBox.Location = New System.Drawing.Point(209, 457)
+      Me.TranscriberEmailTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.TranscriberEmailTextBox.Name = "TranscriberEmailTextBox"
-      Me.TranscriberEmailTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.TranscriberEmailTextBox.Size = New System.Drawing.Size(269, 22)
       Me.TranscriberEmailTextBox.TabIndex = 94
       '
       'TranscriberSyndicateTextBox
       '
       Me.TranscriberSyndicateTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "TranscriberSyndicate", True))
-      Me.TranscriberSyndicateTextBox.Location = New System.Drawing.Point(157, 397)
+      Me.TranscriberSyndicateTextBox.Location = New System.Drawing.Point(209, 489)
+      Me.TranscriberSyndicateTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.TranscriberSyndicateTextBox.Name = "TranscriberSyndicateTextBox"
-      Me.TranscriberSyndicateTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.TranscriberSyndicateTextBox.Size = New System.Drawing.Size(269, 22)
       Me.TranscriberSyndicateTextBox.TabIndex = 96
       '
       'CreditEmailTextBox
       '
       Me.CreditEmailTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CreditEmail", True))
-      Me.CreditEmailTextBox.Location = New System.Drawing.Point(513, 7)
+      Me.CreditEmailTextBox.Location = New System.Drawing.Point(684, 9)
+      Me.CreditEmailTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CreditEmailTextBox.Name = "CreditEmailTextBox"
-      Me.CreditEmailTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.CreditEmailTextBox.Size = New System.Drawing.Size(269, 22)
       Me.CreditEmailTextBox.TabIndex = 98
       '
       'CreditNameTextBox
       '
       Me.CreditNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CreditName", True))
-      Me.CreditNameTextBox.Location = New System.Drawing.Point(513, 33)
+      Me.CreditNameTextBox.Location = New System.Drawing.Point(684, 41)
+      Me.CreditNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CreditNameTextBox.Name = "CreditNameTextBox"
-      Me.CreditNameTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.CreditNameTextBox.Size = New System.Drawing.Size(269, 22)
       Me.CreditNameTextBox.TabIndex = 100
       '
       'FirstCommentTextBox
       '
       Me.FirstCommentTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "FirstComment", True))
-      Me.FirstCommentTextBox.Location = New System.Drawing.Point(513, 59)
+      Me.FirstCommentTextBox.Location = New System.Drawing.Point(684, 73)
+      Me.FirstCommentTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.FirstCommentTextBox.Name = "FirstCommentTextBox"
-      Me.FirstCommentTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.FirstCommentTextBox.Size = New System.Drawing.Size(269, 22)
       Me.FirstCommentTextBox.TabIndex = 102
       '
       'SecondCommentTextBox
       '
       Me.SecondCommentTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "SecondComment", True))
-      Me.SecondCommentTextBox.Location = New System.Drawing.Point(513, 85)
+      Me.SecondCommentTextBox.Location = New System.Drawing.Point(684, 105)
+      Me.SecondCommentTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.SecondCommentTextBox.Name = "SecondCommentTextBox"
-      Me.SecondCommentTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.SecondCommentTextBox.Size = New System.Drawing.Size(269, 22)
       Me.SecondCommentTextBox.TabIndex = 104
       '
       'TranscriptionDateTextBox
       '
       Me.TranscriptionDateTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "TranscriptionDate", True))
-      Me.TranscriptionDateTextBox.Location = New System.Drawing.Point(513, 111)
+      Me.TranscriptionDateTextBox.Location = New System.Drawing.Point(684, 137)
+      Me.TranscriptionDateTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.TranscriptionDateTextBox.Name = "TranscriptionDateTextBox"
-      Me.TranscriptionDateTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.TranscriptionDateTextBox.Size = New System.Drawing.Size(269, 22)
       Me.TranscriptionDateTextBox.TabIndex = 106
       '
       'ModificationDateTextBox
       '
       Me.ModificationDateTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "ModificationDate", True))
-      Me.ModificationDateTextBox.Location = New System.Drawing.Point(513, 137)
+      Me.ModificationDateTextBox.Location = New System.Drawing.Point(684, 169)
+      Me.ModificationDateTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.ModificationDateTextBox.Name = "ModificationDateTextBox"
-      Me.ModificationDateTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.ModificationDateTextBox.Size = New System.Drawing.Size(269, 22)
       Me.ModificationDateTextBox.TabIndex = 108
       '
       'UploadedDateTextBox
       '
       Me.UploadedDateTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "UploadedDate", True))
-      Me.UploadedDateTextBox.Location = New System.Drawing.Point(513, 163)
+      Me.UploadedDateTextBox.Location = New System.Drawing.Point(684, 201)
+      Me.UploadedDateTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.UploadedDateTextBox.Name = "UploadedDateTextBox"
-      Me.UploadedDateTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.UploadedDateTextBox.Size = New System.Drawing.Size(269, 22)
       Me.UploadedDateTextBox.TabIndex = 110
       '
       'ErrorTextBox
       '
       Me.ErrorTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "Error", True))
-      Me.ErrorTextBox.Location = New System.Drawing.Point(513, 189)
+      Me.ErrorTextBox.Location = New System.Drawing.Point(684, 233)
+      Me.ErrorTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.ErrorTextBox.Name = "ErrorTextBox"
-      Me.ErrorTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.ErrorTextBox.Size = New System.Drawing.Size(269, 22)
       Me.ErrorTextBox.TabIndex = 112
       '
       'DigestTextBox
       '
       Me.DigestTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "Digest", True))
-      Me.DigestTextBox.Location = New System.Drawing.Point(513, 215)
+      Me.DigestTextBox.Location = New System.Drawing.Point(684, 265)
+      Me.DigestTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.DigestTextBox.Name = "DigestTextBox"
-      Me.DigestTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.DigestTextBox.Size = New System.Drawing.Size(269, 22)
       Me.DigestTextBox.TabIndex = 114
       '
       'LockedByTranscriberCheckBox
       '
       Me.LockedByTranscriberCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.BatchBindingSource, "LockedByTranscriber", True))
-      Me.LockedByTranscriberCheckBox.Location = New System.Drawing.Point(513, 241)
+      Me.LockedByTranscriberCheckBox.Location = New System.Drawing.Point(684, 297)
+      Me.LockedByTranscriberCheckBox.Margin = New System.Windows.Forms.Padding(4)
       Me.LockedByTranscriberCheckBox.Name = "LockedByTranscriberCheckBox"
-      Me.LockedByTranscriberCheckBox.Size = New System.Drawing.Size(130, 24)
+      Me.LockedByTranscriberCheckBox.Size = New System.Drawing.Size(173, 30)
       Me.LockedByTranscriberCheckBox.TabIndex = 116
       Me.LockedByTranscriberCheckBox.Text = "Locked by transcriber"
       Me.LockedByTranscriberCheckBox.UseVisualStyleBackColor = True
@@ -1163,9 +1268,10 @@ Public Class FreeREG2Browser
       'LockedByCoordinatorCheckBox
       '
       Me.LockedByCoordinatorCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.BatchBindingSource, "LockedByCoordinator", True))
-      Me.LockedByCoordinatorCheckBox.Location = New System.Drawing.Point(513, 271)
+      Me.LockedByCoordinatorCheckBox.Location = New System.Drawing.Point(684, 334)
+      Me.LockedByCoordinatorCheckBox.Margin = New System.Windows.Forms.Padding(4)
       Me.LockedByCoordinatorCheckBox.Name = "LockedByCoordinatorCheckBox"
-      Me.LockedByCoordinatorCheckBox.Size = New System.Drawing.Size(138, 24)
+      Me.LockedByCoordinatorCheckBox.Size = New System.Drawing.Size(184, 30)
       Me.LockedByCoordinatorCheckBox.TabIndex = 118
       Me.LockedByCoordinatorCheckBox.Text = "Locked by Co-ordinator"
       Me.LockedByCoordinatorCheckBox.UseVisualStyleBackColor = True
@@ -1173,57 +1279,64 @@ Public Class FreeREG2Browser
       'LdsTextBox
       '
       Me.LdsTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "lds", True))
-      Me.LdsTextBox.Location = New System.Drawing.Point(513, 301)
+      Me.LdsTextBox.Location = New System.Drawing.Point(684, 370)
+      Me.LdsTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.LdsTextBox.Name = "LdsTextBox"
-      Me.LdsTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.LdsTextBox.Size = New System.Drawing.Size(269, 22)
       Me.LdsTextBox.TabIndex = 120
       '
       'ActionTextBox
       '
       Me.ActionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "Action", True))
-      Me.ActionTextBox.Location = New System.Drawing.Point(513, 327)
+      Me.ActionTextBox.Location = New System.Drawing.Point(684, 402)
+      Me.ActionTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.ActionTextBox.Name = "ActionTextBox"
-      Me.ActionTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.ActionTextBox.Size = New System.Drawing.Size(269, 22)
       Me.ActionTextBox.TabIndex = 122
       '
       'CharacterSetTextBox
       '
       Me.CharacterSetTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CharacterSet", True))
-      Me.CharacterSetTextBox.Location = New System.Drawing.Point(513, 353)
+      Me.CharacterSetTextBox.Location = New System.Drawing.Point(684, 434)
+      Me.CharacterSetTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CharacterSetTextBox.Name = "CharacterSetTextBox"
-      Me.CharacterSetTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.CharacterSetTextBox.Size = New System.Drawing.Size(269, 22)
       Me.CharacterSetTextBox.TabIndex = 124
       '
       'AlternateRegisterNameTextBox
       '
       Me.AlternateRegisterNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "AlternateRegisterName", True))
-      Me.AlternateRegisterNameTextBox.Location = New System.Drawing.Point(513, 379)
+      Me.AlternateRegisterNameTextBox.Location = New System.Drawing.Point(684, 466)
+      Me.AlternateRegisterNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.AlternateRegisterNameTextBox.Name = "AlternateRegisterNameTextBox"
-      Me.AlternateRegisterNameTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.AlternateRegisterNameTextBox.Size = New System.Drawing.Size(269, 22)
       Me.AlternateRegisterNameTextBox.TabIndex = 126
       '
       'CsvFileTextBox
       '
       Me.CsvFileTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CsvFile", True))
-      Me.CsvFileTextBox.Location = New System.Drawing.Point(513, 405)
+      Me.CsvFileTextBox.Location = New System.Drawing.Point(684, 498)
+      Me.CsvFileTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CsvFileTextBox.Name = "CsvFileTextBox"
-      Me.CsvFileTextBox.Size = New System.Drawing.Size(203, 20)
+      Me.CsvFileTextBox.Size = New System.Drawing.Size(269, 22)
       Me.CsvFileTextBox.TabIndex = 128
       '
       'btnDeleteFile
       '
-      Me.btnDeleteFile.Location = New System.Drawing.Point(610, 430)
+      Me.btnDeleteFile.Location = New System.Drawing.Point(813, 529)
+      Me.btnDeleteFile.Margin = New System.Windows.Forms.Padding(4)
       Me.btnDeleteFile.Name = "btnDeleteFile"
-      Me.btnDeleteFile.Size = New System.Drawing.Size(82, 23)
+      Me.btnDeleteFile.Size = New System.Drawing.Size(109, 28)
       Me.btnDeleteFile.TabIndex = 65
       Me.btnDeleteFile.Text = "Delete Batch"
       Me.btnDeleteFile.UseVisualStyleBackColor = True
       '
       'btnViewContents
       '
-      Me.btnViewContents.Location = New System.Drawing.Point(698, 430)
+      Me.btnViewContents.Location = New System.Drawing.Point(931, 529)
+      Me.btnViewContents.Margin = New System.Windows.Forms.Padding(4)
       Me.btnViewContents.Name = "btnViewContents"
-      Me.btnViewContents.Size = New System.Drawing.Size(84, 23)
+      Me.btnViewContents.Size = New System.Drawing.Size(112, 28)
       Me.btnViewContents.TabIndex = 64
       Me.btnViewContents.Text = "View Contents"
       Me.btnViewContents.UseVisualStyleBackColor = True
@@ -1233,6 +1346,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
       Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
       Me.SplitContainer1.Location = New System.Drawing.Point(0, 24)
+      Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4)
       Me.SplitContainer1.Name = "SplitContainer1"
       Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
       '
@@ -1244,8 +1358,9 @@ Public Class FreeREG2Browser
       '
       Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer2)
       Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer3)
-      Me.SplitContainer1.Size = New System.Drawing.Size(922, 495)
+      Me.SplitContainer1.Size = New System.Drawing.Size(1229, 620)
       Me.SplitContainer1.SplitterDistance = 32
+      Me.SplitContainer1.SplitterWidth = 5
       Me.SplitContainer1.TabIndex = 65
       Me.SplitContainer1.Visible = False
       '
@@ -1254,6 +1369,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Dock = System.Windows.Forms.DockStyle.Fill
       Me.SplitContainer2.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
       Me.SplitContainer2.Location = New System.Drawing.Point(0, 0)
+      Me.SplitContainer2.Margin = New System.Windows.Forms.Padding(4)
       Me.SplitContainer2.Name = "SplitContainer2"
       Me.SplitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal
       '
@@ -1269,26 +1385,67 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.Label1)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
-      Me.SplitContainer2.Size = New System.Drawing.Size(922, 459)
-      Me.SplitContainer2.SplitterDistance = 415
+      Me.SplitContainer2.Size = New System.Drawing.Size(1229, 583)
+      Me.SplitContainer2.SplitterDistance = 535
+      Me.SplitContainer2.SplitterWidth = 5
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
+      '
+      'dlvLocalFiles
+      '
+      Me.dlvLocalFiles.AlternateRowBackColor = System.Drawing.Color.Wheat
+      Me.dlvLocalFiles.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
+      Me.dlvLocalFiles.CellEditUseWholeCell = False
+      Me.dlvLocalFiles.CheckedAspectName = ""
+      Me.dlvLocalFiles.Cursor = System.Windows.Forms.Cursors.Default
+      Me.dlvLocalFiles.DataSource = Me.bsrcLocalFiles
+      Me.dlvLocalFiles.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvLocalFiles.FullRowSelect = True
+      Me.dlvLocalFiles.GridLines = True
+      Me.dlvLocalFiles.Location = New System.Drawing.Point(0, 0)
+      Me.dlvLocalFiles.Margin = New System.Windows.Forms.Padding(4)
+      Me.dlvLocalFiles.MultiSelect = False
+      Me.dlvLocalFiles.Name = "dlvLocalFiles"
+      Me.dlvLocalFiles.SelectColumnsOnRightClick = False
+      Me.dlvLocalFiles.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None
+      Me.dlvLocalFiles.ShowCommandMenuOnRightClick = True
+      Me.dlvLocalFiles.ShowGroups = False
+      Me.dlvLocalFiles.ShowImagesOnSubItems = True
+      Me.dlvLocalFiles.ShowItemToolTips = True
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(1229, 535)
+      Me.dlvLocalFiles.TabIndex = 4
+      Me.dlvLocalFiles.TintSortColumn = True
+      Me.dlvLocalFiles.UseAlternatingBackColors = True
+      Me.dlvLocalFiles.UseCompatibleStateImageBehavior = False
+      Me.dlvLocalFiles.UseSubItemCheckBoxes = True
+      Me.dlvLocalFiles.View = System.Windows.Forms.View.Details
+      '
+      'btnNewFile
+      '
+      Me.btnNewFile.Location = New System.Drawing.Point(581, 12)
+      Me.btnNewFile.Margin = New System.Windows.Forms.Padding(4)
+      Me.btnNewFile.Name = "btnNewFile"
+      Me.btnNewFile.Size = New System.Drawing.Size(121, 28)
+      Me.btnNewFile.TabIndex = 10
+      Me.btnNewFile.Text = "Start New File"
+      Me.btnNewFile.UseVisualStyleBackColor = True
       '
       'cboxProcess
       '
       Me.cboxProcess.FormattingEnabled = True
-      Me.cboxProcess.Items.AddRange(New Object() {"Check for errors", "Process tonight", "As soon as possible"})
-      Me.cboxProcess.Location = New System.Drawing.Point(704, 11)
+      Me.cboxProcess.Location = New System.Drawing.Point(710, 14)
+      Me.cboxProcess.Margin = New System.Windows.Forms.Padding(4)
       Me.cboxProcess.MaxDropDownItems = 3
       Me.cboxProcess.Name = "cboxProcess"
-      Me.cboxProcess.Size = New System.Drawing.Size(205, 21)
+      Me.cboxProcess.Size = New System.Drawing.Size(272, 24)
       Me.cboxProcess.TabIndex = 9
       '
       'labFilename
       '
       Me.labFilename.AutoSize = True
       Me.labFilename.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.labFilename.Location = New System.Drawing.Point(89, 13)
+      Me.labFilename.Location = New System.Drawing.Point(119, 16)
+      Me.labFilename.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       Me.labFilename.Name = "labFilename"
       Me.labFilename.Size = New System.Drawing.Size(0, 20)
       Me.labFilename.TabIndex = 8
@@ -1296,18 +1453,20 @@ Public Class FreeREG2Browser
       'Label1
       '
       Me.Label1.AutoSize = True
-      Me.Label1.Location = New System.Drawing.Point(12, 17)
+      Me.Label1.Location = New System.Drawing.Point(16, 18)
+      Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
       Me.Label1.Name = "Label1"
-      Me.Label1.Size = New System.Drawing.Size(71, 13)
+      Me.Label1.Size = New System.Drawing.Size(90, 16)
       Me.Label1.TabIndex = 7
       Me.Label1.Text = "Selected File:"
       '
       'btnUploadFile
       '
       Me.btnUploadFile.Enabled = False
-      Me.btnUploadFile.Location = New System.Drawing.Point(533, 11)
+      Me.btnUploadFile.Location = New System.Drawing.Point(990, 12)
+      Me.btnUploadFile.Margin = New System.Windows.Forms.Padding(4)
       Me.btnUploadFile.Name = "btnUploadFile"
-      Me.btnUploadFile.Size = New System.Drawing.Size(75, 23)
+      Me.btnUploadFile.Size = New System.Drawing.Size(100, 28)
       Me.btnUploadFile.TabIndex = 5
       Me.btnUploadFile.Text = "Upload file"
       Me.btnUploadFile.UseVisualStyleBackColor = True
@@ -1315,9 +1474,10 @@ Public Class FreeREG2Browser
       'btnReplaceFile
       '
       Me.btnReplaceFile.Enabled = False
-      Me.btnReplaceFile.Location = New System.Drawing.Point(623, 11)
+      Me.btnReplaceFile.Location = New System.Drawing.Point(1098, 12)
+      Me.btnReplaceFile.Margin = New System.Windows.Forms.Padding(4)
       Me.btnReplaceFile.Name = "btnReplaceFile"
-      Me.btnReplaceFile.Size = New System.Drawing.Size(75, 23)
+      Me.btnReplaceFile.Size = New System.Drawing.Size(100, 28)
       Me.btnReplaceFile.TabIndex = 6
       Me.btnReplaceFile.Text = "Replace file"
       Me.btnReplaceFile.UseVisualStyleBackColor = True
@@ -1328,6 +1488,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
       Me.SplitContainer3.IsSplitterFixed = True
       Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
+      Me.SplitContainer3.Margin = New System.Windows.Forms.Padding(4)
       Me.SplitContainer3.Name = "SplitContainer3"
       '
       'SplitContainer3.Panel1
@@ -1337,8 +1498,9 @@ Public Class FreeREG2Browser
       'SplitContainer3.Panel2
       '
       Me.SplitContainer3.Panel2.Controls.Add(Me.panelUploadedFiles)
-      Me.SplitContainer3.Size = New System.Drawing.Size(922, 459)
+      Me.SplitContainer3.Size = New System.Drawing.Size(1229, 583)
       Me.SplitContainer3.SplitterDistance = 129
+      Me.SplitContainer3.SplitterWidth = 5
       Me.SplitContainer3.TabIndex = 5
       '
       'dlvUploadedFiles
@@ -1352,13 +1514,12 @@ Public Class FreeREG2Browser
       Me.dlvUploadedFiles.DataSource = Me.BatchBindingSource
       Me.dlvUploadedFiles.Dock = System.Windows.Forms.DockStyle.Fill
       Me.dlvUploadedFiles.GridLines = True
-      Me.dlvUploadedFiles.HighlightBackgroundColor = System.Drawing.Color.Empty
-      Me.dlvUploadedFiles.HighlightForegroundColor = System.Drawing.Color.Empty
       Me.dlvUploadedFiles.Location = New System.Drawing.Point(0, 0)
+      Me.dlvUploadedFiles.Margin = New System.Windows.Forms.Padding(4)
       Me.dlvUploadedFiles.MultiSelect = False
       Me.dlvUploadedFiles.Name = "dlvUploadedFiles"
       Me.dlvUploadedFiles.ShowGroups = False
-      Me.dlvUploadedFiles.Size = New System.Drawing.Size(129, 459)
+      Me.dlvUploadedFiles.Size = New System.Drawing.Size(129, 583)
       Me.dlvUploadedFiles.Sorting = System.Windows.Forms.SortOrder.Ascending
       Me.dlvUploadedFiles.TabIndex = 0
       Me.dlvUploadedFiles.UseAlternatingBackColors = True
@@ -1389,25 +1550,18 @@ Public Class FreeREG2Browser
       Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
       Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
-      'btnNewFile
-      '
-      Me.btnNewFile.Location = New System.Drawing.Point(436, 11)
-      Me.btnNewFile.Name = "btnNewFile"
-      Me.btnNewFile.Size = New System.Drawing.Size(91, 23)
-      Me.btnNewFile.TabIndex = 10
-      Me.btnNewFile.Text = "Start New File"
-      Me.btnNewFile.UseVisualStyleBackColor = True
-      '
       'FreeREG2Browser
       '
-      Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+      Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(922, 541)
+      Me.ClientSize = New System.Drawing.Size(1229, 666)
       Me.Controls.Add(Me.SplitContainer1)
       Me.Controls.Add(Me.BrowserStatusStrip)
       Me.Controls.Add(Me.BrowserMenuStrip)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
       Me.MainMenuStrip = Me.BrowserMenuStrip
+      Me.Margin = New System.Windows.Forms.Padding(4)
       Me.Name = "FreeREG2Browser"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
       Me.Text = "FreeREG/2 Browser"
@@ -1418,7 +1572,6 @@ Public Class FreeREG2Browser
       CType(Me.bnavShowData, System.ComponentModel.ISupportInitialize).EndInit()
       Me.bnavShowData.ResumeLayout(False)
       Me.bnavShowData.PerformLayout()
-      CType(Me.dlvLocalFiles, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).EndInit()
       Me.panelUploadedFiles.ResumeLayout(False)
       Me.panelUploadedFiles.PerformLayout()
@@ -1432,6 +1585,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.ResumeLayout(False)
       Me.SplitContainer2.Panel2.PerformLayout()
       Me.SplitContainer2.ResumeLayout(False)
+      CType(Me.dlvLocalFiles, System.ComponentModel.ISupportInitialize).EndInit()
       Me.SplitContainer3.Panel1.ResumeLayout(False)
       Me.SplitContainer3.Panel2.ResumeLayout(False)
       Me.SplitContainer3.ResumeLayout(False)
@@ -1511,14 +1665,9 @@ Public Class FreeREG2Browser
          MyAppSettings = New FreeReg2BrowserSettings()
       End If
 
-      MyAppSettings.UserId = _myUsername
+      MyAppSettings.UserId = _myUserId
       MyAppSettings.Password = _myPassword
-
-#If DEBUG Then
-      MyAppSettings.BaseUrl = MyAppSettings.TestUrl
-#Else
-		MyAppSettings.BaseUrl = MyAppSettings.LiveUrl
-#End If
+      MyAppSettings.BaseUrl = _myUrl
 
       If File.Exists(ErrorMessagesFileName) Then
          ErrorMessagesDataSet.ReadXml(ErrorMessagesFileName, XmlReadMode.ReadSchema)
@@ -1527,12 +1676,21 @@ Public Class FreeREG2Browser
       If File.Exists(TranscriberProfileFile) Then
          UserDataSet.ReadXml(TranscriberProfileFile, XmlReadMode.ReadSchema)
          UserDataSet.AcceptChanges()
+
+         Dim currentUser As WinFreeReg.UserDetails.UserRow = UserDataSet.User.FindByuserid(MyAppSettings.UserId)
+         If currentUser.person_role = "trainee" Then
+            cboxProcess.Items.Add("Check for errors")
+         Else
+            cboxProcess.Items.AddRange(New Object() {"Process tonight", "As soon as possible"})
+         End If
       End If
       If File.Exists(FreeregTablesFile) Then
          TablesDataSet.ReadXml(FreeregTablesFile, XmlReadMode.ReadSchema)
          TablesDataSet.AcceptChanges()
       End If
-      If File.Exists(LookupTablesFile) Then LoadLookupTables()
+
+      LoadLookupTables()
+
       If Not String.IsNullOrEmpty(MyAppSettings.UserId) Then
          If File.Exists(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
             BatchesDataSet.ReadXml(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId)))
@@ -1541,93 +1699,11 @@ Public Class FreeREG2Browser
       End If
    End Sub
 
-	Private Sub LoadLookupTables()
-		Dim fname As String
-
-		Dim dsDefault As LookupTables = New LookupTables
-		fname = LookupTablesFile
-		dsDefault.LoadXmlData(fname)
-		dsDefault.AcceptChanges()
-		dsDefault.SaveXmlData(fname)
-		Dim fiDefault As FileInfo = New FileInfo(fname)
-
-		Dim dsUser As LookupTables = New LookupTables
-		fname = UserLookupTablesFile
-		dsUser.LoadXmlData(fname)
-		dsUser.AcceptChanges()
-		dsUser.SaveXmlData(fname)
-		Dim fiUser As FileInfo = New FileInfo(fname)
-
-		If fiDefault.LastWriteTime > fiUser.LastWriteTime Then
-			'	Incoming default file is more recent than the user file - Try and merge the two
-			'
-			For Each dt As DataTable In dsDefault.Tables
-				Dim dt1 As DataTable = dt
-				Dim seq1 As IEnumerable(Of DataRow) = dt1.AsEnumerable()
-				Dim union1 As IEnumerable(Of DataRow)
-				Try
-					If dsDefault.Tables.Contains(dt1.TableName + "Table") Then
-						Dim dt3 As DataTable = dsDefault.Tables(dt1.TableName + "Table")
-						Dim seq3 As IEnumerable(Of DataRow) = dt3.AsEnumerable()
-						union1 = seq1.Union(seq3, DataRowComparer.Default)
-					Else
-						union1 = seq1
-					End If
-
-					'	Need to merge all of fiDefault with just the User records from fiUser
-					'
-					Dim dt2 As DataTable = dsUser.Tables(dt.TableName)
-					If dt2 IsNot Nothing Then
-						Dim seq2 As IEnumerable(Of DataRow) = dt2.AsEnumerable().Where(Function(row As DataRow) row(0) = "User")
-						Dim union2 As IEnumerable(Of DataRow)
-						If dsUser.Tables.Contains(dt2.TableName + "Table") Then
-							Dim dt4 As DataTable = dsUser.Tables(dt2.TableName + "Table")
-							Dim seq4 As IEnumerable(Of DataRow) = dt4.AsEnumerable().Where(Function(row As DataRow) row(0) = "User")
-							union2 = seq2.Union(seq4, DataRowComparer.Default)
-						Else
-							union2 = seq2
-						End If
-
-						Dim union As IEnumerable(Of DataRow) = union1.Union(union2, DataRowComparer.Default)
-						Try
-							If union.Count > 0 Then
-								If Not dt.TableName.Contains("Table") Then
-									Dim dtu = union.CopyToDataTable()
-									dsUser.Tables(dt.TableName).Clear()
-									For Each row In dtu.Rows
-										Try
-											dsUser.Tables(dt.TableName).ImportRow(row)
-
-										Catch ex As ConstraintException
-											MessageBox.Show(String.Format("Found a duplicate entry of '{1}' in {0} table. The entry has been discarded.", dt.TableName, row.ItemArray(1)), "Lookup Tables", MessageBoxButtons.OK)
-										End Try
-									Next
-									dsUser.Tables(dt.TableName).AcceptChanges()
-								Else
-									dsUser.Tables.Remove(dt.TableName)
-								End If
-							End If
-
-						Catch ex As ConstraintException
-							Dim newException As New ApplicationException("", ex)
-							Throw newException
-						End Try
-					End If
-
-				Catch ex As ConstraintException
-					Dim newException As New ApplicationException("", ex)
-					Throw newException
-				End Try
-			Next
-
-			dsUser.SaveXmlData(fname)
-		End If
-
-		'	Load the tables
-		'
-		LookUpsDataSet.LoadXmlData(fname)
-		LookUpsDataSet.AcceptChanges()
-	End Sub
+   Private Sub LoadLookupTables()
+      LookUpsDataSet.LoadXmlData(LookupTablesFile)
+      LookUpsDataSet.AcceptChanges()
+      If Not File.Exists(LookupTablesFile) Then LookUpsDataSet.SaveXmlData(LookupTablesFile)
+   End Sub
 
 #Region "Menu - FreeREG"
 
@@ -1637,7 +1713,7 @@ Public Class FreeREG2Browser
 				miLogin.Enabled = True
 				miLogout.Enabled = False
 				miUserProfile.Enabled = File.Exists(TranscriberProfileFile)
-				miRefreshUser.Enabled = False
+            miRefreshUser.Enabled = False
 
 			Case ProgramState.LoggedOn
 				miLogin.Enabled = False
@@ -1649,8 +1725,11 @@ Public Class FreeREG2Browser
 				miLogout.Enabled = True
 				miUserProfile.Enabled = File.Exists(TranscriberProfileFile)
 				miRefreshUser.Enabled = True
-		End Select
-	End Sub
+      End Select
+
+      miNetworkTrace.Checked = _myNetworkTrace
+
+   End Sub
 
 	Private Sub miLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLogin.Click
 		Using dlg As New formLogin()
@@ -1682,6 +1761,10 @@ Public Class FreeREG2Browser
 		Refreshtranscriber()
 	End Sub
 
+   Private Sub miNetworkTrace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miNetworkTrace.Click
+      _myNetworkTrace = miNetworkTrace.Checked
+   End Sub
+
 	Private Sub miExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miExit.Click
 		Me.Close()
 	End Sub
@@ -1693,11 +1776,11 @@ Public Class FreeREG2Browser
 	Private Sub miTranscriptions_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miTranscriptions.DropDownOpening
 		Select Case pgmState
 			Case ProgramState.Idle
-				miLocalFiles.Enabled = False
+            miLocalFiles.Enabled = True
 				miUploadedFiles.Enabled = False
 
 			Case ProgramState.LoggedOn
-				miLocalFiles.Enabled = False
+            miLocalFiles.Enabled = True
 				miUploadedFiles.Enabled = False
 
 			Case ProgramState.UserAuthenticated
@@ -1709,10 +1792,10 @@ Public Class FreeREG2Browser
 	Private Sub miLocalFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLocalFiles.Click
 		labelStatus.Text = ""
 
-      Dim fileQuery = From file As FileInfo In ListFiles(OldBaseDataDirectory + "\Transcripts") _
-        Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
-        Order By file.Name _
-        Select file
+      Dim fileQuery = From file As FileInfo In ListFiles(_myTranscriptionLibrary) _
+                      Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
+                      Order By file.Name _
+                      Select file
 
 		Dim tableLocalFiles As DataTable = CreateDataTable(Of FileInfo)(fileQuery)
 		If File.Exists(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
@@ -1838,10 +1921,11 @@ Public Class FreeREG2Browser
 
 		dlvLocalFiles.RebuildColumns()
 		SplitContainer2.Visible = True
-		cboxProcess.SelectedIndex = 1
+      If cboxProcess.Items.Count > 0 Then cboxProcess.SelectedIndex = 0
 		SplitContainer3.Visible = False
 		bnavShowData.Visible = True
-		Me.ClientSize = New Size(SplitContainer2.PreferredSize.Width, Me.ClientSize.Height)
+      Me.ClientSize = New Size(SplitContainer2.PreferredSize.Width, Me.ClientSize.Height)
+      btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
 	End Sub
 
 	Private Sub miUploadedFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUploadedFiles.Click
@@ -1851,8 +1935,8 @@ Public Class FreeREG2Browser
 	Function ListFiles(ByVal root As String) As System.Collections.Generic.IEnumerable(Of System.IO.FileInfo)
 		' Function to retrieve a list of files. Note that this is a copy
 		' of the file information.
-		Return From file In My.Computer.FileSystem.GetFiles(root, FileIO.SearchOption.SearchTopLevelOnly, "*.*") _
-		 Select New System.IO.FileInfo(file)
+      Return From file In My.Computer.FileSystem.GetFiles(root, FileIO.SearchOption.SearchTopLevelOnly, "*.*") _
+             Select New System.IO.FileInfo(file)
 	End Function
 
 	Public Shared Function CreateDataTable(Of T)(ByVal list As IEnumerable(Of T)) As DataTable
@@ -1947,13 +2031,13 @@ Public Class FreeREG2Browser
 			Dim row As DataRow = dbi.Row
 			labFilename.Text = row("Name")
 			If row.Table.Columns.Contains("dateuploaded") Then
-				cboxProcess.SelectedIndex = 1
+            If cboxProcess.Items.Count > 0 Then cboxProcess.SelectedIndex = 0
 				If DBNull.Value.Equals(row("dateuploaded")) Then
-					btnUploadFile.Enabled = True
+               btnUploadFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
 					btnReplaceFile.Enabled = False
 				Else
 					btnUploadFile.Enabled = False
-					btnReplaceFile.Enabled = True
+               btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
 				End If
 			End If
 		End If
@@ -1980,15 +2064,15 @@ Public Class FreeREG2Browser
 	End Sub
 
 	Private Sub miUserTables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUserTables.Click
-		Using dlg As New formUserTables() With {.LookupTables = LookUpsDataSet, .LookupsFilename = LookupTablesFile}
-			dlg.ShowDialog()
-		End Using
+      Using dlg As New formUserTables() With {.LookupTables = LookUpsDataSet, .LookupsFilename = LookupTablesFile}
+         dlg.ShowDialog()
+      End Using
 	End Sub
 
 	Private Sub miFreeREG2Tables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miFreeREG2Tables.Click
-		Using dlg As New formFreeregTables With {.DataSet = TablesDataSet, .TablesFileName = FreeregTablesFile, .Settings = MyAppSettings}
-			dlg.ShowDialog()
-		End Using
+      Using dlg As New formFreeregTables With {.DataSet = TablesDataSet, .TablesFileName = FreeregTablesFile, .Settings = MyAppSettings, .DefaultCounty = _myDefaultCounty}
+         dlg.ShowDialog()
+      End Using
 	End Sub
 
 #End Region
@@ -3260,7 +3344,7 @@ Public Class FreeREG2Browser
 				Dim contents As String = webClient.DownloadString(addrRequest)
 
 				If contents.StartsWith("+INFO") Then
-               Using dlg As New formBatchContents() With {.PersonalPath = OldBaseDataDirectory + "\Transcripts", .CurrentBatch = currentBatch, .Text = String.Format("Batch Contents - {0}", currentBatch.FileName)}
+               Using dlg As New formBatchContents() With {.PersonalPath = _myTranscriptionLibrary, .CurrentBatch = currentBatch, .Text = String.Format("Batch Contents - {0}", currentBatch.FileName)}
                   dlg.FileContentsTextBox.Text = contents
                   dlg.ShowDialog()
                End Using
@@ -3353,7 +3437,21 @@ Public Class FreeREG2Browser
 		Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
       Using dlg As New formFileWorkspace With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = BaseDataDirectory, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
          Try
-            dlg.ShowDialog()
+            Dim rc = dlg.ShowDialog()
+            If rc = Windows.Forms.DialogResult.OK Then
+               If File.Exists(dlg.TranscriptionFile.FullFileName) Then
+                  ' File has been edited
+                  ' Details need to be updated in the table
+                  Dim fi As FileInfo = New System.IO.FileInfo(dlg.TranscriptionFile.FullFileName)
+                  row("Attributes") = fi.Attributes
+                  row("IsReadOnly") = fi.IsReadOnly
+                  row("LastAccessTime") = fi.LastAccessTime
+                  row("LastAccessTimeUtc") = fi.LastAccessTimeUtc
+                  row("LastWriteTime") = fi.LastWriteTime
+                  row("LastWriteTimeUtc") = fi.LastWriteTimeUtc
+                  row("Length") = fi.Length
+               End If
+            End If
 
          Catch ex As Exception
             Beep()
@@ -3380,14 +3478,34 @@ Public Class FreeREG2Browser
 	End Sub
 
 	Private Sub btnNewFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewFile.Click
-		Using dlg As New formStartNewFile With {.TablesDataset = TablesDataSet, .LookupsDataSet = LookUpsDataSet}
-			Try
-				Dim rc = dlg.ShowDialog()
+      Using dlg As New formStartNewFile With {.Username = _myUserName, .EmailAddress = _myEmailAddress, .dsFreeRegTables = TablesDataSet, .dsLookupTables = LookUpsDataSet, .DefaultCounty = _myDefaultCounty, .TranscriptionLibrary = _myTranscriptionLibrary}
+         Try
+            Dim rc = dlg.ShowDialog()
+            If rc = Windows.Forms.DialogResult.OK Then
+               If File.Exists(dlg.NewTranscriptionFile.FullFileName) Then
+                  ' File has been created
+                  ' Needs to be added to the table of files
+                  Dim fi As FileInfo = New System.IO.FileInfo(dlg.NewTranscriptionFile.FullFileName)
+                  Dim tableLocalFiles As DataTable = bsrcLocalFiles.DataSource
+                  Dim type As Type = GetType(System.IO.FileInfo)
+                  Dim properties = type.GetProperties()
 
-			Catch ex As Exception
-				Beep()
+                  Dim values As Object() = New Object(properties.Length - 1) {}
+                  Dim i As Integer = 0
+                  While i < properties.Length
+                     values(i) = properties(i).GetValue(fi, Nothing)
+                     System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
+                  End While
+                  tableLocalFiles.Rows.Add(values)
+               End If
+            End If
+            If dlg.TablesUpdated Then TablesDataSet.WriteXml(FreeregTablesFile, XmlWriteMode.WriteSchema)
 
-			End Try
-		End Using
+         Catch ex As Exception
+            Beep()
+
+         End Try
+      End Using
 	End Sub
+
 End Class
