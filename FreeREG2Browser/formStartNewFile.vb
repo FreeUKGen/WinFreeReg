@@ -12,7 +12,7 @@ Public Class formStartNewFile
    Private m_SelectedRegisterType As String
    Private m_SelectedRecordType As String
    Private m_RecordType As String
-   Private BaseDataDirectory = String.Format("{0}\{1}\{2}", My.Computer.FileSystem.SpecialDirectories.MyDocuments, Application.CompanyName, Application.ProductName)
+   Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
 
    Private m_UserName As String
    Public Property Username() As String
@@ -281,9 +281,9 @@ Public Class formStartNewFile
       End Select
 
       Dim ErrorMessagesDataSet As New ErrorMessages()
-      Dim ErrorMessagesFileName As String = Path.Combine(BaseDataDirectory, "ErrorMessages.xml")
+      Dim ErrorMessagesFileName As String = Path.Combine(AppDataLocalFolder, "ErrorMessages.xml")
 
-      Using dlg As New formFileWorkspace With {.TranscriptionFile = NewFile, .SelectedRow = Nothing, .BaseDirectory = BaseDataDirectory, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+      Using dlg As New formFileWorkspace With {.TranscriptionFile = NewFile, .SelectedRow = Nothing, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
          Try
             dlg.IsNewFile = True
             Dim rc = dlg.ShowDialog()

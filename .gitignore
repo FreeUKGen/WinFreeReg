@@ -28,3 +28,5 @@ _ReSharper*/
 *.vssscc
 $tf*/
 *.stackdump
+Setup1/WinFreeREG.Setup/Express/SingleImage/LogFiles/
+Setup1/WinFreeREG.Setup/Express/SingleImage/Reports/

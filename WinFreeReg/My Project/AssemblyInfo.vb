@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("WinFreeReg")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("FreeUKGenealogy")> 
-<Assembly: AssemblyProduct("WinFreeReg")> 
+<Assembly: AssemblyProduct("WinFreeREG")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 Free UK Genealogy")> 
 <Assembly: AssemblyTrademark("")> 
 

@@ -4,8 +4,8 @@ Imports WinFreeReg
 
 Public Class formStartUp
 
-   Private BaseDataDirectory = String.Format("{0}\{1}\{2}", My.Computer.FileSystem.SpecialDirectories.MyDocuments, Application.CompanyName, Application.ProductName)
-   Public LookupTablesFile As String = Path.Combine(BaseDataDirectory, "winfreereg.tables")
+   Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
+   Public LookupTablesFile As String = Path.Combine(AppDataLocalFolder, "winfreereg.tables")
    Dim strPersonalFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
 
    Private Sub formStartUp_Load(sender As Object, e As EventArgs) Handles MyBase.Load

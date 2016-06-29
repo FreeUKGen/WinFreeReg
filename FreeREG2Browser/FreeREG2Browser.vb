@@ -45,10 +45,9 @@ Public Class FreeREG2Browser
 
 	Private nameMachineConfig As String = RuntimeEnvironment.GetRuntimeDirectory() + "CONFIG\machine.config"
 	Private nameAppConfig As String = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile
-	Private pathLocalAppData As String = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)
-	Private pathRoamingAppData As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+   Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
+   Private pathRoamingAppData As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
 	Private pathUserConfig As String = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath()
-	Private BaseDataDirectory = String.Format("{0}\{1}\{2}", My.Computer.FileSystem.SpecialDirectories.MyDocuments, Application.CompanyName, Application.ProductName)
 
 	Private pgmState As ProgramState = ProgramState.Idle
 	Private authenticity_token As String = ""
@@ -58,11 +57,11 @@ Public Class FreeREG2Browser
 	Public LookUpsDataSet As New LookupTables()
 	Public ErrorMessagesDataSet As New ErrorMessages()
 
-	Public ErrorMessagesFileName As String = Path.Combine(BaseDataDirectory, "ErrorMessages.xml")
-	Public SettingsFileName As String = Path.Combine(BaseDataDirectory, "FreeRegBrowserSetttings.dat")
-	Public TranscriberProfileFile As String = Path.Combine(BaseDataDirectory, "transcriber.xml")
-	Public FreeregTablesFile As String = Path.Combine(BaseDataDirectory, "FreeREGTables.xml")
-   Public LookupTablesFile As String = Path.Combine(BaseDataDirectory, "winfreereg.tables")
+   Public ErrorMessagesFileName As String = Path.Combine(AppDataLocalFolder, "ErrorMessages.xml")
+   Public SettingsFileName As String = Path.Combine(AppDataLocalFolder, "FreeRegBrowserSetttings.dat")
+   Public TranscriberProfileFile As String = Path.Combine(AppDataLocalFolder, "transcriber.xml")
+   Public FreeregTablesFile As String = Path.Combine(AppDataLocalFolder, "FreeREGTables.xml")
+   Public LookupTablesFile As String = Path.Combine(AppDataLocalFolder, "winfreereg.tables")
 
 	Friend WithEvents bnavShowData As System.Windows.Forms.BindingNavigator
 	Private components As System.ComponentModel.IContainer
@@ -1606,7 +1605,7 @@ Public Class FreeREG2Browser
       If BatchesDataSet.Batch.GetChanges() IsNot Nothing Then
          If Not BatchesDataSet.Batch.HasErrors Then
             BatchesDataSet.Batch.AcceptChanges()
-            BatchesDataSet.WriteXml(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
+            BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
          End If
       End If
 
@@ -1692,8 +1691,8 @@ Public Class FreeREG2Browser
       LoadLookupTables()
 
       If Not String.IsNullOrEmpty(MyAppSettings.UserId) Then
-         If File.Exists(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
-            BatchesDataSet.ReadXml(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId)))
+         If File.Exists(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
+            BatchesDataSet.ReadXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)))
             BatchesDataSet.AcceptChanges()
          End If
       End If
@@ -1798,19 +1797,19 @@ Public Class FreeREG2Browser
                       Select file
 
 		Dim tableLocalFiles As DataTable = CreateDataTable(Of FileInfo)(fileQuery)
-		If File.Exists(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
-			Dim col As DataColumn = tableLocalFiles.Columns.Add("dateUploaded", Type.GetType("System.String"))
-			col.Caption = "Date Uploaded"
-			For Each row As DataRow In tableLocalFiles.Rows
-				Dim batchRow As Batches.BatchRow = BatchesDataSet.Batch.FindByFileName(row("Name"))
-				If batchRow IsNot Nothing Then
-					Dim dtUploaded As New DateTime()
-					If Date.TryParse(batchRow.UploadedDate, dtUploaded) Then
-						row("dateUploaded") = dtUploaded.ToLocalTime.ToString()
-					End If
-				End If
-			Next
-		End If
+      If File.Exists(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
+         Dim col As DataColumn = tableLocalFiles.Columns.Add("dateUploaded", Type.GetType("System.String"))
+         col.Caption = "Date Uploaded"
+         For Each row As DataRow In tableLocalFiles.Rows
+            Dim batchRow As Batches.BatchRow = BatchesDataSet.Batch.FindByFileName(row("Name"))
+            If batchRow IsNot Nothing Then
+               Dim dtUploaded As New DateTime()
+               If Date.TryParse(batchRow.UploadedDate, dtUploaded) Then
+                  row("dateUploaded") = dtUploaded.ToLocalTime.ToString()
+               End If
+            End If
+         Next
+      End If
 
 		Dim cnt = dlvLocalFiles.Columns.Count
 
@@ -3050,7 +3049,7 @@ Public Class FreeREG2Browser
 			Dim drv As DataRowView() = dv.FindRows(res.Parameter)
 			BatchesDataSet.Batch.RemoveBatchRow(drv(0).Row)
 			BatchesDataSet.Batch.AcceptChanges()
-			BatchesDataSet.WriteXml(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
+         BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
 
 			' Refresh the user profile
 			'
@@ -3205,7 +3204,7 @@ Public Class FreeREG2Browser
 						Next
 					End If
 					BatchesDataSet.AcceptChanges()
-					BatchesDataSet.WriteXml(Path.Combine(BaseDataDirectory, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
+               BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
 					worker.ReportProgress(100, String.Format("Batches fetched from FreeREG/2 for {0}", MyAppSettings.UserId))
 				Else
 					Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed - Not logged on")
@@ -3435,7 +3434,7 @@ Public Class FreeREG2Browser
 
 	Private Sub dlvLocalFiles_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.ItemActivate
 		Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
-      Using dlg As New formFileWorkspace With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = BaseDataDirectory, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+      Using dlg As New formFileWorkspace With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
          Try
             Dim rc = dlg.ShowDialog()
             If rc = Windows.Forms.DialogResult.OK Then
