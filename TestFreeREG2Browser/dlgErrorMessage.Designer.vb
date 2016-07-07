@@ -23,8 +23,8 @@ Partial Class dlgErrorMessage
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
       Me.components = New System.ComponentModel.Container()
-      Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-      Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+      Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+      Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
       Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(dlgErrorMessage))
       Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
       Me.OK_Button = New System.Windows.Forms.Button()
@@ -112,7 +112,9 @@ Partial Class dlgErrorMessage
       Me.ErrorMessagesDataGridView.DataSource = Me.ErrorMessagesBindingSource
       Me.ErrorMessagesDataGridView.Dock = System.Windows.Forms.DockStyle.Fill
       Me.ErrorMessagesDataGridView.Location = New System.Drawing.Point(0, 0)
+      Me.ErrorMessagesDataGridView.MultiSelect = False
       Me.ErrorMessagesDataGridView.Name = "ErrorMessagesDataGridView"
+      Me.ErrorMessagesDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
       Me.ErrorMessagesDataGridView.Size = New System.Drawing.Size(758, 363)
       Me.ErrorMessagesDataGridView.TabIndex = 0
       '
@@ -128,8 +130,8 @@ Partial Class dlgErrorMessage
       'MessageColumn
       '
       Me.MessageColumn.DataPropertyName = "Message"
-      DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-      Me.MessageColumn.DefaultCellStyle = DataGridViewCellStyle1
+      DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+      Me.MessageColumn.DefaultCellStyle = DataGridViewCellStyle3
       Me.MessageColumn.HeaderText = "Message"
       Me.MessageColumn.Name = "MessageColumn"
       Me.MessageColumn.Width = 150
@@ -138,8 +140,8 @@ Partial Class dlgErrorMessage
       '
       Me.ExplanationColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
       Me.ExplanationColumn.DataPropertyName = "Explanation"
-      DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-      Me.ExplanationColumn.DefaultCellStyle = DataGridViewCellStyle2
+      DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+      Me.ExplanationColumn.DefaultCellStyle = DataGridViewCellStyle4
       Me.ExplanationColumn.HeaderText = "Explanation"
       Me.ExplanationColumn.Name = "ExplanationColumn"
       Me.ExplanationColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable

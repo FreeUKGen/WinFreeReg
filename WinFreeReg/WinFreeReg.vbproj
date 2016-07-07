@@ -175,6 +175,10 @@
       <Project>{c3fc6c01-e52b-4766-a53b-02179b406333}</Project>
       <Name>RegexUtilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WindowsControlLibrary2\WinFreeRegControlLibrary.vbproj">
+      <Project>{887aac62-10ed-4af7-bd7f-d1379272c6dd}</Project>
+      <Name>WinFreeRegControlLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

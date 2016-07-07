@@ -398,6 +398,10 @@
       <Project>{88B014CC-B9C9-4CD5-BF08-AF67453D31E9}</Project>
       <Name>TranscriptionTables</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WindowsControlLibrary2\WinFreeRegControlLibrary.vbproj">
+      <Project>{887aac62-10ed-4af7-bd7f-d1379272c6dd}</Project>
+      <Name>WinFreeRegControlLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\save.png" />

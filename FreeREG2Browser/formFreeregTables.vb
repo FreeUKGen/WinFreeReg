@@ -43,6 +43,7 @@ Public Class formFreeregTables
       End Get
       Set(ByVal value As FreeReg2BrowserSettings)
          _settings = value
+         uri = New Uri(_settings.BaseUrl)
       End Set
    End Property
 
@@ -56,6 +57,7 @@ Public Class formFreeregTables
       End Set
    End Property
 
+   Private uri As Uri
    Private currentCountyCode As String = Nothing
    Private ignoreSelection As Integer = 2
 
@@ -414,12 +416,18 @@ Public Class formFreeregTables
 		Using webClient As New CookieAwareWebClient()
 			Try
 				webClient.SetTimeout(30000)
-				webClient.CookieContainer = _settings.CookieJar
-				Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/register_types.xml"
+            webClient.CookieContainer = New CookieContainer()
+            For Each cookie In _settings.Cookies
+               webClient.CookieContainer.Add(uri, New Cookie(cookie.name, cookie.value))
+            Next
+            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/register_types.xml"
 				Dim response = webClient.DownloadString(addrRequest)
 
-				_settings.CookieJar = webClient.CookieContainer
-				Dim res As New BackgroundResult()
+            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
+            Dim res As New BackgroundResult()
 				res.Parameter = e.Argument
 				res.Result = response
 				Return res
@@ -531,12 +539,16 @@ Public Class formFreeregTables
 		Using webClient As New CookieAwareWebClient()
 			Try
 				webClient.SetTimeout(30000)
-				webClient.CookieContainer = _settings.CookieJar
-				Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/list.xml"
+            webClient.CookieContainer = New CookieContainer()
+            For Each cookie In _settings.Cookies
+               webClient.CookieContainer.Add(Uri, New Cookie(cookie.name, cookie.value))
+            Next
+            Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/list.xml"
 				Dim contents As String = webClient.DownloadString(addrRequest)
 
-				_settings.CookieJar = webClient.CookieContainer
-				Dim res As New BackgroundResult()
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
+            Dim res As New BackgroundResult()
 				res.Parameter = e.Argument
 				res.Result = contents
 				Return res
@@ -611,14 +623,18 @@ Public Class formFreeregTables
 		Using webClient As New CookieAwareWebClient()
 			Try
 				webClient.SetTimeout(30000)
-				webClient.CookieContainer = _settings.CookieJar
-				Dim addrRequest As String = _settings.BaseUrl + "/transreg_places/list.xml"
+            webClient.CookieContainer = New CookieContainer()
+            For Each cookie In _settings.Cookies
+               webClient.CookieContainer.Add(Uri, New Cookie(cookie.name, cookie.value))
+            Next
+            Dim addrRequest As String = _settings.BaseUrl + "/transreg_places/list.xml"
 				Dim query_data = New NameValueCollection()
 				query_data.Add("county", selectedCounty)
 				webClient.QueryString = query_data
 				Dim contents As String = webClient.DownloadString(addrRequest)
 
-				_settings.CookieJar = webClient.CookieContainer
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
 
 				Try
 					If contents.StartsWith("<PlacesTable>") Then
@@ -734,15 +750,19 @@ Public Class formFreeregTables
 		Using webClient As New CookieAwareWebClient()
 			Try
 				webClient.SetTimeout(30000)
-				webClient.CookieContainer = _settings.CookieJar
-				Dim addrRequest As String = _settings.BaseUrl + "/transreg_churches/list.xml"
+            webClient.CookieContainer = New CookieContainer()
+            For Each cookie In _settings.Cookies
+               webClient.CookieContainer.Add(Uri, New Cookie(cookie.name, cookie.value))
+            Next
+            Dim addrRequest As String = _settings.BaseUrl + "/transreg_churches/list.xml"
 				Dim query_data = New NameValueCollection()
 				query_data.Add("county", params.County)
 				query_data.Add("place", params.Place)
 				webClient.QueryString = query_data
 				Dim contents As String = webClient.DownloadString(addrRequest)
 
-				_settings.CookieJar = webClient.CookieContainer
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
 
 				Try
 					If contents.StartsWith("<ChurchesTable>") Then

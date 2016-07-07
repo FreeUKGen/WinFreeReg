@@ -32,7 +32,6 @@ Partial Class formStartUp
       Me.TranscriptionLibraryLabel = New System.Windows.Forms.Label()
       Me.linkBrowse = New System.Windows.Forms.LinkLabel()
       Me.dlgTranscriptionFolderBrowser = New System.Windows.Forms.FolderBrowserDialog()
-      Me.StartToolTip = New System.Windows.Forms.ToolTip(Me.components)
       Me.LibraryTextBox = New System.Windows.Forms.TextBox()
       Me.UrlLabel = New System.Windows.Forms.Label()
       Me.UrlTextBox = New System.Windows.Forms.TextBox()
@@ -40,16 +39,16 @@ Partial Class formStartUp
       Me.libraryErrorProvider = New System.Windows.Forms.ErrorProvider(Me.components)
       Me.DefaultCountyLabel = New System.Windows.Forms.Label()
       Me.DefaultCountyComboBox = New System.Windows.Forms.ComboBox()
-      Me.LookupTables1 = New WinFreeReg.LookupTables()
       Me.TraceCheckBox = New System.Windows.Forms.CheckBox()
       Me.UserNameLabel = New System.Windows.Forms.Label()
       Me.UserNameTextBox = New System.Windows.Forms.TextBox()
       Me.EmailAddressLabel = New System.Windows.Forms.Label()
       Me.EmailAddressTextBox = New System.Windows.Forms.TextBox()
       Me.linkPassword = New System.Windows.Forms.LinkLabel()
+      Me.UserLookupTables = New WinFreeReg.LookupTables()
       CType(Me.urlErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.libraryErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
-      CType(Me.LookupTables1, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.UserLookupTables, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
       'PasswordTextBox
@@ -125,10 +124,6 @@ Partial Class formStartUp
       Me.linkBrowse.TabStop = True
       Me.linkBrowse.Text = "Browse"
       '
-      'StartToolTip
-      '
-      Me.StartToolTip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info
-      '
       'LibraryTextBox
       '
       Me.LibraryTextBox.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -138,7 +133,6 @@ Partial Class formStartUp
       Me.LibraryTextBox.Name = "LibraryTextBox"
       Me.LibraryTextBox.Size = New System.Drawing.Size(391, 26)
       Me.LibraryTextBox.TabIndex = 13
-      Me.StartToolTip.SetToolTip(Me.LibraryTextBox, "LibraryTextBox")
       '
       'UrlLabel
       '
@@ -188,12 +182,6 @@ Partial Class formStartUp
       Me.DefaultCountyComboBox.Name = "DefaultCountyComboBox"
       Me.DefaultCountyComboBox.Size = New System.Drawing.Size(220, 27)
       Me.DefaultCountyComboBox.TabIndex = 9
-      '
-      'LookupTables1
-      '
-      Me.LookupTables1.DataSetName = "LookupTables"
-      Me.LookupTables1.Locale = New System.Globalization.CultureInfo("")
-      Me.LookupTables1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
       'TraceCheckBox
       '
@@ -255,6 +243,12 @@ Partial Class formStartUp
       Me.linkPassword.Tag = ""
       Me.linkPassword.Text = "Show password"
       '
+      'UserLookupTables
+      '
+      Me.UserLookupTables.DataSetName = "LookupTables"
+      Me.UserLookupTables.Locale = New System.Globalization.CultureInfo("")
+      Me.UserLookupTables.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+      '
       'formStartUp
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -278,13 +272,16 @@ Partial Class formStartUp
       Me.Controls.Add(Me.UserIdTextBox)
       Me.Controls.Add(Me.PasswordLabel)
       Me.Controls.Add(Me.UserIdLabel)
+      Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+      Me.MaximizeBox = False
+      Me.MinimizeBox = False
       Me.Name = "formStartUp"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
       Me.Text = "WinFreeReg - Startup"
       CType(Me.urlErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.libraryErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
-      CType(Me.LookupTables1, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.UserLookupTables, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
 
@@ -298,14 +295,13 @@ Partial Class formStartUp
    Friend WithEvents LibraryTextBox As System.Windows.Forms.TextBox
    Private WithEvents linkBrowse As System.Windows.Forms.LinkLabel
    Friend WithEvents dlgTranscriptionFolderBrowser As System.Windows.Forms.FolderBrowserDialog
-   Friend WithEvents StartToolTip As System.Windows.Forms.ToolTip
    Friend WithEvents UrlLabel As System.Windows.Forms.Label
    Friend WithEvents UrlTextBox As System.Windows.Forms.TextBox
    Friend WithEvents urlErrorProvider As System.Windows.Forms.ErrorProvider
    Friend WithEvents libraryErrorProvider As System.Windows.Forms.ErrorProvider
    Friend WithEvents DefaultCountyComboBox As System.Windows.Forms.ComboBox
    Friend WithEvents DefaultCountyLabel As System.Windows.Forms.Label
-   Friend WithEvents LookupTables1 As WinFreeReg.LookupTables
+   Friend WithEvents UserLookupTables As WinFreeReg.LookupTables
    Friend WithEvents TraceCheckBox As System.Windows.Forms.CheckBox
    Friend WithEvents UserNameLabel As System.Windows.Forms.Label
    Friend WithEvents EmailAddressTextBox As System.Windows.Forms.TextBox

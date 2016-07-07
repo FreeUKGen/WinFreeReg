@@ -1902,6 +1902,7 @@
 		<row><td>freereg2browser.primary_outp</td><td>FreeREG2Browser.Primary_output</td><td>FreeREG2Browser.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;FreeREG2Browser&gt;|Built</td><td>3</td><td/></row>
 		<row><td>lookuptables.primary_output</td><td>LookupTables.Primary_output</td><td>LookupTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LookupTables&gt;|Built</td><td>3</td><td/></row>
 		<row><td>regexutilities.primary_outpu</td><td>RegexUtilities.Primary_output</td><td>RegexUtilities.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;RegexUtilities&gt;|Built</td><td>3</td><td/></row>
+		<row><td>tooltips.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>ToolTips.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\AppData\Local\WinFreeREG\ToolTips.xml</td><td>1</td><td/></row>
 		<row><td>transcriptiontables.primary_</td><td>TranscriptionTables.Primary_output</td><td>TranscriptionTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;TranscriptionTables&gt;|Built</td><td>3</td><td/></row>
 		<row><td>winfreereg.primary_output</td><td>WinFreeReg.Primary_output</td><td>WinFreeReg.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WinFreeReg&gt;|Built</td><td>3</td><td/></row>
 	</table>

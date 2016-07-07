@@ -20,67 +20,69 @@ Imports System.Reflection
 Imports BrightIdeasSoftware
 Imports System.Drawing
 Imports System.Globalization
+Imports System.Threading
 
 Public Class FreeREG2Browser
-	Inherits System.Windows.Forms.Form
+   Inherits System.Windows.Forms.Form
 
-	Friend WithEvents miLogout As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents miLogin As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents miFreeREG As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents BrowserStatusStrip As System.Windows.Forms.StatusStrip
-	Friend WithEvents labelStatus As System.Windows.Forms.ToolStripStatusLabel
-	Friend WithEvents BrowserMenuStrip As System.Windows.Forms.MenuStrip
-	Friend WithEvents backgroundLogon As System.ComponentModel.BackgroundWorker
-	Friend WithEvents backgroundLogout As System.ComponentModel.BackgroundWorker
-	Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents miUserProfile As System.Windows.Forms.ToolStripMenuItem
-	Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents miExit As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents miLogout As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents miLogin As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents miFreeREG As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents BrowserStatusStrip As System.Windows.Forms.StatusStrip
+   Friend WithEvents labelStatus As System.Windows.Forms.ToolStripStatusLabel
+   Friend WithEvents BrowserMenuStrip As System.Windows.Forms.MenuStrip
+   Friend WithEvents backgroundLogon As System.ComponentModel.BackgroundWorker
+   Friend WithEvents backgroundLogout As System.ComponentModel.BackgroundWorker
+   Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents miUserProfile As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents miExit As System.Windows.Forms.ToolStripMenuItem
 
-	Enum ProgramState
-		Idle
-		LoggedOn
-		UserAuthenticated
-	End Enum
+   Enum ProgramState
+      Idle
+      LoggedOn
+      UserAuthenticated
+   End Enum
 
-	Private nameMachineConfig As String = RuntimeEnvironment.GetRuntimeDirectory() + "CONFIG\machine.config"
-	Private nameAppConfig As String = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile
+   Private nameMachineConfig As String = RuntimeEnvironment.GetRuntimeDirectory() + "CONFIG\machine.config"
+   Private nameAppConfig As String = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile
    Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
    Private pathRoamingAppData As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-	Private pathUserConfig As String = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath()
+   Private pathUserConfig As String = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath()
 
-	Private pgmState As ProgramState = ProgramState.Idle
-	Private authenticity_token As String = ""
-	Private utf8_token As String = ""
-	Private UserDataSet As UserDetails = New UserDetails()
-	Public TablesDataSet As FreeregTables = New FreeregTables()
-	Public LookUpsDataSet As New LookupTables()
-	Public ErrorMessagesDataSet As New ErrorMessages()
+   Private pgmState As ProgramState = ProgramState.Idle
+   Private authenticity_token As String = ""
+   Private utf8_token As String = ""
+   Private UserDataSet As UserDetails = New UserDetails()
+   Public TablesDataSet As FreeregTables = New FreeregTables()
+   Public LookUpsDataSet As New LookupTables()
+   Public ErrorMessagesDataSet As New ErrorMessages()
 
    Public ErrorMessagesFileName As String = Path.Combine(AppDataLocalFolder, "ErrorMessages.xml")
    Public SettingsFileName As String = Path.Combine(AppDataLocalFolder, "FreeRegBrowserSetttings.dat")
    Public TranscriberProfileFile As String = Path.Combine(AppDataLocalFolder, "transcriber.xml")
    Public FreeregTablesFile As String = Path.Combine(AppDataLocalFolder, "FreeREGTables.xml")
    Public LookupTablesFile As String = Path.Combine(AppDataLocalFolder, "winfreereg.tables")
+   Public ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
 
-	Friend WithEvents bnavShowData As System.Windows.Forms.BindingNavigator
-	Private components As System.ComponentModel.IContainer
-	Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
-	Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorMoveFirstItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorMovePreviousItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorSeparator As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents BindingNavigatorPositionItem As System.Windows.Forms.ToolStripTextBox
-	Friend WithEvents BindingNavigatorSeparator1 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents bsrcLocalFiles As System.Windows.Forms.BindingSource
-	Friend WithEvents dlvLocalFiles As BrightIdeasSoftware.DataListView
-	Friend WithEvents backgroundBatches As System.ComponentModel.BackgroundWorker
-	Friend WithEvents panelUploadedFiles As System.Windows.Forms.Panel
-	Friend WithEvents BatchBindingSource As System.Windows.Forms.BindingSource
+   Friend WithEvents bnavShowData As System.Windows.Forms.BindingNavigator
+   Private components As System.ComponentModel.IContainer
+   Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
+   Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorMoveFirstItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorMovePreviousItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorSeparator As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents BindingNavigatorPositionItem As System.Windows.Forms.ToolStripTextBox
+   Friend WithEvents BindingNavigatorSeparator1 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents bsrcLocalFiles As System.Windows.Forms.BindingSource
+   Friend WithEvents dlvLocalFiles As BrightIdeasSoftware.DataListView
+   Friend WithEvents backgroundBatches As System.ComponentModel.BackgroundWorker
+   Friend WithEvents panelUploadedFiles As System.Windows.Forms.Panel
+   Friend WithEvents BatchBindingSource As System.Windows.Forms.BindingSource
    Friend WithEvents BatchesDataSet As WinFreeReg.Batches
    Friend WithEvents btnViewContents As System.Windows.Forms.Button
    Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
@@ -721,9 +723,11 @@ Public Class FreeREG2Browser
       '
       'miLogin
       '
+      Me.miLogin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
       Me.miLogin.Name = "miLogin"
       Me.miLogin.Size = New System.Drawing.Size(155, 22)
       Me.miLogin.Text = "Log on ..."
+      Me.miLogin.ToolTipText = "Log on to FreeREG"
       '
       'miLogout
       '
@@ -738,9 +742,11 @@ Public Class FreeREG2Browser
       '
       'miUserProfile
       '
+      Me.miUserProfile.AutoToolTip = True
       Me.miUserProfile.Name = "miUserProfile"
       Me.miUserProfile.Size = New System.Drawing.Size(155, 22)
       Me.miUserProfile.Text = "User Profile ..."
+      Me.miUserProfile.ToolTipText = "Display your User Profile"
       '
       'miRefreshUser
       '
@@ -757,6 +763,7 @@ Public Class FreeREG2Browser
       'miNetworkTrace
       '
       Me.miNetworkTrace.CheckOnClick = True
+      Me.miNetworkTrace.Enabled = False
       Me.miNetworkTrace.Name = "miNetworkTrace"
       Me.miNetworkTrace.Size = New System.Drawing.Size(155, 22)
       Me.miNetworkTrace.Text = "Network Trace?"
@@ -847,7 +854,7 @@ Public Class FreeREG2Browser
       Me.bnavShowData.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
       Me.bnavShowData.Name = "bnavShowData"
       Me.bnavShowData.PositionItem = Me.BindingNavigatorPositionItem
-      Me.bnavShowData.Size = New System.Drawing.Size(1229, 31)
+      Me.bnavShowData.Size = New System.Drawing.Size(1229, 25)
       Me.bnavShowData.TabIndex = 3
       Me.bnavShowData.Text = "BindingNavigator1"
       Me.bnavShowData.Visible = False
@@ -858,14 +865,14 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
       Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 28)
+      Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorAddNewItem.Text = "Add new"
       Me.BindingNavigatorAddNewItem.Visible = False
       '
       'BindingNavigatorCountItem
       '
       Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
-      Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 28)
+      Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 22)
       Me.BindingNavigatorCountItem.Text = "of {0}"
       Me.BindingNavigatorCountItem.ToolTipText = "Total number of items"
       '
@@ -875,7 +882,7 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
       Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 28)
+      Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorDeleteItem.Text = "Delete"
       Me.BindingNavigatorDeleteItem.Visible = False
       '
@@ -885,7 +892,7 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
       Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 28)
+      Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorMoveFirstItem.Text = "Move first"
       '
       'BindingNavigatorMovePreviousItem
@@ -894,13 +901,13 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
       Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 28)
+      Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorMovePreviousItem.Text = "Move previous"
       '
       'BindingNavigatorSeparator
       '
       Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
-      Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 31)
+      Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
       '
       'BindingNavigatorPositionItem
       '
@@ -914,7 +921,7 @@ Public Class FreeREG2Browser
       'BindingNavigatorSeparator1
       '
       Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
-      Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 31)
+      Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
       '
       'BindingNavigatorMoveNextItem
       '
@@ -922,7 +929,7 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
       Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 28)
+      Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorMoveNextItem.Text = "Move next"
       '
       'BindingNavigatorMoveLastItem
@@ -931,13 +938,13 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
       Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 28)
+      Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorMoveLastItem.Text = "Move last"
       '
       'BindingNavigatorSeparator2
       '
       Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
-      Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 31)
+      Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 25)
       '
       'backgroundBatches
       '
@@ -1385,7 +1392,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(1229, 583)
-      Me.SplitContainer2.SplitterDistance = 535
+      Me.SplitContainer2.SplitterDistance = 533
       Me.SplitContainer2.SplitterWidth = 5
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1411,7 +1418,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(1229, 535)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(1229, 533)
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
       Me.dlvLocalFiles.UseAlternatingBackColors = True
@@ -1549,6 +1556,12 @@ Public Class FreeREG2Browser
       Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
       Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
+      'BrowserToolTip
+      '
+      Me.BrowserToolTip.BackColor = System.Drawing.Color.Wheat
+      Me.BrowserToolTip.IsBalloon = True
+      Me.BrowserToolTip.ToolTipTitle = "FreeREG/2 Browser"
+      '
       'FreeREG2Browser
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1563,7 +1576,7 @@ Public Class FreeREG2Browser
       Me.Margin = New System.Windows.Forms.Padding(4)
       Me.Name = "FreeREG2Browser"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-      Me.Text = "FreeREG/2 Browser"
+      Me.Text = "WinFreeREG - FreeREG/2 Browser"
       Me.BrowserMenuStrip.ResumeLayout(False)
       Me.BrowserMenuStrip.PerformLayout()
       Me.BrowserStatusStrip.ResumeLayout(False)
@@ -1646,6 +1659,16 @@ Public Class FreeREG2Browser
       End Try
    End Sub
 
+   Private Sub FreeREG2Browser_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+      If pgmState <> ProgramState.Idle Then
+         backgroundLogout.RunWorkerAsync()
+         While backgroundLogout.IsBusy
+            Thread.Sleep(5)
+            Application.DoEvents()
+         End While
+      End If
+   End Sub
+
    Private Sub FreeREG2Browser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       If File.Exists(SettingsFileName) Then
          Dim stream As Stream = Nothing
@@ -1656,6 +1679,8 @@ Public Class FreeREG2Browser
 
          Catch ex As Exception
             Beep()
+            MessageBox.Show(ex.Message, "Corrupted Settings File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            Application.Exit()
 
          Finally
             If stream IsNot Nothing Then stream.Close()
@@ -1663,6 +1688,8 @@ Public Class FreeREG2Browser
       Else
          MyAppSettings = New FreeReg2BrowserSettings()
       End If
+
+      Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
 
       MyAppSettings.UserId = _myUserId
       MyAppSettings.Password = _myPassword
@@ -1706,97 +1733,97 @@ Public Class FreeREG2Browser
 
 #Region "Menu - FreeREG"
 
-	Private Sub miFreeREG2_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miFreeREG.DropDownOpening
-		Select Case pgmState
-			Case ProgramState.Idle
-				miLogin.Enabled = True
-				miLogout.Enabled = False
-				miUserProfile.Enabled = File.Exists(TranscriberProfileFile)
+   Private Sub miFreeREG2_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miFreeREG.DropDownOpening
+      Select Case pgmState
+         Case ProgramState.Idle
+            miLogin.Enabled = True
+            miLogout.Enabled = False
+            miUserProfile.Enabled = File.Exists(TranscriberProfileFile)
             miRefreshUser.Enabled = False
 
-			Case ProgramState.LoggedOn
-				miLogin.Enabled = False
-				miLogout.Enabled = True
-				miUserProfile.Enabled = File.Exists(TranscriberProfileFile)
+         Case ProgramState.LoggedOn
+            miLogin.Enabled = False
+            miLogout.Enabled = True
+            miUserProfile.Enabled = File.Exists(TranscriberProfileFile)
 
-			Case ProgramState.UserAuthenticated
-				miLogin.Enabled = False
-				miLogout.Enabled = True
-				miUserProfile.Enabled = File.Exists(TranscriberProfileFile)
-				miRefreshUser.Enabled = True
+         Case ProgramState.UserAuthenticated
+            miLogin.Enabled = False
+            miLogout.Enabled = True
+            miUserProfile.Enabled = File.Exists(TranscriberProfileFile)
+            miRefreshUser.Enabled = True
       End Select
 
       miNetworkTrace.Checked = _myNetworkTrace
 
    End Sub
 
-	Private Sub miLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLogin.Click
-		Using dlg As New formLogin()
-			dlg.UrlTextBox.Text = MyAppSettings.BaseUrl
-			dlg.UsernameTextBox.Text = MyAppSettings.UserId
-			dlg.PasswordTextBox.Text = MyAppSettings.Password
-			Dim rc As DialogResult = dlg.ShowDialog()
-			If rc = Windows.Forms.DialogResult.OK Then
-				MyAppSettings.UserId = dlg.UsernameTextBox.Text
-				MyAppSettings.Password = dlg.PasswordTextBox.Text
-				backgroundLogon.RunWorkerAsync()
-			Else
-			End If
-		End Using
-	End Sub
+   Private Sub miLogin_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLogin.Click
+      Using dlg As New formLogin()
+         dlg.UrlTextBox.Text = MyAppSettings.BaseUrl
+         dlg.UsernameTextBox.Text = MyAppSettings.UserId
+         dlg.PasswordTextBox.Text = MyAppSettings.Password
+         Dim rc As DialogResult = dlg.ShowDialog()
+         If rc = Windows.Forms.DialogResult.OK Then
+            MyAppSettings.UserId = dlg.UsernameTextBox.Text
+            MyAppSettings.Password = dlg.PasswordTextBox.Text
+            backgroundLogon.RunWorkerAsync()
+         Else
+         End If
+      End Using
+   End Sub
 
-	Private Sub miLogout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLogout.Click
-		miLogout.Enabled = False
-		backgroundLogout.RunWorkerAsync()
-	End Sub
+   Private Sub miLogout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLogout.Click
+      miLogout.Enabled = False
+      backgroundLogout.RunWorkerAsync()
+   End Sub
 
-	Private Sub miUserDetails_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUserProfile.Click
-		Using dlg As New formUserDetails With {.RecordToShow = UserDataSet.User.FindByuserid(MyAppSettings.UserId), .MyOwner = Me}
-			dlg.ShowDialog()
-		End Using
-	End Sub
+   Private Sub miUserDetails_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUserProfile.Click
+      Using dlg As New formUserDetails With {.RecordToShow = UserDataSet.User.FindByuserid(MyAppSettings.UserId), .MyOwner = Me}
+         dlg.ShowDialog()
+      End Using
+   End Sub
 
-	Private Sub miRefreshUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miRefreshUser.Click
-		Refreshtranscriber()
-	End Sub
+   Private Sub miRefreshUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miRefreshUser.Click
+      RefreshTranscriber()
+   End Sub
 
    Private Sub miNetworkTrace_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miNetworkTrace.Click
       _myNetworkTrace = miNetworkTrace.Checked
    End Sub
 
-	Private Sub miExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miExit.Click
-		Me.Close()
-	End Sub
+   Private Sub miExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miExit.Click
+      Me.Close()
+   End Sub
 
 #End Region
 
 #Region "Menu - Transcripts"
 
-	Private Sub miTranscriptions_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miTranscriptions.DropDownOpening
-		Select Case pgmState
-			Case ProgramState.Idle
+   Private Sub miTranscriptions_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miTranscriptions.DropDownOpening
+      Select Case pgmState
+         Case ProgramState.Idle
             miLocalFiles.Enabled = True
-				miUploadedFiles.Enabled = False
+            miUploadedFiles.Enabled = False
 
-			Case ProgramState.LoggedOn
+         Case ProgramState.LoggedOn
             miLocalFiles.Enabled = True
-				miUploadedFiles.Enabled = False
+            miUploadedFiles.Enabled = False
 
-			Case ProgramState.UserAuthenticated
-				miLocalFiles.Enabled = True
-				miUploadedFiles.Enabled = True
-		End Select
-	End Sub
+         Case ProgramState.UserAuthenticated
+            miLocalFiles.Enabled = True
+            miUploadedFiles.Enabled = True
+      End Select
+   End Sub
 
-	Private Sub miLocalFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLocalFiles.Click
-		labelStatus.Text = ""
+   Private Sub miLocalFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLocalFiles.Click
+      labelStatus.Text = ""
 
       Dim fileQuery = From file As FileInfo In ListFiles(_myTranscriptionLibrary) _
                       Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
                       Order By file.Name _
                       Select file
 
-		Dim tableLocalFiles As DataTable = CreateDataTable(Of FileInfo)(fileQuery)
+      Dim tableLocalFiles As DataTable = CreateDataTable(Of FileInfo)(fileQuery)
       If File.Exists(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
          Dim col As DataColumn = tableLocalFiles.Columns.Add("dateUploaded", Type.GetType("System.String"))
          col.Caption = "Date Uploaded"
@@ -1811,1629 +1838,1777 @@ Public Class FreeREG2Browser
          Next
       End If
 
-		Dim cnt = dlvLocalFiles.Columns.Count
+      Dim cnt = dlvLocalFiles.Columns.Count
 
-		SplitContainer1.Visible = True
-		panelUploadedFiles.Visible = False
-		bsrcLocalFiles.DataSource = tableLocalFiles
-		bnavShowData.BindingSource = bsrcLocalFiles
+      SplitContainer1.Visible = True
+      panelUploadedFiles.Visible = False
+      bsrcLocalFiles.DataSource = tableLocalFiles
+      bnavShowData.BindingSource = bsrcLocalFiles
 
-		If cnt = 0 Then
-			Dim dlvcol As OLVColumn
+      If cnt = 0 Then
+         Dim dlvcol As OLVColumn
 
-			dlvcol = CType(dlvLocalFiles.Columns("Name"), OLVColumn)
-			dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-			dlvcol.Groupable = False
-			dlvcol.Sortable = True
-			dlvcol.IsEditable = False
+         dlvcol = CType(dlvLocalFiles.Columns("Name"), OLVColumn)
+         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+         dlvcol.Groupable = False
+         dlvcol.Sortable = True
+         dlvcol.IsEditable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("Length"), OLVColumn)
-			dlvcol.Text = "Size"
-			dlvcol.TextAlign = HorizontalAlignment.Right
-			dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-			dlvcol.AspectToStringFormat = "{0:###,##0}"
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
-			dlvcol.IsEditable = False
+         dlvcol = CType(dlvLocalFiles.Columns("Length"), OLVColumn)
+         dlvcol.Text = "Size"
+         dlvcol.TextAlign = HorizontalAlignment.Right
+         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+         dlvcol.AspectToStringFormat = "{0:###,##0}"
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
+         dlvcol.IsEditable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("DirectoryName"), OLVColumn)
-			dlvcol.IsVisible = False
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("DirectoryName"), OLVColumn)
+         dlvcol.IsVisible = False
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("Directory"), OLVColumn)
-			dlvcol.IsVisible = False
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("Directory"), OLVColumn)
+         dlvcol.IsVisible = False
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("IsReadOnly"), OLVColumn)
-			dlvcol.Text = "Read Only"
-			dlvcol.AspectGetter = New AspectGetterDelegate(AddressOf GetReadOnlyStatus)
-			dlvcol.AspectPutter = New AspectPutterDelegate(AddressOf SetReadOnlyStatus)
-			dlvcol.AspectToStringConverter = New AspectToStringConverterDelegate(AddressOf ReadOnlyState)
-			dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize)
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("IsReadOnly"), OLVColumn)
+         dlvcol.Text = "Read Only"
+         dlvcol.AspectGetter = New AspectGetterDelegate(AddressOf GetReadOnlyStatus)
+         dlvcol.AspectPutter = New AspectPutterDelegate(AddressOf SetReadOnlyStatus)
+         dlvcol.AspectToStringConverter = New AspectToStringConverterDelegate(AddressOf ReadOnlyState)
+         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize)
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("Exists"), OLVColumn)
-			dlvcol.IsVisible = False
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("Exists"), OLVColumn)
+         dlvcol.IsVisible = False
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("FullName"), OLVColumn)
-			dlvcol.IsVisible = False
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("FullName"), OLVColumn)
+         dlvcol.IsVisible = False
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("Extension"), OLVColumn)
-			dlvcol.IsVisible = False
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("Extension"), OLVColumn)
+         dlvcol.IsVisible = False
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("CreationTIme"), OLVColumn)
-			dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
-			dlvcol.IsEditable = False
+         dlvcol = CType(dlvLocalFiles.Columns("CreationTIme"), OLVColumn)
+         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
+         dlvcol.IsEditable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("CreationTImeUtc"), OLVColumn)
-			dlvcol.IsVisible = False
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("CreationTImeUtc"), OLVColumn)
+         dlvcol.IsVisible = False
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("LastAccessTime"), OLVColumn)
-			dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
-			dlvcol.IsEditable = False
+         dlvcol = CType(dlvLocalFiles.Columns("LastAccessTime"), OLVColumn)
+         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
+         dlvcol.IsEditable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("LastAccessTimeUtc"), OLVColumn)
-			dlvcol.IsVisible = False
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("LastAccessTimeUtc"), OLVColumn)
+         dlvcol.IsVisible = False
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("LastWriteTime"), OLVColumn)
-			dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
-			dlvcol.IsEditable = False
+         dlvcol = CType(dlvLocalFiles.Columns("LastWriteTime"), OLVColumn)
+         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
+         dlvcol.IsEditable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("LastWriteTimeUtc"), OLVColumn)
-			dlvcol.IsVisible = False
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("LastWriteTimeUtc"), OLVColumn)
+         dlvcol.IsVisible = False
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("Attributes"), OLVColumn)
-			dlvcol.IsVisible = False
-			dlvcol.Groupable = False
-			dlvcol.Sortable = False
+         dlvcol = CType(dlvLocalFiles.Columns("Attributes"), OLVColumn)
+         dlvcol.IsVisible = False
+         dlvcol.Groupable = False
+         dlvcol.Sortable = False
 
-			dlvcol = CType(dlvLocalFiles.Columns("dateUploaded"), OLVColumn)
-			If dlvcol IsNot Nothing Then
-				dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-				dlvcol.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetGroupKey)
-				dlvcol.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetGroupTitle)
-				dlvcol.Sortable = True
-				dlvcol.IsEditable = False
-			End If
-		End If
+         dlvcol = CType(dlvLocalFiles.Columns("dateUploaded"), OLVColumn)
+         If dlvcol IsNot Nothing Then
+            dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+            dlvcol.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetGroupKey)
+            dlvcol.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetGroupTitle)
+            dlvcol.Sortable = True
+            dlvcol.IsEditable = False
+         End If
+      End If
 
-		dlvLocalFiles.RebuildColumns()
-		SplitContainer2.Visible = True
+      dlvLocalFiles.RebuildColumns()
+      SplitContainer2.Visible = True
       If cboxProcess.Items.Count > 0 Then cboxProcess.SelectedIndex = 0
-		SplitContainer3.Visible = False
-		bnavShowData.Visible = True
+      SplitContainer3.Visible = False
+      bnavShowData.Visible = True
       Me.ClientSize = New Size(SplitContainer2.PreferredSize.Width, Me.ClientSize.Height)
       btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
-	End Sub
+   End Sub
 
-	Private Sub miUploadedFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUploadedFiles.Click
-		backgroundBatches.RunWorkerAsync()
-	End Sub
+   Private Sub miUploadedFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUploadedFiles.Click
+      backgroundBatches.RunWorkerAsync()
+   End Sub
 
-	Function ListFiles(ByVal root As String) As System.Collections.Generic.IEnumerable(Of System.IO.FileInfo)
-		' Function to retrieve a list of files. Note that this is a copy
-		' of the file information.
+   Function ListFiles(ByVal root As String) As System.Collections.Generic.IEnumerable(Of System.IO.FileInfo)
+      ' Function to retrieve a list of files. Note that this is a copy
+      ' of the file information.
       Return From file In My.Computer.FileSystem.GetFiles(root, FileIO.SearchOption.SearchTopLevelOnly, "*.*") _
              Select New System.IO.FileInfo(file)
-	End Function
+   End Function
 
-	Public Shared Function CreateDataTable(Of T)(ByVal list As IEnumerable(Of T)) As DataTable
-		Dim type As Type = GetType(T)
-		Dim properties = type.GetProperties()
+   Public Shared Function CreateDataTable(Of T)(ByVal list As IEnumerable(Of T)) As DataTable
+      Dim type As Type = GetType(T)
+      Dim properties = type.GetProperties()
 
-		Dim dataTable As New DataTable()
-		For Each info As PropertyInfo In properties
-			dataTable.Columns.Add(New DataColumn(info.Name, If(Nullable.GetUnderlyingType(info.PropertyType), info.PropertyType)))
-		Next
+      Dim dataTable As New DataTable()
+      For Each info As PropertyInfo In properties
+         dataTable.Columns.Add(New DataColumn(info.Name, If(Nullable.GetUnderlyingType(info.PropertyType), info.PropertyType)))
+      Next
 
-		For Each entity As T In list
-			Dim values As Object() = New Object(properties.Length - 1) {}
-			Dim i As Integer = 0
-			While i < properties.Length
-				values(i) = properties(i).GetValue(entity, Nothing)
-				System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
-			End While
+      For Each entity As T In list
+         Dim values As Object() = New Object(properties.Length - 1) {}
+         Dim i As Integer = 0
+         While i < properties.Length
+            values(i) = properties(i).GetValue(entity, Nothing)
+            System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
+         End While
 
-			dataTable.Rows.Add(values)
-		Next
+         dataTable.Rows.Add(values)
+      Next
 
-		Return dataTable
-	End Function
+      Return dataTable
+   End Function
 
-	Function ReadOnlyState(ByVal objState As Object)
-		Dim state As Boolean = CType(objState, Boolean)
-		Return IIf(state, "True", "False")
-	End Function
+   Function ReadOnlyState(ByVal objState As Object)
+      Dim state As Boolean = CType(objState, Boolean)
+      Return IIf(state, "True", "False")
+   End Function
 
-	Function GetReadOnlyStatus(ByVal rowObject As Object)
-		Dim drv As DataRowView = CType(rowObject, DataRowView)
-		Dim dr As DataRow = drv.Row
-		Dim fi As New FileInfo(dr("FullName"))
-		Return fi.IsReadOnly
-	End Function
+   Function GetReadOnlyStatus(ByVal rowObject As Object)
+      Dim drv As DataRowView = CType(rowObject, DataRowView)
+      Dim dr As DataRow = drv.Row
+      Dim fi As New FileInfo(dr("FullName"))
+      Return fi.IsReadOnly
+   End Function
 
-	Function SetReadOnlyStatus(ByVal rowObject As Object, ByVal newValue As Object)
-		Dim drv As DataRowView = CType(rowObject, DataRowView)
-		Dim dr As DataRow = drv.Row
-		Dim fi As New FileInfo(dr("FullName"))
-		fi.IsReadOnly = newValue
-		Return newValue
-	End Function
+   Function SetReadOnlyStatus(ByVal rowObject As Object, ByVal newValue As Object)
+      Dim drv As DataRowView = CType(rowObject, DataRowView)
+      Dim dr As DataRow = drv.Row
+      Dim fi As New FileInfo(dr("FullName"))
+      fi.IsReadOnly = newValue
+      Return newValue
+   End Function
 
-	Function SetGroupKey(ByVal rowObject As Object)
-		Dim drv As DataRowView = CType(rowObject, DataRowView)
-		Dim dr As DataRow = drv.Row
-		Dim dtLastWritten As DateTime = dr("LastWriteTime")
-		If DBNull.Value.Equals(dr("dateuploaded")) Then
-			Return -1
-		Else
-			Dim dtUploaded As DateTime = dr("dateUploaded")
-			If DateTime.Compare(dtLastWritten, dtUploaded) > 0 Then
-				Return 0
-			End If
-		End If
-		Return 1
-	End Function
+   Function SetGroupKey(ByVal rowObject As Object)
+      Dim drv As DataRowView = CType(rowObject, DataRowView)
+      Dim dr As DataRow = drv.Row
+      Dim dtLastWritten As DateTime = dr("LastWriteTime")
+      If DBNull.Value.Equals(dr("dateuploaded")) Then
+         Return -1
+      Else
+         Dim dtUploaded As DateTime = dr("dateUploaded")
+         If DateTime.Compare(dtLastWritten, dtUploaded) > 0 Then
+            Return 0
+         End If
+      End If
+      Return 1
+   End Function
 
-	Function SetGroupTitle(ByVal groupKey As Object)
-		Dim i = CInt(groupKey)
-		If i = -1 Then Return "New Files"
-		If i = 0 Then Return "Files that need replacing"
-		If i = 1 Then Return "Default"
-		Return "Error"
-	End Function
+   Function SetGroupTitle(ByVal groupKey As Object)
+      Dim i = CInt(groupKey)
+      If i = -1 Then Return "New Files"
+      If i = 0 Then Return "Files that need replacing"
+      If i = 1 Then Return "Default"
+      Return "Error"
+   End Function
 
-	Private Sub dlvLocalFiles_FormatRow(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.FormatRowEventArgs) Handles dlvLocalFiles.FormatRow
-		Dim model As DataRowView = CType(e.Model, DataRowView)
-		Dim row As DataRow = CType(model.Row, DataRow)
-		Dim dtLastWritten As DateTime = row("LastWriteTime")
-		If row.Table.Columns.Contains("dateuploaded") Then
-			If DBNull.Value.Equals(row("dateuploaded")) Then
-				e.Item.BackColor = Color.LavenderBlush
-				e.Item.ForeColor = Color.Red
-			Else
-				Dim dtUploaded As DateTime = row("dateUploaded")
-				If DateTime.Compare(dtLastWritten, dtUploaded) > 0 Then
-					e.Item.BackColor = Color.Honeydew
-					e.Item.ForeColor = Color.Green
-				End If
-			End If
-		End If
-	End Sub
+   Private Sub dlvLocalFiles_FormatRow(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.FormatRowEventArgs) Handles dlvLocalFiles.FormatRow
+      Dim model As DataRowView = CType(e.Model, DataRowView)
+      Dim row As DataRow = CType(model.Row, DataRow)
+      Dim dtLastWritten As DateTime = row("LastWriteTime")
+      If row.Table.Columns.Contains("dateuploaded") Then
+         If DBNull.Value.Equals(row("dateuploaded")) Then
+            e.Item.BackColor = Color.LavenderBlush
+            e.Item.ForeColor = Color.Red
+         Else
+            Dim dtUploaded As DateTime = row("dateUploaded")
+            If DateTime.Compare(dtLastWritten, dtUploaded) > 0 Then
+               e.Item.BackColor = Color.Honeydew
+               e.Item.ForeColor = Color.Green
+            End If
+         End If
+      End If
+   End Sub
 
-	Private Sub dlvLocalFiles_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.SelectionChanged
-		If dlvLocalFiles.HideSelection Then dlvLocalFiles.HideSelection = False
-		If dlvLocalFiles.SelectedItem IsNot Nothing Then
-			Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
-			Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
-			Dim row As DataRow = dbi.Row
-			labFilename.Text = row("Name")
-			If row.Table.Columns.Contains("dateuploaded") Then
+   Private Sub dlvLocalFiles_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.SelectionChanged
+      If dlvLocalFiles.HideSelection Then dlvLocalFiles.HideSelection = False
+      If dlvLocalFiles.SelectedItem IsNot Nothing Then
+         Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
+         Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
+         Dim row As DataRow = dbi.Row
+         labFilename.Text = row("Name")
+         If row.Table.Columns.Contains("dateuploaded") Then
             If cboxProcess.Items.Count > 0 Then cboxProcess.SelectedIndex = 0
-				If DBNull.Value.Equals(row("dateuploaded")) Then
+            If DBNull.Value.Equals(row("dateuploaded")) Then
                btnUploadFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
-					btnReplaceFile.Enabled = False
-				Else
-					btnUploadFile.Enabled = False
+               btnReplaceFile.Enabled = False
+            Else
+               btnUploadFile.Enabled = False
                btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
-				End If
-			End If
-		End If
-	End Sub
+            End If
+         End If
+      End If
+   End Sub
 
 #End Region
 
 #Region "Menu - Transcription Data"
 
-	Private Sub miTranscriptionData_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miTranscriptionData.DropDownOpening
-		Select Case pgmState
-			Case ProgramState.Idle
-				miFreeREG2Tables.Enabled = False
-				miUserTables.Enabled = False
+   Private Sub miTranscriptionData_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miTranscriptionData.DropDownOpening
+      Select Case pgmState
+         Case ProgramState.Idle
+            miFreeREG2Tables.Enabled = False
+            miUserTables.Enabled = False
 
-			Case ProgramState.LoggedOn
-				miFreeREG2Tables.Enabled = False
-				miUserTables.Enabled = False
+         Case ProgramState.LoggedOn
+            miFreeREG2Tables.Enabled = False
+            miUserTables.Enabled = False
 
-			Case ProgramState.UserAuthenticated
-				miFreeREG2Tables.Enabled = True
-				miUserTables.Enabled = True
-		End Select
-	End Sub
+         Case ProgramState.UserAuthenticated
+            miFreeREG2Tables.Enabled = True
+            miUserTables.Enabled = True
+      End Select
+   End Sub
 
-	Private Sub miUserTables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUserTables.Click
+   Private Sub miUserTables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUserTables.Click
       Using dlg As New formUserTables() With {.LookupTables = LookUpsDataSet, .LookupsFilename = LookupTablesFile}
          dlg.ShowDialog()
       End Using
-	End Sub
+   End Sub
 
-	Private Sub miFreeREG2Tables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miFreeREG2Tables.Click
+   Private Sub miFreeREG2Tables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miFreeREG2Tables.Click
       Using dlg As New formFreeregTables With {.DataSet = TablesDataSet, .TablesFileName = FreeregTablesFile, .Settings = MyAppSettings, .DefaultCounty = _myDefaultCounty}
          dlg.ShowDialog()
       End Using
-	End Sub
+   End Sub
 
 #End Region
 
 #Region "Logon Background Thread"
 
-	Private Sub backgroundLogon_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundLogon.DoWork
-		Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-		e.Result = PerformLogon(worker, e)
-	End Sub
+   Private Sub backgroundLogon_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundLogon.DoWork
+      Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
+      e.Result = PerformLogon(worker, e)
+   End Sub
 
-	Private Sub backgroundLogon_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundLogon.ProgressChanged
-		labelStatus.Text = e.UserState
-		Application.DoEvents()
-	End Sub
+   Private Sub backgroundLogon_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundLogon.ProgressChanged
+      labelStatus.Text = e.UserState
+      Application.DoEvents()
+   End Sub
 
-	Private Sub backgroundLogon_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundLogon.RunWorkerCompleted
-		If (e.Error IsNot Nothing) Then
-			Select Case e.Error.GetType.Name
-				Case "BackgroundWorkerException"
-					HandleBackgroundWorkerException(e.Error)
-				Case "XmlException"
-					HandleXmlException(e.Error)
-				Case "WebException"
-					HandleWebException(e.Error)
-				Case Else
-					HandleException(e.Error)
-			End Select
-		ElseIf e.Cancelled Then
-			' Next, handle the case where the user canceled the operation.
-			' Note that due to a race condition in the DoWork event handler, the Cancelled
-			' flag may not have been set, even though CancelAsync was called.
-			labelStatus.Text = "Cancelled"
-		Else
-			' Finally, handle the case where the operation succeeded.
-			miLogin.Enabled = False
-			miLogout.Enabled = True
-			pgmState = ProgramState.UserAuthenticated
+   Private Sub backgroundLogon_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundLogon.RunWorkerCompleted
+      If (e.Error IsNot Nothing) Then
+         Select Case e.Error.GetType.Name
+            Case "BackgroundWorkerException"
+               HandleBackgroundWorkerException(e.Error)
+            Case "XmlException"
+               HandleXmlException(e.Error)
+            Case "WebException"
+               HandleWebException(e.Error)
+            Case Else
+               HandleException(e.Error)
+         End Select
+      ElseIf e.Cancelled Then
+         ' Next, handle the case where the user canceled the operation.
+         ' Note that due to a race condition in the DoWork event handler, the Cancelled
+         ' flag may not have been set, even though CancelAsync was called.
+         labelStatus.Text = "Cancelled"
+      Else
+         ' Finally, handle the case where the operation succeeded.
+         miLogin.Enabled = False
+         miLogout.Enabled = True
+         pgmState = ProgramState.UserAuthenticated
 
-			' Kick off the Batches download thread
-			'
-		End If
-	End Sub
+         ' Kick off the Batches download thread
+         '
+      End If
+   End Sub
 
-	Function PerformLogon(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Long
-		Dim result As Long = 0
+   Function PerformLogon(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Long
+      Dim result As Long = 0
+      Dim uri = New Uri(MyAppSettings.BaseUrl)
+      MyAppSettings.Cookies = New CookieCollection()
 
-		Using webClient As New CookieAwareWebClient()
-			Try
-				worker.ReportProgress(0, "Logging on...")
-				webClient.SetTimeout(30000)
-				webClient.CookieContainer = New CookieContainer()
-				Dim uri = New Uri(MyAppSettings.BaseUrl)
-				Dim euDirective As New Cookie("cookiesDirective", "1")
-				webClient.CookieContainer.Add(uri, euDirective)
-				Dim addrRequest As String = MyAppSettings.BaseUrl + "/refinery/login"
-				Dim login_request = webClient.DownloadString(addrRequest)
-				MyAppSettings.CookieJar = webClient.CookieContainer
+      Dim euDirective As New Cookie("cookiesDirective", "1")
+      MyAppSettings.Cookies.Add(euDirective)
 
-				HtmlAgilityPack.HtmlNode.ElementsFlags.Remove("form")
-				HtmlAgilityPack.HtmlNode.ElementsFlags.Remove("input")
-				Dim doc As New HtmlAgilityPack.HtmlDocument
-				doc.LoadHtml(login_request)
-				Dim forms As HtmlAgilityPack.HtmlNodeCollection = doc.DocumentNode.SelectNodes("//form")
-				Dim formAction As String = ""
-				For Each form As HtmlAgilityPack.HtmlNode In forms
-					formAction = form.GetAttributeValue("action", "")
-					Dim nodes As HtmlAgilityPack.HtmlNodeCollection = form.SelectNodes("//input")
-					For Each node As HtmlAgilityPack.HtmlNode In nodes
-						Dim name = node.GetAttributeValue("name", "")
-						Dim type = node.GetAttributeValue("type", "")
-						Dim value = node.GetAttributeValue("value", "")
-						If name = "utf8" Then utf8_token = value
-						If name = "authenticity_token" Then authenticity_token = value
-					Next
-				Next
+      Using webClient As New CookieAwareWebClient()
+         Try
+            '  Tickle FreeREG/2 server
+            '
+            worker.ReportProgress(0, "Logging on...")
+            webClient.SetTimeout(30000)
+            webClient.GetHttpRequest(uri).KeepAlive = True
+            webClient.GetHttpRequest(uri).Expect = "302"
+            webClient.CookieContainer = New CookieContainer()
+            For Each cookie In MyAppSettings.Cookies
+               webClient.CookieContainer.Add(uri, New Cookie(cookie.name, cookie.value))
+            Next
+            Dim addrRequest As String = MyAppSettings.BaseUrl + "/cms/refinery/login"
+            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim login_request = webClient.DownloadString(addrRequest)
 
-				Dim addrPost As String = MyAppSettings.BaseUrl + formAction
-				Dim login_data = New NameValueCollection()
-				login_data.Add("utf8", utf8_token)
-				login_data.Add("authenticity_token", authenticity_token)
-				login_data.Add("refinery_user[login]", MyAppSettings.TransregName)
-				login_data.Add("refinery_user[password]", MyAppSettings.TransregPassword)
-				login_data.Add("remember_me", "0")
-				Dim login_array = webClient.UploadValues(addrPost, "POST", login_data)
-				Dim login_page = Encoding.ASCII.GetString(login_array)
-				MyAppSettings.CookieJar = webClient.CookieContainer
+            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            '  Process any cookies
+            '
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-				'	Check that we've actually logged in with the transreg userid
-				'
-				Try
-					Dim xmlDoc As New XmlDocument()
-					xmlDoc.LoadXml(login_page)
-					Dim root As XmlElement = xmlDoc.DocumentElement()
-					If root Is Nothing Then
-						' No root element
-						Throw New BackgroundWorkerException("Computer Login failed - Missing root element")
-					Else
-						If String.Compare(root.Name, "login", True) = 0 Then
-							Dim element As XmlElement = xmlDoc.SelectSingleNode("/login/result")
-							If element Is Nothing Then
-								' Missing 'result' node
-								Throw New BackgroundWorkerException("Computer Login failed - Missing result node")
-							Else
-								Select Case element.FirstChild.Value
-									Case "Logged in"
+            '  Extract details from the input form
+            '
+            HtmlNode.ElementsFlags.Remove("form")
+            HtmlNode.ElementsFlags.Remove("input")
+            Dim doc As New HtmlAgilityPack.HtmlDocument()
+            doc.LoadHtml(login_request)
 
-									Case Else
-										' XML Format error
-										Throw New BackgroundWorkerException("Computer Login - XML format error")
+            Dim formAction As String = ""
+            Dim forms As HtmlNodeCollection = doc.DocumentNode.SelectNodes("//form")
+            Dim form = forms.First()
+            If form.Id = "new_authentication_devise_user" Then
+               formAction = form.GetAttributeValue("action", "")
+               Dim nodes As HtmlNodeCollection = form.SelectNodes("//input")
+               For Each node As HtmlNode In nodes
+                  Dim name = node.GetAttributeValue("name", "")
+                  Dim type = node.GetAttributeValue("type", "")
+                  If name = "authenticity_token" Then
+                     authenticity_token = node.GetAttributeValue("value", "")
+                  ElseIf name = "utf8" Then
+                     utf8_token = node.GetAttributeValue("value", "")
+                  End If
+               Next
+            End If
 
-								End Select
-							End If
-						Else
-							Throw New BackgroundWorkerException("Computer Login - Unrecognised response")
-						End If
-					End If
+            '  Fill the login form
+            '
+            Dim addrPost As String = MyAppSettings.BaseUrl + formAction
+            Dim login_data = New NameValueCollection()
+            login_data.Add("utf8", ChrW(&H2713))
+            login_data.Add("authenticity_token", authenticity_token)
+            login_data.Add("authentication_devise_user[login]", MyAppSettings.TransregName)
+            login_data.Add("authentication_devise_user[password]", MyAppSettings.TransregPassword)
+            login_data.Add("authentication_devise_user[remember_me]", "0")
 
-				Catch ex As BackgroundWorkerException
-					Throw
+            '  Add the cookies to the request
+            '
+            For Each Cookie In MyAppSettings.Cookies
+               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+            Next
 
-				Catch ex As XmlException
-					Throw New BackgroundWorkerException("Computer Login failed", ex)
+            webClient.GetHttpRequest(uri).KeepAlive = True
+            webClient.GetHttpRequest(uri).Expect = Nothing
 
-				Catch ex As Exception
-					Throw New BackgroundWorkerException("Computer Login failed", ex)
+            '  POST the submit data
+            '
+            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim login_array = webClient.UploadValues(addrPost, "POST", login_data)
+            Dim login_page = Encoding.ASCII.GetString(login_array)
 
-				End Try
+            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            '  Process any cookies
+            '
+            hdr = webClient.ResponseHeaders("Set-Cookie")
+            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-				Dim loginResponse As New HtmlAgilityPack.HtmlDocument()
-				loginResponse.LoadHtml(login_page)
-				Dim html As HtmlAgilityPack.HtmlNode = loginResponse.DocumentNode()
-				Dim divs = html.Descendants("div").Where(Function(n) n.GetAttributeValue("class", "").Equals("flash flash_alert")).Any
-				If divs Then
-					Dim div As HtmlAgilityPack.HtmlNode = html.Descendants("div").Where(Function(n) n.GetAttributeValue("class", "").Equals("flash flash_alert")).Single()
-					If div IsNot Nothing Then
-						If Not String.IsNullOrEmpty(div.InnerText) Then
-							Throw New BackgroundWorkerException(String.Format("{0} Computer Login failed - {1}", MyAppSettings.TransregName, div.InnerText))
-						End If
-					End If
-				End If
+            '	Check that we've actually logged in with the transreg userid
+            '
+            Try
+               Dim xmlDoc As New XmlDocument()
+               xmlDoc.LoadXml(login_page)
+               Dim root As XmlElement = xmlDoc.DocumentElement()
+               If root Is Nothing Then
+                  ' No root element
+                  Throw New BackgroundWorkerException("Computer Login failed - Missing root element")
+               Else
+                  If String.Compare(root.Name, "login", True) = 0 Then
+                     Dim element As XmlElement = xmlDoc.SelectSingleNode("/login/result")
+                     If element Is Nothing Then
+                        ' Missing 'result' node
+                        Throw New BackgroundWorkerException("Computer Login failed - Missing result node")
+                     Else
+                        Select Case element.FirstChild.Value
+                           Case "Logged in"
 
-				worker.ReportProgress(50, "Authenticating transcriber...")
-				Dim addrAuth As String = MyAppSettings.BaseUrl + "/transreg_users/authenticate"
-				Dim query_data = New NameValueCollection()
-				query_data.Add("transcriberid", MyAppSettings.UserId)
-				query_data.Add("transcriberpassword", MyAppSettings.Password)
-				webClient.QueryString = query_data
-				Dim auth_page = webClient.DownloadString(addrAuth)
-				MyAppSettings.CookieJar = webClient.CookieContainer
+                           Case Else
+                              ' XML Format error
+                              Throw New BackgroundWorkerException("Computer Login - XML format error")
 
-				Try
-					Dim xmlDoc As New XmlDocument()
-					xmlDoc.LoadXml(auth_page)
-					Dim root As XmlElement = xmlDoc.DocumentElement()
-					If root Is Nothing Then
-						' No root element
-						Throw New BackgroundWorkerException("User Authentication failed - Missing root element")
-					Else
-						If String.Compare(root.Name, "authentication", True) = 0 Then
-							Dim element As XmlElement = xmlDoc.SelectSingleNode("/authentication/result")
-							If element Is Nothing Then
-								' Missing 'result' node
-								Throw New BackgroundWorkerException("User Authentication failed - Missing result node")
-							Else
-								Select Case element.FirstChild.Value
-									Case "success"
-										Dim userid As XmlElement = xmlDoc.SelectSingleNode("/authentication/userid_detail")
-										If userid Is Nothing Then
-											' Missing 'userid-detail' node
-											Throw New BackgroundWorkerException("User Authentication failed - Missing userid-detail node")
-										Else
-											Dim dt As UserDetails.UserDataTable = UserDataSet.User
-											Dim rec As UserDetails.UserRow
-											rec = dt.FindByuserid(MyAppSettings.UserId)
-											If rec Is Nothing Then
-												rec = dt.NewUserRow()
-												For Each el As XmlElement In userid.ChildNodes
-													Try
-														Dim n As String = el.Name
-														Dim z As String = el.InnerText
-														If dt.Columns.Contains(n) Then
-															Select Case dt.Columns(n).DataType.Name
-																Case "Boolean"
-																	If Not Boolean.TryParse(z, rec(n)) Then
-																		rec(n) = IIf(z = "1", True, False)
-																	End If
-																Case "UInt16"
-																	If Not UInt16.TryParse(z, rec(n)) Then
-																		Beep()
-																	End If
-																Case "DateTime"
-																	If Not String.IsNullOrEmpty(z) Then
-																		rec(n) = z
-																	End If
-																Case Else
-																	rec(n) = z
-															End Select
-														End If
+                        End Select
+                     End If
+                  Else
+                     Throw New BackgroundWorkerException("Computer Login - Unrecognised response")
+                  End If
+               End If
 
-													Catch ex As Exception
-														Throw New BackgroundWorkerException("User Authentication failed", ex)
-													End Try
-												Next
-												dt.AddUserRow(rec)
-											Else
-												For Each el As XmlElement In userid.ChildNodes
-													Try
-														Dim n As String = el.Name
-														Dim z As String = el.InnerText
-														If dt.Columns.Contains(n) Then
-															Select Case dt.Columns(n).DataType.Name
-																Case "Boolean"
-																	If Not Boolean.TryParse(z, rec(n)) Then
-																		rec(n) = IIf(z = "1", True, False)
-																	End If
-																Case "UInt16"
-																	If Not UInt16.TryParse(z, rec(n)) Then
-																		Beep()
-																	End If
-																Case "DateTime"
-																	If Not String.IsNullOrEmpty(z) Then
-																		rec(n) = z
-																	End If
-																Case Else
-																	rec(n) = z
-															End Select
-														End If
+            Catch ex As BackgroundWorkerException
+               Throw
 
-													Catch ex As Exception
-														Throw New BackgroundWorkerException("User Authentication failed", ex)
-													End Try
-												Next
-											End If
+            Catch ex As XmlException
+               Throw New BackgroundWorkerException("Computer Login failed", ex)
 
-											UserDataSet.AcceptChanges()
-											UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
+            Catch ex As Exception
+               Throw New BackgroundWorkerException("Computer Login failed", ex)
 
-										End If
+            End Try
 
-									Case "unknown_user"
-										' Unknown Transcriber Id.
-										Throw New BackgroundWorkerException("User Authentication - unknown transcriber-id")
+            '  Process any cookies
+            '
+            hdr = webClient.ResponseHeaders("Set-Cookie")
+            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-									Case "no_match"
-										' Invalid Transcriber Password
-										Throw New BackgroundWorkerException("User Authentication - invalid transcriber password")
+            Dim loginResponse As New HtmlAgilityPack.HtmlDocument()
+            loginResponse.LoadHtml(login_page)
+            Dim html As HtmlNode = loginResponse.DocumentNode()
+            Dim divs = html.Descendants("div").Where(Function(n) n.GetAttributeValue("class", "").Equals("flash flash_alert")).Any
+            If divs Then
+               Dim div As HtmlNode = html.Descendants("div").Where(Function(n) n.GetAttributeValue("class", "").Equals("flash flash_alert")).Single()
+               If div IsNot Nothing Then
+                  If Not String.IsNullOrEmpty(div.InnerText) Then
+                     Throw New BackgroundWorkerException(String.Format("{0} Computer Login failed - {1}", MyAppSettings.TransregName, div.InnerText))
+                  End If
+               End If
+            End If
 
-									Case Else
-										' XML Format error
-										Throw New BackgroundWorkerException("User Authentication - XML format error")
+            worker.ReportProgress(50, "Authenticating transcriber...")
+            Dim addrAuth As String = MyAppSettings.BaseUrl + "/transreg_users/authenticate"
+            Dim query_data = New NameValueCollection()
+            query_data.Add("transcriberid", MyAppSettings.UserId)
+            query_data.Add("transcriberpassword", MyAppSettings.Password)
+            webClient.QueryString = query_data
 
-								End Select
-							End If
+            '  Add the cookies to the request
+            '
+            For Each Cookie In MyAppSettings.Cookies
+               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+            Next
+            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim auth_page = webClient.DownloadString(addrAuth)
+            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
 
-							MyAppSettings.CookieJar = webClient.CookieContainer
-							worker.ReportProgress(100, "Logged on to FreeREG/2")
-						Else
-							Throw New BackgroundWorkerException("User Authentication - Unrecognised response")
-						End If
-					End If
+            '  Process any cookies
+            '
+            hdr = webClient.ResponseHeaders("Set-Cookie")
+            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-				Catch ex As BackgroundWorkerException
-					Throw
+            Try
+               Dim xmlDoc As New XmlDocument()
+               xmlDoc.LoadXml(auth_page)
+               Dim root As XmlElement = xmlDoc.DocumentElement()
+               If root Is Nothing Then
+                  ' No root element
+                  Throw New BackgroundWorkerException("User Authentication failed - Missing root element")
+               Else
+                  If String.Compare(root.Name, "authentication", True) = 0 Then
+                     Dim element As XmlElement = xmlDoc.SelectSingleNode("/authentication/result")
+                     If element Is Nothing Then
+                        ' Missing 'result' node
+                        Throw New BackgroundWorkerException("User Authentication failed - Missing result node")
+                     Else
+                        Select Case element.FirstChild.Value
+                           Case "success"
+                              Dim userid As XmlElement = xmlDoc.SelectSingleNode("/authentication/userid_detail")
+                              If userid Is Nothing Then
+                                 ' Missing 'userid-detail' node
+                                 Throw New BackgroundWorkerException("User Authentication failed - Missing userid-detail node")
+                              Else
+                                 Dim dt As UserDetails.UserDataTable = UserDataSet.User
+                                 Dim rec As UserDetails.UserRow
+                                 rec = dt.FindByuserid(MyAppSettings.UserId)
+                                 If rec Is Nothing Then
+                                    rec = dt.NewUserRow()
+                                    For Each el As XmlElement In userid.ChildNodes
+                                       Try
+                                          Dim n As String = el.Name
+                                          Dim z As String = el.InnerText
+                                          If dt.Columns.Contains(n) Then
+                                             Select Case dt.Columns(n).DataType.Name
+                                                Case "Boolean"
+                                                   If Not Boolean.TryParse(z, rec(n)) Then
+                                                      rec(n) = IIf(z = "1", True, False)
+                                                   End If
+                                                Case "UInt16"
+                                                   If Not UInt16.TryParse(z, rec(n)) Then
+                                                      Beep()
+                                                   End If
+                                                Case "DateTime"
+                                                   If Not String.IsNullOrEmpty(z) Then
+                                                      rec(n) = z
+                                                   End If
+                                                Case Else
+                                                   rec(n) = z
+                                             End Select
+                                          End If
 
-				Catch ex As XmlException
-					Throw New BackgroundWorkerException("User Authentication failed", ex)
+                                       Catch ex As Exception
+                                          Throw New BackgroundWorkerException("User Authentication failed", ex)
+                                       End Try
+                                    Next
+                                    dt.AddUserRow(rec)
+                                 Else
+                                    For Each el As XmlElement In userid.ChildNodes
+                                       Try
+                                          Dim n As String = el.Name
+                                          Dim z As String = el.InnerText
+                                          If dt.Columns.Contains(n) Then
+                                             Select Case dt.Columns(n).DataType.Name
+                                                Case "Boolean"
+                                                   If Not Boolean.TryParse(z, rec(n)) Then
+                                                      rec(n) = IIf(z = "1", True, False)
+                                                   End If
+                                                Case "UInt16"
+                                                   If Not UInt16.TryParse(z, rec(n)) Then
+                                                      Beep()
+                                                   End If
+                                                Case "DateTime"
+                                                   If Not String.IsNullOrEmpty(z) Then
+                                                      rec(n) = z
+                                                   End If
+                                                Case Else
+                                                   rec(n) = z
+                                             End Select
+                                          End If
 
-				Catch ex As Exception
-					Throw New BackgroundWorkerException("User Authentication failed", ex)
+                                       Catch ex As Exception
+                                          Throw New BackgroundWorkerException("User Authentication failed", ex)
+                                       End Try
+                                    Next
+                                 End If
 
-				End Try
+                                 UserDataSet.AcceptChanges()
+                                 UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
 
-			Catch ex As BackgroundWorkerException
-				Throw
+                              End If
 
-			Catch ex As WebException
-				Dim webResp As HttpWebResponse = ex.Response
-				If webResp Is Nothing Then
-					Throw New BackgroundWorkerException("Logon to FreeREG/2 failed", ex)
-				Else
-					Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
-					Select Case webResp.StatusCode
-						Case HttpStatusCode.NotFound
+                           Case "unknown_user"
+                              ' Unknown Transcriber Id.
+                              Throw New BackgroundWorkerException("User Authentication - unknown transcriber-id")
 
-						Case HttpStatusCode.NotAcceptable
+                           Case "no_match"
+                              ' Invalid Transcriber Password
+                              Throw New BackgroundWorkerException("User Authentication - invalid transcriber password")
 
-						Case HttpStatusCode.InternalServerError
+                           Case Else
+                              ' XML Format error
+                              Throw New BackgroundWorkerException("User Authentication - XML format error")
 
-						Case Else
+                        End Select
+                     End If
 
-					End Select
-					Throw New BackgroundWorkerException("Logon to FreeREG/2 failed", ex)
-				End If
+                     worker.ReportProgress(100, "Logged on to FreeREG/2")
+                  Else
+                     Throw New BackgroundWorkerException("User Authentication - Unrecognised response")
+                  End If
+               End If
 
-			Catch ex As Exception
-				Throw New BackgroundWorkerException("Logon to FreeREG/2 failed", ex)
-			End Try
-		End Using
+            Catch ex As BackgroundWorkerException
+               Throw
 
-		Return result
-	End Function
+            Catch ex As XmlException
+               Throw New BackgroundWorkerException("User Authentication failed", ex)
 
-	Private Sub ShowAuthorisationResponse(ByVal auth_page As String)
-		Dim page_data As Byte() = Encoding.UTF8.GetBytes(auth_page)
-		Dim ms As New MemoryStream(page_data)
-		Dim reader As New XmlTextReader(ms)
-		reader.WhitespaceHandling = WhitespaceHandling.None
+            Catch ex As Exception
+               Throw New BackgroundWorkerException("User Authentication failed", ex)
 
-		While reader.Read()
-			Select Case reader.NodeType
-				Case XmlNodeType.Element
-					Console.WriteLine("<{0}>", reader.Name)
-				Case XmlNodeType.Text
-					Console.WriteLine(reader.Value)
-				Case XmlNodeType.CDATA
-					Console.WriteLine("<![CDATA[{0}]]>", reader.Value)
-				Case XmlNodeType.ProcessingInstruction
-					Console.WriteLine("<?{0} {1}?>", reader.Name, reader.Value)
-				Case XmlNodeType.Comment
-					Console.WriteLine("<!--{0}-->", reader.Value)
-				Case XmlNodeType.XmlDeclaration
-					Console.WriteLine("<?xml version='1.0'?>")
-				Case XmlNodeType.Document
-				Case XmlNodeType.DocumentType
-					Console.WriteLine("<!DOCTYPE {0} [{1}]", reader.Name, reader.Value)
-				Case XmlNodeType.EntityReference
-					Console.WriteLine(reader.Name)
-				Case XmlNodeType.EndElement
-					Console.WriteLine("</{0}>", reader.Name)
-			End Select
-		End While
-	End Sub
+            End Try
 
-	Public Sub Refreshtranscriber()
-		Using webClient As New CookieAwareWebClient()
-			webClient.SetTimeout(60000)
-			webClient.CookieContainer = MyAppSettings.CookieJar
-			Dim addrAuth As String = MyAppSettings.BaseUrl + "/transreg_users/refreshuser"
-			Dim query_data = New NameValueCollection()
-			query_data.Add("transcriberid", MyAppSettings.UserId)
-			webClient.QueryString = query_data
-			Dim auth_page = webClient.DownloadString(addrAuth)
-			MyAppSettings.CookieJar = webClient.CookieContainer
+         Catch ex As BackgroundWorkerException
+            Throw
 
-			Try
-				Dim xmlDoc As New XmlDocument()
-				xmlDoc.LoadXml(auth_page)
-				Dim root As XmlElement = xmlDoc.DocumentElement()
-				If root Is Nothing Then
-					' No root element
-					Throw New BackgroundWorkerException("Refresh User failed - Missing root element")
-				Else
-					If String.Compare(root.Name, "refresh", True) = 0 Then
-						Dim element As XmlElement = xmlDoc.SelectSingleNode("/refresh/result")
-						If element Is Nothing Then
-							' Missing 'result' node
-							Throw New BackgroundWorkerException("Refresh User failed - Missing result node")
-						Else
-							Select Case element.FirstChild.Value
-								Case "success"
-									Dim userid As XmlElement = xmlDoc.SelectSingleNode("/refresh/userid_detail")
-									If userid Is Nothing Then
-										' Missing 'userid-detail' node
-										Throw New BackgroundWorkerException("Refresh User failed - Missing userid-detail node")
-									Else
-										Try
-											Dim dt As UserDetails.UserDataTable = UserDataSet.User
-											Dim rec As UserDetails.UserRow
-											rec = dt.FindByuserid(MyAppSettings.UserId)
-											If rec Is Nothing Then
-												rec = dt.NewUserRow()
-												For Each el As XmlElement In userid.ChildNodes
-													Try
-														Dim n As String = el.Name
-														Dim z As String = el.InnerText
-														If dt.Columns.Contains(n) Then
-															Select Case dt.Columns(n).DataType.Name
-																Case "Boolean"
-																	If Not Boolean.TryParse(z, rec(n)) Then
-																		rec(n) = IIf(z = "1", True, False)
-																	End If
-																Case "UInt16"
-																	If Not UInt16.TryParse(z, rec(n)) Then
-																		Beep()
-																	End If
-																Case "DateTime"
-																	If Not String.IsNullOrEmpty(z) Then
-																		rec(n) = z
-																	End If
-																Case Else
-																	rec(n) = z
-															End Select
-														End If
+         Catch ex As WebException
+            Dim webResp As HttpWebResponse = ex.Response
+            If webResp Is Nothing Then
+               Throw New BackgroundWorkerException("Logon to FreeREG/2 failed", ex)
+            Else
+               Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
+               Select Case webResp.StatusCode
+                  Case HttpStatusCode.NotFound
 
-													Catch ex As Exception
-														Throw New BackgroundWorkerException("Refresh User failed", ex)
-													End Try
-												Next
-												dt.AddUserRow(rec)
-											Else
-												For Each el As XmlElement In userid.ChildNodes
-													Try
-														Dim n As String = el.Name
-														Dim z As String = el.InnerText
-														If dt.Columns.Contains(n) Then
-															Select Case dt.Columns(n).DataType.Name
-																Case "Boolean"
-																	If Not Boolean.TryParse(z, rec(n)) Then
-																		rec(n) = IIf(z = "1", True, False)
-																	End If
-																Case "UInt16"
-																	If Not UInt16.TryParse(z, rec(n)) Then
-																		Beep()
-																	End If
-																Case "DateTime"
-																	If Not String.IsNullOrEmpty(z) Then
-																		rec(n) = z
-																	End If
-																Case Else
-																	rec(n) = z
-															End Select
-														End If
+                  Case HttpStatusCode.NotAcceptable
 
-													Catch ex As Exception
-														Throw New BackgroundWorkerException("Refresh User failed", ex)
-													End Try
-												Next
-											End If
+                  Case HttpStatusCode.InternalServerError
 
-											UserDataSet.AcceptChanges()
-											UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
+                  Case Else
 
-										Catch ex As Exception
-											Throw New BackgroundWorkerException("Refresh User failed", ex)
-										End Try
-									End If
+               End Select
+               Throw New BackgroundWorkerException("Logon to FreeREG/2 failed", ex)
+            End If
 
-								Case "unknown_user"
-									' Unknown Transcriber Id.
-									Throw New BackgroundWorkerException("Refresh User - unknown transcriber-id")
+         Catch ex As Exception
+            Throw New BackgroundWorkerException("Logon to FreeREG/2 failed", ex)
+         End Try
+      End Using
 
-								Case "no_match"
-									' Invalid Transcriber Password
-									Throw New BackgroundWorkerException("Refresh User - invalid transcriber password")
+      Return result
+   End Function
 
-								Case Else
-									' XML Format error
-									Throw New BackgroundWorkerException("Refresh User - XML format error")
+   Private Sub ShowAuthorisationResponse(ByVal auth_page As String)
+      Dim page_data As Byte() = Encoding.UTF8.GetBytes(auth_page)
+      Dim ms As New MemoryStream(page_data)
+      Dim reader As New XmlTextReader(ms)
+      reader.WhitespaceHandling = WhitespaceHandling.None
 
-							End Select
-						End If
+      While reader.Read()
+         Select Case reader.NodeType
+            Case XmlNodeType.Element
+               Console.WriteLine("<{0}>", reader.Name)
+            Case XmlNodeType.Text
+               Console.WriteLine(reader.Value)
+            Case XmlNodeType.CDATA
+               Console.WriteLine("<![CDATA[{0}]]>", reader.Value)
+            Case XmlNodeType.ProcessingInstruction
+               Console.WriteLine("<?{0} {1}?>", reader.Name, reader.Value)
+            Case XmlNodeType.Comment
+               Console.WriteLine("<!--{0}-->", reader.Value)
+            Case XmlNodeType.XmlDeclaration
+               Console.WriteLine("<?xml version='1.0'?>")
+            Case XmlNodeType.Document
+            Case XmlNodeType.DocumentType
+               Console.WriteLine("<!DOCTYPE {0} [{1}]", reader.Name, reader.Value)
+            Case XmlNodeType.EntityReference
+               Console.WriteLine(reader.Name)
+            Case XmlNodeType.EndElement
+               Console.WriteLine("</{0}>", reader.Name)
+         End Select
+      End While
+   End Sub
 
-					Else
-						Throw New BackgroundWorkerException("Refresh User - Unrecognised response")
-					End If
-				End If
+   Public Sub RefreshTranscriber()
+      Dim uri = New Uri(MyAppSettings.BaseUrl)
 
-			Catch ex As BackgroundWorkerException
-				Throw
+      Using webClient As New CookieAwareWebClient()
+         webClient.SetTimeout(60000)
+         webClient.CookieContainer = New CookieContainer()
+         Dim addrAuth As String = MyAppSettings.BaseUrl + "/transreg_users/refreshuser"
+         Dim query_data = New NameValueCollection()
+         query_data.Add("transcriberid", MyAppSettings.UserId)
+         webClient.QueryString = query_data
 
-			Catch ex As XmlException
-				Throw New BackgroundWorkerException("Refresh User failed", ex)
+         '  Add the cookies to the request
+         '
+         For Each Cookie In MyAppSettings.Cookies
+            webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+         Next
+         Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+         Dim auth_page = webClient.DownloadString(addrAuth)
 
-			Catch ex As Exception
-				Throw New BackgroundWorkerException("Refresh User failed", ex)
+         Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+         '  Process any cookies
+         '
+         Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+         MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-			End Try
+         Try
+            Dim xmlDoc As New XmlDocument()
+            xmlDoc.LoadXml(auth_page)
+            Dim root As XmlElement = xmlDoc.DocumentElement()
+            If root Is Nothing Then
+               ' No root element
+               Throw New BackgroundWorkerException("Refresh User failed - Missing root element")
+            Else
+               If String.Compare(root.Name, "refresh", True) = 0 Then
+                  Dim element As XmlElement = xmlDoc.SelectSingleNode("/refresh/result")
+                  If element Is Nothing Then
+                     ' Missing 'result' node
+                     Throw New BackgroundWorkerException("Refresh User failed - Missing result node")
+                  Else
+                     Select Case element.FirstChild.Value
+                        Case "success"
+                           Dim userid As XmlElement = xmlDoc.SelectSingleNode("/refresh/userid_detail")
+                           If userid Is Nothing Then
+                              ' Missing 'userid-detail' node
+                              Throw New BackgroundWorkerException("Refresh User failed - Missing userid-detail node")
+                           Else
+                              Try
+                                 Dim dt As UserDetails.UserDataTable = UserDataSet.User
+                                 Dim rec As UserDetails.UserRow
+                                 rec = dt.FindByuserid(MyAppSettings.UserId)
+                                 If rec Is Nothing Then
+                                    rec = dt.NewUserRow()
+                                    For Each el As XmlElement In userid.ChildNodes
+                                       Try
+                                          Dim n As String = el.Name
+                                          Dim z As String = el.InnerText
+                                          If dt.Columns.Contains(n) Then
+                                             Select Case dt.Columns(n).DataType.Name
+                                                Case "Boolean"
+                                                   If Not Boolean.TryParse(z, rec(n)) Then
+                                                      rec(n) = IIf(z = "1", True, False)
+                                                   End If
+                                                Case "UInt16"
+                                                   If Not UInt16.TryParse(z, rec(n)) Then
+                                                      Beep()
+                                                   End If
+                                                Case "DateTime"
+                                                   If Not String.IsNullOrEmpty(z) Then
+                                                      rec(n) = z
+                                                   End If
+                                                Case Else
+                                                   rec(n) = z
+                                             End Select
+                                          End If
 
-		End Using
-	End Sub
+                                       Catch ex As Exception
+                                          Throw New BackgroundWorkerException("Refresh User failed", ex)
+                                       End Try
+                                    Next
+                                    dt.AddUserRow(rec)
+                                 Else
+                                    For Each el As XmlElement In userid.ChildNodes
+                                       Try
+                                          Dim n As String = el.Name
+                                          Dim z As String = el.InnerText
+                                          If dt.Columns.Contains(n) Then
+                                             Select Case dt.Columns(n).DataType.Name
+                                                Case "Boolean"
+                                                   If Not Boolean.TryParse(z, rec(n)) Then
+                                                      rec(n) = IIf(z = "1", True, False)
+                                                   End If
+                                                Case "UInt16"
+                                                   If Not UInt16.TryParse(z, rec(n)) Then
+                                                      Beep()
+                                                   End If
+                                                Case "DateTime"
+                                                   If Not String.IsNullOrEmpty(z) Then
+                                                      rec(n) = z
+                                                   End If
+                                                Case Else
+                                                   rec(n) = z
+                                             End Select
+                                          End If
+
+                                       Catch ex As Exception
+                                          Throw New BackgroundWorkerException("Refresh User failed", ex)
+                                       End Try
+                                    Next
+                                 End If
+
+                                 UserDataSet.AcceptChanges()
+                                 UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
+
+                              Catch ex As Exception
+                                 Throw New BackgroundWorkerException("Refresh User failed", ex)
+                              End Try
+                           End If
+
+                        Case "unknown_user"
+                           ' Unknown Transcriber Id.
+                           Throw New BackgroundWorkerException("Refresh User - unknown transcriber-id")
+
+                        Case "no_match"
+                           ' Invalid Transcriber Password
+                           Throw New BackgroundWorkerException("Refresh User - invalid transcriber password")
+
+                        Case Else
+                           ' XML Format error
+                           Throw New BackgroundWorkerException("Refresh User - XML format error")
+
+                     End Select
+                  End If
+
+               Else
+                  Throw New BackgroundWorkerException("Refresh User - Unrecognised response")
+               End If
+            End If
+
+         Catch ex As BackgroundWorkerException
+            Throw
+
+         Catch ex As XmlException
+            Throw New BackgroundWorkerException("Refresh User failed", ex)
+
+         Catch ex As Exception
+            Throw New BackgroundWorkerException("Refresh User failed", ex)
+
+         End Try
+
+      End Using
+   End Sub
 
 #End Region
 
 #Region "Logout Background Thread"
 
-	Private Sub backgroundLogout_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundLogout.DoWork
-		Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-		e.Result = PerformLogout(worker, e)
-	End Sub
+   Private Sub backgroundLogout_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundLogout.DoWork
+      Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
+      e.Result = PerformLogout(worker, e)
+   End Sub
 
-	Private Sub backgroundLogout_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundLogout.ProgressChanged
-		labelStatus.Text = e.UserState
-		Application.DoEvents()
-	End Sub
+   Private Sub backgroundLogout_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundLogout.ProgressChanged
+      labelStatus.Text = e.UserState
+      Application.DoEvents()
+   End Sub
 
-	Private Sub backgroundLogout_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundLogout.RunWorkerCompleted
-		If (e.Error IsNot Nothing) Then
-			Select Case e.Error.GetType.Name
-				Case "BackgroundWorkerException"
-					HandleBackgroundWorkerException(e.Error)
-				Case "XmlException"
-					HandleXmlException(e.Error)
-				Case "WebException"
-					HandleWebException(e.Error)
-				Case Else
-					HandleException(e.Error)
-			End Select
-		ElseIf e.Cancelled Then
-			' Next, handle the case where the user canceled the operation.
-			' Note that due to a race condition in the DoWork event handler, the Cancelled
-			' flag may not have been set, even though CancelAsync was called.
-			labelStatus.Text = "Cancelled"
-		Else
-			' Finally, handle the case where the operation succeeded.
-			miLogin.Enabled = True
-			miLogout.Enabled = False
-			labelStatus.Text = "Logged out"
-			pgmState = ProgramState.Idle
-			SplitContainer1.Visible = False
-			SplitContainer2.Visible = False
-			panelUploadedFiles.Visible = False
-		End If
-	End Sub
+   Private Sub backgroundLogout_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundLogout.RunWorkerCompleted
+      If (e.Error IsNot Nothing) Then
+         Select Case e.Error.GetType.Name
+            Case "BackgroundWorkerException"
+               HandleBackgroundWorkerException(e.Error)
+            Case "XmlException"
+               HandleXmlException(e.Error)
+            Case "WebException"
+               HandleWebException(e.Error)
+            Case Else
+               HandleException(e.Error)
+         End Select
+      ElseIf e.Cancelled Then
+         ' Next, handle the case where the user canceled the operation.
+         ' Note that due to a race condition in the DoWork event handler, the Cancelled
+         ' flag may not have been set, even though CancelAsync was called.
+         labelStatus.Text = "Cancelled"
+      Else
+         ' Finally, handle the case where the operation succeeded.
+         miLogin.Enabled = True
+         miLogout.Enabled = False
+         labelStatus.Text = "Logged out"
+         pgmState = ProgramState.Idle
+         SplitContainer1.Visible = False
+         SplitContainer2.Visible = False
+         panelUploadedFiles.Visible = False
+      End If
+   End Sub
 
-	Function PerformLogout(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Long
-		Dim result As Long = 0
+   Function PerformLogout(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Long
+      Dim result As Long = 0
+      Dim uri = New Uri(MyAppSettings.BaseUrl)
 
-		Using webClient As New CookieAwareWebClient()
-			Try
-				webClient.SetTimeout(30000)
-				webClient.CookieContainer = MyAppSettings.CookieJar
-				Dim addrRequest As String = MyAppSettings.BaseUrl + "/refinery/logout"
-				Dim logout_response = webClient.DownloadString(addrRequest)
+      Using webClient As New CookieAwareWebClient()
+         Try
+            worker.ReportProgress(0, "Logging out...")
+            webClient.SetTimeout(30000)
+            webClient.CookieContainer = New CookieContainer()
+            Dim addrRequest As String = MyAppSettings.BaseUrl + "/cms/refinery/logout"
 
-			Catch ex As WebException
-				Dim webResp As HttpWebResponse = ex.Response
-				If webResp Is Nothing Then
-					MessageBox.Show(ex.InnerException.Message, ex.Message)
-					Throw New BackgroundWorkerException("Logout to FreeREG/2 failed", ex)
-				Else
-					Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
-					Select Case webResp.StatusCode
-						Case HttpStatusCode.NotFound
+            '  Add the cookies to the request
+            '
+            For Each Cookie In MyAppSettings.Cookies
+               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+            Next
+            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim logout_response = webClient.DownloadString(addrRequest)
 
-						Case HttpStatusCode.NotAcceptable
+            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            '  Process any cookies
+            '
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-						Case HttpStatusCode.InternalServerError
+         Catch ex As WebException
+            Dim webResp As HttpWebResponse = ex.Response
+            If webResp Is Nothing Then
+               MessageBox.Show(ex.InnerException.Message, ex.Message)
+               Throw New BackgroundWorkerException("Logout to FreeREG/2 failed", ex)
+            Else
+               Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
+               Select Case webResp.StatusCode
+                  Case HttpStatusCode.NotFound
 
-						Case Else
+                  Case HttpStatusCode.NotAcceptable
 
-					End Select
-					Throw New BackgroundWorkerException("Logout to FreeREG/2 failed", ex)
-				End If
+                  Case HttpStatusCode.InternalServerError
 
-			Catch ex As Exception
-				Throw New BackgroundWorkerException("Logout to FreeREG/2 failed", ex)
-			End Try
-		End Using
+                  Case Else
 
-		Return result
-	End Function
+               End Select
+               Throw New BackgroundWorkerException("Logout to FreeREG/2 failed", ex)
+            End If
+
+         Catch ex As Exception
+            Throw New BackgroundWorkerException("Logout to FreeREG/2 failed", ex)
+         End Try
+      End Using
+
+      Return result
+   End Function
 
 #End Region
 
 #Region "Upload File Thread"
 
-	Private Sub backgroundUpload_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundUpload.DoWork
-		Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-		e.Result = PerformUpload(e.Argument, worker, e)
-	End Sub
+   Private Sub backgroundUpload_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundUpload.DoWork
+      Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
+      e.Result = PerformUpload(e.Argument, worker, e)
+   End Sub
 
-	Private Sub backgroundUpload_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundUpload.ProgressChanged
-		Application.DoEvents()
-	End Sub
+   Private Sub backgroundUpload_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundUpload.ProgressChanged
+      Application.DoEvents()
+   End Sub
 
-	Private Sub backgroundUpload_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundUpload.RunWorkerCompleted
-		If (e.Error IsNot Nothing) Then
-			Select Case e.Error.GetType.Name
-				Case "BackgroundWorkerException"
-					HandleUploadBackgroundWorkerException(e.Error)
-				Case "XmlException"
-					HandleXmlException(e.Error)
-				Case "WebException"
-					HandleWebException(e.Error)
-				Case Else
-					HandleException(e.Error)
-			End Select
-		ElseIf e.Cancelled Then
-			' Next, handle the case where the user canceled the operation.
-			' Note that due to a race condition in the DoWork event handler, the Cancelled
-			' flag may not have been set, even though CancelAsync was called.
-			labelStatus.Text = "Cancelled"
-		Else
-			' Finally, handle the case where the operation succeeded.
-			Dim res As BackgroundResult = CType(e.Result, BackgroundResult)
-			Try
-				Dim xmlDoc As New XmlDocument()
-				xmlDoc.LoadXml(res.Result)
-				Dim root As XmlElement = xmlDoc.DocumentElement()
-				If root Is Nothing Then
-					' No root element
-					Throw New BackgroundWorkerException("File Upload failed - Missing root element")
-				Else
-					If String.Compare(root.Name, "upload", True) = 0 Then
-						Dim element As XmlElement = xmlDoc.SelectSingleNode("/upload/result")
-						If element Is Nothing Then
-							' Missing 'result' node
-							Throw New BackgroundWorkerException("File Upload failed - Missing result node")
-						Else
-							Select Case element.FirstChild.Value
-								Case "success"
-									Dim message As XmlElement = xmlDoc.SelectSingleNode("/upload/message")
-									MessageBox.Show(message.FirstChild.Value, "File Upload", MessageBoxButtons.OK, MessageBoxIcon.Information)
+   Private Sub backgroundUpload_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundUpload.RunWorkerCompleted
+      If (e.Error IsNot Nothing) Then
+         Select Case e.Error.GetType.Name
+            Case "BackgroundWorkerException"
+               HandleUploadBackgroundWorkerException(e.Error)
+            Case "XmlException"
+               HandleXmlException(e.Error)
+            Case "WebException"
+               HandleWebException(e.Error)
+            Case Else
+               HandleException(e.Error)
+         End Select
+      ElseIf e.Cancelled Then
+         ' Next, handle the case where the user canceled the operation.
+         ' Note that due to a race condition in the DoWork event handler, the Cancelled
+         ' flag may not have been set, even though CancelAsync was called.
+         labelStatus.Text = "Cancelled"
+      Else
+         ' Finally, handle the case where the operation succeeded.
+         Dim res As BackgroundResult = CType(e.Result, BackgroundResult)
+         Try
+            Dim xmlDoc As New XmlDocument()
+            xmlDoc.LoadXml(res.Result)
+            Dim root As XmlElement = xmlDoc.DocumentElement()
+            If root Is Nothing Then
+               ' No root element
+               Throw New BackgroundWorkerException("File Upload failed - Missing root element")
+            Else
+               If String.Compare(root.Name, "upload", True) = 0 Then
+                  Dim element As XmlElement = xmlDoc.SelectSingleNode("/upload/result")
+                  If element Is Nothing Then
+                     ' Missing 'result' node
+                     Throw New BackgroundWorkerException("File Upload failed - Missing result node")
+                  Else
+                     Select Case element.FirstChild.Value
+                        Case "success"
+                           Dim message As XmlElement = xmlDoc.SelectSingleNode("/upload/message")
+                           MessageBox.Show(message.FirstChild.Value, "File Upload", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-								Case "failure"
-									Dim message As XmlElement = xmlDoc.SelectSingleNode("/upload/message")
-									MessageBox.Show(message.FirstChild.Value, "File Upload", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Case "failure"
+                           Dim message As XmlElement = xmlDoc.SelectSingleNode("/upload/message")
+                           MessageBox.Show(message.FirstChild.Value, "File Upload", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-								Case Else
-									' XML Format error
-									Throw New BackgroundWorkerException("File Upload failed - XML format error")
+                        Case Else
+                           ' XML Format error
+                           Throw New BackgroundWorkerException("File Upload failed - XML format error")
 
-							End Select
-						End If
-					Else
-						Throw New BackgroundWorkerException("File Upload failed - Unrecognised response")
-					End If
-				End If
+                     End Select
+                  End If
+               Else
+                  Throw New BackgroundWorkerException("File Upload failed - Unrecognised response")
+               End If
+            End If
 
-			Catch ex As BackgroundWorkerException
-				Throw
+         Catch ex As BackgroundWorkerException
+            Throw
 
-			Catch ex As XmlException
-				Throw New BackgroundWorkerException("File Upload failed", ex)
+         Catch ex As XmlException
+            Throw New BackgroundWorkerException("File Upload failed", ex)
 
-			Catch ex As Exception
-				Throw New BackgroundWorkerException("File Upload failed", ex)
+         Catch ex As Exception
+            Throw New BackgroundWorkerException("File Upload failed", ex)
 
-			End Try
+         End Try
 
-			' File won't be available immediately as part of the Uploaded Files dataset
-			' Therefore needs to be marked as Uploaded but not yet processed
-			'
-		End If
-	End Sub
+         ' File won't be available immediately as part of the Uploaded Files dataset
+         ' Therefore needs to be marked as Uploaded but not yet processed
+         '
+      End If
+   End Sub
 
-	Function PerformUpload(ByVal fullname As String, ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Object
-		Dim result As Object
-		Dim fname As String = Path.GetFileName(fullname)
+   Function PerformUpload(ByVal fullname As String, ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Object
+      Dim result As Object
+      Dim fname As String = Path.GetFileName(fullname)
 
-		Try
-			Dim query_data = New NameValueCollection()
-			query_data.Add("transcriberid", MyAppSettings.UserId)
-			query_data.Add("transcriberpassword", MyAppSettings.Password)
+      Try
+         Dim query_data = New NameValueCollection()
+         query_data.Add("transcriberid", MyAppSettings.UserId)
+         query_data.Add("transcriberpassword", MyAppSettings.Password)
 
-			result = HttpUploadFile(MyAppSettings.BaseUrl + "/transreg_csvfiles/upload", fullname, "csvfile[csvfile]", "application/octet-stream", query_data)
+         result = HttpUploadFile(MyAppSettings.BaseUrl + "/transreg_csvfiles/upload", fullname, "csvfile[csvfile]", "application/octet-stream", query_data)
 
-		Catch ex As WebException
-			Throw New BackgroundWorkerException(String.Format("Upload of {0} to FreeREG/2 failed", fname), ex)
+      Catch ex As WebException
+         Throw New BackgroundWorkerException(String.Format("Upload of {0} to FreeREG/2 failed", fname), ex)
 
-		Catch ex As Exception
-			Throw New BackgroundWorkerException(String.Format("Upload of {0} to FreeREG/2 failed", fname), ex)
+      Catch ex As Exception
+         Throw New BackgroundWorkerException(String.Format("Upload of {0} to FreeREG/2 failed", fname), ex)
 
-		End Try
+      End Try
 
-		Return result
-	End Function
+      Return result
+   End Function
 
-	Public Function HttpUploadFile(ByVal url As String, ByVal file As String, ByVal paramName As String, ByVal contentType As String, ByVal nvc As NameValueCollection) As Object
-		Dim boundary As String = "---------------------------" + DateTime.Now.Ticks.ToString("x")
-		Dim boundarybytes As Byte() = System.Text.Encoding.ASCII.GetBytes(vbCrLf + "--" + boundary + vbCrLf)
+   Public Function HttpUploadFile(ByVal url As String, ByVal file As String, ByVal paramName As String, ByVal contentType As String, ByVal nvc As NameValueCollection) As Object
+      Dim uri = New Uri(MyAppSettings.BaseUrl)
+      Dim boundary As String = "---------------------------" + DateTime.Now.Ticks.ToString("x")
+      Dim boundarybytes As Byte() = System.Text.Encoding.ASCII.GetBytes(vbCrLf + "--" + boundary + vbCrLf)
 
-		Dim wr As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
-		wr.ContentType = "multipart/form-data; boundary=" + boundary
-		wr.Method = "POST"
-		wr.KeepAlive = True
-		wr.Credentials = System.Net.CredentialCache.DefaultCredentials
-		wr.CookieContainer = MyAppSettings.CookieJar
+      Dim wr As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
+      wr.ContentType = "multipart/form-data; boundary=" + boundary
+      wr.Method = "POST"
+      wr.KeepAlive = True
+      wr.Credentials = System.Net.CredentialCache.DefaultCredentials
+      wr.CookieContainer = New CookieContainer()
 
-		Dim rs As Stream = wr.GetRequestStream()
+      '  Add the cookies to the request
+      '
+      For Each Cookie In MyAppSettings.Cookies
+         wr.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+      Next
+      Console.WriteLine("Out - {0}", wr.CookieContainer.GetCookieHeader(uri))
 
-		Dim formdataTemplate As String = "Content-Disposition: form-data; name=""{0}""" + vbCrLf + vbCrLf + "{1}"
-		For Each key As String In nvc.Keys
-			rs.Write(boundarybytes, 0, boundarybytes.Length)
-			Dim formitem As String = String.Format(formdataTemplate, key, nvc(key))
-			Dim formitembytes As Byte() = System.Text.Encoding.UTF8.GetBytes(formitem)
-			rs.Write(formitembytes, 0, formitembytes.Length)
-		Next
-		rs.Write(boundarybytes, 0, boundarybytes.Length)
+      Dim rs As Stream = wr.GetRequestStream()
 
-		Dim headerTemplate As String = "Content-Disposition: form-data; name=""{0}""; filename=""{1}""" + vbCrLf + "Content-Type: {2}" + vbCrLf + vbCrLf
-		Dim header As String = String.Format(headerTemplate, paramName, file, contentType)
-		Dim headerbytes As Byte() = System.Text.Encoding.UTF8.GetBytes(header)
-		rs.Write(headerbytes, 0, headerbytes.Length)
+      Dim formdataTemplate As String = "Content-Disposition: form-data; name=""{0}""" + vbCrLf + vbCrLf + "{1}"
+      For Each key As String In nvc.Keys
+         rs.Write(boundarybytes, 0, boundarybytes.Length)
+         Dim formitem As String = String.Format(formdataTemplate, key, nvc(key))
+         Dim formitembytes As Byte() = System.Text.Encoding.UTF8.GetBytes(formitem)
+         rs.Write(formitembytes, 0, formitembytes.Length)
+      Next
+      rs.Write(boundarybytes, 0, boundarybytes.Length)
 
-		Dim fileStream As FileStream = New FileStream(file, FileMode.Open, FileAccess.Read)
-		Dim buffer(4096) As Byte
-		Dim bytesRead As Integer = fileStream.Read(buffer, 0, buffer.Length)
-		While (bytesRead <> 0)
-			rs.Write(buffer, 0, bytesRead)
-			bytesRead = fileStream.Read(buffer, 0, buffer.Length)
-		End While
-		fileStream.Close()
+      Dim headerTemplate As String = "Content-Disposition: form-data; name=""{0}""; filename=""{1}""" + vbCrLf + "Content-Type: {2}" + vbCrLf + vbCrLf
+      Dim header As String = String.Format(headerTemplate, paramName, file, contentType)
+      Dim headerbytes As Byte() = System.Text.Encoding.UTF8.GetBytes(header)
+      rs.Write(headerbytes, 0, headerbytes.Length)
 
-		Dim trailer As Byte() = System.Text.Encoding.ASCII.GetBytes(vbCrLf + "--" + boundary + "--" + vbCrLf)
-		rs.Write(trailer, 0, trailer.Length)
-		rs.Close()
+      Dim fileStream As FileStream = New FileStream(file, FileMode.Open, FileAccess.Read)
+      Dim buffer(4096) As Byte
+      Dim bytesRead As Integer = fileStream.Read(buffer, 0, buffer.Length)
+      While (bytesRead <> 0)
+         rs.Write(buffer, 0, bytesRead)
+         bytesRead = fileStream.Read(buffer, 0, buffer.Length)
+      End While
+      fileStream.Close()
 
-		Dim wresp As WebResponse = Nothing
-		Try
-			wresp = wr.GetResponse()
-			Dim stream2 As Stream = wresp.GetResponseStream()
-			Dim reader2 As StreamReader = New StreamReader(stream2)
-			Dim result As String = reader2.ReadToEnd()
+      Dim trailer As Byte() = System.Text.Encoding.ASCII.GetBytes(vbCrLf + "--" + boundary + "--" + vbCrLf)
+      rs.Write(trailer, 0, trailer.Length)
+      rs.Close()
 
-			Dim res As New BackgroundResult()
-			res.Parameter = file
-			res.Result = result
-			Return res
+      Dim wresp As WebResponse = Nothing
+      Try
+         wresp = wr.GetResponse()
+         Dim stream2 As Stream = wresp.GetResponseStream()
+         Dim reader2 As StreamReader = New StreamReader(stream2)
+         Dim result As String = reader2.ReadToEnd()
 
-		Catch ex As Exception
-			If wresp IsNot Nothing Then
-				wresp.Close()
-				wresp = Nothing
-			End If
-			Throw
+         'Console.WriteLine(" In - {0}", wresp.CookieContainer.GetCookieHeader(uri))
+         ''  Process any cookies
+         ''
+         'Dim hdr = wr.ResponseHeaders("Set-Cookie")
+         'MyAppSettings.Cookies.Add(wr.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-		Finally
-			wr = Nothing
-		End Try
+         Dim res As New BackgroundResult()
+         res.Parameter = file
+         res.Result = result
+         Return res
 
-	End Function
+      Catch ex As Exception
+         If wresp IsNot Nothing Then
+            wresp.Close()
+            wresp = Nothing
+         End If
+         Throw
+
+      Finally
+         wr = Nothing
+      End Try
+
+   End Function
 
 #End Region
 
 #Region "Replace File Thread"
 
-	Private Sub backgroundReplace_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundReplace.DoWork
-		Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-		e.Result = ReplaceFile(e.Argument, worker, e)
-	End Sub
+   Private Sub backgroundReplace_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundReplace.DoWork
+      Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
+      e.Result = ReplaceFile(e.Argument, worker, e)
+   End Sub
 
-	Private Sub backgroundReplace_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundReplace.ProgressChanged
-		labelStatus.Text = e.UserState
-		Application.DoEvents()
-	End Sub
+   Private Sub backgroundReplace_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundReplace.ProgressChanged
+      labelStatus.Text = e.UserState
+      Application.DoEvents()
+   End Sub
 
-	Private Sub backgroundReplace_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundReplace.RunWorkerCompleted
-		If (e.Error IsNot Nothing) Then
-			Select Case e.Error.GetType.Name
-				Case "BackgroundWorkerException"
-					HandleBackgroundWorkerException(e.Error)
-				Case "XmlException"
-					HandleXmlException(e.Error)
-				Case "WebException"
-					HandleWebException(e.Error)
-				Case Else
-					HandleException(e.Error)
-			End Select
-		ElseIf e.Cancelled Then
-			' Next, handle the case where the user canceled the operation.
-			' Note that due to a race condition in the DoWork event handler, the Cancelled
-			' flag may not have been set, even though CancelAsync was called.
-			labelStatus.Text = "Cancelled"
-		Else
-			' Finally, handle the case where the operation succeeded.
-			Dim res As BackgroundResult = CType(e.Result, BackgroundResult)
-			Try
-				Dim xmlDoc As New XmlDocument()
-				xmlDoc.LoadXml(res.Result)
-				Dim root As XmlElement = xmlDoc.DocumentElement()
-				If root Is Nothing Then
-					' No root element
-					Throw New BackgroundWorkerException("File Replace failed - Missing root element")
-				Else
-					If String.Compare(root.Name, "replace", True) = 0 Then
-						Dim element As XmlElement = xmlDoc.SelectSingleNode("/replace/result")
-						If element Is Nothing Then
-							' Missing 'result' node
-							Throw New BackgroundWorkerException("File Replace failed - Missing result node")
-						Else
-							Select Case element.FirstChild.Value
-								Case "success"
-									Dim message As XmlElement = xmlDoc.SelectSingleNode("/replace/message")
-									MessageBox.Show(message.FirstChild.Value, "File Replace", MessageBoxButtons.OK, MessageBoxIcon.Information)
+   Private Sub backgroundReplace_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundReplace.RunWorkerCompleted
+      If (e.Error IsNot Nothing) Then
+         Select Case e.Error.GetType.Name
+            Case "BackgroundWorkerException"
+               HandleBackgroundWorkerException(e.Error)
+            Case "XmlException"
+               HandleXmlException(e.Error)
+            Case "WebException"
+               HandleWebException(e.Error)
+            Case Else
+               HandleException(e.Error)
+         End Select
+      ElseIf e.Cancelled Then
+         ' Next, handle the case where the user canceled the operation.
+         ' Note that due to a race condition in the DoWork event handler, the Cancelled
+         ' flag may not have been set, even though CancelAsync was called.
+         labelStatus.Text = "Cancelled"
+      Else
+         ' Finally, handle the case where the operation succeeded.
+         Dim res As BackgroundResult = CType(e.Result, BackgroundResult)
+         Try
+            Dim xmlDoc As New XmlDocument()
+            xmlDoc.LoadXml(res.Result)
+            Dim root As XmlElement = xmlDoc.DocumentElement()
+            If root Is Nothing Then
+               ' No root element
+               Throw New BackgroundWorkerException("File Replace failed - Missing root element")
+            Else
+               If String.Compare(root.Name, "replace", True) = 0 Then
+                  Dim element As XmlElement = xmlDoc.SelectSingleNode("/replace/result")
+                  If element Is Nothing Then
+                     ' Missing 'result' node
+                     Throw New BackgroundWorkerException("File Replace failed - Missing result node")
+                  Else
+                     Select Case element.FirstChild.Value
+                        Case "success"
+                           Dim message As XmlElement = xmlDoc.SelectSingleNode("/replace/message")
+                           MessageBox.Show(message.FirstChild.Value, "File Replace", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-								Case "failure"
-									Dim message As XmlElement = xmlDoc.SelectSingleNode("/replace/message")
-									MessageBox.Show(message.FirstChild.Value, "File Replace", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Case "failure"
+                           Dim message As XmlElement = xmlDoc.SelectSingleNode("/replace/message")
+                           MessageBox.Show(message.FirstChild.Value, "File Replace", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-								Case Else
-									' XML Format error
-									Throw New BackgroundWorkerException("File Replace failed - XML format error")
+                        Case Else
+                           ' XML Format error
+                           Throw New BackgroundWorkerException("File Replace failed - XML format error")
 
-							End Select
-						End If
-					Else
-						Throw New BackgroundWorkerException("File Replace failed - Unrecognised response")
-					End If
-				End If
+                     End Select
+                  End If
+               Else
+                  Throw New BackgroundWorkerException("File Replace failed - Unrecognised response")
+               End If
+            End If
 
-			Catch ex As BackgroundWorkerException
-				Throw
+         Catch ex As BackgroundWorkerException
+            Throw
 
-			Catch ex As XmlException
-				Throw New BackgroundWorkerException("File Replace failed", ex)
+         Catch ex As XmlException
+            Throw New BackgroundWorkerException("File Replace failed", ex)
 
-			Catch ex As Exception
-				Throw New BackgroundWorkerException("File Replace failed", ex)
+         Catch ex As Exception
+            Throw New BackgroundWorkerException("File Replace failed", ex)
 
-			End Try
-		End If
-	End Sub
+         End Try
+      End If
+   End Sub
 
-	Function ReplaceFile(ByVal fullname As String, ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Object
-		Dim result As Object
-		Dim fname As String = Path.GetFileName(fullname)
+   Function ReplaceFile(ByVal fullname As String, ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Object
+      Dim result As Object
+      Dim fname As String = Path.GetFileName(fullname)
 
-		Try
-			Dim query_data = New NameValueCollection()
-			query_data.Add("transcriberid", MyAppSettings.UserId)
-			query_data.Add("transcriberpassword", MyAppSettings.Password)
+      Try
+         Dim query_data = New NameValueCollection()
+         query_data.Add("transcriberid", MyAppSettings.UserId)
+         query_data.Add("transcriberpassword", MyAppSettings.Password)
 
-			result = HttpReplaceFile(MyAppSettings.BaseUrl + "/transreg_csvfiles/replace", fullname, "csvfile[csvfile]", "application/octet-stream", query_data)
+         result = HttpReplaceFile(MyAppSettings.BaseUrl + "/transreg_csvfiles/replace", fullname, "csvfile[csvfile]", "application/octet-stream", query_data)
 
-		Catch ex As WebException
-			Throw New BackgroundWorkerException(String.Format("Replacement of {0} to FreeREG/2 failed", fname), ex)
+      Catch ex As WebException
+         Throw New BackgroundWorkerException(String.Format("Replacement of {0} to FreeREG/2 failed", fname), ex)
 
-		Catch ex As Exception
-			Throw New BackgroundWorkerException(String.Format("Replacement of {0} to FreeREG/2 failed", fname), ex)
+      Catch ex As Exception
+         Throw New BackgroundWorkerException(String.Format("Replacement of {0} to FreeREG/2 failed", fname), ex)
 
-		End Try
+      End Try
 
-		Return result
-	End Function
+      Return result
+   End Function
 
-	Public Function HttpReplaceFile(ByVal url As String, ByVal file As String, ByVal paramName As String, ByVal contentType As String, ByVal nvc As NameValueCollection) As Object
-		Dim boundary As String = "---------------------------" + DateTime.Now.Ticks.ToString("x")
-		Dim boundarybytes As Byte() = System.Text.Encoding.ASCII.GetBytes(vbCrLf + "--" + boundary + vbCrLf)
+   Public Function HttpReplaceFile(ByVal url As String, ByVal file As String, ByVal paramName As String, ByVal contentType As String, ByVal nvc As NameValueCollection) As Object
+      Dim uri = New Uri(MyAppSettings.BaseUrl)
+      Dim boundary As String = "---------------------------" + DateTime.Now.Ticks.ToString("x")
+      Dim boundarybytes As Byte() = System.Text.Encoding.ASCII.GetBytes(vbCrLf + "--" + boundary + vbCrLf)
 
-		Dim wr As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
-		wr.ContentType = "multipart/form-data; boundary=" + boundary
-		wr.Method = "POST"
-		wr.KeepAlive = True
-		wr.Credentials = System.Net.CredentialCache.DefaultCredentials
-		wr.CookieContainer = MyAppSettings.CookieJar
+      Dim wr As HttpWebRequest = CType(WebRequest.Create(url), HttpWebRequest)
+      wr.ContentType = "multipart/form-data; boundary=" + boundary
+      wr.Method = "POST"
+      wr.KeepAlive = True
+      wr.Credentials = System.Net.CredentialCache.DefaultCredentials
+      wr.CookieContainer = New CookieContainer()
+      '  Add the cookies to the request
+      '
+      For Each Cookie In MyAppSettings.Cookies
+         wr.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+      Next
+      Console.WriteLine("Out - {0}", wr.CookieContainer.GetCookieHeader(uri))
 
-		Dim rs As Stream = wr.GetRequestStream()
+      Dim rs As Stream = wr.GetRequestStream()
 
-		Dim formdataTemplate As String = "Content-Disposition: form-data; name=""{0}""" + vbCrLf + vbCrLf + "{1}"
-		For Each key As String In nvc.Keys
-			rs.Write(boundarybytes, 0, boundarybytes.Length)
-			Dim formitem As String = String.Format(formdataTemplate, key, nvc(key))
-			Dim formitembytes As Byte() = System.Text.Encoding.UTF8.GetBytes(formitem)
-			rs.Write(formitembytes, 0, formitembytes.Length)
-		Next
-		rs.Write(boundarybytes, 0, boundarybytes.Length)
+      Dim formdataTemplate As String = "Content-Disposition: form-data; name=""{0}""" + vbCrLf + vbCrLf + "{1}"
+      For Each key As String In nvc.Keys
+         rs.Write(boundarybytes, 0, boundarybytes.Length)
+         Dim formitem As String = String.Format(formdataTemplate, key, nvc(key))
+         Dim formitembytes As Byte() = System.Text.Encoding.UTF8.GetBytes(formitem)
+         rs.Write(formitembytes, 0, formitembytes.Length)
+      Next
+      rs.Write(boundarybytes, 0, boundarybytes.Length)
 
-		Dim headerTemplate As String = "Content-Disposition: form-data; name=""{0}""; filename=""{1}""" + vbCrLf + "Content-Type: {2}" + vbCrLf + vbCrLf
-		Dim header As String = String.Format(headerTemplate, paramName, file, contentType)
-		Dim headerbytes As Byte() = System.Text.Encoding.UTF8.GetBytes(header)
-		rs.Write(headerbytes, 0, headerbytes.Length)
+      Dim headerTemplate As String = "Content-Disposition: form-data; name=""{0}""; filename=""{1}""" + vbCrLf + "Content-Type: {2}" + vbCrLf + vbCrLf
+      Dim header As String = String.Format(headerTemplate, paramName, file, contentType)
+      Dim headerbytes As Byte() = System.Text.Encoding.UTF8.GetBytes(header)
+      rs.Write(headerbytes, 0, headerbytes.Length)
 
-		Dim fileStream As FileStream = New FileStream(file, FileMode.Open, FileAccess.Read)
-		Dim buffer(4096) As Byte
-		Dim bytesRead As Integer = fileStream.Read(buffer, 0, buffer.Length)
-		While (bytesRead <> 0)
-			rs.Write(buffer, 0, bytesRead)
-			bytesRead = fileStream.Read(buffer, 0, buffer.Length)
-		End While
-		fileStream.Close()
+      Dim fileStream As FileStream = New FileStream(file, FileMode.Open, FileAccess.Read)
+      Dim buffer(4096) As Byte
+      Dim bytesRead As Integer = fileStream.Read(buffer, 0, buffer.Length)
+      While (bytesRead <> 0)
+         rs.Write(buffer, 0, bytesRead)
+         bytesRead = fileStream.Read(buffer, 0, buffer.Length)
+      End While
+      fileStream.Close()
 
-		Dim trailer As Byte() = System.Text.Encoding.ASCII.GetBytes(vbCrLf + "--" + boundary + "--" + vbCrLf)
-		rs.Write(trailer, 0, trailer.Length)
-		rs.Close()
+      Dim trailer As Byte() = System.Text.Encoding.ASCII.GetBytes(vbCrLf + "--" + boundary + "--" + vbCrLf)
+      rs.Write(trailer, 0, trailer.Length)
+      rs.Close()
 
-		Dim wresp As WebResponse = Nothing
-		Try
-			wresp = wr.GetResponse()
-			Dim stream2 As Stream = wresp.GetResponseStream()
-			Dim reader2 As StreamReader = New StreamReader(stream2)
-			Dim result As String = reader2.ReadToEnd()
+      Dim wresp As WebResponse = Nothing
+      Try
+         wresp = wr.GetResponse()
+         Dim stream2 As Stream = wresp.GetResponseStream()
+         Dim reader2 As StreamReader = New StreamReader(stream2)
+         Dim result As String = reader2.ReadToEnd()
 
-			Dim res As New BackgroundResult()
-			res.Parameter = file
-			res.Result = result
-			Return res
+         Dim res As New BackgroundResult()
+         res.Parameter = file
+         res.Result = result
+         Return res
 
-		Catch ex As Exception
-			If wresp IsNot Nothing Then
-				wresp.Close()
-				wresp = Nothing
-			End If
-			Throw
+      Catch ex As Exception
+         If wresp IsNot Nothing Then
+            wresp.Close()
+            wresp = Nothing
+         End If
+         Throw
 
-		Finally
-			wr = Nothing
-		End Try
+      Finally
+         wr = Nothing
+      End Try
 
-	End Function
+   End Function
 
 #End Region
 
 #Region "Delete File Thread"
 
-	Private Sub backgroundDelete_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundDelete.DoWork
-		Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-		e.Result = PerformDeleteFile(worker, e)
-	End Sub
+   Private Sub backgroundDelete_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundDelete.DoWork
+      Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
+      e.Result = PerformDeleteFile(worker, e)
+   End Sub
 
-	Private Sub backgroundDelete_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundDelete.ProgressChanged
-		labelStatus.Text = e.UserState
-		Application.DoEvents()
-	End Sub
+   Private Sub backgroundDelete_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundDelete.ProgressChanged
+      labelStatus.Text = e.UserState
+      Application.DoEvents()
+   End Sub
 
-	Private Sub backgroundDelete_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundDelete.RunWorkerCompleted
-		If (e.Error IsNot Nothing) Then
-			Select Case e.Error.GetType.Name
-				Case "BackgroundWorkerException"
-					HandleBackgroundWorkerException(e.Error)
-				Case "XmlException"
-					HandleXmlException(e.Error)
-				Case "WebException"
-					HandleWebException(e.Error)
-				Case Else
-					HandleException(e.Error)
-			End Select
-		ElseIf e.Cancelled Then
-			' Next, handle the case where the user canceled the operation.
-			' Note that due to a race condition in the DoWork event handler, the Cancelled
-			' flag may not have been set, even though CancelAsync was called.
-			labelStatus.Text = "Cancelled"
-		Else
-			' Finally, handle the case where the operation succeeded.
-			Dim res As BackgroundResult = CType(e.Result, BackgroundResult)
-			Try
-				Dim xmlDoc As New XmlDocument()
-				xmlDoc.LoadXml(res.Result)
-				Dim root As XmlElement = xmlDoc.DocumentElement()
-				If root Is Nothing Then
-					' No root element
-					Throw New BackgroundWorkerException("File Delete failed - Missing root element")
-				Else
-					If String.Compare(root.Name, "delete", True) = 0 Then
-						Dim element As XmlElement = xmlDoc.SelectSingleNode("/delete/result")
-						If element Is Nothing Then
-							' Missing 'result' node
-							Throw New BackgroundWorkerException("File Delete failed - Missing result node")
-						Else
-							Select Case element.FirstChild.Value
-								Case "success"
-									Dim message As XmlElement = xmlDoc.SelectSingleNode("/delete/message")
-									MessageBox.Show(message.FirstChild.Value, "File Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+   Private Sub backgroundDelete_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundDelete.RunWorkerCompleted
+      If (e.Error IsNot Nothing) Then
+         Select Case e.Error.GetType.Name
+            Case "BackgroundWorkerException"
+               HandleBackgroundWorkerException(e.Error)
+            Case "XmlException"
+               HandleXmlException(e.Error)
+            Case "WebException"
+               HandleWebException(e.Error)
+            Case Else
+               HandleException(e.Error)
+         End Select
+      ElseIf e.Cancelled Then
+         ' Next, handle the case where the user canceled the operation.
+         ' Note that due to a race condition in the DoWork event handler, the Cancelled
+         ' flag may not have been set, even though CancelAsync was called.
+         labelStatus.Text = "Cancelled"
+      Else
+         ' Finally, handle the case where the operation succeeded.
+         Dim res As BackgroundResult = CType(e.Result, BackgroundResult)
+         Try
+            Dim xmlDoc As New XmlDocument()
+            xmlDoc.LoadXml(res.Result)
+            Dim root As XmlElement = xmlDoc.DocumentElement()
+            If root Is Nothing Then
+               ' No root element
+               Throw New BackgroundWorkerException("File Delete failed - Missing root element")
+            Else
+               If String.Compare(root.Name, "delete", True) = 0 Then
+                  Dim element As XmlElement = xmlDoc.SelectSingleNode("/delete/result")
+                  If element Is Nothing Then
+                     ' Missing 'result' node
+                     Throw New BackgroundWorkerException("File Delete failed - Missing result node")
+                  Else
+                     Select Case element.FirstChild.Value
+                        Case "success"
+                           Dim message As XmlElement = xmlDoc.SelectSingleNode("/delete/message")
+                           MessageBox.Show(message.FirstChild.Value, "File Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-								Case "failure"
-									Dim message As XmlElement = xmlDoc.SelectSingleNode("/delete/message")
-									MessageBox.Show(message.FirstChild.Value, "File Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        Case "failure"
+                           Dim message As XmlElement = xmlDoc.SelectSingleNode("/delete/message")
+                           MessageBox.Show(message.FirstChild.Value, "File Delete", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
-								Case Else
-									' XML Format error
-									Throw New BackgroundWorkerException("File Delete failed - XML format error")
+                        Case Else
+                           ' XML Format error
+                           Throw New BackgroundWorkerException("File Delete failed - XML format error")
 
-							End Select
-						End If
-					Else
-						Throw New BackgroundWorkerException("File Delete failed - Unrecognised response")
-					End If
-				End If
+                     End Select
+                  End If
+               Else
+                  Throw New BackgroundWorkerException("File Delete failed - Unrecognised response")
+               End If
+            End If
 
-			Catch ex As BackgroundWorkerException
-				Throw
+         Catch ex As BackgroundWorkerException
+            Throw
 
-			Catch ex As XmlException
-				Throw New BackgroundWorkerException("File Delete failed", ex)
+         Catch ex As XmlException
+            Throw New BackgroundWorkerException("File Delete failed", ex)
 
-			Catch ex As Exception
-				Throw New BackgroundWorkerException("File Delete failed", ex)
+         Catch ex As Exception
+            Throw New BackgroundWorkerException("File Delete failed", ex)
 
-			End Try
+         End Try
 
-			' Remove the deleted file from the batches dataset
-			'
-			Dim dv As New DataView(BatchesDataSet.Batch, String.Format("ID='{0}'", res.Parameter), "ID", DataViewRowState.CurrentRows)
-			Dim drv As DataRowView() = dv.FindRows(res.Parameter)
-			BatchesDataSet.Batch.RemoveBatchRow(drv(0).Row)
-			BatchesDataSet.Batch.AcceptChanges()
+         ' Remove the deleted file from the batches dataset
+         '
+         Dim dv As New DataView(BatchesDataSet.Batch, String.Format("ID='{0}'", res.Parameter), "ID", DataViewRowState.CurrentRows)
+         Dim drv As DataRowView() = dv.FindRows(res.Parameter)
+         BatchesDataSet.Batch.RemoveBatchRow(drv(0).Row)
+         BatchesDataSet.Batch.AcceptChanges()
          BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
 
-			' Refresh the user profile
-			'
-			Refreshtranscriber()
+         ' Refresh the user profile
+         '
+         RefreshTranscriber()
 
-		End If
-	End Sub
+      End If
+   End Sub
 
-	Function PerformDeleteFile(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Object
+   Function PerformDeleteFile(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Object
+      Dim uri = New Uri(MyAppSettings.BaseUrl)
 
-		Using webClient As New CookieAwareWebClient()
-			Try
-				webClient.SetTimeout(30000)
-				webClient.CookieContainer = MyAppSettings.CookieJar
-				Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_csvfiles/delete.xml"
-				Dim query_data = New NameValueCollection()
-				query_data.Add("transcriberid", MyAppSettings.UserId)
-				query_data.Add("transcriberpassword", MyAppSettings.Password)
-				query_data.Add("id", e.Argument)
-				webClient.QueryString = query_data
-				Dim contents As String = webClient.DownloadString(addrRequest)
+      Using webClient As New CookieAwareWebClient()
+         Try
+            webClient.SetTimeout(30000)
+            webClient.CookieContainer = New CookieContainer()
+            Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_csvfiles/delete.xml"
+            Dim query_data = New NameValueCollection()
+            query_data.Add("transcriberid", MyAppSettings.UserId)
+            query_data.Add("transcriberpassword", MyAppSettings.Password)
+            query_data.Add("id", e.Argument)
+            webClient.QueryString = query_data
 
-				Dim res As New BackgroundResult()
-				res.Parameter = e.Argument
-				res.Result = contents
-				Return res
+            '  Add the cookies to the request
+            '
+            For Each Cookie In MyAppSettings.Cookies
+               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+            Next
+            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim contents As String = webClient.DownloadString(addrRequest)
 
-			Catch ex As XmlException
-				Throw New BackgroundWorkerException("Deleting File from FreeREG/2 failed", ex)
+            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            '  Process any cookies
+            '
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-			Catch ex As WebException
-				Dim webResp As HttpWebResponse = ex.Response
-				If webResp Is Nothing Then
-					Throw New BackgroundWorkerException("Deleting File from FreeREG/2 failed", ex)
-				Else
-					Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
-					Select Case webResp.StatusCode
-						Case HttpStatusCode.NotFound
+            Dim res As New BackgroundResult()
+            res.Parameter = e.Argument
+            res.Result = contents
+            Return res
 
-						Case HttpStatusCode.NotAcceptable
+         Catch ex As XmlException
+            Throw New BackgroundWorkerException("Deleting File from FreeREG/2 failed", ex)
 
-						Case HttpStatusCode.InternalServerError
+         Catch ex As WebException
+            Dim webResp As HttpWebResponse = ex.Response
+            If webResp Is Nothing Then
+               Throw New BackgroundWorkerException("Deleting File from FreeREG/2 failed", ex)
+            Else
+               Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
+               Select Case webResp.StatusCode
+                  Case HttpStatusCode.NotFound
 
-						Case Else
+                  Case HttpStatusCode.NotAcceptable
 
-					End Select
-					Throw New BackgroundWorkerException("Deleting File from FreeREG/2 failed", ex)
-				End If
+                  Case HttpStatusCode.InternalServerError
 
-			Catch ex As Exception
-				Throw
+                  Case Else
 
-			End Try
+               End Select
+               Throw New BackgroundWorkerException("Deleting File from FreeREG/2 failed", ex)
+            End If
 
-		End Using
+         Catch ex As Exception
+            Throw
 
-	End Function
+         End Try
+
+      End Using
+
+   End Function
 
 #End Region
 
 #Region "Get User Batches Background Thread"
 
-	Private Sub backgroundBatches_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundBatches.DoWork
-		Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-		e.Result = GetBatches(worker, e)
-	End Sub
+   Private Sub backgroundBatches_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundBatches.DoWork
+      Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
+      e.Result = GetBatches(worker, e)
+   End Sub
 
-	Private Sub backgroundBatches_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundBatches.ProgressChanged
-		labelStatus.Text = e.UserState
-		Application.DoEvents()
-	End Sub
+   Private Sub backgroundBatches_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundBatches.ProgressChanged
+      labelStatus.Text = e.UserState
+      Application.DoEvents()
+   End Sub
 
-	Private Sub backgroundBatches_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundBatches.RunWorkerCompleted
-		If (e.Error IsNot Nothing) Then
-			Select Case e.Error.GetType.Name
-				Case "BackgroundWorkerException"
-					HandleBackgroundWorkerException(e.Error)
-				Case "XmlException"
-					HandleXmlException(e.Error)
-				Case "WebException"
-					HandleWebException(e.Error)
-				Case Else
-					HandleException(e.Error)
-			End Select
-		ElseIf e.Cancelled Then
-			' Next, handle the case where the user canceled the operation.
-			' Note that due to a race condition in the DoWork event handler, the Cancelled
-			' flag may not have been set, even though CancelAsync was called.
-			labelStatus.Text = "Cancelled"
-		Else
-			' Finally, handle the case where the operation succeeded.
-			SplitContainer1.Visible = True
-			SplitContainer2.Visible = False
-			SplitContainer3.Visible = True
-			panelUploadedFiles.Visible = True
+   Private Sub backgroundBatches_RunWorkerCompleted(ByVal sender As System.Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles backgroundBatches.RunWorkerCompleted
+      If (e.Error IsNot Nothing) Then
+         Select Case e.Error.GetType.Name
+            Case "BackgroundWorkerException"
+               HandleBackgroundWorkerException(e.Error)
+            Case "XmlException"
+               HandleXmlException(e.Error)
+            Case "WebException"
+               HandleWebException(e.Error)
+            Case Else
+               HandleException(e.Error)
+         End Select
+      ElseIf e.Cancelled Then
+         ' Next, handle the case where the user canceled the operation.
+         ' Note that due to a race condition in the DoWork event handler, the Cancelled
+         ' flag may not have been set, even though CancelAsync was called.
+         labelStatus.Text = "Cancelled"
+      Else
+         ' Finally, handle the case where the operation succeeded.
+         SplitContainer1.Visible = True
+         SplitContainer2.Visible = False
+         SplitContainer3.Visible = True
+         panelUploadedFiles.Visible = True
 
-			If olvcFilename.AspectToStringConverter Is Nothing Then olvcFilename.AspectToStringConverter = New AspectToStringConverterDelegate(AddressOf BatchName)
+         If olvcFilename.AspectToStringConverter Is Nothing Then olvcFilename.AspectToStringConverter = New AspectToStringConverterDelegate(AddressOf BatchName)
 
-			BatchBindingSource.DataSource = BatchesDataSet
-			BatchBindingSource.DataMember = "Batch"
-			bnavShowData.BindingSource = BatchBindingSource
-			bnavShowData.Visible = True
-			dlvUploadedFiles.Visible = True
-			labelStatus.Text = ""
-			dlvUploadedFiles.RebuildColumns()
-		End If
-	End Sub
+         BatchBindingSource.DataSource = BatchesDataSet
+         BatchBindingSource.DataMember = "Batch"
+         bnavShowData.BindingSource = BatchBindingSource
+         bnavShowData.Visible = True
+         dlvUploadedFiles.Visible = True
+         labelStatus.Text = ""
+         dlvUploadedFiles.RebuildColumns()
+      End If
+   End Sub
 
-	Private Function BatchName(ByVal objValue As String) As String
-		Dim x = objValue.IndexOf("."c)
-		Return objValue.Substring(0, objValue.IndexOf("."c))
-	End Function
+   Private Function BatchName(ByVal objValue As String) As String
+      Dim x = objValue.IndexOf("."c)
+      Return objValue.Substring(0, objValue.IndexOf("."c))
+   End Function
 
-	Function GetBatches(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Long
-		Dim result As Long = 0
+   Function GetBatches(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Long
+      Dim result As Long = 0
+      Dim uri = New Uri(MyAppSettings.BaseUrl)
 
-		worker.ReportProgress(0, String.Format("Fetching batches from FreeREG/2 for {0}...", MyAppSettings.UserId))
+      worker.ReportProgress(0, String.Format("Fetching batches from FreeREG/2 for {0}...", MyAppSettings.UserId))
 
-		Using webClient As New CookieAwareWebClient()
-			Try
-				webClient.SetTimeout(30000)
-				webClient.CookieContainer = MyAppSettings.CookieJar
-				Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_batches/list.xml"
-				Dim query_data = New NameValueCollection()
-				query_data.Add("transcriber", MyAppSettings.UserId)
-				webClient.QueryString = query_data
-				Dim contents As String = webClient.DownloadString(addrRequest)
+      Using webClient As New CookieAwareWebClient()
+         Try
+            webClient.SetTimeout(30000)
+            webClient.CookieContainer = New CookieContainer()
+            Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_batches/list.xml"
+            Dim query_data = New NameValueCollection()
+            query_data.Add("transcriber", MyAppSettings.UserId)
+            webClient.QueryString = query_data
+            '  Add the cookies to the request
+            '
+            For Each Cookie In MyAppSettings.Cookies
+               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+            Next
+            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim contents As String = webClient.DownloadString(addrRequest)
 
-				If contents.StartsWith("<BatchesTable>") Then
-					Dim doc As XmlDocument = New XmlDocument()
-					Dim buf As Byte() = ASCIIEncoding.ASCII.GetBytes(contents)
-					Dim ms As MemoryStream = New MemoryStream(buf)
-					doc.Load(ms)
-					ms.Close()
+            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            '  Process any cookies
+            '
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-					buf = ASCIIEncoding.ASCII.GetBytes(doc.OuterXml)
-					ms = New MemoryStream(buf)
-					Dim ds As DataSet = New DataSet()
-					ds.ReadXml(ms, XmlReadMode.InferSchema)
-					ms.Close()
+            If contents.StartsWith("<BatchesTable>") Then
+               Dim doc As XmlDocument = New XmlDocument()
+               Dim buf As Byte() = ASCIIEncoding.ASCII.GetBytes(contents)
+               Dim ms As MemoryStream = New MemoryStream(buf)
+               doc.Load(ms)
+               ms.Close()
 
-					BatchesDataSet.Clear()
-					If ds.Tables("Batch") IsNot Nothing Then
-						For Each row As DataRow In ds.Tables("Batch").Rows
-							BatchesDataSet.Batch.AddBatchRow(row.Item("ID"), row.Item("CountyName"), row.Item("PlaceName"), row.Item("ChurchName"), row.Item("RegisterType"), _
-							 row.Item("RecordType"), row.Item("Records"), row.Item("DateMin"), row.Item("DateMax"), row.Item("DateRange"), row.Item("UserId"), _
-							 row.Item("UserIdLowerCase"), row.Item("FileName"), row.Item("TranscriberName"), row.Item("TranscriberEmail"), row.Item("TranscriberSyndicate"), _
-							 row.Item("CreditEmail"), row.Item("CreditName"), row.Item("FirstComment"), row.Item("SecondComment"), row.Item("TranscriptionDate"), _
-							 row.Item("ModificationDate"), row.Item("UploadedDate"), row.Item("Error"), row.Item("Digest"), row.Item("LockedByTranscriber"), _
-							 row.Item("LockedByCoordinator"), row.Item("lds"), row.Item("Action"), row.Item("CharacterSet"), row.Item("AlternateRegisterName"), _
-							 row.Item("CsvFile"))
-						Next
-					End If
-					BatchesDataSet.AcceptChanges()
+               buf = ASCIIEncoding.ASCII.GetBytes(doc.OuterXml)
+               ms = New MemoryStream(buf)
+               Dim ds As DataSet = New DataSet()
+               ds.ReadXml(ms, XmlReadMode.InferSchema)
+               ms.Close()
+
+               BatchesDataSet.Clear()
+               If ds.Tables("Batch") IsNot Nothing Then
+                  For Each row As DataRow In ds.Tables("Batch").Rows
+                     BatchesDataSet.Batch.AddBatchRow(row.Item("ID"), row.Item("CountyName"), row.Item("PlaceName"), row.Item("ChurchName"), row.Item("RegisterType"), _
+                      row.Item("RecordType"), row.Item("Records"), row.Item("DateMin"), row.Item("DateMax"), row.Item("DateRange"), row.Item("UserId"), _
+                      row.Item("UserIdLowerCase"), row.Item("FileName"), row.Item("TranscriberName"), row.Item("TranscriberEmail"), row.Item("TranscriberSyndicate"), _
+                      row.Item("CreditEmail"), row.Item("CreditName"), row.Item("FirstComment"), row.Item("SecondComment"), row.Item("TranscriptionDate"), _
+                      row.Item("ModificationDate"), row.Item("UploadedDate"), row.Item("Error"), row.Item("Digest"), row.Item("LockedByTranscriber"), _
+                      row.Item("LockedByCoordinator"), row.Item("lds"), row.Item("Action"), row.Item("CharacterSet"), row.Item("AlternateRegisterName"), _
+                      row.Item("CsvFile"))
+                  Next
+               End If
+               BatchesDataSet.AcceptChanges()
                BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
-					worker.ReportProgress(100, String.Format("Batches fetched from FreeREG/2 for {0}", MyAppSettings.UserId))
-				Else
-					Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed - Not logged on")
-				End If
+               worker.ReportProgress(100, String.Format("Batches fetched from FreeREG/2 for {0}", MyAppSettings.UserId))
+            Else
+               Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed - Not logged on")
+            End If
 
-			Catch ex As XmlException
-				Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)
+         Catch ex As XmlException
+            Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)
 
-			Catch ex As WebException
-				Dim webResp As HttpWebResponse = ex.Response
-				If webResp Is Nothing Then
-					Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)
-				Else
-					Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
-					Select Case webResp.StatusCode
-						Case HttpStatusCode.NotFound
+         Catch ex As WebException
+            Dim webResp As HttpWebResponse = ex.Response
+            If webResp Is Nothing Then
+               Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)
+            Else
+               Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
+               Select Case webResp.StatusCode
+                  Case HttpStatusCode.NotFound
 
-						Case HttpStatusCode.NotAcceptable
+                  Case HttpStatusCode.NotAcceptable
 
-						Case HttpStatusCode.InternalServerError
+                  Case HttpStatusCode.InternalServerError
 
-						Case Else
+                  Case Else
 
-					End Select
-					Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)
-				End If
+               End Select
+               Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)
+            End If
 
-			Catch ex As Exception
-				Throw
+         Catch ex As Exception
+            Throw
 
-			End Try
-		End Using
-	End Function
+         End Try
+      End Using
+   End Function
 
 #End Region
 
 #Region "Exception Handlers"
 
-	Public Sub HandleUploadBackgroundWorkerException(ByVal ex As Exception)
-		Dim exi = ex.InnerException
-		If exi IsNot Nothing Then
-			Dim x = exi.GetType.Name
-			Select Case x
-				Case "WebException"
-					Dim webEx As WebException = exi
-					Dim webResp As HttpWebResponse = webEx.Response
-					Dim strm As Stream = webResp.GetResponseStream()
-					Dim encode As Encoding = Encoding.GetEncoding(webResp.CharacterSet)
-					Using dlg As New formPageReceived()
-						dlg.Text = "WebException"
-						dlg.wbPage.DocumentStream = strm
-						dlg.ShowDialog()
-					End Using
+   Public Sub HandleUploadBackgroundWorkerException(ByVal ex As Exception)
+      Dim exi = ex.InnerException
+      If exi IsNot Nothing Then
+         Dim x = exi.GetType.Name
+         Select Case x
+            Case "WebException"
+               Dim webEx As WebException = exi
+               Dim webResp As HttpWebResponse = webEx.Response
+               Dim strm As Stream = webResp.GetResponseStream()
+               Dim encode As Encoding = Encoding.GetEncoding(webResp.CharacterSet)
+               Using dlg As New formPageReceived()
+                  dlg.Text = "WebException"
+                  dlg.wbPage.DocumentStream = strm
+                  dlg.ShowDialog()
+               End Using
 
-					If ex.InnerException.InnerException IsNot Nothing Then
-						MessageBox.Show(String.Format("{0} - {1}", ex.InnerException.Message, ex.InnerException.InnerException.Message), ex.Message)
-					Else
-						MessageBox.Show(String.Format("{0}", ex.InnerException.Message), ex.Message)
-					End If
-					webResp.Close()
-					Beep()
+               If ex.InnerException.InnerException IsNot Nothing Then
+                  MessageBox.Show(String.Format("{0} - {1}", ex.InnerException.Message, ex.InnerException.InnerException.Message), ex.Message)
+               Else
+                  MessageBox.Show(String.Format("{0}", ex.InnerException.Message), ex.Message)
+               End If
+               webResp.Close()
+               Beep()
 
-				Case "XmlException"
-					MessageBox.Show(String.Format("{0} - {1}", "", ex.InnerException.Message), ex.Message)
-					Beep()
+            Case "XmlException"
+               MessageBox.Show(String.Format("{0} - {1}", "", ex.InnerException.Message), ex.Message)
+               Beep()
 
-				Case Else
-					MessageBox.Show(String.Format("{0} - {1}", "", ex.InnerException.Message), ex.Message)
-					Beep()
-			End Select
-		Else
-			MessageBox.Show(ex.Message)
-		End If
-	End Sub
+            Case Else
+               MessageBox.Show(String.Format("{0} - {1}", "", ex.InnerException.Message), ex.Message)
+               Beep()
+         End Select
+      Else
+         MessageBox.Show(ex.Message)
+      End If
+   End Sub
 
-	Public Sub HandleBackgroundWorkerException(ByVal ex As Exception)
-		Dim exi = ex.InnerException
-		If exi IsNot Nothing Then
-			Dim x = exi.GetType.Name
-			Select Case x
-				Case "WebException"
-					If ex.InnerException.InnerException IsNot Nothing Then
-						MessageBox.Show(String.Format("{0} - {1}", ex.InnerException.Message, ex.InnerException.InnerException.Message), ex.Message)
-					Else
-						MessageBox.Show(String.Format("{0}", ex.InnerException.Message), ex.Message)
-					End If
-					Beep()
-				Case "XmlException"
-					MessageBox.Show(String.Format("{0} - {1}", "", ex.InnerException.Message), ex.Message)
-					Beep()
-				Case Else
-					Beep()
-			End Select
-		Else
-			MessageBox.Show(ex.Message)
-		End If
-	End Sub
+   Public Sub HandleBackgroundWorkerException(ByVal ex As Exception)
+      Dim exi = ex.InnerException
+      If exi IsNot Nothing Then
+         Dim x = exi.GetType.Name
+         Select Case x
+            Case "WebException"
+               If ex.InnerException.InnerException IsNot Nothing Then
+                  MessageBox.Show(String.Format("{0} - {1}", ex.InnerException.Message, ex.InnerException.InnerException.Message), ex.Message)
+               Else
+                  MessageBox.Show(String.Format("{0}", ex.InnerException.Message), ex.Message)
+               End If
+               Beep()
+            Case "XmlException"
+               MessageBox.Show(String.Format("{0} - {1}", "", ex.InnerException.Message), ex.Message)
+               Beep()
+            Case Else
+               Beep()
+         End Select
+      Else
+         MessageBox.Show(ex.Message)
+      End If
+   End Sub
 
-	Public Sub HandleXmlException(ByVal ex As Exception)
-		Beep()
-	End Sub
+   Public Sub HandleXmlException(ByVal ex As Exception)
+      Beep()
+   End Sub
 
-	Public Sub HandleWebException(ByVal ex As Exception)
-		MessageBox.Show(String.Format("{0} - {1}", ex.InnerException.Message, ex.InnerException.InnerException.Message), ex.Message)
-		Beep()
-	End Sub
+   Public Sub HandleWebException(ByVal ex As Exception)
+      MessageBox.Show(String.Format("{0} - {1}", ex.InnerException.Message, ex.InnerException.InnerException.Message), ex.Message)
+      Beep()
+   End Sub
 
-	Public Sub HandleException(ByVal ex As Exception)
-		Beep()
-	End Sub
+   Public Sub HandleException(ByVal ex As Exception)
+      Beep()
+   End Sub
 
 #End Region
 
-	Private Sub BatchBindingSource_CurrentChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BatchBindingSource.CurrentChanged
-		Dim currentBatch As Batches.BatchRow = BatchBindingSource.Current.Row
-	End Sub
+   Private Sub BatchBindingSource_CurrentChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BatchBindingSource.CurrentChanged
+      Dim currentBatch As Batches.BatchRow = BatchBindingSource.Current.Row
+   End Sub
 
-	Private Sub BatchBindingSource_CurrentItemChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BatchBindingSource.CurrentItemChanged
-		Dim currentBatch As Batches.BatchRow = BatchBindingSource.Current.Row
-	End Sub
+   Private Sub BatchBindingSource_CurrentItemChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BatchBindingSource.CurrentItemChanged
+      Dim currentBatch As Batches.BatchRow = BatchBindingSource.Current.Row
+   End Sub
 
 #Region "Button Click Handlers"
 
-	Private Sub btnViewContents_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnViewContents.Click
-		Dim currentBatch As Batches.BatchRow = BatchBindingSource.Current.Row
+   Private Sub btnViewContents_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnViewContents.Click
+      Dim uri = New Uri(MyAppSettings.BaseUrl)
+      Dim currentBatch As Batches.BatchRow = BatchBindingSource.Current.Row
 
-		Using webClient As New CookieAwareWebClient()
-			Try
-				webClient.SetTimeout(30000)
-				webClient.CookieContainer = MyAppSettings.CookieJar
-				Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_batches/download.xml"
-				Dim query_data = New NameValueCollection()
-				query_data.Add("transcriber", MyAppSettings.UserId)
-				query_data.Add("id", currentBatch.ID)
-				webClient.QueryString = query_data
-				Dim contents As String = webClient.DownloadString(addrRequest)
+      Using webClient As New CookieAwareWebClient()
+         Try
+            webClient.SetTimeout(30000)
+            webClient.CookieContainer = New CookieContainer()
+            Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_batches/download.xml"
+            Dim query_data = New NameValueCollection()
+            query_data.Add("transcriber", MyAppSettings.UserId)
+            query_data.Add("id", currentBatch.ID)
+            webClient.QueryString = query_data
 
-				If contents.StartsWith("+INFO") Then
+            '  Add the cookies to the request
+            '
+            For Each Cookie In MyAppSettings.Cookies
+               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+            Next
+            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim contents As String = webClient.DownloadString(addrRequest)
+
+            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            '  Process any cookies
+            '
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
+
+            If contents.StartsWith("+INFO") Then
                Using dlg As New formBatchContents() With {.PersonalPath = _myTranscriptionLibrary, .CurrentBatch = currentBatch, .Text = String.Format("Batch Contents - {0}", currentBatch.FileName)}
                   dlg.FileContentsTextBox.Text = contents
                   dlg.ShowDialog()
                End Using
-				Else
-					Dim xmlDoc As New XmlDocument()
-					xmlDoc.LoadXml(contents)
-					Dim root As XmlElement = xmlDoc.DocumentElement()
-					If root Is Nothing Then
-						' No root element
-						Throw New BackgroundWorkerException("View Contents failed - Missing root element")
-					Else
-						If String.Compare(root.Name, "download", True) = 0 Then
-							Dim element As XmlElement = xmlDoc.SelectSingleNode("/download/result")
-							If element Is Nothing Then
-								' Missing 'result' node
-								Throw New BackgroundWorkerException("View Contents failed - Missing result node")
-							Else
-								Select Case element.FirstChild.Value
-									Case "failure"
-										Dim message As XmlElement = xmlDoc.SelectSingleNode("download/message")
-										MessageBox.Show(message.FirstChild.Value, "View Batch Contents", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Else
+               Dim xmlDoc As New XmlDocument()
+               xmlDoc.LoadXml(contents)
+               Dim root As XmlElement = xmlDoc.DocumentElement()
+               If root Is Nothing Then
+                  ' No root element
+                  Throw New BackgroundWorkerException("View Contents failed - Missing root element")
+               Else
+                  If String.Compare(root.Name, "download", True) = 0 Then
+                     Dim element As XmlElement = xmlDoc.SelectSingleNode("/download/result")
+                     If element Is Nothing Then
+                        ' Missing 'result' node
+                        Throw New BackgroundWorkerException("View Contents failed - Missing result node")
+                     Else
+                        Select Case element.FirstChild.Value
+                           Case "failure"
+                              Dim message As XmlElement = xmlDoc.SelectSingleNode("download/message")
+                              MessageBox.Show(message.FirstChild.Value, "View Batch Contents", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
-									Case Else
-										' XML Format error
-										Throw New BackgroundWorkerException("View Contents - XML format error")
+                           Case Else
+                              ' XML Format error
+                              Throw New BackgroundWorkerException("View Contents - XML format error")
 
-								End Select
-							End If
-						Else
-							Throw New BackgroundWorkerException("View Contents - Unrecognised response")
-						End If
-					End If
+                        End Select
+                     End If
+                  Else
+                     Throw New BackgroundWorkerException("View Contents - Unrecognised response")
+                  End If
+               End If
 
-				End If
+            End If
 
-			Catch ex As XmlException
-				HandleXmlException(ex)
+         Catch ex As XmlException
+            HandleXmlException(ex)
 
-			Catch ex As WebException
-				Dim ex1 As New BackgroundWorkerException("Download Batch Contents", ex)
-				HandleBackgroundWorkerException(ex1)
+         Catch ex As WebException
+            Dim ex1 As New BackgroundWorkerException("Download Batch Contents", ex)
+            HandleBackgroundWorkerException(ex1)
 
-			Catch ex As Exception
-				HandleException(ex)
+         Catch ex As Exception
+            HandleException(ex)
 
-			End Try
-		End Using
-	End Sub
+         End Try
+      End Using
+   End Sub
 
-	Private Sub btnDeleteFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteFile.Click
-		Dim currentBatch As Batches.BatchRow = BatchBindingSource.Current.Row
+   Private Sub btnDeleteFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteFile.Click
+      Dim currentBatch As Batches.BatchRow = BatchBindingSource.Current.Row
 
-		Try
-			backgroundDelete.RunWorkerAsync(currentBatch.ID)
+      Try
+         backgroundDelete.RunWorkerAsync(currentBatch.ID)
 
-		Catch ex As Exception
+      Catch ex As Exception
 
-		End Try
-	End Sub
+      End Try
+   End Sub
 
-	Private Sub btnUploadFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUploadFile.Click
-		Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
-		Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
-		Dim row As DataRow = dbi.Row
+   Private Sub btnUploadFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUploadFile.Click
+      Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
+      Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
+      Dim row As DataRow = dbi.Row
 
-		Try
-			backgroundUpload.RunWorkerAsync(row("FullName"))
+      Try
+         backgroundUpload.RunWorkerAsync(row("FullName"))
 
-		Catch ex As Exception
+      Catch ex As Exception
 
-		End Try
-	End Sub
+      End Try
+   End Sub
 
-	Private Sub btnReplaceFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReplaceFile.Click
-		Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
-		Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
-		Dim row As DataRow = dbi.Row
+   Private Sub btnReplaceFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnReplaceFile.Click
+      Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
+      Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
+      Dim row As DataRow = dbi.Row
 
-		Try
-			backgroundReplace.RunWorkerAsync(row("FullName"))
+      Try
+         backgroundReplace.RunWorkerAsync(row("FullName"))
 
-		Catch ex As Exception
+      Catch ex As Exception
 
-		End Try
-	End Sub
+      End Try
+   End Sub
 
 #End Region
 
-	Private Sub dlvLocalFiles_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.ItemActivate
-		Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
+   Private Sub dlvLocalFiles_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.ItemActivate
+      Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
       Using dlg As New formFileWorkspace With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
          Try
             Dim rc = dlg.ShowDialog()
@@ -3459,24 +3634,24 @@ Public Class FreeREG2Browser
 
          End Try
       End Using
-	End Sub
+   End Sub
 
-	Private Sub dlvLocalFiles_CellToolTipShowing(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.ToolTipShowingEventArgs) Handles dlvLocalFiles.CellToolTipShowing
-		If e.ModifierKeys = Keys.Control Then
-			If e.Column.Name = "Name" Then
-				Dim tfile As New TranscriptionFileClass(CType(e.Model, DataRowView).Row, LookUpsDataSet, TablesDataSet)
-				e.BackColor = Color.Bisque
-				e.IsBalloon = True
-				e.StandardIcon = ToolTipControl.StandardIcons.InfoLarge
-				e.Title = tfile.FileName
-				e.Text = tfile.FileHeader.Place + vbCrLf + tfile.FileHeader.Church + vbCrLf _
-				 + tfile.FileHeader.Comment1 + vbCrLf + tfile.FileHeader.Comment2 + vbCrLf + vbCrLf _
-				 + String.Format("File size: {0} records", tfile.Items.Rows.Count)
-			End If
-		End If
-	End Sub
+   Private Sub dlvLocalFiles_CellToolTipShowing(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.ToolTipShowingEventArgs) Handles dlvLocalFiles.CellToolTipShowing
+      If e.ModifierKeys = Keys.Control Then
+         If e.Column.Name = "Name" Then
+            Dim tfile As New TranscriptionFileClass(CType(e.Model, DataRowView).Row, LookUpsDataSet, TablesDataSet)
+            e.BackColor = Color.Bisque
+            e.IsBalloon = True
+            e.StandardIcon = ToolTipControl.StandardIcons.InfoLarge
+            e.Title = tfile.FileName
+            e.Text = tfile.FileHeader.Place + vbCrLf + tfile.FileHeader.Church + vbCrLf _
+             + tfile.FileHeader.Comment1 + vbCrLf + tfile.FileHeader.Comment2 + vbCrLf + vbCrLf _
+             + String.Format("File size: {0} records", tfile.Items.Rows.Count)
+         End If
+      End If
+   End Sub
 
-	Private Sub btnNewFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewFile.Click
+   Private Sub btnNewFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewFile.Click
       Using dlg As New formStartNewFile With {.Username = _myUserName, .EmailAddress = _myEmailAddress, .dsFreeRegTables = TablesDataSet, .dsLookupTables = LookUpsDataSet, .DefaultCounty = _myDefaultCounty, .TranscriptionLibrary = _myTranscriptionLibrary}
          Try
             Dim rc = dlg.ShowDialog()
@@ -3505,6 +3680,6 @@ Public Class FreeREG2Browser
 
          End Try
       End Using
-	End Sub
+   End Sub
 
 End Class

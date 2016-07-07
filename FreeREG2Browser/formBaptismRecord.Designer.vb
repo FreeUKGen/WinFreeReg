@@ -336,6 +336,10 @@ Partial Class formBaptismRecord
       Me.ButtonCancel.Text = "Cancel"
       Me.ButtonCancel.UseVisualStyleBackColor = True
       '
+      'BaptismToolTip
+      '
+      Me.BaptismToolTip.ToolTipTitle = "WinFreeREG - Baptism Record"
+      '
       'formBaptismRecord
       '
       Me.AcceptButton = Me.ButtonOK
@@ -375,7 +379,7 @@ Partial Class formBaptismRecord
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
       Me.Name = "formBaptismRecord"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "Baptism Record"
+      Me.Text = "WinFreeREG - Baptism Record"
       CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.BaptismSexBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)

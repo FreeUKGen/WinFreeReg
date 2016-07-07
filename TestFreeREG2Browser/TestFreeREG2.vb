@@ -3,13 +3,12 @@ Imports WinFreeReg
 
 Public Class frmTestBrowser
 
+   Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
 
    Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
-
       Using frm As New FreeREG2Browser()
          frm.ShowDialog()
       End Using
-
    End Sub
 
    Private Sub frmTestBrowser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -18,10 +17,24 @@ Public Class frmTestBrowser
 
    Private Sub btnErrorMessages_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnErrorMessages.Click
       Try
-         Dim BaseDataDirectory = String.Format("{0}\{1}\{2}", My.Computer.FileSystem.SpecialDirectories.MyDocuments, Application.CompanyName, Application.ProductName)
-         Dim ErrorMEssageFileName As String = Path.Combine(BaseDataDirectory, "ErrorMessages.xml")
+         Dim ErrorMEssageFileName As String = Path.Combine(AppDataLocalFolder, "ErrorMessages.xml")
 
          Using dlg As New dlgErrorMessage(ErrorMEssageFileName)
+            dlg.ShowDialog()
+         End Using
+
+      Catch ex As ArgumentNullException
+
+      Catch ex As Exception
+
+      End Try
+   End Sub
+
+   Private Sub btnToolTips_Click(sender As Object, e As EventArgs) Handles btnToolTips.Click
+      Try
+         Dim ToolTipsFileName As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
+
+         Using dlg As New dlgToolTips(ToolTipsFileName)
             dlg.ShowDialog()
          End Using
 

@@ -389,7 +389,9 @@ Partial Class formStartNewFile
       '
       'NewFileToolTip
       '
-      Me.NewFileToolTip.ToolTipTitle = "Start New File"
+      Me.NewFileToolTip.BackColor = System.Drawing.Color.Wheat
+      Me.NewFileToolTip.IsBalloon = True
+      Me.NewFileToolTip.ToolTipTitle = "WinFreeREG - Start New File"
       '
       'formStartNewFile
       '
@@ -424,7 +426,7 @@ Partial Class formStartNewFile
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
       Me.Name = "formStartNewFile"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "Start New File"
+      Me.Text = "WinFreeREG - Start New File"
       CType(Me.FreeregTables, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.CountiesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.PlacesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()

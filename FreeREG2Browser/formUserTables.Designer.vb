@@ -463,6 +463,10 @@ Partial Class formUserTables
       Me.bsBrideCOndition.DataMember = "BrideCondition"
       Me.bsBrideCOndition.DataSource = GetType(WinFreeReg.LookupTables)
       '
+      'UserTablesToolTip
+      '
+      Me.UserTablesToolTip.ToolTipTitle = "WinFreeREG - User Tables"
+      '
       'formUserTables
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -471,7 +475,7 @@ Partial Class formUserTables
       Me.Controls.Add(Me.SplitContainer1)
       Me.Name = "formUserTables"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "User Tables"
+      Me.Text = "WinFreeREG - User Tables"
       Me.SplitContainer1.Panel1.ResumeLayout(False)
       Me.SplitContainer1.Panel1.PerformLayout()
       Me.SplitContainer1.Panel2.ResumeLayout(False)

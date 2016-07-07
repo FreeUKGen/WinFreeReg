@@ -22,46 +22,58 @@ Partial Class frmTestBrowser
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
-		Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTestBrowser))
-		Me.btnStart = New System.Windows.Forms.Button
-		Me.btnErrorMessages = New System.Windows.Forms.Button
-		Me.SuspendLayout()
-		'
-		'btnStart
-		'
-		Me.btnStart.Location = New System.Drawing.Point(121, 111)
-		Me.btnStart.Name = "btnStart"
-		Me.btnStart.Size = New System.Drawing.Size(75, 23)
-		Me.btnStart.TabIndex = 0
-		Me.btnStart.Text = "Start"
-		Me.btnStart.UseVisualStyleBackColor = True
-		'
-		'btnErrorMessages
-		'
-		Me.btnErrorMessages.Location = New System.Drawing.Point(13, 226)
-		Me.btnErrorMessages.Name = "btnErrorMessages"
-		Me.btnErrorMessages.Size = New System.Drawing.Size(94, 23)
-		Me.btnErrorMessages.TabIndex = 1
-		Me.btnErrorMessages.Text = "Error Messages"
-		Me.btnErrorMessages.UseVisualStyleBackColor = True
-		'
-		'frmTestBrowser
-		'
-		Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-		Me.ClientSize = New System.Drawing.Size(332, 261)
-		Me.Controls.Add(Me.btnErrorMessages)
-		Me.Controls.Add(Me.btnStart)
-		Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-		Me.MaximizeBox = False
-		Me.MinimizeBox = False
-		Me.Name = "frmTestBrowser"
-		Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-		Me.Text = "Test FreeREG/2 Browser"
-		Me.ResumeLayout(False)
+      Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmTestBrowser))
+      Me.btnStart = New System.Windows.Forms.Button()
+      Me.btnErrorMessages = New System.Windows.Forms.Button()
+      Me.btnToolTips = New System.Windows.Forms.Button()
+      Me.SuspendLayout()
+      '
+      'btnStart
+      '
+      Me.btnStart.Location = New System.Drawing.Point(121, 111)
+      Me.btnStart.Name = "btnStart"
+      Me.btnStart.Size = New System.Drawing.Size(75, 23)
+      Me.btnStart.TabIndex = 0
+      Me.btnStart.Text = "Start"
+      Me.btnStart.UseVisualStyleBackColor = True
+      '
+      'btnErrorMessages
+      '
+      Me.btnErrorMessages.Location = New System.Drawing.Point(13, 226)
+      Me.btnErrorMessages.Name = "btnErrorMessages"
+      Me.btnErrorMessages.Size = New System.Drawing.Size(94, 23)
+      Me.btnErrorMessages.TabIndex = 1
+      Me.btnErrorMessages.Text = "Error Messages"
+      Me.btnErrorMessages.UseVisualStyleBackColor = True
+      '
+      'btnToolTips
+      '
+      Me.btnToolTips.Location = New System.Drawing.Point(113, 226)
+      Me.btnToolTips.Name = "btnToolTips"
+      Me.btnToolTips.Size = New System.Drawing.Size(75, 23)
+      Me.btnToolTips.TabIndex = 2
+      Me.btnToolTips.Text = "ToolTips"
+      Me.btnToolTips.UseVisualStyleBackColor = True
+      '
+      'frmTestBrowser
+      '
+      Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+      Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+      Me.ClientSize = New System.Drawing.Size(332, 261)
+      Me.Controls.Add(Me.btnToolTips)
+      Me.Controls.Add(Me.btnErrorMessages)
+      Me.Controls.Add(Me.btnStart)
+      Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+      Me.MaximizeBox = False
+      Me.MinimizeBox = False
+      Me.Name = "frmTestBrowser"
+      Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+      Me.Text = "Test FreeREG/2 Browser"
+      Me.ResumeLayout(False)
 
-	End Sub
+   End Sub
 	Friend WithEvents btnStart As System.Windows.Forms.Button
-	Friend WithEvents btnErrorMessages As System.Windows.Forms.Button
+   Friend WithEvents btnErrorMessages As System.Windows.Forms.Button
+   Friend WithEvents btnToolTips As System.Windows.Forms.Button
 
 End Class

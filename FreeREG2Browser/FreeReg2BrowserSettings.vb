@@ -16,7 +16,7 @@ Imports System.Security.Permissions
    Private _baseUrl As String = ""
    Private _userid As String
    Private _password As String
-   Private _cookieJar As CookieContainer = New CookieContainer()
+   Private _cookies As CookieCollection
    Private _transregName As String = "transreg"
    Private _transregPassword As String = "temppasshope"
 
@@ -54,14 +54,14 @@ Imports System.Security.Permissions
    End Property
 
    <Category("User"), _
-    BrowsableAttribute(False), _
-    Description("A container for persisting Cookies from one session to another")> _
-   Public Property CookieJar() As CookieContainer
+   BrowsableAttribute(False), _
+   Description("A collection of Cookies")> _
+   Public Property Cookies As CookieCollection
       Get
-         Return _cookieJar
+         Return _cookies
       End Get
-      Set(ByVal value As CookieContainer)
-         _cookieJar = value
+      Set(ByVal value As CookieCollection)
+         _cookies = value
       End Set
    End Property
 
@@ -100,14 +100,12 @@ Imports System.Security.Permissions
       Password = info.GetString("k")
       TransregName = info.GetString("l")
       TransregPassword = info.GetString("m")
-      CookieJar = New CookieContainer()
-      Dim numCookies As Integer = info.GetInt32("o")
-      For ix As Integer = 1 To numCookies Step 1
-         Dim key As String = "Cookie_" + (ix - 1).ToString()
-         Dim c As Cookie = info.GetValue(key, GetType(Cookie))
-         CookieJar.Add(c)
+      Cookies = New CookieCollection()
+      Dim x As Integer = info.GetValue("n", GetType(UInt16))
+      For i As Integer = 0 To x - 1 Step 1
+         Dim str = info.GetString(String.Format("Cookie:{0}", i)).Split(New Char() {" "c})
+         Cookies.Add(New Cookie(str(0), str(1)))
       Next
-
    End Sub
 
    <SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter:=True)> _
@@ -117,12 +115,10 @@ Imports System.Security.Permissions
       info.AddValue("k", Password)
       info.AddValue("l", TransregName)
       info.AddValue("m", TransregPassword)
-      Dim ix As Integer = 0
-      info.AddValue("o", CookieJar.Count)
-      For Each c As Cookie In CookieJar.GetCookies(New Uri(BaseUrl))
-         Dim key As String = "Cookie_" + ix.ToString()
-         info.AddValue(key, c, GetType(Cookie))
-         ix += 1
+      info.AddValue("n", Cookies.Count)
+      For i As Integer = 0 To Cookies.Count - 1 Step 1
+         info.AddValue(String.Format("Cookie:{0}", i), String.Format("{0} {1}", Cookies(i).Name, Cookies(i).Value))
       Next
+
    End Sub
 End Class

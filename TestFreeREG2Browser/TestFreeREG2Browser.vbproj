@@ -83,6 +83,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core">
@@ -114,9 +115,18 @@
     <Compile Include="dlgErrorMessage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="dlgToolTips.Designer.vb">
+      <DependentUpon>dlgToolTips.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgToolTips.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ErrorMessages.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorMessages.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorMessages.vb">
       <DependentUpon>ErrorMessages.xsd</DependentUpon>
     </Compile>
     <Compile Include="TestFreeREG2.vb">
@@ -141,10 +151,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="ToolTips.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ToolTips.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="dlgErrorMessage.resx">
       <DependentUpon>dlgErrorMessage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgToolTips.resx">
+      <DependentUpon>dlgToolTips.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TestFreeREG2.resx">
       <DependentUpon>TestFreeREG2.vb</DependentUpon>
@@ -177,6 +195,17 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="ToolTips.xsc">
+      <DependentUpon>ToolTips.xsd</DependentUpon>
+    </None>
+    <None Include="ToolTips.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ToolTips.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="ToolTips.xss">
+      <DependentUpon>ToolTips.xsd</DependentUpon>
     </None>
     <None Include="WinFreeReg.snk" />
   </ItemGroup>

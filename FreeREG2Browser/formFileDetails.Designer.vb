@@ -225,6 +225,10 @@ Partial Class formFileDetails
       RegisterTypeLabel.TabIndex = 29
       RegisterTypeLabel.Text = "Register Type:"
       '
+      'FileDetailsToolTip
+      '
+      Me.FileDetailsToolTip.ToolTipTitle = "WinFreeREG - File Details"
+      '
       'LinkLabel1
       '
       Me.LinkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -473,7 +477,7 @@ Partial Class formFileDetails
       Me.Controls.Add(RegisterTypeLabel)
       Me.Name = "formFileDetails"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "FIle Details - {0}"
+      Me.Text = "WinFreeREG - FIle Details - {0}"
       Me.FileDetailsToolTip.SetToolTip(Me, resources.GetString("$this.ToolTip"))
       CType(Me.FileHeaderClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.ChurchesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()

@@ -29,7 +29,7 @@
 	End Sub
 
 	Private Sub btnRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRefresh.Click
-		MyOwner.Refreshtranscriber()
+      MyOwner.RefreshTranscriber()
 		FillFormFields()
 	End Sub
 

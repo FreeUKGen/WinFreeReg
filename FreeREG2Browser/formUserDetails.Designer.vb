@@ -607,6 +607,10 @@ Partial Class formUserDetails
       Me.btnRefresh.Text = "Refresh"
       Me.btnRefresh.UseVisualStyleBackColor = True
       '
+      'UserDetailsToolTip
+      '
+      Me.UserDetailsToolTip.ToolTipTitle = "WinFreeREG - User Details"
+      '
       'formUserDetails
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -675,7 +679,7 @@ Partial Class formUserDetails
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
       Me.Name = "formUserDetails"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "User Profile"
+      Me.Text = "WinFreeREG - User Profile"
       CType(Me.UserDetails, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()

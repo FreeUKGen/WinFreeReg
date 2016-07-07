@@ -316,6 +316,10 @@ Partial Class formBurialRecord
       Me.ButtonCancel.Text = "Cancel"
       Me.ButtonCancel.UseVisualStyleBackColor = True
       '
+      'BurialToolTip
+      '
+      Me.BurialToolTip.ToolTipTitle = "WinFreeREG - Burial Record"
+      '
       'formBurialRecord
       '
       Me.AcceptButton = Me.ButtonOK
@@ -353,7 +357,7 @@ Partial Class formBurialRecord
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
       Me.Name = "formBurialRecord"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "Burial Record"
+      Me.Text = "WinFreeREG - Burial Record"
       CType(Me.ErrorProvider1, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.BurialRelationshipBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)

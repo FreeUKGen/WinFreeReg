@@ -102,6 +102,10 @@ Partial Class formTablesErrors
       Me.btnOK.Text = "OK"
       Me.btnOK.UseVisualStyleBackColor = True
       '
+      'ErrorsToolTip
+      '
+      Me.ErrorsToolTip.ToolTipTitle = "WinFreeREG - Errors"
+      '
       'formTablesErrors
       '
       Me.AcceptButton = Me.btnOK
@@ -112,7 +116,7 @@ Partial Class formTablesErrors
       Me.Controls.Add(Me.SplitContainer1)
       Me.Name = "formTablesErrors"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "Errors"
+      Me.Text = "WinFreeREG - Errors"
       CType(Me.olvErrors, System.ComponentModel.ISupportInitialize).EndInit()
       Me.SplitContainer1.Panel1.ResumeLayout(False)
       Me.SplitContainer1.Panel2.ResumeLayout(False)

@@ -289,6 +289,10 @@ Partial Class formFreeregTables
       'backgroundChurches
       '
       '
+      'FreeRegTablesToolTip
+      '
+      Me.FreeRegTablesToolTip.ToolTipTitle = "WinFreeREG - FreeREG Tables"
+      '
       'formFreeregTables
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -300,7 +304,7 @@ Partial Class formFreeregTables
       Me.Margin = New System.Windows.Forms.Padding(4)
       Me.Name = "formFreeregTables"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "FreeREG Tables"
+      Me.Text = "WinFreeREG - FreeREG Tables"
       Me.TabControl1.ResumeLayout(False)
       Me.tabRegisterTypes.ResumeLayout(False)
       CType(Me.dlvRegisterTypes, System.ComponentModel.ISupportInitialize).EndInit()

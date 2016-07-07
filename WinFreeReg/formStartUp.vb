@@ -1,15 +1,16 @@
 ﻿Imports System.Runtime.Serialization.Formatters.Binary
 Imports System.IO
 Imports WinFreeReg
+Imports System.Text
 
 Public Class formStartUp
 
    Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
    Public LookupTablesFile As String = Path.Combine(AppDataLocalFolder, "winfreereg.tables")
+   Public ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
    Dim strPersonalFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
 
    Private Sub formStartUp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-      '      If String.IsNullOrEmpty(My.Settings.MyFreeREGUrl) Then
 #If DEBUG Then
 #If LOCAL Then
       My.Settings.MyFreeREGUrl = My.Settings.MyLocalUrl
@@ -19,7 +20,8 @@ Public Class formStartUp
 #Else
       My.Settings.MyFreeREGUrl = My.Settings.MyLiveUrl
 #End If
-      '      End If
+
+      Dim StartToolTip = New CustomToolTip(ToolTipsFile, Me)
 
       If String.IsNullOrEmpty(My.Settings.MyTranscriptionLibrary) Then
          My.Settings.MyTranscriptionLibrary = String.Format("{0}\FreeREG\WinREG for Windows\Transcripts", strPersonalFolder)
@@ -33,8 +35,8 @@ Public Class formStartUp
       TraceCheckBox.Checked = My.Settings.MyNetworkTrace
       linkPassword.Tag = True
 
-      LookupTables1.LoadXmlData(LookupTablesFile)
-      DefaultCountyComboBox.DataSource = LookupTables1.Tables("ChapmanCodes").DefaultView
+      UserLookupTables.LoadXmlData(LookupTablesFile)
+      DefaultCountyComboBox.DataSource = UserLookupTables.Tables("ChapmanCodes").DefaultView
       DefaultCountyComboBox.DisplayMember = "Code"
       DefaultCountyComboBox.BindingContext = Me.BindingContext
       If Not String.IsNullOrEmpty(My.Settings.MyDefaultCounty) Then DefaultCountyComboBox.SelectedIndex = DefaultCountyComboBox.FindString(My.Settings.MyDefaultCounty)
@@ -118,24 +120,6 @@ Public Class formStartUp
       End If
    End Sub
 
-   Private RecursionBreak As Boolean = False
-
-   Private Sub StartToolTip_Popup(sender As Object, e As PopupEventArgs) Handles StartToolTip.Popup
-      If RecursionBreak Then Return
-
-      If String.IsNullOrEmpty(LibraryTextBox.Text) Then
-         e.Cancel = True
-         Return
-      End If
-
-      If e.AssociatedControl.Name = "LibraryTextBox" Then
-         RecursionBreak = True
-         StartToolTip.SetToolTip(LibraryTextBox, LibraryTextBox.Text)
-         RecursionBreak = False
-      End If
-
-   End Sub
-
    Private Sub UrlTextBox_Validating(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles UrlTextBox.Validating
       If IsValidUrl(UrlTextBox.Text) Then
          urlErrorProvider.SetError(UrlTextBox, "")
@@ -177,4 +161,5 @@ Public Class formStartUp
          End If
       End If
    End Sub
+
 End Class

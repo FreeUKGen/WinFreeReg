@@ -120,6 +120,10 @@ Partial Class formLogin
       Me.UrlTextBox.Size = New System.Drawing.Size(347, 16)
       Me.UrlTextBox.TabIndex = 7
       '
+      'LoginToolTip
+      '
+      Me.LoginToolTip.ToolTipTitle = "WinFreeREG - Login"
+      '
       'formLogin
       '
       Me.AcceptButton = Me.OK_Button
@@ -143,7 +147,7 @@ Partial Class formLogin
       Me.Name = "formLogin"
       Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "Login to FreeREG"
+      Me.Text = "WinFreeREG - Login to FreeREG"
       Me.ResumeLayout(False)
       Me.PerformLayout()
 

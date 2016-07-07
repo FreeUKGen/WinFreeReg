@@ -715,7 +715,7 @@ Partial Class formMarriageRecord
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
       Me.Name = "formMarriageRecord"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "Marriage Record"
+      Me.Text = "WinFreeREG - Marriage Record"
       CType(Me.MarriageErrorProvider, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.GroomConditionBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.BrideConditionBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
