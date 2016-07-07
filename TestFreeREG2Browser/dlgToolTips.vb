@@ -31,7 +31,7 @@ Public Class dlgToolTips
    End Sub
 
    Private Sub dlgToolTips_FormClosed(sender As Object, e As FormClosedEventArgs) Handles Me.FormClosed
-      If Me.DialogResult = Windows.Forms.DialogResult.Cancel Then Exit Sub
+      If DialogResult = Windows.Forms.DialogResult.Cancel Then Exit Sub
 
       If File.Exists(m_FileName) Then File.SetAttributes(m_FileName, File.GetAttributes(m_FileName) And (Not FileAttributes.ReadOnly))
       ToolTips.AcceptChanges()
@@ -40,22 +40,22 @@ Public Class dlgToolTips
    End Sub
 
    Private Sub dlgToolTips_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
-      If Me.DialogResult = Windows.Forms.DialogResult.Cancel Then Exit Sub
-
-      If ToolTips.Tables("ToolTips").HasErrors Then
-         Dim errors As WinFreeReg.ToolTips.ToolTipsRow() = ToolTips.Tables("ToolTips").GetErrors()
-         e.Cancel = True
-      Else
-         Dim changes As WinFreeReg.ToolTips.ToolTipsDataTable = CType(ToolTips.Tables("ToolTips"), WinFreeReg.ToolTips.ToolTipsDataTable).GetChanges()
-         If changes IsNot Nothing Then
-            For Each row In changes.Rows
-               Beep()
-            Next
+      If DialogResult = Windows.Forms.DialogResult.Cancel Then
+         If ToolTips.HasChanges() Then
+            Dim res = MessageBox.Show("There are =unsaved changes. Do you still want to exit without saving them?", "Tooltips Editor", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2)
+            If res = Windows.Forms.DialogResult.No Then e.Cancel = True
          End If
       End If
    End Sub
 
    Private Sub dlgToolTips_Load(sender As Object, e As EventArgs) Handles Me.Load
       If File.Exists(m_FileName) Then ToolTips.ReadXml(m_FileName)
+      ToolTips.AcceptChanges()
+   End Sub
+
+   Private Sub dgvToolTips_RowValidated(sender As Object, e As DataGridViewCellEventArgs) Handles dgvToolTips.RowValidated
+      'If dgvToolTips.Columns(e.ColumnIndex).DataPropertyName = "ToolTipText" Then
+      '   ToolTips.Tables("ToolTips").AcceptChanges()
+      'End If
    End Sub
 End Class

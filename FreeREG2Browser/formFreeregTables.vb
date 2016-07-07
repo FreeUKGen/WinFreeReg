@@ -73,6 +73,9 @@ Public Class formFreeregTables
       ConfigureChurchesOLV()
 
       TabControl1.SelectTab("tabCounties")
+
+      Dim StartToolTip = New CustomToolTip(Path.Combine(String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName), "ToolTips.xml"), Me)
+
    End Sub
 
 	Sub ConfigureRegisterTypesOLV()

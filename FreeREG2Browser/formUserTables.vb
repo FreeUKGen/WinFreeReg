@@ -1,18 +1,19 @@
 ﻿Imports System.Windows.Forms
 Imports System.Text
 Imports BrightIdeasSoftware
+Imports System.IO
 
 Public Class formUserTables
 
-	Private m_LookupsFilename As String
-	Public Property LookupsFilename() As String
-		Get
-			Return m_LookupsFilename
-		End Get
-		Set(ByVal value As String)
-			m_LookupsFilename = value
-		End Set
-	End Property
+   Private m_LookupsFilename As String
+   Public Property LookupsFilename() As String
+      Get
+         Return m_LookupsFilename
+      End Get
+      Set(ByVal value As String)
+         m_LookupsFilename = value
+      End Set
+   End Property
 
    Private m_lookups As WinFreeReg.LookupTables
    Public Property LookupTables() As WinFreeReg.LookupTables
@@ -68,6 +69,10 @@ Public Class formUserTables
       BindingNavigatorAddNewItem.Enabled = False
       BindingNavigatorDeleteItem.Enabled = False
       BindingNavigatorSaveChanges.Enabled = LookupTables.HasChanges()
+
+      Dim AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
+      Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
+      Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
 
    End Sub
 
@@ -268,10 +273,10 @@ Public Class formUserTables
       LookupTables.WriteXml(m_LookupsFilename, XmlWriteMode.WriteSchema)
    End Sub
 
-	Private Sub BindingNavigatorSaveChanges_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorSaveChanges.Click
-		LookupTables.AcceptChanges()
-		LookupTables.WriteXml(m_LookupsFilename, XmlWriteMode.WriteSchema)
-		BindingNavigatorSaveChanges.Enabled = LookupTables.HasChanges()
-	End Sub
+   Private Sub BindingNavigatorSaveChanges_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorSaveChanges.Click
+      LookupTables.AcceptChanges()
+      LookupTables.WriteXml(m_LookupsFilename, XmlWriteMode.WriteSchema)
+      BindingNavigatorSaveChanges.Enabled = LookupTables.HasChanges()
+   End Sub
 
 End Class

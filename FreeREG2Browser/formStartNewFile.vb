@@ -100,6 +100,10 @@ Public Class formStartNewFile
 
       Label1.Visible = False
       labFilename.Text = ""
+
+      Dim AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
+      Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
+      Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
    End Sub
 
    Private Sub CountiesComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CountiesComboBox.SelectedIndexChanged

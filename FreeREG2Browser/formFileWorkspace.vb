@@ -154,6 +154,10 @@ Public Class formFileWorkspace
 
       If m_NewFile Then AddNewItem()
 
+      Dim AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
+      Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
+      Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
+
 	End Sub
 
 	Private Function SexDescription(ByVal model As Object) As String

@@ -1,6 +1,7 @@
 ﻿Imports System.Drawing
 Imports System.Windows.Forms
 Imports WinFreeReg.TranscriptionFileClass
+Imports System.IO
 
 Public Class formFileDetails
 
@@ -32,6 +33,10 @@ Public Class formFileDetails
       ChurchesBindingSource.DataSource = m_TranscriptionFile.FreeregTables
       RegisterTypesBindingSource.DataSource = m_TranscriptionFile.FreeregTables
       FileTypesBindingSource.DataSource = m_TranscriptionFile.LookupTables
+
+      Dim AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
+      Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
+      Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
    End Sub
 
    Private Sub LinkLabel1_LinkClicked(sender As Object, e As Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked

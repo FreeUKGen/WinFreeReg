@@ -25,7 +25,11 @@ Public Class formBatchContents
 
 	Private Sub formBatchContents_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 		FileContentsTextBox.Select(0, 0)
-	End Sub
+
+      Dim AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
+      Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
+      Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
+   End Sub
 
 	Private Sub btnSaveFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveFile.Click
 		Dim contents As String = FileContentsTextBox.Text

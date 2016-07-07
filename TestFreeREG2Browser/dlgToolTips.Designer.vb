@@ -45,7 +45,7 @@ Partial Class dlgToolTips
       Me.BindingNavigatorSeparator2 = New System.Windows.Forms.ToolStripSeparator()
       Me.ToolTipsBindingNavigatorSaveItem = New System.Windows.Forms.ToolStripButton()
       Me.Panel1 = New System.Windows.Forms.Panel()
-      Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+      Me.dgvToolTips = New System.Windows.Forms.DataGridView()
       Me.FormNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
       Me.ControlNameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
       Me.ToolTipTextDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -55,7 +55,7 @@ Partial Class dlgToolTips
       CType(Me.ToolTipsBindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.ToolTipsBindingNavigator.SuspendLayout()
       Me.Panel1.SuspendLayout()
-      CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.dgvToolTips, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
       'TableLayoutPanel1
@@ -66,7 +66,7 @@ Partial Class dlgToolTips
       Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
       Me.TableLayoutPanel1.Controls.Add(Me.OK_Button, 0, 0)
       Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 1, 0)
-      Me.TableLayoutPanel1.Location = New System.Drawing.Point(452, 304)
+      Me.TableLayoutPanel1.Location = New System.Drawing.Point(680, 413)
       Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
       Me.TableLayoutPanel1.RowCount = 1
       Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -116,7 +116,7 @@ Partial Class dlgToolTips
       Me.ToolTipsBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
       Me.ToolTipsBindingNavigator.Name = "ToolTipsBindingNavigator"
       Me.ToolTipsBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-      Me.ToolTipsBindingNavigator.Size = New System.Drawing.Size(610, 25)
+      Me.ToolTipsBindingNavigator.Size = New System.Drawing.Size(838, 25)
       Me.ToolTipsBindingNavigator.TabIndex = 1
       Me.ToolTipsBindingNavigator.Text = "BindingNavigator1"
       '
@@ -219,26 +219,26 @@ Partial Class dlgToolTips
       Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-      Me.Panel1.Controls.Add(Me.DataGridView1)
+      Me.Panel1.Controls.Add(Me.dgvToolTips)
       Me.Panel1.Location = New System.Drawing.Point(0, 28)
       Me.Panel1.Name = "Panel1"
-      Me.Panel1.Size = New System.Drawing.Size(610, 270)
+      Me.Panel1.Size = New System.Drawing.Size(838, 379)
       Me.Panel1.TabIndex = 2
       '
-      'DataGridView1
+      'dgvToolTips
       '
-      Me.DataGridView1.AutoGenerateColumns = False
-      Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
-      Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-      Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FormNameDataGridViewTextBoxColumn, Me.ControlNameDataGridViewTextBoxColumn, Me.ToolTipTextDataGridViewTextBoxColumn})
-      Me.DataGridView1.DataSource = Me.ToolTipsBindingSource
-      Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-      Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
-      Me.DataGridView1.MultiSelect = False
-      Me.DataGridView1.Name = "DataGridView1"
-      Me.DataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-      Me.DataGridView1.Size = New System.Drawing.Size(610, 270)
-      Me.DataGridView1.TabIndex = 0
+      Me.dgvToolTips.AutoGenerateColumns = False
+      Me.dgvToolTips.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+      Me.dgvToolTips.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+      Me.dgvToolTips.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.FormNameDataGridViewTextBoxColumn, Me.ControlNameDataGridViewTextBoxColumn, Me.ToolTipTextDataGridViewTextBoxColumn})
+      Me.dgvToolTips.DataSource = Me.ToolTipsBindingSource
+      Me.dgvToolTips.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dgvToolTips.Location = New System.Drawing.Point(0, 0)
+      Me.dgvToolTips.MultiSelect = False
+      Me.dgvToolTips.Name = "dgvToolTips"
+      Me.dgvToolTips.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
+      Me.dgvToolTips.Size = New System.Drawing.Size(838, 379)
+      Me.dgvToolTips.TabIndex = 0
       '
       'FormNameDataGridViewTextBoxColumn
       '
@@ -248,6 +248,7 @@ Partial Class dlgToolTips
       Me.FormNameDataGridViewTextBoxColumn.DefaultCellStyle = DataGridViewCellStyle1
       Me.FormNameDataGridViewTextBoxColumn.HeaderText = "Form"
       Me.FormNameDataGridViewTextBoxColumn.Name = "FormNameDataGridViewTextBoxColumn"
+      Me.FormNameDataGridViewTextBoxColumn.ReadOnly = True
       Me.FormNameDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
       Me.FormNameDataGridViewTextBoxColumn.Width = 21
       '
@@ -257,6 +258,7 @@ Partial Class dlgToolTips
       Me.ControlNameDataGridViewTextBoxColumn.DataPropertyName = "ControlName"
       Me.ControlNameDataGridViewTextBoxColumn.HeaderText = "Control"
       Me.ControlNameDataGridViewTextBoxColumn.Name = "ControlNameDataGridViewTextBoxColumn"
+      Me.ControlNameDataGridViewTextBoxColumn.ReadOnly = True
       Me.ControlNameDataGridViewTextBoxColumn.Width = 21
       '
       'ToolTipTextDataGridViewTextBoxColumn
@@ -274,7 +276,7 @@ Partial Class dlgToolTips
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.CancelButton = Me.Cancel_Button
-      Me.ClientSize = New System.Drawing.Size(610, 345)
+      Me.ClientSize = New System.Drawing.Size(838, 454)
       Me.Controls.Add(Me.Panel1)
       Me.Controls.Add(Me.ToolTipsBindingNavigator)
       Me.Controls.Add(Me.TableLayoutPanel1)
@@ -292,7 +294,7 @@ Partial Class dlgToolTips
       Me.ToolTipsBindingNavigator.ResumeLayout(False)
       Me.ToolTipsBindingNavigator.PerformLayout()
       Me.Panel1.ResumeLayout(False)
-      CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.dgvToolTips, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
 
@@ -316,7 +318,7 @@ Partial Class dlgToolTips
    Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator
    Friend WithEvents ToolTipsBindingNavigatorSaveItem As System.Windows.Forms.ToolStripButton
    Friend WithEvents Panel1 As System.Windows.Forms.Panel
-   Friend WithEvents DataGridView1 As System.Windows.Forms.DataGridView
+   Friend WithEvents dgvToolTips As System.Windows.Forms.DataGridView
    Friend WithEvents FormNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
    Friend WithEvents ControlNameDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn
    Friend WithEvents ToolTipTextDataGridViewTextBoxColumn As System.Windows.Forms.DataGridViewTextBoxColumn

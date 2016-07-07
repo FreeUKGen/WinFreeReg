@@ -214,6 +214,10 @@
       <Project>{38629534-0DF4-4C0D-AFE3-B90114DDEEDB}</Project>
       <Name>FreeREG2Browser</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WindowsControlLibrary2\WinFreeRegControlLibrary.vbproj">
+      <Project>{887aac62-10ed-4af7-bd7f-d1379272c6dd}</Project>
+      <Name>WinFreeRegControlLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
