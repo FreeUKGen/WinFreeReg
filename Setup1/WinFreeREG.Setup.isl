@@ -225,6 +225,7 @@
 	<table name="AppSearch">
 		<col key="yes" def="s72">Property</col>
 		<col key="yes" def="s72">Signature_</col>
+		<row><td>DOTNETVERSION45FULL</td><td>DotNet45Full</td></row>
 	</table>
 
 	<table name="BBControl">
@@ -340,14 +341,20 @@
 		<col def="S0">ISDotNetInstallerArgsUninstall</col>
 		<col def="S0">ISDotNetInstallerArgsRollback</col>
 		<row><td>FreeREG2Browser.Primary_output</td><td>{CB50B56D-3EFA-472A-B3F4-E9E97081269A}</td><td>INSTALLDIR</td><td>2</td><td/><td>freereg2browser.primary_outp</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>FreeREG2Browser.Primary_output1</td><td>{57547C00-62BE-4FC3-B99F-755E606486CE}</td><td>INSTALLDIR</td><td>2</td><td/><td>freereg2browser.primary_outp</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td>{953965DC-DBB9-4655-BC4A-6EE74F47358B}</td><td>AppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{97D53AE4-D678-4795-B6E8-D5F95D820809}</td><td>PersonalFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{1339B2F4-1B4D-49E5-BD2B-F92A227A175E}</td><td>LocalAppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td>{BAD5A1D0-9B66-43BF-9FD6-20CC2F04B641}</td><td>WINFREEREG1</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LookupTables.Primary_output</td><td>{783A7448-873E-4BA8-BF45-1FBB4D66451F}</td><td>INSTALLDIR</td><td>2</td><td/><td>lookuptables.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>LookupTables.Primary_output1</td><td>{A1E1B95E-E52C-40FA-B02C-9FE646C31354}</td><td>INSTALLDIR</td><td>2</td><td/><td>lookuptables.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>RegexUtilities.Primary_output</td><td>{5ACA9BD4-D6F6-4FBD-9CE9-1FFB22DFC671}</td><td>INSTALLDIR</td><td>2</td><td/><td>regexutilities.primary_outpu</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>RegexUtilities.Primary_output1</td><td>{35D8F056-094F-46AD-8092-A18508D87001}</td><td>INSTALLDIR</td><td>2</td><td/><td>regexutilities.primary_outpu</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>TranscriptionTables.Primary_output</td><td>{E6A2D8BB-CF69-43EB-87A2-18B2408914EF}</td><td>INSTALLDIR</td><td>2</td><td/><td>transcriptiontables.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>TranscriptionTables.Primary_output1</td><td>{CE72DEF3-0FD4-41C6-A226-320BA17737AE}</td><td>INSTALLDIR</td><td>2</td><td/><td>transcriptiontables.primary_</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>WinFreeReg.Primary_output</td><td>{F72C4F68-94BF-4536-BE84-04F9A87A7959}</td><td>INSTALLDIR</td><td>2</td><td/><td>winfreereg.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WinFreeReg.Primary_output1</td><td>{8F10C2AF-133A-4356-B451-95226DA690E1}</td><td>INSTALLDIR</td><td>2</td><td/><td>winfreereg.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>WinFreeRegControlLibrary.Primary_output</td><td>{F05274C4-AF14-4526-ADBE-A043D84A37B5}</td><td>INSTALLDIR</td><td>2</td><td/><td>winfreeregcontrollibrary.pri</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 	</table>
 
 	<table name="Condition">
@@ -1852,8 +1859,6 @@
 		<col def="S255">ProgId_</col>
 		<col def="S64">MIME_</col>
 		<col def="s38">Feature_</col>
-		<row><td>NewExtension1</td><td>WinFreeReg.Primary_output</td><td/><td/><td>AlwaysInstall</td></row>
-		<row><td>NewExtension2</td><td>WinFreeReg.Primary_output</td><td/><td/><td>AlwaysInstall</td></row>
 	</table>
 
 	<table name="Feature">
@@ -1876,14 +1881,20 @@
 		<col key="yes" def="s38">Feature_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AlwaysInstall</td><td>FreeREG2Browser.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>FreeREG2Browser.Primary_output1</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>AlwaysInstall</td><td>LookupTables.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>LookupTables.Primary_output1</td></row>
 		<row><td>AlwaysInstall</td><td>RegexUtilities.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>RegexUtilities.Primary_output1</td></row>
 		<row><td>AlwaysInstall</td><td>TranscriptionTables.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>TranscriptionTables.Primary_output1</td></row>
 		<row><td>AlwaysInstall</td><td>WinFreeReg.Primary_output</td></row>
+		<row><td>AlwaysInstall</td><td>WinFreeReg.Primary_output1</td></row>
+		<row><td>AlwaysInstall</td><td>WinFreeRegControlLibrary.Primary_output</td></row>
 	</table>
 
 	<table name="File">
@@ -1899,12 +1910,13 @@
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>errormessages.xml2</td><td>ISX_DEFAULTCOMPONENT3</td><td>ERRORM~1.XML|ErrorMessages.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\FreeREG\WinREG for Windows\ErrorMessages.xml</td><td>1</td><td/></row>
-		<row><td>freereg2browser.primary_outp</td><td>FreeREG2Browser.Primary_output</td><td>FreeREG2Browser.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;FreeREG2Browser&gt;|Built</td><td>3</td><td/></row>
-		<row><td>lookuptables.primary_output</td><td>LookupTables.Primary_output</td><td>LookupTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LookupTables&gt;|Built</td><td>3</td><td/></row>
-		<row><td>regexutilities.primary_outpu</td><td>RegexUtilities.Primary_output</td><td>RegexUtilities.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;RegexUtilities&gt;|Built</td><td>3</td><td/></row>
+		<row><td>freereg2browser.primary_outp</td><td>FreeREG2Browser.Primary_output1</td><td>FreeREG2Browser.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;FreeREG2Browser&gt;|Built</td><td>3</td><td/></row>
+		<row><td>lookuptables.primary_output</td><td>LookupTables.Primary_output1</td><td>LookupTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LookupTables&gt;|Built</td><td>3</td><td/></row>
+		<row><td>regexutilities.primary_outpu</td><td>RegexUtilities.Primary_output1</td><td>RegexUtilities.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;RegexUtilities&gt;|Built</td><td>3</td><td/></row>
 		<row><td>tooltips.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>ToolTips.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\AppData\Local\WinFreeREG\ToolTips.xml</td><td>1</td><td/></row>
-		<row><td>transcriptiontables.primary_</td><td>TranscriptionTables.Primary_output</td><td>TranscriptionTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;TranscriptionTables&gt;|Built</td><td>3</td><td/></row>
-		<row><td>winfreereg.primary_output</td><td>WinFreeReg.Primary_output</td><td>WinFreeReg.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WinFreeReg&gt;|Built</td><td>3</td><td/></row>
+		<row><td>transcriptiontables.primary_</td><td>TranscriptionTables.Primary_output1</td><td>TranscriptionTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;TranscriptionTables&gt;|Built</td><td>3</td><td/></row>
+		<row><td>winfreereg.primary_output</td><td>WinFreeReg.Primary_output1</td><td>WinFreeReg.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WinFreeReg&gt;|Built</td><td>3</td><td/></row>
+		<row><td>winfreeregcontrollibrary.pri</td><td>WinFreeRegControlLibrary.Primary_output</td><td>WinFreeRegControlLibrary.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WinFreeRegControlLibrary&gt;|Built</td><td>3</td><td/></row>
 	</table>
 
 	<table name="FileSFPCatalog">
@@ -2049,14 +2061,20 @@
 		<col def="S0">HTTPLocation</col>
 		<col def="S0">Miscellaneous</col>
 		<row><td>FreeREG2Browser.Primary_output</td><td/><td/><td>_1ED98FB3_6F29_4AD3_ADF4_ACCBF7CCB751_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>FreeREG2Browser.Primary_output1</td><td/><td/><td>_6600A1DD_34E1_4CFB_8640_E655EEA68C43_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT</td><td/><td/><td>_D2E22606_C007_40C1_B720_30DFEFD479AC_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_06CD69EA_2BEA_47D6_BB10_1B2A4EEAAEB8_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_9085489A_C111_4F0C_8BCA_740F879DAAB0_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td/><td/><td>_97F525FE_9AC5_4885_B54A_3820C3D6D5B1_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LookupTables.Primary_output</td><td/><td/><td>_B945B06A_4653_45F6_AD38_744E7686F40E_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>LookupTables.Primary_output1</td><td/><td/><td>_4282366C_D7F3_482E_B368_32134DE52F63_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>RegexUtilities.Primary_output</td><td/><td/><td>_19FE2C1F_DE28_401B_BAD2_F7FAA143979B_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>RegexUtilities.Primary_output1</td><td/><td/><td>_49B220BC_F18D_4984_8DD0_53053A164C6A_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>TranscriptionTables.Primary_output</td><td/><td/><td>_F2C93366_5168_49FC_9A28_43DA84DC1AB3_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>TranscriptionTables.Primary_output1</td><td/><td/><td>_CB585D2B_9454_4B26_BB25_BC1D2D14282F_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>WinFreeReg.Primary_output</td><td/><td/><td>_725FBB9C_2C25_4E56_8E98_74D1FEE11E9C_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WinFreeReg.Primary_output1</td><td/><td/><td>_BC2A7B36_3DF5_43E9_AB24_609C9AA1EECE_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>WinFreeRegControlLibrary.Primary_output</td><td/><td/><td>_8D7296AB_9E7E_4E05_A7F7_8283A1654751_FILTER</td><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="ISCustomActionReference">
@@ -2369,6 +2387,7 @@
 		<row><td>SystemFolder</td><td/><td/><td>1</td></row>
 		<row><td>TranscriptionTables</td><td>TranscriptionTables\TranscriptionTables.vbproj</td><td/><td>2</td></row>
 		<row><td>WinFreeReg</td><td>WinFreeReg\WinFreeReg.vbproj</td><td/><td>2</td></row>
+		<row><td>WinFreeRegControlLibrary</td><td>WindowsControlLibrary2\WinFreeRegControlLibrary.vbproj</td><td/><td>2</td></row>
 		<row><td>WindowsFolder</td><td/><td/><td>1</td></row>
 	</table>
 
@@ -2680,9 +2699,10 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>-484161809</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>1671751856</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
+		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL</td><td>1033</td><td>Microsoft .NET Framework 4.5 Full package or greater needs to be installed for this installation to continue.</td><td>0</td><td/><td>1671700688</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_OS</td><td>1033</td><td>The operating system is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
@@ -3781,8 +3801,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.FreeUKGenealogy.com</td><td>0</td><td/><td>-484161809</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>-484161809</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.FreeUKGenealogy.com</td><td>0</td><td/><td>1671751856</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>1671751856</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-484144821</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-484139350</td></row>
 	</table>
@@ -3892,24 +3912,33 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\FreeREG2Browser\Resources\appico.ico</td><td>0</td></row>
+		<row><td>_091F2364A8194811AE373FB57DC96543.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_11875191A41A42BBAB1B4D90339EF654.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_15E5403130DF4DED825ABB519F2A0990.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_197B334B08D54B30B924AED2B7E7E3FD.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_37F0E4FCF8F14836A961E755A879DE63.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_3E0E63EB77E14B8BA3C7EE7A763EE8FB.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_422DD8401F5F49079C5C57C067D33484.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_425B5A51D39E46BFAE491024ECEAB7BA.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_42EB20B3FE4A4B09BC1ECCA49CEECD24.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_4CE7AFD933654959ACBE60EBBA46B148.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_500D64741DF34A3A80E504B146C1997C.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_55C42996C2C148D69786DF239EC86EEE.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_58B80EB8D3CC4DA3A75BB5701D87F5D8.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_5EF099F0CFF542A8B395F7BEF1D73268.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_619DE9AD53524F41A47C0B944613B56F.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_64AAFD4CD42E41E995F2CAED61043CD4.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_65F865E93A5F465388D6CC9A05877A8C.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_6608A18739034A85ABA427D7B1D8F3DA.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_6DF04D59E2DF4CC4854161F79C46C4F0.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_70AB872005E6462C886F902DCA78F40C.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_75DFD47C9B5B48918E79FB0189BC5C70.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_7B463C80C34847EAAA0AD958B02E1CAC.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_7FBA8BEA1294427CB7C66FEF1B543B7E.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_865A1F2DBCE94BFE87597BC55008DFF1.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_875B9D931899481EBAC66B1AC03EDE9A.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_8998F738099B4512B15148D9399F7B6A.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_8A05067F8A53418E92A4EE346CCC48AA.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_8C7B35A344404E6AB0478A6F6FC3EEBD.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_993D19AA30FD4404936C39C58B4007E9.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_9BFCC9457B73492DAED054B347B1FE5D.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
@@ -3917,16 +3946,21 @@
 		<row><td>_A53A7D96DDBA4C07A54A7DCCC0ACB841.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_A5AE6152FC9C4B06BC80D58201BB5B5D.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_AED80E49A3CB41CA926109DD47617BE5.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_B01644897D36437FB227D9688F8B9AFE.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_B33BE79E1457441788D53A844B81E737.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_B729FF4321F14FB08BA05CABB772EB07.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_BBE185656E634EE49B8EAEB9DDD37EC6.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_C01CEB90BEC54ED1A57657F2B1D426C4.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_C1EB12FE7EB945519226E3D501EF93A9.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_CA6503216FD141E4AF684C4EC20A0F0B.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_DEC46998A8F444E4ABD9F879253370D6.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_DF8EBAA8ED25486E94CB53683A793E9E.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_E5F913CA885041DD97DF8000D1FFBC0E.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_EA31A1AAE4DB469B931A5C9B64963681.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_F10C8AB7E9814B38908636E8334080D6.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_F730EB5E3F4E4F99B9AFB96403CEB525.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_F9F970225FD3417BB01EB840B343C697.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_FA058A98295645639200FCBB4492EC5B.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_FA0D1A3C733C4934AE332F5E8FC9ED59.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 	</table>
 
@@ -4123,6 +4157,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 	<table name="LaunchCondition">
 		<col key="yes" def="s255">Condition</col>
 		<col def="l255">Description</col>
+		<row><td>DOTNETVERSION45FULL&gt;="#1"</td><td>##IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION45FULL##</td></row>
 	</table>
 
 	<table name="ListBox">
@@ -4451,7 +4486,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>RestartManagerOption</td><td>CloseRestart</td><td/></row>
 		<row><td>SERIALNUMBER</td><td/><td/></row>
 		<row><td>SERIALNUMVALSUCCESSRETVAL</td><td>1</td><td/></row>
-		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR</td><td/></row>
+		<row><td>SecureCustomProperties</td><td>ISFOUNDNEWERPRODUCTVERSION;USERNAME;COMPANYNAME;ISX_SERIALNUM;SUPPORTDIR;DOTNETVERSION45FULL</td><td/></row>
 		<row><td>SelectedSetupType</td><td>##IDS__DisplayName_Typical##</td><td/></row>
 		<row><td>SetupType</td><td>Typical</td><td/></row>
 		<row><td>UpgradeCode</td><td>{9215B267-4765-4E2A-84B3-ECF1E94D2DE0}</td><td/></row>
@@ -4496,6 +4531,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="s255">Key</col>
 		<col def="S255">Name</col>
 		<col def="I2">Type</col>
+		<row><td>DotNet45Full</td><td>2</td><td>SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full</td><td>Version</td><td>2</td></row>
 	</table>
 
 	<table name="Registry">

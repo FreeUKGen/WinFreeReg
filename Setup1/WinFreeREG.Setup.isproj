@@ -49,5 +49,9 @@
 			<Name>WinFreeReg</Name>
 			<Project>{2C861969-D0E9-4E76-808C-1F64BAE12BE9}</Project>
 		</ProjectReference>
+		<ProjectReference Include="..\WindowsControlLibrary2\WinFreeRegControlLibrary.vbproj">
+			<Name>WinFreeRegControlLibrary</Name>
+			<Project>{887AAC62-10ED-4AF7-BD7F-D1379272C6DD}</Project>
+		</ProjectReference>
 	</ItemGroup>
 </Project>
