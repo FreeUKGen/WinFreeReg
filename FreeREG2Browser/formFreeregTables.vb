@@ -401,7 +401,7 @@ Public Class formFreeregTables
 					_tables.RegisterTypes.AcceptChanges()
 					_tables.WriteXml(_filename, XmlWriteMode.WriteSchema)
 				Else
-					Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG/2 failed - Not logged on")
+               Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG failed - Not logged on")
 				End If
 
 			Catch ex As BackgroundWorkerException
@@ -439,12 +439,12 @@ Public Class formFreeregTables
 				Return res
 
 			Catch ex As XmlException
-				Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG/2 failed", ex)
+            Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG failed", ex)
 
 			Catch ex As WebException
 				Dim webResp As HttpWebResponse = ex.Response
 				If webResp Is Nothing Then
-					Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG failed", ex)
 				Else
 					Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
 					Select Case webResp.StatusCode
@@ -457,7 +457,7 @@ Public Class formFreeregTables
 						Case Else
 
 					End Select
-					Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG failed", ex)
 				End If
 
 			Catch ex As Exception
@@ -524,7 +524,7 @@ Public Class formFreeregTables
 					_tables.Counties.AcceptChanges()
 					_tables.WriteXml(_filename, XmlWriteMode.WriteSchema)
 				Else
-					Throw New BackgroundWorkerException("Getting Counties from FreeREG/2 failed - not logged on")
+               Throw New BackgroundWorkerException("Getting Counties from FreeREG failed - not logged on")
 				End If
 
 			Catch ex As BackgroundWorkerException
@@ -560,12 +560,12 @@ Public Class formFreeregTables
 				Return res
 
 			Catch ex As XmlException
-				Throw New BackgroundWorkerException("Getting Counties from FreeREG/2 failed", ex)
+            Throw New BackgroundWorkerException("Getting Counties from FreeREG failed", ex)
 
 			Catch ex As WebException
 				Dim webResp As HttpWebResponse = ex.Response
 				If webResp Is Nothing Then
-					Throw New BackgroundWorkerException("Getting Counties from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting Counties from FreeREG failed", ex)
 				Else
 					Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
 					Select Case webResp.StatusCode
@@ -578,7 +578,7 @@ Public Class formFreeregTables
 						Case Else
 
 					End Select
-					Throw New BackgroundWorkerException("Getting Counties from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting Counties from FreeREG failed", ex)
 				End If
 
 			Catch ex As Exception
@@ -671,7 +671,7 @@ Public Class formFreeregTables
 						_tables.Places.AcceptChanges()
 						_tables.WriteXml(_filename, XmlWriteMode.WriteSchema)
 					Else
-						Throw New BackgroundWorkerException("Getting Places from FreeREG/2 failed - not logged on")
+                  Throw New BackgroundWorkerException("Getting Places from FreeREG failed - not logged on")
 					End If
 
 				Catch ex As BackgroundWorkerException
@@ -686,12 +686,12 @@ Public Class formFreeregTables
 				End Try
 
 			Catch ex As XmlException
-				Throw New BackgroundWorkerException("Getting Places from FreeREG/2 failed", ex)
+            Throw New BackgroundWorkerException("Getting Places from FreeREG failed", ex)
 
 			Catch ex As WebException
 				Dim webResp As HttpWebResponse = ex.Response
 				If webResp Is Nothing Then
-					Throw New BackgroundWorkerException("Getting Places from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting Places from FreeREG failed", ex)
 				Else
 					Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
 					Select Case webResp.StatusCode
@@ -704,7 +704,7 @@ Public Class formFreeregTables
 						Case Else
 
 					End Select
-					Throw New BackgroundWorkerException("Getting Places from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting Places from FreeREG failed", ex)
 				End If
 
 			Catch ex As Exception
@@ -803,7 +803,7 @@ Public Class formFreeregTables
                      Throw New BackgroundWorkerException(String.Format("No church information available for {0}", params.Place))
                   End If
 					Else
-						Throw New BackgroundWorkerException("Getting Churches from FreeREG/2 failed - Not logged on")
+                  Throw New BackgroundWorkerException("Getting Churches from FreeREG failed - Not logged on")
 					End If
 
 				Catch ex As BackgroundWorkerException
@@ -818,12 +818,12 @@ Public Class formFreeregTables
 				End Try
 
 			Catch ex As XmlException
-				Throw New BackgroundWorkerException("Getting Churches from FreeREG/2 failed", ex)
+            Throw New BackgroundWorkerException("Getting Churches from FreeREG failed", ex)
 
 			Catch ex As WebException
 				Dim webResp As HttpWebResponse = ex.Response
 				If webResp Is Nothing Then
-					Throw New BackgroundWorkerException("Getting Churches from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting Churches from FreeREG failed", ex)
 				Else
 					Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
 					Select Case webResp.StatusCode
@@ -836,7 +836,7 @@ Public Class formFreeregTables
 						Case Else
 
 					End Select
-					Throw New BackgroundWorkerException("Getting Churches from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting Churches from FreeREG failed", ex)
 				End If
 
 			Catch ex As Exception

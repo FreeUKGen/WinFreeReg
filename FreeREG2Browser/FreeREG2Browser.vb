@@ -710,7 +710,7 @@ Public Class FreeREG2Browser
       Me.BrowserMenuStrip.Location = New System.Drawing.Point(0, 0)
       Me.BrowserMenuStrip.Name = "BrowserMenuStrip"
       Me.BrowserMenuStrip.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
-      Me.BrowserMenuStrip.Size = New System.Drawing.Size(1202, 24)
+      Me.BrowserMenuStrip.Size = New System.Drawing.Size(1137, 24)
       Me.BrowserMenuStrip.TabIndex = 0
       Me.BrowserMenuStrip.Text = "MenuStrip1"
       '
@@ -823,7 +823,7 @@ Public Class FreeREG2Browser
       Me.BrowserStatusStrip.Location = New System.Drawing.Point(0, 644)
       Me.BrowserStatusStrip.Name = "BrowserStatusStrip"
       Me.BrowserStatusStrip.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
-      Me.BrowserStatusStrip.Size = New System.Drawing.Size(1202, 22)
+      Me.BrowserStatusStrip.Size = New System.Drawing.Size(1137, 22)
       Me.BrowserStatusStrip.TabIndex = 1
       Me.BrowserStatusStrip.Text = "StatusStrip1"
       '
@@ -1027,7 +1027,7 @@ Public Class FreeREG2Browser
       Me.panelUploadedFiles.Location = New System.Drawing.Point(0, 0)
       Me.panelUploadedFiles.Margin = New System.Windows.Forms.Padding(4)
       Me.panelUploadedFiles.Name = "panelUploadedFiles"
-      Me.panelUploadedFiles.Size = New System.Drawing.Size(1068, 583)
+      Me.panelUploadedFiles.Size = New System.Drawing.Size(985, 583)
       Me.panelUploadedFiles.TabIndex = 5
       '
       'IDTextBox
@@ -1335,7 +1335,7 @@ Public Class FreeREG2Browser
       '
       'btnDeleteFile
       '
-      Me.btnDeleteFile.Location = New System.Drawing.Point(813, 529)
+      Me.btnDeleteFile.Location = New System.Drawing.Point(723, 536)
       Me.btnDeleteFile.Margin = New System.Windows.Forms.Padding(4)
       Me.btnDeleteFile.Name = "btnDeleteFile"
       Me.btnDeleteFile.Size = New System.Drawing.Size(109, 28)
@@ -1345,7 +1345,7 @@ Public Class FreeREG2Browser
       '
       'btnViewContents
       '
-      Me.btnViewContents.Location = New System.Drawing.Point(931, 529)
+      Me.btnViewContents.Location = New System.Drawing.Point(841, 536)
       Me.btnViewContents.Margin = New System.Windows.Forms.Padding(4)
       Me.btnViewContents.Name = "btnViewContents"
       Me.btnViewContents.Size = New System.Drawing.Size(112, 28)
@@ -1370,7 +1370,7 @@ Public Class FreeREG2Browser
       '
       Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer2)
       Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer3)
-      Me.SplitContainer1.Size = New System.Drawing.Size(1202, 620)
+      Me.SplitContainer1.Size = New System.Drawing.Size(1137, 620)
       Me.SplitContainer1.SplitterDistance = 32
       Me.SplitContainer1.SplitterWidth = 5
       Me.SplitContainer1.TabIndex = 65
@@ -1397,8 +1397,8 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.Label1)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
-      Me.SplitContainer2.Size = New System.Drawing.Size(1202, 583)
-      Me.SplitContainer2.SplitterDistance = 529
+      Me.SplitContainer2.Size = New System.Drawing.Size(1137, 583)
+      Me.SplitContainer2.SplitterDistance = 528
       Me.SplitContainer2.SplitterWidth = 5
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1424,7 +1424,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(1202, 529)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(1137, 528)
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
       Me.dlvLocalFiles.UseAlternatingBackColors = True
@@ -1498,7 +1498,6 @@ Public Class FreeREG2Browser
       '
       Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
       Me.SplitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-      Me.SplitContainer3.IsSplitterFixed = True
       Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
       Me.SplitContainer3.Margin = New System.Windows.Forms.Padding(4)
       Me.SplitContainer3.Name = "SplitContainer3"
@@ -1510,8 +1509,8 @@ Public Class FreeREG2Browser
       'SplitContainer3.Panel2
       '
       Me.SplitContainer3.Panel2.Controls.Add(Me.panelUploadedFiles)
-      Me.SplitContainer3.Size = New System.Drawing.Size(1202, 583)
-      Me.SplitContainer3.SplitterDistance = 129
+      Me.SplitContainer3.Size = New System.Drawing.Size(1137, 583)
+      Me.SplitContainer3.SplitterDistance = 147
       Me.SplitContainer3.SplitterWidth = 5
       Me.SplitContainer3.TabIndex = 5
       '
@@ -1530,7 +1529,8 @@ Public Class FreeREG2Browser
       Me.dlvUploadedFiles.Margin = New System.Windows.Forms.Padding(4)
       Me.dlvUploadedFiles.MultiSelect = False
       Me.dlvUploadedFiles.Name = "dlvUploadedFiles"
-      Me.dlvUploadedFiles.Size = New System.Drawing.Size(129, 583)
+      Me.dlvUploadedFiles.ShowCommandMenuOnRightClick = True
+      Me.dlvUploadedFiles.Size = New System.Drawing.Size(147, 583)
       Me.dlvUploadedFiles.Sorting = System.Windows.Forms.SortOrder.Ascending
       Me.dlvUploadedFiles.TabIndex = 0
       Me.dlvUploadedFiles.UseAlternatingBackColors = True
@@ -1565,7 +1565,7 @@ Public Class FreeREG2Browser
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(1202, 666)
+      Me.ClientSize = New System.Drawing.Size(1137, 666)
       Me.Controls.Add(Me.SplitContainer1)
       Me.Controls.Add(Me.BrowserStatusStrip)
       Me.Controls.Add(Me.BrowserMenuStrip)
@@ -1575,7 +1575,7 @@ Public Class FreeREG2Browser
       Me.Margin = New System.Windows.Forms.Padding(4)
       Me.Name = "FreeREG2Browser"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-      Me.Text = "WinFreeREG - FreeREG/2 Browser"
+      Me.Text = "WinFreeREG - FreeREG Browser"
       Me.BrowserMenuStrip.ResumeLayout(False)
       Me.BrowserMenuStrip.PerformLayout()
       Me.BrowserStatusStrip.ResumeLayout(False)
@@ -2153,7 +2153,7 @@ Public Class FreeREG2Browser
 
       Using webClient As New CookieAwareWebClient()
          Try
-            '  Tickle FreeREG/2 server
+            '  Tickle FreeREG server
             '
             worker.ReportProgress(0, "Logging on...")
             webClient.SetTimeout(30000)
@@ -2412,7 +2412,7 @@ Public Class FreeREG2Browser
                         End Select
                      End If
 
-                     worker.ReportProgress(100, "Logged on to FreeREG/2")
+                     worker.ReportProgress(100, "Logged on to FreeREG")
                   Else
                      Throw New BackgroundWorkerException("User Authentication - Unrecognised response")
                   End If
@@ -2435,7 +2435,7 @@ Public Class FreeREG2Browser
          Catch ex As WebException
             Dim webResp As HttpWebResponse = ex.Response
             If webResp Is Nothing Then
-               Throw New BackgroundWorkerException("Logon to FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Logon to FreeREG failed", ex)
             Else
                Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
                Select Case webResp.StatusCode
@@ -2448,11 +2448,11 @@ Public Class FreeREG2Browser
                   Case Else
 
                End Select
-               Throw New BackgroundWorkerException("Logon to FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Logon to FreeREG failed", ex)
             End If
 
          Catch ex As Exception
-            Throw New BackgroundWorkerException("Logon to FreeREG/2 failed", ex)
+            Throw New BackgroundWorkerException("Logon to FreeREG failed", ex)
          End Try
       End Using
 
@@ -2714,7 +2714,7 @@ Public Class FreeREG2Browser
             Dim webResp As HttpWebResponse = ex.Response
             If webResp Is Nothing Then
                MessageBox.Show(ex.InnerException.Message, ex.Message)
-               Throw New BackgroundWorkerException("Logout to FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Logout to FreeREG failed", ex)
             Else
                Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
                Select Case webResp.StatusCode
@@ -2727,11 +2727,11 @@ Public Class FreeREG2Browser
                   Case Else
 
                End Select
-               Throw New BackgroundWorkerException("Logout to FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Logout to FreeREG failed", ex)
             End If
 
          Catch ex As Exception
-            Throw New BackgroundWorkerException("Logout to FreeREG/2 failed", ex)
+            Throw New BackgroundWorkerException("Logout to FreeREG failed", ex)
          End Try
       End Using
 
@@ -2834,10 +2834,10 @@ Public Class FreeREG2Browser
          result = HttpUploadFile(MyAppSettings.BaseUrl + "/transreg_csvfiles/upload", fullname, "csvfile[csvfile]", "application/octet-stream", query_data)
 
       Catch ex As WebException
-         Throw New BackgroundWorkerException(String.Format("Upload of {0} to FreeREG/2 failed", fname), ex)
+         Throw New BackgroundWorkerException(String.Format("Upload of {0} to FreeREG failed", fname), ex)
 
       Catch ex As Exception
-         Throw New BackgroundWorkerException(String.Format("Upload of {0} to FreeREG/2 failed", fname), ex)
+         Throw New BackgroundWorkerException(String.Format("Upload of {0} to FreeREG failed", fname), ex)
 
       End Try
 
@@ -3016,10 +3016,10 @@ Public Class FreeREG2Browser
          result = HttpReplaceFile(MyAppSettings.BaseUrl + "/transreg_csvfiles/replace", fullname, "csvfile[csvfile]", "application/octet-stream", query_data)
 
       Catch ex As WebException
-         Throw New BackgroundWorkerException(String.Format("Replacement of {0} to FreeREG/2 failed", fname), ex)
+         Throw New BackgroundWorkerException(String.Format("Replacement of {0} to FreeREG failed", fname), ex)
 
       Catch ex As Exception
-         Throw New BackgroundWorkerException(String.Format("Replacement of {0} to FreeREG/2 failed", fname), ex)
+         Throw New BackgroundWorkerException(String.Format("Replacement of {0} to FreeREG failed", fname), ex)
 
       End Try
 
@@ -3226,12 +3226,12 @@ Public Class FreeREG2Browser
             Return res
 
          Catch ex As XmlException
-            Throw New BackgroundWorkerException("Deleting File from FreeREG/2 failed", ex)
+            Throw New BackgroundWorkerException("Deleting File from FreeREG failed", ex)
 
          Catch ex As WebException
             Dim webResp As HttpWebResponse = ex.Response
             If webResp Is Nothing Then
-               Throw New BackgroundWorkerException("Deleting File from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Deleting File from FreeREG failed", ex)
             Else
                Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
                Select Case webResp.StatusCode
@@ -3244,7 +3244,7 @@ Public Class FreeREG2Browser
                   Case Else
 
                End Select
-               Throw New BackgroundWorkerException("Deleting File from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Deleting File from FreeREG failed", ex)
             End If
 
          Catch ex As Exception
@@ -3308,7 +3308,7 @@ Public Class FreeREG2Browser
          dlvUploadedFiles.Visible = True
          FileListProgressBar.Value = 0
          FileListProgressBar.Visible = False
-         labelStatus.Text = String.Format("Batches fetched from FreeREG/2 for {0}", MyAppSettings.UserId)
+         labelStatus.Text = String.Format("Batch details downloaded from FreeREG for {0}", MyAppSettings.UserId)
          dlvUploadedFiles.RebuildColumns()
          olvcFilename.Groupable = True
          olvcFilename.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetFileNameGroupKey)
@@ -3338,7 +3338,7 @@ Public Class FreeREG2Browser
       Dim result As Long = 0
       Dim uri = New Uri(MyAppSettings.BaseUrl)
 
-      worker.ReportProgress(0, String.Format("Fetching batches from FreeREG/2 for {0}...", MyAppSettings.UserId))
+      worker.ReportProgress(0, String.Format("Fetching Batch details from FreeREG for {0}...", MyAppSettings.UserId))
 
       Using webClient As New CookieAwareWebClient()
          Try
@@ -3399,19 +3399,19 @@ Public Class FreeREG2Browser
                BatchesDataSet.AcceptChanges()
                BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
             Else
-               Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed - Not logged on")
+               Throw New BackgroundWorkerException("Getting Batch Details from FreeREG failed - Not logged on")
             End If
 
          Catch ex As NullReferenceException
             Throw New BackgroundWorkerException("Storing Batch data failed - ", ex)
 
          Catch ex As XmlException
-            Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)
+            Throw New BackgroundWorkerException("Getting Batch Details from FreeREG failed", ex)
 
          Catch ex As WebException
             Dim webResp As HttpWebResponse = ex.Response
             If webResp Is Nothing Then
-               Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting Batch Details from FreeREG failed", ex)
             Else
                Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
                Select Case webResp.StatusCode
@@ -3424,7 +3424,7 @@ Public Class FreeREG2Browser
                   Case Else
 
                End Select
-               Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)
+               Throw New BackgroundWorkerException("Getting Batch Details from FreeREG failed", ex)
             End If
 
          Catch ex As Exception

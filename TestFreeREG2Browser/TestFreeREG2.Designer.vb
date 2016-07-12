@@ -68,7 +68,7 @@ Partial Class frmTestBrowser
       Me.MinimizeBox = False
       Me.Name = "frmTestBrowser"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-      Me.Text = "Test FreeREG/2 Browser"
+      Me.Text = "Test FreeREG Browser"
       Me.ResumeLayout(False)
 
    End Sub
