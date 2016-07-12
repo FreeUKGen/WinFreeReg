@@ -206,7 +206,7 @@ Public Class FreeREG2Browser
    Private _myTranscriptionLibrary As String
    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
    Friend WithEvents miNetworkTrace As System.Windows.Forms.ToolStripMenuItem
-   Friend WithEvents BrowserToolTip As System.Windows.Forms.ToolTip
+   Friend WithEvents FileListProgressBar As System.Windows.Forms.ToolStripProgressBar
    Public Property TranscriptionLibrary() As String
       Get
          Return _myTranscriptionLibrary
@@ -282,6 +282,7 @@ Public Class FreeREG2Browser
       Me.miUserTables = New System.Windows.Forms.ToolStripMenuItem()
       Me.BrowserStatusStrip = New System.Windows.Forms.StatusStrip()
       Me.labelStatus = New System.Windows.Forms.ToolStripStatusLabel()
+      Me.FileListProgressBar = New System.Windows.Forms.ToolStripProgressBar()
       Me.backgroundLogon = New System.ComponentModel.BackgroundWorker()
       Me.backgroundLogout = New System.ComponentModel.BackgroundWorker()
       Me.bnavShowData = New System.Windows.Forms.BindingNavigator(Me.components)
@@ -351,7 +352,6 @@ Public Class FreeREG2Browser
       Me.backgroundReplace = New System.ComponentModel.BackgroundWorker()
       Me.backgroundDelete = New System.ComponentModel.BackgroundWorker()
       Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
-      Me.BrowserToolTip = New System.Windows.Forms.ToolTip(Me.components)
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
       PlaceNameLabel = New System.Windows.Forms.Label()
@@ -710,7 +710,7 @@ Public Class FreeREG2Browser
       Me.BrowserMenuStrip.Location = New System.Drawing.Point(0, 0)
       Me.BrowserMenuStrip.Name = "BrowserMenuStrip"
       Me.BrowserMenuStrip.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
-      Me.BrowserMenuStrip.Size = New System.Drawing.Size(1229, 24)
+      Me.BrowserMenuStrip.Size = New System.Drawing.Size(1202, 24)
       Me.BrowserMenuStrip.TabIndex = 0
       Me.BrowserMenuStrip.Text = "MenuStrip1"
       '
@@ -819,11 +819,11 @@ Public Class FreeREG2Browser
       '
       'BrowserStatusStrip
       '
-      Me.BrowserStatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.labelStatus})
+      Me.BrowserStatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.labelStatus, Me.FileListProgressBar})
       Me.BrowserStatusStrip.Location = New System.Drawing.Point(0, 644)
       Me.BrowserStatusStrip.Name = "BrowserStatusStrip"
       Me.BrowserStatusStrip.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
-      Me.BrowserStatusStrip.Size = New System.Drawing.Size(1229, 22)
+      Me.BrowserStatusStrip.Size = New System.Drawing.Size(1202, 22)
       Me.BrowserStatusStrip.TabIndex = 1
       Me.BrowserStatusStrip.Text = "StatusStrip1"
       '
@@ -831,6 +831,12 @@ Public Class FreeREG2Browser
       '
       Me.labelStatus.Name = "labelStatus"
       Me.labelStatus.Size = New System.Drawing.Size(0, 17)
+      '
+      'FileListProgressBar
+      '
+      Me.FileListProgressBar.Name = "FileListProgressBar"
+      Me.FileListProgressBar.Size = New System.Drawing.Size(100, 16)
+      Me.FileListProgressBar.Visible = False
       '
       'backgroundLogon
       '
@@ -854,7 +860,7 @@ Public Class FreeREG2Browser
       Me.bnavShowData.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
       Me.bnavShowData.Name = "bnavShowData"
       Me.bnavShowData.PositionItem = Me.BindingNavigatorPositionItem
-      Me.bnavShowData.Size = New System.Drawing.Size(1229, 25)
+      Me.bnavShowData.Size = New System.Drawing.Size(1202, 25)
       Me.bnavShowData.TabIndex = 3
       Me.bnavShowData.Text = "BindingNavigator1"
       Me.bnavShowData.Visible = False
@@ -1021,7 +1027,7 @@ Public Class FreeREG2Browser
       Me.panelUploadedFiles.Location = New System.Drawing.Point(0, 0)
       Me.panelUploadedFiles.Margin = New System.Windows.Forms.Padding(4)
       Me.panelUploadedFiles.Name = "panelUploadedFiles"
-      Me.panelUploadedFiles.Size = New System.Drawing.Size(1095, 583)
+      Me.panelUploadedFiles.Size = New System.Drawing.Size(1068, 583)
       Me.panelUploadedFiles.TabIndex = 5
       '
       'IDTextBox
@@ -1364,7 +1370,7 @@ Public Class FreeREG2Browser
       '
       Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer2)
       Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer3)
-      Me.SplitContainer1.Size = New System.Drawing.Size(1229, 620)
+      Me.SplitContainer1.Size = New System.Drawing.Size(1202, 620)
       Me.SplitContainer1.SplitterDistance = 32
       Me.SplitContainer1.SplitterWidth = 5
       Me.SplitContainer1.TabIndex = 65
@@ -1391,8 +1397,8 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.Label1)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
-      Me.SplitContainer2.Size = New System.Drawing.Size(1229, 583)
-      Me.SplitContainer2.SplitterDistance = 533
+      Me.SplitContainer2.Size = New System.Drawing.Size(1202, 583)
+      Me.SplitContainer2.SplitterDistance = 529
       Me.SplitContainer2.SplitterWidth = 5
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1418,7 +1424,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(1229, 533)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(1202, 529)
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
       Me.dlvLocalFiles.UseAlternatingBackColors = True
@@ -1504,7 +1510,7 @@ Public Class FreeREG2Browser
       'SplitContainer3.Panel2
       '
       Me.SplitContainer3.Panel2.Controls.Add(Me.panelUploadedFiles)
-      Me.SplitContainer3.Size = New System.Drawing.Size(1229, 583)
+      Me.SplitContainer3.Size = New System.Drawing.Size(1202, 583)
       Me.SplitContainer3.SplitterDistance = 129
       Me.SplitContainer3.SplitterWidth = 5
       Me.SplitContainer3.TabIndex = 5
@@ -1524,7 +1530,6 @@ Public Class FreeREG2Browser
       Me.dlvUploadedFiles.Margin = New System.Windows.Forms.Padding(4)
       Me.dlvUploadedFiles.MultiSelect = False
       Me.dlvUploadedFiles.Name = "dlvUploadedFiles"
-      Me.dlvUploadedFiles.ShowGroups = False
       Me.dlvUploadedFiles.Size = New System.Drawing.Size(129, 583)
       Me.dlvUploadedFiles.Sorting = System.Windows.Forms.SortOrder.Ascending
       Me.dlvUploadedFiles.TabIndex = 0
@@ -1556,17 +1561,11 @@ Public Class FreeREG2Browser
       Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
       Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
-      'BrowserToolTip
-      '
-      Me.BrowserToolTip.BackColor = System.Drawing.Color.Wheat
-      Me.BrowserToolTip.IsBalloon = True
-      Me.BrowserToolTip.ToolTipTitle = "FreeREG/2 Browser"
-      '
       'FreeREG2Browser
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(1229, 666)
+      Me.ClientSize = New System.Drawing.Size(1202, 666)
       Me.Controls.Add(Me.SplitContainer1)
       Me.Controls.Add(Me.BrowserStatusStrip)
       Me.Controls.Add(Me.BrowserMenuStrip)
@@ -1704,10 +1703,12 @@ Public Class FreeREG2Browser
          UserDataSet.AcceptChanges()
 
          Dim currentUser As WinFreeReg.UserDetails.UserRow = UserDataSet.User.FindByuserid(MyAppSettings.UserId)
-         If currentUser.person_role = "trainee" Then
-            cboxProcess.Items.Add("Check for errors")
-         Else
-            cboxProcess.Items.AddRange(New Object() {"Process tonight", "As soon as possible"})
+         If currentUser IsNot Nothing Then
+            If currentUser.person_role = "trainee" Then
+               cboxProcess.Items.Add("Check for errors")
+            Else
+               cboxProcess.Items.AddRange(New Object() {"Process tonight", "As soon as possible"})
+            End If
          End If
       End If
       If File.Exists(FreeregTablesFile) Then
@@ -1715,7 +1716,9 @@ Public Class FreeREG2Browser
          TablesDataSet.AcceptChanges()
       End If
 
-      LoadLookupTables()
+      LookUpsDataSet.LoadXmlData(LookupTablesFile)
+      LookUpsDataSet.AcceptChanges()
+      If Not File.Exists(LookupTablesFile) Then LookUpsDataSet.SaveXmlData(LookupTablesFile)
 
       If Not String.IsNullOrEmpty(MyAppSettings.UserId) Then
          If File.Exists(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
@@ -1723,12 +1726,6 @@ Public Class FreeREG2Browser
             BatchesDataSet.AcceptChanges()
          End If
       End If
-   End Sub
-
-   Private Sub LoadLookupTables()
-      LookUpsDataSet.LoadXmlData(LookupTablesFile)
-      LookUpsDataSet.AcceptChanges()
-      If Not File.Exists(LookupTablesFile) Then LookUpsDataSet.SaveXmlData(LookupTablesFile)
    End Sub
 
 #Region "Menu - FreeREG"
@@ -1955,6 +1952,7 @@ Public Class FreeREG2Browser
    End Sub
 
    Private Sub miUploadedFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUploadedFiles.Click
+      FileListProgressBar.Visible = True
       backgroundBatches.RunWorkerAsync()
    End Sub
 
@@ -2137,6 +2135,8 @@ Public Class FreeREG2Browser
          miLogin.Enabled = False
          miLogout.Enabled = True
          pgmState = ProgramState.UserAuthenticated
+
+         MessageBox.Show(My.Resources.msgLoggedIn, "FreeREG Login", MessageBoxButtons.OK, MessageBoxIcon.Information)
 
          ' Kick off the Batches download thread
          '
@@ -3267,6 +3267,10 @@ Public Class FreeREG2Browser
 
    Private Sub backgroundBatches_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundBatches.ProgressChanged
       labelStatus.Text = e.UserState
+      If e.ProgressPercentage > 0 Then
+         FileListProgressBar.Text = e.ProgressPercentage
+         FileListProgressBar.Value = e.ProgressPercentage
+      End If
       Application.DoEvents()
    End Sub
 
@@ -3298,13 +3302,32 @@ Public Class FreeREG2Browser
 
          BatchBindingSource.DataSource = BatchesDataSet
          BatchBindingSource.DataMember = "Batch"
+         BatchBindingSource.Sort = "FileName"
          bnavShowData.BindingSource = BatchBindingSource
          bnavShowData.Visible = True
          dlvUploadedFiles.Visible = True
-         labelStatus.Text = ""
+         FileListProgressBar.Value = 0
+         FileListProgressBar.Visible = False
+         labelStatus.Text = String.Format("Batches fetched from FreeREG/2 for {0}", MyAppSettings.UserId)
          dlvUploadedFiles.RebuildColumns()
+         olvcFilename.Groupable = True
+         olvcFilename.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetFileNameGroupKey)
+         olvcFilename.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetFileNameGroupTitle)
+
       End If
    End Sub
+
+   Function SetFileNameGroupKey(ByVal rowObject As Object)
+      Dim drv As DataRowView = CType(rowObject, DataRowView)
+      Dim dr As WinFreeReg.Batches.BatchRow = CType(drv.Row, WinFreeReg.Batches.BatchRow)
+      Return dr.CountyName
+   End Function
+
+   Function SetFileNameGroupTitle(ByVal groupKey As Object)
+      Dim s = CStr(groupKey)
+      Dim r = LookUpsDataSet.ChapmanCodes.FindByCode(s)
+      Return r.County
+   End Function
 
    Private Function BatchName(ByVal objValue As String) As String
       Dim x = objValue.IndexOf("."c)
@@ -3338,6 +3361,7 @@ Public Class FreeREG2Browser
             '
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")
             MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
+            worker.ReportProgress(0, "Response received...")
 
             If contents.StartsWith("<BatchesTable>") Then
                Dim doc As XmlDocument = New XmlDocument()
@@ -3354,22 +3378,32 @@ Public Class FreeREG2Browser
 
                BatchesDataSet.Clear()
                If ds.Tables("Batch") IsNot Nothing Then
+                  worker.ReportProgress(0, String.Format("Response received... {0} files listed", ds.Tables("Batch").Rows.Count))
                   For Each row As DataRow In ds.Tables("Batch").Rows
-                     BatchesDataSet.Batch.AddBatchRow(row.Item("ID"), row.Item("CountyName"), row.Item("PlaceName"), row.Item("ChurchName"), row.Item("RegisterType"), _
-                      row.Item("RecordType"), row.Item("Records"), row.Item("DateMin"), row.Item("DateMax"), row.Item("DateRange"), row.Item("UserId"), _
-                      row.Item("UserIdLowerCase"), row.Item("FileName"), row.Item("TranscriberName"), row.Item("TranscriberEmail"), row.Item("TranscriberSyndicate"), _
-                      row.Item("CreditEmail"), row.Item("CreditName"), row.Item("FirstComment"), row.Item("SecondComment"), row.Item("TranscriptionDate"), _
-                      row.Item("ModificationDate"), row.Item("UploadedDate"), row.Item("Error"), row.Item("Digest"), row.Item("LockedByTranscriber"), _
-                      row.Item("LockedByCoordinator"), row.Item("lds"), row.Item("Action"), row.Item("CharacterSet"), row.Item("AlternateRegisterName"), _
-                      row.Item("CsvFile"))
+                     Try
+                        BatchesDataSet.Batch.AddBatchRow(row.Item("ID"), row.Item("CountyName"), row.Item("PlaceName"), row.Item("ChurchName"), row.Item("RegisterType"), _
+                         row.Item("RecordType"), row.Item("Records"), row.Item("DateMin"), row.Item("DateMax"), row.Item("DateRange"), row.Item("UserId"), _
+                         row.Item("UserIdLowerCase"), row.Item("FileName"), row.Item("TranscriberName"), row.Item("TranscriberEmail"), row.Item("TranscriberSyndicate"), _
+                         row.Item("CreditEmail"), row.Item("CreditName"), row.Item("FirstComment"), row.Item("SecondComment"), row.Item("TranscriptionDate"), _
+                         row.Item("ModificationDate"), row.Item("UploadedDate"), row.Item("Error"), row.Item("Digest"), row.Item("LockedByTranscriber"), _
+                         row.Item("LockedByCoordinator"), row.Item("lds"), row.Item("Action"), row.Item("CharacterSet"), row.Item("AlternateRegisterName"), _
+                         row.Item("CsvFile"))
+                        worker.ReportProgress(BatchesDataSet.Batch.Rows.Count / ds.Tables("Batch").Rows.Count * 100, "Storing file information...")
+
+                     Catch ex As ConstraintException
+                        MessageBox.Show(ex.Message, "Storing Batch Data", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+                     End Try
                   Next
                End If
                BatchesDataSet.AcceptChanges()
                BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
-               worker.ReportProgress(100, String.Format("Batches fetched from FreeREG/2 for {0}", MyAppSettings.UserId))
             Else
                Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed - Not logged on")
             End If
+
+         Catch ex As NullReferenceException
+            Throw New BackgroundWorkerException("Storing Batch data failed - ", ex)
 
          Catch ex As XmlException
             Throw New BackgroundWorkerException("Getting Batch Details from FreeREG/2 failed", ex)

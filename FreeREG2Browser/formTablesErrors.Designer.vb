@@ -22,13 +22,11 @@ Partial Class formTablesErrors
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-      Me.components = New System.ComponentModel.Container()
       Me.olvErrors = New BrightIdeasSoftware.ObjectListView()
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
       Me.btnIgnore = New System.Windows.Forms.Button()
       Me.btnCancel = New System.Windows.Forms.Button()
       Me.btnOK = New System.Windows.Forms.Button()
-      Me.ErrorsToolTip = New System.Windows.Forms.ToolTip(Me.components)
       CType(Me.olvErrors, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SplitContainer1.Panel1.SuspendLayout()
       Me.SplitContainer1.Panel2.SuspendLayout()
@@ -102,10 +100,6 @@ Partial Class formTablesErrors
       Me.btnOK.Text = "OK"
       Me.btnOK.UseVisualStyleBackColor = True
       '
-      'ErrorsToolTip
-      '
-      Me.ErrorsToolTip.ToolTipTitle = "WinFreeREG - Errors"
-      '
       'formTablesErrors
       '
       Me.AcceptButton = Me.btnOK
@@ -129,5 +123,4 @@ Partial Class formTablesErrors
 	Friend WithEvents btnIgnore As System.Windows.Forms.Button
 	Friend WithEvents btnCancel As System.Windows.Forms.Button
    Friend WithEvents btnOK As System.Windows.Forms.Button
-   Friend WithEvents ErrorsToolTip As System.Windows.Forms.ToolTip
 End Class

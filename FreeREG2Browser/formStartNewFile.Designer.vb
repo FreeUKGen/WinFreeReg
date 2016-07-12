@@ -56,7 +56,6 @@ Partial Class formStartNewFile
       Me.CreditEmailTextBox = New System.Windows.Forms.TextBox()
       Me.ldsCheckBox = New System.Windows.Forms.CheckBox()
       Me.linkUpdate = New System.Windows.Forms.LinkLabel()
-      Me.NewFileToolTip = New System.Windows.Forms.ToolTip(Me.components)
       CType(Me.FreeregTables, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.CountiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.PlacesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -384,14 +383,7 @@ Partial Class formStartNewFile
       Me.linkUpdate.TabIndex = 23
       Me.linkUpdate.TabStop = True
       Me.linkUpdate.Text = "Update"
-      Me.NewFileToolTip.SetToolTip(Me.linkUpdate, resources.GetString("linkUpdate.ToolTip"))
       Me.linkUpdate.Visible = False
-      '
-      'NewFileToolTip
-      '
-      Me.NewFileToolTip.BackColor = System.Drawing.Color.Wheat
-      Me.NewFileToolTip.IsBalloon = True
-      Me.NewFileToolTip.ToolTipTitle = "WinFreeREG - Start New File"
       '
       'formStartNewFile
       '
@@ -470,5 +462,4 @@ Partial Class formStartNewFile
    Friend WithEvents CreditEmailTextBox As System.Windows.Forms.TextBox
    Friend WithEvents ldsCheckBox As System.Windows.Forms.CheckBox
    Private WithEvents linkUpdate As System.Windows.Forms.LinkLabel
-   Friend WithEvents NewFileToolTip As System.Windows.Forms.ToolTip
 End Class

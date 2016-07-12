@@ -139,4 +139,7 @@
   <data name="msgSaveFileWithErrors" xml:space="preserve">
     <value>The file has errors in it. Do you wish to save the file with the errors in it.</value>
   </data>
+  <data name="msgLoggedIn" xml:space="preserve">
+    <value>You have successfully logged in to the FreeREGserver.</value>
+  </data>
 </root>

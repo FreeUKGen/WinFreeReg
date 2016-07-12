@@ -89,6 +89,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to You have successfully logged in to the FreeREGserver..
+        '''</summary>
+        Friend ReadOnly Property msgLoggedIn() As String
+            Get
+                Return ResourceManager.GetString("msgLoggedIn", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to You are trying to add a new record to the table, but, the File Value is identical to a previously added record..
         '''</summary>
         Friend ReadOnly Property msgNewRecordNotUnique() As String

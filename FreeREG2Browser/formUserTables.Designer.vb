@@ -63,7 +63,6 @@ Partial Class formUserTables
       Me.olvcType3 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcDisplayValue3 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.bsBrideCOndition = New System.Windows.Forms.BindingSource(Me.components)
-      Me.UserTablesToolTip = New System.Windows.Forms.ToolTip(Me.components)
       Me.SplitContainer1.Panel1.SuspendLayout()
       Me.SplitContainer1.Panel2.SuspendLayout()
       Me.SplitContainer1.SuspendLayout()
@@ -463,10 +462,6 @@ Partial Class formUserTables
       Me.bsBrideCOndition.DataMember = "BrideCondition"
       Me.bsBrideCOndition.DataSource = GetType(WinFreeReg.LookupTables)
       '
-      'UserTablesToolTip
-      '
-      Me.UserTablesToolTip.ToolTipTitle = "WinFreeREG - User Tables"
-      '
       'formUserTables
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -538,5 +533,4 @@ Partial Class formUserTables
 	Friend WithEvents olvcType3 As BrightIdeasSoftware.OLVColumn
 	Friend WithEvents olvcDisplayValue3 As BrightIdeasSoftware.OLVColumn
    Friend WithEvents BindingNavigatorSaveChanges As System.Windows.Forms.ToolStripButton
-   Friend WithEvents UserTablesToolTip As System.Windows.Forms.ToolTip
 End Class

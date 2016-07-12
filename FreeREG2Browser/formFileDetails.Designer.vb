@@ -37,8 +37,6 @@ Partial Class formFileDetails
       Dim MySyndicateLabel As System.Windows.Forms.Label
       Dim PlaceLabel As System.Windows.Forms.Label
       Dim RegisterTypeLabel As System.Windows.Forms.Label
-      Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formFileDetails))
-      Me.FileDetailsToolTip = New System.Windows.Forms.ToolTip(Me.components)
       Me.LinkLabel1 = New System.Windows.Forms.LinkLabel()
       Me.FileHeaderClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
       Me.ChurchComboBox = New System.Windows.Forms.ComboBox()
@@ -225,10 +223,6 @@ Partial Class formFileDetails
       RegisterTypeLabel.TabIndex = 29
       RegisterTypeLabel.Text = "Register Type:"
       '
-      'FileDetailsToolTip
-      '
-      Me.FileDetailsToolTip.ToolTipTitle = "WinFreeREG - File Details"
-      '
       'LinkLabel1
       '
       Me.LinkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -240,8 +234,6 @@ Partial Class formFileDetails
       Me.LinkLabel1.TabStop = True
       Me.LinkLabel1.Tag = "False"
       Me.LinkLabel1.Text = "More-->"
-      Me.FileDetailsToolTip.SetToolTip(Me.LinkLabel1, "Click on this link to show or hide the internal values" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "kept within the transcrip" & _
-        "tion file header records.")
       '
       'FileHeaderClassBindingSource
       '
@@ -478,7 +470,6 @@ Partial Class formFileDetails
       Me.Name = "formFileDetails"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "WinFreeREG - FIle Details - {0}"
-      Me.FileDetailsToolTip.SetToolTip(Me, resources.GetString("$this.ToolTip"))
       CType(Me.FileHeaderClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.ChurchesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.FreeregTables, System.ComponentModel.ISupportInitialize).EndInit()
@@ -490,7 +481,6 @@ Partial Class formFileDetails
       Me.PerformLayout()
 
    End Sub
-   Friend WithEvents FileDetailsToolTip As System.Windows.Forms.ToolTip
    Friend WithEvents LinkLabel1 As System.Windows.Forms.LinkLabel
    Friend WithEvents FileHeaderClassBindingSource As System.Windows.Forms.BindingSource
    Friend WithEvents ChurchComboBox As System.Windows.Forms.ComboBox

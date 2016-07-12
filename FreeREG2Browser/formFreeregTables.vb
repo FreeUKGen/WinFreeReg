@@ -177,7 +177,7 @@ Public Class formFreeregTables
 
 		dlvcol = CType(dlvChurches.Columns("ChapmanCode"), OLVColumn)
 		dlvcol.IsVisible = False
-      dlvcol.Groupable = True
+      dlvcol.Groupable = False
       dlvcol.Sortable = True
 
 		dlvcol = CType(dlvChurches.Columns("LastAmended"), OLVColumn)
@@ -187,10 +187,13 @@ Public Class formFreeregTables
 		dlvcol = CType(dlvChurches.Columns("ChurchName"), OLVColumn)
 		dlvcol.Width = 58
       dlvcol.Groupable = False
+      dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
 
 		dlvcol = CType(dlvChurches.Columns("PlaceName"), OLVColumn)
 		dlvcol.Width = 53
+      dlvcol.IsVisible = False
       dlvcol.Groupable = False
+      dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
 
 		dlvcol = CType(dlvChurches.Columns("Location"), OLVColumn)
 		dlvcol.Width = 66

@@ -29,7 +29,6 @@ Partial Class formLogin
 	'Do not modify it using the code editor.
 	<System.Diagnostics.DebuggerStepThrough()> _
 	Private Sub InitializeComponent()
-      Me.components = New System.ComponentModel.Container()
       Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formLogin))
       Me.UsernameLabel = New System.Windows.Forms.Label()
       Me.PasswordLabel = New System.Windows.Forms.Label()
@@ -39,7 +38,6 @@ Partial Class formLogin
       Me.Cancel_Button = New System.Windows.Forms.Button()
       Me.UrlLabel = New System.Windows.Forms.Label()
       Me.UrlTextBox = New System.Windows.Forms.TextBox()
-      Me.LoginToolTip = New System.Windows.Forms.ToolTip(Me.components)
       Me.SuspendLayout()
       '
       'UsernameLabel
@@ -120,10 +118,6 @@ Partial Class formLogin
       Me.UrlTextBox.Size = New System.Drawing.Size(347, 16)
       Me.UrlTextBox.TabIndex = 7
       '
-      'LoginToolTip
-      '
-      Me.LoginToolTip.ToolTipTitle = "WinFreeREG - Login"
-      '
       'formLogin
       '
       Me.AcceptButton = Me.OK_Button
@@ -154,6 +148,5 @@ Partial Class formLogin
    End Sub
 	Friend WithEvents UrlLabel As System.Windows.Forms.Label
    Friend WithEvents UrlTextBox As System.Windows.Forms.TextBox
-   Friend WithEvents LoginToolTip As System.Windows.Forms.ToolTip
 
 End Class

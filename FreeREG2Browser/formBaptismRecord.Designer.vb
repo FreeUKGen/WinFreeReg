@@ -54,7 +54,6 @@ Partial Class formBaptismRecord
       Me.LDSImageTextBox = New System.Windows.Forms.TextBox()
       Me.ButtonOK = New System.Windows.Forms.Button()
       Me.ButtonCancel = New System.Windows.Forms.Button()
-      Me.BaptismToolTip = New System.Windows.Forms.ToolTip(Me.components)
       RegNoLabel = New System.Windows.Forms.Label()
       BirthDateLabel = New System.Windows.Forms.Label()
       BaptismDateLabel = New System.Windows.Forms.Label()
@@ -336,10 +335,6 @@ Partial Class formBaptismRecord
       Me.ButtonCancel.Text = "Cancel"
       Me.ButtonCancel.UseVisualStyleBackColor = True
       '
-      'BaptismToolTip
-      '
-      Me.BaptismToolTip.ToolTipTitle = "WinFreeREG - Baptism Record"
-      '
       'formBaptismRecord
       '
       Me.AcceptButton = Me.ButtonOK
@@ -404,5 +399,4 @@ Partial Class formBaptismRecord
 	Friend WithEvents BaptismSexBindingSource As System.Windows.Forms.BindingSource
 	Friend WithEvents ButtonCancel As System.Windows.Forms.Button
    Friend WithEvents ButtonOK As System.Windows.Forms.Button
-   Friend WithEvents BaptismToolTip As System.Windows.Forms.ToolTip
 End Class

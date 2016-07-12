@@ -22,7 +22,6 @@ Partial Class formFreeregTables
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-      Me.components = New System.ComponentModel.Container()
       Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formFreeregTables))
       Me.TabControl1 = New System.Windows.Forms.TabControl()
       Me.tabRegisterTypes = New System.Windows.Forms.TabPage()
@@ -43,7 +42,6 @@ Partial Class formFreeregTables
       Me.backgroundCounties = New System.ComponentModel.BackgroundWorker()
       Me.backgroundPlaces = New System.ComponentModel.BackgroundWorker()
       Me.backgroundChurches = New System.ComponentModel.BackgroundWorker()
-      Me.FreeRegTablesToolTip = New System.Windows.Forms.ToolTip(Me.components)
       Me.TabControl1.SuspendLayout()
       Me.tabRegisterTypes.SuspendLayout()
       CType(Me.dlvRegisterTypes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -289,10 +287,6 @@ Partial Class formFreeregTables
       'backgroundChurches
       '
       '
-      'FreeRegTablesToolTip
-      '
-      Me.FreeRegTablesToolTip.ToolTipTitle = "WinFreeREG - FreeREG Tables"
-      '
       'formFreeregTables
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -340,5 +334,4 @@ Partial Class formFreeregTables
 	Friend WithEvents labCounty As System.Windows.Forms.Label
 	Friend WithEvents cboxPlaces As System.Windows.Forms.ComboBox
    Friend WithEvents labPlace As System.Windows.Forms.Label
-   Friend WithEvents FreeRegTablesToolTip As System.Windows.Forms.ToolTip
 End Class

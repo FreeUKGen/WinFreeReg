@@ -52,7 +52,6 @@ Partial Class formBurialRecord
       Me.LDSImageTextBox = New System.Windows.Forms.TextBox()
       Me.ButtonOK = New System.Windows.Forms.Button()
       Me.ButtonCancel = New System.Windows.Forms.Button()
-      Me.BurialToolTip = New System.Windows.Forms.ToolTip(Me.components)
       RegNoLabel = New System.Windows.Forms.Label()
       BurialDateLabel = New System.Windows.Forms.Label()
       ForenamesLabel = New System.Windows.Forms.Label()
@@ -316,10 +315,6 @@ Partial Class formBurialRecord
       Me.ButtonCancel.Text = "Cancel"
       Me.ButtonCancel.UseVisualStyleBackColor = True
       '
-      'BurialToolTip
-      '
-      Me.BurialToolTip.ToolTipTitle = "WinFreeREG - Burial Record"
-      '
       'formBurialRecord
       '
       Me.AcceptButton = Me.ButtonOK
@@ -381,5 +376,4 @@ Partial Class formBurialRecord
 	Friend WithEvents BurialRelationshipBindingSource As System.Windows.Forms.BindingSource
 	Friend WithEvents ButtonCancel As System.Windows.Forms.Button
    Friend WithEvents ButtonOK As System.Windows.Forms.Button
-   Friend WithEvents BurialToolTip As System.Windows.Forms.ToolTip
 End Class

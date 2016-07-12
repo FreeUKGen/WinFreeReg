@@ -22,7 +22,6 @@ Partial Class formUserDetails
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-      Me.components = New System.ComponentModel.Container()
       Dim Skill_levelLabel As System.Windows.Forms.Label
       Dim Number_of_filesLabel As System.Windows.Forms.Label
       Dim Number_of_recordsLabel As System.Windows.Forms.Label
@@ -85,7 +84,6 @@ Partial Class formUserDetails
       Me.C_atTextBox = New System.Windows.Forms.TextBox()
       Me.Disabled_dateTextBox = New System.Windows.Forms.TextBox()
       Me.btnRefresh = New System.Windows.Forms.Button()
-      Me.UserDetailsToolTip = New System.Windows.Forms.ToolTip(Me.components)
       Skill_levelLabel = New System.Windows.Forms.Label()
       Number_of_filesLabel = New System.Windows.Forms.Label()
       Number_of_recordsLabel = New System.Windows.Forms.Label()
@@ -607,10 +605,6 @@ Partial Class formUserDetails
       Me.btnRefresh.Text = "Refresh"
       Me.btnRefresh.UseVisualStyleBackColor = True
       '
-      'UserDetailsToolTip
-      '
-      Me.UserDetailsToolTip.ToolTipTitle = "WinFreeREG - User Details"
-      '
       'formUserDetails
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -719,5 +713,4 @@ Partial Class formUserDetails
 	Friend WithEvents C_atTextBox As System.Windows.Forms.TextBox
 	Friend WithEvents Disabled_dateTextBox As System.Windows.Forms.TextBox
    Friend WithEvents btnRefresh As System.Windows.Forms.Button
-   Friend WithEvents UserDetailsToolTip As System.Windows.Forms.ToolTip
 End Class

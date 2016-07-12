@@ -113,7 +113,6 @@ Partial Class formFileWorkspace
       Me.olvcWitness2Forenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcWitness2Surname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcNotes2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.WorkspaceToolTip = New System.Windows.Forms.ToolTip(Me.components)
       CType(Me.bsBaptisms, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.bsBurials, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.bsMarriages, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -902,12 +901,6 @@ Partial Class formFileWorkspace
       Me.olvcNotes2.Sortable = False
       Me.olvcNotes2.Text = "Notes"
       '
-      'WorkspaceToolTip
-      '
-      Me.WorkspaceToolTip.BackColor = System.Drawing.Color.Wheat
-      Me.WorkspaceToolTip.IsBalloon = True
-      Me.WorkspaceToolTip.ToolTipTitle = "WinFreeREG - File Workspace"
-      '
       'formFileWorkspace
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1025,5 +1018,4 @@ Partial Class formFileWorkspace
 	Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
 	Friend WithEvents BindingNavigatorSaveFile As System.Windows.Forms.ToolStripButton
    Friend WithEvents BindingNavigatorFileDetails As System.Windows.Forms.ToolStripButton
-   Friend WithEvents WorkspaceToolTip As System.Windows.Forms.ToolTip
 End Class
