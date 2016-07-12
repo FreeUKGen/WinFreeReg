@@ -27,12 +27,14 @@ Public Class CustomToolTip
       End Set
    End Property
 
+   Private _form As Form
+
    Public Sub New()
       MyBase.New()
-      '      Me.OwnerDraw = True
       Me._ds = New ToolTips()
       '      AddHandler Me.Popup, AddressOf Me.OnPopup
-      '      AddHandler Me.Draw, AddressOf Me.OnDraw
+      AddHandler Me.Draw, AddressOf Me.OnDraw
+      Me.OwnerDraw = True
    End Sub
 
    Public Sub New(ByVal strFileName As String, ByVal form As Form)
@@ -44,12 +46,23 @@ Public Class CustomToolTip
          Me.ToolTipTitle = form.Text
          Me.ToolTipIcon = ToolTipIcon.Info
          Me.SetToolTips(form)
+         _form = form
       End If
    End Sub
 
    Private Sub OnPopup(sender As Object, e As PopupEventArgs)
       ' use this event to set the size of the tool tip
-      e.ToolTipSize = New Size(200, 100)
+      Dim lineArray As String()
+      Dim CR As String() = {vbCrLf}
+      lineArray = Me.GetToolTip(e.AssociatedControl).Split(CR, StringSplitOptions.RemoveEmptyEntries)
+      Dim sz As New Size(0, 0)
+      For Each line In lineArray
+         Dim l = TextRenderer.MeasureText(lineArray(0), _form.Font())
+         If l.Width > sz.Width Then sz.Width = l.Width
+         If l.Height > sz.Height Then sz.Height = l.Height
+      Next
+      sz.Height = e.ToolTipSize.Height
+      e.ToolTipSize = sz
    End Sub
 
    Private Sub OnDraw(sender As Object, e As DrawToolTipEventArgs)
@@ -104,14 +117,14 @@ Public Class CustomToolTip
       For Each row In WindowControls
          If row.IsControlNameNull Then
             If Not row.IsToolTipTextNull Then
-               Me.SetToolTip(form, AddNewLinesForTooltip(row.ToolTipText))
+               Me.SetToolTip(form, SplitToolTip(row.ToolTipText))
             End If
          Else
             If Not row.IsToolTipTextNull Then
                If Not String.IsNullOrEmpty(row.ToolTipText) Then
-                  Dim ctl() = form.Controls.Find(row.ControlName, False)
+                  Dim ctl() = form.Controls.Find(row.ControlName, True)
                   If ctl.Count > 0 Then
-                     Me.SetToolTip(ctl(0), AddNewLinesForTooltip(row.ToolTipText))
+                     Me.SetToolTip(ctl(0), SplitToolTip(row.ToolTipText))
                   End If
                End If
             End If
@@ -119,38 +132,23 @@ Public Class CustomToolTip
       Next
    End Sub
 
-   Private Const MAXIMUMSINGLELINETOOLTIPLENGTH As Integer = 64
-
-   Private Function AddNewLinesForTooltip(text As String) As String
-      If text.Length < MAXIMUMSINGLELINETOOLTIPLENGTH Then
-         Return text
-      End If
-      Dim lineLength As Integer = Convert.ToInt16(Math.Sqrt(Convert.ToDouble(text.Length))) * 2
-      Dim sb As New StringBuilder()
-      Dim currentLinePosition As Integer = 0
-      Dim textIndex As Integer = 0
-      While textIndex < text.Length
-         ' If we have reached the target line length and the next 
-         ' character is whitespace then begin a new line.
-         If currentLinePosition >= lineLength AndAlso Char.IsWhiteSpace(text(textIndex)) Then
-            sb.Append(Environment.NewLine)
-            currentLinePosition = 0
+   Friend Function SplitToolTip(ByVal strOrig As String) As String
+      Dim strArray As String()
+      Dim SPACE As Char() = {" "}
+      Dim CR As String = vbCrLf
+      Dim strOneWord As String
+      Dim strBuilder As String = ""
+      Dim strReturn As String = ""
+      strArray = strOrig.Split(SPACE, StringSplitOptions.RemoveEmptyEntries)
+      For Each strOneWord In strArray
+         strBuilder = strBuilder & strOneWord & SPACE
+         If Len(strBuilder) > 70 Then
+            strReturn = strReturn & strBuilder & CR
+            strBuilder = ""
          End If
-         ' If we have just started a new line, skip all the whitespace.
-         If currentLinePosition = 0 Then
-            While textIndex < text.Length AndAlso Char.IsWhiteSpace(text(textIndex))
-               System.Math.Max(System.Threading.Interlocked.Increment(textIndex), textIndex - 1)
-            End While
-         End If
-         ' Append the next character.
-         If textIndex < text.Length Then
-            sb.Append(text(textIndex))
-         End If
-
-         System.Math.Max(System.Threading.Interlocked.Increment(currentLinePosition), currentLinePosition - 1)
-         System.Math.Max(System.Threading.Interlocked.Increment(textIndex), textIndex - 1)
-      End While
-      Return sb.ToString()
+      Next
+      If Len(strBuilder) < 8 Then strReturn = strReturn.Substring(0, strReturn.Length - 2)
+      Return strReturn & strBuilder
    End Function
 
 End Class
