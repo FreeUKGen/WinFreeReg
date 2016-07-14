@@ -332,10 +332,9 @@ Partial Class formFileWorkspace
       '
       Me.olvcLoadOrder.AspectName = "LoadOrder"
       Me.olvcLoadOrder.Groupable = False
-      Me.olvcLoadOrder.Hideable = False
       Me.olvcLoadOrder.IsEditable = False
       Me.olvcLoadOrder.IsVisible = False
-      Me.olvcLoadOrder.Text = "LoadOrder"
+      Me.olvcLoadOrder.Text = "Load Order"
       Me.olvcLoadOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       '
       'olvcCounty

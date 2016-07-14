@@ -558,11 +558,20 @@ Public Class formFileWorkspace
       If cols IsNot Nothing Then
          For Each col In cols
             If col.ColumnName = e.Column.AspectName Then
+               Dim cbd As CellBorderDecoration = New CellBorderDecoration()
                Dim err = row.GetColumnError(col.ColumnName)
                If err.Contains("Warning:") Then
-                  e.SubItem.BackColor = Drawing.Color.Gold
+                  cbd.BorderPen = Pens.Gold
+                  cbd.FillBrush = Nothing
+                  cbd.CornerRounding = 0.0
+                  e.SubItem.BackColor = Color.Wheat
+                  e.SubItem.Decoration = cbd
                Else
-                  e.SubItem.BackColor = Drawing.Color.Red
+                  cbd.BorderPen = Pens.Red
+                  cbd.FillBrush = Nothing
+                  cbd.CornerRounding = 0.0
+                  e.SubItem.BackColor = Color.LavenderBlush
+                  e.SubItem.Decoration = cbd
                End If
             End If
          Next
