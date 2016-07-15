@@ -74,6 +74,7 @@ Public Class formStartUp
          PasswordTextBox.Text = frm.Password
          UrlTextBox.Text = frm.FreeregUrl
          TraceCheckBox.Checked = frm.TraceNetwork
+         Me.Close()
       End Using
    End Sub
 
