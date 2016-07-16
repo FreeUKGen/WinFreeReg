@@ -98,6 +98,12 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="formGeneralHelp.Designer.vb">
+      <DependentUpon>formGeneralHelp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formGeneralHelp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formStartUp.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="formGeneralHelp.resx">
+      <DependentUpon>formGeneralHelp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formStartUp.resx">
       <DependentUpon>formStartUp.vb</DependentUpon>
     </EmbeddedResource>

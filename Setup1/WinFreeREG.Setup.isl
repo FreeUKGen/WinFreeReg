@@ -346,6 +346,7 @@
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td>{97D53AE4-D678-4795-B6E8-D5F95D820809}</td><td>PersonalFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{1339B2F4-1B4D-49E5-BD2B-F92A227A175E}</td><td>LocalAppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td>{BAD5A1D0-9B66-43BF-9FD6-20CC2F04B641}</td><td>WINFREEREG1</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT4</td><td>{DA4427F9-B896-4F4D-BD46-BADA4658A9D1}</td><td>DOC</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LookupTables.Primary_output</td><td>{783A7448-873E-4BA8-BF45-1FBB4D66451F}</td><td>INSTALLDIR</td><td>2</td><td/><td>lookuptables.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LookupTables.Primary_output1</td><td>{A1E1B95E-E52C-40FA-B02C-9FE646C31354}</td><td>INSTALLDIR</td><td>2</td><td/><td>lookuptables.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>RegexUtilities.Primary_output</td><td>{5ACA9BD4-D6F6-4FBD-9CE9-1FFB22DFC671}</td><td>INSTALLDIR</td><td>2</td><td/><td>regexutilities.primary_outpu</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -1152,6 +1153,7 @@
 		<row><td>CommonFiles64Folder</td><td>TARGETDIR</td><td>.:Common64</td><td/><td>0</td><td/></row>
 		<row><td>CommonFilesFolder</td><td>TARGETDIR</td><td>.:Common</td><td/><td>0</td><td/></row>
 		<row><td>DATABASEDIR</td><td>ISYourDataBaseDir</td><td>.</td><td/><td>0</td><td/></row>
+		<row><td>DOC</td><td>WINFREEREG1</td><td>doc</td><td/><td>0</td><td/></row>
 		<row><td>DesktopFolder</td><td>TARGETDIR</td><td>.:Desktop</td><td/><td>3</td><td/></row>
 		<row><td>FREEUKGENEALOGY</td><td>ProgramFilesFolder</td><td>FREEUK~1|FreeUKGenealogy</td><td/><td>0</td><td/></row>
 		<row><td>FavoritesFolder</td><td>TARGETDIR</td><td>.:FAVORI~1|Favorites</td><td/><td>0</td><td/></row>
@@ -1886,6 +1888,7 @@
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT3</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT4</td></row>
 		<row><td>AlwaysInstall</td><td>LookupTables.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>LookupTables.Primary_output1</td></row>
 		<row><td>AlwaysInstall</td><td>RegexUtilities.Primary_output</td></row>
@@ -1911,8 +1914,11 @@
 		<col def="S72">ISComponentSubFolder_</col>
 		<row><td>errormessages.xml2</td><td>ISX_DEFAULTCOMPONENT3</td><td>ERRORM~1.XML|ErrorMessages.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\FreeREG\WinREG for Windows\ErrorMessages.xml</td><td>1</td><td/></row>
 		<row><td>freereg2browser.primary_outp</td><td>FreeREG2Browser.Primary_output1</td><td>FreeREG2Browser.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;FreeREG2Browser&gt;|Built</td><td>3</td><td/></row>
+		<row><td>freeregbrowser.css</td><td>ISX_DEFAULTCOMPONENT4</td><td>FREERE~1.CSS|FreeRegBrowser.css</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\FreeRegBrowser.css</td><td>1</td><td/></row>
+		<row><td>generalhelp.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>GENERA~1.HTM|GeneralHelp.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\GeneralHelp.html</td><td>1</td><td/></row>
 		<row><td>lookuptables.primary_output</td><td>LookupTables.Primary_output1</td><td>LookupTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LookupTables&gt;|Built</td><td>3</td><td/></row>
 		<row><td>regexutilities.primary_outpu</td><td>RegexUtilities.Primary_output1</td><td>RegexUtilities.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;RegexUtilities&gt;|Built</td><td>3</td><td/></row>
+		<row><td>startup.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>STARTU~1.HTM|StartUp.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\StartUp.html</td><td>1</td><td/></row>
 		<row><td>tooltips.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>ToolTips.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\AppData\Local\WinFreeREG\ToolTips.xml</td><td>1</td><td/></row>
 		<row><td>transcriptiontables.primary_</td><td>TranscriptionTables.Primary_output1</td><td>TranscriptionTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;TranscriptionTables&gt;|Built</td><td>3</td><td/></row>
 		<row><td>winfreereg.primary_output</td><td>WinFreeReg.Primary_output1</td><td>WinFreeReg.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WinFreeReg&gt;|Built</td><td>3</td><td/></row>
@@ -2066,6 +2072,7 @@
 		<row><td>ISX_DEFAULTCOMPONENT1</td><td/><td/><td>_06CD69EA_2BEA_47D6_BB10_1B2A4EEAAEB8_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_9085489A_C111_4F0C_8BCA_740F879DAAB0_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td/><td/><td>_97F525FE_9AC5_4885_B54A_3820C3D6D5B1_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT4</td><td/><td/><td>_B5A6A4BC_0972_4A50_90D0_A69CF5E29D60_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LookupTables.Primary_output</td><td/><td/><td>_B945B06A_4653_45F6_AD38_744E7686F40E_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LookupTables.Primary_output1</td><td/><td/><td>_4282366C_D7F3_482E_B368_32134DE52F63_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>RegexUtilities.Primary_output</td><td/><td/><td>_19FE2C1F_DE28_401B_BAD2_F7FAA143979B_FILTER</td><td/><td/><td/><td/></row>

@@ -59,5 +59,23 @@ Namespace My.Resources
                 resourceCulture = value
             End Set
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The requested Help page is missing.
+        '''</summary>
+        Friend ReadOnly Property msgHelpFileNotFound() As String
+            Get
+                Return ResourceManager.GetString("msgHelpFileNotFound", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to When creating the Help page, the name of an HTML file must be provided.
+        '''</summary>
+        Friend ReadOnly Property msgHelpPageError() As String
+            Get
+                Return ResourceManager.GetString("msgHelpPageError", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace

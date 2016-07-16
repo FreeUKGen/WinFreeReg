@@ -10,6 +10,8 @@ Public Class formStartUp
    Public ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
    Dim strPersonalFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
 
+   Private formHelp As New formGeneralHelp() With {.Visible = False}
+
    Private Sub formStartUp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #If DEBUG Then
 #If LOCAL Then
@@ -163,4 +165,16 @@ Public Class formStartUp
       End If
    End Sub
 
+   Private Sub formStartUp_HelpButtonClicked(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.HelpButtonClicked
+      Try
+         formHelp.Title = "FreeREG StartUp"
+         formHelp.StartPage = "StartUp.html"
+         formHelp.ShowDialog()
+         e.Cancel = True
+
+      Catch ex As Exception
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
 End Class
