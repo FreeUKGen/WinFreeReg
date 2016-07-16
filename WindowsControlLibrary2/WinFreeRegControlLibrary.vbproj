@@ -82,6 +82,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="formGeneralHelp.Designer.vb">
+      <DependentUpon>formGeneralHelp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formGeneralHelp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -106,6 +112,9 @@
     <Compile Include="WinFormControlExtensions.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="formGeneralHelp.resx">
+      <DependentUpon>formGeneralHelp.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
