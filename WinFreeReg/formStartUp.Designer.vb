@@ -46,6 +46,7 @@ Partial Class formStartUp
       Me.EmailAddressTextBox = New System.Windows.Forms.TextBox()
       Me.linkPassword = New System.Windows.Forms.LinkLabel()
       Me.UserLookupTables = New WinFreeReg.LookupTables()
+      Me.KeepOpenCheckBox = New System.Windows.Forms.CheckBox()
       CType(Me.urlErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.libraryErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.UserLookupTables, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -249,11 +250,25 @@ Partial Class formStartUp
       Me.UserLookupTables.Locale = New System.Globalization.CultureInfo("")
       Me.UserLookupTables.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
+      'KeepOpenCheckBox
+      '
+      Me.KeepOpenCheckBox.AutoSize = True
+      Me.KeepOpenCheckBox.Checked = True
+      Me.KeepOpenCheckBox.CheckState = System.Windows.Forms.CheckState.Checked
+      Me.KeepOpenCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.KeepOpenCheckBox.Location = New System.Drawing.Point(312, 308)
+      Me.KeepOpenCheckBox.Name = "KeepOpenCheckBox"
+      Me.KeepOpenCheckBox.Size = New System.Drawing.Size(59, 14)
+      Me.KeepOpenCheckBox.TabIndex = 18
+      Me.KeepOpenCheckBox.Text = "Keep open"
+      Me.KeepOpenCheckBox.UseVisualStyleBackColor = True
+      '
       'formStartUp
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.ClientSize = New System.Drawing.Size(468, 339)
+      Me.Controls.Add(Me.KeepOpenCheckBox)
       Me.Controls.Add(Me.linkPassword)
       Me.Controls.Add(Me.EmailAddressTextBox)
       Me.Controls.Add(Me.EmailAddressLabel)
@@ -309,5 +324,6 @@ Partial Class formStartUp
    Friend WithEvents EmailAddressLabel As System.Windows.Forms.Label
    Friend WithEvents UserNameTextBox As System.Windows.Forms.TextBox
    Friend WithEvents linkPassword As System.Windows.Forms.LinkLabel
+   Friend WithEvents KeepOpenCheckBox As System.Windows.Forms.CheckBox
 
 End Class
