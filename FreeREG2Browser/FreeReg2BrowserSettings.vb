@@ -92,6 +92,7 @@ Imports System.Security.Permissions
    End Property
 
    Public Sub New()
+      Cookies = New CookieCollection()
    End Sub
 
    Protected Sub New(ByVal info As SerializationInfo, ByVal context As StreamingContext)

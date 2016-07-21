@@ -1668,6 +1668,7 @@ Public Class FreeREG2Browser
 
       Catch ex As Exception
          Beep()
+         MessageBox.Show(ex.Message, "Corrupted Settings File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
       Finally
          If stream IsNot Nothing Then stream.Close()
@@ -1697,7 +1698,11 @@ Public Class FreeREG2Browser
          Catch ex As Exception
             Beep()
             MessageBox.Show(ex.Message, "Corrupted Settings File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-            Application.Exit()
+            stream.Close()
+            stream = Nothing
+            File.Delete(SettingsFileName)
+            MyAppSettings = New FreeReg2BrowserSettings()
+            '            Application.Exit()
 
          Finally
             If stream IsNot Nothing Then stream.Close()
