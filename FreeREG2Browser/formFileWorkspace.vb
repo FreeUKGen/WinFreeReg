@@ -65,16 +65,20 @@ Public Class formFileWorkspace
 		m_dlvStates([enum]) = state
 	End Sub
 
-	Sub New()
+   Private formHelp As formGeneralHelp = Nothing
 
-		' This call is required by the Windows Form Designer.
-		InitializeComponent()
+   Sub New(ByVal helpForm As formGeneralHelp)
 
-		' Add any initialization after the InitializeComponent() call.
-		m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS) = dlvBaptisms.SaveState()
-		m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS) = dlvBurials.SaveState()
-		m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES) = dlvMarriages.SaveState()
-	End Sub
+      ' This call is required by the Windows Form Designer.
+      InitializeComponent()
+
+      ' Add any initialization after the InitializeComponent() call.
+      m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS) = dlvBaptisms.SaveState()
+      m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS) = dlvBurials.SaveState()
+      m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES) = dlvMarriages.SaveState()
+
+      formHelp = helpForm
+   End Sub
 
 	Private Sub formFileDetails_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       Dim title = String.Format(Me.Text, m_TranscriptionFile.FileName)
@@ -539,7 +543,7 @@ Public Class formFileWorkspace
    End Sub
 
    Private Sub BindingNavigatorFileDetails_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorFileDetails.Click
-      Using dlg As New formFileDetails() With {.TranscriptionFile = m_TranscriptionFile}
+      Using dlg As New formFileDetails(formHelp) With {.TranscriptionFile = m_TranscriptionFile}
          Dim rc = dlg.ShowDialog()
          If rc = Windows.Forms.DialogResult.OK Then
             If dlg.HeaderChanged Then m_TranscriptionFile.Save()
@@ -635,4 +639,18 @@ Public Class formFileWorkspace
       output += lineBuilder.ToString()
       Return output
    End Function
+
+   Private Sub miGeneralHelp_Click(sender As Object, e As EventArgs) Handles miGeneralHelp.Click
+      Try
+         formHelp.Title = "File Workspace"
+         formHelp.StartPage = "FileWorkspace.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
+
 End Class

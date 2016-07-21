@@ -347,6 +347,7 @@
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td>{1339B2F4-1B4D-49E5-BD2B-F92A227A175E}</td><td>LocalAppDataFolder</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td>{BAD5A1D0-9B66-43BF-9FD6-20CC2F04B641}</td><td>WINFREEREG1</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>ISX_DEFAULTCOMPONENT4</td><td>{DA4427F9-B896-4F4D-BD46-BADA4658A9D1}</td><td>DOC</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
+		<row><td>ISX_DEFAULTCOMPONENT5</td><td>{A14D52FE-7DF6-40CE-B56B-5BC1F4EA6592}</td><td>INSTALLDIR</td><td>2</td><td/><td/><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LookupTables.Primary_output</td><td>{783A7448-873E-4BA8-BF45-1FBB4D66451F}</td><td>INSTALLDIR</td><td>2</td><td/><td>lookuptables.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>LookupTables.Primary_output1</td><td>{A1E1B95E-E52C-40FA-B02C-9FE646C31354}</td><td>INSTALLDIR</td><td>2</td><td/><td>lookuptables.primary_output</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
 		<row><td>RegexUtilities.Primary_output</td><td>{5ACA9BD4-D6F6-4FBD-9CE9-1FFB22DFC671}</td><td>INSTALLDIR</td><td>2</td><td/><td>regexutilities.primary_outpu</td><td>17</td><td/><td/><td/><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td><td>/LogFile=</td></row>
@@ -950,7 +951,7 @@
 		<row><td>InstallChangeFolder</td><td>OK</td><td>EndDialog</td><td>Return</td><td>1</td><td>3</td></row>
 		<row><td>InstallChangeFolder</td><td>OK</td><td>SetTargetPath</td><td>[_BrowseProperty]</td><td>1</td><td>2</td></row>
 		<row><td>InstallChangeFolder</td><td>Up</td><td>DirectoryListUp</td><td>0</td><td>1</td><td>0</td></row>
-		<row><td>InstallWelcome</td><td>Back</td><td>NewDialog</td><td>SplashBitmap</td><td>Display_IsBitmapDlg</td><td>0</td></row>
+		<row><td>InstallWelcome</td><td>Back</td><td>NewDialog</td><td>SplashBitmap</td><td>NOT Installed</td><td>0</td></row>
 		<row><td>InstallWelcome</td><td>Cancel</td><td>SpawnDialog</td><td>CancelSetup</td><td>1</td><td>0</td></row>
 		<row><td>InstallWelcome</td><td>Next</td><td>NewDialog</td><td>ReadyToInstall</td><td>1</td><td>0</td></row>
 		<row><td>LicenseAgreement</td><td>Back</td><td>NewDialog</td><td>InstallWelcome</td><td>1</td><td>0</td></row>
@@ -1065,6 +1066,7 @@
 		<col key="yes" def="s72">Directory_</col>
 		<col key="yes" def="s72">Component_</col>
 		<row><td>AppDataFolder</td><td>ISX_DEFAULTCOMPONENT</td></row>
+		<row><td>INSTALLDIR</td><td>ISX_DEFAULTCOMPONENT5</td></row>
 		<row><td>LocalAppDataFolder</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>PersonalFolder</td><td>ISX_DEFAULTCOMPONENT1</td></row>
 	</table>
@@ -1889,6 +1891,7 @@
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT2</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT3</td></row>
 		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT4</td></row>
+		<row><td>AlwaysInstall</td><td>ISX_DEFAULTCOMPONENT5</td></row>
 		<row><td>AlwaysInstall</td><td>LookupTables.Primary_output</td></row>
 		<row><td>AlwaysInstall</td><td>LookupTables.Primary_output1</td></row>
 		<row><td>AlwaysInstall</td><td>RegexUtilities.Primary_output</td></row>
@@ -1912,15 +1915,22 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>errormessages.xml2</td><td>ISX_DEFAULTCOMPONENT3</td><td>ERRORM~1.XML|ErrorMessages.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\FreeREG\WinREG for Windows\ErrorMessages.xml</td><td>1</td><td/></row>
+		<row><td>errormessages.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>ERRORM~1.XML|ErrorMessages.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Other Files\ErrorMessages.xml</td><td>1</td><td/></row>
+		<row><td>filedetails.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>FILEDE~1.HTM|FileDetails.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\FileDetails.html</td><td>1</td><td/></row>
+		<row><td>fileworkspace.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>FILEWO~1.HTM|FileWorkspace.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\FileWorkspace.html</td><td>1</td><td/></row>
 		<row><td>freereg2browser.primary_outp</td><td>FreeREG2Browser.Primary_output1</td><td>FreeREG2Browser.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;FreeREG2Browser&gt;|Built</td><td>3</td><td/></row>
 		<row><td>freeregbrowser.css</td><td>ISX_DEFAULTCOMPONENT4</td><td>FREERE~1.CSS|FreeRegBrowser.css</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\FreeRegBrowser.css</td><td>1</td><td/></row>
+		<row><td>freeregtables.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>FREERE~1.HTM|FreeregTables.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\FreeregTables.html</td><td>1</td><td/></row>
 		<row><td>generalhelp.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>GENERA~1.HTM|GeneralHelp.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\GeneralHelp.html</td><td>1</td><td/></row>
+		<row><td>localfiles.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>LOCALF~1.HTM|LocalFiles.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\LocalFiles.html</td><td>1</td><td/></row>
 		<row><td>lookuptables.primary_output</td><td>LookupTables.Primary_output1</td><td>LookupTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;LookupTables&gt;|Built</td><td>3</td><td/></row>
 		<row><td>regexutilities.primary_outpu</td><td>RegexUtilities.Primary_output1</td><td>RegexUtilities.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;RegexUtilities&gt;|Built</td><td>3</td><td/></row>
+		<row><td>startnewfile.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>STARTN~1.HTM|StartNewFile.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\StartNewFile.html</td><td>1</td><td/></row>
 		<row><td>startup.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>STARTU~1.HTM|StartUp.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\StartUp.html</td><td>1</td><td/></row>
-		<row><td>tooltips.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>ToolTips.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\AppData\Local\WinFreeREG\ToolTips.xml</td><td>1</td><td/></row>
+		<row><td>tooltips.xml</td><td>ISX_DEFAULTCOMPONENT3</td><td>ToolTips.xml</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Other Files\ToolTips.xml</td><td>1</td><td/></row>
 		<row><td>transcriptiontables.primary_</td><td>TranscriptionTables.Primary_output1</td><td>TranscriptionTables.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;TranscriptionTables&gt;|Built</td><td>3</td><td/></row>
+		<row><td>uploadedfiles.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>UPLOAD~1.HTM|UploadedFiles.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\UploadedFiles.html</td><td>1</td><td/></row>
+		<row><td>usertables.html</td><td>ISX_DEFAULTCOMPONENT4</td><td>USERTA~1.HTM|UserTables.html</td><td>0</td><td/><td/><td/><td>1</td><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Documentation\UserTables.html</td><td>1</td><td/></row>
 		<row><td>winfreereg.primary_output</td><td>WinFreeReg.Primary_output1</td><td>WinFreeReg.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WinFreeReg&gt;|Built</td><td>3</td><td/></row>
 		<row><td>winfreeregcontrollibrary.pri</td><td>WinFreeRegControlLibrary.Primary_output</td><td>WinFreeRegControlLibrary.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;WinFreeRegControlLibrary&gt;|Built</td><td>3</td><td/></row>
 	</table>
@@ -2073,6 +2083,7 @@
 		<row><td>ISX_DEFAULTCOMPONENT2</td><td/><td/><td>_9085489A_C111_4F0C_8BCA_740F879DAAB0_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT3</td><td/><td/><td>_97F525FE_9AC5_4885_B54A_3820C3D6D5B1_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>ISX_DEFAULTCOMPONENT4</td><td/><td/><td>_B5A6A4BC_0972_4A50_90D0_A69CF5E29D60_FILTER</td><td/><td/><td/><td/></row>
+		<row><td>ISX_DEFAULTCOMPONENT5</td><td/><td/><td>_5B348A7D_8E99_4237_A0CF_171570050AE8_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LookupTables.Primary_output</td><td/><td/><td>_B945B06A_4653_45F6_AD38_744E7686F40E_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>LookupTables.Primary_output1</td><td/><td/><td>_4282366C_D7F3_482E_B368_32134DE52F63_FILTER</td><td/><td/><td/><td/></row>
 		<row><td>RegexUtilities.Primary_output</td><td/><td/><td>_19FE2C1F_DE28_401B_BAD2_F7FAA143979B_FILTER</td><td/><td/><td/><td/></row>
@@ -2706,7 +2717,7 @@
 		<col def="I2">Encoded</col>
 		<col def="S0">Comment</col>
 		<col def="I4">TimeStamp</col>
-		<row><td>COMPANY_NAME</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>1805916023</td></row>
+		<row><td>COMPANY_NAME</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>-1952150673</td></row>
 		<row><td>DN_AlwaysInstall</td><td>1033</td><td>Always Install</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_COLOR</td><td>1033</td><td>The color settings of your system are not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDPROP_EXPRESS_LAUNCH_CONDITION_DOTNETVERSION35SP1</td><td>1033</td><td>Microsoft .NET Framework 3.5 SP1 needs to be installed for this installation to continue.</td><td>0</td><td/><td>1805928311</td></row>
@@ -3809,8 +3820,8 @@
 		<row><td>IDS__TargetReq_DESC_PROCESSOR</td><td>1033</td><td>The processor is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDS__TargetReq_DESC_RAM</td><td>1033</td><td>The amount of RAM is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
 		<row><td>IDS__TargetReq_DESC_RESOLUTION</td><td>1033</td><td>The screen resolution is not adequate for running [ProductName].</td><td>0</td><td/><td>-484139350</td></row>
-		<row><td>ID_STRING1</td><td>1033</td><td>http://www.FreeUKGenealogy.com</td><td>0</td><td/><td>1805916023</td></row>
-		<row><td>ID_STRING2</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>1805916023</td></row>
+		<row><td>ID_STRING1</td><td>1033</td><td>http://www.FreeUKGenealogy.com</td><td>0</td><td/><td>-1952150673</td></row>
+		<row><td>ID_STRING2</td><td>1033</td><td>FreeUKGenealogy</td><td>0</td><td/><td>-1952150673</td></row>
 		<row><td>ID_STRING3</td><td>1033</td><td>Launch |Built</td><td>0</td><td/><td>-484144821</td></row>
 		<row><td>IIDS_UITEXT_FeatureUninstalled</td><td>1033</td><td>This feature will remain uninstalled.</td><td>0</td><td/><td>-484139350</td></row>
 	</table>
@@ -3958,6 +3969,8 @@
 		<row><td>_B33BE79E1457441788D53A844B81E737.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_B729FF4321F14FB08BA05CABB772EB07.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_BBE185656E634EE49B8EAEB9DDD37EC6.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_Built1_2778313F750F4D3892C7C1C0EC76E190.exe</td><td/><td>&lt;VSSolutionFolder&gt;\FreeREG2Browser\Resources\appico.ico</td><td>0</td></row>
+		<row><td>_Built_293A45CC4FA74DCD9386F3632141AED2.exe</td><td/><td>&lt;VSSolutionFolder&gt;\FreeREG2Browser\Resources\appico.ico</td><td>0</td></row>
 		<row><td>_C01CEB90BEC54ED1A57657F2B1D426C4.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_C1EB12FE7EB945519226E3D501EF93A9.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_CA6503216FD141E4AF684C4EC20A0F0B.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
@@ -4103,7 +4116,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{477BBFA6-AE14-4A6A-99C6-C01A82F94668}</td></row>
 		<row><td>ISUSSignature</td><td>{15E69C45-9616-46F5-B81C-C40B7BF2DD3C}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewObjects,viewProject,viewRealSetupDesign,viewSetupDesign,viewSetupTypes,viewUpdateService,viewUpgradePaths,viewAppFiles,viewFeatureFiles,viewDependencies,viewShortcuts,viewUI,viewIniFiles,viewFileExtensions,viewEnvironmentVariables,viewVRoots,viewServices,viewBillboards,viewTextMessages,viewSystemSearch,viewCustomActions,viewRelease,viewISToday</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewObjects,viewProject,viewRealSetupDesign,viewSetupDesign,viewSetupTypes,viewUpdateService,viewUpgradePaths,viewAppFiles,viewFeatureFiles,viewDependencies,viewShortcuts,viewUI,viewIniFiles,viewFileExtensions,viewEnvironmentVariables,viewVRoots,viewServices,viewBillboards,viewTextMessages,viewSystemSearch,viewCustomActions,viewRelease,viewISToday,viewRegistry,viewTextFiles,viewXMLConfig,viewSQLServer,viewComponentServices,viewInstallScriptStd,viewSupportFiles,viewDesignPatches</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>
@@ -4137,7 +4150,7 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<row><td>FindRelatedProducts</td><td/><td>430</td><td>FindRelatedProducts</td><td/></row>
 		<row><td>ISPreventDowngrade</td><td>ISFOUNDNEWERPRODUCTVERSION</td><td>450</td><td>ISPreventDowngrade</td><td/></row>
 		<row><td>ISSetAllUsers</td><td>Not Installed</td><td>10</td><td/><td/></row>
-		<row><td>InstallWelcome</td><td>Not Installed</td><td>1210</td><td>InstallWelcome</td><td/></row>
+		<row><td>InstallWelcome</td><td>Not UITEST And Not Installed</td><td>1110</td><td/><td/></row>
 		<row><td>IsolateComponents</td><td/><td>950</td><td>IsolateComponents</td><td/></row>
 		<row><td>LaunchConditions</td><td>Not Installed</td><td>410</td><td>LaunchConditions</td><td/></row>
 		<row><td>MaintenanceWelcome</td><td>Installed And Not RESUME And Not Preselected And Not PATCH</td><td>1230</td><td>MaintenanceWelcome</td><td/></row>
@@ -4646,8 +4659,8 @@ UwBpAG4AZwBsAGUASQBtAGEAZwBlAAEARQB4AHAAcgBlAHMAcwA=
 		<col def="S255">ISComments</col>
 		<col def="S255">ISShortcutName</col>
 		<col def="I4">ISAttributes</col>
-		<row><td>_Built</td><td>winfre_1_winfreereg</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>WinFreeReg.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
-		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>WinFreeReg.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td/><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built</td><td>winfre_1_winfreereg</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>WinFreeReg.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built_293A45CC4FA74DCD9386F3632141AED2.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
+		<row><td>_Built1</td><td>DesktopFolder</td><td>##IDS_SHORTCUT_DISPLAY_NAME1##</td><td>WinFreeReg.Primary_output</td><td>AlwaysInstall</td><td/><td/><td/><td>_Built1_2778313F750F4D3892C7C1C0EC76E190.exe</td><td>0</td><td>1</td><td/><td/><td/><td/><td/><td/><td/><td/></row>
 	</table>
 
 	<table name="Signature">

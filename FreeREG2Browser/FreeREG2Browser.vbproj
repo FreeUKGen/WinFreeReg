@@ -444,7 +444,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Documentation\FileDetails.html" />
+    <Content Include="Documentation\FileWorkspace.html" />
+    <Content Include="Documentation\FreeRegBrowser.css" />
+    <Content Include="Documentation\FreeregTables.html" />
+    <Content Include="Documentation\GeneralHelp.html" />
+    <Content Include="Documentation\LocalFiles.html" />
+    <Content Include="Documentation\StartNewFile.html" />
+    <Content Include="Documentation\StartUp.html" />
+    <Content Include="Documentation\UploadedFiles.html" />
+    <Content Include="Documentation\UserTables.html" />
     <Content Include="Other Files\ErrorMessages.xml" />
+    <Content Include="Other Files\ToolTips.xml" />
+    <None Include="Resources\help.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

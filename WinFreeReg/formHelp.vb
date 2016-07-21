@@ -1,7 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports System.IO
 
-Public Class formGeneralHelp
+Public Class formHelp
 
    Private AppDataLocalFolder = String.Format("{0}\{1}\doc", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
 
@@ -27,7 +27,10 @@ Public Class formGeneralHelp
 
    Private m_StartPagePath As String
 
-   Private Sub formGeneralHelp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+   Private Sub formHelp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+   End Sub
+
+   Private Sub formHelp_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
       If [String].IsNullOrEmpty(m_StartPageName) Then Throw New ArgumentException(My.Resources.msgHelpPageError, "Pagename")
       m_StartPagePath = Path.Combine(AppDataLocalFolder, m_StartPageName)
       If Not File.Exists(m_StartPagePath) Then Throw New FileNotFoundException(My.Resources.msgHelpFileNotFound, m_StartPagePath)
@@ -42,4 +45,19 @@ Public Class formGeneralHelp
       End Try
    End Sub
 
+   Private Sub wbPage_CanGoBackChanged(ByVal sender As Object, ByVal e As EventArgs) Handles wbPage.CanGoBackChanged
+      ToolStripButton4.Enabled = wbPage.CanGoBack
+   End Sub
+
+   Private Sub ToolStripButton4_Click(sender As Object, e As EventArgs) Handles ToolStripButton4.Click
+      wbPage.GoBack()
+   End Sub
+
+   Private Sub wbPage_CanGoForwardChanged(ByVal sender As Object, ByVal e As EventArgs) Handles wbPage.CanGoForwardChanged
+      ToolStripButton5.Enabled = wbPage.CanGoForward
+   End Sub
+
+   Private Sub ToolStripButton5_Click(sender As Object, e As EventArgs) Handles ToolStripButton5.Click
+      wbPage.GoForward()
+   End Sub
 End Class

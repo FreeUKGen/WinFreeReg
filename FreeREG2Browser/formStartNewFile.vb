@@ -89,6 +89,14 @@ Public Class formStartNewFile
       End Set
    End Property
 
+   Private formHelp As formGeneralHelp = Nothing
+
+   Public Sub New(helpForm As formGeneralHelp)
+      InitializeComponent()
+
+      formHelp = helpForm
+   End Sub
+
    Private Sub formStartNewFile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       CountiesBindingSource.DataSource = m_TablesDataSet
       PlacesBindingSource.DataSource = m_TablesDataSet
@@ -287,7 +295,7 @@ Public Class formStartNewFile
       Dim ErrorMessagesDataSet As New ErrorMessages()
       Dim ErrorMessagesFileName As String = Path.Combine(AppDataLocalFolder, "ErrorMessages.xml")
 
-      Using dlg As New formFileWorkspace With {.TranscriptionFile = NewFile, .SelectedRow = Nothing, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+      Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = NewFile, .SelectedRow = Nothing, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
          Try
             dlg.IsNewFile = True
             Dim rc = dlg.ShowDialog()
@@ -310,5 +318,18 @@ Public Class formStartNewFile
          m_TablesDataSet.AcceptChanges()
          _TablesUpdated = True
       End If
+   End Sub
+
+   Private Sub formStartNewFile_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
+      Try
+         formHelp.Title = "Start New File"
+         formHelp.StartPage = "StartNewFile.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
    End Sub
 End Class

@@ -22,6 +22,13 @@ Public Class formFileDetails
       End Get
    End Property
 
+   Private formHelp As formGeneralHelp = Nothing
+   Public Sub New(helpForm As formGeneralHelp)
+      InitializeComponent()
+
+      formHelp = helpForm
+   End Sub
+
    Private Sub formFileDetails_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       FileHeaderClassBindingSource.DataSource = m_TranscriptionFile.FileHeader
       m_HeaderChanged = False
@@ -91,5 +98,18 @@ Public Class formFileDetails
 
    Private Sub PlaceComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PlaceComboBox.SelectedIndexChanged
       ChurchesBindingSource.Filter = String.Format("ChapmanCode = '{0}' AND PlaceName = '{1}'", CountyComboBox.SelectedValue, PlaceComboBox.SelectedValue)
+   End Sub
+
+   Private Sub formFileDetails_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
+      Try
+         formHelp.Title = "FreeREG Browser"
+         formHelp.StartPage = "FileDetails.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
    End Sub
 End Class

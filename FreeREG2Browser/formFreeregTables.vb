@@ -57,6 +57,13 @@ Public Class formFreeregTables
       End Set
    End Property
 
+   Private formHelp As formGeneralHelp = Nothing
+   Public Sub New(helpForm As formGeneralHelp)
+      InitializeComponent()
+
+      formHelp = helpForm
+   End Sub
+
    Private uri As Uri
    Private currentCountyCode As String = Nothing
    Private ignoreSelection As Integer = 2
@@ -992,6 +999,19 @@ Public Class formFreeregTables
 				End If
 		End Select
 	End Sub
+
+   Private Sub formFreeregTables_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
+      Try
+         formHelp.Title = "FreeREG Browser"
+         formHelp.StartPage = "FreeregTables.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
 
 	Public Class FilterPlacesByCounty
 		Implements IModelFilter

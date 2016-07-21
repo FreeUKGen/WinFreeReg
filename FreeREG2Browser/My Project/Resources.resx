@@ -120,26 +120,29 @@
   <data name="msgConfirmDeleteObject" xml:space="preserve">
     <value>You have elected to delete the current record. Are you sure that reallly want to do this?</value>
   </data>
-  <data name="msgUnsavedChanges" xml:space="preserve">
-    <value>There are unsaved changes, do you wish to save these changes before closing the file?</value>
-  </data>
-  <data name="msgNewRecordNotUnique" xml:space="preserve">
-    <value>You are trying to add a new record to the table, but, the File Value is identical to a previously added record.</value>
-  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="appico" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\appico.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="msgNewRecordNotUnique" xml:space="preserve">
+    <value>You are trying to add a new record to the table, but, the File Value is identical to a previously added record.</value>
+  </data>
+  <data name="msgLoggedIn" xml:space="preserve">
+    <value>You have successfully logged in to the FreeREGserver.</value>
   </data>
   <data name="msgError" xml:space="preserve">
     <value>This is going to be the explanation for the error</value>
   </data>
+  <data name="appico" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\appico.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="msgSaveFileWithErrors" xml:space="preserve">
     <value>The file has errors in it. Do you wish to save the file with the errors in it.</value>
   </data>
-  <data name="msgLoggedIn" xml:space="preserve">
-    <value>You have successfully logged in to the FreeREGserver.</value>
+  <data name="msgUnsavedChanges" xml:space="preserve">
+    <value>There are unsaved changes, do you wish to save these changes before closing the file?</value>
   </data>
 </root>

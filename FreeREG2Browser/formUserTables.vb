@@ -25,6 +25,13 @@ Public Class formUserTables
       End Set
    End Property
 
+   Private formHelp As formGeneralHelp = Nothing
+   Public Sub New(helpForm As formGeneralHelp)
+      InitializeComponent()
+
+      formHelp = helpForm
+   End Sub
+
    Private Sub formUserTables_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       Dim styleDisabled As New SimpleItemStyle() With {.ForeColor = Drawing.Color.DarkRed, .BackColor = Drawing.Color.Cornsilk}
 
@@ -279,4 +286,16 @@ Public Class formUserTables
       BindingNavigatorSaveChanges.Enabled = LookupTables.HasChanges()
    End Sub
 
+   Private Sub formUserTables_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
+      Try
+         formHelp.Title = "FreeREG Browser"
+         formHelp.StartPage = "UserTables.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
 End Class

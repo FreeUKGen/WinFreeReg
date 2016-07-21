@@ -468,6 +468,7 @@ Partial Class formFileDetails
       Me.Controls.Add(PlaceLabel)
       Me.Controls.Add(RegisterTypeLabel)
       Me.Name = "formFileDetails"
+      Me.ShowIcon = False
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "WinFreeREG - FIle Details - {0}"
       CType(Me.FileHeaderClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()

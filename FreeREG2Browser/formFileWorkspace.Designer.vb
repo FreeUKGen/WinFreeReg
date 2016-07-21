@@ -113,6 +113,7 @@ Partial Class formFileWorkspace
       Me.olvcWitness2Forenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcWitness2Surname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcNotes2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.miGeneralHelp = New System.Windows.Forms.ToolStripMenuItem()
       CType(Me.bsBaptisms, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.bsBurials, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.bsMarriages, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -131,7 +132,7 @@ Partial Class formFileWorkspace
       Me.workspaceBindingNavigator.AddNewItem = Nothing
       Me.workspaceBindingNavigator.CountItem = Me.BindingNavigatorCountItem
       Me.workspaceBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
-      Me.workspaceBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.BindingNavigatorSaveFile, Me.BindingNavigatorFileDetails})
+      Me.workspaceBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.BindingNavigatorSaveFile, Me.BindingNavigatorFileDetails, Me.miGeneralHelp})
       Me.workspaceBindingNavigator.Location = New System.Drawing.Point(0, 0)
       Me.workspaceBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
       Me.workspaceBindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
@@ -900,6 +901,15 @@ Partial Class formFileWorkspace
       Me.olvcNotes2.Sortable = False
       Me.olvcNotes2.Text = "Notes"
       '
+      'miGeneralHelp
+      '
+      Me.miGeneralHelp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+      Me.miGeneralHelp.Image = Global.WinFreeReg.My.Resources.Resources.help
+      Me.miGeneralHelp.Name = "miGeneralHelp"
+      Me.miGeneralHelp.ShortcutKeys = System.Windows.Forms.Keys.F1
+      Me.miGeneralHelp.Size = New System.Drawing.Size(60, 25)
+      Me.miGeneralHelp.Text = "Help"
+      '
       'formFileWorkspace
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1017,4 +1027,5 @@ Partial Class formFileWorkspace
 	Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
 	Friend WithEvents BindingNavigatorSaveFile As System.Windows.Forms.ToolStripButton
    Friend WithEvents BindingNavigatorFileDetails As System.Windows.Forms.ToolStripButton
+   Friend WithEvents miGeneralHelp As System.Windows.Forms.ToolStripMenuItem
 End Class

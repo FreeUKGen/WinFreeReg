@@ -29,21 +29,44 @@ Public Class formGeneralHelp
 
    Private Sub formGeneralHelp_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
       Visible = False
+      Me.Text = "General help - {0}"
       e.Cancel = True
    End Sub
 
    Private Sub formGeneralHelp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-      If [String].IsNullOrEmpty(m_StartPageName) Then Throw New ArgumentException(My.Resources.msgHelpPageError, "Pagename")
-      m_StartPagePath = Path.Combine(AppDataLocalFolder, m_StartPageName)
-      If Not File.Exists(m_StartPagePath) Then Throw New FileNotFoundException(My.Resources.msgHelpFileNotFound, m_StartPagePath)
-
-      Try
-         Text = String.Format(Me.Text, m_Title)
-         wbPage.Navigate(m_StartPagePath)
-
-      Catch ex As Exception
-         Beep()
-
-      End Try
    End Sub
+
+   Private Sub formGeneralHelp_VisibleChanged(sender As Object, e As EventArgs) Handles MyBase.VisibleChanged
+      If Me.Visible Then
+         If [String].IsNullOrEmpty(m_StartPageName) Then Throw New ArgumentException(My.Resources.msgHelpPageError, "Pagename")
+         m_StartPagePath = Path.Combine(AppDataLocalFolder, m_StartPageName)
+         If Not File.Exists(m_StartPagePath) Then Throw New FileNotFoundException(My.Resources.msgHelpFileNotFound, m_StartPagePath)
+
+         Try
+            Text = String.Format(Me.Text, m_Title)
+            wbPage.Navigate(m_StartPagePath)
+
+         Catch ex As Exception
+            Beep()
+
+         End Try
+      End If
+   End Sub
+
+   Private Sub wbPage_CanGoBackChanged(ByVal sender As Object, ByVal e As EventArgs) Handles wbPage.CanGoBackChanged
+      btnBack.Enabled = wbPage.CanGoBack
+   End Sub
+
+   Private Sub btnBack_Click(sender As Object, e As EventArgs) Handles btnBack.Click
+      wbPage.GoBack()
+   End Sub
+
+   Private Sub wbPage_CanGoForwardChanged(ByVal sender As Object, ByVal e As EventArgs) Handles wbPage.CanGoForwardChanged
+      btnForward.Enabled = wbPage.CanGoForward
+   End Sub
+
+   Private Sub btnForward_Click(sender As Object, e As EventArgs) Handles btnForward.Click
+      wbPage.GoForward()
+   End Sub
+
 End Class

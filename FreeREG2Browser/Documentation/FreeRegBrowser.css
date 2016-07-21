@@ -1,0 +1,29 @@
+﻿.boldword
+      {
+         font-weight: bold;
+         color: #000099;
+      }
+body {
+   font-family: "Comic Sans MS";
+}
+h1
+{
+   color: #0000FF;
+}
+h2
+{
+   font-style: italic;
+}
+dt
+{
+   color: #800000;
+}
+dd
+{
+   font-family: Arial;
+   font-size: medium;
+}
+.newStyle1
+{
+   color: #800000;
+}

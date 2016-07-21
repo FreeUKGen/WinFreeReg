@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+   <meta charset="utf-8" />
+   <title>WinFreeREG - General Help</title>
+   <link href="FreeRegBrowser.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+   <h1>WinFreeREG - The FreeREG Portal</h1>
+
+   <p>This is the main working area of the program. Here, you can work with the transcription files that are stored on your PC and manage the files that have been uploaded to the FreeREG server. At first sight,the window is most unprepossessing. All that is available is provided by the items on the menu bar.</p>
+
+   <p>At this initial point, there is very little that can be done. If you take a tour of the 3 menu options, you will see that only 2 of them are operative. You can <span class="boldword">Login</span> to the FreeREG server or work with your <span class="boldword">local transcription files</span>. Most other options only become available after you have logged in to the FreeREG server for the first time.</p>
+   
+   <h2>Logon</h2>
+
+   <p>Use this option to login to the FreeREG server. When selected, the program will use the <span class="boldword">User ID</span> and <span class="boldword">password</span> last entered on the Startup window to login. A further, confirmation window will be shown, in which you can enter another <span class="boldword">User ID</span> and <span class="boldword">password</span>. These will override the entries on the Startup window and become the most-recently used Userid and password the next time the program is used.</p>
+
+   <p>Confirm or cancel the confirmation box. Cancelling returns you to the main window. When the Login attempt is confirmed, the program will perform the login and authentication process. Watch out for progress messages in the status line at the bottom of the window. Success or failure will be signalled by a message issued at the end of the login process, after which, all applicable options will become available in the menu.</p>
+
+   <h2>Logoff</h2>
+
+   <p>This option will log you off from the FreeREG server. You need not explicitly log off. Closing this main window will, if you&#39;re logged in, force a log off. You should also be aware that due to a lack of activity, the FreeREG server may force a log off aw well. In this event, the program does not receive any notification of the fact and the first indication of the forced log off will be a refusal of the server to do something that you might expect it to normally do.</p>
+   
+   <h2>User Profile</h2>
+
+   <p>The <span class="boldword">User Profile</span> option displays a version of your FreeREG User Profile record as it is stored on the server. Note that despite appearances to the contrary, there is no possibility currently of editing anything you see on this screen. You should also be aware that, until you have successfully logged in to the FreeREG once, this option will not be available.</p>
+
+   <h2>Refresh User</h2>
+   
+   <p>This option allows the user to refresh their profile details without the necessity of first displaying it.</p>
+   
+   <h2>Exit</h2>
+
+   <p>This option is very self-explanatory!</p>
+
+   <h2>Local Files</h2>
+
+   <p>This option will give you a list of all the transcription files that it finds on the PC in the default folder. For ease of use, the text of records will be colour-coded. Files in black need nothing doing to them. They haven&#39;t been changed since they were last uploaded. Files in green have been changed and most likely need replacing on the server. And files in red are new files and need to be uploaded to the server.</p>
+
+   <p>Initially all local files will be in red unless you have first logged on to the server and downloaded a list of the files that have previously been uploaded to the server.</p>
+
+   <p>See <a href="LocalFiles.html">Local Files List</a> for more details.</p>
+
+   <h2>Uploaded Files</h2>
+
+   <p>This option will fulfill several purposes. Firstly, each time the option is selected, (and this can only happen if the user has logged in to the server) the program will retrieve the latest list of files that have been uploaded to the server. It then displays this list.</p>
+
+   <p>Secondly, as each filename is selected, details obtained from the server are displayed, giving an insight into the contents of the file. Note that these details are read-only and it is not possible to change them except through uploading the local file to the server to replace the online version.</p>
+
+   <p>Thirdly, the user can retrieve the file contents from the server to view them and can, if required save the file to the PC.</p>
+
+   <p>See <a href="UploadedFiles.html">Uploaded Files List</a> for more details.</p>
+
+   <h2>FreeREG Tables</h2>
+
+   <p>Use this option to download:-</p>
+
+   <dl>
+      <dt>Register Types</dt>
+      <dd>A table containing the full set of acceptable types of documents that can be transcribed: Parish Registers (PR), Archdeacons Transcripts (AT) etc.</dd>
+      <dt>Counties</dt>
+      <dd>A table of all the counties in the United Kingdom</dd>
+      <dt>Place names</dt>
+      <dd>A table of all the recognised places in a county. Note that in most counties there are very large numbers of places and downloading them will take time. Also, when displaying the list of places, the time taken can seem inordinate. Have patience!</dd>
+      <dt>Church names</dt>
+      <dd>A table of all the recognised churches in a particular place. In a small parish, there is generally only a single church, whilst in cities there can be a large number of institutions. London (the City and the modern Greater) presents more of challenge.</dd>
+   </dl>
+
+   <p>See <a href="FreeregTables.html">Downloading FreeREG Tables</a> for more information.</p> 
+
+   <h2>User Tables</h2>
+
+   <p>Use this option to maintain your own, personal set of data tables to be used in the transcription process. These tables attempt to control what is recorded in certain fields of the three record types, and prevent large-scale anarchy in the FreeREG database.</p>
+
+   <p>Use this option to maintain :-</p>
+
+   <dl>
+      <dt>Baptism Sex</dt>
+      <dd>This table exists to provide some semblance of consistency when it comes to recording the gender of children (and older) being baptised. Very often, registers reflect personal preferences of the people recording the events and the times in which the recordings were made. This table seeks to limit the freedom of transcribers to strictly adhere to the TWYS principle, and dictates that Sex can be only M or F or ? or blank.</dd>
+      <dt>Burial Relationships</dt>
+      <dd>Relationships of the deceased to various other, mentioned people are many and varied. Again, this table exists to try and bring some form of consistency to what is actually recorded in transcriptions. The table consists of a small set of standard relationships, to which the user is able to add further entries as and when they are encountered.</dd>
+      <dt>Groom Marriage Conditions</dt>
+      <dd>For the most part, the condition of the Groom at the time of his marriage is fairly well standardised in the registers. This is reflected by the set of standard entries in this table. But, these do not cover all eventualities, and over the centuries, people have found further ways of describing the groom. The user can add to these standard entries as and when requires.</dd>
+      <dt>Bride Marriage Conditions</dt>
+      <dd>For the most part, the condition of the Bride at the time of her marriage is fairly well standardised in the registers. This is reflected by the set of standard entries in this table. But, these do not cover all eventualities, and over the centuries, people have found further ways of describing the bride. The user can add to these standard entries as and when requires.</dd>
+   </dl>
+
+   <p>See <a href="UserTables.html">Maintaining The User Tables</a> for more information.</p>
+
+</body>
+</html>

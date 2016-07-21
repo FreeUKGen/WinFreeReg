@@ -187,9 +187,10 @@ Partial Class formStartUp
       'TraceCheckBox
       '
       Me.TraceCheckBox.AutoSize = True
-      Me.TraceCheckBox.Location = New System.Drawing.Point(12, 314)
+      Me.TraceCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.TraceCheckBox.Location = New System.Drawing.Point(12, 308)
       Me.TraceCheckBox.Name = "TraceCheckBox"
-      Me.TraceCheckBox.Size = New System.Drawing.Size(99, 17)
+      Me.TraceCheckBox.Size = New System.Drawing.Size(76, 14)
       Me.TraceCheckBox.TabIndex = 15
       Me.TraceCheckBox.Text = "Network trace?"
       Me.TraceCheckBox.UseVisualStyleBackColor = True

@@ -3,7 +3,7 @@ Imports WinFreeReg
 
 Public Class frmTestBrowser
 
-   Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
+   Private AppDataLocalFolder = "C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Other Files"
 
    Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
       Using frm As New FreeREG2Browser()

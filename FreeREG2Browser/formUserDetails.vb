@@ -24,6 +24,13 @@ Public Class formUserDetails
       End Set
    End Property
 
+   Private formHelp As formGeneralHelp = Nothing
+   Public Sub New(ByVal helpForm As formGeneralHelp)
+      InitializeComponent()
+
+      formHelp = helpForm
+   End Sub
+
    Private Sub formUserDetails_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       Dim AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
       Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
@@ -70,5 +77,18 @@ Public Class formUserDetails
       Research_agreementCheckBox.Checked = _record("research_agreement")
       Transcription_agreementCheckBox.Checked = _record("transcription_agreement")
       Password_confirmationTextBox.Text = _record("password_confirmation")
+   End Sub
+
+   Private Sub formUserDetails_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
+      Try
+         formHelp.Title = "FreeREG Browser"
+         formHelp.StartPage = "UserDetails.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
    End Sub
 End Class

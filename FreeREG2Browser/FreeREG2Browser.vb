@@ -65,6 +65,8 @@ Public Class FreeREG2Browser
    Public LookupTablesFile As String = Path.Combine(AppDataLocalFolder, "winfreereg.tables")
    Public ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
 
+   Private formHelp As New formGeneralHelp() With {.Visible = False}
+
    Friend WithEvents bnavShowData As System.Windows.Forms.BindingNavigator
    Private components As System.ComponentModel.IContainer
    Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
@@ -207,6 +209,7 @@ Public Class FreeREG2Browser
    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
    Friend WithEvents miNetworkTrace As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents FileListProgressBar As System.Windows.Forms.ToolStripProgressBar
+   Friend WithEvents miGeneralHelp As System.Windows.Forms.ToolStripMenuItem
    Public Property TranscriptionLibrary() As String
       Get
          Return _myTranscriptionLibrary
@@ -280,6 +283,7 @@ Public Class FreeREG2Browser
       Me.miTranscriptionData = New System.Windows.Forms.ToolStripMenuItem()
       Me.miFreeREG2Tables = New System.Windows.Forms.ToolStripMenuItem()
       Me.miUserTables = New System.Windows.Forms.ToolStripMenuItem()
+      Me.miGeneralHelp = New System.Windows.Forms.ToolStripMenuItem()
       Me.BrowserStatusStrip = New System.Windows.Forms.StatusStrip()
       Me.labelStatus = New System.Windows.Forms.ToolStripStatusLabel()
       Me.FileListProgressBar = New System.Windows.Forms.ToolStripProgressBar()
@@ -706,11 +710,11 @@ Public Class FreeREG2Browser
       '
       'BrowserMenuStrip
       '
-      Me.BrowserMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG, Me.miTranscriptions, Me.miTranscriptionData})
+      Me.BrowserMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG, Me.miTranscriptions, Me.miTranscriptionData, Me.miGeneralHelp})
       Me.BrowserMenuStrip.Location = New System.Drawing.Point(0, 0)
       Me.BrowserMenuStrip.Name = "BrowserMenuStrip"
       Me.BrowserMenuStrip.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
-      Me.BrowserMenuStrip.Size = New System.Drawing.Size(1137, 24)
+      Me.BrowserMenuStrip.Size = New System.Drawing.Size(1204, 24)
       Me.BrowserMenuStrip.TabIndex = 0
       Me.BrowserMenuStrip.Text = "MenuStrip1"
       '
@@ -767,11 +771,13 @@ Public Class FreeREG2Browser
       Me.miNetworkTrace.Name = "miNetworkTrace"
       Me.miNetworkTrace.Size = New System.Drawing.Size(155, 22)
       Me.miNetworkTrace.Text = "Network Trace?"
+      Me.miNetworkTrace.Visible = False
       '
       'ToolStripSeparator3
       '
       Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
       Me.ToolStripSeparator3.Size = New System.Drawing.Size(152, 6)
+      Me.ToolStripSeparator3.Visible = False
       '
       'miExit
       '
@@ -808,14 +814,23 @@ Public Class FreeREG2Browser
       'miFreeREG2Tables
       '
       Me.miFreeREG2Tables.Name = "miFreeREG2Tables"
-      Me.miFreeREG2Tables.Size = New System.Drawing.Size(159, 22)
-      Me.miFreeREG2Tables.Text = "FreeREG2 Tables"
+      Me.miFreeREG2Tables.Size = New System.Drawing.Size(153, 22)
+      Me.miFreeREG2Tables.Text = "FreeREG Tables"
       '
       'miUserTables
       '
       Me.miUserTables.Name = "miUserTables"
-      Me.miUserTables.Size = New System.Drawing.Size(159, 22)
+      Me.miUserTables.Size = New System.Drawing.Size(153, 22)
       Me.miUserTables.Text = "User Tables"
+      '
+      'miGeneralHelp
+      '
+      Me.miGeneralHelp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+      Me.miGeneralHelp.Image = Global.WinFreeReg.My.Resources.Resources.help
+      Me.miGeneralHelp.Name = "miGeneralHelp"
+      Me.miGeneralHelp.ShortcutKeys = System.Windows.Forms.Keys.F1
+      Me.miGeneralHelp.Size = New System.Drawing.Size(60, 20)
+      Me.miGeneralHelp.Text = "Help"
       '
       'BrowserStatusStrip
       '
@@ -823,12 +838,13 @@ Public Class FreeREG2Browser
       Me.BrowserStatusStrip.Location = New System.Drawing.Point(0, 644)
       Me.BrowserStatusStrip.Name = "BrowserStatusStrip"
       Me.BrowserStatusStrip.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
-      Me.BrowserStatusStrip.Size = New System.Drawing.Size(1137, 22)
+      Me.BrowserStatusStrip.Size = New System.Drawing.Size(1204, 22)
       Me.BrowserStatusStrip.TabIndex = 1
       Me.BrowserStatusStrip.Text = "StatusStrip1"
       '
       'labelStatus
       '
+      Me.labelStatus.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
       Me.labelStatus.Name = "labelStatus"
       Me.labelStatus.Size = New System.Drawing.Size(0, 17)
       '
@@ -860,7 +876,7 @@ Public Class FreeREG2Browser
       Me.bnavShowData.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
       Me.bnavShowData.Name = "bnavShowData"
       Me.bnavShowData.PositionItem = Me.BindingNavigatorPositionItem
-      Me.bnavShowData.Size = New System.Drawing.Size(1202, 25)
+      Me.bnavShowData.Size = New System.Drawing.Size(1137, 25)
       Me.bnavShowData.TabIndex = 3
       Me.bnavShowData.Text = "BindingNavigator1"
       Me.bnavShowData.Visible = False
@@ -1027,7 +1043,7 @@ Public Class FreeREG2Browser
       Me.panelUploadedFiles.Location = New System.Drawing.Point(0, 0)
       Me.panelUploadedFiles.Margin = New System.Windows.Forms.Padding(4)
       Me.panelUploadedFiles.Name = "panelUploadedFiles"
-      Me.panelUploadedFiles.Size = New System.Drawing.Size(985, 583)
+      Me.panelUploadedFiles.Size = New System.Drawing.Size(1052, 583)
       Me.panelUploadedFiles.TabIndex = 5
       '
       'IDTextBox
@@ -1370,7 +1386,7 @@ Public Class FreeREG2Browser
       '
       Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer2)
       Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer3)
-      Me.SplitContainer1.Size = New System.Drawing.Size(1137, 620)
+      Me.SplitContainer1.Size = New System.Drawing.Size(1204, 620)
       Me.SplitContainer1.SplitterDistance = 32
       Me.SplitContainer1.SplitterWidth = 5
       Me.SplitContainer1.TabIndex = 65
@@ -1397,8 +1413,8 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.Label1)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
-      Me.SplitContainer2.Size = New System.Drawing.Size(1137, 583)
-      Me.SplitContainer2.SplitterDistance = 528
+      Me.SplitContainer2.Size = New System.Drawing.Size(1204, 583)
+      Me.SplitContainer2.SplitterDistance = 518
       Me.SplitContainer2.SplitterWidth = 5
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1424,7 +1440,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(1137, 528)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(1204, 518)
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
       Me.dlvLocalFiles.UseAlternatingBackColors = True
@@ -1509,7 +1525,7 @@ Public Class FreeREG2Browser
       'SplitContainer3.Panel2
       '
       Me.SplitContainer3.Panel2.Controls.Add(Me.panelUploadedFiles)
-      Me.SplitContainer3.Size = New System.Drawing.Size(1137, 583)
+      Me.SplitContainer3.Size = New System.Drawing.Size(1204, 583)
       Me.SplitContainer3.SplitterDistance = 147
       Me.SplitContainer3.SplitterWidth = 5
       Me.SplitContainer3.TabIndex = 5
@@ -1565,7 +1581,7 @@ Public Class FreeREG2Browser
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(1137, 666)
+      Me.ClientSize = New System.Drawing.Size(1204, 666)
       Me.Controls.Add(Me.SplitContainer1)
       Me.Controls.Add(Me.BrowserStatusStrip)
       Me.Controls.Add(Me.BrowserMenuStrip)
@@ -1656,6 +1672,8 @@ Public Class FreeREG2Browser
       Finally
          If stream IsNot Nothing Then stream.Close()
       End Try
+
+      formHelp.Dispose()
    End Sub
 
    Private Sub FreeREG2Browser_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
@@ -1775,7 +1793,7 @@ Public Class FreeREG2Browser
    End Sub
 
    Private Sub miUserDetails_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUserProfile.Click
-      Using dlg As New formUserDetails With {.RecordToShow = UserDataSet.User.FindByuserid(MyAppSettings.UserId), .MyOwner = Me}
+      Using dlg As New formUserDetails(formHelp) With {.RecordToShow = UserDataSet.User.FindByuserid(MyAppSettings.UserId), .MyOwner = Me}
          dlg.ShowDialog()
       End Using
    End Sub
@@ -2075,11 +2093,11 @@ Public Class FreeREG2Browser
       Select Case pgmState
          Case ProgramState.Idle
             miFreeREG2Tables.Enabled = False
-            miUserTables.Enabled = False
+            miUserTables.Enabled = True
 
          Case ProgramState.LoggedOn
             miFreeREG2Tables.Enabled = False
-            miUserTables.Enabled = False
+            miUserTables.Enabled = True
 
          Case ProgramState.UserAuthenticated
             miFreeREG2Tables.Enabled = True
@@ -2088,13 +2106,13 @@ Public Class FreeREG2Browser
    End Sub
 
    Private Sub miUserTables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUserTables.Click
-      Using dlg As New formUserTables() With {.LookupTables = LookUpsDataSet, .LookupsFilename = LookupTablesFile}
+      Using dlg As New formUserTables(formHelp) With {.LookupTables = LookUpsDataSet, .LookupsFilename = LookupTablesFile}
          dlg.ShowDialog()
       End Using
    End Sub
 
    Private Sub miFreeREG2Tables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miFreeREG2Tables.Click
-      Using dlg As New formFreeregTables With {.DataSet = TablesDataSet, .TablesFileName = FreeregTablesFile, .Settings = MyAppSettings, .DefaultCounty = _myDefaultCounty}
+      Using dlg As New formFreeregTables(formHelp) With {.DataSet = TablesDataSet, .TablesFileName = FreeregTablesFile, .Settings = MyAppSettings, .DefaultCounty = _myDefaultCounty}
          dlg.ShowDialog()
       End Using
    End Sub
@@ -3553,7 +3571,7 @@ Public Class FreeREG2Browser
 
             If contents.StartsWith("+INFO") Then
                Using dlg As New formBatchContents() With {.PersonalPath = _myTranscriptionLibrary, .CurrentBatch = currentBatch, .Text = String.Format("Batch Contents - {0}", currentBatch.FileName)}
-                  dlg.FileContentsTextBox.Text = contents
+                  dlg.FileContentsTextBox.Text = contents.Replace(",""""", ",")
                   dlg.ShowDialog()
                End Using
             Else
@@ -3643,7 +3661,7 @@ Public Class FreeREG2Browser
 
    Private Sub dlvLocalFiles_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.ItemActivate
       Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
-      Using dlg As New formFileWorkspace With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+      Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
          Try
             Dim rc = dlg.ShowDialog()
             If rc = Windows.Forms.DialogResult.OK Then
@@ -3686,7 +3704,7 @@ Public Class FreeREG2Browser
    End Sub
 
    Private Sub btnNewFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewFile.Click
-      Using dlg As New formStartNewFile With {.Username = _myUserName, .EmailAddress = _myEmailAddress, .dsFreeRegTables = TablesDataSet, .dsLookupTables = LookUpsDataSet, .DefaultCounty = _myDefaultCounty, .TranscriptionLibrary = _myTranscriptionLibrary}
+      Using dlg As New formStartNewFile(formHelp) With {.Username = _myUserName, .EmailAddress = _myEmailAddress, .dsFreeRegTables = TablesDataSet, .dsLookupTables = LookUpsDataSet, .DefaultCounty = _myDefaultCounty, .TranscriptionLibrary = _myTranscriptionLibrary}
          Try
             Dim rc = dlg.ShowDialog()
             If rc = Windows.Forms.DialogResult.OK Then
@@ -3711,9 +3729,23 @@ Public Class FreeREG2Browser
 
          Catch ex As Exception
             Beep()
+            MessageBox.Show(ex.Message, "Start New File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
          End Try
       End Using
+   End Sub
+
+   Private Sub miGeneralHelp_Click(sender As Object, e As EventArgs) Handles miGeneralHelp.Click
+      Try
+         formHelp.Title = "FreeREG Browser"
+         formHelp.StartPage = "GeneralHelp.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
    End Sub
 
 End Class

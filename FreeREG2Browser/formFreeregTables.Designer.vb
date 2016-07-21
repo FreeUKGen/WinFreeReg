@@ -294,8 +294,11 @@ Partial Class formFreeregTables
       Me.ClientSize = New System.Drawing.Size(598, 339)
       Me.Controls.Add(Me.SplitContainer1)
       Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.HelpButton = True
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
       Me.Margin = New System.Windows.Forms.Padding(4)
+      Me.MaximizeBox = False
+      Me.MinimizeBox = False
       Me.Name = "formFreeregTables"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "WinFreeREG - FreeREG Tables"
