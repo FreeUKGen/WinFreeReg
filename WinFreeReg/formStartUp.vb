@@ -68,15 +68,17 @@ Public Class formStartUp
 
    Private Sub buttonStart_Click(sender As Object, e As EventArgs) Handles buttonStart.Click
       Dim r = Me.Validate()
-      Using frm As New FreeREG2Browser() With {.UserName = UserNameTextBox.Text, .EmailAddress = EmailAddressTextBox.Text, .UserId = UserIdTextBox.Text, .Password = PasswordTextBox.Text, .FreeregUrl = UrlTextBox.Text, .DefaultCounty = DefaultCountyComboBox.SelectedItem.Row, .TranscriptionLibrary = My.Settings.MyTranscriptionLibrary, .TraceNetwork = TraceCheckBox.Checked}
+      Using frm As New FreeREG2Browser() With {.UserName = UserNameTextBox.Text, .EmailAddress = EmailAddressTextBox.Text, .UserId = UserIdTextBox.Text, _
+                                               .Password = PasswordTextBox.Text, .FreeregUrl = UrlTextBox.Text, .DefaultCounty = DefaultCountyComboBox.SelectedItem.Row, _
+                                               .TranscriptionLibrary = My.Settings.MyTranscriptionLibrary, .TraceNetwork = TraceCheckBox.Checked}
          Me.Hide()
          frm.ShowDialog()
-         Me.Show()
          UserIdTextBox.Text = frm.UserId
          PasswordTextBox.Text = frm.Password
          UrlTextBox.Text = frm.FreeregUrl
          TraceCheckBox.Checked = frm.TraceNetwork
          If Not KeepOpenCheckBox.Checked Then Me.Close()
+         Me.Show()
       End Using
    End Sub
 

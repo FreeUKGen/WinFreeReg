@@ -97,6 +97,9 @@ Public Class formStartNewFile
       formHelp = helpForm
    End Sub
 
+   Property Settings As FreeReg2BrowserSettings
+   Property UserTablesFile As String
+
    Private Sub formStartNewFile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       CountiesBindingSource.DataSource = m_TablesDataSet
       PlacesBindingSource.DataSource = m_TablesDataSet
@@ -118,8 +121,6 @@ Public Class formStartNewFile
       If CountiesComboBox.SelectedItem IsNot Nothing Then
          Dim row As WinFreeReg.FreeregTables.CountiesRow = CType(CountiesComboBox.SelectedItem(), DataRowView).Row
          m_SelectedCounty = row.ChapmanCode
-         Label1.Visible = True
-         labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
 
          labPlace.Visible = True
          PlacesBindingSource.Filter = String.Format("ChapmanCode = '{0}'", m_SelectedCounty)
@@ -145,11 +146,15 @@ Public Class formStartNewFile
             m_SelectedChurch = rowChurch.ChurchName
 
             labCode.Visible = True
-            CodeTextBox.Text = IIf(IsNothing(row.Code), m_SelectedPlace.Substring(0, 3).ToUpper, row.Code)
-            labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
             CodeTextBox.Enabled = True
             CodeTextBox.Visible = True
+            CodeTextBox.Text = rowChurch.Code
+            linkUpdate.Visible = True
 
+            If Not String.IsNullOrEmpty(rowChurch.Code) Then
+               Label1.Visible = True
+               labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
+            End If
             labRegisterType.Visible = True
             RegisterTypesComboBox.Enabled = True
             RegisterTypesComboBox.Visible = True
@@ -171,10 +176,15 @@ Public Class formStartNewFile
          m_SelectedChurch = row.ChurchName
 
          labCode.Visible = True
-         '         CodeTextBox.Text = m_SelectedPlace.Substring(0, 3).ToUpper
-         labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
          CodeTextBox.Enabled = True
          CodeTextBox.Visible = True
+         CodeTextBox.Text = row.Code
+         linkUpdate.Visible = True
+         If Not String.IsNullOrEmpty(row.Code) Then
+            Label1.Visible = True
+            labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
+            linkUpdate.Visible = True
+         End If
 
          labRegisterType.Visible = True
          RegisterTypesComboBox.Enabled = True
@@ -198,9 +208,13 @@ Public Class formStartNewFile
          Dim row As WinFreeReg.LookupTables.RecordTypesRow = CType(RecordTypesComboBox.SelectedItem(), DataRowView).Row
          m_SelectedRecordType = row.Type
          m_RecordType = row.Description
-         labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
-         Dim strFileName As String = m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType
-         labFilename.Text += " " + SuffixNumber(strFileName).ToString
+         If Not String.IsNullOrEmpty(CodeTextBox.Text) Then
+            Label1.Visible = True
+            labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
+            linkUpdate.Visible = True
+            Dim strFileName As String = CodeTextBox.Text + m_SelectedRecordType
+            labFilename.Text += " " + SuffixNumber(strFileName).ToString
+         End If
 
          labComments.Visible = True
          Comment1TextBox.Enabled = True
@@ -220,15 +234,8 @@ Public Class formStartNewFile
    End Sub
 
    Private Sub CodeTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CodeTextBox.TextChanged
-      If CodeTextBox.TextLength = 3 Then
-         labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType + " " + SuffixNumber(m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType).ToString
-         If CodeTextBox.Text <> m_SelectedPlace.Substring(0, 3).ToUpper Then linkUpdate.Visible = True
-      ElseIf CodeTextBox.TextLength = 0 Then
-         labFilename.Text = m_SelectedCounty + " " + m_SelectedPlace.Substring(0, 3).ToUpper + " " + m_SelectedRecordType + " " + SuffixNumber(m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType).ToString
-         linkUpdate.Visible = False
-      Else
-         linkUpdate.Visible = False
-      End If
+      labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
+      Label1.Visible = CodeTextBox.TextLength > 0
    End Sub
 
    Private Function ListFiles(ByVal root As String) As System.Collections.Generic.IEnumerable(Of System.IO.FileInfo)
@@ -298,12 +305,16 @@ Public Class formStartNewFile
       Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = NewFile, .SelectedRow = Nothing, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
          Try
             dlg.IsNewFile = True
+            dlg.Settings = Settings
+            dlg.DefaultCounty = DefaultCounty
+            dlg.UserTablesFile = UserTablesFile
             Dim rc = dlg.ShowDialog()
             Me.DialogResult = rc
             _myNewFile = NewFile
 
          Catch ex As Exception
             Beep()
+            MessageBox.Show(ex.Message, "Start New File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
          Finally
             Me.Close()
@@ -312,11 +323,12 @@ Public Class formStartNewFile
    End Sub
 
    Private Sub linkUpdate_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkUpdate.LinkClicked
-      If CodeTextBox.TextLength = 3 Then
-         Dim row As WinFreeReg.FreeregTables.PlacesRow = CType(PlacesComboBox.SelectedItem(), DataRowView).Row
+      If CodeTextBox.TextLength > 0 Then
+         Dim row As WinFreeReg.FreeregTables.ChurchesRow = CType(ChurchesComboBox.SelectedItem(), DataRowView).Row
          row.Code = CodeTextBox.Text
          m_TablesDataSet.AcceptChanges()
          _TablesUpdated = True
+         linkUpdate.Visible = False
       End If
    End Sub
 

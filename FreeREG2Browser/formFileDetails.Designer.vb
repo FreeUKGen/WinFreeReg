@@ -60,6 +60,9 @@ Partial Class formFileDetails
       Me.PlacesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
       Me.RegisterTypeComboBox = New System.Windows.Forms.ComboBox()
       Me.RegisterTypesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+      Me.PlaceCodeTextBox = New System.Windows.Forms.TextBox()
+      Me.TranscriptionFileClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+      Me.Label1 = New System.Windows.Forms.Label()
       ChurchLabel = New System.Windows.Forms.Label()
       Comment1Label = New System.Windows.Forms.Label()
       Comment2Label = New System.Windows.Forms.Label()
@@ -81,6 +84,7 @@ Partial Class formFileDetails
       CType(Me.FileTypesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.PlacesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.RegisterTypesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.TranscriptionFileClassBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
       'ChurchLabel
@@ -227,7 +231,7 @@ Partial Class formFileDetails
       '
       Me.LinkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.LinkLabel1.AutoSize = True
-      Me.LinkLabel1.Location = New System.Drawing.Point(563, 265)
+      Me.LinkLabel1.Location = New System.Drawing.Point(563, 259)
       Me.LinkLabel1.Name = "LinkLabel1"
       Me.LinkLabel1.Size = New System.Drawing.Size(43, 13)
       Me.LinkLabel1.TabIndex = 31
@@ -403,7 +407,7 @@ Partial Class formFileDetails
       Me.PlaceComboBox.DisplayMember = "PlaceName"
       Me.PlaceComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.PlaceComboBox.FormattingEnabled = True
-      Me.PlaceComboBox.Location = New System.Drawing.Point(132, 42)
+      Me.PlaceComboBox.Location = New System.Drawing.Point(132, 40)
       Me.PlaceComboBox.Name = "PlaceComboBox"
       Me.PlaceComboBox.Size = New System.Drawing.Size(170, 24)
       Me.PlaceComboBox.TabIndex = 59
@@ -432,11 +436,37 @@ Partial Class formFileDetails
       Me.RegisterTypesBindingSource.DataMember = "RegisterTypes"
       Me.RegisterTypesBindingSource.DataSource = Me.FreeregTables
       '
+      'PlaceCodeTextBox
+      '
+      Me.PlaceCodeTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
+      Me.PlaceCodeTextBox.Enabled = False
+      Me.PlaceCodeTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.PlaceCodeTextBox.Location = New System.Drawing.Point(387, 73)
+      Me.PlaceCodeTextBox.MaxLength = 8
+      Me.PlaceCodeTextBox.Name = "PlaceCodeTextBox"
+      Me.PlaceCodeTextBox.Size = New System.Drawing.Size(101, 23)
+      Me.PlaceCodeTextBox.TabIndex = 62
+      '
+      'TranscriptionFileClassBindingSource
+      '
+      Me.TranscriptionFileClassBindingSource.DataSource = GetType(WinFreeReg.TranscriptionFileClass)
+      '
+      'Label1
+      '
+      Me.Label1.AutoSize = True
+      Me.Label1.Location = New System.Drawing.Point(317, 78)
+      Me.Label1.Name = "Label1"
+      Me.Label1.Size = New System.Drawing.Size(64, 13)
+      Me.Label1.TabIndex = 63
+      Me.Label1.Text = "Place code:"
+      '
       'formFileDetails
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(618, 287)
+      Me.ClientSize = New System.Drawing.Size(618, 281)
+      Me.Controls.Add(Me.Label1)
+      Me.Controls.Add(Me.PlaceCodeTextBox)
       Me.Controls.Add(Me.ChurchComboBox)
       Me.Controls.Add(Me.Comment1TextBox)
       Me.Controls.Add(Me.Comment2TextBox)
@@ -478,6 +508,7 @@ Partial Class formFileDetails
       CType(Me.FileTypesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.PlacesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.RegisterTypesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.TranscriptionFileClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
 
@@ -505,4 +536,7 @@ Partial Class formFileDetails
    Friend WithEvents ChurchesBindingSource As System.Windows.Forms.BindingSource
    Friend WithEvents RegisterTypesBindingSource As System.Windows.Forms.BindingSource
    Friend WithEvents FileTypesBindingSource As System.Windows.Forms.BindingSource
+   Friend WithEvents PlaceCodeTextBox As System.Windows.Forms.TextBox
+   Friend WithEvents Label1 As System.Windows.Forms.Label
+   Friend WithEvents TranscriptionFileClassBindingSource As System.Windows.Forms.BindingSource
 End Class

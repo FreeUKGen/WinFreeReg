@@ -21,6 +21,7 @@ Imports BrightIdeasSoftware
 Imports System.Drawing
 Imports System.Globalization
 Imports System.Threading
+Imports Microsoft.VisualBasic.FileIO
 
 Public Class FreeREG2Browser
    Inherits System.Windows.Forms.Form
@@ -210,6 +211,10 @@ Public Class FreeREG2Browser
    Friend WithEvents miNetworkTrace As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents FileListProgressBar As System.Windows.Forms.ToolStripProgressBar
    Friend WithEvents miGeneralHelp As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents AboutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents localContextMenuStrip As System.Windows.Forms.ContextMenuStrip
+   Friend WithEvents OpenWithNotepadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents DeleteFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
    Public Property TranscriptionLibrary() As String
       Get
          Return _myTranscriptionLibrary
@@ -284,6 +289,7 @@ Public Class FreeREG2Browser
       Me.miFreeREG2Tables = New System.Windows.Forms.ToolStripMenuItem()
       Me.miUserTables = New System.Windows.Forms.ToolStripMenuItem()
       Me.miGeneralHelp = New System.Windows.Forms.ToolStripMenuItem()
+      Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.BrowserStatusStrip = New System.Windows.Forms.StatusStrip()
       Me.labelStatus = New System.Windows.Forms.ToolStripStatusLabel()
       Me.FileListProgressBar = New System.Windows.Forms.ToolStripProgressBar()
@@ -356,6 +362,9 @@ Public Class FreeREG2Browser
       Me.backgroundReplace = New System.ComponentModel.BackgroundWorker()
       Me.backgroundDelete = New System.ComponentModel.BackgroundWorker()
       Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
+      Me.localContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+      Me.OpenWithNotepadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.DeleteFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
       PlaceNameLabel = New System.Windows.Forms.Label()
@@ -406,6 +415,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer3.SuspendLayout()
       CType(Me.dlvUploadedFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+      Me.localContextMenuStrip.SuspendLayout()
       Me.SuspendLayout()
       '
       'IDLabel
@@ -710,7 +720,7 @@ Public Class FreeREG2Browser
       '
       'BrowserMenuStrip
       '
-      Me.BrowserMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG, Me.miTranscriptions, Me.miTranscriptionData, Me.miGeneralHelp})
+      Me.BrowserMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG, Me.miTranscriptions, Me.miTranscriptionData, Me.miGeneralHelp, Me.AboutToolStripMenuItem})
       Me.BrowserMenuStrip.Location = New System.Drawing.Point(0, 0)
       Me.BrowserMenuStrip.Name = "BrowserMenuStrip"
       Me.BrowserMenuStrip.Padding = New System.Windows.Forms.Padding(8, 2, 0, 2)
@@ -832,6 +842,12 @@ Public Class FreeREG2Browser
       Me.miGeneralHelp.Size = New System.Drawing.Size(60, 20)
       Me.miGeneralHelp.Text = "Help"
       '
+      'AboutToolStripMenuItem
+      '
+      Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+      Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(52, 20)
+      Me.AboutToolStripMenuItem.Text = "About"
+      '
       'BrowserStatusStrip
       '
       Me.BrowserStatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.labelStatus, Me.FileListProgressBar})
@@ -876,7 +892,7 @@ Public Class FreeREG2Browser
       Me.bnavShowData.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
       Me.bnavShowData.Name = "bnavShowData"
       Me.bnavShowData.PositionItem = Me.BindingNavigatorPositionItem
-      Me.bnavShowData.Size = New System.Drawing.Size(1137, 25)
+      Me.bnavShowData.Size = New System.Drawing.Size(1204, 25)
       Me.bnavShowData.TabIndex = 3
       Me.bnavShowData.Text = "BindingNavigator1"
       Me.bnavShowData.Visible = False
@@ -1414,7 +1430,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(1204, 583)
-      Me.SplitContainer2.SplitterDistance = 518
+      Me.SplitContainer2.SplitterDistance = 512
       Me.SplitContainer2.SplitterWidth = 5
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1440,7 +1456,8 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(1204, 518)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(1204, 512)
+      Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
       Me.dlvLocalFiles.UseAlternatingBackColors = True
@@ -1577,6 +1594,24 @@ Public Class FreeREG2Browser
       Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
       Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
+      'localContextMenuStrip
+      '
+      Me.localContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenWithNotepadToolStripMenuItem, Me.DeleteFileToolStripMenuItem})
+      Me.localContextMenuStrip.Name = "localContextMenuStrip"
+      Me.localContextMenuStrip.Size = New System.Drawing.Size(164, 48)
+      '
+      'OpenWithNotepadToolStripMenuItem
+      '
+      Me.OpenWithNotepadToolStripMenuItem.Name = "OpenWithNotepadToolStripMenuItem"
+      Me.OpenWithNotepadToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+      Me.OpenWithNotepadToolStripMenuItem.Text = "Open with Editor"
+      '
+      'DeleteFileToolStripMenuItem
+      '
+      Me.DeleteFileToolStripMenuItem.Name = "DeleteFileToolStripMenuItem"
+      Me.DeleteFileToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+      Me.DeleteFileToolStripMenuItem.Text = "Delete file"
+      '
       'FreeREG2Browser
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1618,6 +1653,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer3.ResumeLayout(False)
       CType(Me.dlvUploadedFiles, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+      Me.localContextMenuStrip.ResumeLayout(False)
       Me.ResumeLayout(False)
       Me.PerformLayout()
 
@@ -1721,6 +1757,7 @@ Public Class FreeREG2Browser
          ErrorMessagesDataSet.ReadXml(ErrorMessagesFileName, XmlReadMode.ReadSchema)
          ErrorMessagesDataSet.AcceptChanges()
       End If
+
       If File.Exists(TranscriberProfileFile) Then
          UserDataSet.ReadXml(TranscriberProfileFile, XmlReadMode.ReadSchema)
          UserDataSet.AcceptChanges()
@@ -1734,6 +1771,7 @@ Public Class FreeREG2Browser
             End If
          End If
       End If
+
       If File.Exists(FreeregTablesFile) Then
          TablesDataSet.ReadXml(FreeregTablesFile, XmlReadMode.ReadSchema)
          TablesDataSet.AcceptChanges()
@@ -2112,13 +2150,15 @@ Public Class FreeREG2Browser
 
    Private Sub miUserTables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUserTables.Click
       Using dlg As New formUserTables(formHelp) With {.LookupTables = LookUpsDataSet, .LookupsFilename = LookupTablesFile}
+         dlg.ShowAll()
          dlg.ShowDialog()
       End Using
    End Sub
 
    Private Sub miFreeREG2Tables_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miFreeREG2Tables.Click
-      Using dlg As New formFreeregTables(formHelp) With {.DataSet = TablesDataSet, .TablesFileName = FreeregTablesFile, .Settings = MyAppSettings, .DefaultCounty = _myDefaultCounty}
+      Using dlg As New formFreeregTables(formHelp) With {.DataSet = TablesDataSet, .Settings = MyAppSettings, .DefaultCounty = _myDefaultCounty}
          dlg.ShowDialog()
+         If dlg.IsChanged Then TablesDataSet.WriteXml(FreeregTablesFile, XmlWriteMode.WriteSchema)
       End Using
    End Sub
 
@@ -3667,7 +3707,12 @@ Public Class FreeREG2Browser
    Private Sub dlvLocalFiles_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.ItemActivate
       Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
       Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+         Me.Hide()
          Try
+            dlg.Settings = MyAppSettings
+            dlg.DefaultCounty = _myDefaultCounty
+            dlg.FreeregTablesFile = FreeregTablesFile
+            dlg.UserTablesFile = TranscriberProfileFile
             Dim rc = dlg.ShowDialog()
             If rc = Windows.Forms.DialogResult.OK Then
                If File.Exists(dlg.TranscriptionFile.FullFileName) Then
@@ -3686,10 +3731,12 @@ Public Class FreeREG2Browser
 
          Catch ex As Exception
             Beep()
+            MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
          Finally
 
          End Try
+         Me.Show()
       End Using
    End Sub
 
@@ -3711,6 +3758,8 @@ Public Class FreeREG2Browser
    Private Sub btnNewFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewFile.Click
       Using dlg As New formStartNewFile(formHelp) With {.Username = _myUserName, .EmailAddress = _myEmailAddress, .dsFreeRegTables = TablesDataSet, .dsLookupTables = LookUpsDataSet, .DefaultCounty = _myDefaultCounty, .TranscriptionLibrary = _myTranscriptionLibrary}
          Try
+            dlg.Settings = MyAppSettings
+            dlg.UserTablesFile = TranscriberProfileFile
             Dim rc = dlg.ShowDialog()
             If rc = Windows.Forms.DialogResult.OK Then
                If File.Exists(dlg.NewTranscriptionFile.FullFileName) Then
@@ -3753,4 +3802,40 @@ Public Class FreeREG2Browser
       End Try
    End Sub
 
+   Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+      Using dlg As New AboutBox()
+         dlg.ShowDialog()
+      End Using
+   End Sub
+
+   Private selectedFile As DataRow = Nothing
+
+   Private Sub dlvLocalFiles_CellRightClick(sender As Object, e As CellRightClickEventArgs) Handles dlvLocalFiles.CellRightClick
+      If e.Model Is Nothing Then Return
+      selectedFile = CType(e.Model, DataRowView).Row
+      e.MenuStrip = localContextMenuStrip
+   End Sub
+
+   Private Sub OpenWithNotepadToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenWithNotepadToolStripMenuItem.Click
+      If selectedFile IsNot Nothing Then System.Diagnostics.Process.Start(selectedFile("FullName"))
+      selectedFile = Nothing
+   End Sub
+
+   Private Sub DeleteFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteFileToolStripMenuItem.Click
+      If selectedFile IsNot Nothing Then
+         If MessageBox.Show(String.Format(My.Resources.msgConfirmDeleteFile, selectedFile("Name")), "Delete FIle", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+            Try
+               FileSystem.DeleteFile(selectedFile("FullName"), UIOption.AllDialogs, RecycleOption.SendToRecycleBin)
+               MessageBox.Show(String.Format(My.Resources.msgFileRecycled, selectedFile("Name")), "File Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information)
+               Dim tableLocalFiles As DataTable = bsrcLocalFiles.DataSource
+               tableLocalFiles.Rows.Remove(selectedFile)
+
+            Catch ex As Exception
+               MessageBox.Show(ex.Message, "Delete File Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
+         End If
+         selectedFile = Nothing
+      End If
+   End Sub
 End Class

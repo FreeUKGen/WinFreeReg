@@ -292,9 +292,9 @@ Partial Class formStartNewFile
       Me.CodeTextBox.Enabled = False
       Me.CodeTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.CodeTextBox.Location = New System.Drawing.Point(449, 96)
-      Me.CodeTextBox.MaxLength = 3
+      Me.CodeTextBox.MaxLength = 8
       Me.CodeTextBox.Name = "CodeTextBox"
-      Me.CodeTextBox.Size = New System.Drawing.Size(44, 20)
+      Me.CodeTextBox.Size = New System.Drawing.Size(80, 20)
       Me.CodeTextBox.TabIndex = 7
       Me.CodeTextBox.Visible = False
       '
@@ -376,7 +376,7 @@ Partial Class formStartNewFile
       Me.linkUpdate.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.linkUpdate.AutoSize = True
       Me.linkUpdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.linkUpdate.Location = New System.Drawing.Point(496, 100)
+      Me.linkUpdate.Location = New System.Drawing.Point(532, 100)
       Me.linkUpdate.Margin = New System.Windows.Forms.Padding(0)
       Me.linkUpdate.Name = "linkUpdate"
       Me.linkUpdate.Size = New System.Drawing.Size(41, 13)

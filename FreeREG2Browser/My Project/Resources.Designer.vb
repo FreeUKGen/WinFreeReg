@@ -81,11 +81,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to You have elected to delete the current record. Are you sure that reallly want to do this?.
+        '''  Looks up a localized string similar to The Church records for {1} in {0} have been updated..
+        '''</summary>
+        Friend ReadOnly Property msgChurchesUpdated() As String
+            Get
+                Return ResourceManager.GetString("msgChurchesUpdated", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to You have elected to delete the file {0}. Are you absolutely sure that you really want to do this?.
+        '''</summary>
+        Friend ReadOnly Property msgConfirmDeleteFile() As String
+            Get
+                Return ResourceManager.GetString("msgConfirmDeleteFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to You have elected to delete the current record. Are you sure that you reallly want to do this?.
         '''</summary>
         Friend ReadOnly Property msgConfirmDeleteObject() As String
             Get
                 Return ResourceManager.GetString("msgConfirmDeleteObject", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The County records have been refreshed..
+        '''</summary>
+        Friend ReadOnly Property msgCountiesRefreshed() As String
+            Get
+                Return ResourceManager.GetString("msgCountiesRefreshed", resourceCulture)
             End Get
         End Property
         
@@ -95,6 +122,15 @@ Namespace My.Resources
         Friend ReadOnly Property msgError() As String
             Get
                 Return ResourceManager.GetString("msgError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The file {0} has been deleted and is currently in the Recycle Bin..
+        '''</summary>
+        Friend ReadOnly Property msgFileRecycled() As String
+            Get
+                Return ResourceManager.GetString("msgFileRecycled", resourceCulture)
             End Get
         End Property
         
@@ -113,6 +149,15 @@ Namespace My.Resources
         Friend ReadOnly Property msgNewRecordNotUnique() As String
             Get
                 Return ResourceManager.GetString("msgNewRecordNotUnique", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The Place records for {0} have been updated..
+        '''</summary>
+        Friend ReadOnly Property msgPlacesUpdated() As String
+            Get
+                Return ResourceManager.GetString("msgPlacesUpdated", resourceCulture)
             End Get
         End Property
         

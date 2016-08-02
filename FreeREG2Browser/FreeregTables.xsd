@@ -60,13 +60,6 @@
               <xs:element name="ChapmanCode" msprop:Generator_ColumnVarNameInTable="columnChapmanCode" msprop:Generator_ColumnPropNameInRow="ChapmanCode" msprop:Generator_ColumnPropNameInTable="ChapmanCodeColumn" msprop:Generator_UserColumnName="ChapmanCode" type="xs:string" />
               <xs:element name="Country" msprop:Generator_ColumnVarNameInTable="columnCountry" msprop:Generator_ColumnPropNameInRow="Country" msprop:Generator_ColumnPropNameInTable="CountryColumn" msprop:Generator_UserColumnName="Country" type="xs:string" minOccurs="0" />
               <xs:element name="CountyName" msprop:Generator_ColumnVarNameInTable="columnCountyName" msprop:Generator_ColumnPropNameInRow="CountyName" msprop:Generator_ColumnPropNameInTable="CountyNameColumn" msprop:Generator_UserColumnName="CountyName" type="xs:string" minOccurs="0" />
-              <xs:element name="Code" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="Code" msprop:Generator_ColumnVarNameInTable="columnCode" msprop:Generator_ColumnPropNameInTable="CodeColumn" msprop:Generator_UserColumnName="Code" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="3" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
               <xs:element name="Notes" msprop:Generator_ColumnVarNameInTable="columnNotes" msprop:Generator_ColumnPropNameInRow="Notes" msprop:Generator_ColumnPropNameInTable="NotesColumn" msprop:Generator_UserColumnName="Notes" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
@@ -77,6 +70,13 @@
               <xs:element name="ChurchName" msprop:Generator_ColumnVarNameInTable="columnChurchName" msprop:Generator_ColumnPropNameInRow="ChurchName" msprop:Generator_ColumnPropNameInTable="ChurchNameColumn" msprop:Generator_UserColumnName="ChurchName" type="xs:string" />
               <xs:element name="ChapmanCode" msprop:Generator_ColumnVarNameInTable="columnChapmanCode" msprop:Generator_ColumnPropNameInRow="ChapmanCode" msprop:Generator_ColumnPropNameInTable="ChapmanCodeColumn" msprop:Generator_UserColumnName="ChapmanCode" type="xs:string" />
               <xs:element name="PlaceName" msprop:Generator_ColumnVarNameInTable="columnPlaceName" msprop:Generator_ColumnPropNameInRow="PlaceName" msprop:Generator_ColumnPropNameInTable="PlaceNameColumn" msprop:Generator_UserColumnName="PlaceName" type="xs:string" />
+              <xs:element name="Code" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="Code" msprop:Generator_ColumnVarNameInTable="columnCode" msprop:Generator_ColumnPropNameInTable="CodeColumn" msprop:Generator_UserColumnName="Code" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="8" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="Location" msprop:Generator_ColumnVarNameInTable="columnLocation" msprop:Generator_ColumnPropNameInRow="Location" msprop:Generator_ColumnPropNameInTable="LocationColumn" msprop:Generator_UserColumnName="Location" type="xs:string" minOccurs="0" />
               <xs:element name="Denomination" msprop:Generator_ColumnVarNameInTable="columnDenomination" msprop:Generator_ColumnPropNameInRow="Denomination" msprop:Generator_ColumnPropNameInTable="DenominationColumn" msprop:Generator_UserColumnName="Denomination" type="xs:string" minOccurs="0" />
               <xs:element name="Website" msprop:Generator_ColumnVarNameInTable="columnWebsite" msprop:Generator_ColumnPropNameInRow="Website" msprop:Generator_ColumnPropNameInTable="WebsiteColumn" msprop:Generator_UserColumnName="Website" type="xs:string" minOccurs="0" />

@@ -41,6 +41,7 @@ Partial Class formFileWorkspace
       Me.BindingNavigatorAddNewItem = New System.Windows.Forms.ToolStripButton()
       Me.BindingNavigatorSaveFile = New System.Windows.Forms.ToolStripButton()
       Me.BindingNavigatorFileDetails = New System.Windows.Forms.ToolStripButton()
+      Me.miGeneralHelp = New System.Windows.Forms.ToolStripMenuItem()
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
       Me.dlvBaptisms = New BrightIdeasSoftware.DataListView()
       Me.olvcRegNo = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
@@ -113,7 +114,15 @@ Partial Class formFileWorkspace
       Me.olvcWitness2Forenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcWitness2Surname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcNotes2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.miGeneralHelp = New System.Windows.Forms.ToolStripMenuItem()
+      Me.baptismsContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+      Me.bapFreeREGTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.burialsContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+      Me.BurialRelationshipsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.burFreeREGTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.marriagesContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
+      Me.GroomConditionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.BrideConditionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.marFreeREGTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       CType(Me.bsBaptisms, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.bsBurials, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.bsMarriages, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -125,6 +134,9 @@ Partial Class formFileWorkspace
       CType(Me.dlvBaptisms, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.dlvBurials, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).BeginInit()
+      Me.baptismsContextMenuStrip.SuspendLayout()
+      Me.burialsContextMenuStrip.SuspendLayout()
+      Me.marriagesContextMenuStrip.SuspendLayout()
       Me.SuspendLayout()
       '
       'workspaceBindingNavigator
@@ -132,6 +144,7 @@ Partial Class formFileWorkspace
       Me.workspaceBindingNavigator.AddNewItem = Nothing
       Me.workspaceBindingNavigator.CountItem = Me.BindingNavigatorCountItem
       Me.workspaceBindingNavigator.DeleteItem = Me.BindingNavigatorDeleteItem
+      Me.workspaceBindingNavigator.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
       Me.workspaceBindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.BindingNavigatorPositionItem, Me.BindingNavigatorCountItem, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.BindingNavigatorSeparator2, Me.BindingNavigatorAddNewItem, Me.BindingNavigatorDeleteItem, Me.BindingNavigatorSaveFile, Me.BindingNavigatorFileDetails, Me.miGeneralHelp})
       Me.workspaceBindingNavigator.Location = New System.Drawing.Point(0, 0)
       Me.workspaceBindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
@@ -247,10 +260,20 @@ Partial Class formFileWorkspace
       Me.BindingNavigatorFileDetails.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorFileDetails.Text = "Edit File Details"
       '
+      'miGeneralHelp
+      '
+      Me.miGeneralHelp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+      Me.miGeneralHelp.Image = Global.WinFreeReg.My.Resources.Resources.help
+      Me.miGeneralHelp.Name = "miGeneralHelp"
+      Me.miGeneralHelp.ShortcutKeys = System.Windows.Forms.Keys.F1
+      Me.miGeneralHelp.Size = New System.Drawing.Size(60, 25)
+      Me.miGeneralHelp.Text = "Help"
+      '
       'SplitContainer1
       '
       Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
       Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+      Me.SplitContainer1.IsSplitterFixed = True
       Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
       Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4)
       Me.SplitContainer1.Name = "SplitContainer1"
@@ -295,7 +318,6 @@ Partial Class formFileWorkspace
       Me.dlvBaptisms.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
       Me.dlvBaptisms.CellEditEnterChangesRows = True
       Me.dlvBaptisms.CellEditTabChangesRows = True
-      Me.dlvBaptisms.CellEditUseWholeCell = False
       Me.dlvBaptisms.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo, Me.olvcFiche, Me.olvcImage, Me.olvcBirthDate, Me.olvcBaptismDate, Me.olvcForenames, Me.olvcSex, Me.olvcFathersName, Me.olvcFathersSurname, Me.olvcMothersName, Me.olvcMothersSurname, Me.olvcFathersOccupation, Me.olvcAbode, Me.olvcNotes})
       Me.dlvBaptisms.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvBaptisms.DataSource = Me.bsBaptisms
@@ -400,6 +422,8 @@ Partial Class formFileWorkspace
       'olvcSex
       '
       Me.olvcSex.AspectName = "Sex"
+      Me.olvcSex.AutoCompleteEditor = False
+      Me.olvcSex.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None
       Me.olvcSex.Groupable = False
       Me.olvcSex.Text = "Sex"
       Me.olvcSex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -447,6 +471,7 @@ Partial Class formFileWorkspace
       Me.olvcNotes.Hideable = False
       Me.olvcNotes.Sortable = False
       Me.olvcNotes.Text = "Notes"
+      Me.olvcNotes.UseFiltering = False
       '
       'dlvBurials
       '
@@ -472,7 +497,6 @@ Partial Class formFileWorkspace
       Me.dlvBurials.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
       Me.dlvBurials.CellEditEnterChangesRows = True
       Me.dlvBurials.CellEditTabChangesRows = True
-      Me.dlvBurials.CellEditUseWholeCell = False
       Me.dlvBurials.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo1, Me.olvcFiche1, Me.olvcImage1, Me.olvcBurialDate, Me.olvcForenames1, Me.olvcRelationship, Me.olvcMaleForenames, Me.olvcFemaleForenames, Me.olvcRelativeSurname, Me.olvcSurname, Me.olvcAge, Me.olvcAbode1, Me.olvcNotes1})
       Me.dlvBurials.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvBurials.DataSource = Me.bsBurials
@@ -480,11 +504,13 @@ Partial Class formFileWorkspace
       Me.dlvBurials.FullRowSelect = True
       Me.dlvBurials.GridLines = True
       Me.dlvBurials.HeaderWordWrap = True
+      Me.dlvBurials.HideSelection = False
       Me.dlvBurials.Location = New System.Drawing.Point(0, 0)
       Me.dlvBurials.Margin = New System.Windows.Forms.Padding(4)
       Me.dlvBurials.MultiSelect = False
       Me.dlvBurials.Name = "dlvBurials"
       Me.dlvBurials.ShowCommandMenuOnRightClick = True
+      Me.dlvBurials.ShowGroups = False
       Me.dlvBurials.ShowItemToolTips = True
       Me.dlvBurials.Size = New System.Drawing.Size(1119, 659)
       Me.dlvBurials.SortGroupItemsByPrimaryColumn = False
@@ -617,6 +643,7 @@ Partial Class formFileWorkspace
       Me.olvcNotes1.Hideable = False
       Me.olvcNotes1.Sortable = False
       Me.olvcNotes1.Text = "Notes"
+      Me.olvcNotes1.UseFiltering = False
       '
       'dlvMarriages
       '
@@ -658,7 +685,6 @@ Partial Class formFileWorkspace
       Me.dlvMarriages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
       Me.dlvMarriages.CellEditEnterChangesRows = True
       Me.dlvMarriages.CellEditTabChangesRows = True
-      Me.dlvMarriages.CellEditUseWholeCell = False
       Me.dlvMarriages.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo2, Me.olvcFiche2, Me.olvcImage2, Me.olvcMarriageDate, Me.olvcGroomForenames, Me.olvcGroomSurname, Me.olvcGroomAge, Me.olvcGroomParish, Me.olvcGroomCondition, Me.olvcGroomOccupation, Me.olvcGroomAbode, Me.olvcBrideForenames, Me.olvcBrideSurname, Me.olvcBrideAge, Me.olvcBrideParish, Me.olvcBrideCondition, Me.olvcBrideOccupation, Me.olvcBrideAbode, Me.olvcGroomFatherForenames, Me.olvcGroomFatherSurname, Me.olvcGroomFatherOccupation, Me.olvcBrideFatherForenames, Me.olvcBrideFatherSurname, Me.olvcBrideFatherOccupation, Me.olvcWitness1Forenames, Me.olvcWitness1Surname, Me.olvcWitness2Forenames, Me.olvcWitness2Surname, Me.olvcNotes2})
       Me.dlvMarriages.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvMarriages.DataSource = Me.bsMarriages
@@ -666,11 +692,13 @@ Partial Class formFileWorkspace
       Me.dlvMarriages.FullRowSelect = True
       Me.dlvMarriages.GridLines = True
       Me.dlvMarriages.HeaderWordWrap = True
+      Me.dlvMarriages.HideSelection = False
       Me.dlvMarriages.Location = New System.Drawing.Point(0, 0)
       Me.dlvMarriages.Margin = New System.Windows.Forms.Padding(4)
       Me.dlvMarriages.MultiSelect = False
       Me.dlvMarriages.Name = "dlvMarriages"
       Me.dlvMarriages.ShowCommandMenuOnRightClick = True
+      Me.dlvMarriages.ShowGroups = False
       Me.dlvMarriages.ShowItemToolTips = True
       Me.dlvMarriages.Size = New System.Drawing.Size(1119, 659)
       Me.dlvMarriages.SortGroupItemsByPrimaryColumn = False
@@ -900,15 +928,61 @@ Partial Class formFileWorkspace
       Me.olvcNotes2.Hideable = False
       Me.olvcNotes2.Sortable = False
       Me.olvcNotes2.Text = "Notes"
+      Me.olvcNotes2.UseFiltering = False
       '
-      'miGeneralHelp
+      'baptismsContextMenuStrip
       '
-      Me.miGeneralHelp.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-      Me.miGeneralHelp.Image = Global.WinFreeReg.My.Resources.Resources.help
-      Me.miGeneralHelp.Name = "miGeneralHelp"
-      Me.miGeneralHelp.ShortcutKeys = System.Windows.Forms.Keys.F1
-      Me.miGeneralHelp.Size = New System.Drawing.Size(60, 25)
-      Me.miGeneralHelp.Text = "Help"
+      Me.baptismsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bapFreeREGTablesToolStripMenuItem})
+      Me.baptismsContextMenuStrip.Name = "baptismsContextMenuStrip"
+      Me.baptismsContextMenuStrip.Size = New System.Drawing.Size(152, 26)
+      '
+      'bapFreeREGTablesToolStripMenuItem
+      '
+      Me.bapFreeREGTablesToolStripMenuItem.Name = "bapFreeREGTablesToolStripMenuItem"
+      Me.bapFreeREGTablesToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+      Me.bapFreeREGTablesToolStripMenuItem.Text = "FreeREG tables"
+      '
+      'burialsContextMenuStrip
+      '
+      Me.burialsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BurialRelationshipsToolStripMenuItem, Me.burFreeREGTablesToolStripMenuItem})
+      Me.burialsContextMenuStrip.Name = "burialsContextMenuStrip"
+      Me.burialsContextMenuStrip.Size = New System.Drawing.Size(178, 48)
+      '
+      'BurialRelationshipsToolStripMenuItem
+      '
+      Me.BurialRelationshipsToolStripMenuItem.Name = "BurialRelationshipsToolStripMenuItem"
+      Me.BurialRelationshipsToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+      Me.BurialRelationshipsToolStripMenuItem.Text = "Burial Relationships"
+      '
+      'burFreeREGTablesToolStripMenuItem
+      '
+      Me.burFreeREGTablesToolStripMenuItem.Name = "burFreeREGTablesToolStripMenuItem"
+      Me.burFreeREGTablesToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+      Me.burFreeREGTablesToolStripMenuItem.Text = "FreeREG tables"
+      '
+      'marriagesContextMenuStrip
+      '
+      Me.marriagesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GroomConditionsToolStripMenuItem, Me.BrideConditionsToolStripMenuItem, Me.marFreeREGTablesToolStripMenuItem})
+      Me.marriagesContextMenuStrip.Name = "marriagesContextMenuStrip"
+      Me.marriagesContextMenuStrip.Size = New System.Drawing.Size(173, 70)
+      '
+      'GroomConditionsToolStripMenuItem
+      '
+      Me.GroomConditionsToolStripMenuItem.Name = "GroomConditionsToolStripMenuItem"
+      Me.GroomConditionsToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+      Me.GroomConditionsToolStripMenuItem.Text = "Groom Conditions"
+      '
+      'BrideConditionsToolStripMenuItem
+      '
+      Me.BrideConditionsToolStripMenuItem.Name = "BrideConditionsToolStripMenuItem"
+      Me.BrideConditionsToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+      Me.BrideConditionsToolStripMenuItem.Text = "Bride Conditions"
+      '
+      'marFreeREGTablesToolStripMenuItem
+      '
+      Me.marFreeREGTablesToolStripMenuItem.Name = "marFreeREGTablesToolStripMenuItem"
+      Me.marFreeREGTablesToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+      Me.marFreeREGTablesToolStripMenuItem.Text = "FreeREG tables"
       '
       'formFileWorkspace
       '
@@ -935,6 +1009,9 @@ Partial Class formFileWorkspace
       CType(Me.dlvBaptisms, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.dlvBurials, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).EndInit()
+      Me.baptismsContextMenuStrip.ResumeLayout(False)
+      Me.burialsContextMenuStrip.ResumeLayout(False)
+      Me.marriagesContextMenuStrip.ResumeLayout(False)
       Me.ResumeLayout(False)
 
    End Sub
@@ -1013,19 +1090,28 @@ Partial Class formFileWorkspace
    Friend WithEvents bsBurials As System.Windows.Forms.BindingSource
    Friend WithEvents bsMarriages As System.Windows.Forms.BindingSource
    Friend WithEvents workspaceBindingNavigator As System.Windows.Forms.BindingNavigator
-	Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
-	Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorMoveFirstItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorMovePreviousItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorSeparator As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents BindingNavigatorPositionItem As System.Windows.Forms.ToolStripTextBox
-	Friend WithEvents BindingNavigatorSeparator1 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
-	Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator
-	Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
-	Friend WithEvents BindingNavigatorSaveFile As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorAddNewItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorCountItem As System.Windows.Forms.ToolStripLabel
+   Friend WithEvents BindingNavigatorDeleteItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorMoveFirstItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorMovePreviousItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorSeparator As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents BindingNavigatorPositionItem As System.Windows.Forms.ToolStripTextBox
+   Friend WithEvents BindingNavigatorSeparator1 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
+   Friend WithEvents BindingNavigatorSeparator2 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
+   Friend WithEvents BindingNavigatorSaveFile As System.Windows.Forms.ToolStripButton
    Friend WithEvents BindingNavigatorFileDetails As System.Windows.Forms.ToolStripButton
    Friend WithEvents miGeneralHelp As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents baptismsContextMenuStrip As System.Windows.Forms.ContextMenuStrip
+   Friend WithEvents burialsContextMenuStrip As System.Windows.Forms.ContextMenuStrip
+   Friend WithEvents marriagesContextMenuStrip As System.Windows.Forms.ContextMenuStrip
+   Friend WithEvents bapFreeREGTablesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents BurialRelationshipsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents burFreeREGTablesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents GroomConditionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents BrideConditionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents marFreeREGTablesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

@@ -32,6 +32,29 @@ Public Class formUserTables
       formHelp = helpForm
    End Sub
 
+   Private boolShowBaptismSex As Boolean = False
+   Private boolShowBurialRelationships As Boolean = False
+   Private boolShowGroomConditions As Boolean = False
+   Private boolShowBrideConditions As Boolean = False
+
+   Public Sub ShowAll()
+      ShowTable(TableType.BaptismSex Or TableType.BrideConditions Or TableType.BurialRelationships Or TableType.GroomConditions)
+   End Sub
+
+   Public Sub ShowTable(ByVal type As TableType)
+      If (type And TableType.BaptismSex) = TableType.BaptismSex Then boolShowBaptismSex = True
+      If (type And TableType.BrideConditions) = TableType.BrideConditions Then boolShowBrideConditions = True
+      If (type And TableType.BurialRelationships) = TableType.BurialRelationships Then boolShowBurialRelationships = True
+      If (type And TableType.GroomConditions) = TableType.GroomConditions Then boolShowGroomConditions = True
+   End Sub
+
+   Enum TableType
+      BaptismSex = 1
+      BurialRelationships = 2
+      GroomConditions = 4
+      BrideConditions = 8
+   End Enum
+
    Private Sub formUserTables_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       Dim styleDisabled As New SimpleItemStyle() With {.ForeColor = Drawing.Color.DarkRed, .BackColor = Drawing.Color.Cornsilk}
 
@@ -71,7 +94,20 @@ Public Class formUserTables
          End If
       Next
 
-      UserTablesTabControl.SelectTab(tabBaptismSex)
+      If Not boolShowBaptismSex Then UserTablesTabControl.TabPages.Remove(tabBaptismSex)
+      If Not boolShowBrideConditions Then UserTablesTabControl.TabPages.Remove(tabBrideCondition)
+      If Not boolShowBurialRelationships Then UserTablesTabControl.TabPages.Remove(tabBurialRelationship)
+      If Not boolShowGroomConditions Then UserTablesTabControl.TabPages.Remove(tabGroomCondition)
+
+      If UserTablesTabControl.TabPages.Contains(tabBaptismSex) Then
+         UserTablesTabControl.SelectTab(tabBaptismSex)
+      ElseIf UserTablesTabControl.TabPages.Contains(tabBurialRelationship) Then
+         UserTablesTabControl.SelectTab(tabBurialRelationship)
+      ElseIf UserTablesTabControl.TabPages.Contains(tabGroomCondition) Then
+         UserTablesTabControl.SelectTab(tabGroomCondition)
+      Else
+         UserTablesTabControl.SelectTab(tabBrideCondition)
+      End If
       UserTablesBindingNavigator.BindingSource = bsBaptismSex
       BindingNavigatorAddNewItem.Enabled = False
       BindingNavigatorDeleteItem.Enabled = False

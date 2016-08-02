@@ -78,6 +78,16 @@ Public Class TranscriptionFileClass
       End Set
    End Property
 
+   Private m_PlaceCode As String
+   Public Property PlaceCode() As String
+      Get
+         Return m_PlaceCode
+      End Get
+      Set(value As String)
+         m_PlaceCode = value
+      End Set
+   End Property
+
    Private m_Decoding As Encoding = Encoding.GetEncoding("iso-8859-1")
    Private m_Encoding As Encoding = Encoding.GetEncoding("utf-8")
 
@@ -110,11 +120,14 @@ Public Class TranscriptionFileClass
 
          m_fileHeader = New FileHeaderClass(m_Reader)
          Dim rec As String() = m_fileHeader.GetHeader()
+         If String.IsNullOrEmpty(m_fileHeader.InternalFilename) Then m_fileHeader.InternalFilename = m_fileName
          Dim X = m_fileHeader.Church.Split(New Char() {" "c}, StringSplitOptions.RemoveEmptyEntries)
          If m_FreeregTables.RegisterTypes.FindByType(X(X.Length - 1)) IsNot Nothing Then
             m_fileHeader.Church = String.Join(" ", X, 0, X.Length - 1)
             m_fileHeader.RegisterType = X(X.Length - 1)
          End If
+
+         m_PlaceCode = freeregTables.Churches.FindByChurchNameChapmanCodePlaceName(m_fileHeader.Church, m_fileHeader.County, m_fileHeader.Place).Code
 
          Select Case m_fileHeader.FileType
             Case FileTypes.BAPTISMS
@@ -687,6 +700,7 @@ Public Class TranscriptionFileClass
       Public Function GetHeader() As String()
          Dim FirstDataRecord() = New String() {""}
          Try
+            ' +INFO,<email>,<password>,SEQUENCED,<filetype>,<charset>,<WinREG version>
             _hdrLine1 = m_myReader.ReadFields()
             m_fileType = [Enum].Parse(GetType(FileTypes), _hdrLine1(4), True)
             m_myEmail = _hdrLine1(1)
@@ -697,21 +711,71 @@ Public Class TranscriptionFileClass
                End If
             End If
 
+            ' #,CCC,<name>,<syndicate>,<internal name>,<date created>
             _hdrLine2 = m_myReader.ReadFields()
-            m_dateCreated = [DateTime].Parse(_hdrLine2(5))
-            m_myName = _hdrLine2(2)
-            m_mySyndicate = _hdrLine2(3)
-            m_internalFilename = _hdrLine2(4)
+            If _hdrLine2.Length >= 3 Then
+               m_myName = _hdrLine2(2)
+               If _hdrLine2.Length >= 4 Then
+                  m_mySyndicate = _hdrLine2(3)
+                  If _hdrLine2.Length >= 5 Then
+                     m_internalFilename = _hdrLine2(4)
+                     If _hdrLine2.Length >= 6 Then
+                        m_dateCreated = [DateTime].Parse(_hdrLine2(5))
+                     Else
+                        m_dateCreated = Date.Now()
+                     End If
+                  Else
+                     m_internalFilename = String.Empty
+                     m_dateCreated = Date.Now()
+                  End If
+               Else
+                  m_mySyndicate = String.Empty
+                  m_internalFilename = String.Empty
+                  m_dateCreated = Date.Now()
+               End If
+            Else
+               m_mySyndicate = String.Empty
+               m_internalFilename = String.Empty
+               m_dateCreated = Date.Now()
+               m_myName = String.Empty
+            End If
 
+            ' #,CREDIT,<credit name>,<credit email>
             _hdrLine3 = m_myReader.ReadFields()
-            m_creditName = _hdrLine3(2)
-            m_creditEmail = _hdrLine3(3)
+            If _hdrLine3.Length >= 3 Then
+               m_creditName = _hdrLine3(2)
+               If _hdrLine3.Length >= 4 Then
+                  m_creditEmail = _hdrLine3(3)
+               Else
+                  m_creditEmail = String.Empty
+               End If
+            Else
+               m_creditName = String.Empty
+               m_creditEmail = String.Empty
+            End If
 
+            ' #,<date changed>,<comment 1>,<comment 2>
             _hdrLine4 = m_myReader.ReadFields()
-            m_dateLastChanged = [DateTime].Parse(_hdrLine4(1))
-            m_comment1 = _hdrLine4(2)
-            m_comment2 = _hdrLine4(3)
+            If _hdrLine4.Length >= 2 Then
+               m_dateLastChanged = [DateTime].Parse(_hdrLine4(1))
+               If _hdrLine4.Length >= 3 Then
+                  m_comment1 = _hdrLine4(2)
+                  If _hdrLine4.Length >= 4 Then
+                     m_comment2 = _hdrLine4(3)
+                  Else
+                     m_comment2 = String.Empty
+                  End If
+               Else
+                  m_comment2 = String.Empty
+                  m_comment1 = String.Empty
+               End If
+            Else
+               m_comment2 = String.Empty
+               m_comment1 = String.Empty
+               m_dateLastChanged = Date.Now()
+            End If
 
+            ' +LDS
             _hdrLine5 = m_myReader.ReadFields()
             If _hdrLine5(0) = "+LDS" Then
                m_isLDS = True

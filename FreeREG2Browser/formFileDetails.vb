@@ -30,10 +30,12 @@ Public Class formFileDetails
    End Sub
 
    Private Sub formFileDetails_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+      TranscriptionFileClassBindingSource.DataSource = m_TranscriptionFile
       FileHeaderClassBindingSource.DataSource = m_TranscriptionFile.FileHeader
       m_HeaderChanged = False
       Dim title = String.Format(Me.Text, m_TranscriptionFile.FileName)
       Me.Text = title
+      PlaceCodeTextBox.Text = m_TranscriptionFile.PlaceCode
 
       CountiesBindingSource.DataSource = m_TranscriptionFile.FreeregTables
       PlacesBindingSource.DataSource = m_TranscriptionFile.FreeregTables
@@ -98,6 +100,7 @@ Public Class formFileDetails
 
    Private Sub PlaceComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PlaceComboBox.SelectedIndexChanged
       ChurchesBindingSource.Filter = String.Format("ChapmanCode = '{0}' AND PlaceName = '{1}'", CountyComboBox.SelectedValue, PlaceComboBox.SelectedValue)
+      m_HeaderChanged = True
    End Sub
 
    Private Sub formFileDetails_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
@@ -111,5 +114,37 @@ Public Class formFileDetails
          MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
       End Try
+   End Sub
+
+   Private Sub RegisterTypeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles RegisterTypeComboBox.SelectedIndexChanged
+      m_HeaderChanged = True
+   End Sub
+
+   Private Sub ChurchComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ChurchComboBox.SelectedIndexChanged
+      m_HeaderChanged = True
+   End Sub
+
+   Private Sub CreditEmailTextBox_TextChanged(sender As Object, e As EventArgs) Handles CreditEmailTextBox.TextChanged
+      m_HeaderChanged = True
+   End Sub
+
+   Private Sub CreditNameTextBox_TextChanged(sender As Object, e As EventArgs) Handles CreditNameTextBox.TextChanged
+      m_HeaderChanged = True
+   End Sub
+
+   Private Sub Comment1TextBox_TextChanged(sender As Object, e As EventArgs) Handles Comment1TextBox.TextChanged
+      m_HeaderChanged = True
+   End Sub
+
+   Private Sub Comment2TextBox_TextChanged(sender As Object, e As EventArgs) Handles Comment2TextBox.TextChanged
+      m_HeaderChanged = True
+   End Sub
+
+   Private Sub MyEmailTextBox_TextChanged(sender As Object, e As EventArgs) Handles MyEmailTextBox.TextChanged
+      m_HeaderChanged = True
+   End Sub
+
+   Private Sub MyNameTextBox_TextChanged(sender As Object, e As EventArgs) Handles MyNameTextBox.TextChanged
+      m_HeaderChanged = True
    End Sub
 End Class

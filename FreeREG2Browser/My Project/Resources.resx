@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="msgConfirmDeleteObject" xml:space="preserve">
-    <value>You have elected to delete the current record. Are you sure that reallly want to do this?</value>
+    <value>You have elected to delete the current record. Are you sure that you reallly want to do this?</value>
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="save" type="System.Resources.ResXFileRef, System.Windows.Forms">
@@ -144,5 +144,20 @@
   </data>
   <data name="msgUnsavedChanges" xml:space="preserve">
     <value>There are unsaved changes, do you wish to save these changes before closing the file?</value>
+  </data>
+  <data name="msgConfirmDeleteFile" xml:space="preserve">
+    <value>You have elected to delete the file {0}. Are you absolutely sure that you really want to do this?</value>
+  </data>
+  <data name="msgFileRecycled" xml:space="preserve">
+    <value>The file {0} has been deleted and is currently in the Recycle Bin.</value>
+  </data>
+  <data name="msgChurchesUpdated" xml:space="preserve">
+    <value>The Church records for {1} in {0} have been updated.</value>
+  </data>
+  <data name="msgCountiesRefreshed" xml:space="preserve">
+    <value>The County records have been refreshed.</value>
+  </data>
+  <data name="msgPlacesUpdated" xml:space="preserve">
+    <value>The Place records for {0} have been updated.</value>
   </data>
 </root>

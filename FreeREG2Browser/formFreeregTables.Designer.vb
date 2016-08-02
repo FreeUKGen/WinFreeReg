@@ -170,10 +170,10 @@ Partial Class formFreeregTables
       'tabChurches
       '
       Me.tabChurches.Controls.Add(Me.dlvChurches)
-      Me.tabChurches.Location = New System.Drawing.Point(4, 22)
+      Me.tabChurches.Location = New System.Drawing.Point(4, 25)
       Me.tabChurches.Name = "tabChurches"
       Me.tabChurches.Padding = New System.Windows.Forms.Padding(3)
-      Me.tabChurches.Size = New System.Drawing.Size(590, 266)
+      Me.tabChurches.Size = New System.Drawing.Size(590, 263)
       Me.tabChurches.TabIndex = 0
       Me.tabChurches.Text = "Churches"
       Me.tabChurches.UseVisualStyleBackColor = True
@@ -192,7 +192,7 @@ Partial Class formFreeregTables
       Me.dlvChurches.Name = "dlvChurches"
       Me.dlvChurches.ShowCommandMenuOnRightClick = True
       Me.dlvChurches.ShowItemCountOnGroups = True
-      Me.dlvChurches.Size = New System.Drawing.Size(584, 260)
+      Me.dlvChurches.Size = New System.Drawing.Size(584, 257)
       Me.dlvChurches.SortGroupItemsByPrimaryColumn = False
       Me.dlvChurches.TabIndex = 0
       Me.dlvChurches.UseCompatibleStateImageBehavior = False

@@ -61,22 +61,31 @@ Partial Class TranscriptionTables
 			End If
 
 			If (e.Column.ColumnName = Me.SexColumn.ColumnName) Then
-				'Add user code here
-				Dim value As String = e.ProposedValue.ToString.ToUpper()
-				e.Row.SetColumnError(e.Column.ColumnName, "")
-				If Not String.IsNullOrEmpty(value) Then
-					If tabBapSex IsNot Nothing Then
-						If tabBapSex.FindByCode(value) Is Nothing Then
-							e.Row.SetColumnError(e.Column.ColumnName, IIf(MyAddErrorNumberToMessage, String.Format("????:{0}", String.Format("The value '{0}' is not present in the Baptism Sex table", value)), String.Format("The value '{0}' is not present in the Baptism Sex table", value)))
-							'						Else
-							'							Dim x = tabBapSex.FindByCode(value)
-							'							e.ProposedValue = x.Description
-						End If
-					Else
-						e.Row.SetColumnError(e.Column.ColumnName, IIf(MyAddErrorNumberToMessage, String.Format("????:{0}", String.Format("Baptism Sex table not linked to dataset", value)), String.Format("Baptism Sex table not linked to dataset", value)))
-					End If
-				End If
-			End If
+            'Add user code here
+            Try
+               If e.ProposedValue IsNot Nothing Then
+                  Dim value As String = e.ProposedValue.ToString.ToUpper()
+                  e.Row.SetColumnError(e.Column.ColumnName, "")
+                  If Not String.IsNullOrEmpty(value) Then
+                     If tabBapSex IsNot Nothing Then
+                        If tabBapSex.FindByCode(value) Is Nothing Then
+                           e.Row.SetColumnError(e.Column.ColumnName, IIf(MyAddErrorNumberToMessage, String.Format("????:{0}", String.Format("The value '{0}' is not present in the Baptism Sex table", value)), String.Format("The value '{0}' is not present in the Baptism Sex table", value)))
+                           '						Else
+                           '							Dim x = tabBapSex.FindByCode(value)
+                           '							e.ProposedValue = x.Description
+                        End If
+                     Else
+                        e.Row.SetColumnError(e.Column.ColumnName, IIf(MyAddErrorNumberToMessage, String.Format("????:{0}", String.Format("Baptism Sex table not linked to dataset", value)), String.Format("Baptism Sex table not linked to dataset", value)))
+                     End If
+                  End If
+               Else
+                  Beep()
+               End If
+
+            Catch ex As Exception
+
+            End Try
+         End If
 
 		End Sub
 
@@ -134,16 +143,16 @@ Partial Class TranscriptionTables
 				Dim value As String = e.ProposedValue.ToString
 				e.Row.SetColumnError(e.Column.ColumnName, "")
 				If Not String.IsNullOrEmpty(value) Then
-					If tabBurialRelationship IsNot Nothing Then
-						If tabBurialRelationship.FindByFileValue(value) Is Nothing Then
-							e.Row.SetColumnError(e.Column.ColumnName, IIf(MyAddErrorNumberToMessage, String.Format("????:{0}", String.Format("The value '{0}' is not present in the Burial Relationship table", value)), String.Format("The value '{0}' is not present in the Burial Relationship table", value)))
-							'						Else
-							'							Dim x = tabBurialRelationship.FindByFileValue(value)
-							'							e.ProposedValue = x.DisplayValue
-						End If
-					Else
-						e.Row.SetColumnError(e.Column.ColumnName, IIf(MyAddErrorNumberToMessage, String.Format("????:{0}", String.Format("Burial Relationship table is not linked to dataset", value)), String.Format("Burial Relationship table is not linked to dataset", value)))
-					End If
+               If tabBurialRelationship IsNot Nothing Then
+                  If tabBurialRelationship.FindByFileValue(value) Is Nothing Then
+                     e.Row.SetColumnError(e.Column.ColumnName, IIf(MyAddErrorNumberToMessage, String.Format("????:{0}", String.Format("The value '{0}' is not present in the Burial Relationship table", value)), String.Format("The value '{0}' is not present in the Burial Relationship table", value)))
+                     '						Else
+                     '							Dim x = tabBurialRelationship.FindByFileValue(value)
+                     '							e.ProposedValue = x.DisplayValue
+                  End If
+               Else
+                  e.Row.SetColumnError(e.Column.ColumnName, IIf(MyAddErrorNumberToMessage, String.Format("????:{0}", String.Format("Burial Relationship table is not linked to dataset", value)), String.Format("Burial Relationship table is not linked to dataset", value)))
+               End If
 				End If
 			End If
 
