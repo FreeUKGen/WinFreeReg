@@ -1065,6 +1065,7 @@ Public Class FreeREG2Browser
       'IDTextBox
       '
       Me.IDTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "ID", True))
+      Me.IDTextBox.Enabled = False
       Me.IDTextBox.Location = New System.Drawing.Point(209, 9)
       Me.IDTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.IDTextBox.Name = "IDTextBox"
@@ -1085,6 +1086,7 @@ Public Class FreeREG2Browser
       'CountyNameTextBox
       '
       Me.CountyNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CountyName", True))
+      Me.CountyNameTextBox.Enabled = False
       Me.CountyNameTextBox.Location = New System.Drawing.Point(209, 41)
       Me.CountyNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CountyNameTextBox.Name = "CountyNameTextBox"
@@ -1094,6 +1096,7 @@ Public Class FreeREG2Browser
       'PlaceNameTextBox
       '
       Me.PlaceNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "PlaceName", True))
+      Me.PlaceNameTextBox.Enabled = False
       Me.PlaceNameTextBox.Location = New System.Drawing.Point(209, 73)
       Me.PlaceNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.PlaceNameTextBox.Name = "PlaceNameTextBox"
@@ -1103,6 +1106,7 @@ Public Class FreeREG2Browser
       'ChurchNameTextBox
       '
       Me.ChurchNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "ChurchName", True))
+      Me.ChurchNameTextBox.Enabled = False
       Me.ChurchNameTextBox.Location = New System.Drawing.Point(209, 105)
       Me.ChurchNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.ChurchNameTextBox.Name = "ChurchNameTextBox"
@@ -1112,6 +1116,7 @@ Public Class FreeREG2Browser
       'RegisterTypeTextBox
       '
       Me.RegisterTypeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "RegisterType", True))
+      Me.RegisterTypeTextBox.Enabled = False
       Me.RegisterTypeTextBox.Location = New System.Drawing.Point(209, 137)
       Me.RegisterTypeTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.RegisterTypeTextBox.Name = "RegisterTypeTextBox"
@@ -1121,6 +1126,7 @@ Public Class FreeREG2Browser
       'RecordTypeTextBox
       '
       Me.RecordTypeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "RecordType", True))
+      Me.RecordTypeTextBox.Enabled = False
       Me.RecordTypeTextBox.Location = New System.Drawing.Point(209, 169)
       Me.RecordTypeTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.RecordTypeTextBox.Name = "RecordTypeTextBox"
@@ -1130,6 +1136,7 @@ Public Class FreeREG2Browser
       'RecordsTextBox
       '
       Me.RecordsTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "Records", True))
+      Me.RecordsTextBox.Enabled = False
       Me.RecordsTextBox.Location = New System.Drawing.Point(209, 201)
       Me.RecordsTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.RecordsTextBox.Name = "RecordsTextBox"
@@ -1139,6 +1146,7 @@ Public Class FreeREG2Browser
       'DateMinTextBox
       '
       Me.DateMinTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "DateMin", True))
+      Me.DateMinTextBox.Enabled = False
       Me.DateMinTextBox.Location = New System.Drawing.Point(209, 233)
       Me.DateMinTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.DateMinTextBox.Name = "DateMinTextBox"
@@ -1148,6 +1156,7 @@ Public Class FreeREG2Browser
       'DateMaxTextBox
       '
       Me.DateMaxTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "DateMax", True))
+      Me.DateMaxTextBox.Enabled = False
       Me.DateMaxTextBox.Location = New System.Drawing.Point(209, 265)
       Me.DateMaxTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.DateMaxTextBox.Name = "DateMaxTextBox"
@@ -1157,6 +1166,7 @@ Public Class FreeREG2Browser
       'DateRangeTextBox
       '
       Me.DateRangeTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "DateRange", True))
+      Me.DateRangeTextBox.Enabled = False
       Me.DateRangeTextBox.Location = New System.Drawing.Point(209, 297)
       Me.DateRangeTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.DateRangeTextBox.Name = "DateRangeTextBox"
@@ -1166,6 +1176,7 @@ Public Class FreeREG2Browser
       'UserIdTextBox
       '
       Me.UserIdTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "UserId", True))
+      Me.UserIdTextBox.Enabled = False
       Me.UserIdTextBox.Location = New System.Drawing.Point(209, 329)
       Me.UserIdTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.UserIdTextBox.Name = "UserIdTextBox"
@@ -1175,6 +1186,7 @@ Public Class FreeREG2Browser
       'UserIdLowerCaseTextBox
       '
       Me.UserIdLowerCaseTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "UserIdLowerCase", True))
+      Me.UserIdLowerCaseTextBox.Enabled = False
       Me.UserIdLowerCaseTextBox.Location = New System.Drawing.Point(209, 361)
       Me.UserIdLowerCaseTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.UserIdLowerCaseTextBox.Name = "UserIdLowerCaseTextBox"
@@ -1184,6 +1196,7 @@ Public Class FreeREG2Browser
       'FileNameTextBox
       '
       Me.FileNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "FileName", True))
+      Me.FileNameTextBox.Enabled = False
       Me.FileNameTextBox.Location = New System.Drawing.Point(209, 393)
       Me.FileNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.FileNameTextBox.Name = "FileNameTextBox"
@@ -1193,6 +1206,7 @@ Public Class FreeREG2Browser
       'TranscriberNameTextBox
       '
       Me.TranscriberNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "TranscriberName", True))
+      Me.TranscriberNameTextBox.Enabled = False
       Me.TranscriberNameTextBox.Location = New System.Drawing.Point(209, 425)
       Me.TranscriberNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.TranscriberNameTextBox.Name = "TranscriberNameTextBox"
@@ -1202,6 +1216,7 @@ Public Class FreeREG2Browser
       'TranscriberEmailTextBox
       '
       Me.TranscriberEmailTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "TranscriberEmail", True))
+      Me.TranscriberEmailTextBox.Enabled = False
       Me.TranscriberEmailTextBox.Location = New System.Drawing.Point(209, 457)
       Me.TranscriberEmailTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.TranscriberEmailTextBox.Name = "TranscriberEmailTextBox"
@@ -1211,6 +1226,7 @@ Public Class FreeREG2Browser
       'TranscriberSyndicateTextBox
       '
       Me.TranscriberSyndicateTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "TranscriberSyndicate", True))
+      Me.TranscriberSyndicateTextBox.Enabled = False
       Me.TranscriberSyndicateTextBox.Location = New System.Drawing.Point(209, 489)
       Me.TranscriberSyndicateTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.TranscriberSyndicateTextBox.Name = "TranscriberSyndicateTextBox"
@@ -1220,6 +1236,7 @@ Public Class FreeREG2Browser
       'CreditEmailTextBox
       '
       Me.CreditEmailTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CreditEmail", True))
+      Me.CreditEmailTextBox.Enabled = False
       Me.CreditEmailTextBox.Location = New System.Drawing.Point(684, 9)
       Me.CreditEmailTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CreditEmailTextBox.Name = "CreditEmailTextBox"
@@ -1229,6 +1246,7 @@ Public Class FreeREG2Browser
       'CreditNameTextBox
       '
       Me.CreditNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CreditName", True))
+      Me.CreditNameTextBox.Enabled = False
       Me.CreditNameTextBox.Location = New System.Drawing.Point(684, 41)
       Me.CreditNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CreditNameTextBox.Name = "CreditNameTextBox"
@@ -1238,6 +1256,7 @@ Public Class FreeREG2Browser
       'FirstCommentTextBox
       '
       Me.FirstCommentTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "FirstComment", True))
+      Me.FirstCommentTextBox.Enabled = False
       Me.FirstCommentTextBox.Location = New System.Drawing.Point(684, 73)
       Me.FirstCommentTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.FirstCommentTextBox.Name = "FirstCommentTextBox"
@@ -1247,6 +1266,7 @@ Public Class FreeREG2Browser
       'SecondCommentTextBox
       '
       Me.SecondCommentTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "SecondComment", True))
+      Me.SecondCommentTextBox.Enabled = False
       Me.SecondCommentTextBox.Location = New System.Drawing.Point(684, 105)
       Me.SecondCommentTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.SecondCommentTextBox.Name = "SecondCommentTextBox"
@@ -1256,6 +1276,7 @@ Public Class FreeREG2Browser
       'TranscriptionDateTextBox
       '
       Me.TranscriptionDateTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "TranscriptionDate", True))
+      Me.TranscriptionDateTextBox.Enabled = False
       Me.TranscriptionDateTextBox.Location = New System.Drawing.Point(684, 137)
       Me.TranscriptionDateTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.TranscriptionDateTextBox.Name = "TranscriptionDateTextBox"
@@ -1265,6 +1286,7 @@ Public Class FreeREG2Browser
       'ModificationDateTextBox
       '
       Me.ModificationDateTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "ModificationDate", True))
+      Me.ModificationDateTextBox.Enabled = False
       Me.ModificationDateTextBox.Location = New System.Drawing.Point(684, 169)
       Me.ModificationDateTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.ModificationDateTextBox.Name = "ModificationDateTextBox"
@@ -1274,6 +1296,7 @@ Public Class FreeREG2Browser
       'UploadedDateTextBox
       '
       Me.UploadedDateTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "UploadedDate", True))
+      Me.UploadedDateTextBox.Enabled = False
       Me.UploadedDateTextBox.Location = New System.Drawing.Point(684, 201)
       Me.UploadedDateTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.UploadedDateTextBox.Name = "UploadedDateTextBox"
@@ -1283,6 +1306,7 @@ Public Class FreeREG2Browser
       'ErrorTextBox
       '
       Me.ErrorTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "Error", True))
+      Me.ErrorTextBox.Enabled = False
       Me.ErrorTextBox.Location = New System.Drawing.Point(684, 233)
       Me.ErrorTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.ErrorTextBox.Name = "ErrorTextBox"
@@ -1292,6 +1316,7 @@ Public Class FreeREG2Browser
       'DigestTextBox
       '
       Me.DigestTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "Digest", True))
+      Me.DigestTextBox.Enabled = False
       Me.DigestTextBox.Location = New System.Drawing.Point(684, 265)
       Me.DigestTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.DigestTextBox.Name = "DigestTextBox"
@@ -1301,6 +1326,7 @@ Public Class FreeREG2Browser
       'LockedByTranscriberCheckBox
       '
       Me.LockedByTranscriberCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.BatchBindingSource, "LockedByTranscriber", True))
+      Me.LockedByTranscriberCheckBox.Enabled = False
       Me.LockedByTranscriberCheckBox.Location = New System.Drawing.Point(684, 297)
       Me.LockedByTranscriberCheckBox.Margin = New System.Windows.Forms.Padding(4)
       Me.LockedByTranscriberCheckBox.Name = "LockedByTranscriberCheckBox"
@@ -1312,6 +1338,7 @@ Public Class FreeREG2Browser
       'LockedByCoordinatorCheckBox
       '
       Me.LockedByCoordinatorCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.BatchBindingSource, "LockedByCoordinator", True))
+      Me.LockedByCoordinatorCheckBox.Enabled = False
       Me.LockedByCoordinatorCheckBox.Location = New System.Drawing.Point(684, 334)
       Me.LockedByCoordinatorCheckBox.Margin = New System.Windows.Forms.Padding(4)
       Me.LockedByCoordinatorCheckBox.Name = "LockedByCoordinatorCheckBox"
@@ -1323,6 +1350,7 @@ Public Class FreeREG2Browser
       'LdsTextBox
       '
       Me.LdsTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "lds", True))
+      Me.LdsTextBox.Enabled = False
       Me.LdsTextBox.Location = New System.Drawing.Point(684, 370)
       Me.LdsTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.LdsTextBox.Name = "LdsTextBox"
@@ -1332,6 +1360,7 @@ Public Class FreeREG2Browser
       'ActionTextBox
       '
       Me.ActionTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "Action", True))
+      Me.ActionTextBox.Enabled = False
       Me.ActionTextBox.Location = New System.Drawing.Point(684, 402)
       Me.ActionTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.ActionTextBox.Name = "ActionTextBox"
@@ -1341,6 +1370,7 @@ Public Class FreeREG2Browser
       'CharacterSetTextBox
       '
       Me.CharacterSetTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CharacterSet", True))
+      Me.CharacterSetTextBox.Enabled = False
       Me.CharacterSetTextBox.Location = New System.Drawing.Point(684, 434)
       Me.CharacterSetTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CharacterSetTextBox.Name = "CharacterSetTextBox"
@@ -1350,6 +1380,7 @@ Public Class FreeREG2Browser
       'AlternateRegisterNameTextBox
       '
       Me.AlternateRegisterNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "AlternateRegisterName", True))
+      Me.AlternateRegisterNameTextBox.Enabled = False
       Me.AlternateRegisterNameTextBox.Location = New System.Drawing.Point(684, 466)
       Me.AlternateRegisterNameTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.AlternateRegisterNameTextBox.Name = "AlternateRegisterNameTextBox"
@@ -1359,6 +1390,7 @@ Public Class FreeREG2Browser
       'CsvFileTextBox
       '
       Me.CsvFileTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CsvFile", True))
+      Me.CsvFileTextBox.Enabled = False
       Me.CsvFileTextBox.Location = New System.Drawing.Point(684, 498)
       Me.CsvFileTextBox.Margin = New System.Windows.Forms.Padding(4)
       Me.CsvFileTextBox.Name = "CsvFileTextBox"
@@ -1430,7 +1462,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(1204, 583)
-      Me.SplitContainer2.SplitterDistance = 512
+      Me.SplitContainer2.SplitterDistance = 511
       Me.SplitContainer2.SplitterWidth = 5
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1456,7 +1488,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(1204, 512)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(1204, 511)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True

@@ -364,6 +364,7 @@ Partial Class formUserDetails
       '
       'Skill_levelTextBox
       '
+      Me.Skill_levelTextBox.Enabled = False
       Me.Skill_levelTextBox.Location = New System.Drawing.Point(150, 327)
       Me.Skill_levelTextBox.Name = "Skill_levelTextBox"
       Me.Skill_levelTextBox.Size = New System.Drawing.Size(200, 20)
@@ -371,6 +372,7 @@ Partial Class formUserDetails
       '
       'Number_of_filesTextBox
       '
+      Me.Number_of_filesTextBox.Enabled = False
       Me.Number_of_filesTextBox.Location = New System.Drawing.Point(527, 148)
       Me.Number_of_filesTextBox.Name = "Number_of_filesTextBox"
       Me.Number_of_filesTextBox.Size = New System.Drawing.Size(200, 20)
@@ -378,6 +380,7 @@ Partial Class formUserDetails
       '
       'Number_of_recordsTextBox
       '
+      Me.Number_of_recordsTextBox.Enabled = False
       Me.Number_of_recordsTextBox.Location = New System.Drawing.Point(527, 174)
       Me.Number_of_recordsTextBox.Name = "Number_of_recordsTextBox"
       Me.Number_of_recordsTextBox.Size = New System.Drawing.Size(200, 20)
@@ -385,6 +388,7 @@ Partial Class formUserDetails
       '
       'Person_roleTextBox
       '
+      Me.Person_roleTextBox.Enabled = False
       Me.Person_roleTextBox.Location = New System.Drawing.Point(150, 353)
       Me.Person_roleTextBox.Name = "Person_roleTextBox"
       Me.Person_roleTextBox.Size = New System.Drawing.Size(200, 20)
@@ -392,6 +396,7 @@ Partial Class formUserDetails
       '
       'NameTextBox
       '
+      Me.NameTextBox.Enabled = False
       Me.NameTextBox.Location = New System.Drawing.Point(150, 15)
       Me.NameTextBox.Name = "NameTextBox"
       Me.NameTextBox.Size = New System.Drawing.Size(200, 20)
@@ -399,6 +404,7 @@ Partial Class formUserDetails
       '
       'UseridTextBox
       '
+      Me.UseridTextBox.Enabled = False
       Me.UseridTextBox.Location = New System.Drawing.Point(150, 41)
       Me.UseridTextBox.Name = "UseridTextBox"
       Me.UseridTextBox.Size = New System.Drawing.Size(200, 20)
@@ -406,6 +412,7 @@ Partial Class formUserDetails
       '
       'PasswordTextBox
       '
+      Me.PasswordTextBox.Enabled = False
       Me.PasswordTextBox.Location = New System.Drawing.Point(150, 119)
       Me.PasswordTextBox.Name = "PasswordTextBox"
       Me.PasswordTextBox.Size = New System.Drawing.Size(200, 20)
@@ -413,6 +420,7 @@ Partial Class formUserDetails
       '
       'Email_addressTextBox
       '
+      Me.Email_addressTextBox.Enabled = False
       Me.Email_addressTextBox.Location = New System.Drawing.Point(150, 67)
       Me.Email_addressTextBox.Name = "Email_addressTextBox"
       Me.Email_addressTextBox.Size = New System.Drawing.Size(200, 20)
@@ -420,6 +428,7 @@ Partial Class formUserDetails
       '
       'ActiveCheckBox
       '
+      Me.ActiveCheckBox.Enabled = False
       Me.ActiveCheckBox.Location = New System.Drawing.Point(527, 13)
       Me.ActiveCheckBox.Name = "ActiveCheckBox"
       Me.ActiveCheckBox.Size = New System.Drawing.Size(200, 24)
@@ -429,6 +438,7 @@ Partial Class formUserDetails
       '
       'Fiche_readerCheckBox
       '
+      Me.Fiche_readerCheckBox.Enabled = False
       Me.Fiche_readerCheckBox.Location = New System.Drawing.Point(527, 197)
       Me.Fiche_readerCheckBox.Name = "Fiche_readerCheckBox"
       Me.Fiche_readerCheckBox.Size = New System.Drawing.Size(200, 24)
@@ -438,6 +448,7 @@ Partial Class formUserDetails
       '
       'AddressTextBox
       '
+      Me.AddressTextBox.Enabled = False
       Me.AddressTextBox.Location = New System.Drawing.Point(150, 171)
       Me.AddressTextBox.Name = "AddressTextBox"
       Me.AddressTextBox.Size = New System.Drawing.Size(200, 20)
@@ -445,6 +456,7 @@ Partial Class formUserDetails
       '
       'SyndicateTextBox
       '
+      Me.SyndicateTextBox.Enabled = False
       Me.SyndicateTextBox.Location = New System.Drawing.Point(150, 223)
       Me.SyndicateTextBox.Name = "SyndicateTextBox"
       Me.SyndicateTextBox.Size = New System.Drawing.Size(200, 20)
@@ -452,6 +464,7 @@ Partial Class formUserDetails
       '
       'Submitter_numberTextBox
       '
+      Me.Submitter_numberTextBox.Enabled = False
       Me.Submitter_numberTextBox.Location = New System.Drawing.Point(527, 66)
       Me.Submitter_numberTextBox.Name = "Submitter_numberTextBox"
       Me.Submitter_numberTextBox.Size = New System.Drawing.Size(200, 20)
@@ -459,6 +472,7 @@ Partial Class formUserDetails
       '
       'Previous_syndicateTextBox
       '
+      Me.Previous_syndicateTextBox.Enabled = False
       Me.Previous_syndicateTextBox.Location = New System.Drawing.Point(527, 225)
       Me.Previous_syndicateTextBox.Name = "Previous_syndicateTextBox"
       Me.Previous_syndicateTextBox.Size = New System.Drawing.Size(200, 20)
@@ -466,6 +480,7 @@ Partial Class formUserDetails
       '
       'DigestTextBox
       '
+      Me.DigestTextBox.Enabled = False
       Me.DigestTextBox.Location = New System.Drawing.Point(527, 250)
       Me.DigestTextBox.Name = "DigestTextBox"
       Me.DigestTextBox.Size = New System.Drawing.Size(200, 20)
@@ -473,6 +488,7 @@ Partial Class formUserDetails
       '
       'Syndicate_groupsTextBox
       '
+      Me.Syndicate_groupsTextBox.Enabled = False
       Me.Syndicate_groupsTextBox.Location = New System.Drawing.Point(150, 249)
       Me.Syndicate_groupsTextBox.Name = "Syndicate_groupsTextBox"
       Me.Syndicate_groupsTextBox.Size = New System.Drawing.Size(200, 20)
@@ -480,6 +496,7 @@ Partial Class formUserDetails
       '
       'County_groupsTextBox
       '
+      Me.County_groupsTextBox.Enabled = False
       Me.County_groupsTextBox.Location = New System.Drawing.Point(150, 275)
       Me.County_groupsTextBox.Name = "County_groupsTextBox"
       Me.County_groupsTextBox.Size = New System.Drawing.Size(200, 20)
@@ -487,6 +504,7 @@ Partial Class formUserDetails
       '
       'Country_groupsTextBox
       '
+      Me.Country_groupsTextBox.Enabled = False
       Me.Country_groupsTextBox.Location = New System.Drawing.Point(150, 301)
       Me.Country_groupsTextBox.Name = "Country_groupsTextBox"
       Me.Country_groupsTextBox.Size = New System.Drawing.Size(200, 20)
@@ -494,6 +512,7 @@ Partial Class formUserDetails
       '
       'Userid_lower_caseTextBox
       '
+      Me.Userid_lower_caseTextBox.Enabled = False
       Me.Userid_lower_caseTextBox.Location = New System.Drawing.Point(527, 40)
       Me.Userid_lower_caseTextBox.Name = "Userid_lower_caseTextBox"
       Me.Userid_lower_caseTextBox.Size = New System.Drawing.Size(200, 20)
@@ -501,6 +520,7 @@ Partial Class formUserDetails
       '
       'Telephone_numberTextBox
       '
+      Me.Telephone_numberTextBox.Enabled = False
       Me.Telephone_numberTextBox.Location = New System.Drawing.Point(150, 197)
       Me.Telephone_numberTextBox.Name = "Telephone_numberTextBox"
       Me.Telephone_numberTextBox.Size = New System.Drawing.Size(200, 20)
@@ -508,6 +528,7 @@ Partial Class formUserDetails
       '
       'Disabled_reasonTextBox
       '
+      Me.Disabled_reasonTextBox.Enabled = False
       Me.Disabled_reasonTextBox.Location = New System.Drawing.Point(527, 378)
       Me.Disabled_reasonTextBox.Name = "Disabled_reasonTextBox"
       Me.Disabled_reasonTextBox.Size = New System.Drawing.Size(200, 20)
@@ -515,6 +536,7 @@ Partial Class formUserDetails
       '
       'Technical_agreementCheckBox
       '
+      Me.Technical_agreementCheckBox.Enabled = False
       Me.Technical_agreementCheckBox.Location = New System.Drawing.Point(527, 404)
       Me.Technical_agreementCheckBox.Name = "Technical_agreementCheckBox"
       Me.Technical_agreementCheckBox.Size = New System.Drawing.Size(200, 24)
@@ -524,6 +546,7 @@ Partial Class formUserDetails
       '
       'Research_agreementCheckBox
       '
+      Me.Research_agreementCheckBox.Enabled = False
       Me.Research_agreementCheckBox.Location = New System.Drawing.Point(527, 423)
       Me.Research_agreementCheckBox.Name = "Research_agreementCheckBox"
       Me.Research_agreementCheckBox.Size = New System.Drawing.Size(200, 24)
@@ -533,6 +556,7 @@ Partial Class formUserDetails
       '
       'Password_confirmationTextBox
       '
+      Me.Password_confirmationTextBox.Enabled = False
       Me.Password_confirmationTextBox.Location = New System.Drawing.Point(150, 145)
       Me.Password_confirmationTextBox.Name = "Password_confirmationTextBox"
       Me.Password_confirmationTextBox.Size = New System.Drawing.Size(200, 20)
@@ -540,6 +564,7 @@ Partial Class formUserDetails
       '
       'Transcription_agreementCheckBox
       '
+      Me.Transcription_agreementCheckBox.Enabled = False
       Me.Transcription_agreementCheckBox.Location = New System.Drawing.Point(527, 444)
       Me.Transcription_agreementCheckBox.Name = "Transcription_agreementCheckBox"
       Me.Transcription_agreementCheckBox.Size = New System.Drawing.Size(200, 24)
@@ -549,6 +574,7 @@ Partial Class formUserDetails
       '
       'Email_address_confirmationTextBox
       '
+      Me.Email_address_confirmationTextBox.Enabled = False
       Me.Email_address_confirmationTextBox.Location = New System.Drawing.Point(150, 93)
       Me.Email_address_confirmationTextBox.Name = "Email_address_confirmationTextBox"
       Me.Email_address_confirmationTextBox.Size = New System.Drawing.Size(200, 20)
@@ -556,6 +582,7 @@ Partial Class formUserDetails
       '
       'Skill_notesTextBox
       '
+      Me.Skill_notesTextBox.Enabled = False
       Me.Skill_notesTextBox.Location = New System.Drawing.Point(527, 328)
       Me.Skill_notesTextBox.Name = "Skill_notesTextBox"
       Me.Skill_notesTextBox.Size = New System.Drawing.Size(200, 20)
@@ -563,6 +590,7 @@ Partial Class formUserDetails
       '
       'Sign_up_dateTextBox
       '
+      Me.Sign_up_dateTextBox.Enabled = False
       Me.Sign_up_dateTextBox.Location = New System.Drawing.Point(527, 96)
       Me.Sign_up_dateTextBox.Name = "Sign_up_dateTextBox"
       Me.Sign_up_dateTextBox.Size = New System.Drawing.Size(200, 20)
@@ -570,6 +598,7 @@ Partial Class formUserDetails
       '
       'Last_uploadTextBox
       '
+      Me.Last_uploadTextBox.Enabled = False
       Me.Last_uploadTextBox.Location = New System.Drawing.Point(527, 122)
       Me.Last_uploadTextBox.Name = "Last_uploadTextBox"
       Me.Last_uploadTextBox.Size = New System.Drawing.Size(200, 20)
@@ -577,6 +606,7 @@ Partial Class formUserDetails
       '
       'U_atTextBox
       '
+      Me.U_atTextBox.Enabled = False
       Me.U_atTextBox.Location = New System.Drawing.Point(527, 276)
       Me.U_atTextBox.Name = "U_atTextBox"
       Me.U_atTextBox.Size = New System.Drawing.Size(200, 20)
@@ -584,6 +614,7 @@ Partial Class formUserDetails
       '
       'C_atTextBox
       '
+      Me.C_atTextBox.Enabled = False
       Me.C_atTextBox.Location = New System.Drawing.Point(527, 301)
       Me.C_atTextBox.Name = "C_atTextBox"
       Me.C_atTextBox.Size = New System.Drawing.Size(200, 20)
@@ -591,6 +622,7 @@ Partial Class formUserDetails
       '
       'Disabled_dateTextBox
       '
+      Me.Disabled_dateTextBox.Enabled = False
       Me.Disabled_dateTextBox.Location = New System.Drawing.Point(150, 379)
       Me.Disabled_dateTextBox.Name = "Disabled_dateTextBox"
       Me.Disabled_dateTextBox.Size = New System.Drawing.Size(200, 20)
