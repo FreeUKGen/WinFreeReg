@@ -289,7 +289,6 @@ Partial Class formStartNewFile
       'CodeTextBox
       '
       Me.CodeTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
-      Me.CodeTextBox.Enabled = False
       Me.CodeTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.CodeTextBox.Location = New System.Drawing.Point(449, 96)
       Me.CodeTextBox.MaxLength = 8

@@ -702,7 +702,10 @@ Partial Class formUserDetails
       Me.Controls.Add(Me.Email_address_confirmationTextBox)
       Me.Controls.Add(Skill_notesLabel)
       Me.Controls.Add(Me.Skill_notesTextBox)
+      Me.HelpButton = True
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+      Me.MaximizeBox = False
+      Me.MinimizeBox = False
       Me.Name = "formUserDetails"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "WinFreeREG - User Profile"

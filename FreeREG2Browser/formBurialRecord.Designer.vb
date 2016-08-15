@@ -349,7 +349,10 @@ Partial Class formBurialRecord
       Me.Controls.Add(LDSFicheLabel)
       Me.Controls.Add(Me.LDSFicheTextBox)
       Me.Controls.Add(Me.LDSImageTextBox)
-      Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
+      Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
+      Me.HelpButton = True
+      Me.MaximizeBox = False
+      Me.MinimizeBox = False
       Me.Name = "formBurialRecord"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "WinFreeREG - Burial Record"

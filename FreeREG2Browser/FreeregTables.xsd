@@ -70,7 +70,7 @@
               <xs:element name="ChurchName" msprop:Generator_ColumnVarNameInTable="columnChurchName" msprop:Generator_ColumnPropNameInRow="ChurchName" msprop:Generator_ColumnPropNameInTable="ChurchNameColumn" msprop:Generator_UserColumnName="ChurchName" type="xs:string" />
               <xs:element name="ChapmanCode" msprop:Generator_ColumnVarNameInTable="columnChapmanCode" msprop:Generator_ColumnPropNameInRow="ChapmanCode" msprop:Generator_ColumnPropNameInTable="ChapmanCodeColumn" msprop:Generator_UserColumnName="ChapmanCode" type="xs:string" />
               <xs:element name="PlaceName" msprop:Generator_ColumnVarNameInTable="columnPlaceName" msprop:Generator_ColumnPropNameInRow="PlaceName" msprop:Generator_ColumnPropNameInTable="PlaceNameColumn" msprop:Generator_UserColumnName="PlaceName" type="xs:string" />
-              <xs:element name="Code" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="Code" msprop:Generator_ColumnVarNameInTable="columnCode" msprop:Generator_ColumnPropNameInTable="CodeColumn" msprop:Generator_UserColumnName="Code" minOccurs="0">
+              <xs:element name="FileCode" msdata:Caption="File Code" msprop:nullValue="_null" msprop:Generator_ColumnPropNameInRow="FileCode" msprop:Generator_ColumnVarNameInTable="columnFileCode" msprop:Generator_ColumnPropNameInTable="FileCodeColumn" msprop:Generator_UserColumnName="FileCode" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="8" />

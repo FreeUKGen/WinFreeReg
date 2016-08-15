@@ -1273,7 +1273,7 @@ Partial Public Class FreeregTables
 
       Private columnPlaceName As Global.System.Data.DataColumn
 
-      Private columnCode As Global.System.Data.DataColumn
+      Private columnFileCode As Global.System.Data.DataColumn
 
       Private columnLocation As Global.System.Data.DataColumn
 
@@ -1346,9 +1346,9 @@ Partial Public Class FreeregTables
 
       <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
        Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property CodeColumn() As Global.System.Data.DataColumn
+      Public ReadOnly Property FileCodeColumn() As Global.System.Data.DataColumn
          Get
-            Return Me.columnCode
+            Return Me.columnFileCode
          End Get
       End Property
 
@@ -1429,9 +1429,9 @@ Partial Public Class FreeregTables
 
       <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
        Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Function AddChurchesRow(ByVal ChurchName As String, ByVal ChapmanCode As String, ByVal PlaceName As String, ByVal Code As String, ByVal Location As String, ByVal Denomination As String, ByVal Website As String, ByVal LastAmended As String, ByVal Notes As String) As ChurchesRow
+      Public Overloads Function AddChurchesRow(ByVal ChurchName As String, ByVal ChapmanCode As String, ByVal PlaceName As String, ByVal FileCode As String, ByVal Location As String, ByVal Denomination As String, ByVal Website As String, ByVal LastAmended As String, ByVal Notes As String) As ChurchesRow
          Dim rowChurchesRow As ChurchesRow = CType(Me.NewRow, ChurchesRow)
-         Dim columnValuesArray() As Object = New Object() {ChurchName, ChapmanCode, PlaceName, Code, Location, Denomination, Website, LastAmended, Notes}
+         Dim columnValuesArray() As Object = New Object() {ChurchName, ChapmanCode, PlaceName, FileCode, Location, Denomination, Website, LastAmended, Notes}
          rowChurchesRow.ItemArray = columnValuesArray
          Me.Rows.Add(rowChurchesRow)
          Return rowChurchesRow
@@ -1463,7 +1463,7 @@ Partial Public Class FreeregTables
          Me.columnChurchName = MyBase.Columns("ChurchName")
          Me.columnChapmanCode = MyBase.Columns("ChapmanCode")
          Me.columnPlaceName = MyBase.Columns("PlaceName")
-         Me.columnCode = MyBase.Columns("Code")
+         Me.columnFileCode = MyBase.Columns("FileCode")
          Me.columnLocation = MyBase.Columns("Location")
          Me.columnDenomination = MyBase.Columns("Denomination")
          Me.columnWebsite = MyBase.Columns("Website")
@@ -1480,8 +1480,8 @@ Partial Public Class FreeregTables
          MyBase.Columns.Add(Me.columnChapmanCode)
          Me.columnPlaceName = New Global.System.Data.DataColumn("PlaceName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
          MyBase.Columns.Add(Me.columnPlaceName)
-         Me.columnCode = New Global.System.Data.DataColumn("Code", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnCode)
+         Me.columnFileCode = New Global.System.Data.DataColumn("FileCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnFileCode)
          Me.columnLocation = New Global.System.Data.DataColumn("Location", GetType(String), Nothing, Global.System.Data.MappingType.Element)
          MyBase.Columns.Add(Me.columnLocation)
          Me.columnDenomination = New Global.System.Data.DataColumn("Denomination", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -1496,7 +1496,8 @@ Partial Public Class FreeregTables
          Me.columnChurchName.AllowDBNull = False
          Me.columnChapmanCode.AllowDBNull = False
          Me.columnPlaceName.AllowDBNull = False
-         Me.columnCode.MaxLength = 8
+         Me.columnFileCode.Caption = "File Code"
+         Me.columnFileCode.MaxLength = 8
       End Sub
 
       <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
@@ -1930,16 +1931,16 @@ Partial Public Class FreeregTables
 
       <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
        Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Code() As String
+      Public Property FileCode() As String
          Get
-            If Me.IsCodeNull Then
+            If Me.IsFileCodeNull Then
                Return Nothing
             Else
-               Return CType(Me(Me.tableChurches.CodeColumn), String)
+               Return CType(Me(Me.tableChurches.FileCodeColumn), String)
             End If
          End Get
          Set(value As String)
-            Me(Me.tableChurches.CodeColumn) = value
+            Me(Me.tableChurches.FileCodeColumn) = value
          End Set
       End Property
 
@@ -2020,14 +2021,14 @@ Partial Public Class FreeregTables
 
       <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
        Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsCodeNull() As Boolean
-         Return Me.IsNull(Me.tableChurches.CodeColumn)
+      Public Function IsFileCodeNull() As Boolean
+         Return Me.IsNull(Me.tableChurches.FileCodeColumn)
       End Function
 
       <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
        Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetCodeNull()
-         Me(Me.tableChurches.CodeColumn) = Global.System.Convert.DBNull
+      Public Sub SetFileCodeNull()
+         Me(Me.tableChurches.FileCodeColumn) = Global.System.Convert.DBNull
       End Sub
 
       <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _

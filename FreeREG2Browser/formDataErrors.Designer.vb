@@ -1,27 +1,27 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class formTablesErrors
-    Inherits System.Windows.Forms.Form
+Partial Class formDataErrors
+   Inherits System.Windows.Forms.Form
 
-    'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
-    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
-        Try
-            If disposing AndAlso components IsNot Nothing Then
-                components.Dispose()
-            End If
-        Finally
-            MyBase.Dispose(disposing)
-        End Try
-    End Sub
+   'Form overrides dispose to clean up the component list.
+   <System.Diagnostics.DebuggerNonUserCode()> _
+   Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+      Try
+         If disposing AndAlso components IsNot Nothing Then
+            components.Dispose()
+         End If
+      Finally
+         MyBase.Dispose(disposing)
+      End Try
+   End Sub
 
-    'Required by the Windows Form Designer
-    Private components As System.ComponentModel.IContainer
+   'Required by the Windows Form Designer
+   Private components As System.ComponentModel.IContainer
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
-    Private Sub InitializeComponent()
+   'NOTE: The following procedure is required by the Windows Form Designer
+   'It can be modified using the Windows Form Designer.  
+   'Do not modify it using the code editor.
+   <System.Diagnostics.DebuggerStepThrough()> _
+   Private Sub InitializeComponent()
       Me.olvErrors = New BrightIdeasSoftware.ObjectListView()
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
       Me.btnIgnore = New System.Windows.Forms.Button()
@@ -108,9 +108,12 @@ Partial Class formTablesErrors
       Me.CancelButton = Me.btnCancel
       Me.ClientSize = New System.Drawing.Size(544, 339)
       Me.Controls.Add(Me.SplitContainer1)
+      Me.HelpButton = True
+      Me.MaximizeBox = False
+      Me.MinimizeBox = False
       Me.Name = "formTablesErrors"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-      Me.Text = "WinFreeREG - Errors"
+      Me.Text = "Data Errors"
       CType(Me.olvErrors, System.ComponentModel.ISupportInitialize).EndInit()
       Me.SplitContainer1.Panel1.ResumeLayout(False)
       Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -118,9 +121,9 @@ Partial Class formTablesErrors
       Me.ResumeLayout(False)
 
    End Sub
-	Friend WithEvents olvErrors As BrightIdeasSoftware.ObjectListView
-	Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
-	Friend WithEvents btnIgnore As System.Windows.Forms.Button
-	Friend WithEvents btnCancel As System.Windows.Forms.Button
+   Friend WithEvents olvErrors As BrightIdeasSoftware.ObjectListView
+   Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
+   Friend WithEvents btnIgnore As System.Windows.Forms.Button
+   Friend WithEvents btnCancel As System.Windows.Forms.Button
    Friend WithEvents btnOK As System.Windows.Forms.Button
 End Class

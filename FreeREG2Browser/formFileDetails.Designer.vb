@@ -63,6 +63,7 @@ Partial Class formFileDetails
       Me.PlaceCodeTextBox = New System.Windows.Forms.TextBox()
       Me.TranscriptionFileClassBindingSource = New System.Windows.Forms.BindingSource(Me.components)
       Me.Label1 = New System.Windows.Forms.Label()
+      Me.errorChurchName = New System.Windows.Forms.ErrorProvider(Me.components)
       ChurchLabel = New System.Windows.Forms.Label()
       Comment1Label = New System.Windows.Forms.Label()
       Comment2Label = New System.Windows.Forms.Label()
@@ -85,6 +86,7 @@ Partial Class formFileDetails
       CType(Me.PlacesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.RegisterTypesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.TranscriptionFileClassBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.errorChurchName, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
       'ChurchLabel
@@ -231,7 +233,7 @@ Partial Class formFileDetails
       '
       Me.LinkLabel1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.LinkLabel1.AutoSize = True
-      Me.LinkLabel1.Location = New System.Drawing.Point(563, 259)
+      Me.LinkLabel1.Location = New System.Drawing.Point(563, 266)
       Me.LinkLabel1.Name = "LinkLabel1"
       Me.LinkLabel1.Size = New System.Drawing.Size(43, 13)
       Me.LinkLabel1.TabIndex = 31
@@ -460,11 +462,15 @@ Partial Class formFileDetails
       Me.Label1.TabIndex = 63
       Me.Label1.Text = "Place code:"
       '
+      'errorChurchName
+      '
+      Me.errorChurchName.ContainerControl = Me
+      '
       'formFileDetails
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(618, 281)
+      Me.ClientSize = New System.Drawing.Size(618, 288)
       Me.Controls.Add(Me.Label1)
       Me.Controls.Add(Me.PlaceCodeTextBox)
       Me.Controls.Add(Me.ChurchComboBox)
@@ -509,6 +515,7 @@ Partial Class formFileDetails
       CType(Me.PlacesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.RegisterTypesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.TranscriptionFileClassBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.errorChurchName, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
 
@@ -539,4 +546,5 @@ Partial Class formFileDetails
    Friend WithEvents PlaceCodeTextBox As System.Windows.Forms.TextBox
    Friend WithEvents Label1 As System.Windows.Forms.Label
    Friend WithEvents TranscriptionFileClassBindingSource As System.Windows.Forms.BindingSource
+   Friend WithEvents errorChurchName As System.Windows.Forms.ErrorProvider
 End Class

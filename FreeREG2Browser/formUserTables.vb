@@ -297,7 +297,7 @@ Public Class formUserTables
             End If
          Next
 
-         Using dlg As New formTablesErrors() With {.Lookups = LookupTables}
+         Using dlg As New formDataErrors(formHelp) With {.Lookups = LookupTables}
             Generator.GenerateColumns(dlg.olvErrors, GetType(classUncorrectedErrors), True)
             dlg.olvErrors.SetObjects(errors)
             Try

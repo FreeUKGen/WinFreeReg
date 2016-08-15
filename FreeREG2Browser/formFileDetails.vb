@@ -48,19 +48,34 @@ Public Class formFileDetails
       Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
    End Sub
 
-   Private Sub LinkLabel1_LinkClicked(sender As Object, e As Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
-      If LinkLabel1.Tag.ToString = "False" Then
-         Me.Size = New Drawing.Size With {.Width = Me.Width, .Height = 524}
-         LinkLabel1.Text = "<--Less"
-         LinkLabel1.Tag = "True"
-      Else
-         Me.Size = New Drawing.Size With {.Width = Me.Width, .Height = 324}
-         LinkLabel1.Text = "More-->"
-         LinkLabel1.Tag = "False"
-      End If
+   Private Sub formFileDetails_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+      CountyComboBox.SelectedValue = m_TranscriptionFile.FileHeader.County
+      PlacesBindingSource.Filter = String.Format("ChapmanCode = '{0}'", m_TranscriptionFile.FileHeader.County)
+      PlaceComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Place
+      ChurchesBindingSource.Filter = String.Format("ChapmanCode = '{0}' AND PlaceName = '{1}'", m_TranscriptionFile.FileHeader.County, m_TranscriptionFile.FileHeader.Place)
+      ChurchComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Church
+      RegisterTypeComboBox.SelectedValue = m_TranscriptionFile.FileHeader.RegisterType
+      FileTypeComboBox.SelectedValue = [Enum].GetName(GetType(FileTypes), m_TranscriptionFile.FileHeader.FileType).Substring(0, 2)
    End Sub
 
    Private Sub formFileDetails_FormClosing(sender As Object, e As Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+      errorChurchName.SetError(ChurchComboBox, "")
+      If ChurchesBindingSource.Count = 0 Then
+         errorChurchName.SetError(ChurchComboBox, String.Format(My.Resources.msgNoChurchesForPlace, PlaceComboBox.SelectedValue))
+         e.Cancel = True
+         Return
+      End If
+
+      If PlaceComboBox.SelectedValue <> m_TranscriptionFile.FileHeader.Place Then m_HeaderChanged = True
+      If ChurchComboBox.SelectedValue <> m_TranscriptionFile.FileHeader.Church Then m_HeaderChanged = True
+      If RegisterTypeComboBox.SelectedValue <> m_TranscriptionFile.FileHeader.RegisterType Then m_HeaderChanged = True
+      If IsLDSCheckBox.Checked <> m_TranscriptionFile.FileHeader.isLDS Then m_HeaderChanged = True
+      If CreditNameTextBox.Text <> m_TranscriptionFile.FileHeader.CreditName Then m_HeaderChanged = True
+      If CreditEmailTextBox.Text <> m_TranscriptionFile.FileHeader.CreditEmail Then m_HeaderChanged = True
+      If Comment1TextBox.Text <> m_TranscriptionFile.FileHeader.Comment1 Then m_HeaderChanged = True
+      If Comment2TextBox.Text <> m_TranscriptionFile.FileHeader.Comment2 Then m_HeaderChanged = True
+      If MyNameTextBox.Text <> m_TranscriptionFile.FileHeader.MyName Then m_HeaderChanged = True
+      If MyEmailTextBox.Text <> m_TranscriptionFile.FileHeader.MyEmail Then m_HeaderChanged = True
    End Sub
 
    Private Sub formFileDetails_FormClosed(sender As Object, e As Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
@@ -88,19 +103,21 @@ Public Class formFileDetails
       e.Graphics.DrawString(s, e.Font, Brushes.Black, New RectangleF(e.Bounds.X, e.Bounds.Y, e.Bounds.Width, e.Bounds.Height))
    End Sub
 
-   Private Sub formFileDetails_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
-      CountyComboBox.SelectedValue = m_TranscriptionFile.FileHeader.County
-      PlacesBindingSource.Filter = String.Format("ChapmanCode = '{0}'", m_TranscriptionFile.FileHeader.County)
-      PlaceComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Place
-      ChurchesBindingSource.Filter = String.Format("ChapmanCode = '{0}' AND PlaceName = '{1}'", m_TranscriptionFile.FileHeader.County, m_TranscriptionFile.FileHeader.Place)
-      ChurchComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Church
-      RegisterTypeComboBox.SelectedValue = m_TranscriptionFile.FileHeader.RegisterType
-      FileTypeComboBox.SelectedValue = [Enum].GetName(GetType(FileTypes), m_TranscriptionFile.FileHeader.FileType).Substring(0, 2)
-   End Sub
-
    Private Sub PlaceComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PlaceComboBox.SelectedIndexChanged
       ChurchesBindingSource.Filter = String.Format("ChapmanCode = '{0}' AND PlaceName = '{1}'", CountyComboBox.SelectedValue, PlaceComboBox.SelectedValue)
-      m_HeaderChanged = True
+      errorChurchName.SetError(ChurchComboBox, "")
+   End Sub
+
+   Private Sub LinkLabel1_LinkClicked(sender As Object, e As Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
+      If LinkLabel1.Tag.ToString = "False" Then
+         Me.Size = New Drawing.Size With {.Width = Me.Width, .Height = 524}
+         LinkLabel1.Text = "<--Less"
+         LinkLabel1.Tag = "True"
+      Else
+         Me.Size = New Drawing.Size With {.Width = Me.Width, .Height = 324}
+         LinkLabel1.Text = "More-->"
+         LinkLabel1.Tag = "False"
+      End If
    End Sub
 
    Private Sub formFileDetails_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
@@ -116,35 +133,4 @@ Public Class formFileDetails
       End Try
    End Sub
 
-   Private Sub RegisterTypeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles RegisterTypeComboBox.SelectedIndexChanged
-      m_HeaderChanged = True
-   End Sub
-
-   Private Sub ChurchComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ChurchComboBox.SelectedIndexChanged
-      m_HeaderChanged = True
-   End Sub
-
-   Private Sub CreditEmailTextBox_TextChanged(sender As Object, e As EventArgs) Handles CreditEmailTextBox.TextChanged
-      m_HeaderChanged = True
-   End Sub
-
-   Private Sub CreditNameTextBox_TextChanged(sender As Object, e As EventArgs) Handles CreditNameTextBox.TextChanged
-      m_HeaderChanged = True
-   End Sub
-
-   Private Sub Comment1TextBox_TextChanged(sender As Object, e As EventArgs) Handles Comment1TextBox.TextChanged
-      m_HeaderChanged = True
-   End Sub
-
-   Private Sub Comment2TextBox_TextChanged(sender As Object, e As EventArgs) Handles Comment2TextBox.TextChanged
-      m_HeaderChanged = True
-   End Sub
-
-   Private Sub MyEmailTextBox_TextChanged(sender As Object, e As EventArgs) Handles MyEmailTextBox.TextChanged
-      m_HeaderChanged = True
-   End Sub
-
-   Private Sub MyNameTextBox_TextChanged(sender As Object, e As EventArgs) Handles MyNameTextBox.TextChanged
-      m_HeaderChanged = True
-   End Sub
 End Class

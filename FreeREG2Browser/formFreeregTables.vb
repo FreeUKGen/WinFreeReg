@@ -84,150 +84,34 @@ Public Class formFreeregTables
    End Sub
 
    Sub ConfigureRegisterTypesOLV()
-      Dim dlvcol As OLVColumn
-
       dlvRegisterTypes.DataSource = _tables
       dlvRegisterTypes.DataMember = "RegisterTypes"
-
-      dlvcol = CType(dlvRegisterTypes.Columns("Type"), OLVColumn)
-      dlvcol.Width = 50
-      dlvcol.TextAlign = HorizontalAlignment.Center
-
-      dlvcol = CType(dlvRegisterTypes.Columns("Description"), OLVColumn)
-      dlvcol.Sortable = False
-      dlvcol.FillsFreeSpace = True
-      dlvRegisterTypes.RebuildColumns()
-
    End Sub
 
    Sub ConfigureCountiesOLV()
-      Dim dlvcol As OLVColumn
-
       dlvCounties.DataSource = _tables
       dlvCounties.DataMember = "Counties"
-      dlvCounties.ShowGroups = False
-
-      dlvcol = CType(dlvCounties.Columns("ChapmanCode"), OLVColumn)
-      dlvcol.Width = 80
-      dlvcol.TextAlign = HorizontalAlignment.Center
-
-      dlvcol = CType(dlvCounties.Columns("CountyName"), OLVColumn)
-      dlvcol.Width = 120
-      dlvcol.Sortable = False
-
-      dlvcol = CType(dlvCounties.Columns("Notes"), OLVColumn)
-      dlvcol.Sortable = False
-      dlvcol.FillsFreeSpace = True
-      dlvCounties.HeaderWordWrap = True
-      dlvCounties.RebuildColumns()
       currentCountyCode = _myDefaultCounty.Code
-
    End Sub
 
    Sub ConfigurePlacesOLV()
-      Dim dlvcol As OLVColumn
-
       dlvPlaces.DataSource = _tables
       dlvPlaces.DataMember = "Places"
-      dlvPlaces.ShowGroups = False
 
-      dlvcol = CType(dlvPlaces.Columns("ChapmanCode"), OLVColumn)
-      dlvcol.Width = 80
-      dlvcol.Groupable = True
-      dlvcol.Sortable = True
-      dlvcol.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetCountyGroupKey)
-      dlvcol.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetCountyGroupTitle)
-      dlvcol.TextAlign = HorizontalAlignment.Center
+      olvc2ChapmanCode.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetCountyGroupKey)
+      olvc2ChapmanCode.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetCountyGroupTitle)
 
-      dlvcol = CType(dlvPlaces.Columns("CountyName"), OLVColumn)
-      dlvcol.IsVisible = False
-
-      dlvcol = CType(dlvPlaces.Columns("PlaceName"), OLVColumn)
-      dlvcol.Width = 200
-      dlvcol.Groupable = False
-      dlvcol.Sortable = True
-
-      dlvcol = CType(dlvPlaces.Columns("Country"), OLVColumn)
-      dlvcol.Width = 65
-      dlvcol.Sortable = True
-      dlvcol.Groupable = True
-      dlvcol.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetCountryGroupKey)
-      dlvcol.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetCountryGroupTitle)
-      dlvcol.UseFiltering = False
-
-      dlvcol = CType(dlvPlaces.Columns("Notes"), OLVColumn)
-      dlvcol.Sortable = False
-      dlvcol.Groupable = False
-      dlvcol.FillsFreeSpace = True
-      dlvcol.UseFiltering = False
-
-      '		dlvPlaces.CustomSorter = New SortDelegate(AddressOf SortPlaces)
-      dlvPlaces.HeaderWordWrap = True
-      dlvPlaces.IsSearchOnSortColumn = True
-      dlvPlaces.RebuildColumns()
+      olvc2Country.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetCountryGroupKey)
+      olvc2Country.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetCountryGroupTitle)
 
    End Sub
 
    Sub ConfigureChurchesOLV()
-      Dim dlvcol As OLVColumn
-
       dlvChurches.DataSource = _tables
       dlvChurches.DataMember = "Churches"
-      dlvChurches.ShowGroups = False
-
-      dlvcol = CType(dlvChurches.Columns("ChapmanCode"), OLVColumn)
-      dlvcol.IsVisible = False
-      dlvcol.Groupable = False
-      dlvcol.Sortable = True
-
-      dlvcol = CType(dlvChurches.Columns("LastAmended"), OLVColumn)
-      dlvcol.IsVisible = False
-      dlvcol.Groupable = False
-
-      dlvcol = CType(dlvChurches.Columns("ChurchName"), OLVColumn)
-      dlvcol.Width = 58
-      dlvcol.Groupable = False
-      dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-
-      dlvcol = CType(dlvChurches.Columns("PlaceName"), OLVColumn)
-      dlvcol.Width = 53
-      dlvcol.IsVisible = False
-      dlvcol.Groupable = False
-      dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-
-      dlvcol = CType(dlvChurches.Columns("Code"), OLVColumn)
-      dlvcol.Width = 100
-      dlvcol.Groupable = False
-      dlvcol.Sortable = True
-
-      dlvcol = CType(dlvChurches.Columns("Location"), OLVColumn)
-      dlvcol.Width = 66
-      dlvcol.Groupable = False
-
-      dlvcol = CType(dlvChurches.Columns("Denomination"), OLVColumn)
-      dlvcol.Width = 99
-      dlvcol.Groupable = False
-
-      dlvcol = CType(dlvChurches.Columns("Website"), OLVColumn)
-      dlvcol.Width = 69
-      dlvcol.Groupable = False
-
-      dlvcol = CType(dlvChurches.Columns("Notes"), OLVColumn)
-      dlvcol.Sortable = False
-      dlvcol.Groupable = False
-      dlvcol.FillsFreeSpace = True
-      dlvcol.UseFiltering = False
-
-      dlvChurches.HeaderWordWrap = True
-      dlvChurches.RebuildColumns()
    End Sub
 
 #Region "ObjectListView delegates"
-
-   Private Sub SortPlaces(ByVal column As OLVColumn, ByVal order As SortOrder)
-      Dim dlvcol = CType(dlvPlaces.Columns("ChapmanCode"), OLVColumn)
-      dlvPlaces.ListViewItemSorter = New ColumnComparer(dlvcol, SortOrder.Ascending, column, order)
-   End Sub
 
    Private Sub ConfigureTextOverlay(ByVal textOverlay As TextOverlay)
       textOverlay.TextColor = Color.Firebrick
@@ -322,6 +206,7 @@ Public Class formFreeregTables
       cboxCounties.Visible = False
       cboxCounties.DataSource = Nothing
       cboxCounties.DisplayMember = ""
+
       labPlace.Visible = False
       cboxPlaces.Visible = False
       cboxPlaces.DataSource = Nothing
@@ -334,9 +219,10 @@ Public Class formFreeregTables
       cboxCounties.DataSource = _tables.Counties
       cboxCounties.DisplayMember = "ChapmanCode"
       cboxCounties.SelectedIndex = cboxCounties.FindString(currentCountyCode)
+
+      labPlace.Visible = ShowPlaces
+      cboxPlaces.Visible = ShowPlaces
       If ShowPlaces Then
-         labPlace.Visible = True
-         cboxPlaces.Visible = True
          Dim dt = _tables.Places.Where(Function(row As FreeregTables.PlacesRow) row.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
          If dt.Count > 0 Then
             cboxPlaces.DataSource = New BindingSource(dt, Nothing)
@@ -346,8 +232,6 @@ Public Class formFreeregTables
             cboxPlaces.DisplayMember = "'"
          End If
       Else
-         labPlace.Visible = False
-         cboxPlaces.Visible = False
          cboxPlaces.DataSource = Nothing
          cboxPlaces.DisplayMember = ""
       End If
@@ -794,6 +678,7 @@ Public Class formFreeregTables
                      For Each rowIncoming As DataRow In ds.Tables("Church").Rows
                         Dim newNotes As String = rowIncoming.Item("Notes").ToString.Replace(vbCrLf, " ")
                         Dim newFileCode As String = String.Empty
+#If USE_FILECODES Then
                         Dim reg As New Regex("FILE: (?<FileCode>\w{3,8})", RegexOptions.IgnoreCase)
                         Dim mat As Match = reg.Match(newNotes)
                         If mat.Success Then
@@ -808,12 +693,13 @@ Public Class formFreeregTables
                               Beep()
                            End If
                         End If
+#End If
 
                         Dim rowExisting As FreeregTables.ChurchesRow = _tables.Churches.FindByChurchNameChapmanCodePlaceName(rowIncoming.Item("ChurchName"), params.County, params.Place)
                         If rowExisting Is Nothing Then
                            _tables.Churches.AddChurchesRow(rowIncoming.Item("ChurchName"), params.County, params.Place, newFileCode, rowIncoming.Item("Location"), rowIncoming.Item("Denomination"), rowIncoming.Item("Website"), rowIncoming.Item("LastAmended"), newNotes)
                         Else
-                           rowExisting.Code = newFileCode
+                           rowExisting.FileCode = newFileCode
                            rowExisting.Location = rowIncoming.Item("Location")
                            rowExisting.Denomination = rowIncoming.Item("Denomination")
                            rowExisting.Website = rowIncoming.Item("Website")
@@ -973,19 +859,19 @@ Public Class formFreeregTables
             If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
                dlvChurches.ModelFilter = Nothing
                Dim filterChurches = New FilterChurchesByCountyAndPlace()
+               filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
 
                Dim dt = _tables.Places.Where(Function(row As FreeregTables.PlacesRow) row.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
                If dt.Count > 0 Then
                   cboxPlaces.DataSource = New BindingSource(dt, Nothing)
                   cboxPlaces.DisplayMember = "Placename"
                Else
-                  cboxPlaces.ValueMember = ""
-                  cboxPlaces.SelectedValue = Nothing
+                  cboxPlaces.SelectedIndex = -1
+                  cboxPlaces.Refresh()
                   cboxPlaces.DataSource = Nothing
                   cboxPlaces.DisplayMember = ""
                   cboxPlaces.Items.Clear()
                End If
-               filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
 
                If cboxPlaces.SelectedItem IsNot Nothing Then
                   filterChurches.PlaceName = CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName
@@ -1007,12 +893,21 @@ Public Class formFreeregTables
          Case "tabPlaces"
          Case "tabChurches"
             If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
-               If Not String.IsNullOrEmpty(CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName) Then
-                  dlvChurches.ModelFilter = Nothing
-                  Dim filterChurches = New FilterChurchesByCountyAndPlace()
-                  filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
-                  filterChurches.PlaceName = CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName
-                  dlvChurches.ModelFilter = filterChurches
+               If Not cboxPlaces.SelectedItem Is Nothing Then
+                  If Not String.IsNullOrEmpty(CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName) Then
+                     dlvChurches.ModelFilter = Nothing
+                     Dim filterChurches = New FilterChurchesByCountyAndPlace()
+                     filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
+                     filterChurches.PlaceName = CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName
+                     dlvChurches.ModelFilter = filterChurches
+                  Else
+                     Beep()
+                  End If
+               Else
+                  dlvPlaces.ModelFilter = Nothing
+                  dlvPlaces.ModelFilter = New FilterPlacesByCounty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
+                  currentCountyCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
+                  TabControl1.SelectTab("tabPlaces")
                End If
             End If
       End Select
@@ -1029,6 +924,35 @@ Public Class formFreeregTables
          MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
       End Try
+   End Sub
+
+   Private Sub dlvChurches_CellEditStarting(sender As Object, e As CellEditEventArgs) Handles dlvChurches.CellEditStarting
+      If e.Column.AspectName = "FileCode" Then
+         With CType(e.Control, TextBox)
+            .CharacterCasing = CharacterCasing.Upper
+#If USE_FILECODES Then
+            .MaxLength = 8
+#Else
+            .MaxLength = 3
+#End If
+         End With
+      End If
+   End Sub
+
+   Private Sub dlvChurches_CellEditValidating(sender As Object, e As CellEditEventArgs) Handles dlvChurches.CellEditValidating
+      If e.Column.AspectName = "FileCode" Then
+         ' Validation goes here
+         If e.NewValue.ToString = String.Empty Then Exit Sub
+         If e.NewValue.ToString.Length <> CType(e.Control, TextBox).MaxLength Then e.Cancel = True
+      End If
+   End Sub
+
+   Private Sub dlvChurches_CellEditFinishing(sender As Object, e As CellEditEventArgs) Handles dlvChurches.CellEditFinishing
+      If e.Cancel Then Exit Sub
+      If e.Column.AspectName = "FileCode" Then
+         _tables.RegisterTypes.AcceptChanges()
+         _FileIsChanged = True
+      End If
    End Sub
 
    Public Class FilterPlacesByCounty

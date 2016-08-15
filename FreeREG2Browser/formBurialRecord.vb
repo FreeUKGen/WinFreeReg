@@ -3,6 +3,14 @@ Imports System.IO
 
 Public Class formBurialRecord
 
+   Private formHelp As formGeneralHelp = Nothing
+   Sub New(HelpForm As formGeneralHelp)
+      ' This call is required by the Windows Form Designer.
+      InitializeComponent()
+
+      formHelp = HelpForm
+   End Sub
+
    Private m_Lookups As WinFreeReg.LookupTables
    Public Property Lookups() As WinFreeReg.LookupTables
       Get
@@ -105,4 +113,16 @@ Public Class formBurialRecord
    '	Return x(0).FileValue
    'End Function
 
+   Private Sub formBurialRecord_HelpButtonClicked(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.HelpButtonClicked
+      Try
+         formHelp.Title = "Correct Burial Errors"
+         formHelp.StartPage = "BurialErrors.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
 End Class

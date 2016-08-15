@@ -101,6 +101,14 @@ Public Class formStartNewFile
    Property UserTablesFile As String
 
    Private Sub formStartNewFile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+#If USE_FILECODES Then
+      CodeTextBox.MaxLength = 8
+#Else
+      CodeTextBox.MaxLength = 3
+#End If
+      CodeTextBox.Size = New Drawing.Size(CodeTextBox.MaxLength * 10, 20)
+      linkUpdate.Location = New Drawing.Point(CodeTextBox.Location.X + CodeTextBox.Size.Width + 2, 100)
+
       CountiesBindingSource.DataSource = m_TablesDataSet
       PlacesBindingSource.DataSource = m_TablesDataSet
       ChurchesBindingSource.DataSource = m_TablesDataSet
@@ -136,37 +144,48 @@ Public Class formStartNewFile
 
          labChurch.Visible = True
          ChurchesBindingSource.Filter = String.Format("ChapmanCode = '{0}' AND PlaceName = '{1}'", m_SelectedCounty, m_SelectedPlace)
-         If ChurchesBindingSource.Count = 1 Then
-            Dim rowChurch As WinFreeReg.FreeregTables.ChurchesRow = ChurchesBindingSource.Item(0).Row
-            ChurchesComboBox.Enabled = False
-            ChurchesComboBox.Visible = False
-            ChurchTextBox.Enabled = True
-            ChurchTextBox.Visible = True
-            ChurchTextBox.Text = rowChurch.ChurchName
-            m_SelectedChurch = rowChurch.ChurchName
-
-            labCode.Visible = True
-            CodeTextBox.Enabled = True
-            CodeTextBox.Visible = True
-            CodeTextBox.Text = rowChurch.Code
-            linkUpdate.Visible = True
-
-            If Not String.IsNullOrEmpty(rowChurch.Code) Then
-               Label1.Visible = True
-               labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
-            End If
-            labRegisterType.Visible = True
-            RegisterTypesComboBox.Enabled = True
-            RegisterTypesComboBox.Visible = True
-         Else
-            If ChurchesBindingSource.Count = 0 Then
+         Select Case ChurchesBindingSource.Count
+            Case 0
                MessageBox.Show("The selected Place has no Church information available. Download the Church information before creating the new file.", "Create New File", MessageBoxButtons.OK, MessageBoxIcon.Error)
                Beep()
-            Else
+
+            Case 1
+               Dim rowChurch As WinFreeReg.FreeregTables.ChurchesRow = ChurchesBindingSource.Item(0).Row
+               ChurchesComboBox.Enabled = False
+               ChurchesComboBox.Visible = False
+               ChurchTextBox.Enabled = True
+               ChurchTextBox.Visible = True
+               ChurchTextBox.Text = rowChurch.ChurchName
+               m_SelectedChurch = rowChurch.ChurchName
+               labCode.Visible = True
+               CodeTextBox.Visible = True
+
+#If USE_FILECODES Then
+               CodeTextBox.Text = rowChurch.Code
+               If Not String.IsNullOrEmpty(rowChurch.Code) Then
+                  Label1.Visible = True
+                  labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
+                  Dim strFileName As String = CodeTextBox.Text + m_SelectedRecordType
+                  labFilename.Text += " " + SuffixNumber(strFileName).ToString
+               End If
+#Else
+               If rowChurch.FileCode.Length = 3 Then CodeTextBox.Text = rowChurch.FileCode Else CodeTextBox.Text = String.Empty
+               If Not String.IsNullOrEmpty(CodeTextBox.Text) Then
+                  Label1.Visible = True
+                  labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
+                  Dim strFileName As String = m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType
+                  labFilename.Text += " " + SuffixNumber(strFileName).ToString
+               End If
+#End If
+
+               labRegisterType.Visible = True
+               RegisterTypesComboBox.Enabled = True
+               RegisterTypesComboBox.Visible = True
+
+            Case Else
                ChurchesComboBox.Enabled = True
                ChurchesComboBox.Visible = True
-            End If
-         End If
+         End Select
       End If
    End Sub
 
@@ -174,17 +193,27 @@ Public Class formStartNewFile
       If ChurchesComboBox.SelectedItem IsNot Nothing Then
          Dim row As WinFreeReg.FreeregTables.ChurchesRow = CType(ChurchesComboBox.SelectedItem(), DataRowView).Row
          m_SelectedChurch = row.ChurchName
-
          labCode.Visible = True
-         CodeTextBox.Enabled = True
          CodeTextBox.Visible = True
-         CodeTextBox.Text = row.Code
          linkUpdate.Visible = True
+
+#If USE_FILECODES Then
+         CodeTextBox.Text = row.Code
          If Not String.IsNullOrEmpty(row.Code) Then
             Label1.Visible = True
             labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
-            linkUpdate.Visible = True
+            Dim strFileName As String = CodeTextBox.Text + m_SelectedRecordType
+            labFilename.Text += " " + SuffixNumber(strFileName).ToString
          End If
+#Else
+         If row.FileCode.Length = 3 Then CodeTextBox.Text = row.FileCode Else CodeTextBox.Text = String.Empty
+         If Not String.IsNullOrEmpty(CodeTextBox.Text) Then
+            Label1.Visible = True
+            labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
+            Dim strFileName As String = m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType
+            labFilename.Text += " " + SuffixNumber(strFileName).ToString
+         End If
+#End If
 
          labRegisterType.Visible = True
          RegisterTypesComboBox.Enabled = True
@@ -208,13 +237,19 @@ Public Class formStartNewFile
          Dim row As WinFreeReg.LookupTables.RecordTypesRow = CType(RecordTypesComboBox.SelectedItem(), DataRowView).Row
          m_SelectedRecordType = row.Type
          m_RecordType = row.Description
+
+#If USE_FILECODES Then
          If Not String.IsNullOrEmpty(CodeTextBox.Text) Then
             Label1.Visible = True
             labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
-            linkUpdate.Visible = True
             Dim strFileName As String = CodeTextBox.Text + m_SelectedRecordType
             labFilename.Text += " " + SuffixNumber(strFileName).ToString
          End If
+#Else
+         labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
+         Dim strFileName As String = m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType
+         labFilename.Text += " " + SuffixNumber(strFileName).ToString
+#End If
 
          labComments.Visible = True
          Comment1TextBox.Enabled = True
@@ -234,8 +269,17 @@ Public Class formStartNewFile
    End Sub
 
    Private Sub CodeTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CodeTextBox.TextChanged
+#If USE_FILECODES Then
       labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
+      Dim strFileName As String = CodeTextBox.Text + m_SelectedRecordType
+      labFilename.Text += " " + SuffixNumber(strFileName).ToString
+#Else
+      labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
+      Dim strFileName As String = m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType
+      labFilename.Text += " " + SuffixNumber(strFileName).ToString
+#End If
       Label1.Visible = CodeTextBox.TextLength > 0
+      linkUpdate.Visible = (CodeTextBox.TextLength = CodeTextBox.MaxLength)
    End Sub
 
    Private Function ListFiles(ByVal root As String) As System.Collections.Generic.IEnumerable(Of System.IO.FileInfo)
@@ -324,10 +368,17 @@ Public Class formStartNewFile
 
    Private Sub linkUpdate_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkUpdate.LinkClicked
       If CodeTextBox.TextLength > 0 Then
+#If USE_FILECODES Then
          Dim row As WinFreeReg.FreeregTables.ChurchesRow = CType(ChurchesComboBox.SelectedItem(), DataRowView).Row
          row.Code = CodeTextBox.Text
          m_TablesDataSet.AcceptChanges()
          _TablesUpdated = True
+#Else
+         Dim row As WinFreeReg.FreeregTables.ChurchesRow = CType(ChurchesComboBox.SelectedItem(), DataRowView).Row
+         row.FileCode = CodeTextBox.Text
+         m_TablesDataSet.AcceptChanges()
+         _TablesUpdated = True
+#End If
          linkUpdate.Visible = False
       End If
    End Sub
@@ -344,4 +395,5 @@ Public Class formStartNewFile
 
       End Try
    End Sub
+
 End Class

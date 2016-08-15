@@ -127,7 +127,7 @@ Public Class TranscriptionFileClass
             m_fileHeader.RegisterType = X(X.Length - 1)
          End If
 
-         m_PlaceCode = freeregTables.Churches.FindByChurchNameChapmanCodePlaceName(m_fileHeader.Church, m_fileHeader.County, m_fileHeader.Place).Code
+         m_PlaceCode = freeregTables.Churches.FindByChurchNameChapmanCodePlaceName(m_fileHeader.Church, m_fileHeader.County, m_fileHeader.Place).FileCode
 
          Select Case m_fileHeader.FileType
             Case FileTypes.BAPTISMS

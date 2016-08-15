@@ -229,7 +229,7 @@ Public Class formFileWorkspace
                   errors.Add(err)
                Next
 
-               Using dlg As New formTablesErrors() With {.Lookups = m_TranscriptionFile.LookupTables}
+               Using dlg As New formDataErrors(formHelp) With {.Lookups = m_TranscriptionFile.LookupTables}
                   Generator.GenerateColumns(dlg.olvErrors, GetType(classUncorrectedErrors), True)
                   dlg.olvErrors.SetObjects(errors)
                   Try
@@ -265,7 +265,7 @@ Public Class formFileWorkspace
                   Next
                Next
 
-               Using dlg As New formTablesErrors() With {.Lookups = m_TranscriptionFile.LookupTables}
+               Using dlg As New formDataErrors(formHelp) With {.Lookups = m_TranscriptionFile.LookupTables}
                   Generator.GenerateColumns(dlg.olvErrors, GetType(classUncorrectedErrors), True)
                   dlg.olvErrors.SetObjects(errors)
                   Try
@@ -301,7 +301,7 @@ Public Class formFileWorkspace
                   Next
                Next
 
-               Using dlg As New formTablesErrors() With {.Lookups = m_TranscriptionFile.LookupTables}
+               Using dlg As New formDataErrors(formHelp) With {.Lookups = m_TranscriptionFile.LookupTables}
                   Generator.GenerateColumns(dlg.olvErrors, GetType(classUncorrectedErrors), True)
                   dlg.olvErrors.SetObjects(errors)
                   Try
@@ -643,20 +643,18 @@ Public Class formFileWorkspace
          For Each col In cols
             If col.ColumnName = e.Column.AspectName Then
                Dim cbd As CellBorderDecoration = New CellBorderDecoration()
+               cbd.FillBrush = Nothing
+               cbd.CornerRounding = 0.0
                Dim err = row.GetColumnError(col.ColumnName)
                If err.Contains("Warning:") Then
                   cbd.BorderPen = Pens.Gold
-                  cbd.FillBrush = Nothing
-                  cbd.CornerRounding = 0.0
                   e.SubItem.BackColor = Color.Wheat
-                  e.SubItem.Decoration = cbd
                Else
                   cbd.BorderPen = Pens.Red
-                  cbd.FillBrush = Nothing
-                  cbd.CornerRounding = 0.0
                   e.SubItem.BackColor = Color.LavenderBlush
-                  e.SubItem.Decoration = cbd
                End If
+               e.SubItem.Decoration = cbd
+               Exit For
             End If
          Next
       End If
@@ -698,6 +696,7 @@ Public Class formFileWorkspace
                         End If
                      End If
                   End If
+                  Exit For
                End If
             Next
          End If

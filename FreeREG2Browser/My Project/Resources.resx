@@ -160,4 +160,7 @@
   <data name="msgPlacesUpdated" xml:space="preserve">
     <value>The Place records for {0} have been updated.</value>
   </data>
+  <data name="msgNoChurchesForPlace" xml:space="preserve">
+    <value>The selected Place ({0}) has no Churches. You can not select this place.</value>
+  </data>
 </root>

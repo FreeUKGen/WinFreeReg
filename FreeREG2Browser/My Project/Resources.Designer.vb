@@ -153,6 +153,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to The selected Place ({0}) has no Churches. You can not select this place..
+        '''</summary>
+        Friend ReadOnly Property msgNoChurchesForPlace() As String
+            Get
+                Return ResourceManager.GetString("msgNoChurchesForPlace", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to The Place records for {0} have been updated..
         '''</summary>
         Friend ReadOnly Property msgPlacesUpdated() As String

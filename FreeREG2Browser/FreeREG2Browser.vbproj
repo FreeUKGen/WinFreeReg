@@ -59,7 +59,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>FreeREG2Browser.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022,42353,42354,42355</NoWarn>
-    <DefineConstants>LOCAL=False</DefineConstants>
+    <DefineConstants>LOCAL=False, USE_FILECODES=False</DefineConstants>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -226,10 +226,10 @@
     <Compile Include="formPageReceived.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="formTablesErrors.Designer.vb">
-      <DependentUpon>formTablesErrors.vb</DependentUpon>
+    <Compile Include="formDataErrors.Designer.vb">
+      <DependentUpon>formDataErrors.vb</DependentUpon>
     </Compile>
-    <Compile Include="formTablesErrors.vb">
+    <Compile Include="formDataErrors.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="formUserDetails.Designer.vb">
@@ -317,8 +317,8 @@
     <EmbeddedResource Include="formPageReceived.resx">
       <DependentUpon>formPageReceived.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="formTablesErrors.resx">
-      <DependentUpon>formTablesErrors.vb</DependentUpon>
+    <EmbeddedResource Include="formDataErrors.resx">
+      <DependentUpon>formDataErrors.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formUserDetails.resx">
       <DependentUpon>formUserDetails.vb</DependentUpon>
@@ -466,15 +466,21 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Documentation\BaptismErrors.html" />
+    <Content Include="Documentation\BurialErrors.html" />
+    <Content Include="Documentation\CorrectTableError.html" />
     <Content Include="Documentation\FileDetails.html" />
     <Content Include="Documentation\FileWorkspace.html" />
     <Content Include="Documentation\FreeRegBrowser.css" />
     <Content Include="Documentation\FreeregTables.html" />
     <Content Include="Documentation\GeneralHelp.html" />
     <Content Include="Documentation\LocalFiles.html" />
+    <Content Include="Documentation\MarriageErrors.html" />
     <Content Include="Documentation\StartNewFile.html" />
     <Content Include="Documentation\StartUp.html" />
+    <Content Include="Documentation\DataErrors.html" />
     <Content Include="Documentation\UploadedFiles.html" />
+    <Content Include="Documentation\UserDetails.html" />
     <Content Include="Documentation\UserTables.html" />
     <Content Include="Other Files\ErrorMessages.xml" />
     <Content Include="Other Files\ToolTips.xml" />

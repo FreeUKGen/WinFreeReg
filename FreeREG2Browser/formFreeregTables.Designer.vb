@@ -26,12 +26,31 @@ Partial Class formFreeregTables
       Me.TabControl1 = New System.Windows.Forms.TabControl()
       Me.tabRegisterTypes = New System.Windows.Forms.TabPage()
       Me.dlvRegisterTypes = New BrightIdeasSoftware.DataListView()
+      Me.olvc0Type = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc0Description = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.tabCounties = New System.Windows.Forms.TabPage()
       Me.dlvCounties = New BrightIdeasSoftware.DataListView()
+      Me.olvc1ChapmanCode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc1CountyName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc1Notes = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.tabPlaces = New System.Windows.Forms.TabPage()
       Me.dlvPlaces = New BrightIdeasSoftware.DataListView()
+      Me.olvc2PlaceName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc2Notes = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc2ChapmanCode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc2CountyName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc2Country = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.tabChurches = New System.Windows.Forms.TabPage()
       Me.dlvChurches = New BrightIdeasSoftware.DataListView()
+      Me.olvc3ChurchName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc3FileCode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc3Notes = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc3ChapmanCode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc3PlaceName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc3Denomination = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc3Location = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc3Website = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvc3LastAmended = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
       Me.cboxPlaces = New System.Windows.Forms.ComboBox()
       Me.labPlace = New System.Windows.Forms.Label()
@@ -82,12 +101,16 @@ Partial Class formFreeregTables
       '
       'dlvRegisterTypes
       '
+      Me.dlvRegisterTypes.AllColumns.Add(Me.olvc0Type)
+      Me.dlvRegisterTypes.AllColumns.Add(Me.olvc0Description)
       Me.dlvRegisterTypes.CellEditUseWholeCell = False
+      Me.dlvRegisterTypes.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvc0Type, Me.olvc0Description})
       Me.dlvRegisterTypes.DataSource = Nothing
       Me.dlvRegisterTypes.Dock = System.Windows.Forms.DockStyle.Fill
       Me.dlvRegisterTypes.EmptyListMsg = "The Register Types table has no entries"
       Me.dlvRegisterTypes.FullRowSelect = True
       Me.dlvRegisterTypes.GridLines = True
+      Me.dlvRegisterTypes.HeaderWordWrap = True
       Me.dlvRegisterTypes.Location = New System.Drawing.Point(3, 3)
       Me.dlvRegisterTypes.MultiSelect = False
       Me.dlvRegisterTypes.Name = "dlvRegisterTypes"
@@ -99,6 +122,28 @@ Partial Class formFreeregTables
       Me.dlvRegisterTypes.TabIndex = 0
       Me.dlvRegisterTypes.UseCompatibleStateImageBehavior = False
       Me.dlvRegisterTypes.View = System.Windows.Forms.View.Details
+      '
+      'olvc0Type
+      '
+      Me.olvc0Type.AspectName = "Type"
+      Me.olvc0Type.Groupable = False
+      Me.olvc0Type.Hideable = False
+      Me.olvc0Type.IsEditable = False
+      Me.olvc0Type.MaximumWidth = 50
+      Me.olvc0Type.MinimumWidth = 50
+      Me.olvc0Type.Text = "Type"
+      Me.olvc0Type.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvc0Type.Width = 50
+      '
+      'olvc0Description
+      '
+      Me.olvc0Description.AspectName = "Description"
+      Me.olvc0Description.FillsFreeSpace = True
+      Me.olvc0Description.Groupable = False
+      Me.olvc0Description.Hideable = False
+      Me.olvc0Description.IsEditable = False
+      Me.olvc0Description.Text = "Description"
+      Me.olvc0Description.WordWrap = True
       '
       'tabCounties
       '
@@ -113,17 +158,24 @@ Partial Class formFreeregTables
       '
       'dlvCounties
       '
+      Me.dlvCounties.AllColumns.Add(Me.olvc1ChapmanCode)
+      Me.dlvCounties.AllColumns.Add(Me.olvc1CountyName)
+      Me.dlvCounties.AllColumns.Add(Me.olvc1Notes)
       Me.dlvCounties.CellEditUseWholeCell = False
+      Me.dlvCounties.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvc1ChapmanCode, Me.olvc1CountyName, Me.olvc1Notes})
       Me.dlvCounties.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvCounties.DataSource = Nothing
       Me.dlvCounties.Dock = System.Windows.Forms.DockStyle.Fill
       Me.dlvCounties.EmptyListMsg = "The Counties table has no entries"
       Me.dlvCounties.FullRowSelect = True
       Me.dlvCounties.GridLines = True
+      Me.dlvCounties.HeaderWordWrap = True
       Me.dlvCounties.Location = New System.Drawing.Point(3, 3)
       Me.dlvCounties.MultiSelect = False
       Me.dlvCounties.Name = "dlvCounties"
       Me.dlvCounties.ShowCommandMenuOnRightClick = True
+      Me.dlvCounties.ShowFilterMenuOnRightClick = False
+      Me.dlvCounties.ShowGroups = False
       Me.dlvCounties.ShowItemCountOnGroups = True
       Me.dlvCounties.Size = New System.Drawing.Size(584, 260)
       Me.dlvCounties.SortGroupItemsByPrimaryColumn = False
@@ -132,6 +184,41 @@ Partial Class formFreeregTables
       Me.dlvCounties.UseFilterIndicator = True
       Me.dlvCounties.UseFiltering = True
       Me.dlvCounties.View = System.Windows.Forms.View.Details
+      '
+      'olvc1ChapmanCode
+      '
+      Me.olvc1ChapmanCode.AspectName = "ChapmanCode"
+      Me.olvc1ChapmanCode.Groupable = False
+      Me.olvc1ChapmanCode.Hideable = False
+      Me.olvc1ChapmanCode.IsEditable = False
+      Me.olvc1ChapmanCode.MaximumWidth = 80
+      Me.olvc1ChapmanCode.MinimumWidth = 80
+      Me.olvc1ChapmanCode.Text = "Chapman Code"
+      Me.olvc1ChapmanCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvc1ChapmanCode.Width = 80
+      '
+      'olvc1CountyName
+      '
+      Me.olvc1CountyName.AspectName = "CountyName"
+      Me.olvc1CountyName.Groupable = False
+      Me.olvc1CountyName.Hideable = False
+      Me.olvc1CountyName.IsEditable = False
+      Me.olvc1CountyName.MaximumWidth = 150
+      Me.olvc1CountyName.MinimumWidth = 80
+      Me.olvc1CountyName.Sortable = False
+      Me.olvc1CountyName.Text = "Name"
+      Me.olvc1CountyName.Width = 150
+      '
+      'olvc1Notes
+      '
+      Me.olvc1Notes.AspectName = "Notes"
+      Me.olvc1Notes.FillsFreeSpace = True
+      Me.olvc1Notes.Groupable = False
+      Me.olvc1Notes.Hideable = False
+      Me.olvc1Notes.IsEditable = False
+      Me.olvc1Notes.Sortable = False
+      Me.olvc1Notes.Text = "Notes"
+      Me.olvc1Notes.WordWrap = True
       '
       'tabPlaces
       '
@@ -146,17 +233,25 @@ Partial Class formFreeregTables
       '
       'dlvPlaces
       '
+      Me.dlvPlaces.AllColumns.Add(Me.olvc2PlaceName)
+      Me.dlvPlaces.AllColumns.Add(Me.olvc2Notes)
+      Me.dlvPlaces.AllColumns.Add(Me.olvc2ChapmanCode)
+      Me.dlvPlaces.AllColumns.Add(Me.olvc2CountyName)
+      Me.dlvPlaces.AllColumns.Add(Me.olvc2Country)
       Me.dlvPlaces.CellEditUseWholeCell = False
+      Me.dlvPlaces.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvc2PlaceName, Me.olvc2Notes})
       Me.dlvPlaces.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvPlaces.DataSource = Nothing
       Me.dlvPlaces.Dock = System.Windows.Forms.DockStyle.Fill
       Me.dlvPlaces.EmptyListMsg = "The Places table has no entries"
       Me.dlvPlaces.FullRowSelect = True
       Me.dlvPlaces.GridLines = True
+      Me.dlvPlaces.HeaderWordWrap = True
       Me.dlvPlaces.Location = New System.Drawing.Point(3, 3)
       Me.dlvPlaces.MultiSelect = False
       Me.dlvPlaces.Name = "dlvPlaces"
       Me.dlvPlaces.ShowCommandMenuOnRightClick = True
+      Me.dlvPlaces.ShowGroups = False
       Me.dlvPlaces.ShowItemCountOnGroups = True
       Me.dlvPlaces.Size = New System.Drawing.Size(584, 260)
       Me.dlvPlaces.SortGroupItemsByPrimaryColumn = False
@@ -166,6 +261,63 @@ Partial Class formFreeregTables
       Me.dlvPlaces.UseFilterIndicator = True
       Me.dlvPlaces.UseFiltering = True
       Me.dlvPlaces.View = System.Windows.Forms.View.Details
+      '
+      'olvc2PlaceName
+      '
+      Me.olvc2PlaceName.AspectName = "PlaceName"
+      Me.olvc2PlaceName.Groupable = False
+      Me.olvc2PlaceName.Hideable = False
+      Me.olvc2PlaceName.IsEditable = False
+      Me.olvc2PlaceName.MaximumWidth = 120
+      Me.olvc2PlaceName.MinimumWidth = 120
+      Me.olvc2PlaceName.Text = "Place name"
+      Me.olvc2PlaceName.UseFiltering = False
+      Me.olvc2PlaceName.Width = 120
+      '
+      'olvc2Notes
+      '
+      Me.olvc2Notes.AspectName = "Notes"
+      Me.olvc2Notes.FillsFreeSpace = True
+      Me.olvc2Notes.Groupable = False
+      Me.olvc2Notes.Hideable = False
+      Me.olvc2Notes.IsEditable = False
+      Me.olvc2Notes.Sortable = False
+      Me.olvc2Notes.Text = "Notes"
+      '
+      'olvc2ChapmanCode
+      '
+      Me.olvc2ChapmanCode.AspectName = "ChapmanCode"
+      Me.olvc2ChapmanCode.DisplayIndex = 2
+      Me.olvc2ChapmanCode.IsEditable = False
+      Me.olvc2ChapmanCode.IsVisible = False
+      Me.olvc2ChapmanCode.MaximumWidth = 80
+      Me.olvc2ChapmanCode.MinimumWidth = 80
+      Me.olvc2ChapmanCode.Text = "Chapman Code"
+      Me.olvc2ChapmanCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvc2ChapmanCode.Width = 80
+      '
+      'olvc2CountyName
+      '
+      Me.olvc2CountyName.AspectName = "CountyName"
+      Me.olvc2CountyName.DisplayIndex = 3
+      Me.olvc2CountyName.Groupable = False
+      Me.olvc2CountyName.IsEditable = False
+      Me.olvc2CountyName.IsVisible = False
+      Me.olvc2CountyName.MaximumWidth = 120
+      Me.olvc2CountyName.MinimumWidth = 120
+      Me.olvc2CountyName.Sortable = False
+      Me.olvc2CountyName.Text = "County"
+      Me.olvc2CountyName.Width = 120
+      '
+      'olvc2Country
+      '
+      Me.olvc2Country.AspectName = "Country"
+      Me.olvc2Country.DisplayIndex = 4
+      Me.olvc2Country.IsEditable = False
+      Me.olvc2Country.IsVisible = False
+      Me.olvc2Country.Text = "Country"
+      Me.olvc2Country.UseFiltering = False
+      Me.olvc2Country.Width = 80
       '
       'tabChurches
       '
@@ -180,18 +332,32 @@ Partial Class formFreeregTables
       '
       'dlvChurches
       '
+      Me.dlvChurches.AllColumns.Add(Me.olvc3ChurchName)
+      Me.dlvChurches.AllColumns.Add(Me.olvc3FileCode)
+      Me.dlvChurches.AllColumns.Add(Me.olvc3Notes)
+      Me.dlvChurches.AllColumns.Add(Me.olvc3ChapmanCode)
+      Me.dlvChurches.AllColumns.Add(Me.olvc3PlaceName)
+      Me.dlvChurches.AllColumns.Add(Me.olvc3Denomination)
+      Me.dlvChurches.AllColumns.Add(Me.olvc3Location)
+      Me.dlvChurches.AllColumns.Add(Me.olvc3Website)
+      Me.dlvChurches.AllColumns.Add(Me.olvc3LastAmended)
+      Me.dlvChurches.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
       Me.dlvChurches.CellEditUseWholeCell = False
+      Me.dlvChurches.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvc3ChurchName, Me.olvc3FileCode, Me.olvc3Notes})
       Me.dlvChurches.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvChurches.DataSource = Nothing
       Me.dlvChurches.Dock = System.Windows.Forms.DockStyle.Fill
       Me.dlvChurches.EmptyListMsg = "The Churches table has no entries"
       Me.dlvChurches.FullRowSelect = True
       Me.dlvChurches.GridLines = True
+      Me.dlvChurches.HeaderWordWrap = True
       Me.dlvChurches.Location = New System.Drawing.Point(3, 3)
       Me.dlvChurches.MultiSelect = False
       Me.dlvChurches.Name = "dlvChurches"
       Me.dlvChurches.ShowCommandMenuOnRightClick = True
+      Me.dlvChurches.ShowGroups = False
       Me.dlvChurches.ShowItemCountOnGroups = True
+      Me.dlvChurches.ShowItemToolTips = True
       Me.dlvChurches.Size = New System.Drawing.Size(584, 257)
       Me.dlvChurches.SortGroupItemsByPrimaryColumn = False
       Me.dlvChurches.TabIndex = 0
@@ -199,6 +365,100 @@ Partial Class formFreeregTables
       Me.dlvChurches.UseFilterIndicator = True
       Me.dlvChurches.UseFiltering = True
       Me.dlvChurches.View = System.Windows.Forms.View.Details
+      '
+      'olvc3ChurchName
+      '
+      Me.olvc3ChurchName.AspectName = "ChurchName"
+      Me.olvc3ChurchName.Groupable = False
+      Me.olvc3ChurchName.IsEditable = False
+      Me.olvc3ChurchName.Sortable = False
+      Me.olvc3ChurchName.Text = "Church Name"
+      Me.olvc3ChurchName.Width = 95
+      '
+      'olvc3FileCode
+      '
+      Me.olvc3FileCode.AspectName = "FileCode"
+      Me.olvc3FileCode.CellEditUseWholeCell = True
+      Me.olvc3FileCode.Groupable = False
+      Me.olvc3FileCode.Sortable = False
+      Me.olvc3FileCode.Text = "File Code"
+      Me.olvc3FileCode.ToolTipText = "This field is user-defined and controls that part of the transcription filename t" & _
+    "hat is allocated to the place/church"
+      Me.olvc3FileCode.Width = 77
+      '
+      'olvc3Notes
+      '
+      Me.olvc3Notes.AspectName = "Notes"
+      Me.olvc3Notes.FillsFreeSpace = True
+      Me.olvc3Notes.Groupable = False
+      Me.olvc3Notes.Hideable = False
+      Me.olvc3Notes.IsEditable = False
+      Me.olvc3Notes.Text = "Notes"
+      Me.olvc3Notes.WordWrap = True
+      '
+      'olvc3ChapmanCode
+      '
+      Me.olvc3ChapmanCode.AspectName = "ChapmanCode"
+      Me.olvc3ChapmanCode.DisplayIndex = 3
+      Me.olvc3ChapmanCode.Groupable = False
+      Me.olvc3ChapmanCode.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvc3ChapmanCode.IsEditable = False
+      Me.olvc3ChapmanCode.IsVisible = False
+      Me.olvc3ChapmanCode.MaximumWidth = 80
+      Me.olvc3ChapmanCode.MinimumWidth = 80
+      Me.olvc3ChapmanCode.Text = "Chapman Code"
+      Me.olvc3ChapmanCode.Width = 80
+      '
+      'olvc3PlaceName
+      '
+      Me.olvc3PlaceName.AspectName = "PlaceName"
+      Me.olvc3PlaceName.DisplayIndex = 4
+      Me.olvc3PlaceName.Groupable = False
+      Me.olvc3PlaceName.IsEditable = False
+      Me.olvc3PlaceName.IsVisible = False
+      Me.olvc3PlaceName.Text = "Place Name"
+      Me.olvc3PlaceName.Width = 92
+      '
+      'olvc3Denomination
+      '
+      Me.olvc3Denomination.AspectName = "Denomination"
+      Me.olvc3Denomination.DisplayIndex = 5
+      Me.olvc3Denomination.Groupable = False
+      Me.olvc3Denomination.IsEditable = False
+      Me.olvc3Denomination.IsVisible = False
+      Me.olvc3Denomination.Sortable = False
+      Me.olvc3Denomination.Text = "Denomination"
+      '
+      'olvc3Location
+      '
+      Me.olvc3Location.AspectName = "Location"
+      Me.olvc3Location.DisplayIndex = 6
+      Me.olvc3Location.Groupable = False
+      Me.olvc3Location.IsEditable = False
+      Me.olvc3Location.IsVisible = False
+      Me.olvc3Location.Sortable = False
+      Me.olvc3Location.Text = "Location"
+      '
+      'olvc3Website
+      '
+      Me.olvc3Website.AspectName = "Website"
+      Me.olvc3Website.DisplayIndex = 7
+      Me.olvc3Website.Groupable = False
+      Me.olvc3Website.IsEditable = False
+      Me.olvc3Website.IsVisible = False
+      Me.olvc3Website.Sortable = False
+      Me.olvc3Website.Text = "Website"
+      '
+      'olvc3LastAmended
+      '
+      Me.olvc3LastAmended.AspectName = "LastAmended"
+      Me.olvc3LastAmended.DisplayIndex = 8
+      Me.olvc3LastAmended.Groupable = False
+      Me.olvc3LastAmended.IsEditable = False
+      Me.olvc3LastAmended.IsVisible = False
+      Me.olvc3LastAmended.Searchable = False
+      Me.olvc3LastAmended.Sortable = False
+      Me.olvc3LastAmended.Text = "Date last Changed"
       '
       'SplitContainer1
       '
@@ -337,4 +597,23 @@ Partial Class formFreeregTables
 	Friend WithEvents labCounty As System.Windows.Forms.Label
 	Friend WithEvents cboxPlaces As System.Windows.Forms.ComboBox
    Friend WithEvents labPlace As System.Windows.Forms.Label
+   Friend WithEvents olvc1ChapmanCode As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc1CountyName As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc1Notes As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc0Type As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc0Description As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc2ChapmanCode As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc2CountyName As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc2PlaceName As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc2Country As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc3ChapmanCode As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc3LastAmended As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc3PlaceName As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc3ChurchName As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc3Location As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc3Denomination As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc3Website As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc3FileCode As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc3Notes As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvc2Notes As BrightIdeasSoftware.OLVColumn
 End Class

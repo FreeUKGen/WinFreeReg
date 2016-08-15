@@ -91,4 +91,17 @@ Public Class formUserDetails
 
       End Try
    End Sub
+
+   Private Sub formUserDetails_HelpButtonClicked(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.HelpButtonClicked
+      Try
+         formHelp.Title = "FreeREG Browser"
+         formHelp.StartPage = "UserDetails.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
 End Class
