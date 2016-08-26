@@ -268,6 +268,7 @@ Partial Class formStartUp
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+      Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
       Me.ClientSize = New System.Drawing.Size(468, 339)
       Me.Controls.Add(Me.KeepOpenCheckBox)
       Me.Controls.Add(Me.linkPassword)
@@ -288,6 +289,7 @@ Partial Class formStartUp
       Me.Controls.Add(Me.UserIdTextBox)
       Me.Controls.Add(Me.PasswordLabel)
       Me.Controls.Add(Me.UserIdLabel)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
       Me.HelpButton = True
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

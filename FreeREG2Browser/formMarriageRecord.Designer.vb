@@ -712,6 +712,7 @@ Partial Class formMarriageRecord
       Me.Controls.Add(LDSFicheLabel)
       Me.Controls.Add(Me.LDSFicheTextBox)
       Me.Controls.Add(Me.LDSImageTextBox)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
       Me.HelpButton = True
       Me.MaximizeBox = False

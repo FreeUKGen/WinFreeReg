@@ -194,7 +194,8 @@ Partial Class formBaptismRecord
       '
       'RegNoTextBox
       '
-      Me.RegNoTextBox.Location = New System.Drawing.Point(125, 16)
+      Me.RegNoTextBox.Location = New System.Drawing.Point(125, 15)
+      Me.RegNoTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.RegNoTextBox.Name = "RegNoTextBox"
       Me.RegNoTextBox.Size = New System.Drawing.Size(121, 20)
       Me.RegNoTextBox.TabIndex = 2
@@ -202,7 +203,8 @@ Partial Class formBaptismRecord
       '
       'BirthDateTextBox
       '
-      Me.BirthDateTextBox.Location = New System.Drawing.Point(125, 42)
+      Me.BirthDateTextBox.Location = New System.Drawing.Point(125, 41)
+      Me.BirthDateTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.BirthDateTextBox.Name = "BirthDateTextBox"
       Me.BirthDateTextBox.Size = New System.Drawing.Size(121, 20)
       Me.BirthDateTextBox.TabIndex = 4
@@ -210,7 +212,8 @@ Partial Class formBaptismRecord
       '
       'BaptismDateTextBox
       '
-      Me.BaptismDateTextBox.Location = New System.Drawing.Point(125, 68)
+      Me.BaptismDateTextBox.Location = New System.Drawing.Point(125, 67)
+      Me.BaptismDateTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.BaptismDateTextBox.Name = "BaptismDateTextBox"
       Me.BaptismDateTextBox.Size = New System.Drawing.Size(121, 20)
       Me.BaptismDateTextBox.TabIndex = 6
@@ -218,7 +221,8 @@ Partial Class formBaptismRecord
       '
       'ForenamesTextBox
       '
-      Me.ForenamesTextBox.Location = New System.Drawing.Point(125, 94)
+      Me.ForenamesTextBox.Location = New System.Drawing.Point(125, 93)
+      Me.ForenamesTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.ForenamesTextBox.Name = "ForenamesTextBox"
       Me.ForenamesTextBox.Size = New System.Drawing.Size(121, 20)
       Me.ForenamesTextBox.TabIndex = 8
@@ -229,7 +233,8 @@ Partial Class formBaptismRecord
       Me.SexComboBox.DataSource = Me.BaptismSexBindingSource
       Me.SexComboBox.DisplayMember = "Description"
       Me.SexComboBox.FormattingEnabled = True
-      Me.SexComboBox.Location = New System.Drawing.Point(125, 120)
+      Me.SexComboBox.Location = New System.Drawing.Point(125, 119)
+      Me.SexComboBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.SexComboBox.Name = "SexComboBox"
       Me.SexComboBox.Size = New System.Drawing.Size(121, 21)
       Me.SexComboBox.TabIndex = 10
@@ -243,7 +248,8 @@ Partial Class formBaptismRecord
       '
       'FathersNameTextBox
       '
-      Me.FathersNameTextBox.Location = New System.Drawing.Point(125, 147)
+      Me.FathersNameTextBox.Location = New System.Drawing.Point(125, 148)
+      Me.FathersNameTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.FathersNameTextBox.Name = "FathersNameTextBox"
       Me.FathersNameTextBox.Size = New System.Drawing.Size(121, 20)
       Me.FathersNameTextBox.TabIndex = 12
@@ -251,7 +257,8 @@ Partial Class formBaptismRecord
       '
       'MothersNameTextBox
       '
-      Me.MothersNameTextBox.Location = New System.Drawing.Point(125, 173)
+      Me.MothersNameTextBox.Location = New System.Drawing.Point(125, 174)
+      Me.MothersNameTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.MothersNameTextBox.Name = "MothersNameTextBox"
       Me.MothersNameTextBox.Size = New System.Drawing.Size(121, 20)
       Me.MothersNameTextBox.TabIndex = 14
@@ -259,7 +266,8 @@ Partial Class formBaptismRecord
       '
       'FathersSurnameTextBox
       '
-      Me.FathersSurnameTextBox.Location = New System.Drawing.Point(361, 147)
+      Me.FathersSurnameTextBox.Location = New System.Drawing.Point(361, 148)
+      Me.FathersSurnameTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.FathersSurnameTextBox.Name = "FathersSurnameTextBox"
       Me.FathersSurnameTextBox.Size = New System.Drawing.Size(121, 20)
       Me.FathersSurnameTextBox.TabIndex = 16
@@ -267,7 +275,8 @@ Partial Class formBaptismRecord
       '
       'MothersSurnameTextBox
       '
-      Me.MothersSurnameTextBox.Location = New System.Drawing.Point(361, 173)
+      Me.MothersSurnameTextBox.Location = New System.Drawing.Point(361, 174)
+      Me.MothersSurnameTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.MothersSurnameTextBox.Name = "MothersSurnameTextBox"
       Me.MothersSurnameTextBox.Size = New System.Drawing.Size(121, 20)
       Me.MothersSurnameTextBox.TabIndex = 18
@@ -275,7 +284,8 @@ Partial Class formBaptismRecord
       '
       'AbodeTextBox
       '
-      Me.AbodeTextBox.Location = New System.Drawing.Point(125, 199)
+      Me.AbodeTextBox.Location = New System.Drawing.Point(125, 200)
+      Me.AbodeTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.AbodeTextBox.Name = "AbodeTextBox"
       Me.AbodeTextBox.Size = New System.Drawing.Size(121, 20)
       Me.AbodeTextBox.TabIndex = 20
@@ -283,7 +293,8 @@ Partial Class formBaptismRecord
       '
       'FathersOccupationTextBox
       '
-      Me.FathersOccupationTextBox.Location = New System.Drawing.Point(125, 225)
+      Me.FathersOccupationTextBox.Location = New System.Drawing.Point(125, 226)
+      Me.FathersOccupationTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.FathersOccupationTextBox.Name = "FathersOccupationTextBox"
       Me.FathersOccupationTextBox.Size = New System.Drawing.Size(121, 20)
       Me.FathersOccupationTextBox.TabIndex = 22
@@ -291,7 +302,8 @@ Partial Class formBaptismRecord
       '
       'NotesTextBox
       '
-      Me.NotesTextBox.Location = New System.Drawing.Point(125, 251)
+      Me.NotesTextBox.Location = New System.Drawing.Point(125, 252)
+      Me.NotesTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.NotesTextBox.Name = "NotesTextBox"
       Me.NotesTextBox.Size = New System.Drawing.Size(357, 20)
       Me.NotesTextBox.TabIndex = 24
@@ -299,7 +311,8 @@ Partial Class formBaptismRecord
       '
       'LDSFicheTextBox
       '
-      Me.LDSFicheTextBox.Location = New System.Drawing.Point(125, 277)
+      Me.LDSFicheTextBox.Location = New System.Drawing.Point(125, 278)
+      Me.LDSFicheTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.LDSFicheTextBox.Name = "LDSFicheTextBox"
       Me.LDSFicheTextBox.Size = New System.Drawing.Size(121, 20)
       Me.LDSFicheTextBox.TabIndex = 26
@@ -307,7 +320,8 @@ Partial Class formBaptismRecord
       '
       'LDSImageTextBox
       '
-      Me.LDSImageTextBox.Location = New System.Drawing.Point(267, 277)
+      Me.LDSImageTextBox.Location = New System.Drawing.Point(267, 278)
+      Me.LDSImageTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.LDSImageTextBox.Name = "LDSImageTextBox"
       Me.LDSImageTextBox.Size = New System.Drawing.Size(121, 20)
       Me.LDSImageTextBox.TabIndex = 28
@@ -318,8 +332,9 @@ Partial Class formBaptismRecord
       Me.ButtonOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.ButtonOK.DialogResult = System.Windows.Forms.DialogResult.OK
       Me.ButtonOK.Location = New System.Drawing.Point(326, 349)
+      Me.ButtonOK.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.ButtonOK.Name = "ButtonOK"
-      Me.ButtonOK.Size = New System.Drawing.Size(75, 23)
+      Me.ButtonOK.Size = New System.Drawing.Size(75, 24)
       Me.ButtonOK.TabIndex = 29
       Me.ButtonOK.Text = "OK"
       Me.ButtonOK.UseVisualStyleBackColor = True
@@ -329,8 +344,9 @@ Partial Class formBaptismRecord
       Me.ButtonCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
       Me.ButtonCancel.Location = New System.Drawing.Point(407, 349)
+      Me.ButtonCancel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.ButtonCancel.Name = "ButtonCancel"
-      Me.ButtonCancel.Size = New System.Drawing.Size(75, 23)
+      Me.ButtonCancel.Size = New System.Drawing.Size(75, 24)
       Me.ButtonCancel.TabIndex = 30
       Me.ButtonCancel.Text = "Cancel"
       Me.ButtonCancel.UseVisualStyleBackColor = True
@@ -371,8 +387,10 @@ Partial Class formBaptismRecord
       Me.Controls.Add(LDSFicheLabel)
       Me.Controls.Add(Me.LDSFicheTextBox)
       Me.Controls.Add(Me.LDSImageTextBox)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
       Me.HelpButton = True
+      Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.MaximizeBox = False
       Me.MinimizeBox = False
       Me.Name = "formBaptismRecord"

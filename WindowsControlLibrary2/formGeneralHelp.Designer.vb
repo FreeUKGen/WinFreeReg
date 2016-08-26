@@ -74,6 +74,7 @@ Partial Class formGeneralHelp
       Me.ClientSize = New System.Drawing.Size(553, 277)
       Me.Controls.Add(Me.wbPage)
       Me.Controls.Add(Me.ToolStrip1)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
       Me.Name = "formGeneralHelp"
       Me.Text = "General Help - {0}"

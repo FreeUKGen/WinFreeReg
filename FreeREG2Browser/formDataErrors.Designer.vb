@@ -44,7 +44,7 @@ Partial Class formDataErrors
       Me.olvErrors.Location = New System.Drawing.Point(0, 0)
       Me.olvErrors.Name = "olvErrors"
       Me.olvErrors.ShowGroups = False
-      Me.olvErrors.Size = New System.Drawing.Size(544, 283)
+      Me.olvErrors.Size = New System.Drawing.Size(544, 282)
       Me.olvErrors.TabIndex = 0
       Me.olvErrors.UseCompatibleStateImageBehavior = False
       Me.olvErrors.View = System.Windows.Forms.View.Details
@@ -67,7 +67,7 @@ Partial Class formDataErrors
       Me.SplitContainer1.Panel2.Controls.Add(Me.btnCancel)
       Me.SplitContainer1.Panel2.Controls.Add(Me.btnOK)
       Me.SplitContainer1.Size = New System.Drawing.Size(544, 339)
-      Me.SplitContainer1.SplitterDistance = 283
+      Me.SplitContainer1.SplitterDistance = 282
       Me.SplitContainer1.TabIndex = 1
       '
       'btnIgnore
@@ -100,7 +100,7 @@ Partial Class formDataErrors
       Me.btnOK.Text = "OK"
       Me.btnOK.UseVisualStyleBackColor = True
       '
-      'formTablesErrors
+      'formDataErrors
       '
       Me.AcceptButton = Me.btnOK
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -108,10 +108,11 @@ Partial Class formDataErrors
       Me.CancelButton = Me.btnCancel
       Me.ClientSize = New System.Drawing.Size(544, 339)
       Me.Controls.Add(Me.SplitContainer1)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.HelpButton = True
       Me.MaximizeBox = False
       Me.MinimizeBox = False
-      Me.Name = "formTablesErrors"
+      Me.Name = "formDataErrors"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "Data Errors"
       CType(Me.olvErrors, System.ComponentModel.ISupportInitialize).EndInit()

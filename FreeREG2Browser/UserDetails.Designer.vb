@@ -884,7 +884,8 @@ Partial Public Class UserDetails
             Me.columncountry_groups.DefaultValue = CType("""""",String)
             Me.columnu_at.DateTimeMode = Global.System.Data.DataSetDateTime.Utc
             Me.columnc_at.DateTimeMode = Global.System.Data.DataSetDateTime.Utc
-            Me.columntelephone_number.DefaultValue = CType("""""",String)
+         Me.columnlast_upload.DateTimeMode = Global.System.Data.DataSetDateTime.Utc
+         Me.columntelephone_number.DefaultValue = CType("""""", String)
             Me.columndisabled_reason.DefaultValue = CType("""""",String)
             Me.columntechnical_agreement.DefaultValue = CType(false,Boolean)
             Me.columnresearch_agreement.DefaultValue = CType(false,Boolean)

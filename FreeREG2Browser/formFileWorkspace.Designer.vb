@@ -153,7 +153,7 @@ Partial Class formFileWorkspace
       Me.workspaceBindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
       Me.workspaceBindingNavigator.Name = "workspaceBindingNavigator"
       Me.workspaceBindingNavigator.PositionItem = Me.BindingNavigatorPositionItem
-      Me.workspaceBindingNavigator.Size = New System.Drawing.Size(1119, 25)
+      Me.workspaceBindingNavigator.Size = New System.Drawing.Size(839, 25)
       Me.workspaceBindingNavigator.TabIndex = 3
       Me.workspaceBindingNavigator.Text = "BindingNavigator1"
       '
@@ -201,7 +201,7 @@ Partial Class formFileWorkspace
       Me.BindingNavigatorPositionItem.AccessibleName = "Position"
       Me.BindingNavigatorPositionItem.AutoSize = False
       Me.BindingNavigatorPositionItem.Name = "BindingNavigatorPositionItem"
-      Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(65, 23)
+      Me.BindingNavigatorPositionItem.Size = New System.Drawing.Size(57, 23)
       Me.BindingNavigatorPositionItem.Text = "0"
       Me.BindingNavigatorPositionItem.ToolTipText = "Current position"
       '
@@ -275,7 +275,6 @@ Partial Class formFileWorkspace
       Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
       Me.SplitContainer1.IsSplitterFixed = True
       Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
-      Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4)
       Me.SplitContainer1.Name = "SplitContainer1"
       Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
       '
@@ -288,9 +287,8 @@ Partial Class formFileWorkspace
       Me.SplitContainer1.Panel2.Controls.Add(Me.dlvBaptisms)
       Me.SplitContainer1.Panel2.Controls.Add(Me.dlvBurials)
       Me.SplitContainer1.Panel2.Controls.Add(Me.dlvMarriages)
-      Me.SplitContainer1.Size = New System.Drawing.Size(1119, 689)
+      Me.SplitContainer1.Size = New System.Drawing.Size(839, 560)
       Me.SplitContainer1.SplitterDistance = 25
-      Me.SplitContainer1.SplitterWidth = 5
       Me.SplitContainer1.TabIndex = 4
       '
       'dlvBaptisms
@@ -318,6 +316,7 @@ Partial Class formFileWorkspace
       Me.dlvBaptisms.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
       Me.dlvBaptisms.CellEditEnterChangesRows = True
       Me.dlvBaptisms.CellEditTabChangesRows = True
+      Me.dlvBaptisms.CellEditUseWholeCell = False
       Me.dlvBaptisms.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo, Me.olvcFiche, Me.olvcImage, Me.olvcBirthDate, Me.olvcBaptismDate, Me.olvcForenames, Me.olvcSex, Me.olvcFathersName, Me.olvcFathersSurname, Me.olvcMothersName, Me.olvcMothersSurname, Me.olvcFathersOccupation, Me.olvcAbode, Me.olvcNotes})
       Me.dlvBaptisms.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvBaptisms.DataSource = Me.bsBaptisms
@@ -327,13 +326,12 @@ Partial Class formFileWorkspace
       Me.dlvBaptisms.HeaderWordWrap = True
       Me.dlvBaptisms.HideSelection = False
       Me.dlvBaptisms.Location = New System.Drawing.Point(0, 0)
-      Me.dlvBaptisms.Margin = New System.Windows.Forms.Padding(4)
       Me.dlvBaptisms.MultiSelect = False
       Me.dlvBaptisms.Name = "dlvBaptisms"
       Me.dlvBaptisms.ShowCommandMenuOnRightClick = True
       Me.dlvBaptisms.ShowGroups = False
       Me.dlvBaptisms.ShowItemToolTips = True
-      Me.dlvBaptisms.Size = New System.Drawing.Size(1119, 659)
+      Me.dlvBaptisms.Size = New System.Drawing.Size(839, 531)
       Me.dlvBaptisms.SortGroupItemsByPrimaryColumn = False
       Me.dlvBaptisms.TabIndex = 0
       Me.dlvBaptisms.TintSortColumn = True
@@ -497,6 +495,7 @@ Partial Class formFileWorkspace
       Me.dlvBurials.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
       Me.dlvBurials.CellEditEnterChangesRows = True
       Me.dlvBurials.CellEditTabChangesRows = True
+      Me.dlvBurials.CellEditUseWholeCell = False
       Me.dlvBurials.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo1, Me.olvcFiche1, Me.olvcImage1, Me.olvcBurialDate, Me.olvcForenames1, Me.olvcRelationship, Me.olvcMaleForenames, Me.olvcFemaleForenames, Me.olvcRelativeSurname, Me.olvcSurname, Me.olvcAge, Me.olvcAbode1, Me.olvcNotes1})
       Me.dlvBurials.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvBurials.DataSource = Me.bsBurials
@@ -506,13 +505,12 @@ Partial Class formFileWorkspace
       Me.dlvBurials.HeaderWordWrap = True
       Me.dlvBurials.HideSelection = False
       Me.dlvBurials.Location = New System.Drawing.Point(0, 0)
-      Me.dlvBurials.Margin = New System.Windows.Forms.Padding(4)
       Me.dlvBurials.MultiSelect = False
       Me.dlvBurials.Name = "dlvBurials"
       Me.dlvBurials.ShowCommandMenuOnRightClick = True
       Me.dlvBurials.ShowGroups = False
       Me.dlvBurials.ShowItemToolTips = True
-      Me.dlvBurials.Size = New System.Drawing.Size(1119, 659)
+      Me.dlvBurials.Size = New System.Drawing.Size(839, 531)
       Me.dlvBurials.SortGroupItemsByPrimaryColumn = False
       Me.dlvBurials.TabIndex = 1
       Me.dlvBurials.TintSortColumn = True
@@ -685,6 +683,7 @@ Partial Class formFileWorkspace
       Me.dlvMarriages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
       Me.dlvMarriages.CellEditEnterChangesRows = True
       Me.dlvMarriages.CellEditTabChangesRows = True
+      Me.dlvMarriages.CellEditUseWholeCell = False
       Me.dlvMarriages.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo2, Me.olvcFiche2, Me.olvcImage2, Me.olvcMarriageDate, Me.olvcGroomForenames, Me.olvcGroomSurname, Me.olvcGroomAge, Me.olvcGroomParish, Me.olvcGroomCondition, Me.olvcGroomOccupation, Me.olvcGroomAbode, Me.olvcBrideForenames, Me.olvcBrideSurname, Me.olvcBrideAge, Me.olvcBrideParish, Me.olvcBrideCondition, Me.olvcBrideOccupation, Me.olvcBrideAbode, Me.olvcGroomFatherForenames, Me.olvcGroomFatherSurname, Me.olvcGroomFatherOccupation, Me.olvcBrideFatherForenames, Me.olvcBrideFatherSurname, Me.olvcBrideFatherOccupation, Me.olvcWitness1Forenames, Me.olvcWitness1Surname, Me.olvcWitness2Forenames, Me.olvcWitness2Surname, Me.olvcNotes2})
       Me.dlvMarriages.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvMarriages.DataSource = Me.bsMarriages
@@ -694,13 +693,12 @@ Partial Class formFileWorkspace
       Me.dlvMarriages.HeaderWordWrap = True
       Me.dlvMarriages.HideSelection = False
       Me.dlvMarriages.Location = New System.Drawing.Point(0, 0)
-      Me.dlvMarriages.Margin = New System.Windows.Forms.Padding(4)
       Me.dlvMarriages.MultiSelect = False
       Me.dlvMarriages.Name = "dlvMarriages"
       Me.dlvMarriages.ShowCommandMenuOnRightClick = True
       Me.dlvMarriages.ShowGroups = False
       Me.dlvMarriages.ShowItemToolTips = True
-      Me.dlvMarriages.Size = New System.Drawing.Size(1119, 659)
+      Me.dlvMarriages.Size = New System.Drawing.Size(839, 531)
       Me.dlvMarriages.SortGroupItemsByPrimaryColumn = False
       Me.dlvMarriages.TabIndex = 2
       Me.dlvMarriages.TintSortColumn = True
@@ -986,13 +984,12 @@ Partial Class formFileWorkspace
       '
       'formFileWorkspace
       '
-      Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+      Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(1119, 689)
+      Me.ClientSize = New System.Drawing.Size(839, 560)
       Me.Controls.Add(Me.SplitContainer1)
-      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-      Me.Margin = New System.Windows.Forms.Padding(4)
       Me.Name = "formFileWorkspace"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "WinFreeREG - File Workspace - {0}"

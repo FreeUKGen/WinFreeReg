@@ -37,7 +37,7 @@ Partial Class formBatchContents
       Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
       Me.SplitContainer1.IsSplitterFixed = True
       Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
-      Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(4)
+      Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.SplitContainer1.Name = "SplitContainer1"
       Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
       '
@@ -48,8 +48,8 @@ Partial Class formBatchContents
       'SplitContainer1.Panel2
       '
       Me.SplitContainer1.Panel2.Controls.Add(Me.btnSaveFile)
-      Me.SplitContainer1.Size = New System.Drawing.Size(856, 615)
-      Me.SplitContainer1.SplitterDistance = 562
+      Me.SplitContainer1.Size = New System.Drawing.Size(642, 500)
+      Me.SplitContainer1.SplitterDistance = 442
       Me.SplitContainer1.SplitterWidth = 5
       Me.SplitContainer1.TabIndex = 0
       '
@@ -57,34 +57,34 @@ Partial Class formBatchContents
       '
       Me.FileContentsTextBox.Dock = System.Windows.Forms.DockStyle.Fill
       Me.FileContentsTextBox.Location = New System.Drawing.Point(0, 0)
-      Me.FileContentsTextBox.Margin = New System.Windows.Forms.Padding(4)
+      Me.FileContentsTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.FileContentsTextBox.Multiline = True
       Me.FileContentsTextBox.Name = "FileContentsTextBox"
       Me.FileContentsTextBox.ReadOnly = True
       Me.FileContentsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both
-      Me.FileContentsTextBox.Size = New System.Drawing.Size(856, 562)
+      Me.FileContentsTextBox.Size = New System.Drawing.Size(642, 442)
       Me.FileContentsTextBox.TabIndex = 0
       Me.FileContentsTextBox.WordWrap = False
       '
       'btnSaveFile
       '
-      Me.btnSaveFile.Location = New System.Drawing.Point(16, 12)
-      Me.btnSaveFile.Margin = New System.Windows.Forms.Padding(4)
+      Me.btnSaveFile.Location = New System.Drawing.Point(12, 9)
+      Me.btnSaveFile.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.btnSaveFile.Name = "btnSaveFile"
-      Me.btnSaveFile.Size = New System.Drawing.Size(201, 28)
+      Me.btnSaveFile.Size = New System.Drawing.Size(151, 22)
       Me.btnSaveFile.TabIndex = 0
       Me.btnSaveFile.Text = "Save Transcription file to PC"
       Me.btnSaveFile.UseVisualStyleBackColor = True
       '
       'formBatchContents
       '
-      Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+      Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(856, 615)
+      Me.ClientSize = New System.Drawing.Size(642, 500)
       Me.Controls.Add(Me.SplitContainer1)
-      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-      Me.Margin = New System.Windows.Forms.Padding(4)
+      Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Name = "formBatchContents"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "WinFreeREG - Batch Contents"

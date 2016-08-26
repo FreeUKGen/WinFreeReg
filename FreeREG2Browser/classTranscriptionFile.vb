@@ -127,7 +127,13 @@ Public Class TranscriptionFileClass
             m_fileHeader.RegisterType = X(X.Length - 1)
          End If
 
-         m_PlaceCode = freeregTables.Churches.FindByChurchNameChapmanCodePlaceName(m_fileHeader.Church, m_fileHeader.County, m_fileHeader.Place).FileCode
+         Dim Crec = freeregTables.Churches.FindByChurchNameChapmanCodePlaceName(m_fileHeader.Church, m_fileHeader.County, m_fileHeader.Place)
+         If Crec Is Nothing Then
+            MessageBox.Show(String.Format("Unable to find Church record for County:{0} Place:{1} Church:{2}", m_fileHeader.County, m_fileHeader.Place, m_fileHeader.Church))
+            m_PlaceCode = String.Empty
+         Else
+            m_PlaceCode = Crec.FileCode
+         End If
 
          Select Case m_fileHeader.FileType
             Case FileTypes.BAPTISMS

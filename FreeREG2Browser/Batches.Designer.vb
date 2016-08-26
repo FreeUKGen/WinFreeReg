@@ -673,1157 +673,1160 @@ Partial Public Class Batches
             Me.Rows.Add(row)
         End Sub
         
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddBatchRow( _
-                    ByVal ID As String,  _
-                    ByVal CountyName As String,  _
-                    ByVal PlaceName As String,  _
-                    ByVal ChurchName As String,  _
-                    ByVal RegisterType As String,  _
-                    ByVal RecordType As String,  _
-                    ByVal Records As String,  _
-                    ByVal DateMin As String,  _
-                    ByVal DateMax As String,  _
-                    ByVal DateRange As String,  _
-                    ByVal UserId As String,  _
-                    ByVal UserIdLowerCase As String,  _
-                    ByVal FileName As String,  _
-                    ByVal TranscriberName As String,  _
-                    ByVal TranscriberEmail As String,  _
-                    ByVal TranscriberSyndicate As String,  _
-                    ByVal CreditEmail As String,  _
-                    ByVal CreditName As String,  _
-                    ByVal FirstComment As String,  _
-                    ByVal SecondComment As String,  _
-                    ByVal TranscriptionDate As String,  _
-                    ByVal ModificationDate As String,  _
-                    ByVal UploadedDate As String,  _
-                    ByVal _Error As String,  _
-                    ByVal Digest As String,  _
-                    ByVal LockedByTranscriber As Boolean,  _
-                    ByVal LockedByCoordinator As Boolean,  _
-                    ByVal lds As String,  _
-                    ByVal Action As String,  _
-                    ByVal CharacterSet As String,  _
-                    ByVal AlternateRegisterName As String,  _
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Overloads Function AddBatchRow( _
+                    ByVal ID As String, _
+                    ByVal CountyName As String, _
+                    ByVal PlaceName As String, _
+                    ByVal ChurchName As String, _
+                    ByVal RegisterType As String, _
+                    ByVal RecordType As String, _
+                    ByVal Records As String, _
+                    ByVal DateMin As String, _
+                    ByVal DateMax As String, _
+                    ByVal DateRange As String, _
+                    ByVal UserId As String, _
+                    ByVal UserIdLowerCase As String, _
+                    ByVal FileName As String, _
+                    ByVal TranscriberName As String, _
+                    ByVal TranscriberEmail As String, _
+                    ByVal TranscriberSyndicate As String, _
+                    ByVal CreditEmail As String, _
+                    ByVal CreditName As String, _
+                    ByVal FirstComment As String, _
+                    ByVal SecondComment As String, _
+                    ByVal TranscriptionDate As Date, _
+                    ByVal ModificationDate As Date, _
+                    ByVal UploadedDate As Date, _
+                    ByVal _Error As String, _
+                    ByVal Digest As String, _
+                    ByVal LockedByTranscriber As Boolean, _
+                    ByVal LockedByCoordinator As Boolean, _
+                    ByVal lds As Boolean, _
+                    ByVal Action As String, _
+                    ByVal CharacterSet As String, _
+                    ByVal AlternateRegisterName As String, _
                     ByVal CsvFile As String) As BatchRow
-            Dim rowBatchRow As BatchRow = CType(Me.NewRow,BatchRow)
-            Dim columnValuesArray() As Object = New Object() {ID, CountyName, PlaceName, ChurchName, RegisterType, RecordType, Records, DateMin, DateMax, DateRange, UserId, UserIdLowerCase, FileName, TranscriberName, TranscriberEmail, TranscriberSyndicate, CreditEmail, CreditName, FirstComment, SecondComment, TranscriptionDate, ModificationDate, UploadedDate, _Error, Digest, LockedByTranscriber, LockedByCoordinator, lds, Action, CharacterSet, AlternateRegisterName, CsvFile}
-            rowBatchRow.ItemArray = columnValuesArray
-            Me.Rows.Add(rowBatchRow)
-            Return rowBatchRow
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function FindByFileName(ByVal FileName As String) As BatchRow
-            Return CType(Me.Rows.Find(New Object() {FileName}),BatchRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overrides Function Clone() As Global.System.Data.DataTable
-            Dim cln As BatchDataTable = CType(MyBase.Clone,BatchDataTable)
-            cln.InitVars
-            Return cln
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-            Return New BatchDataTable()
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Friend Sub InitVars()
-            Me.columnID = MyBase.Columns("ID")
-            Me.columnCountyName = MyBase.Columns("CountyName")
-            Me.columnPlaceName = MyBase.Columns("PlaceName")
-            Me.columnChurchName = MyBase.Columns("ChurchName")
-            Me.columnRegisterType = MyBase.Columns("RegisterType")
-            Me.columnRecordType = MyBase.Columns("RecordType")
-            Me.columnRecords = MyBase.Columns("Records")
-            Me.columnDateMin = MyBase.Columns("DateMin")
-            Me.columnDateMax = MyBase.Columns("DateMax")
-            Me.columnDateRange = MyBase.Columns("DateRange")
-            Me.columnUserId = MyBase.Columns("UserId")
-            Me.columnUserIdLowerCase = MyBase.Columns("UserIdLowerCase")
-            Me.columnFileName = MyBase.Columns("FileName")
-            Me.columnTranscriberName = MyBase.Columns("TranscriberName")
-            Me.columnTranscriberEmail = MyBase.Columns("TranscriberEmail")
-            Me.columnTranscriberSyndicate = MyBase.Columns("TranscriberSyndicate")
-            Me.columnCreditEmail = MyBase.Columns("CreditEmail")
-            Me.columnCreditName = MyBase.Columns("CreditName")
-            Me.columnFirstComment = MyBase.Columns("FirstComment")
-            Me.columnSecondComment = MyBase.Columns("SecondComment")
-            Me.columnTranscriptionDate = MyBase.Columns("TranscriptionDate")
-            Me.columnModificationDate = MyBase.Columns("ModificationDate")
-            Me.columnUploadedDate = MyBase.Columns("UploadedDate")
-            Me.columnError = MyBase.Columns("Error")
-            Me.columnDigest = MyBase.Columns("Digest")
-            Me.columnLockedByTranscriber = MyBase.Columns("LockedByTranscriber")
-            Me.columnLockedByCoordinator = MyBase.Columns("LockedByCoordinator")
-            Me.columnlds = MyBase.Columns("lds")
-            Me.columnAction = MyBase.Columns("Action")
-            Me.columnCharacterSet = MyBase.Columns("CharacterSet")
-            Me.columnAlternateRegisterName = MyBase.Columns("AlternateRegisterName")
-            Me.columnCsvFile = MyBase.Columns("CsvFile")
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Private Sub InitClass()
-            Me.columnID = New Global.System.Data.DataColumn("ID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnID)
-            Me.columnCountyName = New Global.System.Data.DataColumn("CountyName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCountyName)
-            Me.columnPlaceName = New Global.System.Data.DataColumn("PlaceName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnPlaceName)
-            Me.columnChurchName = New Global.System.Data.DataColumn("ChurchName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnChurchName)
-            Me.columnRegisterType = New Global.System.Data.DataColumn("RegisterType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnRegisterType)
-            Me.columnRecordType = New Global.System.Data.DataColumn("RecordType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnRecordType)
-            Me.columnRecords = New Global.System.Data.DataColumn("Records", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnRecords)
-            Me.columnDateMin = New Global.System.Data.DataColumn("DateMin", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDateMin)
-            Me.columnDateMax = New Global.System.Data.DataColumn("DateMax", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDateMax)
-            Me.columnDateRange = New Global.System.Data.DataColumn("DateRange", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDateRange)
-            Me.columnUserId = New Global.System.Data.DataColumn("UserId", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnUserId)
-            Me.columnUserIdLowerCase = New Global.System.Data.DataColumn("UserIdLowerCase", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnUserIdLowerCase)
-            Me.columnFileName = New Global.System.Data.DataColumn("FileName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnFileName)
-            Me.columnTranscriberName = New Global.System.Data.DataColumn("TranscriberName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTranscriberName)
-            Me.columnTranscriberEmail = New Global.System.Data.DataColumn("TranscriberEmail", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTranscriberEmail)
-            Me.columnTranscriberSyndicate = New Global.System.Data.DataColumn("TranscriberSyndicate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTranscriberSyndicate)
-            Me.columnCreditEmail = New Global.System.Data.DataColumn("CreditEmail", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCreditEmail)
-            Me.columnCreditName = New Global.System.Data.DataColumn("CreditName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCreditName)
-            Me.columnFirstComment = New Global.System.Data.DataColumn("FirstComment", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnFirstComment)
-            Me.columnSecondComment = New Global.System.Data.DataColumn("SecondComment", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnSecondComment)
-            Me.columnTranscriptionDate = New Global.System.Data.DataColumn("TranscriptionDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnTranscriptionDate)
-            Me.columnModificationDate = New Global.System.Data.DataColumn("ModificationDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnModificationDate)
-            Me.columnUploadedDate = New Global.System.Data.DataColumn("UploadedDate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnUploadedDate)
-            Me.columnError = New Global.System.Data.DataColumn("Error", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            Me.columnError.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "ErrorColumn")
-            Me.columnError.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnError")
-            Me.columnError.ExtendedProperties.Add("Generator_UserColumnName", "Error")
-            MyBase.Columns.Add(Me.columnError)
-            Me.columnDigest = New Global.System.Data.DataColumn("Digest", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnDigest)
-            Me.columnLockedByTranscriber = New Global.System.Data.DataColumn("LockedByTranscriber", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnLockedByTranscriber)
-            Me.columnLockedByCoordinator = New Global.System.Data.DataColumn("LockedByCoordinator", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnLockedByCoordinator)
-            Me.columnlds = New Global.System.Data.DataColumn("lds", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnlds)
-            Me.columnAction = New Global.System.Data.DataColumn("Action", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnAction)
-            Me.columnCharacterSet = New Global.System.Data.DataColumn("CharacterSet", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCharacterSet)
-            Me.columnAlternateRegisterName = New Global.System.Data.DataColumn("AlternateRegisterName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnAlternateRegisterName)
-            Me.columnCsvFile = New Global.System.Data.DataColumn("CsvFile", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columnCsvFile)
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnFileName}, true))
-            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("BatchKey1", New Global.System.Data.DataColumn() {Me.columnID}, false))
-            Me.columnID.AllowDBNull = false
-            Me.columnID.Unique = true
-            Me.columnFileName.AllowDBNull = false
-            Me.columnFileName.Unique = true
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function NewBatchRow() As BatchRow
-            Return CType(Me.NewRow,BatchRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-            Return New BatchRow(builder)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Protected Overrides Function GetRowType() As Global.System.Type
-            Return GetType(BatchRow)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanged(e)
-            If (Not (Me.BatchRowChangedEvent) Is Nothing) Then
-                RaiseEvent BatchRowChanged(Me, New BatchRowChangeEvent(CType(e.Row,BatchRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowChanging(e)
-            If (Not (Me.BatchRowChangingEvent) Is Nothing) Then
-                RaiseEvent BatchRowChanging(Me, New BatchRowChangeEvent(CType(e.Row,BatchRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleted(e)
-            If (Not (Me.BatchRowDeletedEvent) Is Nothing) Then
-                RaiseEvent BatchRowDeleted(Me, New BatchRowChangeEvent(CType(e.Row,BatchRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-            MyBase.OnRowDeleting(e)
-            If (Not (Me.BatchRowDeletingEvent) Is Nothing) Then
-                RaiseEvent BatchRowDeleting(Me, New BatchRowChangeEvent(CType(e.Row,BatchRow), e.Action))
-            End If
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub RemoveBatchRow(ByVal row As BatchRow)
-            Me.Rows.Remove(row)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
-            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-            Dim ds As Batches = New Batches()
-            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-            any1.MinOccurs = New Decimal(0)
-            any1.MaxOccurs = Decimal.MaxValue
-            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any1)
-            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-            any2.MinOccurs = New Decimal(1)
-            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-            sequence.Items.Add(any2)
-            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-            attribute1.Name = "namespace"
-            attribute1.FixedValue = ds.Namespace
-            type.Attributes.Add(attribute1)
-            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-            attribute2.Name = "tableTypeName"
-            attribute2.FixedValue = "BatchDataTable"
-            type.Attributes.Add(attribute2)
-            type.Particle = sequence
-            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-            If xs.Contains(dsSchema.TargetNamespace) Then
-                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-                Try 
-                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-                    dsSchema.Write(s1)
-                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-                    Do While schemas.MoveNext
-                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
-                        s2.SetLength(0)
-                        schema.Write(s2)
-                        If (s1.Length = s2.Length) Then
-                            s1.Position = 0
-                            s2.Position = 0
-                            
-                            Do While ((s1.Position <> s1.Length)  _
-                                        AndAlso (s1.ReadByte = s2.ReadByte))
-                                
-                                
-                            Loop
-                            If (s1.Position = s1.Length) Then
-                                Return type
-                            End If
-                        End If
-                        
-                    Loop
-                Finally
-                    If (Not (s1) Is Nothing) Then
-                        s1.Close
-                    End If
-                    If (Not (s2) Is Nothing) Then
-                        s2.Close
-                    End If
-                End Try
-            End If
-            xs.Add(dsSchema)
-            Return type
-        End Function
-    End Class
-    
-    '''<summary>
-    '''Represents strongly named DataRow class.
-    '''</summary>
-    Partial Public Class BatchRow
-        Inherits Global.System.Data.DataRow
-        
-        Private tableBatch As BatchDataTable
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-            MyBase.New(rb)
-            Me.tableBatch = CType(Me.Table,BatchDataTable)
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property ID() As String
-            Get
-                Return CType(Me(Me.tableBatch.IDColumn),String)
-            End Get
-            Set
-                Me(Me.tableBatch.IDColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CountyName() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.CountyNameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'CountyName' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.CountyNameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property PlaceName() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.PlaceNameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'PlaceName' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.PlaceNameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property ChurchName() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.ChurchNameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ChurchName' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.ChurchNameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property RegisterType() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.RegisterTypeColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RegisterType' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.RegisterTypeColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property RecordType() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.RecordTypeColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'RecordType' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.RecordTypeColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Records() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.RecordsColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Records' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.RecordsColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property DateMin() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.DateMinColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'DateMin' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.DateMinColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property DateMax() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.DateMaxColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'DateMax' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.DateMaxColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property DateRange() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.DateRangeColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'DateRange' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.DateRangeColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property UserId() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.UserIdColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'UserId' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.UserIdColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property UserIdLowerCase() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.UserIdLowerCaseColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'UserIdLowerCase' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.UserIdLowerCaseColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property FileName() As String
-            Get
-                Return CType(Me(Me.tableBatch.FileNameColumn),String)
-            End Get
-            Set
-                Me(Me.tableBatch.FileNameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property TranscriberName() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.TranscriberNameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TranscriberName' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.TranscriberNameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property TranscriberEmail() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.TranscriberEmailColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TranscriberEmail' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.TranscriberEmailColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property TranscriberSyndicate() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.TranscriberSyndicateColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TranscriberSyndicate' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.TranscriberSyndicateColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CreditEmail() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.CreditEmailColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'CreditEmail' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.CreditEmailColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CreditName() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.CreditNameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'CreditName' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.CreditNameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property FirstComment() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.FirstCommentColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'FirstComment' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.FirstCommentColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property SecondComment() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.SecondCommentColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'SecondComment' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.SecondCommentColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property TranscriptionDate() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.TranscriptionDateColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'TranscriptionDate' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.TranscriptionDateColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property ModificationDate() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.ModificationDateColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'ModificationDate' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.ModificationDateColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property UploadedDate() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.UploadedDateColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'UploadedDate' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.UploadedDateColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property _Error() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.ErrorColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Error' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.ErrorColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Digest() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.DigestColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Digest' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.DigestColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property LockedByTranscriber() As Boolean
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.LockedByTranscriberColumn),Boolean)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'LockedByTranscriber' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.LockedByTranscriberColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property LockedByCoordinator() As Boolean
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.LockedByCoordinatorColumn),Boolean)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'LockedByCoordinator' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.LockedByCoordinatorColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property lds() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.ldsColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'lds' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.ldsColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property Action() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.ActionColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'Action' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.ActionColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CharacterSet() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.CharacterSetColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'CharacterSet' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.CharacterSetColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property AlternateRegisterName() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.AlternateRegisterNameColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'AlternateRegisterName' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.AlternateRegisterNameColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property CsvFile() As String
-            Get
-                Try 
-                    Return CType(Me(Me.tableBatch.CsvFileColumn),String)
-                Catch e As Global.System.InvalidCastException
-                    Throw New Global.System.Data.StrongTypingException("The value for column 'CsvFile' in table 'Batch' is DBNull.", e)
-                End Try
-            End Get
-            Set
-                Me(Me.tableBatch.CsvFileColumn) = value
-            End Set
-        End Property
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCountyNameNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.CountyNameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCountyNameNull()
-            Me(Me.tableBatch.CountyNameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsPlaceNameNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.PlaceNameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetPlaceNameNull()
-            Me(Me.tableBatch.PlaceNameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsChurchNameNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.ChurchNameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetChurchNameNull()
-            Me(Me.tableBatch.ChurchNameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsRegisterTypeNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.RegisterTypeColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetRegisterTypeNull()
-            Me(Me.tableBatch.RegisterTypeColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsRecordTypeNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.RecordTypeColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetRecordTypeNull()
-            Me(Me.tableBatch.RecordTypeColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsRecordsNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.RecordsColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetRecordsNull()
-            Me(Me.tableBatch.RecordsColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsDateMinNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.DateMinColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetDateMinNull()
-            Me(Me.tableBatch.DateMinColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsDateMaxNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.DateMaxColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetDateMaxNull()
-            Me(Me.tableBatch.DateMaxColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsDateRangeNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.DateRangeColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetDateRangeNull()
-            Me(Me.tableBatch.DateRangeColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsUserIdNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.UserIdColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetUserIdNull()
-            Me(Me.tableBatch.UserIdColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsUserIdLowerCaseNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.UserIdLowerCaseColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetUserIdLowerCaseNull()
-            Me(Me.tableBatch.UserIdLowerCaseColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsTranscriberNameNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.TranscriberNameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetTranscriberNameNull()
-            Me(Me.tableBatch.TranscriberNameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsTranscriberEmailNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.TranscriberEmailColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetTranscriberEmailNull()
-            Me(Me.tableBatch.TranscriberEmailColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsTranscriberSyndicateNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.TranscriberSyndicateColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetTranscriberSyndicateNull()
-            Me(Me.tableBatch.TranscriberSyndicateColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCreditEmailNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.CreditEmailColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCreditEmailNull()
-            Me(Me.tableBatch.CreditEmailColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCreditNameNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.CreditNameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCreditNameNull()
-            Me(Me.tableBatch.CreditNameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsFirstCommentNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.FirstCommentColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetFirstCommentNull()
-            Me(Me.tableBatch.FirstCommentColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsSecondCommentNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.SecondCommentColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetSecondCommentNull()
-            Me(Me.tableBatch.SecondCommentColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsTranscriptionDateNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.TranscriptionDateColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetTranscriptionDateNull()
-            Me(Me.tableBatch.TranscriptionDateColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsModificationDateNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.ModificationDateColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetModificationDateNull()
-            Me(Me.tableBatch.ModificationDateColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsUploadedDateNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.UploadedDateColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetUploadedDateNull()
-            Me(Me.tableBatch.UploadedDateColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function Is_ErrorNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.ErrorColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub Set_ErrorNull()
-            Me(Me.tableBatch.ErrorColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsDigestNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.DigestColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetDigestNull()
-            Me(Me.tableBatch.DigestColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsLockedByTranscriberNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.LockedByTranscriberColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetLockedByTranscriberNull()
-            Me(Me.tableBatch.LockedByTranscriberColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsLockedByCoordinatorNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.LockedByCoordinatorColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetLockedByCoordinatorNull()
-            Me(Me.tableBatch.LockedByCoordinatorColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsldsNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.ldsColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetldsNull()
-            Me(Me.tableBatch.ldsColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsActionNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.ActionColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetActionNull()
-            Me(Me.tableBatch.ActionColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCharacterSetNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.CharacterSetColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCharacterSetNull()
-            Me(Me.tableBatch.CharacterSetColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsAlternateRegisterNameNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.AlternateRegisterNameColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetAlternateRegisterNameNull()
-            Me(Me.tableBatch.AlternateRegisterNameColumn) = Global.System.Convert.DBNull
-        End Sub
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Function IsCsvFileNull() As Boolean
-            Return Me.IsNull(Me.tableBatch.CsvFileColumn)
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Sub SetCsvFileNull()
-            Me(Me.tableBatch.CsvFileColumn) = Global.System.Convert.DBNull
-        End Sub
-    End Class
+         Dim rowBatchRow As BatchRow = CType(Me.NewRow, BatchRow)
+         Dim columnValuesArray() As Object = New Object() {ID, CountyName, PlaceName, ChurchName, RegisterType, RecordType, Records, DateMin, DateMax, DateRange, UserId, UserIdLowerCase, FileName, TranscriberName, TranscriberEmail, TranscriberSyndicate, CreditEmail, CreditName, FirstComment, SecondComment, TranscriptionDate, ModificationDate, UploadedDate, _Error, Digest, LockedByTranscriber, LockedByCoordinator, lds, Action, CharacterSet, AlternateRegisterName, CsvFile}
+         rowBatchRow.ItemArray = columnValuesArray
+         Me.Rows.Add(rowBatchRow)
+         Return rowBatchRow
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function FindByFileName(ByVal FileName As String) As BatchRow
+         Return CType(Me.Rows.Find(New Object() {FileName}), BatchRow)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Overrides Function Clone() As Global.System.Data.DataTable
+         Dim cln As BatchDataTable = CType(MyBase.Clone, BatchDataTable)
+         cln.InitVars()
+         Return cln
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+         Return New BatchDataTable()
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Friend Sub InitVars()
+         Me.columnID = MyBase.Columns("ID")
+         Me.columnCountyName = MyBase.Columns("CountyName")
+         Me.columnPlaceName = MyBase.Columns("PlaceName")
+         Me.columnChurchName = MyBase.Columns("ChurchName")
+         Me.columnRegisterType = MyBase.Columns("RegisterType")
+         Me.columnRecordType = MyBase.Columns("RecordType")
+         Me.columnRecords = MyBase.Columns("Records")
+         Me.columnDateMin = MyBase.Columns("DateMin")
+         Me.columnDateMax = MyBase.Columns("DateMax")
+         Me.columnDateRange = MyBase.Columns("DateRange")
+         Me.columnUserId = MyBase.Columns("UserId")
+         Me.columnUserIdLowerCase = MyBase.Columns("UserIdLowerCase")
+         Me.columnFileName = MyBase.Columns("FileName")
+         Me.columnTranscriberName = MyBase.Columns("TranscriberName")
+         Me.columnTranscriberEmail = MyBase.Columns("TranscriberEmail")
+         Me.columnTranscriberSyndicate = MyBase.Columns("TranscriberSyndicate")
+         Me.columnCreditEmail = MyBase.Columns("CreditEmail")
+         Me.columnCreditName = MyBase.Columns("CreditName")
+         Me.columnFirstComment = MyBase.Columns("FirstComment")
+         Me.columnSecondComment = MyBase.Columns("SecondComment")
+         Me.columnTranscriptionDate = MyBase.Columns("TranscriptionDate")
+         Me.columnModificationDate = MyBase.Columns("ModificationDate")
+         Me.columnUploadedDate = MyBase.Columns("UploadedDate")
+         Me.columnError = MyBase.Columns("Error")
+         Me.columnDigest = MyBase.Columns("Digest")
+         Me.columnLockedByTranscriber = MyBase.Columns("LockedByTranscriber")
+         Me.columnLockedByCoordinator = MyBase.Columns("LockedByCoordinator")
+         Me.columnlds = MyBase.Columns("lds")
+         Me.columnAction = MyBase.Columns("Action")
+         Me.columnCharacterSet = MyBase.Columns("CharacterSet")
+         Me.columnAlternateRegisterName = MyBase.Columns("AlternateRegisterName")
+         Me.columnCsvFile = MyBase.Columns("CsvFile")
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Private Sub InitClass()
+         Me.columnID = New Global.System.Data.DataColumn("ID", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnID)
+         Me.columnCountyName = New Global.System.Data.DataColumn("CountyName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnCountyName)
+         Me.columnPlaceName = New Global.System.Data.DataColumn("PlaceName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnPlaceName)
+         Me.columnChurchName = New Global.System.Data.DataColumn("ChurchName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnChurchName)
+         Me.columnRegisterType = New Global.System.Data.DataColumn("RegisterType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnRegisterType)
+         Me.columnRecordType = New Global.System.Data.DataColumn("RecordType", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnRecordType)
+         Me.columnRecords = New Global.System.Data.DataColumn("Records", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnRecords)
+         Me.columnDateMin = New Global.System.Data.DataColumn("DateMin", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnDateMin)
+         Me.columnDateMax = New Global.System.Data.DataColumn("DateMax", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnDateMax)
+         Me.columnDateRange = New Global.System.Data.DataColumn("DateRange", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnDateRange)
+         Me.columnUserId = New Global.System.Data.DataColumn("UserId", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnUserId)
+         Me.columnUserIdLowerCase = New Global.System.Data.DataColumn("UserIdLowerCase", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnUserIdLowerCase)
+         Me.columnFileName = New Global.System.Data.DataColumn("FileName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnFileName)
+         Me.columnTranscriberName = New Global.System.Data.DataColumn("TranscriberName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnTranscriberName)
+         Me.columnTranscriberEmail = New Global.System.Data.DataColumn("TranscriberEmail", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnTranscriberEmail)
+         Me.columnTranscriberSyndicate = New Global.System.Data.DataColumn("TranscriberSyndicate", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnTranscriberSyndicate)
+         Me.columnCreditEmail = New Global.System.Data.DataColumn("CreditEmail", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnCreditEmail)
+         Me.columnCreditName = New Global.System.Data.DataColumn("CreditName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnCreditName)
+         Me.columnFirstComment = New Global.System.Data.DataColumn("FirstComment", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnFirstComment)
+         Me.columnSecondComment = New Global.System.Data.DataColumn("SecondComment", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnSecondComment)
+         Me.columnTranscriptionDate = New Global.System.Data.DataColumn("TranscriptionDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnTranscriptionDate)
+         Me.columnModificationDate = New Global.System.Data.DataColumn("ModificationDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnModificationDate)
+         Me.columnUploadedDate = New Global.System.Data.DataColumn("UploadedDate", GetType(Date), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnUploadedDate)
+         Me.columnError = New Global.System.Data.DataColumn("Error", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         Me.columnError.ExtendedProperties.Add("Generator_ColumnPropNameInTable", "ErrorColumn")
+         Me.columnError.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "columnError")
+         Me.columnError.ExtendedProperties.Add("Generator_UserColumnName", "Error")
+         MyBase.Columns.Add(Me.columnError)
+         Me.columnDigest = New Global.System.Data.DataColumn("Digest", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnDigest)
+         Me.columnLockedByTranscriber = New Global.System.Data.DataColumn("LockedByTranscriber", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnLockedByTranscriber)
+         Me.columnLockedByCoordinator = New Global.System.Data.DataColumn("LockedByCoordinator", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnLockedByCoordinator)
+         Me.columnlds = New Global.System.Data.DataColumn("lds", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnlds)
+         Me.columnAction = New Global.System.Data.DataColumn("Action", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnAction)
+         Me.columnCharacterSet = New Global.System.Data.DataColumn("CharacterSet", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnCharacterSet)
+         Me.columnAlternateRegisterName = New Global.System.Data.DataColumn("AlternateRegisterName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnAlternateRegisterName)
+         Me.columnCsvFile = New Global.System.Data.DataColumn("CsvFile", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+         MyBase.Columns.Add(Me.columnCsvFile)
+         Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnFileName}, True))
+         Me.Constraints.Add(New Global.System.Data.UniqueConstraint("BatchKey1", New Global.System.Data.DataColumn() {Me.columnID}, False))
+         Me.columnID.AllowDBNull = False
+         Me.columnID.Unique = True
+         Me.columnFileName.AllowDBNull = False
+         Me.columnFileName.Unique = True
+         Me.columnTranscriptionDate.DateTimeMode = Global.System.Data.DataSetDateTime.Utc
+         Me.columnModificationDate.DateTimeMode = Global.System.Data.DataSetDateTime.Utc
+         Me.columnUploadedDate.DateTimeMode = Global.System.Data.DataSetDateTime.Utc
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function NewBatchRow() As BatchRow
+         Return CType(Me.NewRow, BatchRow)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+         Return New BatchRow(builder)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Protected Overrides Function GetRowType() As Global.System.Type
+         Return GetType(BatchRow)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+         MyBase.OnRowChanged(e)
+         If (Not (Me.BatchRowChangedEvent) Is Nothing) Then
+            RaiseEvent BatchRowChanged(Me, New BatchRowChangeEvent(CType(e.Row, BatchRow), e.Action))
+         End If
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+         MyBase.OnRowChanging(e)
+         If (Not (Me.BatchRowChangingEvent) Is Nothing) Then
+            RaiseEvent BatchRowChanging(Me, New BatchRowChangeEvent(CType(e.Row, BatchRow), e.Action))
+         End If
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+         MyBase.OnRowDeleted(e)
+         If (Not (Me.BatchRowDeletedEvent) Is Nothing) Then
+            RaiseEvent BatchRowDeleted(Me, New BatchRowChangeEvent(CType(e.Row, BatchRow), e.Action))
+         End If
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+         MyBase.OnRowDeleting(e)
+         If (Not (Me.BatchRowDeletingEvent) Is Nothing) Then
+            RaiseEvent BatchRowDeleting(Me, New BatchRowChangeEvent(CType(e.Row, BatchRow), e.Action))
+         End If
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub RemoveBatchRow(ByVal row As BatchRow)
+         Me.Rows.Remove(row)
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+         Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+         Dim ds As Batches = New Batches()
+         Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+         any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+         any1.MinOccurs = New Decimal(0)
+         any1.MaxOccurs = Decimal.MaxValue
+         any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+         sequence.Items.Add(any1)
+         Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+         any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+         any2.MinOccurs = New Decimal(1)
+         any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+         sequence.Items.Add(any2)
+         Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+         attribute1.Name = "namespace"
+         attribute1.FixedValue = ds.Namespace
+         type.Attributes.Add(attribute1)
+         Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+         attribute2.Name = "tableTypeName"
+         attribute2.FixedValue = "BatchDataTable"
+         type.Attributes.Add(attribute2)
+         type.Particle = sequence
+         Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+         If xs.Contains(dsSchema.TargetNamespace) Then
+            Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+            Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+            Try
+               Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+               dsSchema.Write(s1)
+               Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+               Do While schemas.MoveNext
+                  schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
+                  s2.SetLength(0)
+                  schema.Write(s2)
+                  If (s1.Length = s2.Length) Then
+                     s1.Position = 0
+                     s2.Position = 0
+
+                     Do While ((s1.Position <> s1.Length) _
+                                 AndAlso (s1.ReadByte = s2.ReadByte))
+
+
+                     Loop
+                     If (s1.Position = s1.Length) Then
+                        Return type
+                     End If
+                  End If
+
+               Loop
+            Finally
+               If (Not (s1) Is Nothing) Then
+                  s1.Close()
+               End If
+               If (Not (s2) Is Nothing) Then
+                  s2.Close()
+               End If
+            End Try
+         End If
+         xs.Add(dsSchema)
+         Return type
+      End Function
+   End Class
+
+   '''<summary>
+   '''Represents strongly named DataRow class.
+   '''</summary>
+   Partial Public Class BatchRow
+      Inherits Global.System.Data.DataRow
+
+      Private tableBatch As BatchDataTable
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+         MyBase.New(rb)
+         Me.tableBatch = CType(Me.Table, BatchDataTable)
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property ID() As String
+         Get
+            Return CType(Me(Me.tableBatch.IDColumn), String)
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.IDColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property CountyName() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.CountyNameColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'CountyName' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.CountyNameColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property PlaceName() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.PlaceNameColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'PlaceName' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.PlaceNameColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property ChurchName() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.ChurchNameColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'ChurchName' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.ChurchNameColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property RegisterType() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.RegisterTypeColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'RegisterType' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.RegisterTypeColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property RecordType() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.RecordTypeColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'RecordType' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.RecordTypeColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property Records() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.RecordsColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'Records' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.RecordsColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property DateMin() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.DateMinColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'DateMin' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.DateMinColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property DateMax() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.DateMaxColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'DateMax' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.DateMaxColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property DateRange() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.DateRangeColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'DateRange' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.DateRangeColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property UserId() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.UserIdColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'UserId' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.UserIdColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property UserIdLowerCase() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.UserIdLowerCaseColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'UserIdLowerCase' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.UserIdLowerCaseColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property FileName() As String
+         Get
+            Return CType(Me(Me.tableBatch.FileNameColumn), String)
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.FileNameColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property TranscriberName() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.TranscriberNameColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'TranscriberName' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.TranscriberNameColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property TranscriberEmail() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.TranscriberEmailColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'TranscriberEmail' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.TranscriberEmailColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property TranscriberSyndicate() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.TranscriberSyndicateColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'TranscriberSyndicate' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.TranscriberSyndicateColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property CreditEmail() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.CreditEmailColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'CreditEmail' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.CreditEmailColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property CreditName() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.CreditNameColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'CreditName' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.CreditNameColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property FirstComment() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.FirstCommentColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'FirstComment' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.FirstCommentColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property SecondComment() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.SecondCommentColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'SecondComment' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.SecondCommentColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property TranscriptionDate() As Date
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.TranscriptionDateColumn), Date)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'TranscriptionDate' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As Date)
+            Me(Me.tableBatch.TranscriptionDateColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property ModificationDate() As Date
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.ModificationDateColumn), Date)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'ModificationDate' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As Date)
+            Me(Me.tableBatch.ModificationDateColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property UploadedDate() As Date
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.UploadedDateColumn), Date)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'UploadedDate' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As Date)
+            Me(Me.tableBatch.UploadedDateColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property _Error() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.ErrorColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'Error' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.ErrorColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property Digest() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.DigestColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'Digest' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.DigestColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property LockedByTranscriber() As Boolean
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.LockedByTranscriberColumn), Boolean)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'LockedByTranscriber' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As Boolean)
+            Me(Me.tableBatch.LockedByTranscriberColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property LockedByCoordinator() As Boolean
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.LockedByCoordinatorColumn), Boolean)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'LockedByCoordinator' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As Boolean)
+            Me(Me.tableBatch.LockedByCoordinatorColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property lds() As Boolean
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.ldsColumn), Boolean)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'lds' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As Boolean)
+            Me(Me.tableBatch.ldsColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property Action() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.ActionColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'Action' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.ActionColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property CharacterSet() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.CharacterSetColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'CharacterSet' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.CharacterSetColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property AlternateRegisterName() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.AlternateRegisterNameColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'AlternateRegisterName' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.AlternateRegisterNameColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Property CsvFile() As String
+         Get
+            Try
+               Return CType(Me(Me.tableBatch.CsvFileColumn), String)
+            Catch e As Global.System.InvalidCastException
+               Throw New Global.System.Data.StrongTypingException("The value for column 'CsvFile' in table 'Batch' is DBNull.", e)
+            End Try
+         End Get
+         Set(value As String)
+            Me(Me.tableBatch.CsvFileColumn) = value
+         End Set
+      End Property
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsCountyNameNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.CountyNameColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetCountyNameNull()
+         Me(Me.tableBatch.CountyNameColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsPlaceNameNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.PlaceNameColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetPlaceNameNull()
+         Me(Me.tableBatch.PlaceNameColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsChurchNameNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.ChurchNameColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetChurchNameNull()
+         Me(Me.tableBatch.ChurchNameColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsRegisterTypeNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.RegisterTypeColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetRegisterTypeNull()
+         Me(Me.tableBatch.RegisterTypeColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsRecordTypeNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.RecordTypeColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetRecordTypeNull()
+         Me(Me.tableBatch.RecordTypeColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsRecordsNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.RecordsColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetRecordsNull()
+         Me(Me.tableBatch.RecordsColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsDateMinNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.DateMinColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetDateMinNull()
+         Me(Me.tableBatch.DateMinColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsDateMaxNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.DateMaxColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetDateMaxNull()
+         Me(Me.tableBatch.DateMaxColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsDateRangeNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.DateRangeColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetDateRangeNull()
+         Me(Me.tableBatch.DateRangeColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsUserIdNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.UserIdColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetUserIdNull()
+         Me(Me.tableBatch.UserIdColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsUserIdLowerCaseNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.UserIdLowerCaseColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetUserIdLowerCaseNull()
+         Me(Me.tableBatch.UserIdLowerCaseColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsTranscriberNameNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.TranscriberNameColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetTranscriberNameNull()
+         Me(Me.tableBatch.TranscriberNameColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsTranscriberEmailNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.TranscriberEmailColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetTranscriberEmailNull()
+         Me(Me.tableBatch.TranscriberEmailColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsTranscriberSyndicateNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.TranscriberSyndicateColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetTranscriberSyndicateNull()
+         Me(Me.tableBatch.TranscriberSyndicateColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsCreditEmailNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.CreditEmailColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetCreditEmailNull()
+         Me(Me.tableBatch.CreditEmailColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsCreditNameNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.CreditNameColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetCreditNameNull()
+         Me(Me.tableBatch.CreditNameColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsFirstCommentNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.FirstCommentColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetFirstCommentNull()
+         Me(Me.tableBatch.FirstCommentColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsSecondCommentNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.SecondCommentColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetSecondCommentNull()
+         Me(Me.tableBatch.SecondCommentColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsTranscriptionDateNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.TranscriptionDateColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetTranscriptionDateNull()
+         Me(Me.tableBatch.TranscriptionDateColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsModificationDateNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.ModificationDateColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetModificationDateNull()
+         Me(Me.tableBatch.ModificationDateColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsUploadedDateNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.UploadedDateColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetUploadedDateNull()
+         Me(Me.tableBatch.UploadedDateColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function Is_ErrorNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.ErrorColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub Set_ErrorNull()
+         Me(Me.tableBatch.ErrorColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsDigestNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.DigestColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetDigestNull()
+         Me(Me.tableBatch.DigestColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsLockedByTranscriberNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.LockedByTranscriberColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetLockedByTranscriberNull()
+         Me(Me.tableBatch.LockedByTranscriberColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsLockedByCoordinatorNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.LockedByCoordinatorColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetLockedByCoordinatorNull()
+         Me(Me.tableBatch.LockedByCoordinatorColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsldsNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.ldsColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetldsNull()
+         Me(Me.tableBatch.ldsColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsActionNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.ActionColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetActionNull()
+         Me(Me.tableBatch.ActionColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsCharacterSetNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.CharacterSetColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetCharacterSetNull()
+         Me(Me.tableBatch.CharacterSetColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsAlternateRegisterNameNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.AlternateRegisterNameColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetAlternateRegisterNameNull()
+         Me(Me.tableBatch.AlternateRegisterNameColumn) = Global.System.Convert.DBNull
+      End Sub
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Function IsCsvFileNull() As Boolean
+         Return Me.IsNull(Me.tableBatch.CsvFileColumn)
+      End Function
+
+      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+      Public Sub SetCsvFileNull()
+         Me(Me.tableBatch.CsvFileColumn) = Global.System.Convert.DBNull
+      End Sub
+   End Class
     
     '''<summary>
     '''Row event argument class

@@ -93,7 +93,7 @@ Partial Class formFileDetails
       '
       ChurchLabel.AutoSize = True
       ChurchLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      ChurchLabel.Location = New System.Drawing.Point(22, 73)
+      ChurchLabel.Location = New System.Drawing.Point(22, 72)
       ChurchLabel.Name = "ChurchLabel"
       ChurchLabel.Size = New System.Drawing.Size(52, 16)
       ChurchLabel.TabIndex = 1
@@ -133,7 +133,7 @@ Partial Class formFileDetails
       '
       CreditEmailLabel.AutoSize = True
       CreditEmailLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      CreditEmailLabel.Location = New System.Drawing.Point(22, 163)
+      CreditEmailLabel.Location = New System.Drawing.Point(22, 162)
       CreditEmailLabel.Name = "CreditEmailLabel"
       CreditEmailLabel.Size = New System.Drawing.Size(83, 16)
       CreditEmailLabel.TabIndex = 9
@@ -183,7 +183,7 @@ Partial Class formFileDetails
       '
       MyNameLabel.AutoSize = True
       MyNameLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      MyNameLabel.Location = New System.Drawing.Point(22, 385)
+      MyNameLabel.Location = New System.Drawing.Point(22, 384)
       MyNameLabel.Name = "MyNameLabel"
       MyNameLabel.Size = New System.Drawing.Size(69, 16)
       MyNameLabel.TabIndex = 21
@@ -203,7 +203,7 @@ Partial Class formFileDetails
       '
       MySyndicateLabel.AutoSize = True
       MySyndicateLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      MySyndicateLabel.Location = New System.Drawing.Point(22, 447)
+      MySyndicateLabel.Location = New System.Drawing.Point(22, 448)
       MySyndicateLabel.Name = "MySyndicateLabel"
       MySyndicateLabel.Size = New System.Drawing.Size(92, 16)
       MySyndicateLabel.TabIndex = 25
@@ -252,7 +252,7 @@ Partial Class formFileDetails
       Me.ChurchComboBox.DisplayMember = "ChurchName"
       Me.ChurchComboBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.ChurchComboBox.FormattingEnabled = True
-      Me.ChurchComboBox.Location = New System.Drawing.Point(132, 72)
+      Me.ChurchComboBox.Location = New System.Drawing.Point(132, 71)
       Me.ChurchComboBox.Name = "ChurchComboBox"
       Me.ChurchComboBox.Size = New System.Drawing.Size(170, 24)
       Me.ChurchComboBox.TabIndex = 33
@@ -281,7 +281,7 @@ Partial Class formFileDetails
       '
       Me.Comment2TextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.FileHeaderClassBindingSource, "Comment2", True))
       Me.Comment2TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.Comment2TextBox.Location = New System.Drawing.Point(132, 252)
+      Me.Comment2TextBox.Location = New System.Drawing.Point(132, 253)
       Me.Comment2TextBox.Name = "Comment2TextBox"
       Me.Comment2TextBox.Size = New System.Drawing.Size(419, 23)
       Me.Comment2TextBox.TabIndex = 37
@@ -356,7 +356,7 @@ Partial Class formFileDetails
       'IsLDSCheckBox
       '
       Me.IsLDSCheckBox.DataBindings.Add(New System.Windows.Forms.Binding("CheckState", Me.FileHeaderClassBindingSource, "isLDS", True))
-      Me.IsLDSCheckBox.Location = New System.Drawing.Point(272, 130)
+      Me.IsLDSCheckBox.Location = New System.Drawing.Point(370, 130)
       Me.IsLDSCheckBox.Name = "IsLDSCheckBox"
       Me.IsLDSCheckBox.Size = New System.Drawing.Size(181, 24)
       Me.IsLDSCheckBox.TabIndex = 49
@@ -376,7 +376,7 @@ Partial Class formFileDetails
       '
       Me.MyNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.FileHeaderClassBindingSource, "MyName", True))
       Me.MyNameTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.MyNameTextBox.Location = New System.Drawing.Point(132, 384)
+      Me.MyNameTextBox.Location = New System.Drawing.Point(132, 383)
       Me.MyNameTextBox.Name = "MyNameTextBox"
       Me.MyNameTextBox.Size = New System.Drawing.Size(170, 23)
       Me.MyNameTextBox.TabIndex = 53
@@ -399,7 +399,7 @@ Partial Class formFileDetails
       Me.MySyndicateTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.MySyndicateTextBox.Location = New System.Drawing.Point(132, 446)
       Me.MySyndicateTextBox.Name = "MySyndicateTextBox"
-      Me.MySyndicateTextBox.Size = New System.Drawing.Size(170, 23)
+      Me.MySyndicateTextBox.Size = New System.Drawing.Size(419, 23)
       Me.MySyndicateTextBox.TabIndex = 57
       '
       'PlaceComboBox
@@ -443,7 +443,7 @@ Partial Class formFileDetails
       Me.PlaceCodeTextBox.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
       Me.PlaceCodeTextBox.Enabled = False
       Me.PlaceCodeTextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.PlaceCodeTextBox.Location = New System.Drawing.Point(387, 73)
+      Me.PlaceCodeTextBox.Location = New System.Drawing.Point(387, 72)
       Me.PlaceCodeTextBox.MaxLength = 8
       Me.PlaceCodeTextBox.Name = "PlaceCodeTextBox"
       Me.PlaceCodeTextBox.Size = New System.Drawing.Size(101, 23)
@@ -503,6 +503,7 @@ Partial Class formFileDetails
       Me.Controls.Add(MySyndicateLabel)
       Me.Controls.Add(PlaceLabel)
       Me.Controls.Add(RegisterTypeLabel)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.Name = "formFileDetails"
       Me.ShowIcon = False
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent

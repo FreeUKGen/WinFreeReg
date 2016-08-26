@@ -83,18 +83,20 @@ Partial Class formFreeregTables
       Me.TabControl1.Controls.Add(Me.tabChurches)
       Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
       Me.TabControl1.Location = New System.Drawing.Point(0, 0)
+      Me.TabControl1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.TabControl1.Name = "TabControl1"
       Me.TabControl1.SelectedIndex = 0
-      Me.TabControl1.Size = New System.Drawing.Size(598, 292)
+      Me.TabControl1.Size = New System.Drawing.Size(464, 230)
       Me.TabControl1.TabIndex = 0
       '
       'tabRegisterTypes
       '
       Me.tabRegisterTypes.Controls.Add(Me.dlvRegisterTypes)
-      Me.tabRegisterTypes.Location = New System.Drawing.Point(4, 25)
+      Me.tabRegisterTypes.Location = New System.Drawing.Point(4, 22)
+      Me.tabRegisterTypes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.tabRegisterTypes.Name = "tabRegisterTypes"
-      Me.tabRegisterTypes.Padding = New System.Windows.Forms.Padding(3)
-      Me.tabRegisterTypes.Size = New System.Drawing.Size(590, 263)
+      Me.tabRegisterTypes.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+      Me.tabRegisterTypes.Size = New System.Drawing.Size(456, 204)
       Me.tabRegisterTypes.TabIndex = 3
       Me.tabRegisterTypes.Text = "Register Types"
       Me.tabRegisterTypes.UseVisualStyleBackColor = True
@@ -105,20 +107,22 @@ Partial Class formFreeregTables
       Me.dlvRegisterTypes.AllColumns.Add(Me.olvc0Description)
       Me.dlvRegisterTypes.CellEditUseWholeCell = False
       Me.dlvRegisterTypes.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvc0Type, Me.olvc0Description})
+      Me.dlvRegisterTypes.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvRegisterTypes.DataSource = Nothing
       Me.dlvRegisterTypes.Dock = System.Windows.Forms.DockStyle.Fill
       Me.dlvRegisterTypes.EmptyListMsg = "The Register Types table has no entries"
       Me.dlvRegisterTypes.FullRowSelect = True
       Me.dlvRegisterTypes.GridLines = True
       Me.dlvRegisterTypes.HeaderWordWrap = True
-      Me.dlvRegisterTypes.Location = New System.Drawing.Point(3, 3)
+      Me.dlvRegisterTypes.Location = New System.Drawing.Point(3, 2)
+      Me.dlvRegisterTypes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.dlvRegisterTypes.MultiSelect = False
       Me.dlvRegisterTypes.Name = "dlvRegisterTypes"
       Me.dlvRegisterTypes.SelectColumnsOnRightClick = False
       Me.dlvRegisterTypes.SelectColumnsOnRightClickBehaviour = BrightIdeasSoftware.ObjectListView.ColumnSelectBehaviour.None
       Me.dlvRegisterTypes.ShowGroups = False
       Me.dlvRegisterTypes.ShowSortIndicators = False
-      Me.dlvRegisterTypes.Size = New System.Drawing.Size(584, 257)
+      Me.dlvRegisterTypes.Size = New System.Drawing.Size(450, 200)
       Me.dlvRegisterTypes.TabIndex = 0
       Me.dlvRegisterTypes.UseCompatibleStateImageBehavior = False
       Me.dlvRegisterTypes.View = System.Windows.Forms.View.Details
@@ -149,9 +153,10 @@ Partial Class formFreeregTables
       '
       Me.tabCounties.Controls.Add(Me.dlvCounties)
       Me.tabCounties.Location = New System.Drawing.Point(4, 22)
+      Me.tabCounties.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.tabCounties.Name = "tabCounties"
-      Me.tabCounties.Padding = New System.Windows.Forms.Padding(3)
-      Me.tabCounties.Size = New System.Drawing.Size(590, 266)
+      Me.tabCounties.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+      Me.tabCounties.Size = New System.Drawing.Size(456, 203)
       Me.tabCounties.TabIndex = 1
       Me.tabCounties.Text = "Counties"
       Me.tabCounties.UseVisualStyleBackColor = True
@@ -170,14 +175,15 @@ Partial Class formFreeregTables
       Me.dlvCounties.FullRowSelect = True
       Me.dlvCounties.GridLines = True
       Me.dlvCounties.HeaderWordWrap = True
-      Me.dlvCounties.Location = New System.Drawing.Point(3, 3)
+      Me.dlvCounties.Location = New System.Drawing.Point(3, 2)
+      Me.dlvCounties.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.dlvCounties.MultiSelect = False
       Me.dlvCounties.Name = "dlvCounties"
       Me.dlvCounties.ShowCommandMenuOnRightClick = True
       Me.dlvCounties.ShowFilterMenuOnRightClick = False
       Me.dlvCounties.ShowGroups = False
       Me.dlvCounties.ShowItemCountOnGroups = True
-      Me.dlvCounties.Size = New System.Drawing.Size(584, 260)
+      Me.dlvCounties.Size = New System.Drawing.Size(450, 199)
       Me.dlvCounties.SortGroupItemsByPrimaryColumn = False
       Me.dlvCounties.TabIndex = 0
       Me.dlvCounties.UseCompatibleStateImageBehavior = False
@@ -224,9 +230,10 @@ Partial Class formFreeregTables
       '
       Me.tabPlaces.Controls.Add(Me.dlvPlaces)
       Me.tabPlaces.Location = New System.Drawing.Point(4, 22)
+      Me.tabPlaces.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.tabPlaces.Name = "tabPlaces"
-      Me.tabPlaces.Padding = New System.Windows.Forms.Padding(3)
-      Me.tabPlaces.Size = New System.Drawing.Size(590, 266)
+      Me.tabPlaces.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+      Me.tabPlaces.Size = New System.Drawing.Size(456, 203)
       Me.tabPlaces.TabIndex = 2
       Me.tabPlaces.Text = "Places"
       Me.tabPlaces.UseVisualStyleBackColor = True
@@ -247,13 +254,14 @@ Partial Class formFreeregTables
       Me.dlvPlaces.FullRowSelect = True
       Me.dlvPlaces.GridLines = True
       Me.dlvPlaces.HeaderWordWrap = True
-      Me.dlvPlaces.Location = New System.Drawing.Point(3, 3)
+      Me.dlvPlaces.Location = New System.Drawing.Point(3, 2)
+      Me.dlvPlaces.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.dlvPlaces.MultiSelect = False
       Me.dlvPlaces.Name = "dlvPlaces"
       Me.dlvPlaces.ShowCommandMenuOnRightClick = True
       Me.dlvPlaces.ShowGroups = False
       Me.dlvPlaces.ShowItemCountOnGroups = True
-      Me.dlvPlaces.Size = New System.Drawing.Size(584, 260)
+      Me.dlvPlaces.Size = New System.Drawing.Size(450, 199)
       Me.dlvPlaces.SortGroupItemsByPrimaryColumn = False
       Me.dlvPlaces.Sorting = System.Windows.Forms.SortOrder.Ascending
       Me.dlvPlaces.TabIndex = 0
@@ -322,10 +330,11 @@ Partial Class formFreeregTables
       'tabChurches
       '
       Me.tabChurches.Controls.Add(Me.dlvChurches)
-      Me.tabChurches.Location = New System.Drawing.Point(4, 25)
+      Me.tabChurches.Location = New System.Drawing.Point(4, 22)
+      Me.tabChurches.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.tabChurches.Name = "tabChurches"
-      Me.tabChurches.Padding = New System.Windows.Forms.Padding(3)
-      Me.tabChurches.Size = New System.Drawing.Size(590, 263)
+      Me.tabChurches.Padding = New System.Windows.Forms.Padding(3, 2, 3, 2)
+      Me.tabChurches.Size = New System.Drawing.Size(456, 203)
       Me.tabChurches.TabIndex = 0
       Me.tabChurches.Text = "Churches"
       Me.tabChurches.UseVisualStyleBackColor = True
@@ -351,14 +360,15 @@ Partial Class formFreeregTables
       Me.dlvChurches.FullRowSelect = True
       Me.dlvChurches.GridLines = True
       Me.dlvChurches.HeaderWordWrap = True
-      Me.dlvChurches.Location = New System.Drawing.Point(3, 3)
+      Me.dlvChurches.Location = New System.Drawing.Point(3, 2)
+      Me.dlvChurches.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.dlvChurches.MultiSelect = False
       Me.dlvChurches.Name = "dlvChurches"
       Me.dlvChurches.ShowCommandMenuOnRightClick = True
       Me.dlvChurches.ShowGroups = False
       Me.dlvChurches.ShowItemCountOnGroups = True
       Me.dlvChurches.ShowItemToolTips = True
-      Me.dlvChurches.Size = New System.Drawing.Size(584, 257)
+      Me.dlvChurches.Size = New System.Drawing.Size(450, 199)
       Me.dlvChurches.SortGroupItemsByPrimaryColumn = False
       Me.dlvChurches.TabIndex = 0
       Me.dlvChurches.UseCompatibleStateImageBehavior = False
@@ -373,7 +383,7 @@ Partial Class formFreeregTables
       Me.olvc3ChurchName.IsEditable = False
       Me.olvc3ChurchName.Sortable = False
       Me.olvc3ChurchName.Text = "Church Name"
-      Me.olvc3ChurchName.Width = 95
+      Me.olvc3ChurchName.Width = 120
       '
       'olvc3FileCode
       '
@@ -382,9 +392,10 @@ Partial Class formFreeregTables
       Me.olvc3FileCode.Groupable = False
       Me.olvc3FileCode.Sortable = False
       Me.olvc3FileCode.Text = "File Code"
+      Me.olvc3FileCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       Me.olvc3FileCode.ToolTipText = "This field is user-defined and controls that part of the transcription filename t" & _
     "hat is allocated to the place/church"
-      Me.olvc3FileCode.Width = 77
+      Me.olvc3FileCode.Width = 35
       '
       'olvc3Notes
       '
@@ -466,6 +477,7 @@ Partial Class formFreeregTables
       Me.SplitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
       Me.SplitContainer1.IsSplitterFixed = True
       Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+      Me.SplitContainer1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.SplitContainer1.Name = "SplitContainer1"
       Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
       '
@@ -480,25 +492,27 @@ Partial Class formFreeregTables
       Me.SplitContainer1.Panel2.Controls.Add(Me.cboxCounties)
       Me.SplitContainer1.Panel2.Controls.Add(Me.labCounty)
       Me.SplitContainer1.Panel2.Controls.Add(Me.btnFetch)
-      Me.SplitContainer1.Size = New System.Drawing.Size(598, 339)
-      Me.SplitContainer1.SplitterDistance = 292
+      Me.SplitContainer1.Size = New System.Drawing.Size(464, 275)
+      Me.SplitContainer1.SplitterDistance = 230
+      Me.SplitContainer1.SplitterWidth = 3
       Me.SplitContainer1.TabIndex = 1
       '
       'cboxPlaces
       '
       Me.cboxPlaces.FormattingEnabled = True
-      Me.cboxPlaces.Location = New System.Drawing.Point(196, 9)
+      Me.cboxPlaces.Location = New System.Drawing.Point(139, 8)
+      Me.cboxPlaces.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.cboxPlaces.Name = "cboxPlaces"
-      Me.cboxPlaces.Size = New System.Drawing.Size(247, 24)
+      Me.cboxPlaces.Size = New System.Drawing.Size(187, 21)
       Me.cboxPlaces.TabIndex = 5
       Me.cboxPlaces.Visible = False
       '
       'labPlace
       '
       Me.labPlace.AutoSize = True
-      Me.labPlace.Location = New System.Drawing.Point(146, 13)
+      Me.labPlace.Location = New System.Drawing.Point(101, 11)
       Me.labPlace.Name = "labPlace"
-      Me.labPlace.Size = New System.Drawing.Size(43, 16)
+      Me.labPlace.Size = New System.Drawing.Size(34, 13)
       Me.labPlace.TabIndex = 4
       Me.labPlace.Text = "Place"
       Me.labPlace.Visible = False
@@ -506,18 +520,19 @@ Partial Class formFreeregTables
       'cboxCounties
       '
       Me.cboxCounties.FormattingEnabled = True
-      Me.cboxCounties.Location = New System.Drawing.Point(68, 9)
+      Me.cboxCounties.Location = New System.Drawing.Point(51, 8)
+      Me.cboxCounties.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.cboxCounties.Name = "cboxCounties"
-      Me.cboxCounties.Size = New System.Drawing.Size(58, 24)
+      Me.cboxCounties.Size = New System.Drawing.Size(44, 21)
       Me.cboxCounties.TabIndex = 3
       Me.cboxCounties.Visible = False
       '
       'labCounty
       '
       Me.labCounty.AutoSize = True
-      Me.labCounty.Location = New System.Drawing.Point(13, 13)
+      Me.labCounty.Location = New System.Drawing.Point(9, 11)
       Me.labCounty.Name = "labCounty"
-      Me.labCounty.Size = New System.Drawing.Size(49, 16)
+      Me.labCounty.Size = New System.Drawing.Size(40, 13)
       Me.labCounty.TabIndex = 1
       Me.labCounty.Text = "County"
       Me.labCounty.Visible = False
@@ -527,9 +542,10 @@ Partial Class formFreeregTables
       Me.btnFetch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.btnFetch.AutoSize = True
-      Me.btnFetch.Location = New System.Drawing.Point(499, 8)
+      Me.btnFetch.Location = New System.Drawing.Point(389, 6)
+      Me.btnFetch.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.btnFetch.Name = "btnFetch"
-      Me.btnFetch.Size = New System.Drawing.Size(75, 26)
+      Me.btnFetch.Size = New System.Drawing.Size(57, 31)
       Me.btnFetch.TabIndex = 0
       Me.btnFetch.Text = "Fetch"
       Me.btnFetch.UseVisualStyleBackColor = True
@@ -549,14 +565,13 @@ Partial Class formFreeregTables
       '
       'formFreeregTables
       '
-      Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+      Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-      Me.ClientSize = New System.Drawing.Size(598, 339)
+      Me.ClientSize = New System.Drawing.Size(464, 275)
       Me.Controls.Add(Me.SplitContainer1)
-      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.HelpButton = True
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-      Me.Margin = New System.Windows.Forms.Padding(4)
       Me.MaximizeBox = False
       Me.MinimizeBox = False
       Me.Name = "formFreeregTables"

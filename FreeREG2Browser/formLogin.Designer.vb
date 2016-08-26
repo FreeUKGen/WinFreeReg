@@ -123,6 +123,7 @@ Partial Class formLogin
       Me.AcceptButton = Me.OK_Button
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+      Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
       Me.BackColor = System.Drawing.SystemColors.Control
       Me.CancelButton = Me.Cancel_Button
       Me.ClientSize = New System.Drawing.Size(401, 192)
@@ -134,6 +135,7 @@ Partial Class formLogin
       Me.Controls.Add(Me.UsernameTextBox)
       Me.Controls.Add(Me.PasswordLabel)
       Me.Controls.Add(Me.UsernameLabel)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
       Me.MaximizeBox = False

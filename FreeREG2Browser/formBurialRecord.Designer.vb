@@ -183,6 +183,7 @@ Partial Class formBurialRecord
       'RegNoTextBox
       '
       Me.RegNoTextBox.Location = New System.Drawing.Point(124, 11)
+      Me.RegNoTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.RegNoTextBox.Name = "RegNoTextBox"
       Me.RegNoTextBox.Size = New System.Drawing.Size(121, 20)
       Me.RegNoTextBox.TabIndex = 2
@@ -191,6 +192,7 @@ Partial Class formBurialRecord
       'BurialDateTextBox
       '
       Me.BurialDateTextBox.Location = New System.Drawing.Point(124, 37)
+      Me.BurialDateTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.BurialDateTextBox.Name = "BurialDateTextBox"
       Me.BurialDateTextBox.Size = New System.Drawing.Size(121, 20)
       Me.BurialDateTextBox.TabIndex = 4
@@ -199,6 +201,7 @@ Partial Class formBurialRecord
       'ForenamesTextBox
       '
       Me.ForenamesTextBox.Location = New System.Drawing.Point(124, 63)
+      Me.ForenamesTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.ForenamesTextBox.Name = "ForenamesTextBox"
       Me.ForenamesTextBox.Size = New System.Drawing.Size(121, 20)
       Me.ForenamesTextBox.TabIndex = 6
@@ -210,6 +213,7 @@ Partial Class formBurialRecord
       Me.RelationshipComboBox.DisplayMember = "DisplayValue"
       Me.RelationshipComboBox.FormattingEnabled = True
       Me.RelationshipComboBox.Location = New System.Drawing.Point(124, 89)
+      Me.RelationshipComboBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.RelationshipComboBox.Name = "RelationshipComboBox"
       Me.RelationshipComboBox.Size = New System.Drawing.Size(121, 21)
       Me.RelationshipComboBox.TabIndex = 8
@@ -224,6 +228,7 @@ Partial Class formBurialRecord
       'MaleForenamesTextBox
       '
       Me.MaleForenamesTextBox.Location = New System.Drawing.Point(124, 116)
+      Me.MaleForenamesTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.MaleForenamesTextBox.Name = "MaleForenamesTextBox"
       Me.MaleForenamesTextBox.Size = New System.Drawing.Size(121, 20)
       Me.MaleForenamesTextBox.TabIndex = 10
@@ -232,6 +237,7 @@ Partial Class formBurialRecord
       'FemaleForenamesTextBox
       '
       Me.FemaleForenamesTextBox.Location = New System.Drawing.Point(124, 142)
+      Me.FemaleForenamesTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.FemaleForenamesTextBox.Name = "FemaleForenamesTextBox"
       Me.FemaleForenamesTextBox.Size = New System.Drawing.Size(121, 20)
       Me.FemaleForenamesTextBox.TabIndex = 12
@@ -240,6 +246,7 @@ Partial Class formBurialRecord
       'RelativeSurnameTextBox
       '
       Me.RelativeSurnameTextBox.Location = New System.Drawing.Point(124, 168)
+      Me.RelativeSurnameTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.RelativeSurnameTextBox.Name = "RelativeSurnameTextBox"
       Me.RelativeSurnameTextBox.Size = New System.Drawing.Size(121, 20)
       Me.RelativeSurnameTextBox.TabIndex = 14
@@ -248,6 +255,7 @@ Partial Class formBurialRecord
       'SurnameTextBox
       '
       Me.SurnameTextBox.Location = New System.Drawing.Point(313, 63)
+      Me.SurnameTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.SurnameTextBox.Name = "SurnameTextBox"
       Me.SurnameTextBox.Size = New System.Drawing.Size(121, 20)
       Me.SurnameTextBox.TabIndex = 16
@@ -256,6 +264,7 @@ Partial Class formBurialRecord
       'AgeTextBox
       '
       Me.AgeTextBox.Location = New System.Drawing.Point(313, 89)
+      Me.AgeTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.AgeTextBox.Name = "AgeTextBox"
       Me.AgeTextBox.Size = New System.Drawing.Size(121, 20)
       Me.AgeTextBox.TabIndex = 18
@@ -264,6 +273,7 @@ Partial Class formBurialRecord
       'AbodeTextBox
       '
       Me.AbodeTextBox.Location = New System.Drawing.Point(124, 194)
+      Me.AbodeTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.AbodeTextBox.Name = "AbodeTextBox"
       Me.AbodeTextBox.Size = New System.Drawing.Size(121, 20)
       Me.AbodeTextBox.TabIndex = 20
@@ -272,6 +282,7 @@ Partial Class formBurialRecord
       'NotesTextBox
       '
       Me.NotesTextBox.Location = New System.Drawing.Point(124, 220)
+      Me.NotesTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.NotesTextBox.Name = "NotesTextBox"
       Me.NotesTextBox.Size = New System.Drawing.Size(310, 20)
       Me.NotesTextBox.TabIndex = 22
@@ -280,6 +291,7 @@ Partial Class formBurialRecord
       'LDSFicheTextBox
       '
       Me.LDSFicheTextBox.Location = New System.Drawing.Point(124, 246)
+      Me.LDSFicheTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.LDSFicheTextBox.Name = "LDSFicheTextBox"
       Me.LDSFicheTextBox.Size = New System.Drawing.Size(121, 20)
       Me.LDSFicheTextBox.TabIndex = 24
@@ -288,6 +300,7 @@ Partial Class formBurialRecord
       'LDSImageTextBox
       '
       Me.LDSImageTextBox.Location = New System.Drawing.Point(267, 246)
+      Me.LDSImageTextBox.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.LDSImageTextBox.Name = "LDSImageTextBox"
       Me.LDSImageTextBox.Size = New System.Drawing.Size(121, 20)
       Me.LDSImageTextBox.TabIndex = 26
@@ -298,8 +311,9 @@ Partial Class formBurialRecord
       Me.ButtonOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.ButtonOK.DialogResult = System.Windows.Forms.DialogResult.OK
       Me.ButtonOK.Location = New System.Drawing.Point(295, 304)
+      Me.ButtonOK.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.ButtonOK.Name = "ButtonOK"
-      Me.ButtonOK.Size = New System.Drawing.Size(75, 23)
+      Me.ButtonOK.Size = New System.Drawing.Size(75, 24)
       Me.ButtonOK.TabIndex = 27
       Me.ButtonOK.Text = "OK"
       Me.ButtonOK.UseVisualStyleBackColor = True
@@ -309,8 +323,9 @@ Partial Class formBurialRecord
       Me.ButtonCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.ButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
       Me.ButtonCancel.Location = New System.Drawing.Point(376, 304)
+      Me.ButtonCancel.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.ButtonCancel.Name = "ButtonCancel"
-      Me.ButtonCancel.Size = New System.Drawing.Size(75, 23)
+      Me.ButtonCancel.Size = New System.Drawing.Size(75, 24)
       Me.ButtonCancel.TabIndex = 28
       Me.ButtonCancel.Text = "Cancel"
       Me.ButtonCancel.UseVisualStyleBackColor = True
@@ -349,8 +364,10 @@ Partial Class formBurialRecord
       Me.Controls.Add(LDSFicheLabel)
       Me.Controls.Add(Me.LDSFicheTextBox)
       Me.Controls.Add(Me.LDSImageTextBox)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D
       Me.HelpButton = True
+      Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
       Me.MaximizeBox = False
       Me.MinimizeBox = False
       Me.Name = "formBurialRecord"

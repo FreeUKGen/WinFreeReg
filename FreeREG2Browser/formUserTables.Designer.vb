@@ -468,6 +468,7 @@ Partial Class formUserTables
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.ClientSize = New System.Drawing.Size(542, 340)
       Me.Controls.Add(Me.SplitContainer1)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.Name = "formUserTables"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "WinFreeREG - User Tables"

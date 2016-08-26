@@ -109,6 +109,9 @@ Public Class formFreeregTables
    Sub ConfigureChurchesOLV()
       dlvChurches.DataSource = _tables
       dlvChurches.DataMember = "Churches"
+
+      olvc3ChurchName.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+      olvc3FileCode.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize)
    End Sub
 
 #Region "ObjectListView delegates"
@@ -237,6 +240,125 @@ Public Class formFreeregTables
       End If
    End Sub
 
+   Private Sub cboxCounties_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboxCounties.SelectedIndexChanged
+      Select Case TabControl1.SelectedTab.Name
+         Case "tabRegisterTypes"
+         Case "tabCounties"
+         Case "tabPlaces"
+            If ignoreSelection > 0 Then
+               dlvPlaces.ModelFilter = Nothing
+               dlvPlaces.ModelFilter = New FilterPlacesByCounty(_myDefaultCounty.Code)
+               ignoreSelection -= 1
+            Else
+               If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
+                  dlvPlaces.ModelFilter = Nothing
+                  dlvPlaces.ModelFilter = New FilterPlacesByCounty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
+                  currentCountyCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
+               Else
+                  dlvPlaces.ModelFilter = Nothing
+                  currentCountyCode = _myDefaultCounty.Code
+               End If
+            End If
+
+         Case "tabChurches"
+            If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
+               dlvChurches.ModelFilter = Nothing
+               Dim filterChurches = New FilterChurchesByCountyAndPlace()
+               filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
+
+               Dim dt = _tables.Places.Where(Function(row As FreeregTables.PlacesRow) row.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
+               If dt.Count > 0 Then
+                  cboxPlaces.DataSource = New BindingSource(dt, Nothing)
+                  cboxPlaces.DisplayMember = "Placename"
+               Else
+                  cboxPlaces.SelectedIndex = -1
+                  cboxPlaces.Refresh()
+                  cboxPlaces.DataSource = Nothing
+                  cboxPlaces.DisplayMember = ""
+                  cboxPlaces.Items.Clear()
+               End If
+
+               If cboxPlaces.SelectedItem IsNot Nothing Then
+                  filterChurches.PlaceName = CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName
+               Else
+                  filterChurches.PlaceName = ""
+               End If
+
+               dlvChurches.ModelFilter = filterChurches
+            Else
+               dlvChurches.ModelFilter = Nothing
+            End If
+      End Select
+   End Sub
+
+   Private Sub cboxPlaces_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboxPlaces.SelectedIndexChanged
+      Select Case TabControl1.SelectedTab.Name
+         Case "tabRegisterTypes"
+         Case "tabCounties"
+         Case "tabPlaces"
+         Case "tabChurches"
+            If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
+               If Not cboxPlaces.SelectedItem Is Nothing Then
+                  If Not String.IsNullOrEmpty(CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName) Then
+                     dlvChurches.ModelFilter = Nothing
+                     Dim filterChurches = New FilterChurchesByCountyAndPlace()
+                     filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
+                     filterChurches.PlaceName = CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName
+                     dlvChurches.ModelFilter = filterChurches
+                  Else
+                     Beep()
+                  End If
+               Else
+                  dlvPlaces.ModelFilter = Nothing
+                  dlvPlaces.ModelFilter = New FilterPlacesByCounty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
+                  currentCountyCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
+                  TabControl1.SelectTab("tabPlaces")
+               End If
+            End If
+      End Select
+   End Sub
+
+   Private Sub formFreeregTables_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
+      Try
+         formHelp.Title = "FreeREG Browser"
+         formHelp.StartPage = "FreeregTables.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
+
+   Private Sub dlvChurches_CellEditStarting(sender As Object, e As CellEditEventArgs) Handles dlvChurches.CellEditStarting
+      If e.Column.AspectName = "FileCode" Then
+         With CType(e.Control, TextBox)
+            .CharacterCasing = CharacterCasing.Upper
+#If USE_FILECODES Then
+            .MaxLength = 8
+#Else
+            .MaxLength = 3
+#End If
+         End With
+      End If
+   End Sub
+
+   Private Sub dlvChurches_CellEditValidating(sender As Object, e As CellEditEventArgs) Handles dlvChurches.CellEditValidating
+      If e.Column.AspectName = "FileCode" Then
+         ' Validation goes here
+         If e.NewValue.ToString = String.Empty Then Exit Sub
+         If e.NewValue.ToString.Length <> CType(e.Control, TextBox).MaxLength Then e.Cancel = True
+      End If
+   End Sub
+
+   Private Sub dlvChurches_CellEditFinishing(sender As Object, e As CellEditEventArgs) Handles dlvChurches.CellEditFinishing
+      If e.Cancel Then Exit Sub
+      If e.Column.AspectName = "FileCode" Then
+         _tables.RegisterTypes.AcceptChanges()
+         _FileIsChanged = True
+      End If
+   End Sub
 #End Region
 
 #Region "Get Register Types Background Thread"
@@ -835,125 +957,6 @@ Public Class formFreeregTables
 
 #End Region
 
-   Private Sub cboxCounties_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboxCounties.SelectedIndexChanged
-      Select Case TabControl1.SelectedTab.Name
-         Case "tabRegisterTypes"
-         Case "tabCounties"
-         Case "tabPlaces"
-            If ignoreSelection > 0 Then
-               dlvPlaces.ModelFilter = Nothing
-               dlvPlaces.ModelFilter = New FilterPlacesByCounty(_myDefaultCounty.Code)
-               ignoreSelection -= 1
-            Else
-               If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
-                  dlvPlaces.ModelFilter = Nothing
-                  dlvPlaces.ModelFilter = New FilterPlacesByCounty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
-                  currentCountyCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
-               Else
-                  dlvPlaces.ModelFilter = Nothing
-                  currentCountyCode = _myDefaultCounty.Code
-               End If
-            End If
-
-         Case "tabChurches"
-            If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
-               dlvChurches.ModelFilter = Nothing
-               Dim filterChurches = New FilterChurchesByCountyAndPlace()
-               filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
-
-               Dim dt = _tables.Places.Where(Function(row As FreeregTables.PlacesRow) row.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
-               If dt.Count > 0 Then
-                  cboxPlaces.DataSource = New BindingSource(dt, Nothing)
-                  cboxPlaces.DisplayMember = "Placename"
-               Else
-                  cboxPlaces.SelectedIndex = -1
-                  cboxPlaces.Refresh()
-                  cboxPlaces.DataSource = Nothing
-                  cboxPlaces.DisplayMember = ""
-                  cboxPlaces.Items.Clear()
-               End If
-
-               If cboxPlaces.SelectedItem IsNot Nothing Then
-                  filterChurches.PlaceName = CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName
-               Else
-                  filterChurches.PlaceName = ""
-               End If
-
-               dlvChurches.ModelFilter = filterChurches
-            Else
-               dlvChurches.ModelFilter = Nothing
-            End If
-      End Select
-   End Sub
-
-   Private Sub cboxPlaces_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cboxPlaces.SelectedIndexChanged
-      Select Case TabControl1.SelectedTab.Name
-         Case "tabRegisterTypes"
-         Case "tabCounties"
-         Case "tabPlaces"
-         Case "tabChurches"
-            If Not String.IsNullOrEmpty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode) Then
-               If Not cboxPlaces.SelectedItem Is Nothing Then
-                  If Not String.IsNullOrEmpty(CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName) Then
-                     dlvChurches.ModelFilter = Nothing
-                     Dim filterChurches = New FilterChurchesByCountyAndPlace()
-                     filterChurches.ChapmanCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
-                     filterChurches.PlaceName = CType(cboxPlaces.SelectedItem, FreeregTables.PlacesRow).PlaceName
-                     dlvChurches.ModelFilter = filterChurches
-                  Else
-                     Beep()
-                  End If
-               Else
-                  dlvPlaces.ModelFilter = Nothing
-                  dlvPlaces.ModelFilter = New FilterPlacesByCounty(CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode)
-                  currentCountyCode = CType(cboxCounties.SelectedItem.row, FreeregTables.CountiesRow).ChapmanCode
-                  TabControl1.SelectTab("tabPlaces")
-               End If
-            End If
-      End Select
-   End Sub
-
-   Private Sub formFreeregTables_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
-      Try
-         formHelp.Title = "FreeREG Browser"
-         formHelp.StartPage = "FreeregTables.html"
-         formHelp.Show()
-
-      Catch ex As Exception
-         formHelp.Hide()
-         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-
-      End Try
-   End Sub
-
-   Private Sub dlvChurches_CellEditStarting(sender As Object, e As CellEditEventArgs) Handles dlvChurches.CellEditStarting
-      If e.Column.AspectName = "FileCode" Then
-         With CType(e.Control, TextBox)
-            .CharacterCasing = CharacterCasing.Upper
-#If USE_FILECODES Then
-            .MaxLength = 8
-#Else
-            .MaxLength = 3
-#End If
-         End With
-      End If
-   End Sub
-
-   Private Sub dlvChurches_CellEditValidating(sender As Object, e As CellEditEventArgs) Handles dlvChurches.CellEditValidating
-      If e.Column.AspectName = "FileCode" Then
-         ' Validation goes here
-         If e.NewValue.ToString = String.Empty Then Exit Sub
-         If e.NewValue.ToString.Length <> CType(e.Control, TextBox).MaxLength Then e.Cancel = True
-      End If
-   End Sub
-
-   Private Sub dlvChurches_CellEditFinishing(sender As Object, e As CellEditEventArgs) Handles dlvChurches.CellEditFinishing
-      If e.Cancel Then Exit Sub
-      If e.Column.AspectName = "FileCode" Then
-         _tables.RegisterTypes.AcceptChanges()
-         _FileIsChanged = True
-      End If
-   End Sub
 
    Public Class FilterPlacesByCounty
       Implements IModelFilter

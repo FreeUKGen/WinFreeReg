@@ -50,7 +50,6 @@ Partial Class formUserDetails
       Dim Email_address_confirmationLabel As System.Windows.Forms.Label
       Dim Skill_notesLabel As System.Windows.Forms.Label
       Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(formUserDetails))
-      Me.UserDetails = New WinFreeReg.UserDetails()
       Me.Skill_levelTextBox = New System.Windows.Forms.TextBox()
       Me.Number_of_filesTextBox = New System.Windows.Forms.TextBox()
       Me.Number_of_recordsTextBox = New System.Windows.Forms.TextBox()
@@ -111,7 +110,6 @@ Partial Class formUserDetails
       Disabled_dateLabel = New System.Windows.Forms.Label()
       Email_address_confirmationLabel = New System.Windows.Forms.Label()
       Skill_notesLabel = New System.Windows.Forms.Label()
-      CType(Me.UserDetails, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
       'Skill_levelLabel
@@ -176,11 +174,12 @@ Partial Class formUserDetails
       PasswordLabel.Size = New System.Drawing.Size(55, 13)
       PasswordLabel.TabIndex = 15
       PasswordLabel.Text = "password:"
+      PasswordLabel.Visible = False
       '
       'Email_addressLabel
       '
       Email_addressLabel.AutoSize = True
-      Email_addressLabel.Location = New System.Drawing.Point(12, 69)
+      Email_addressLabel.Location = New System.Drawing.Point(12, 70)
       Email_addressLabel.Name = "Email_addressLabel"
       Email_addressLabel.Size = New System.Drawing.Size(74, 13)
       Email_addressLabel.TabIndex = 17
@@ -207,7 +206,7 @@ Partial Class formUserDetails
       'Submitter_numberLabel
       '
       Submitter_numberLabel.AutoSize = True
-      Submitter_numberLabel.Location = New System.Drawing.Point(387, 69)
+      Submitter_numberLabel.Location = New System.Drawing.Point(387, 70)
       Submitter_numberLabel.Name = "Submitter_numberLabel"
       Submitter_numberLabel.Size = New System.Drawing.Size(90, 13)
       Submitter_numberLabel.TabIndex = 29
@@ -288,11 +287,12 @@ Partial Class formUserDetails
       'Userid_lower_caseLabel
       '
       Userid_lower_caseLabel.AutoSize = True
-      Userid_lower_caseLabel.Location = New System.Drawing.Point(387, 43)
+      Userid_lower_caseLabel.Location = New System.Drawing.Point(387, 44)
       Userid_lower_caseLabel.Name = "Userid_lower_caseLabel"
       Userid_lower_caseLabel.Size = New System.Drawing.Size(92, 13)
       Userid_lower_caseLabel.TabIndex = 47
       Userid_lower_caseLabel.Text = "userid lower case:"
+      Userid_lower_caseLabel.Visible = False
       '
       'Last_uploadLabel
       '
@@ -315,7 +315,7 @@ Partial Class formUserDetails
       'Disabled_reasonLabel
       '
       Disabled_reasonLabel.AutoSize = True
-      Disabled_reasonLabel.Location = New System.Drawing.Point(387, 381)
+      Disabled_reasonLabel.Location = New System.Drawing.Point(387, 382)
       Disabled_reasonLabel.Name = "Disabled_reasonLabel"
       Disabled_reasonLabel.Size = New System.Drawing.Size(84, 13)
       Disabled_reasonLabel.TabIndex = 53
@@ -329,6 +329,7 @@ Partial Class formUserDetails
       Password_confirmationLabel.Size = New System.Drawing.Size(115, 13)
       Password_confirmationLabel.TabIndex = 59
       Password_confirmationLabel.Text = "password confirmation:"
+      Password_confirmationLabel.Visible = False
       '
       'Disabled_dateLabel
       '
@@ -347,6 +348,7 @@ Partial Class formUserDetails
       Email_address_confirmationLabel.Size = New System.Drawing.Size(134, 13)
       Email_address_confirmationLabel.TabIndex = 65
       Email_address_confirmationLabel.Text = "email address confirmation:"
+      Email_address_confirmationLabel.Visible = False
       '
       'Skill_notesLabel
       '
@@ -357,81 +359,86 @@ Partial Class formUserDetails
       Skill_notesLabel.TabIndex = 67
       Skill_notesLabel.Text = "skill notes:"
       '
-      'UserDetails
-      '
-      Me.UserDetails.DataSetName = "UserDetails"
-      Me.UserDetails.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-      '
       'Skill_levelTextBox
       '
       Me.Skill_levelTextBox.Enabled = False
       Me.Skill_levelTextBox.Location = New System.Drawing.Point(150, 327)
+      Me.Skill_levelTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Skill_levelTextBox.Name = "Skill_levelTextBox"
-      Me.Skill_levelTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Skill_levelTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Skill_levelTextBox.TabIndex = 4
       '
       'Number_of_filesTextBox
       '
       Me.Number_of_filesTextBox.Enabled = False
       Me.Number_of_filesTextBox.Location = New System.Drawing.Point(527, 148)
+      Me.Number_of_filesTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Number_of_filesTextBox.Name = "Number_of_filesTextBox"
-      Me.Number_of_filesTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Number_of_filesTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Number_of_filesTextBox.TabIndex = 6
       '
       'Number_of_recordsTextBox
       '
       Me.Number_of_recordsTextBox.Enabled = False
       Me.Number_of_recordsTextBox.Location = New System.Drawing.Point(527, 174)
+      Me.Number_of_recordsTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Number_of_recordsTextBox.Name = "Number_of_recordsTextBox"
-      Me.Number_of_recordsTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Number_of_recordsTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Number_of_recordsTextBox.TabIndex = 8
       '
       'Person_roleTextBox
       '
       Me.Person_roleTextBox.Enabled = False
       Me.Person_roleTextBox.Location = New System.Drawing.Point(150, 353)
+      Me.Person_roleTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Person_roleTextBox.Name = "Person_roleTextBox"
-      Me.Person_roleTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Person_roleTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Person_roleTextBox.TabIndex = 10
       '
       'NameTextBox
       '
       Me.NameTextBox.Enabled = False
       Me.NameTextBox.Location = New System.Drawing.Point(150, 15)
+      Me.NameTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.NameTextBox.Name = "NameTextBox"
-      Me.NameTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.NameTextBox.Size = New System.Drawing.Size(199, 20)
       Me.NameTextBox.TabIndex = 12
       '
       'UseridTextBox
       '
       Me.UseridTextBox.Enabled = False
       Me.UseridTextBox.Location = New System.Drawing.Point(150, 41)
+      Me.UseridTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.UseridTextBox.Name = "UseridTextBox"
-      Me.UseridTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.UseridTextBox.Size = New System.Drawing.Size(199, 20)
       Me.UseridTextBox.TabIndex = 14
       '
       'PasswordTextBox
       '
       Me.PasswordTextBox.Enabled = False
       Me.PasswordTextBox.Location = New System.Drawing.Point(150, 119)
+      Me.PasswordTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.PasswordTextBox.Name = "PasswordTextBox"
-      Me.PasswordTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.PasswordTextBox.Size = New System.Drawing.Size(199, 20)
       Me.PasswordTextBox.TabIndex = 16
+      Me.PasswordTextBox.Visible = False
       '
       'Email_addressTextBox
       '
       Me.Email_addressTextBox.Enabled = False
       Me.Email_addressTextBox.Location = New System.Drawing.Point(150, 67)
+      Me.Email_addressTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Email_addressTextBox.Name = "Email_addressTextBox"
-      Me.Email_addressTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Email_addressTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Email_addressTextBox.TabIndex = 18
       '
       'ActiveCheckBox
       '
       Me.ActiveCheckBox.Enabled = False
       Me.ActiveCheckBox.Location = New System.Drawing.Point(527, 13)
+      Me.ActiveCheckBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.ActiveCheckBox.Name = "ActiveCheckBox"
-      Me.ActiveCheckBox.Size = New System.Drawing.Size(200, 24)
+      Me.ActiveCheckBox.Size = New System.Drawing.Size(201, 24)
       Me.ActiveCheckBox.TabIndex = 20
       Me.ActiveCheckBox.Text = "Active"
       Me.ActiveCheckBox.UseVisualStyleBackColor = True
@@ -440,8 +447,9 @@ Partial Class formUserDetails
       '
       Me.Fiche_readerCheckBox.Enabled = False
       Me.Fiche_readerCheckBox.Location = New System.Drawing.Point(527, 197)
+      Me.Fiche_readerCheckBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Fiche_readerCheckBox.Name = "Fiche_readerCheckBox"
-      Me.Fiche_readerCheckBox.Size = New System.Drawing.Size(200, 24)
+      Me.Fiche_readerCheckBox.Size = New System.Drawing.Size(201, 24)
       Me.Fiche_readerCheckBox.TabIndex = 24
       Me.Fiche_readerCheckBox.Text = "Fiche reader"
       Me.Fiche_readerCheckBox.UseVisualStyleBackColor = True
@@ -450,96 +458,109 @@ Partial Class formUserDetails
       '
       Me.AddressTextBox.Enabled = False
       Me.AddressTextBox.Location = New System.Drawing.Point(150, 171)
+      Me.AddressTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.AddressTextBox.Name = "AddressTextBox"
-      Me.AddressTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.AddressTextBox.Size = New System.Drawing.Size(199, 20)
       Me.AddressTextBox.TabIndex = 26
       '
       'SyndicateTextBox
       '
       Me.SyndicateTextBox.Enabled = False
       Me.SyndicateTextBox.Location = New System.Drawing.Point(150, 223)
+      Me.SyndicateTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.SyndicateTextBox.Name = "SyndicateTextBox"
-      Me.SyndicateTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.SyndicateTextBox.Size = New System.Drawing.Size(199, 20)
       Me.SyndicateTextBox.TabIndex = 28
       '
       'Submitter_numberTextBox
       '
       Me.Submitter_numberTextBox.Enabled = False
       Me.Submitter_numberTextBox.Location = New System.Drawing.Point(527, 66)
+      Me.Submitter_numberTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Submitter_numberTextBox.Name = "Submitter_numberTextBox"
-      Me.Submitter_numberTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Submitter_numberTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Submitter_numberTextBox.TabIndex = 30
       '
       'Previous_syndicateTextBox
       '
       Me.Previous_syndicateTextBox.Enabled = False
-      Me.Previous_syndicateTextBox.Location = New System.Drawing.Point(527, 225)
+      Me.Previous_syndicateTextBox.Location = New System.Drawing.Point(527, 226)
+      Me.Previous_syndicateTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Previous_syndicateTextBox.Name = "Previous_syndicateTextBox"
-      Me.Previous_syndicateTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Previous_syndicateTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Previous_syndicateTextBox.TabIndex = 34
       '
       'DigestTextBox
       '
       Me.DigestTextBox.Enabled = False
-      Me.DigestTextBox.Location = New System.Drawing.Point(527, 250)
+      Me.DigestTextBox.Location = New System.Drawing.Point(527, 251)
+      Me.DigestTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.DigestTextBox.Name = "DigestTextBox"
-      Me.DigestTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.DigestTextBox.Size = New System.Drawing.Size(199, 20)
       Me.DigestTextBox.TabIndex = 36
       '
       'Syndicate_groupsTextBox
       '
       Me.Syndicate_groupsTextBox.Enabled = False
       Me.Syndicate_groupsTextBox.Location = New System.Drawing.Point(150, 249)
+      Me.Syndicate_groupsTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Syndicate_groupsTextBox.Name = "Syndicate_groupsTextBox"
-      Me.Syndicate_groupsTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Syndicate_groupsTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Syndicate_groupsTextBox.TabIndex = 38
       '
       'County_groupsTextBox
       '
       Me.County_groupsTextBox.Enabled = False
       Me.County_groupsTextBox.Location = New System.Drawing.Point(150, 275)
+      Me.County_groupsTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.County_groupsTextBox.Name = "County_groupsTextBox"
-      Me.County_groupsTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.County_groupsTextBox.Size = New System.Drawing.Size(199, 20)
       Me.County_groupsTextBox.TabIndex = 40
       '
       'Country_groupsTextBox
       '
       Me.Country_groupsTextBox.Enabled = False
       Me.Country_groupsTextBox.Location = New System.Drawing.Point(150, 301)
+      Me.Country_groupsTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Country_groupsTextBox.Name = "Country_groupsTextBox"
-      Me.Country_groupsTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Country_groupsTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Country_groupsTextBox.TabIndex = 42
       '
       'Userid_lower_caseTextBox
       '
       Me.Userid_lower_caseTextBox.Enabled = False
       Me.Userid_lower_caseTextBox.Location = New System.Drawing.Point(527, 40)
+      Me.Userid_lower_caseTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Userid_lower_caseTextBox.Name = "Userid_lower_caseTextBox"
-      Me.Userid_lower_caseTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Userid_lower_caseTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Userid_lower_caseTextBox.TabIndex = 48
+      Me.Userid_lower_caseTextBox.Visible = False
       '
       'Telephone_numberTextBox
       '
       Me.Telephone_numberTextBox.Enabled = False
       Me.Telephone_numberTextBox.Location = New System.Drawing.Point(150, 197)
+      Me.Telephone_numberTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Telephone_numberTextBox.Name = "Telephone_numberTextBox"
-      Me.Telephone_numberTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Telephone_numberTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Telephone_numberTextBox.TabIndex = 52
       '
       'Disabled_reasonTextBox
       '
       Me.Disabled_reasonTextBox.Enabled = False
       Me.Disabled_reasonTextBox.Location = New System.Drawing.Point(527, 378)
+      Me.Disabled_reasonTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Disabled_reasonTextBox.Name = "Disabled_reasonTextBox"
-      Me.Disabled_reasonTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Disabled_reasonTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Disabled_reasonTextBox.TabIndex = 54
       '
       'Technical_agreementCheckBox
       '
       Me.Technical_agreementCheckBox.Enabled = False
       Me.Technical_agreementCheckBox.Location = New System.Drawing.Point(527, 404)
+      Me.Technical_agreementCheckBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Technical_agreementCheckBox.Name = "Technical_agreementCheckBox"
-      Me.Technical_agreementCheckBox.Size = New System.Drawing.Size(200, 24)
+      Me.Technical_agreementCheckBox.Size = New System.Drawing.Size(201, 24)
       Me.Technical_agreementCheckBox.TabIndex = 56
       Me.Technical_agreementCheckBox.Text = "Technical agreeement"
       Me.Technical_agreementCheckBox.UseVisualStyleBackColor = True
@@ -548,8 +569,9 @@ Partial Class formUserDetails
       '
       Me.Research_agreementCheckBox.Enabled = False
       Me.Research_agreementCheckBox.Location = New System.Drawing.Point(527, 423)
+      Me.Research_agreementCheckBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Research_agreementCheckBox.Name = "Research_agreementCheckBox"
-      Me.Research_agreementCheckBox.Size = New System.Drawing.Size(200, 24)
+      Me.Research_agreementCheckBox.Size = New System.Drawing.Size(201, 24)
       Me.Research_agreementCheckBox.TabIndex = 58
       Me.Research_agreementCheckBox.Text = "Research agreement"
       Me.Research_agreementCheckBox.UseVisualStyleBackColor = True
@@ -558,16 +580,19 @@ Partial Class formUserDetails
       '
       Me.Password_confirmationTextBox.Enabled = False
       Me.Password_confirmationTextBox.Location = New System.Drawing.Point(150, 145)
+      Me.Password_confirmationTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Password_confirmationTextBox.Name = "Password_confirmationTextBox"
-      Me.Password_confirmationTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Password_confirmationTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Password_confirmationTextBox.TabIndex = 60
+      Me.Password_confirmationTextBox.Visible = False
       '
       'Transcription_agreementCheckBox
       '
       Me.Transcription_agreementCheckBox.Enabled = False
       Me.Transcription_agreementCheckBox.Location = New System.Drawing.Point(527, 444)
+      Me.Transcription_agreementCheckBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Transcription_agreementCheckBox.Name = "Transcription_agreementCheckBox"
-      Me.Transcription_agreementCheckBox.Size = New System.Drawing.Size(200, 24)
+      Me.Transcription_agreementCheckBox.Size = New System.Drawing.Size(201, 24)
       Me.Transcription_agreementCheckBox.TabIndex = 62
       Me.Transcription_agreementCheckBox.Text = "Transcription agreement"
       Me.Transcription_agreementCheckBox.UseVisualStyleBackColor = True
@@ -576,63 +601,72 @@ Partial Class formUserDetails
       '
       Me.Email_address_confirmationTextBox.Enabled = False
       Me.Email_address_confirmationTextBox.Location = New System.Drawing.Point(150, 93)
+      Me.Email_address_confirmationTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Email_address_confirmationTextBox.Name = "Email_address_confirmationTextBox"
-      Me.Email_address_confirmationTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Email_address_confirmationTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Email_address_confirmationTextBox.TabIndex = 66
+      Me.Email_address_confirmationTextBox.Visible = False
       '
       'Skill_notesTextBox
       '
       Me.Skill_notesTextBox.Enabled = False
-      Me.Skill_notesTextBox.Location = New System.Drawing.Point(527, 328)
+      Me.Skill_notesTextBox.Location = New System.Drawing.Point(527, 329)
+      Me.Skill_notesTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Skill_notesTextBox.Name = "Skill_notesTextBox"
-      Me.Skill_notesTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Skill_notesTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Skill_notesTextBox.TabIndex = 68
       '
       'Sign_up_dateTextBox
       '
       Me.Sign_up_dateTextBox.Enabled = False
       Me.Sign_up_dateTextBox.Location = New System.Drawing.Point(527, 96)
+      Me.Sign_up_dateTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Sign_up_dateTextBox.Name = "Sign_up_dateTextBox"
-      Me.Sign_up_dateTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Sign_up_dateTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Sign_up_dateTextBox.TabIndex = 70
       '
       'Last_uploadTextBox
       '
       Me.Last_uploadTextBox.Enabled = False
       Me.Last_uploadTextBox.Location = New System.Drawing.Point(527, 122)
+      Me.Last_uploadTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Last_uploadTextBox.Name = "Last_uploadTextBox"
-      Me.Last_uploadTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Last_uploadTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Last_uploadTextBox.TabIndex = 71
       '
       'U_atTextBox
       '
       Me.U_atTextBox.Enabled = False
-      Me.U_atTextBox.Location = New System.Drawing.Point(527, 276)
+      Me.U_atTextBox.Location = New System.Drawing.Point(527, 277)
+      Me.U_atTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.U_atTextBox.Name = "U_atTextBox"
-      Me.U_atTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.U_atTextBox.Size = New System.Drawing.Size(199, 20)
       Me.U_atTextBox.TabIndex = 72
       '
       'C_atTextBox
       '
       Me.C_atTextBox.Enabled = False
       Me.C_atTextBox.Location = New System.Drawing.Point(527, 301)
+      Me.C_atTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.C_atTextBox.Name = "C_atTextBox"
-      Me.C_atTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.C_atTextBox.Size = New System.Drawing.Size(199, 20)
       Me.C_atTextBox.TabIndex = 73
       '
       'Disabled_dateTextBox
       '
       Me.Disabled_dateTextBox.Enabled = False
       Me.Disabled_dateTextBox.Location = New System.Drawing.Point(150, 379)
+      Me.Disabled_dateTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Disabled_dateTextBox.Name = "Disabled_dateTextBox"
-      Me.Disabled_dateTextBox.Size = New System.Drawing.Size(200, 20)
+      Me.Disabled_dateTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Disabled_dateTextBox.TabIndex = 74
       '
       'btnRefresh
       '
       Me.btnRefresh.Location = New System.Drawing.Point(15, 444)
+      Me.btnRefresh.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.btnRefresh.Name = "btnRefresh"
-      Me.btnRefresh.Size = New System.Drawing.Size(75, 23)
+      Me.btnRefresh.Size = New System.Drawing.Size(75, 22)
       Me.btnRefresh.TabIndex = 75
       Me.btnRefresh.Text = "Refresh"
       Me.btnRefresh.UseVisualStyleBackColor = True
@@ -702,20 +736,20 @@ Partial Class formUserDetails
       Me.Controls.Add(Me.Email_address_confirmationTextBox)
       Me.Controls.Add(Skill_notesLabel)
       Me.Controls.Add(Me.Skill_notesTextBox)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.HelpButton = True
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+      Me.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.MaximizeBox = False
       Me.MinimizeBox = False
       Me.Name = "formUserDetails"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "WinFreeREG - User Profile"
-      CType(Me.UserDetails, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
 
    End Sub
-   Friend WithEvents UserDetails As WinFreeReg.UserDetails
-	Friend WithEvents Skill_levelTextBox As System.Windows.Forms.TextBox
+   Friend WithEvents Skill_levelTextBox As System.Windows.Forms.TextBox
 	Friend WithEvents Number_of_filesTextBox As System.Windows.Forms.TextBox
 	Friend WithEvents Number_of_recordsTextBox As System.Windows.Forms.TextBox
 	Friend WithEvents Person_roleTextBox As System.Windows.Forms.TextBox

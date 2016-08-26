@@ -414,6 +414,7 @@ Partial Class formStartNewFile
       Me.Controls.Add(Me.labPlace)
       Me.Controls.Add(Me.CountiesComboBox)
       Me.Controls.Add(Me.labCounty)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
       Me.Name = "formStartNewFile"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent

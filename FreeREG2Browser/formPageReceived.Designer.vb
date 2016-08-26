@@ -44,6 +44,7 @@ Partial Class formPageReceived
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.ClientSize = New System.Drawing.Size(777, 418)
       Me.Controls.Add(Me.wbPage)
+      Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
       Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
       Me.Name = "formPageReceived"
       Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
