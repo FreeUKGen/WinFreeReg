@@ -47,7 +47,13 @@ Public Class CookieAwareWebClient
 		'Handles the CookieContainer
 		Dim request As HttpWebRequest = CType(MyBase.GetWebRequest(address), HttpWebRequest)
 		request.CookieContainer = CookieContainer
-		'Sets the Timeout if it exists
+
+      request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; rv:48.0) Gecko/20100101 Firefox/48.0"
+      request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+      request.Headers.Add("Accept-Language", "en-GB,en;q=0.5")
+      request.Headers.Add("Accept-Encoding", "gzip, deflate")
+
+      'Sets the Timeout if it exists
 		If _timeout.HasValue Then
 			request.Timeout = _timeout.Value
 		End If
