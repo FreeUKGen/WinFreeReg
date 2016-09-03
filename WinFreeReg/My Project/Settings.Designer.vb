@@ -113,7 +113,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://test3.freereg.org.uk")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://test3.freereg.org.uk")>  _
         Public ReadOnly Property MyTestUrl() As String
             Get
                 Return CType(Me("MyTestUrl"),String)
@@ -122,7 +122,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://freereg2.freereg.org.uk")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://www.freereg.org.uk")>  _
         Public ReadOnly Property MyLiveUrl() As String
             Get
                 Return CType(Me("MyLiveUrl"),String)
