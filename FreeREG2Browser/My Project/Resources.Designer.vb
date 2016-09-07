@@ -171,6 +171,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to The Register Type records have been refreshed.
+        '''</summary>
+        Friend ReadOnly Property msgRegisterTypesRefreshed() As String
+            Get
+                Return ResourceManager.GetString("msgRegisterTypesRefreshed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to The file has errors in it. Do you wish to save the file with the errors in it..
         '''</summary>
         Friend ReadOnly Property msgSaveFileWithErrors() As String

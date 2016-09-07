@@ -562,7 +562,7 @@
 		<row><td>LicenseAgreement</td><td>DlgLine</td><td>Line</td><td>48</td><td>234</td><td>326</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>DlgTitle</td><td>Text</td><td>13</td><td>6</td><td>292</td><td>25</td><td>65539</td><td/><td>##IDS__IsLicenseDlg_LicenseAgreement##</td><td/><td/><td>0</td><td/><td/><td/></row>
 		<row><td>LicenseAgreement</td><td>ISPrintButton</td><td>PushButton</td><td>301</td><td>188</td><td>65</td><td>17</td><td>3</td><td/><td>##IDS_PRINT_BUTTON##</td><td>Agree</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>&lt;ISProductFolder&gt;\Redist\0409\Eula.rtf</td><td/></row>
+		<row><td>LicenseAgreement</td><td>Memo</td><td>ScrollableText</td><td>8</td><td>55</td><td>358</td><td>130</td><td>7</td><td/><td/><td/><td/><td>0</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Other Files\Eula.rtf</td><td/></row>
 		<row><td>LicenseAgreement</td><td>Next</td><td>PushButton</td><td>230</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Back</td><td>PushButton</td><td>164</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_BACK##</td><td>Next</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>MaintenanceType</td><td>Banner</td><td>Bitmap</td><td>0</td><td>0</td><td>374</td><td>44</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary1</td></row>
@@ -626,7 +626,7 @@
 		<row><td>ReadmeInformation</td><td>DlgLine</td><td>Line</td><td>48</td><td>234</td><td>326</td><td>0</td><td>3</td><td/><td/><td/><td/><td>0</td><td>0</td><td/><td/></row>
 		<row><td>ReadmeInformation</td><td>DlgTitle</td><td>Text</td><td>13</td><td>6</td><td>193</td><td>13</td><td>65539</td><td/><td>##IDS__IsReadmeDlg_ReadMeInfo##</td><td>DlgDesc</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>ReadmeInformation</td><td>Next</td><td>PushButton</td><td>230</td><td>243</td><td>66</td><td>17</td><td>1048579</td><td/><td>##IDS_NEXT##</td><td>Cancel</td><td/><td>0</td><td/><td/><td/></row>
-		<row><td>ReadmeInformation</td><td>Readme</td><td>ScrollableText</td><td>10</td><td>55</td><td>353</td><td>166</td><td>3</td><td/><td/><td>Banner</td><td/><td>0</td><td/><td>&lt;ISProductFolder&gt;\Redist\0409\Readme.rtf</td><td/></row>
+		<row><td>ReadmeInformation</td><td>Readme</td><td>ScrollableText</td><td>10</td><td>55</td><td>353</td><td>166</td><td>3</td><td/><td/><td>Banner</td><td/><td>0</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\FreeREG2Browser\Other Files\Readme.rtf</td><td/></row>
 		<row><td>ReadyToInstall</td><td>Back</td><td>PushButton</td><td>164</td><td>243</td><td>66</td><td>17</td><td>3</td><td/><td>##IDS_BACK##</td><td>GroupBox1</td><td/><td>0</td><td/><td/><td/></row>
 		<row><td>ReadyToInstall</td><td>Banner</td><td>Bitmap</td><td>0</td><td>0</td><td>374</td><td>44</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td>NewBinary1</td></row>
 		<row><td>ReadyToInstall</td><td>BannerLine</td><td>Line</td><td>0</td><td>44</td><td>374</td><td>0</td><td>1</td><td/><td/><td/><td/><td>0</td><td/><td/><td/></row>
@@ -3923,6 +3923,20 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I2">ISIconIndex</col>
 		<row><td>ARPPRODUCTICON.exe</td><td/><td>&lt;VSSolutionFolder&gt;\WinFreeReg\appico.ico</td><td>0</td></row>
+		<row><td>_027DDB57EBBD43A3A570FF4988EF95D5.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_15E40F2211AD4054A8E252BAA14EF6FC.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_18B343E41F2E4C9BBF910208223C683F.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_2CD18F0D1DC5460EA7A23010F4D5221F.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_5B5209E5695C4A2C8A748F2119D65A22.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_5EF2DB27B98C45A4832DDA85A5D74F22.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_5F01EA0B14DD4B5A9DD9A635F931D0B9.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_77E2CD8CB3A44F8EB15482E051F0FD26.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_7AAD69C948714577845D3731109496E4.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_8FE3939C2492464AB5B64FDB02C83E3F.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_BD7C719565FA42F9BB553F06C84F567C.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_BDB420C825A34108917DA52288833875.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_C62309795F0F4DF7894C593D73CAD29E.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
+		<row><td>_E972D533A8FC4449A2BD0E77882EF33F.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_EA7D8C99A2AE45A49B6D0B95B057C01E.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 		<row><td>_F11411CBA79A49838BFBBB1676CF708D.exe</td><td/><td>C:\Users\User\Documents\Visual Studio 2012\Projects\WinFreeReg\WinFreeReg\bin\Debug\WinFreeReg.exe</td><td>0</td></row>
 	</table>
@@ -4057,7 +4071,7 @@ QwBEAF8AUgBPAE0AAQBFAHgAcAByAGUAcwBzAA==
 		<row><td>ISTheme</td><td>InstallShield Blue.theme</td></row>
 		<row><td>ISUSLock</td><td>{86C09257-7F13-4E05-9127-0C6EABA99B2A}</td></row>
 		<row><td>ISUSSignature</td><td>{E1FBF83F-1AA5-4221-87EE-F405E55A2563}</td></row>
-		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewRealSetupDesign,viewUpgradePaths,viewUpdateService,viewAppFiles,viewFeatureFiles,viewObjects,viewDependencies,viewShortcuts,viewFileExtensions,viewSupportFiles,viewRelease,viewTextMessages,viewUI,viewServices,viewRegistry,viewIniFiles,viewEnvironmentVariables,viewVRoots,viewSystemSearch,viewCustomActions,viewSetupTypes</td></row>
+		<row><td>ISVisitedViews</td><td>viewAssistant,viewProject,viewRealSetupDesign,viewUpgradePaths,viewUpdateService,viewAppFiles,viewFeatureFiles,viewObjects,viewDependencies,viewShortcuts,viewFileExtensions,viewSupportFiles,viewRelease,viewTextMessages,viewUI,viewServices,viewRegistry,viewIniFiles,viewEnvironmentVariables,viewVRoots,viewSystemSearch,viewCustomActions,viewSetupTypes,viewBillboards</td></row>
 		<row><td>Limited</td><td>1</td></row>
 		<row><td>LockPermissionMode</td><td>1</td></row>
 		<row><td>MsiExecCmdLineOptions</td><td/></row>

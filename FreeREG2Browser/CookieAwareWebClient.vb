@@ -8,32 +8,17 @@ Public Class CookieAwareWebClient
 
 	'Properties to handle implementing a timeout
 	Private _timeout As System.Nullable(Of Integer) = Nothing
-	Public Property Timeout() As System.Nullable(Of Integer)
-		Get
-			Return _timeout
-		End Get
-		Set(ByVal value As System.Nullable(Of Integer))
-			_timeout = value
-		End Set
-	End Property
 
 	'A CookieContainer class to house the Cookie once it is contained within one of the Requests
 	Private _cookiejar As CookieContainer = Nothing
-	Public Property CookieContainer() As CookieContainer
-		Get
-			Return _cookiejar
-		End Get
-		Set(ByVal value As CookieContainer)
-			_cookiejar = value
-		End Set
-	End Property
+   Private _lastpage As String = Nothing
 
 	'Constructor
 	Public Sub New()
-      CookieContainer = Nothing
+      _cookiejar = New CookieContainer
 	End Sub
 
-	'Method to handle setting the optional timeout (in milliseconds)
+   'Method to handle setting the optional timeout (in milliseconds)
 	Public Sub SetTimeout(ByVal timeout As Integer)
 		_timeout = timeout
 	End Sub
@@ -42,43 +27,41 @@ Public Class CookieAwareWebClient
       Return MyBase.GetWebRequest(address)
    End Function
 
+   Public Sub AddCookie(ByVal address As Uri, ByVal cookie As Cookie)
+      _cookiejar.Add(address, cookie)
+   End Sub
+
+   Public Sub ClearReferer()
+      _lastpage = Nothing
+   End Sub
+
 	'This handles using and storing the Cookie information as well as managing the Request timeout
 	Protected Overrides Function GetWebRequest(ByVal address As Uri) As WebRequest
 		'Handles the CookieContainer
 		Dim request As HttpWebRequest = CType(MyBase.GetWebRequest(address), HttpWebRequest)
-		request.CookieContainer = CookieContainer
+      request.CookieContainer = _cookiejar
 
       request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; rv:48.0) Gecko/20100101 Firefox/48.0"
       request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
       request.Headers.Add("Accept-Language", "en-GB,en;q=0.5")
       request.Headers.Add("Accept-Encoding", "gzip, deflate")
-
       'Sets the Timeout if it exists
-		If _timeout.HasValue Then
-			request.Timeout = _timeout.Value
-		End If
-		Return request
+      If _timeout.HasValue Then request.Timeout = _timeout.Value
+
+      If Not _lastpage Is Nothing Then request.Referer = _lastpage
+      _lastpage = address.ToString()
+      Return request
 	End Function
 
 	Protected Overrides Function GetWebResponse(ByVal request As System.Net.WebRequest) As System.Net.WebResponse
 		Dim response = MyBase.GetWebResponse(request)
-		ReadCookies(response)
-		Return response
+      Return response
 	End Function
 
 	Protected Overrides Function GetWebResponse(ByVal request As System.Net.WebRequest, ByVal result As System.IAsyncResult) As System.Net.WebResponse
 		Dim response = MyBase.GetWebResponse(request, result)
-		ReadCookies(response)
-		Return response
+      Return response
 	End Function
-
-	Private Sub ReadCookies(ByVal r As WebResponse)
-		Dim response As HttpWebResponse = CType(r, HttpWebResponse)
-		If response IsNot Nothing Then
-			Dim cookies As CookieCollection = response.Cookies()
-			CookieContainer.Add(cookies)
-		End If
-	End Sub
 
 	Public Sub ShowResponseHeaders()
 		Dim rsp = Me.ResponseHeaders()
@@ -91,23 +74,23 @@ Public Class CookieAwareWebClient
 
 	Public Sub ShowCookies(ByVal uri As Uri)
 		Try
-			If Me.CookieContainer.Count > 0 Then
-				For Each cookie As Cookie In Me.CookieContainer.GetCookies(uri)
-               '					Console.WriteLine("Cookie:")
-               '					Console.WriteLine("{0} = {1}", cookie.Name, cookie.Value)
-               '					Console.WriteLine("Domain: {0}", cookie.Domain)
-               '					Console.WriteLine("Path: {0}", cookie.Path)
-               '					Console.WriteLine("Port: {0}", cookie.Port)
-               '					Console.WriteLine("Secure: {0}", cookie.Secure)
-               '					Console.WriteLine("When issued: {0}", cookie.TimeStamp)
-               '					Console.WriteLine("Expires: {0} (expired? {1})", cookie.Expires, cookie.Expired)
-               '					Console.WriteLine("Don't save: {0}", cookie.Discard)
-               '					Console.WriteLine("Comment: {0}", cookie.Comment)
-               '					Console.WriteLine("Uri for comments: {0}", cookie.CommentUri)
-               '					Console.WriteLine("Version: RFC {0}", IIf(cookie.Version = 1, "2109", "2965"))
-					Console.WriteLine("String: {0}", cookie.ToString())
-				Next
-			End If
+         If _cookiejar.Count > 0 Then
+            For Each cookie As Cookie In _cookiejar.GetCookies(uri)
+               Console.WriteLine("Cookie:")
+               Console.WriteLine("{0} = {1}", cookie.Name, cookie.Value)
+               Console.WriteLine("Domain: {0}", cookie.Domain)
+               Console.WriteLine("Path: {0}", cookie.Path)
+               Console.WriteLine("Port: {0}", cookie.Port)
+               Console.WriteLine("Secure: {0}", cookie.Secure)
+               Console.WriteLine("When issued: {0}", cookie.TimeStamp)
+               Console.WriteLine("Expires: {0} (expired? {1})", cookie.Expires, cookie.Expired)
+               Console.WriteLine("Don't save: {0}", cookie.Discard)
+               Console.WriteLine("Comment: {0}", cookie.Comment)
+               Console.WriteLine("Uri for comments: {0}", cookie.CommentUri)
+               Console.WriteLine("Version: RFC {0}", IIf(cookie.Version = 1, "2109", "2965"))
+               '					Console.WriteLine("String: {0}", cookie.ToString())
+            Next
+         End If
 
 		Catch ex As Exception
 			Beep()

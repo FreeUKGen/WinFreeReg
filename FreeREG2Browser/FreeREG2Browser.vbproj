@@ -401,6 +401,8 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Other Files\Eula.rtf" />
+    <None Include="Other Files\Readme.rtf" />
     <None Include="packages.config" />
     <None Include="UserDetails.xsc">
       <DependentUpon>UserDetails.xsd</DependentUpon>

@@ -2168,294 +2168,168 @@ Public Class FreeREG2Browser
       Dim euDirective As New Cookie("cookiesDirective", "1")
       MyAppSettings.Cookies.Add(euDirective)
 
+
       Using webClient As New CookieAwareWebClient()
          Try
-            '  Tickle FreeREG server
+            '  Tickle FreeREG server to get the Login page
             '
             worker.ReportProgress(0, "Logging on...")
             webClient.SetTimeout(30000)
+            webClient.AddCookie(uri, euDirective)
+            webClient.GetHttpRequest(uri).AllowAutoRedirect = True
             webClient.GetHttpRequest(uri).KeepAlive = True
-            webClient.GetHttpRequest(uri).Expect = "302"
-            webClient.CookieContainer = New CookieContainer()
-            For Each cookie In MyAppSettings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(cookie.name, cookie.value))
-            Next
-            Dim addrRequest As String = MyAppSettings.BaseUrl + "/cms/refinery/login"
-            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
-            Dim login_request = webClient.DownloadString(addrRequest)
 
-            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_users/computer" + String.Format("?computerid={0}&computeridpassword={1}&transcriberid={2}&transcriberpassword={3}", MyAppSettings.TransregName, MyAppSettings.TransregPassword, MyAppSettings.UserId, MyAppSettings.Password)
+            Dim login_page = webClient.DownloadString(addrRequest)
+
+            webClient.ShowResponseHeaders()
+            webClient.ShowCookies(uri)
+
             '  Process any cookies
             '
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")
             MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
-            '  Extract details from the input form
-            '
-            HtmlNode.ElementsFlags.Remove("form")
-            HtmlNode.ElementsFlags.Remove("input")
-            Dim doc As New HtmlAgilityPack.HtmlDocument()
-            doc.LoadHtml(login_request)
-
-            Dim formAction As String = ""
-            Dim forms As HtmlNodeCollection = doc.DocumentNode.SelectNodes("//form")
-            Dim form = forms.First()
-            If form.Id = "new_authentication_devise_user" Then
-               formAction = form.GetAttributeValue("action", "")
-               Dim nodes As HtmlNodeCollection = form.SelectNodes("//input")
-               For Each node As HtmlNode In nodes
-                  Dim name = node.GetAttributeValue("name", "")
-                  Dim type = node.GetAttributeValue("type", "")
-                  If name = "authenticity_token" Then
-                     authenticity_token = node.GetAttributeValue("value", "")
-                  ElseIf name = "utf8" Then
-                     utf8_token = node.GetAttributeValue("value", "")
-                  End If
-               Next
-            End If
-
-            '  Fill the login form
-            '
-            Dim addrPost As String = MyAppSettings.BaseUrl + formAction
-            Dim login_data = New NameValueCollection()
-            login_data.Add("utf8", ChrW(&H2713))
-            login_data.Add("authenticity_token", authenticity_token)
-            login_data.Add("authentication_devise_user[login]", MyAppSettings.TransregName)
-            login_data.Add("authentication_devise_user[password]", MyAppSettings.TransregPassword)
-            login_data.Add("authentication_devise_user[remember_me]", "0")
-
-            '  Add the cookies to the request
-            '
-            For Each Cookie In MyAppSettings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
-            Next
-
-            webClient.GetHttpRequest(uri).KeepAlive = True
-            webClient.GetHttpRequest(uri).Expect = Nothing
-
-            '  POST the submit data
-            '
-            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
-            Dim login_array = webClient.UploadValues(addrPost, "POST", login_data)
-            Dim login_page = Encoding.ASCII.GetString(login_array)
-
-            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
-            '  Process any cookies
-            '
-            hdr = webClient.ResponseHeaders("Set-Cookie")
-            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
-
-            '	Check that we've actually logged in with the transreg userid
-            '
-            Try
-               Dim xmlDoc As New XmlDocument()
-               xmlDoc.LoadXml(login_page)
-               Dim root As XmlElement = xmlDoc.DocumentElement()
-               If root Is Nothing Then
-                  ' No root element
-                  Throw New BackgroundWorkerException("Computer Login failed - Missing root element")
-               Else
-                  If String.Compare(root.Name, "login", True) = 0 Then
-                     Dim element As XmlElement = xmlDoc.SelectSingleNode("/login/result")
-                     If element Is Nothing Then
-                        ' Missing 'result' node
-                        Throw New BackgroundWorkerException("Computer Login failed - Missing result node")
-                     Else
-                        Select Case element.FirstChild.Value
-                           Case "Logged in"
-
-                           Case Else
-                              ' XML Format error
-                              Throw New BackgroundWorkerException("Computer Login - XML format error")
-
-                        End Select
-                     End If
+            If login_page.StartsWith("<?xml", True, CultureInfo.InvariantCulture) Then
+               Try
+                  Dim xmlDoc As New XmlDocument()
+                  xmlDoc.LoadXml(login_page)
+                  Dim root As XmlElement = xmlDoc.DocumentElement()
+                  If root Is Nothing Then
+                     ' No root element
+                     Throw New BackgroundWorkerException("User Authentication failed - Missing root element")
                   Else
-                     Throw New BackgroundWorkerException("Computer Login - Unrecognised response")
-                  End If
-               End If
-
-            Catch ex As BackgroundWorkerException
-               Throw
-
-            Catch ex As XmlException
-               Throw New BackgroundWorkerException("Computer Login failed", ex)
-
-            Catch ex As Exception
-               Throw New BackgroundWorkerException("Computer Login failed", ex)
-
-            End Try
-
-            '  Process any cookies
-            '
-            hdr = webClient.ResponseHeaders("Set-Cookie")
-            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
-
-            Dim loginResponse As New HtmlAgilityPack.HtmlDocument()
-            loginResponse.LoadHtml(login_page)
-            Dim html As HtmlNode = loginResponse.DocumentNode()
-            Dim divs = html.Descendants("div").Where(Function(n) n.GetAttributeValue("class", "").Equals("flash flash_alert")).Any
-            If divs Then
-               Dim div As HtmlNode = html.Descendants("div").Where(Function(n) n.GetAttributeValue("class", "").Equals("flash flash_alert")).Single()
-               If div IsNot Nothing Then
-                  If Not String.IsNullOrEmpty(div.InnerText) Then
-                     Throw New BackgroundWorkerException(String.Format("{0} Computer Login failed - {1}", MyAppSettings.TransregName, div.InnerText))
-                  End If
-               End If
-            End If
-
-            worker.ReportProgress(50, "Authenticating transcriber...")
-            Dim addrAuth As String = MyAppSettings.BaseUrl + "/transreg_users/authenticate"
-            Dim query_data = New NameValueCollection()
-            query_data.Add("transcriberid", MyAppSettings.UserId)
-            query_data.Add("transcriberpassword", MyAppSettings.Password)
-            webClient.QueryString = query_data
-
-            '  Add the cookies to the request
-            '
-            For Each Cookie In MyAppSettings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
-            Next
-            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
-            Dim auth_page = webClient.DownloadString(addrAuth)
-            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
-
-            '  Process any cookies
-            '
-            hdr = webClient.ResponseHeaders("Set-Cookie")
-            MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
-
-            Try
-               Dim xmlDoc As New XmlDocument()
-               xmlDoc.LoadXml(auth_page)
-               Dim root As XmlElement = xmlDoc.DocumentElement()
-               If root Is Nothing Then
-                  ' No root element
-                  Throw New BackgroundWorkerException("User Authentication failed - Missing root element")
-               Else
-                  If String.Compare(root.Name, "authentication", True) = 0 Then
-                     Dim element As XmlElement = xmlDoc.SelectSingleNode("/authentication/result")
-                     If element Is Nothing Then
-                        ' Missing 'result' node
-                        Throw New BackgroundWorkerException("User Authentication failed - Missing result node")
-                     Else
-                        Select Case element.FirstChild.Value
-                           Case "success"
-                              Dim userid As XmlElement = xmlDoc.SelectSingleNode("/authentication/userid_detail")
-                              If userid Is Nothing Then
-                                 ' Missing 'userid-detail' node
-                                 Throw New BackgroundWorkerException("User Authentication failed - Missing userid-detail node")
-                              Else
-                                 Dim dt As UserDetails.UserDataTable = UserDataSet.User
-                                 Dim rec As UserDetails.UserRow
-                                 rec = dt.FindByuserid(MyAppSettings.UserId)
-                                 If rec Is Nothing Then
-                                    rec = dt.NewUserRow()
-                                    For Each el As XmlElement In userid.ChildNodes
-                                       Try
-                                          Dim n As String = el.Name
-                                          Dim z As String = el.InnerText
-                                          If dt.Columns.Contains(n) Then
-                                             Select Case dt.Columns(n).DataType.Name
-                                                Case "Boolean"
-                                                   If Not Boolean.TryParse(z, rec(n)) Then
-                                                      rec(n) = IIf(z = "1", True, False)
-                                                   End If
-                                                Case "UInt16"
-                                                   If Not UInt16.TryParse(z, rec(n)) Then
-                                                      Beep()
-                                                   End If
-                                                Case "DateTime"
-                                                   If Not String.IsNullOrEmpty(z) Then
-                                                      rec(n) = z
-                                                   End If
-                                                Case Else
-                                                   rec(n) = z
-                                             End Select
-                                          End If
-
-                                       Catch ex As Exception
-                                          Throw New BackgroundWorkerException("User Authentication failed", ex)
-                                       End Try
-                                    Next
-                                    dt.AddUserRow(rec)
+                     If String.Compare(root.Name, "authentication", True) = 0 Then
+                        Dim element As XmlElement = xmlDoc.SelectSingleNode("/authentication/result")
+                        If element Is Nothing Then
+                           ' Missing 'result' node
+                           Throw New BackgroundWorkerException("User Authentication failed - Missing result node")
+                        Else
+                           Select Case element.FirstChild.Value
+                              Case "success"
+                                 Dim userid As XmlElement = xmlDoc.SelectSingleNode("/authentication/userid_detail")
+                                 If userid Is Nothing Then
+                                    ' Missing 'userid-detail' node
+                                    Throw New BackgroundWorkerException("User Authentication failed - Missing userid-detail node")
                                  Else
-                                    For Each el As XmlElement In userid.ChildNodes
-                                       Try
-                                          Dim n As String = el.Name
-                                          Dim z As String = el.InnerText
-                                          If dt.Columns.Contains(n) Then
-                                             Select Case dt.Columns(n).DataType.Name
-                                                Case "Boolean"
-                                                   If Not Boolean.TryParse(z, rec(n)) Then
-                                                      rec(n) = IIf(z = "1", True, False)
-                                                   End If
-                                                Case "UInt16"
-                                                   If Not UInt16.TryParse(z, rec(n)) Then
-                                                      Beep()
-                                                   End If
-                                                Case "DateTime"
-                                                   If Not String.IsNullOrEmpty(z) Then
-                                                      If Not DateTime.TryParse(z, rec(n)) Then
+                                    Dim dt As UserDetails.UserDataTable = UserDataSet.User
+                                    Dim rec As UserDetails.UserRow
+                                    rec = dt.FindByuserid(MyAppSettings.UserId)
+                                    If rec Is Nothing Then
+                                       rec = dt.NewUserRow()
+                                       For Each el As XmlElement In userid.ChildNodes
+                                          Try
+                                             Dim n As String = el.Name
+                                             Dim z As String = el.InnerText
+                                             If dt.Columns.Contains(n) Then
+                                                Select Case dt.Columns(n).DataType.Name
+                                                   Case "Boolean"
+                                                      If Not Boolean.TryParse(z, rec(n)) Then
+                                                         rec(n) = IIf(z = "1", True, False)
+                                                      End If
+                                                   Case "UInt16"
+                                                      If Not UInt16.TryParse(z, rec(n)) Then
                                                          Beep()
                                                       End If
-                                                   End If
-                                                Case Else
-                                                   rec(n) = z
-                                             End Select
-                                          End If
+                                                   Case "DateTime"
+                                                      If Not String.IsNullOrEmpty(z) Then
+                                                         rec(n) = z
+                                                      End If
+                                                   Case Else
+                                                      rec(n) = z
+                                                End Select
+                                             End If
 
-                                       Catch ex As Exception
-                                          Throw New BackgroundWorkerException("User Authentication failed", ex)
-                                       End Try
-                                    Next
+                                          Catch ex As Exception
+                                             Throw New BackgroundWorkerException("User Authentication failed", ex)
+                                          End Try
+                                       Next
+                                       dt.AddUserRow(rec)
+                                    Else
+                                       For Each el As XmlElement In userid.ChildNodes
+                                          Try
+                                             Dim n As String = el.Name
+                                             Dim z As String = el.InnerText
+                                             If dt.Columns.Contains(n) Then
+                                                Select Case dt.Columns(n).DataType.Name
+                                                   Case "Boolean"
+                                                      If Not Boolean.TryParse(z, rec(n)) Then
+                                                         rec(n) = IIf(z = "1", True, False)
+                                                      End If
+                                                   Case "UInt16"
+                                                      If Not UInt16.TryParse(z, rec(n)) Then
+                                                         Beep()
+                                                      End If
+                                                   Case "DateTime"
+                                                      If Not String.IsNullOrEmpty(z) Then
+                                                         If Not DateTime.TryParse(z, rec(n)) Then
+                                                            Beep()
+                                                         End If
+                                                      End If
+                                                   Case Else
+                                                      rec(n) = z
+                                                End Select
+                                             End If
+
+                                          Catch ex As Exception
+                                             Throw New BackgroundWorkerException("User Authentication failed", ex)
+                                          End Try
+                                       Next
+                                    End If
+
+                                    UserDataSet.AcceptChanges()
+                                    UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
+
                                  End If
 
-                                 UserDataSet.AcceptChanges()
-                                 UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
+                              Case "unknown_user"
+                                 ' Unknown Transcriber Id.
+                                 Throw New BackgroundWorkerException("User Authentication - unknown transcriber-id")
 
-                              End If
+                              Case "no_match"
+                                 ' Invalid Transcriber Password
+                                 Throw New BackgroundWorkerException("User Authentication - invalid transcriber password")
 
-                           Case "unknown_user"
-                              ' Unknown Transcriber Id.
-                              Throw New BackgroundWorkerException("User Authentication - unknown transcriber-id")
+                              Case Else
+                                 ' XML Format error
+                                 Throw New BackgroundWorkerException("User Authentication - XML format error")
 
-                           Case "no_match"
-                              ' Invalid Transcriber Password
-                              Throw New BackgroundWorkerException("User Authentication - invalid transcriber password")
+                           End Select
+                        End If
 
-                           Case Else
-                              ' XML Format error
-                              Throw New BackgroundWorkerException("User Authentication - XML format error")
-
-                        End Select
+                        worker.ReportProgress(100, "Logged on to FreeREG")
+                     Else
+                        Throw New BackgroundWorkerException("User Authentication - Unrecognised response")
                      End If
-
-                     worker.ReportProgress(100, "Logged on to FreeREG")
-                  Else
-                     Throw New BackgroundWorkerException("User Authentication - Unrecognised response")
                   End If
+
+               Catch ex As BackgroundWorkerException
+                  Throw
+
+               Catch ex As XmlException
+                  Throw New BackgroundWorkerException("User Authentication failed", ex)
+
+               Catch ex As Exception
+                  Throw New BackgroundWorkerException("User Authentication failed", ex)
+
+               End Try
+
+            Else
+               worker.ReportProgress(0, "Computer Log on failed...")
+               If login_page.StartsWith("<!DOCTYPE html>", True, CultureInfo.InvariantCulture) Then
+                  Throw New BackgroundWorkerException("Computer Login - Unexpected response", login_page)
                End If
-
-            Catch ex As BackgroundWorkerException
-               Throw
-
-            Catch ex As XmlException
-               Throw New BackgroundWorkerException("User Authentication failed", ex)
-
-            Catch ex As Exception
-               Throw New BackgroundWorkerException("User Authentication failed", ex)
-
-            End Try
+               Throw New BackgroundWorkerException("Computer Login - Unexpected response")
+            End If
 
          Catch ex As BackgroundWorkerException
             Throw
 
          Catch ex As WebException
-            Dim webResp As HttpWebResponse = ex.Response
-            If webResp Is Nothing Then
+            If ex.Response Is Nothing Then
                Throw New BackgroundWorkerException("Logon to FreeREG failed", ex)
             Else
+               Dim webResp As HttpWebResponse = ex.Response
                Console.WriteLine(String.Format("WebException:{0} Desc:{1}", webResp.StatusCode, webResp.StatusDescription))
                Select Case webResp.StatusCode
                   Case HttpStatusCode.NotFound
@@ -2478,43 +2352,11 @@ Public Class FreeREG2Browser
       Return result
    End Function
 
-   Private Sub ShowAuthorisationResponse(ByVal auth_page As String)
-      Dim page_data As Byte() = Encoding.UTF8.GetBytes(auth_page)
-      Dim ms As New MemoryStream(page_data)
-      Dim reader As New XmlTextReader(ms)
-      reader.WhitespaceHandling = WhitespaceHandling.None
-
-      While reader.Read()
-         Select Case reader.NodeType
-            Case XmlNodeType.Element
-               Console.WriteLine("<{0}>", reader.Name)
-            Case XmlNodeType.Text
-               Console.WriteLine(reader.Value)
-            Case XmlNodeType.CDATA
-               Console.WriteLine("<![CDATA[{0}]]>", reader.Value)
-            Case XmlNodeType.ProcessingInstruction
-               Console.WriteLine("<?{0} {1}?>", reader.Name, reader.Value)
-            Case XmlNodeType.Comment
-               Console.WriteLine("<!--{0}-->", reader.Value)
-            Case XmlNodeType.XmlDeclaration
-               Console.WriteLine("<?xml version='1.0'?>")
-            Case XmlNodeType.Document
-            Case XmlNodeType.DocumentType
-               Console.WriteLine("<!DOCTYPE {0} [{1}]", reader.Name, reader.Value)
-            Case XmlNodeType.EntityReference
-               Console.WriteLine(reader.Name)
-            Case XmlNodeType.EndElement
-               Console.WriteLine("</{0}>", reader.Name)
-         End Select
-      End While
-   End Sub
-
    Public Sub RefreshTranscriber()
       Dim uri = New Uri(MyAppSettings.BaseUrl)
 
       Using webClient As New CookieAwareWebClient()
          webClient.SetTimeout(60000)
-         webClient.CookieContainer = New CookieContainer()
          Dim addrAuth As String = MyAppSettings.BaseUrl + "/transreg_users/refreshuser"
          Dim query_data = New NameValueCollection()
          query_data.Add("transcriberid", MyAppSettings.UserId)
@@ -2523,12 +2365,10 @@ Public Class FreeREG2Browser
          '  Add the cookies to the request
          '
          For Each Cookie In MyAppSettings.Cookies
-            webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+            webClient.AddCookie(uri, New Cookie(Cookie.name, Cookie.value))
          Next
-         Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
          Dim auth_page = webClient.DownloadString(addrAuth)
 
-         Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
          '  Process any cookies
          '
          Dim hdr = webClient.ResponseHeaders("Set-Cookie")
@@ -2712,18 +2552,15 @@ Public Class FreeREG2Browser
          Try
             worker.ReportProgress(0, "Logging out...")
             webClient.SetTimeout(30000)
-            webClient.CookieContainer = New CookieContainer()
             Dim addrRequest As String = MyAppSettings.BaseUrl + "/cms/refinery/logout"
 
             '  Add the cookies to the request
             '
             For Each Cookie In MyAppSettings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+               webClient.AddCookie(uri, New Cookie(Cookie.Name, Cookie.Value))
             Next
-            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
             Dim logout_response = webClient.DownloadString(addrRequest)
 
-            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
             '  Process any cookies
             '
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")
@@ -2918,9 +2755,8 @@ Public Class FreeREG2Browser
          Dim reader2 As StreamReader = New StreamReader(stream2)
          Dim result As String = reader2.ReadToEnd()
 
-         'Console.WriteLine(" In - {0}", wresp.CookieContainer.GetCookieHeader(uri))
-         ''  Process any cookies
-         ''
+         '  Process any cookies
+         '
          'Dim hdr = wr.ResponseHeaders("Set-Cookie")
          'MyAppSettings.Cookies.Add(wr.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
@@ -3217,7 +3053,6 @@ Public Class FreeREG2Browser
       Using webClient As New CookieAwareWebClient()
          Try
             webClient.SetTimeout(30000)
-            webClient.CookieContainer = New CookieContainer()
             Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_csvfiles/delete.xml"
             Dim query_data = New NameValueCollection()
             query_data.Add("transcriberid", MyAppSettings.UserId)
@@ -3228,12 +3063,11 @@ Public Class FreeREG2Browser
             '  Add the cookies to the request
             '
             For Each Cookie In MyAppSettings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+               webClient.AddCookie(uri, New Cookie(Cookie.Name, Cookie.Value))
             Next
-            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+
             Dim contents As String = webClient.DownloadString(addrRequest)
 
-            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
             '  Process any cookies
             '
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")
@@ -3361,20 +3195,19 @@ Public Class FreeREG2Browser
       Using webClient As New CookieAwareWebClient()
          Try
             webClient.SetTimeout(30000)
-            webClient.CookieContainer = New CookieContainer()
             Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_batches/list.xml"
             Dim query_data = New NameValueCollection()
             query_data.Add("transcriber", MyAppSettings.UserId)
             webClient.QueryString = query_data
+
             '  Add the cookies to the request
             '
             For Each Cookie In MyAppSettings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+               webClient.AddCookie(uri, New Cookie(Cookie.Name, Cookie.Value))
             Next
-            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+
             Dim contents As String = webClient.DownloadString(addrRequest)
 
-            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
             '  Process any cookies
             '
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")
@@ -3512,7 +3345,19 @@ Public Class FreeREG2Browser
                Beep()
          End Select
       Else
-         MessageBox.Show(ex.Message)
+         If ex.GetType.Name = "BackgroundWorkerException" Then
+            If Not DirectCast(ex, BackgroundWorkerException).Page Is Nothing Then
+               Using dlg As New formPageReceived()
+                  dlg.Text = DirectCast(ex, BackgroundWorkerException).Message
+                  dlg.wbPage.DocumentText = DirectCast(ex, BackgroundWorkerException).Page
+                  dlg.ShowDialog()
+               End Using
+            Else
+               MessageBox.Show(ex.Message)
+            End If
+         Else
+            MessageBox.Show(ex.Message)
+         End If
       End If
    End Sub
 
@@ -3548,7 +3393,6 @@ Public Class FreeREG2Browser
       Using webClient As New CookieAwareWebClient()
          Try
             webClient.SetTimeout(30000)
-            webClient.CookieContainer = New CookieContainer()
             Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_batches/download.xml"
             Dim query_data = New NameValueCollection()
             query_data.Add("transcriber", MyAppSettings.UserId)
@@ -3558,12 +3402,12 @@ Public Class FreeREG2Browser
             '  Add the cookies to the request
             '
             For Each Cookie In MyAppSettings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(Cookie.name, Cookie.value))
+               webClient.AddCookie(uri, New Cookie(Cookie.Name, Cookie.Value))
             Next
-            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            '            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
             Dim contents As String = webClient.DownloadString(addrRequest)
 
-            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
+            '            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
             '  Process any cookies
             '
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")

@@ -365,7 +365,7 @@ Public Class formFreeregTables
 
    Private Sub backgroundRegisterTypes_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundRegisterTypes.DoWork
       Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-      e.Result = GetRegisterTypes(worker, e)
+      GetRegisterTypes(worker, e)
    End Sub
 
    Private Sub backgroundRegisterTypes_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundRegisterTypes.ProgressChanged
@@ -390,17 +390,32 @@ Public Class formFreeregTables
          ' flag may not have been set, even though CancelAsync was called.
       Else
          ' Finally, handle the case where the operation succeeded.
-         Dim res As BackgroundResult = CType(e.Result, BackgroundResult)
+         MessageBox.Show(e.Result, "Get Register Types", MessageBoxButtons.OK, MessageBoxIcon.Information)
+      End If
+   End Sub
 
+   Private Sub GetRegisterTypes(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs)
+
+      Using webClient As New CookieAwareWebClient()
          Try
-            If res.Result.StartsWith("<RegisterTypes>") Then
-               Dim doc As XmlDocument = New XmlDocument()
-               Dim buf As Byte() = ASCIIEncoding.ASCII.GetBytes(res.Result)
+            webClient.SetTimeout(30000)
+            For Each cookie In _settings.Cookies
+               webClient.AddCookie(uri, New Cookie(cookie.Name, cookie.Value))
+            Next
+
+            Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/register_types.xml"
+            Dim contents = webClient.DownloadString(addrRequest).Trim
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
+
+            If contents.StartsWith("<RegisterTypes>") Then
+               Dim xmlDoc As XmlDocument = New XmlDocument()
+               Dim buf As Byte() = ASCIIEncoding.ASCII.GetBytes(contents)
                Dim ms As MemoryStream = New MemoryStream(buf)
-               doc.Load(ms)
+               xmlDoc.Load(ms)
                ms.Close()
 
-               buf = ASCIIEncoding.ASCII.GetBytes(doc.OuterXml)
+               buf = ASCIIEncoding.ASCII.GetBytes(xmlDoc.OuterXml)
                ms = New MemoryStream(buf)
                Dim ds As DataSet = New DataSet()
                ds.ReadXml(ms, XmlReadMode.InferSchema)
@@ -412,43 +427,36 @@ Public Class formFreeregTables
                Next
                _tables.RegisterTypes.AcceptChanges()
                _FileIsChanged = True
+               e.Result = My.Resources.msgRegisterTypesRefreshed
+            ElseIf contents.StartsWith("<?xml version=""1.0"" encoding=""UTF-8""?>") Then
+               Dim xmlDoc As XmlDocument = New XmlDocument()
+               xmlDoc.LoadXml(contents)
+               Dim root As XmlElement = xmlDoc.DocumentElement()
+               If root Is Nothing Then
+                  ' No root element
+                  Throw New BackgroundWorkerException("Fetch Register Types failed - Missing root element")
+               Else
+                  If String.Compare(root.Name, "register-types", True) = 0 Then
+                     Dim result As XmlElement = xmlDoc.SelectSingleNode("/register-types/result")
+                     If result Is Nothing Then
+                        ' Missing 'result' node
+                        Throw New BackgroundWorkerException("Fetch Register Types failed - Missing result node")
+                     Else
+                        Select Case result.FirstChild.Value
+                           Case "success"
+                           Case "failure"
+                              Dim message = xmlDoc.SelectSingleNode("/register-types/message").FirstChild.Value
+                              '  <message>You are not authorised to use these facilities</message>
+                              Throw New BackgroundWorkerException(message)
+                           Case Else
+                              Throw New BackgroundWorkerException("Fetch Register Types failed - XML format error")
+                        End Select
+                     End If
+                  End If
+               End If
             Else
-               Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG failed - Not logged on")
+               Throw New BackgroundWorkerException("Fetching Register Types from FreeREG failed - not logged on")
             End If
-
-         Catch ex As BackgroundWorkerException
-            Throw
-
-         Catch ex As XmlException
-            Throw New BackgroundWorkerException("Getting RegisterTypes failed", ex)
-
-         Catch ex As Exception
-            Throw New BackgroundWorkerException("Getting RegisterTypes failed", ex)
-
-         End Try
-      End If
-   End Sub
-
-   Function GetRegisterTypes(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Object
-
-      Using webClient As New CookieAwareWebClient()
-         Try
-            webClient.SetTimeout(30000)
-            webClient.CookieContainer = New CookieContainer()
-            For Each cookie In _settings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(cookie.name, cookie.value))
-            Next
-            Console.WriteLine("Out - {0}", webClient.CookieContainer.GetCookieHeader(uri))
-            Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/register_types.xml"
-            Dim response = webClient.DownloadString(addrRequest)
-
-            Console.WriteLine(" In - {0}", webClient.CookieContainer.GetCookieHeader(uri))
-            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
-            _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
-            Dim res As New BackgroundResult()
-            res.Parameter = e.Argument
-            res.Result = response
-            Return res
 
          Catch ex As XmlException
             Throw New BackgroundWorkerException("Getting RegisterTypes from FreeREG failed", ex)
@@ -479,7 +487,7 @@ Public Class formFreeregTables
 
       End Using
 
-   End Function
+   End Sub
 
 #End Region
 
@@ -487,7 +495,7 @@ Public Class formFreeregTables
 
    Private Sub backgroundCounties_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundCounties.DoWork
       Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-      e.Result = GetCounties(worker, e)
+      GetCounties(worker, e)
    End Sub
 
    Private Sub backgroundCounties_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundCounties.ProgressChanged
@@ -512,12 +520,28 @@ Public Class formFreeregTables
          ' flag may not have been set, even though CancelAsync was called.
       Else
          ' Finally, handle the case where the operation succeeded.
-         Dim res As BackgroundResult = CType(e.Result, BackgroundResult)
+         MessageBox.Show(e.Result, "Get Counties", MessageBoxButtons.OK, MessageBoxIcon.Information)
+      End If
+   End Sub
 
+   Private Sub GetCounties(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs)
+
+      Using webClient As New CookieAwareWebClient()
          Try
-            If res.Result.StartsWith("<CountiesTable>") Then
+            webClient.SetTimeout(30000)
+            For Each cookie In _settings.Cookies
+               webClient.AddCookie(uri, New Cookie(cookie.Name, cookie.Value))
+            Next
+
+            Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/list.xml"
+            Dim contents As String = webClient.DownloadString(addrRequest)
+
+            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
+            _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
+
+            If contents.StartsWith("<CountiesTable>") Then
                Dim doc As XmlDocument = New XmlDocument()
-               Dim buf As Byte() = ASCIIEncoding.ASCII.GetBytes(res.Result)
+               Dim buf As Byte() = ASCIIEncoding.ASCII.GetBytes(contents)
                Dim ms As MemoryStream = New MemoryStream(buf)
                doc.Load(ms)
                ms.Close()
@@ -534,42 +558,36 @@ Public Class formFreeregTables
                Next
                _tables.Counties.AcceptChanges()
                _FileIsChanged = True
-               MessageBox.Show(My.Resources.msgCountiesRefreshed, "Get Counties", MessageBoxButtons.OK, MessageBoxIcon.Information)
+               e.Result = My.Resources.msgCountiesRefreshed
+            ElseIf contents.StartsWith("<?xml version=""1.0"" encoding=""UTF-8""?>") Then
+               Dim xmlDoc As XmlDocument = New XmlDocument()
+               xmlDoc.LoadXml(contents)
+               Dim root As XmlElement = xmlDoc.DocumentElement()
+               If root Is Nothing Then
+                  ' No root element
+                  Throw New BackgroundWorkerException("Getting Counties from FreeREG failed - Missing root element")
+               Else
+                  If String.Compare(root.Name, "list", True) = 0 Then
+                     Dim result As XmlElement = xmlDoc.SelectSingleNode("/list/result")
+                     If result Is Nothing Then
+                        ' Missing 'result' node
+                        Throw New BackgroundWorkerException("Getting Counties from FreeREG failed - Missing result node")
+                     Else
+                        Select Case result.FirstChild.Value
+                           Case "success"
+                           Case "failure"
+                              Dim message = xmlDoc.SelectSingleNode("/list/message").FirstChild.Value
+                              '  <message>You are not authorised to use these facilities</message>
+                              Throw New BackgroundWorkerException(message)
+                           Case Else
+                              Throw New BackgroundWorkerException("Getting Counties from FreeREG failed - XML format error")
+                        End Select
+                     End If
+                  End If
+               End If
             Else
                Throw New BackgroundWorkerException("Getting Counties from FreeREG failed - not logged on")
             End If
-
-         Catch ex As BackgroundWorkerException
-            Throw
-
-         Catch ex As XmlException
-            Throw New BackgroundWorkerException("Getting Counties failed", ex)
-
-         Catch ex As Exception
-            Throw New BackgroundWorkerException("Getting Counties failed", ex)
-
-         End Try
-      End If
-   End Sub
-
-   Function GetCounties(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Object
-
-      Using webClient As New CookieAwareWebClient()
-         Try
-            webClient.SetTimeout(30000)
-            webClient.CookieContainer = New CookieContainer()
-            For Each cookie In _settings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(cookie.name, cookie.value))
-            Next
-            Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/list.xml"
-            Dim contents As String = webClient.DownloadString(addrRequest)
-
-            Dim hdr = webClient.ResponseHeaders("Set-Cookie")
-            _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
-            Dim res As New BackgroundResult()
-            res.Parameter = e.Argument
-            res.Result = contents
-            Return res
 
          Catch ex As XmlException
             Throw New BackgroundWorkerException("Getting Counties from FreeREG failed", ex)
@@ -597,7 +615,7 @@ Public Class formFreeregTables
             Throw
          End Try
       End Using
-   End Function
+   End Sub
 
 #End Region
 
@@ -605,7 +623,7 @@ Public Class formFreeregTables
 
    Private Sub backgroundPlaces_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundPlaces.DoWork
       Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-      e.Result = GetPlaces(e.Argument, worker, e)
+      GetPlaces(e.Argument, worker, e)
    End Sub
 
    Private Sub backgroundPlaces_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundPlaces.ProgressChanged
@@ -632,19 +650,19 @@ Public Class formFreeregTables
          ' Finally, handle the case where the operation succeeded.
          dlvPlaces.DataSource = _tables
          dlvPlaces.DataMember = "Places"
-
+         MessageBox.Show(e.Result, "Get Places", MessageBoxButtons.OK, MessageBoxIcon.Information)
       End If
    End Sub
 
-   Function GetPlaces(ByVal selectedCounty As String, ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Long
+   Private Sub GetPlaces(ByVal selectedCounty As String, ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs)
 
       Using webClient As New CookieAwareWebClient()
          Try
             webClient.SetTimeout(30000)
-            webClient.CookieContainer = New CookieContainer()
             For Each cookie In _settings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(cookie.name, cookie.value))
+               webClient.AddCookie(uri, New Cookie(cookie.Name, cookie.Value))
             Next
+
             Dim addrRequest As String = _settings.BaseUrl + "/transreg_places/list.xml"
             Dim query_data = New NameValueCollection()
             query_data.Add("county", selectedCounty)
@@ -669,19 +687,53 @@ Public Class formFreeregTables
                   ms.Close()
 
                   dlvPlaces.DataSource = Nothing
-                  For Each row As DataRow In ds.Tables("Place").Rows
-                     Dim drow As FreeregTables.PlacesRow = _tables.Places.FindByPlaceNameChapmanCode(row.Item("PlaceName"), row.Item("ChapmanCode"))
-                     If drow Is Nothing Then
-                        _tables.Places.AddPlacesRow(row.Item("PlaceName"), row.Item("ChapmanCode"), row.Item("Country"), row.Item("CountyName"), row.Item("Notes"))
+                  If Not ds.Tables("Place") Is Nothing Then
+                     If ds.Tables("Place").Rows.Count > 0 Then
+                        For Each row As DataRow In ds.Tables("Place").Rows
+                           Dim drow As FreeregTables.PlacesRow = _tables.Places.FindByPlaceNameChapmanCode(row.Item("PlaceName"), row.Item("ChapmanCode"))
+                           If drow Is Nothing Then
+                              _tables.Places.AddPlacesRow(row.Item("PlaceName"), row.Item("ChapmanCode"), row.Item("Country"), row.Item("CountyName"), row.Item("Notes"))
+                           Else
+                              drow.Country = row.Item("Country")
+                              drow.CountyName = row.Item("CountyName")
+                              drow.Notes = row.Item("Notes")
+                           End If
+                        Next
+                        _tables.Places.AcceptChanges()
+                        _FileIsChanged = True
+                        e.Result = String.Format(My.Resources.msgPlacesUpdated, selectedCounty)
                      Else
-                        drow.Country = row.Item("Country")
-                        drow.CountyName = row.Item("CountyName")
-                        drow.Notes = row.Item("Notes")
+                        e.Result = String.Format("No places found for {0}", selectedCounty)
                      End If
-                  Next
-                  _tables.Places.AcceptChanges()
-                  _FileIsChanged = True
-                  MessageBox.Show(String.Format(My.Resources.msgPlacesUpdated, selectedCounty), "Get Places", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                  Else
+                     e.Result = String.Format("No places found for {0}", selectedCounty)
+                  End If
+               ElseIf contents.StartsWith("<?xml version=""1.0"" encoding=""UTF-8""?>") Then
+                  Dim xmlDoc As XmlDocument = New XmlDocument()
+                  xmlDoc.LoadXml(contents)
+                  Dim root As XmlElement = xmlDoc.DocumentElement()
+                  If root Is Nothing Then
+                     ' No root element
+                     Throw New BackgroundWorkerException("Getting Places from FreeREG failed - Missing root element")
+                  Else
+                     If String.Compare(root.Name, "list", True) = 0 Then
+                        Dim result As XmlElement = xmlDoc.SelectSingleNode("/list/result")
+                        If result Is Nothing Then
+                           ' Missing 'result' node
+                           Throw New BackgroundWorkerException("Getting Places from FreeREG failed - Missing result node")
+                        Else
+                           Select Case result.FirstChild.Value
+                              Case "success"
+                              Case "failure"
+                                 Dim message = xmlDoc.SelectSingleNode("/list/message").FirstChild.Value
+                                 '  <message>You are not authorised to use these facilities</message>
+                                 Throw New BackgroundWorkerException(message)
+                              Case Else
+                                 Throw New BackgroundWorkerException("Getting Places from FreeREG failed - XML format error")
+                           End Select
+                        End If
+                     End If
+                  End If
                Else
                   Throw New BackgroundWorkerException("Getting Places from FreeREG failed - not logged on")
                End If
@@ -724,7 +776,7 @@ Public Class formFreeregTables
          End Try
       End Using
 
-   End Function
+   End Sub
 
 #End Region
 
@@ -732,7 +784,7 @@ Public Class formFreeregTables
 
    Private Sub backgroundChurches_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundChurches.DoWork
       Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-      e.Result = GetChurches(e.Argument, worker, e)
+      GetChurches(e.Argument, worker, e)
    End Sub
 
    Private Sub backgroundChurches_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundChurches.ProgressChanged
@@ -759,19 +811,19 @@ Public Class formFreeregTables
          ' Finally, handle the case where the operation succeeded.
          dlvChurches.DataSource = _tables
          dlvChurches.DataMember = "Churches"
-
+         MessageBox.Show(e.Result, "Get Churches", MessageBoxButtons.OK, MessageBoxIcon.Information)
       End If
    End Sub
 
-   Function GetChurches(ByVal params As paramChurches, ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Long
+   Private Sub GetChurches(ByVal params As paramChurches, ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs)
 
       Using webClient As New CookieAwareWebClient()
          Try
             webClient.SetTimeout(30000)
-            webClient.CookieContainer = New CookieContainer()
             For Each cookie In _settings.Cookies
-               webClient.CookieContainer.Add(uri, New Cookie(cookie.name, cookie.value))
+               webClient.AddCookie(uri, New Cookie(cookie.Name, cookie.Value))
             Next
+
             Dim addrRequest As String = _settings.BaseUrl + "/transreg_churches/list.xml"
             Dim query_data = New NameValueCollection()
             query_data.Add("county", params.County)
@@ -797,9 +849,10 @@ Public Class formFreeregTables
                   ms.Close()
 
                   If ds.Tables("Church") IsNot Nothing Then
-                     For Each rowIncoming As DataRow In ds.Tables("Church").Rows
-                        Dim newNotes As String = rowIncoming.Item("Notes").ToString.Replace(vbCrLf, " ")
-                        Dim newFileCode As String = String.Empty
+                     If ds.Tables("Church").Rows.Count > 0 Then
+                        For Each rowIncoming As DataRow In ds.Tables("Church").Rows
+                           Dim newNotes As String = rowIncoming.Item("Notes").ToString.Replace(vbCrLf, " ")
+                           Dim newFileCode As String = String.Empty
 #If USE_FILECODES Then
                         Dim reg As New Regex("FILE: (?<FileCode>\w{3,8})", RegexOptions.IgnoreCase)
                         Dim mat As Match = reg.Match(newNotes)
@@ -817,23 +870,52 @@ Public Class formFreeregTables
                         End If
 #End If
 
-                        Dim rowExisting As FreeregTables.ChurchesRow = _tables.Churches.FindByChurchNameChapmanCodePlaceName(rowIncoming.Item("ChurchName"), params.County, params.Place)
-                        If rowExisting Is Nothing Then
-                           _tables.Churches.AddChurchesRow(rowIncoming.Item("ChurchName"), params.County, params.Place, newFileCode, rowIncoming.Item("Location"), rowIncoming.Item("Denomination"), rowIncoming.Item("Website"), rowIncoming.Item("LastAmended"), newNotes)
-                        Else
-                           rowExisting.FileCode = newFileCode
-                           rowExisting.Location = rowIncoming.Item("Location")
-                           rowExisting.Denomination = rowIncoming.Item("Denomination")
-                           rowExisting.Website = rowIncoming.Item("Website")
-                           rowExisting.LastAmended = rowIncoming.Item("LastAmended")
-                           rowExisting.Notes = newNotes
-                        End If
-                     Next
-                     _tables.Churches.AcceptChanges()
-                     _FileIsChanged = True
-                     MessageBox.Show(String.Format(My.Resources.msgChurchesUpdated, params.County, params.Place), "Get Churches", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                           Dim rowExisting As FreeregTables.ChurchesRow = _tables.Churches.FindByChurchNameChapmanCodePlaceName(rowIncoming.Item("ChurchName"), params.County, params.Place)
+                           If rowExisting Is Nothing Then
+                              _tables.Churches.AddChurchesRow(rowIncoming.Item("ChurchName"), params.County, params.Place, newFileCode, rowIncoming.Item("Location"), rowIncoming.Item("Denomination"), rowIncoming.Item("Website"), rowIncoming.Item("LastAmended"), newNotes)
+                           Else
+                              rowExisting.FileCode = newFileCode
+                              rowExisting.Location = rowIncoming.Item("Location")
+                              rowExisting.Denomination = rowIncoming.Item("Denomination")
+                              rowExisting.Website = rowIncoming.Item("Website")
+                              rowExisting.LastAmended = rowIncoming.Item("LastAmended")
+                              rowExisting.Notes = newNotes
+                           End If
+                        Next
+                        _tables.Churches.AcceptChanges()
+                        _FileIsChanged = True
+                        e.Result = String.Format(My.Resources.msgChurchesUpdated, params.County, params.Place)
+                     Else
+                        e.Result = String.Format("No Churches found for {1} in {0}", params.County, params.Place)
+                     End If
                   Else
-                     Throw New BackgroundWorkerException(String.Format("No church information available for {0}", params.Place))
+                     e.Result = String.Format("No Churches found for {1} in {0}", params.County, params.Place)
+                  End If
+               ElseIf contents.StartsWith("<?xml version=""1.0"" encoding=""UTF-8""?>") Then
+                  Dim xmlDoc As XmlDocument = New XmlDocument()
+                  xmlDoc.LoadXml(contents)
+                  Dim root As XmlElement = xmlDoc.DocumentElement()
+                  If root Is Nothing Then
+                     ' No root element
+                     Throw New BackgroundWorkerException("Getting Churches from FreeREG failed - Missing root element")
+                  Else
+                     If String.Compare(root.Name, "list", True) = 0 Then
+                        Dim result As XmlElement = xmlDoc.SelectSingleNode("/list/result")
+                        If result Is Nothing Then
+                           ' Missing 'result' node
+                           Throw New BackgroundWorkerException("Getting Churches from FreeREG failed - Missing result node")
+                        Else
+                           Select Case result.FirstChild.Value
+                              Case "success"
+                              Case "failure"
+                                 Dim message = xmlDoc.SelectSingleNode("/list/message").FirstChild.Value
+                                 '  <message>You are not authorised to use these facilities</message>
+                                 Throw New BackgroundWorkerException(message)
+                              Case Else
+                                 Throw New BackgroundWorkerException("Getting Churches from FreeREG failed - XML format error")
+                           End Select
+                        End If
+                     End If
                   End If
                Else
                   Throw New BackgroundWorkerException("Getting Churches from FreeREG failed - Not logged on")
@@ -876,7 +958,7 @@ Public Class formFreeregTables
             Throw
          End Try
       End Using
-   End Function
+   End Sub
 
 #End Region
 

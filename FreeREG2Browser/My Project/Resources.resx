@@ -163,4 +163,7 @@
   <data name="msgNoChurchesForPlace" xml:space="preserve">
     <value>The selected Place ({0}) has no Churches. You can not select this place.</value>
   </data>
+  <data name="msgRegisterTypesRefreshed" xml:space="preserve">
+    <value>The Register Type records have been refreshed</value>
+  </data>
 </root>
