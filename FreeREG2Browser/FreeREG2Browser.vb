@@ -1436,7 +1436,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 381
+      Me.SplitContainer2.SplitterDistance = 383
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1461,7 +1461,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 381)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 383)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -3115,7 +3115,7 @@ Public Class FreeREG2Browser
 
    Private Sub backgroundBatches_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles backgroundBatches.DoWork
       Dim worker As BackgroundWorker = CType(sender, BackgroundWorker)
-      e.Result = GetBatches(worker, e)
+      GetBatches(worker, e)
    End Sub
 
    Private Sub backgroundBatches_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundBatches.ProgressChanged
@@ -3166,6 +3166,8 @@ Public Class FreeREG2Browser
          olvcFilename.Groupable = True
          olvcFilename.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetFileNameGroupKey)
          olvcFilename.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetFileNameGroupTitle)
+
+         MessageBox.Show(e.Result, "Uploaded Batches", MessageBoxButtons.OK, MessageBoxIcon.Information)
       End If
    End Sub
 
@@ -3186,8 +3188,7 @@ Public Class FreeREG2Browser
       Return objValue.Substring(0, objValue.IndexOf("."c))
    End Function
 
-   Function GetBatches(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs) As Long
-      Dim result As Long = 0
+   Private Sub GetBatches(ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs)
       Dim uri = New Uri(MyAppSettings.BaseUrl)
 
       worker.ReportProgress(0, String.Format("Fetching Batch details from FreeREG for {0}...", MyAppSettings.UserId))
@@ -3246,6 +3247,10 @@ Public Class FreeREG2Browser
 
                      End Try
                   Next
+                  e.Result = String.Format("Uploaded {0} Batches to FreeREG", BatchesDataSet.Batch.Rows.Count)
+               Else
+                  ' No Batches uploaded by this user
+                  e.Result = My.Resources.msgNoBatchesForUser
                End If
                BatchesDataSet.AcceptChanges()
                BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
@@ -3283,7 +3288,7 @@ Public Class FreeREG2Browser
 
          End Try
       End Using
-   End Function
+   End Sub
 
 #End Region
 
@@ -3501,59 +3506,6 @@ Public Class FreeREG2Browser
       End Try
    End Sub
 
-#End Region
-
-   Private Sub dlvLocalFiles_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.ItemActivate
-      Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
-      Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
-         Me.Hide()
-         Try
-            dlg.Settings = MyAppSettings
-            dlg.DefaultCounty = _myDefaultCounty
-            dlg.FreeregTablesFile = FreeregTablesFile
-            dlg.UserTablesFile = TranscriberProfileFile
-            Dim rc = dlg.ShowDialog()
-            If rc = Windows.Forms.DialogResult.OK Then
-               If File.Exists(dlg.TranscriptionFile.FullFileName) Then
-                  ' File has been edited
-                  ' Details need to be updated in the table
-                  Dim fi As FileInfo = New System.IO.FileInfo(dlg.TranscriptionFile.FullFileName)
-                  row("Attributes") = fi.Attributes
-                  row("IsReadOnly") = fi.IsReadOnly
-                  row("LastAccessTime") = fi.LastAccessTime
-                  row("LastAccessTimeUtc") = fi.LastAccessTimeUtc
-                  row("LastWriteTime") = fi.LastWriteTime
-                  row("LastWriteTimeUtc") = fi.LastWriteTimeUtc
-                  row("Length") = fi.Length
-               End If
-            End If
-
-         Catch ex As Exception
-            Beep()
-            MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-
-         Finally
-
-         End Try
-         Me.Show()
-      End Using
-   End Sub
-
-   Private Sub dlvLocalFiles_CellToolTipShowing(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.ToolTipShowingEventArgs) Handles dlvLocalFiles.CellToolTipShowing
-      If e.ModifierKeys = Keys.Control Then
-         If e.Column.Name = "Name" Then
-            Dim tfile As New TranscriptionFileClass(CType(e.Model, DataRowView).Row, LookUpsDataSet, TablesDataSet)
-            e.BackColor = Color.Bisque
-            e.IsBalloon = True
-            e.StandardIcon = ToolTipControl.StandardIcons.InfoLarge
-            e.Title = tfile.FileName
-            e.Text = tfile.FileHeader.Place + vbCrLf + tfile.FileHeader.Church + vbCrLf _
-             + tfile.FileHeader.Comment1 + vbCrLf + tfile.FileHeader.Comment2 + vbCrLf + vbCrLf _
-             + String.Format("File size: {0} records", tfile.Items.Rows.Count)
-         End If
-      End If
-   End Sub
-
    Private Sub btnNewFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewFile.Click
       Using dlg As New formStartNewFile(formHelp) With {.Username = _myUserName, .EmailAddress = _myEmailAddress, .dsFreeRegTables = TablesDataSet, .dsLookupTables = LookUpsDataSet, .DefaultCounty = _myDefaultCounty, .TranscriptionLibrary = _myTranscriptionLibrary}
          Try
@@ -3586,6 +3538,70 @@ Public Class FreeREG2Browser
 
          End Try
       End Using
+   End Sub
+#End Region
+
+   Private Sub dlvLocalFiles_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.ItemActivate
+      Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
+      Try
+         Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+            Me.Hide()
+            Try
+               dlg.Settings = MyAppSettings
+               dlg.DefaultCounty = _myDefaultCounty
+               dlg.FreeregTablesFile = FreeregTablesFile
+               dlg.UserTablesFile = TranscriberProfileFile
+               Dim rc = dlg.ShowDialog()
+               If rc = Windows.Forms.DialogResult.OK Then
+                  If File.Exists(dlg.TranscriptionFile.FullFileName) Then
+                     ' File has been edited
+                     ' Details need to be updated in the table
+                     Dim fi As FileInfo = New System.IO.FileInfo(dlg.TranscriptionFile.FullFileName)
+                     row("Attributes") = fi.Attributes
+                     row("IsReadOnly") = fi.IsReadOnly
+                     row("LastAccessTime") = fi.LastAccessTime
+                     row("LastAccessTimeUtc") = fi.LastAccessTimeUtc
+                     row("LastWriteTime") = fi.LastWriteTime
+                     row("LastWriteTimeUtc") = fi.LastWriteTimeUtc
+                     row("Length") = fi.Length
+                  End If
+               End If
+
+            Catch ex As Exception
+               Beep()
+               MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+            Finally
+
+            End Try
+            Me.Show()
+         End Using
+
+      Catch ex As FileHeaderException
+         MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
+
+   Private Sub dlvLocalFiles_CellToolTipShowing(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.ToolTipShowingEventArgs) Handles dlvLocalFiles.CellToolTipShowing
+      If e.ModifierKeys = Keys.Control Then
+         If e.Column.Name = "Name" Then
+            Try
+               Dim tfile As New TranscriptionFileClass(CType(e.Model, DataRowView).Row, LookUpsDataSet, TablesDataSet)
+               e.BackColor = Color.Bisque
+               e.IsBalloon = True
+               e.StandardIcon = ToolTipControl.StandardIcons.InfoLarge
+               e.Title = tfile.FileName
+               e.Text = tfile.FileHeader.Place + vbCrLf + tfile.FileHeader.Church + vbCrLf _
+                + tfile.FileHeader.Comment1 + vbCrLf + tfile.FileHeader.Comment2 + vbCrLf + vbCrLf _
+                + String.Format("File size: {0} records", tfile.Items.Rows.Count)
+
+            Catch ex As FileHeaderException
+               MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+            End Try
+         End If
+      End If
    End Sub
 
    Private Sub miGeneralHelp_Click(sender As Object, e As EventArgs) Handles miGeneralHelp.Click

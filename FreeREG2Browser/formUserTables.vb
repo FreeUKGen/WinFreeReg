@@ -108,10 +108,10 @@ Public Class formUserTables
       Else
          UserTablesTabControl.SelectTab(tabBrideCondition)
       End If
-      UserTablesBindingNavigator.BindingSource = bsBaptismSex
-      BindingNavigatorAddNewItem.Enabled = False
-      BindingNavigatorDeleteItem.Enabled = False
-      BindingNavigatorSaveChanges.Enabled = LookupTables.HasChanges()
+      '    UserTablesBindingNavigator.BindingSource = bsBaptismSex
+      '    BindingNavigatorAddNewItem.Enabled = False
+      '    BindingNavigatorDeleteItem.Enabled = False
+      '    BindingNavigatorSaveChanges.Enabled = LookupTables.HasChanges()
 
       Dim AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
       Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")

@@ -153,6 +153,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to No Batches have been uploaded to FreeREG.
+        '''</summary>
+        Friend ReadOnly Property msgNoBatchesForUser() As String
+            Get
+                Return ResourceManager.GetString("msgNoBatchesForUser", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to The selected Place ({0}) has no Churches. You can not select this place..
         '''</summary>
         Friend ReadOnly Property msgNoChurchesForPlace() As String

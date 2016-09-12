@@ -59,6 +59,7 @@ Public Class formFileDetails
    End Sub
 
    Private Sub formFileDetails_FormClosing(sender As Object, e As Windows.Forms.FormClosingEventArgs) Handles MyBase.FormClosing
+      If e.CloseReason = CloseReason.None Then Exit Sub
       errorChurchName.SetError(ChurchComboBox, "")
       If ChurchesBindingSource.Count = 0 Then
          errorChurchName.SetError(ChurchComboBox, String.Format(My.Resources.msgNoChurchesForPlace, PlaceComboBox.SelectedValue))
@@ -79,17 +80,18 @@ Public Class formFileDetails
    End Sub
 
    Private Sub formFileDetails_FormClosed(sender As Object, e As Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-      DialogResult = Windows.Forms.DialogResult.OK
-      m_TranscriptionFile.FileHeader.Place = PlaceComboBox.SelectedValue
-      m_TranscriptionFile.FileHeader.Church = ChurchComboBox.SelectedValue
-      m_TranscriptionFile.FileHeader.RegisterType = RegisterTypeComboBox.SelectedValue
-      m_TranscriptionFile.FileHeader.isLDS = IsLDSCheckBox.Checked
-      m_TranscriptionFile.FileHeader.CreditName = CreditNameTextBox.Text
-      m_TranscriptionFile.FileHeader.CreditEmail = CreditEmailTextBox.Text
-      m_TranscriptionFile.FileHeader.Comment1 = Comment1TextBox.Text
-      m_TranscriptionFile.FileHeader.Comment2 = Comment2TextBox.Text
-      m_TranscriptionFile.FileHeader.MyName = MyNameTextBox.Text
-      m_TranscriptionFile.FileHeader.MyEmail = MyEmailTextBox.Text
+      If DialogResult = Windows.Forms.DialogResult.OK Then
+         m_TranscriptionFile.FileHeader.Place = PlaceComboBox.SelectedValue
+         m_TranscriptionFile.FileHeader.Church = ChurchComboBox.SelectedValue
+         m_TranscriptionFile.FileHeader.RegisterType = RegisterTypeComboBox.SelectedValue
+         m_TranscriptionFile.FileHeader.isLDS = IsLDSCheckBox.Checked
+         m_TranscriptionFile.FileHeader.CreditName = CreditNameTextBox.Text
+         m_TranscriptionFile.FileHeader.CreditEmail = CreditEmailTextBox.Text
+         m_TranscriptionFile.FileHeader.Comment1 = Comment1TextBox.Text
+         m_TranscriptionFile.FileHeader.Comment2 = Comment2TextBox.Text
+         m_TranscriptionFile.FileHeader.MyName = MyNameTextBox.Text
+         m_TranscriptionFile.FileHeader.MyEmail = MyEmailTextBox.Text
+      End If
    End Sub
 
    Private Sub CountyComboBox_DrawItem(sender As Object, e As Windows.Forms.DrawItemEventArgs) Handles CountyComboBox.DrawItem

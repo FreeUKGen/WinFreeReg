@@ -145,6 +145,7 @@
     <Compile Include="AboutBox.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FileHeaderException.vb" />
     <Compile Include="FreeReg2BrowserSettings.vb" />
     <Compile Include="BackgroundWorkerException.vb" />
     <Compile Include="Batches.Designer.vb">

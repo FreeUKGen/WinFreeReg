@@ -301,69 +301,75 @@ Public Class formStartNewFile
    End Function
 
    Private Sub StartFileButton_Click(sender As Object, e As EventArgs) Handles StartFileButton.Click
-      Dim NewFile As New TranscriptionFileClass()
+      Try
+         Dim NewFile As New TranscriptionFileClass()
 
-      NewFile.Create(Path.Combine(_myTranscriptionLibrary, labFilename.Text.Replace(" ", "") + ".CSV"), dsLookupTables, dsFreeRegTables, m_RecordType)
-      NewFile.FileHeader.MyEmail = m_EmailAddress
-      NewFile.FileHeader.MyName = m_UserName
-      NewFile.FileHeader.MyPassword = "password"
-      NewFile.FileHeader.MySyndicate = CType(CType(CountiesComboBox.SelectedItem(), DataRowView).Row, WinFreeReg.FreeregTables.CountiesRow).CountyName
-      NewFile.FileHeader.InternalFilename = labFilename.Text.Replace(" ", "") + ".CSV"
-      NewFile.FileHeader.VersionUsed = ""
-      NewFile.FileHeader.DateCreated = Format(Now(), "dd-MMM-yyyy")
-      NewFile.FileHeader.DateLastChanged = Format(Now(), "dd-MMM-yyyy")
-      NewFile.FileHeader.CreditName = CreditNameTextBox.Text
-      NewFile.FileHeader.CreditEmail = CreditEmailTextBox.Text
-      NewFile.FileHeader.Comment1 = Comment1TextBox.Text
-      NewFile.FileHeader.Comment2 = Comment2TextBox.Text
-      NewFile.FileHeader.County = m_SelectedCounty
-      NewFile.FileHeader.Place = m_SelectedPlace
-      NewFile.FileHeader.Church = m_SelectedChurch
-      NewFile.FileHeader.RegisterType = m_SelectedRegisterType
-      NewFile.FileHeader.isLDS = ldsCheckBox.Checked
+         NewFile.Create(Path.Combine(_myTranscriptionLibrary, labFilename.Text.Replace(" ", "") + ".CSV"), dsLookupTables, dsFreeRegTables, m_RecordType)
+         NewFile.FileHeader.MyEmail = m_EmailAddress
+         NewFile.FileHeader.MyName = m_UserName
+         NewFile.FileHeader.MyPassword = "password"
+         NewFile.FileHeader.MySyndicate = CType(CType(CountiesComboBox.SelectedItem(), DataRowView).Row, WinFreeReg.FreeregTables.CountiesRow).CountyName
+         NewFile.FileHeader.InternalFilename = labFilename.Text.Replace(" ", "") + ".CSV"
+         NewFile.FileHeader.VersionUsed = ""
+         NewFile.FileHeader.DateCreated = Format(Now(), "dd-MMM-yyyy")
+         NewFile.FileHeader.DateLastChanged = Format(Now(), "dd-MMM-yyyy")
+         NewFile.FileHeader.CreditName = CreditNameTextBox.Text
+         NewFile.FileHeader.CreditEmail = CreditEmailTextBox.Text
+         NewFile.FileHeader.Comment1 = Comment1TextBox.Text
+         NewFile.FileHeader.Comment2 = Comment2TextBox.Text
+         NewFile.FileHeader.County = m_SelectedCounty
+         NewFile.FileHeader.Place = m_SelectedPlace
+         NewFile.FileHeader.Church = m_SelectedChurch
+         NewFile.FileHeader.RegisterType = m_SelectedRegisterType
+         NewFile.FileHeader.isLDS = ldsCheckBox.Checked
 
-      Select Case NewFile.FileHeader.FileType
-         Case TranscriptionFileClass.FileTypes.BAPTISMS
-            Dim recordcollection = New TranscriptionTables.BaptismsDataTable
-            recordcollection.LinkLookupTables(True, True, dsLookupTables.BaptismSex)
-            recordcollection.AcceptChanges()
-            NewFile.Items = recordcollection
+         Select Case NewFile.FileHeader.FileType
+            Case TranscriptionFileClass.FileTypes.BAPTISMS
+               Dim recordcollection = New TranscriptionTables.BaptismsDataTable
+               recordcollection.LinkLookupTables(True, True, dsLookupTables.BaptismSex)
+               recordcollection.AcceptChanges()
+               NewFile.Items = recordcollection
 
-         Case TranscriptionFileClass.FileTypes.BURIALS
-            Dim recordcollection = New TranscriptionTables.BurialsDataTable
-            recordcollection.LinkLookupTables(True, True, dsLookupTables.BurialRelationship)
-            recordcollection.AcceptChanges()
-            NewFile.Items = recordcollection
+            Case TranscriptionFileClass.FileTypes.BURIALS
+               Dim recordcollection = New TranscriptionTables.BurialsDataTable
+               recordcollection.LinkLookupTables(True, True, dsLookupTables.BurialRelationship)
+               recordcollection.AcceptChanges()
+               NewFile.Items = recordcollection
 
-         Case TranscriptionFileClass.FileTypes.MARRIAGES
-            Dim recordcollection = New TranscriptionTables.MarriagesDataTable
-            recordcollection.LinkLookupTables(True, True, dsLookupTables.GroomCondition, dsLookupTables.BrideCondition)
-            recordcollection.AcceptChanges()
-            NewFile.Items = recordcollection
+            Case TranscriptionFileClass.FileTypes.MARRIAGES
+               Dim recordcollection = New TranscriptionTables.MarriagesDataTable
+               recordcollection.LinkLookupTables(True, True, dsLookupTables.GroomCondition, dsLookupTables.BrideCondition)
+               recordcollection.AcceptChanges()
+               NewFile.Items = recordcollection
 
-      End Select
+         End Select
 
-      Dim ErrorMessagesDataSet As New ErrorMessages()
-      Dim ErrorMessagesFileName As String = Path.Combine(AppDataLocalFolder, "ErrorMessages.xml")
+         Dim ErrorMessagesDataSet As New ErrorMessages()
+         Dim ErrorMessagesFileName As String = Path.Combine(AppDataLocalFolder, "ErrorMessages.xml")
 
-      Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = NewFile, .SelectedRow = Nothing, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
-         Try
-            dlg.IsNewFile = True
-            dlg.Settings = Settings
-            dlg.DefaultCounty = DefaultCounty
-            dlg.UserTablesFile = UserTablesFile
-            Dim rc = dlg.ShowDialog()
-            Me.DialogResult = rc
-            _myNewFile = NewFile
+         Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = NewFile, .SelectedRow = Nothing, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+            Try
+               dlg.IsNewFile = True
+               dlg.Settings = Settings
+               dlg.DefaultCounty = DefaultCounty
+               dlg.UserTablesFile = UserTablesFile
+               Dim rc = dlg.ShowDialog()
+               Me.DialogResult = rc
+               _myNewFile = NewFile
 
-         Catch ex As Exception
-            Beep()
-            MessageBox.Show(ex.Message, "Start New File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            Catch ex As Exception
+               Beep()
+               MessageBox.Show(ex.Message, "Start New File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
-         Finally
-            Me.Close()
-         End Try
-      End Using
+            Finally
+               Me.Close()
+            End Try
+         End Using
+
+      Catch ex As FileHeaderException
+         MessageBox.Show(ex.Message, "Start New File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
    End Sub
 
    Private Sub linkUpdate_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkUpdate.LinkClicked

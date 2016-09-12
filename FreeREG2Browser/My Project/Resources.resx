@@ -166,4 +166,7 @@
   <data name="msgRegisterTypesRefreshed" xml:space="preserve">
     <value>The Register Type records have been refreshed</value>
   </data>
+  <data name="msgNoBatchesForUser" xml:space="preserve">
+    <value>No Batches have been uploaded to FreeREG</value>
+  </data>
 </root>

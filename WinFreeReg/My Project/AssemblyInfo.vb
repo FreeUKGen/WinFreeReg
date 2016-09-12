@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("WinFreeReg")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyDescription("This is the long-awaited replacement for WinREG, the FreeREG transcription program. This version is a somewhat simplified cousin to WinREG with the advantage that it interacts directly with the FreeREG web-site.")> 
 <Assembly: AssemblyCompany("FreeUKGenealogy")> 
 <Assembly: AssemblyProduct("WinFreeREG")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 Free UK Genealogy")> 

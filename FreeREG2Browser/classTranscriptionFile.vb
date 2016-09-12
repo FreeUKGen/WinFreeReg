@@ -129,8 +129,8 @@ Public Class TranscriptionFileClass
 
          Dim Crec = freeregTables.Churches.FindByChurchNameChapmanCodePlaceName(m_fileHeader.Church, m_fileHeader.County, m_fileHeader.Place)
          If Crec Is Nothing Then
-            MessageBox.Show(String.Format("Unable to find Church record for County:{0} Place:{1} Church:{2}", m_fileHeader.County, m_fileHeader.Place, m_fileHeader.Church))
             m_PlaceCode = String.Empty
+            Throw New FileHeaderException(String.Format("Unable to find Church record for County:{0} Place:{1} Church:{2}", m_fileHeader.County, m_fileHeader.Place, m_fileHeader.Church))
          Else
             m_PlaceCode = Crec.FileCode
          End If
@@ -178,15 +178,20 @@ Public Class TranscriptionFileClass
    End Sub
 
    Sub Create(ByVal strFileName As String, ByVal tableLookups As LookupTables, ByVal tableFreereg As FreeregTables, ByVal strFileType As String)
-      Dim NewFile As New TranscriptionFileClass()
-      FullFileName = strFileName
-      FileName = Path.GetFileName(strFileName)
-      PathName = Path.GetDirectoryName(strFileName)
-      LookupTables = tableLookups
-      FreeregTables = tableFreereg
+      Try
+         Dim NewFile As New TranscriptionFileClass()
+         FullFileName = strFileName
+         FileName = Path.GetFileName(strFileName)
+         PathName = Path.GetDirectoryName(strFileName)
+         LookupTables = tableLookups
+         FreeregTables = tableFreereg
 
-      FileHeader = New FileHeaderClass()
-      FileHeader.FileType = [Enum].Parse(GetType(FileTypes), strFileType, True)
+         FileHeader = New FileHeaderClass()
+         FileHeader.FileType = [Enum].Parse(GetType(FileTypes), strFileType, True)
+
+      Catch ex As FileHeaderException
+         Throw
+      End Try
 
    End Sub
 
