@@ -108,6 +108,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to This will remove the selected file ({0}) from the FreeREG database. The data will no longer exist in the database and will not be found by researchers. Are you absolutely certain that you want to do this?.
+        '''</summary>
+        Friend ReadOnly Property msgConfirmRemoveDatabaseFile() As String
+            Get
+                Return ResourceManager.GetString("msgConfirmRemoveDatabaseFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to The County records have been refreshed..
         '''</summary>
         Friend ReadOnly Property msgCountiesRefreshed() As String

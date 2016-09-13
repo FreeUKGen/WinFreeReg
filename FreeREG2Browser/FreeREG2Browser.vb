@@ -3472,12 +3472,14 @@ Public Class FreeREG2Browser
    Private Sub btnDeleteFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDeleteFile.Click
       Dim currentBatch As Batches.BatchRow = BatchBindingSource.Current.Row
 
-      Try
-         backgroundDelete.RunWorkerAsync(currentBatch.ID)
+      If MessageBox.Show(String.Format(My.Resources.msgConfirmRemoveDatabaseFile, currentBatch.FileName), "Remove Batch", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+         Try
+            backgroundDelete.RunWorkerAsync(currentBatch.ID)
 
-      Catch ex As Exception
+         Catch ex As Exception
 
-      End Try
+         End Try
+      End If
    End Sub
 
    Private Sub btnUploadFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUploadFile.Click
