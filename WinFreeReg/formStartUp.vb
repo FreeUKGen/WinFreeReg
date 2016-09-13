@@ -70,7 +70,7 @@ Public Class formStartUp
       Dim r = Me.Validate()
       Using frm As New FreeREG2Browser() With {.UserName = UserNameTextBox.Text, .EmailAddress = EmailAddressTextBox.Text, .UserId = UserIdTextBox.Text, _
                                                .Password = PasswordTextBox.Text, .FreeregUrl = UrlTextBox.Text, .DefaultCounty = DefaultCountyComboBox.SelectedItem.Row, _
-                                               .TranscriptionLibrary = My.Settings.MyTranscriptionLibrary, .TraceNetwork = TraceCheckBox.Checked}
+                                               .TranscriptionLibrary = LibraryTextBox.Text, .TraceNetwork = TraceCheckBox.Checked}
          Me.Hide()
          frm.ShowDialog()
          UserIdTextBox.Text = frm.UserId
