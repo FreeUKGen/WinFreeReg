@@ -1436,7 +1436,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 383
+      Me.SplitContainer2.SplitterDistance = 384
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1461,7 +1461,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 383)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 384)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -3195,7 +3195,7 @@ Public Class FreeREG2Browser
 
       Using webClient As New CookieAwareWebClient()
          Try
-            webClient.SetTimeout(30000)
+            webClient.SetTimeout(60000)
             Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_batches/list.xml"
             Dim query_data = New NameValueCollection()
             query_data.Add("transcriber", MyAppSettings.UserId)
@@ -3233,18 +3233,65 @@ Public Class FreeREG2Browser
                   worker.ReportProgress(0, String.Format("Response received... {0} files listed", ds.Tables("Batch").Rows.Count))
                   For Each row As DataRow In ds.Tables("Batch").Rows
                      Try
-                        BatchesDataSet.Batch.AddBatchRow(row.Item("ID"), row.Item("CountyName"), row.Item("PlaceName"), row.Item("ChurchName"), CStr(row.Item("RegisterType")).ToUpper, _
-                         CStr(row.Item("RecordType")).ToUpper, row.Item("Records"), row.Item("DateMin"), row.Item("DateMax"), row.Item("DateRange"), row.Item("UserId"), _
-                         row.Item("UserIdLowerCase"), row.Item("FileName"), row.Item("TranscriberName"), row.Item("TranscriberEmail"), row.Item("TranscriberSyndicate"), _
-                         row.Item("CreditEmail"), row.Item("CreditName"), row.Item("FirstComment"), row.Item("SecondComment"), DateTime.Parse(row.Item("TranscriptionDate")), _
-                         DateTime.Parse(row.Item("ModificationDate")), DateTime.Parse(row.Item("UploadedDate")), row.Item("Error"), row.Item("Digest"), row.Item("LockedByTranscriber"), _
-                         row.Item("LockedByCoordinator"), row.Item("lds").ToString.ToLower = "yes", row.Item("Action"), row.Item("CharacterSet"), row.Item("AlternateRegisterName"), _
-                         row.Item("CsvFile"))
+                        Dim batch As Batches.BatchRow = BatchesDataSet.Batch.NewBatchRow()
+                        batch.ID = row.Item("ID")
+                        batch.CountyName = row.Item("CountyName")
+                        batch.PlaceName = row.Item("PlaceName")
+                        batch.ChurchName = row.Item("ChurchName")
+                        batch.RegisterType = CStr(row.Item("RegisterType")).ToUpper
+                        batch.RecordType = CStr(row.Item("RecordType")).ToUpper
+                        batch.Records = row.Item("Records")
+                        batch.DateMin = row.Item("DateMin")
+                        batch.DateMax = row.Item("DateMax")
+                        batch.DateRange = row.Item("DateRange")
+                        batch.UserId = row.Item("UserId")
+                        batch.UserIdLowerCase = row.Item("UserIdLowerCase")
+                        batch.FileName = row.Item("FileName")
+                        batch.TranscriberName = row.Item("TranscriberName")
+                        batch.TranscriberEmail = row.Item("TranscriberEmail")
+                        batch.TranscriberSyndicate = row.Item("TranscriberSyndicate")
+                        batch.CreditEmail = row.Item("CreditEmail")
+                        batch.CreditName = row.Item("CreditName")
+                        batch.FirstComment = row.Item("FirstComment")
+                        batch.SecondComment = row.Item("SecondComment")
+                        Try
+                           batch.TranscriptionDate = DateTime.Parse(row.Item("TranscriptionDate"))
+
+                        Catch ex As FormatException
+                           '                           batch.TranscriptionDate = DateTime.MinValue
+                        End Try
+
+                        Try
+                           batch.ModificationDate = DateTime.Parse(row.Item("ModificationDate"))
+
+                        Catch ex As FormatException
+                           '                           batch.ModificationDate = DateTime.MinValue
+                        End Try
+
+                        Try
+                           batch.UploadedDate = DateTime.Parse(row.Item("UploadedDate"))
+
+                        Catch ex As FormatException
+                           '                           batch.UploadedDate = DateTime.MinValue
+                        End Try
+
+                        batch._Error = row.Item("Error")
+                        batch.Digest = row.Item("Digest")
+                        batch.LockedByTranscriber = row.Item("LockedByTranscriber")
+                        batch.LockedByCoordinator = row.Item("LockedByCoordinator")
+                        batch.lds = row.Item("lds").ToString.ToLower = "yes"
+                        batch.Action = row.Item("Action")
+                        batch.CharacterSet = row.Item("CharacterSet")
+                        batch.AlternateRegisterName = row.Item("AlternateRegisterName")
+                        batch.CsvFile = row.Item("CsvFile")
+                        BatchesDataSet.Batch.AddBatchRow(batch)
                         worker.ReportProgress(BatchesDataSet.Batch.Rows.Count / ds.Tables("Batch").Rows.Count * 100, "Storing file information...")
 
                      Catch ex As ConstraintException
                         MessageBox.Show(ex.Message, "Storing Batch Data", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
+                     Catch ex As Exception
+                        Throw New BackgroundWorkerException("Getting Batch Details from FreeREG failed", ex)
                      End Try
                   Next
                   e.Result = String.Format("Uploaded {0} Batches to FreeREG", BatchesDataSet.Batch.Rows.Count)
