@@ -19,6 +19,7 @@ Imports System.Security.Permissions
    Private _cookies As CookieCollection
    Private _transregName As String = "transreg"
    Private _transregPassword As String = "temppasshope"
+   Private _ShowGettingStarted As Boolean = True
 
    <Category("User"), _
     Description("URL for the root of the FreeREG2 website")> _
@@ -65,6 +66,18 @@ Imports System.Security.Permissions
       End Set
    End Property
 
+   <Category("User"), _
+   BrowsableAttribute(False), _
+   Description("Show the Getting Started page")> _
+   Public Property ShowGettingStarted() As Boolean
+      Get
+         Return _ShowGettingStarted
+      End Get
+      Set(ByVal value As Boolean)
+         _ShowGettingStarted = value
+      End Set
+   End Property
+
    <Category("Application"), _
     Description("The common WinFreeREG user id (TRANSREG)"), _
     BrowsableAttribute(False), _
@@ -107,6 +120,7 @@ Imports System.Security.Permissions
          Dim str = info.GetString(String.Format("Cookie:{0}", i)).Split(New Char() {" "c})
          Cookies.Add(New Cookie(str(0), str(1)))
       Next
+      ShowGettingStarted = info.GetBoolean("o")
    End Sub
 
    <SecurityPermissionAttribute(SecurityAction.Demand, SerializationFormatter:=True)> _
@@ -120,6 +134,6 @@ Imports System.Security.Permissions
       For i As Integer = 0 To Cookies.Count - 1 Step 1
          info.AddValue(String.Format("Cookie:{0}", i), String.Format("{0} {1}", Cookies(i).Name, Cookies(i).Value))
       Next
-
+      info.AddValue("o", ShowGettingStarted)
    End Sub
 End Class

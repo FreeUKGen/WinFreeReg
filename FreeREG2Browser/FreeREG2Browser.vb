@@ -215,6 +215,9 @@ Public Class FreeREG2Browser
    Friend WithEvents localContextMenuStrip As System.Windows.Forms.ContextMenuStrip
    Friend WithEvents OpenWithNotepadToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents DeleteFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents RichTextBox1 As System.Windows.Forms.RichTextBox
+   Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
+   Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
    Public Property TranscriptionLibrary() As String
       Get
          Return _myTranscriptionLibrary
@@ -310,8 +313,6 @@ Public Class FreeREG2Browser
       Me.backgroundBatches = New System.ComponentModel.BackgroundWorker()
       Me.panelUploadedFiles = New System.Windows.Forms.Panel()
       Me.IDTextBox = New System.Windows.Forms.TextBox()
-      Me.BatchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-      Me.BatchesDataSet = New WinFreeReg.Batches()
       Me.CountyNameTextBox = New System.Windows.Forms.TextBox()
       Me.PlaceNameTextBox = New System.Windows.Forms.TextBox()
       Me.ChurchNameTextBox = New System.Windows.Forms.TextBox()
@@ -346,9 +347,6 @@ Public Class FreeREG2Browser
       Me.btnDeleteFile = New System.Windows.Forms.Button()
       Me.btnViewContents = New System.Windows.Forms.Button()
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
-      Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
-      Me.dlvUploadedFiles = New BrightIdeasSoftware.DataListView()
-      Me.olvcFilename = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
       Me.dlvLocalFiles = New BrightIdeasSoftware.DataListView()
       Me.btnNewFile = New System.Windows.Forms.Button()
@@ -357,13 +355,21 @@ Public Class FreeREG2Browser
       Me.Label1 = New System.Windows.Forms.Label()
       Me.btnUploadFile = New System.Windows.Forms.Button()
       Me.btnReplaceFile = New System.Windows.Forms.Button()
+      Me.SplitContainer3 = New System.Windows.Forms.SplitContainer()
+      Me.dlvUploadedFiles = New BrightIdeasSoftware.DataListView()
+      Me.olvcFilename = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.backgroundUpload = New System.ComponentModel.BackgroundWorker()
       Me.backgroundReplace = New System.ComponentModel.BackgroundWorker()
       Me.backgroundDelete = New System.ComponentModel.BackgroundWorker()
-      Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
       Me.localContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
       Me.OpenWithNotepadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.DeleteFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
+      Me.CheckBox1 = New System.Windows.Forms.CheckBox()
+      Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+      Me.BatchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+      Me.BatchesDataSet = New WinFreeReg.Batches()
+      Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
       PlaceNameLabel = New System.Windows.Forms.Label()
@@ -399,21 +405,22 @@ Public Class FreeREG2Browser
       Me.bnavShowData.SuspendLayout()
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.panelUploadedFiles.SuspendLayout()
-      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SplitContainer1.Panel1.SuspendLayout()
       Me.SplitContainer1.Panel2.SuspendLayout()
       Me.SplitContainer1.SuspendLayout()
-      Me.SplitContainer3.Panel1.SuspendLayout()
-      Me.SplitContainer3.Panel2.SuspendLayout()
-      Me.SplitContainer3.SuspendLayout()
-      CType(Me.dlvUploadedFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SplitContainer2.Panel1.SuspendLayout()
       Me.SplitContainer2.Panel2.SuspendLayout()
       Me.SplitContainer2.SuspendLayout()
       CType(Me.dlvLocalFiles, System.ComponentModel.ISupportInitialize).BeginInit()
-      CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+      Me.SplitContainer3.Panel1.SuspendLayout()
+      Me.SplitContainer3.Panel2.SuspendLayout()
+      Me.SplitContainer3.SuspendLayout()
+      CType(Me.dlvUploadedFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.localContextMenuStrip.SuspendLayout()
+      Me.TableLayoutPanel1.SuspendLayout()
+      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
       'IDLabel
@@ -852,7 +859,7 @@ Public Class FreeREG2Browser
       Me.bnavShowData.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
       Me.bnavShowData.Name = "bnavShowData"
       Me.bnavShowData.PositionItem = Me.BindingNavigatorPositionItem
-      Me.bnavShowData.Size = New System.Drawing.Size(903, 20)
+      Me.bnavShowData.Size = New System.Drawing.Size(903, 25)
       Me.bnavShowData.TabIndex = 3
       Me.bnavShowData.Text = "BindingNavigator1"
       Me.bnavShowData.Visible = False
@@ -863,14 +870,14 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorAddNewItem.Image = CType(resources.GetObject("BindingNavigatorAddNewItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorAddNewItem.Name = "BindingNavigatorAddNewItem"
       Me.BindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 17)
+      Me.BindingNavigatorAddNewItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorAddNewItem.Text = "Add new"
       Me.BindingNavigatorAddNewItem.Visible = False
       '
       'BindingNavigatorCountItem
       '
       Me.BindingNavigatorCountItem.Name = "BindingNavigatorCountItem"
-      Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 17)
+      Me.BindingNavigatorCountItem.Size = New System.Drawing.Size(35, 22)
       Me.BindingNavigatorCountItem.Text = "of {0}"
       Me.BindingNavigatorCountItem.ToolTipText = "Total number of items"
       '
@@ -880,7 +887,7 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorDeleteItem.Image = CType(resources.GetObject("BindingNavigatorDeleteItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorDeleteItem.Name = "BindingNavigatorDeleteItem"
       Me.BindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 17)
+      Me.BindingNavigatorDeleteItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorDeleteItem.Text = "Delete"
       Me.BindingNavigatorDeleteItem.Visible = False
       '
@@ -890,7 +897,7 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
       Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 17)
+      Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorMoveFirstItem.Text = "Move first"
       '
       'BindingNavigatorMovePreviousItem
@@ -899,13 +906,13 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
       Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 17)
+      Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorMovePreviousItem.Text = "Move previous"
       '
       'BindingNavigatorSeparator
       '
       Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
-      Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 20)
+      Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
       '
       'BindingNavigatorPositionItem
       '
@@ -919,7 +926,7 @@ Public Class FreeREG2Browser
       'BindingNavigatorSeparator1
       '
       Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
-      Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 20)
+      Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
       '
       'BindingNavigatorMoveNextItem
       '
@@ -927,7 +934,7 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
       Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 17)
+      Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorMoveNextItem.Text = "Move next"
       '
       'BindingNavigatorMoveLastItem
@@ -936,13 +943,13 @@ Public Class FreeREG2Browser
       Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
       Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
       Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
-      Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 17)
+      Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
       Me.BindingNavigatorMoveLastItem.Text = "Move last"
       '
       'BindingNavigatorSeparator2
       '
       Me.BindingNavigatorSeparator2.Name = "BindingNavigatorSeparator2"
-      Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 20)
+      Me.BindingNavigatorSeparator2.Size = New System.Drawing.Size(6, 25)
       '
       'backgroundBatches
       '
@@ -1029,17 +1036,6 @@ Public Class FreeREG2Browser
       Me.IDTextBox.Size = New System.Drawing.Size(203, 20)
       Me.IDTextBox.TabIndex = 66
       Me.IDTextBox.Visible = False
-      '
-      'BatchBindingSource
-      '
-      Me.BatchBindingSource.AllowNew = False
-      Me.BatchBindingSource.DataMember = "Batch"
-      Me.BatchBindingSource.DataSource = Me.BatchesDataSet
-      '
-      'BatchesDataSet
-      '
-      Me.BatchesDataSet.DataSetName = "Batches"
-      Me.BatchesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
       'CountyNameTextBox
       '
@@ -1360,60 +1356,13 @@ Public Class FreeREG2Browser
       '
       'SplitContainer1.Panel2
       '
-      Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer3)
       Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer2)
+      Me.SplitContainer1.Panel2.Controls.Add(Me.SplitContainer3)
       Me.SplitContainer1.Size = New System.Drawing.Size(903, 495)
       Me.SplitContainer1.SplitterDistance = 32
       Me.SplitContainer1.SplitterWidth = 3
       Me.SplitContainer1.TabIndex = 65
       Me.SplitContainer1.Visible = False
-      '
-      'SplitContainer3
-      '
-      Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
-      Me.SplitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-      Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
-      Me.SplitContainer3.Name = "SplitContainer3"
-      '
-      'SplitContainer3.Panel1
-      '
-      Me.SplitContainer3.Panel1.Controls.Add(Me.dlvUploadedFiles)
-      '
-      'SplitContainer3.Panel2
-      '
-      Me.SplitContainer3.Panel2.Controls.Add(Me.panelUploadedFiles)
-      Me.SplitContainer3.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer3.SplitterDistance = 147
-      Me.SplitContainer3.TabIndex = 5
-      '
-      'dlvUploadedFiles
-      '
-      Me.dlvUploadedFiles.AllColumns.Add(Me.olvcFilename)
-      Me.dlvUploadedFiles.AlternateRowBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
-      Me.dlvUploadedFiles.AutoGenerateColumns = False
-      Me.dlvUploadedFiles.CellEditUseWholeCell = False
-      Me.dlvUploadedFiles.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcFilename})
-      Me.dlvUploadedFiles.Cursor = System.Windows.Forms.Cursors.Default
-      Me.dlvUploadedFiles.DataSource = Me.BatchBindingSource
-      Me.dlvUploadedFiles.Dock = System.Windows.Forms.DockStyle.Fill
-      Me.dlvUploadedFiles.GridLines = True
-      Me.dlvUploadedFiles.Location = New System.Drawing.Point(0, 0)
-      Me.dlvUploadedFiles.MultiSelect = False
-      Me.dlvUploadedFiles.Name = "dlvUploadedFiles"
-      Me.dlvUploadedFiles.ShowCommandMenuOnRightClick = True
-      Me.dlvUploadedFiles.Size = New System.Drawing.Size(147, 460)
-      Me.dlvUploadedFiles.Sorting = System.Windows.Forms.SortOrder.Ascending
-      Me.dlvUploadedFiles.TabIndex = 0
-      Me.dlvUploadedFiles.UseAlternatingBackColors = True
-      Me.dlvUploadedFiles.UseCompatibleStateImageBehavior = False
-      Me.dlvUploadedFiles.View = System.Windows.Forms.View.Details
-      '
-      'olvcFilename
-      '
-      Me.olvcFilename.AspectName = "FileName"
-      Me.olvcFilename.Groupable = False
-      Me.olvcFilename.Text = "Batch"
-      Me.olvcFilename.Width = 100
       '
       'SplitContainer2
       '
@@ -1436,7 +1385,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 384
+      Me.SplitContainer2.SplitterDistance = 389
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1461,7 +1410,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 384)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 389)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1526,6 +1475,53 @@ Public Class FreeREG2Browser
       Me.btnReplaceFile.Text = "Replace file"
       Me.btnReplaceFile.UseVisualStyleBackColor = True
       '
+      'SplitContainer3
+      '
+      Me.SplitContainer3.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.SplitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
+      Me.SplitContainer3.Location = New System.Drawing.Point(0, 0)
+      Me.SplitContainer3.Name = "SplitContainer3"
+      '
+      'SplitContainer3.Panel1
+      '
+      Me.SplitContainer3.Panel1.Controls.Add(Me.dlvUploadedFiles)
+      '
+      'SplitContainer3.Panel2
+      '
+      Me.SplitContainer3.Panel2.Controls.Add(Me.panelUploadedFiles)
+      Me.SplitContainer3.Size = New System.Drawing.Size(903, 460)
+      Me.SplitContainer3.SplitterDistance = 147
+      Me.SplitContainer3.TabIndex = 5
+      '
+      'dlvUploadedFiles
+      '
+      Me.dlvUploadedFiles.AllColumns.Add(Me.olvcFilename)
+      Me.dlvUploadedFiles.AlternateRowBackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
+      Me.dlvUploadedFiles.AutoGenerateColumns = False
+      Me.dlvUploadedFiles.CellEditUseWholeCell = False
+      Me.dlvUploadedFiles.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcFilename})
+      Me.dlvUploadedFiles.Cursor = System.Windows.Forms.Cursors.Default
+      Me.dlvUploadedFiles.DataSource = Me.BatchBindingSource
+      Me.dlvUploadedFiles.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvUploadedFiles.GridLines = True
+      Me.dlvUploadedFiles.Location = New System.Drawing.Point(0, 0)
+      Me.dlvUploadedFiles.MultiSelect = False
+      Me.dlvUploadedFiles.Name = "dlvUploadedFiles"
+      Me.dlvUploadedFiles.ShowCommandMenuOnRightClick = True
+      Me.dlvUploadedFiles.Size = New System.Drawing.Size(147, 460)
+      Me.dlvUploadedFiles.Sorting = System.Windows.Forms.SortOrder.Ascending
+      Me.dlvUploadedFiles.TabIndex = 0
+      Me.dlvUploadedFiles.UseAlternatingBackColors = True
+      Me.dlvUploadedFiles.UseCompatibleStateImageBehavior = False
+      Me.dlvUploadedFiles.View = System.Windows.Forms.View.Details
+      '
+      'olvcFilename
+      '
+      Me.olvcFilename.AspectName = "FileName"
+      Me.olvcFilename.Groupable = False
+      Me.olvcFilename.Text = "Batch"
+      Me.olvcFilename.Width = 100
+      '
       'backgroundUpload
       '
       Me.backgroundUpload.WorkerReportsProgress = True
@@ -1537,11 +1533,6 @@ Public Class FreeREG2Browser
       'backgroundDelete
       '
       Me.backgroundDelete.WorkerReportsProgress = True
-      '
-      'FreeregTablesDataSet
-      '
-      Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
-      Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
       'localContextMenuStrip
       '
@@ -1561,11 +1552,65 @@ Public Class FreeREG2Browser
       Me.DeleteFileToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
       Me.DeleteFileToolStripMenuItem.Text = "Delete file"
       '
+      'RichTextBox1
+      '
+      Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.RichTextBox1.Location = New System.Drawing.Point(3, 3)
+      Me.RichTextBox1.Name = "RichTextBox1"
+      Me.RichTextBox1.ReadOnly = True
+      Me.RichTextBox1.Size = New System.Drawing.Size(897, 464)
+      Me.RichTextBox1.TabIndex = 5
+      Me.RichTextBox1.Text = "WinFreeREG Getting Started"
+      '
+      'CheckBox1
+      '
+      Me.CheckBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Me.CheckBox1.AutoSize = True
+      Me.CheckBox1.Checked = True
+      Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
+      Me.CheckBox1.Location = New System.Drawing.Point(792, 475)
+      Me.CheckBox1.Name = "CheckBox1"
+      Me.CheckBox1.Size = New System.Drawing.Size(108, 17)
+      Me.CheckBox1.TabIndex = 6
+      Me.CheckBox1.Text = "Continue to show"
+      Me.CheckBox1.UseVisualStyleBackColor = True
+      '
+      'TableLayoutPanel1
+      '
+      Me.TableLayoutPanel1.ColumnCount = 1
+      Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+      Me.TableLayoutPanel1.Controls.Add(Me.CheckBox1, 0, 1)
+      Me.TableLayoutPanel1.Controls.Add(Me.RichTextBox1, 0, 0)
+      Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 24)
+      Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+      Me.TableLayoutPanel1.RowCount = 2
+      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.15151!))
+      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.848485!))
+      Me.TableLayoutPanel1.Size = New System.Drawing.Size(903, 495)
+      Me.TableLayoutPanel1.TabIndex = 7
+      '
+      'BatchBindingSource
+      '
+      Me.BatchBindingSource.AllowNew = False
+      Me.BatchBindingSource.DataMember = "Batch"
+      Me.BatchBindingSource.DataSource = Me.BatchesDataSet
+      '
+      'BatchesDataSet
+      '
+      Me.BatchesDataSet.DataSetName = "Batches"
+      Me.BatchesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+      '
+      'FreeregTablesDataSet
+      '
+      Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
+      Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+      '
       'FreeREG2Browser
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.ClientSize = New System.Drawing.Size(903, 541)
+      Me.Controls.Add(Me.TableLayoutPanel1)
       Me.Controls.Add(Me.SplitContainer1)
       Me.Controls.Add(Me.BrowserStatusStrip)
       Me.Controls.Add(Me.BrowserMenuStrip)
@@ -1585,23 +1630,25 @@ Public Class FreeREG2Browser
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).EndInit()
       Me.panelUploadedFiles.ResumeLayout(False)
       Me.panelUploadedFiles.PerformLayout()
-      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       Me.SplitContainer1.Panel1.ResumeLayout(False)
       Me.SplitContainer1.Panel1.PerformLayout()
       Me.SplitContainer1.Panel2.ResumeLayout(False)
       Me.SplitContainer1.ResumeLayout(False)
-      Me.SplitContainer3.Panel1.ResumeLayout(False)
-      Me.SplitContainer3.Panel2.ResumeLayout(False)
-      Me.SplitContainer3.ResumeLayout(False)
-      CType(Me.dlvUploadedFiles, System.ComponentModel.ISupportInitialize).EndInit()
       Me.SplitContainer2.Panel1.ResumeLayout(False)
       Me.SplitContainer2.Panel2.ResumeLayout(False)
       Me.SplitContainer2.Panel2.PerformLayout()
       Me.SplitContainer2.ResumeLayout(False)
       CType(Me.dlvLocalFiles, System.ComponentModel.ISupportInitialize).EndInit()
-      CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+      Me.SplitContainer3.Panel1.ResumeLayout(False)
+      Me.SplitContainer3.Panel2.ResumeLayout(False)
+      Me.SplitContainer3.ResumeLayout(False)
+      CType(Me.dlvUploadedFiles, System.ComponentModel.ISupportInitialize).EndInit()
       Me.localContextMenuStrip.ResumeLayout(False)
+      Me.TableLayoutPanel1.ResumeLayout(False)
+      Me.TableLayoutPanel1.PerformLayout()
+      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
 
@@ -1720,10 +1767,15 @@ Public Class FreeREG2Browser
          End If
       End If
 
+      CheckBox1.Checked = MyAppSettings.ShowGettingStarted
+      RichTextBox1.LoadFile(Path.Combine(AppDataLocalFolder, "GettingStarted.rtf"))
       If File.Exists(FreeregTablesFile) Then
          TablesDataSet.ReadXml(FreeregTablesFile, XmlReadMode.ReadSchema)
          TablesDataSet.AcceptChanges()
+      Else
+         TableLayoutPanel1.Visible = True
       End If
+      RichTextBox1.Visible = MyAppSettings.ShowGettingStarted
 
       LookUpsDataSet.LoadXmlData(LookupTablesFile)
       LookUpsDataSet.AcceptChanges()
@@ -1851,7 +1903,7 @@ Public Class FreeREG2Browser
       End If
 
       Dim cnt = dlvLocalFiles.Columns.Count
-
+      TableLayoutPanel1.Visible = False
       SplitContainer1.Visible = True
       panelUploadedFiles.Visible = False
       bsrcLocalFiles.DataSource = tableLocalFiles
@@ -1967,6 +2019,7 @@ Public Class FreeREG2Browser
    End Sub
 
    Private Sub miUploadedFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUploadedFiles.Click
+      TableLayoutPanel1.Visible = False
       FileListProgressBar.Visible = True
       backgroundBatches.RunWorkerAsync()
    End Sub
@@ -3717,4 +3770,8 @@ Public Class FreeREG2Browser
       End If
    End Sub
 
+   Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+      If TableLayoutPanel1.Visible Then RichTextBox1.Visible = CheckBox1.Checked
+      If MyAppSettings IsNot Nothing Then MyAppSettings.ShowGettingStarted = CheckBox1.Checked
+   End Sub
 End Class

@@ -223,7 +223,7 @@ Public Class formStartNewFile
 
    Private Sub RegisterTypesComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RegisterTypesComboBox.SelectedIndexChanged
       If RegisterTypesComboBox.SelectedItem IsNot Nothing Then
-         Dim row As WinFreeReg.FreeregTables.RegisterTypesRow = CType(RegisterTypesComboBox.SelectedItem(), DataRowView).Row
+         Dim row As WinFreeReg.FreeregTables.ApprovedRegisterTypesRow = CType(RegisterTypesComboBox.SelectedItem(), DataRowView).Row
          m_SelectedRegisterType = row.Type
 
          labRecordType.Visible = True

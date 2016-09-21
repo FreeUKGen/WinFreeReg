@@ -430,7 +430,7 @@ Partial Class formFileDetails
       Me.RegisterTypeComboBox.FormattingEnabled = True
       Me.RegisterTypeComboBox.Location = New System.Drawing.Point(132, 102)
       Me.RegisterTypeComboBox.Name = "RegisterTypeComboBox"
-      Me.RegisterTypeComboBox.Size = New System.Drawing.Size(170, 24)
+      Me.RegisterTypeComboBox.Size = New System.Drawing.Size(257, 24)
       Me.RegisterTypeComboBox.TabIndex = 61
       Me.RegisterTypeComboBox.ValueMember = "Type"
       '
@@ -438,6 +438,7 @@ Partial Class formFileDetails
       '
       Me.RegisterTypesBindingSource.DataMember = "RegisterTypes"
       Me.RegisterTypesBindingSource.DataSource = Me.FreeregTables
+      Me.RegisterTypesBindingSource.Sort = "Type"
       '
       'PlaceCodeTextBox
       '

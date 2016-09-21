@@ -163,8 +163,9 @@ Partial Class formStartNewFile
       '
       'RegisterTypesBindingSource
       '
-      Me.RegisterTypesBindingSource.DataMember = "RegisterTypes"
+      Me.RegisterTypesBindingSource.DataMember = "ApprovedRegisterTypes"
       Me.RegisterTypesBindingSource.DataSource = Me.FreeregTables
+      Me.RegisterTypesBindingSource.Sort = "Type"
       '
       'RegisterTypesComboBox
       '

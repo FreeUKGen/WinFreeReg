@@ -85,6 +85,26 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="ApprovedRegisterTypes" msprop:Generator_TableClassName="ApprovedRegisterTypesDataTable" msprop:Generator_TableVarName="tableApprovedRegisterTypes" msprop:Generator_TablePropName="ApprovedRegisterTypes" msprop:Generator_RowDeletingName="ApprovedRegisterTypesRowDeleting" msprop:Generator_RowChangingName="ApprovedRegisterTypesRowChanging" msprop:Generator_RowEvHandlerName="ApprovedRegisterTypesRowChangeEventHandler" msprop:Generator_RowDeletedName="ApprovedRegisterTypesRowDeleted" msprop:Generator_UserTableName="ApprovedRegisterTypes" msprop:Generator_RowChangedName="ApprovedRegisterTypesRowChanged" msprop:Generator_RowEvArgName="ApprovedRegisterTypesRowChangeEvent" msprop:Generator_RowClassName="ApprovedRegisterTypesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Type" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="Type" msprop:Generator_ColumnVarNameInTable="columnType" msprop:Generator_ColumnPropNameInTable="TypeColumn" msprop:Generator_UserColumnName="Type">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="2" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:nullValue="_empty" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="RegisterTypeKey" msdata:PrimaryKey="true">
@@ -105,6 +125,10 @@
       <xs:field xpath="mstns:ChurchName" />
       <xs:field xpath="mstns:ChapmanCode" />
       <xs:field xpath="mstns:PlaceName" />
+    </xs:unique>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:ApprovedRegisterTypes" />
+      <xs:field xpath="mstns:Type" />
     </xs:unique>
   </xs:element>
 </xs:schema>

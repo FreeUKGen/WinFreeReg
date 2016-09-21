@@ -86,6 +86,7 @@ Public Class formFreeregTables
    Sub ConfigureRegisterTypesOLV()
       dlvRegisterTypes.DataSource = _tables
       dlvRegisterTypes.DataMember = "RegisterTypes"
+      dlvRegisterTypes.Sort("Type")
    End Sub
 
    Sub ConfigureCountiesOLV()
@@ -187,20 +188,36 @@ Public Class formFreeregTables
       End Select
    End Sub
 
+   Private Sub btnApproved_Click(sender As Object, e As EventArgs) Handles btnApproved.Click
+      If dlvRegisterTypes.DataMember = "RegisterTypes" Then
+         dlvRegisterTypes.DataMember = "ApprovedRegisterTypes"
+         btnApproved.Text = "Show All Types"
+         dlvRegisterTypes.Sort("Type")
+      Else
+         dlvRegisterTypes.DataMember = "RegisterTypes"
+         btnApproved.Text = "Show Approved Types"
+         dlvRegisterTypes.Sort("Type")
+      End If
+   End Sub
+
    Private Sub TabControl1_Selected(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TabControlEventArgs) Handles TabControl1.Selected
       Select Case e.TabPage.Name
          Case "tabRegisterTypes"
             HideSelectionFields()
             btnFetch.Text = "Fetch Register Types"
+            btnApproved.Visible = True
          Case "tabCounties"
             HideSelectionFields()
             btnFetch.Text = "Fetch Counties"
+            btnApproved.Visible = False
          Case "tabPlaces"
             ShowSelectionFields(False)
             btnFetch.Text = "Fetch Places"
+            btnApproved.Visible = False
          Case "tabChurches"
             ShowSelectionFields(True)
             btnFetch.Text = "Fetch Churches"
+            btnApproved.Visible = False
       End Select
    End Sub
 
@@ -403,7 +420,18 @@ Public Class formFreeregTables
                webClient.AddCookie(uri, New Cookie(cookie.Name, cookie.Value))
             Next
 
-            Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/register_types.xml"
+            ' "Archdeacon's Transcripts" >= "AT",
+            ' "Bishop's Transcripts" >= "BT",
+            ' "Dwelly's Transcripts" >= "DW",
+            ' "Extract of a Register" >= "EX",
+            ' "Memorial Inscription" >= "MI",
+            ' "Other Register" >= "OR",
+            ' "Parish Register" >= "PR",
+            ' "Phillimore's Transcripts" >= "PH",
+            ' "Transcript" >= "TR",
+            ' "Unknown" >= "UK"}
+
+            Dim addrRequest As String = _settings.BaseUrl + "/transreg_counties/register_types.xml"   ' APPROVED_OPTIONS
             Dim contents = webClient.DownloadString(addrRequest).Trim
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")
             _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
@@ -421,13 +449,81 @@ Public Class formFreeregTables
                ds.ReadXml(ms, XmlReadMode.InferSchema)
                ms.Close()
 
-               _tables.RegisterTypes.Clear()
+               _tables.ApprovedRegisterTypes.Clear()
                For Each row As DataRow In ds.Tables("registertype").Rows
-                  _tables.RegisterTypes.AddRegisterTypesRow(row("Type"), row("Description"))
+                  _tables.ApprovedRegisterTypes.AddApprovedRegisterTypesRow(row("Type"), row("Description"))
                Next
-               _tables.RegisterTypes.AcceptChanges()
+               _tables.ApprovedRegisterTypes.AcceptChanges()
                _FileIsChanged = True
-               e.Result = My.Resources.msgRegisterTypesRefreshed
+
+               ' "Archdeacon's Transcripts" >= "AT",
+               ' "Bishop's Transcripts" >= "BT",
+               ' "Dwelly's Transcript (New)" >= "DT",
+               ' "Dwelly's Transcripts" >= "DW",
+               ' "Extract of a Register" >= "EX",
+               ' "Memorial Inscription" >= "MI",
+               ' "Other Register" >= "OR"
+               ' "Other Transcript" >= "OT",
+               ' "Phillimore's Transcripts" >= "PH",
+               ' "Parish Register" >= "PR",
+               ' "Phillimore's Transcript (New)" >= "PT",
+               ' "Transcript" >= "TR",
+               ' "Unknown" >= "UK",
+               ' "Unspecified" >= " ",
+               addrRequest = _settings.BaseUrl + "/transreg_counties/all_register_types.xml"       ' OPTIONS
+               contents = webClient.DownloadString(addrRequest).Trim
+               hdr = webClient.ResponseHeaders("Set-Cookie")
+               _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
+
+               If contents.StartsWith("<AllRegisterTypes>") Then
+                  xmlDoc = New XmlDocument()
+                  buf = ASCIIEncoding.ASCII.GetBytes(contents)
+                  ms = New MemoryStream(buf)
+                  xmlDoc.Load(ms)
+                  ms.Close()
+
+                  buf = ASCIIEncoding.ASCII.GetBytes(xmlDoc.OuterXml)
+                  ms = New MemoryStream(buf)
+                  ds = New DataSet()
+                  ds.ReadXml(ms, XmlReadMode.InferSchema)
+                  ms.Close()
+
+                  _tables.RegisterTypes.Clear()
+                  For Each row As DataRow In ds.Tables("registertype").Rows
+                     _tables.RegisterTypes.AddRegisterTypesRow(row("Type"), row("Description"))
+                  Next
+                  _tables.RegisterTypes.AcceptChanges()
+                  _FileIsChanged = True
+                  e.Result = My.Resources.msgRegisterTypesRefreshed
+               ElseIf contents.StartsWith("<?xml version=""1.0"" encoding=""UTF-8""?>") Then
+                  xmlDoc = New XmlDocument()
+                  xmlDoc.LoadXml(contents)
+                  Dim root As XmlElement = xmlDoc.DocumentElement()
+                  If root Is Nothing Then
+                     ' No root element
+                     Throw New BackgroundWorkerException("Fetch Register Types failed - Missing root element")
+                  Else
+                     If String.Compare(root.Name, "register-types", True) = 0 Then
+                        Dim result As XmlElement = xmlDoc.SelectSingleNode("/register-types/result")
+                        If result Is Nothing Then
+                           ' Missing 'result' node
+                           Throw New BackgroundWorkerException("Fetch Register Types failed - Missing result node")
+                        Else
+                           Select Case result.FirstChild.Value
+                              Case "success"
+                              Case "failure"
+                                 Dim message = xmlDoc.SelectSingleNode("/register-types/message").FirstChild.Value
+                                 '  <message>You are not authorised to use these facilities</message>
+                                 Throw New BackgroundWorkerException(message)
+                              Case Else
+                                 Throw New BackgroundWorkerException("Fetch Register Types failed - XML format error")
+                           End Select
+                        End If
+                     End If
+                  End If
+               Else
+                  Throw New BackgroundWorkerException("Fetching Register Types from FreeREG failed - not logged on")
+               End If
             ElseIf contents.StartsWith("<?xml version=""1.0"" encoding=""UTF-8""?>") Then
                Dim xmlDoc As XmlDocument = New XmlDocument()
                xmlDoc.LoadXml(contents)
