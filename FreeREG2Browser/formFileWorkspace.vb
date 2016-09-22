@@ -403,17 +403,12 @@ Public Class formFileWorkspace
    End Sub
 
    Private Sub BaptismCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBaptisms.CellEditStarting
-      If e.Column.AspectName.Contains("Surname") Then
-         If TypeOf e.Control Is System.Windows.Forms.TextBox Then
+      If TypeOf e.Control Is System.Windows.Forms.TextBox Then
+         If e.Column.AspectName.Contains("Surname") Then
+               CType(e.Control, System.Windows.Forms.TextBox).CharacterCasing = CharacterCasing.Upper
+         ElseIf e.Column.AspectName = "Sex" Then
             CType(e.Control, System.Windows.Forms.TextBox).CharacterCasing = CharacterCasing.Upper
          End If
-      Else
-         Select Case e.Column.AspectName
-            Case "Sex"
-               If TypeOf e.Control Is System.Windows.Forms.TextBox Then
-                  CType(e.Control, System.Windows.Forms.TextBox).CharacterCasing = CharacterCasing.Upper
-               End If
-         End Select
       End If
    End Sub
 
@@ -432,9 +427,13 @@ Public Class formFileWorkspace
                Dim tinfo As TextInfo = culture.TextInfo()
                e.NewValue = tinfo.ToUpper(e.NewValue)
             Case "FathersOccupation"
-               e.NewValue = ConvertToSentenceCase(e.NewValue)
+               Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
+               Dim tinfo As TextInfo = culture.TextInfo()
+               e.NewValue = tinfo.ToTitleCase(e.NewValue)
             Case "Abode"
-               e.NewValue = ConvertToSentenceCase(e.NewValue)
+               Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
+               Dim tinfo As TextInfo = culture.TextInfo()
+               e.NewValue = tinfo.ToTitleCase(e.NewValue)
             Case "Notes"
                e.NewValue = ConvertToSentenceCase(e.NewValue)
 
@@ -480,7 +479,9 @@ Public Class formFileWorkspace
                Dim tinfo As TextInfo = culture.TextInfo()
                e.NewValue = tinfo.ToUpper(e.NewValue)
             Case "Abode"
-               e.NewValue = ConvertToSentenceCase(e.NewValue)
+               Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
+               Dim tinfo As TextInfo = culture.TextInfo()
+               e.NewValue = tinfo.ToTitleCase(e.NewValue)
             Case "Notes"
                e.NewValue = ConvertToSentenceCase(e.NewValue)
 
@@ -526,7 +527,7 @@ Public Class formFileWorkspace
    Private Sub MarriageCellEditFinishing(ByVal sender As Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvMarriages.CellEditFinishing
       If TypeOf e.Control Is TextBox Then
          Select Case e.Column.AspectName
-            Case "GroomFornames", "BrideForenames", "GroomFatherForenames", "BrideFatherForenames", "Witness1Forenames", "Witness2Forenames"
+            Case "GroomForenames", "BrideForenames", "GroomFatherForenames", "BrideFatherForenames", "Witness1Forenames", "Witness2Forenames"
                Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
                Dim tinfo As TextInfo = culture.TextInfo()
                e.NewValue = tinfo.ToTitleCase(e.NewValue)
@@ -535,11 +536,17 @@ Public Class formFileWorkspace
                Dim tinfo As TextInfo = culture.TextInfo()
                e.NewValue = tinfo.ToUpper(e.NewValue)
             Case "GroomParish", "BrideParish"
-               e.NewValue = ConvertToSentenceCase(e.NewValue)
+               Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
+               Dim tinfo As TextInfo = culture.TextInfo()
+               e.NewValue = tinfo.ToTitleCase(e.NewValue)
             Case "GroomOccupation", "BrideOccupation", "GroomFatherOccupation", "BrideFatherOccupation"
-               e.NewValue = ConvertToSentenceCase(e.NewValue)
+               Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
+               Dim tinfo As TextInfo = culture.TextInfo()
+               e.NewValue = tinfo.ToTitleCase(e.NewValue)
             Case "GroomAbode", "BrideAbode"
-               e.NewValue = ConvertToSentenceCase(e.NewValue)
+               Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
+               Dim tinfo As TextInfo = culture.TextInfo()
+               e.NewValue = tinfo.ToTitleCase(e.NewValue)
             Case "Notes"
                e.NewValue = ConvertToSentenceCase(e.NewValue)
 

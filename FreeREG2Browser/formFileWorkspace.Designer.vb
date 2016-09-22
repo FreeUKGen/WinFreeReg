@@ -43,6 +43,40 @@ Partial Class formFileWorkspace
       Me.BindingNavigatorFileDetails = New System.Windows.Forms.ToolStripButton()
       Me.miGeneralHelp = New System.Windows.Forms.ToolStripMenuItem()
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+      Me.dlvMarriages = New BrightIdeasSoftware.DataListView()
+      Me.olvcRegNo2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLoadOrder2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcFiche2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcImage2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcCounty2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcPlace2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcChurch2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcMarriageDate = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomAge = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomParish = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomCondition = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomAbode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideAge = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideParish = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideCondition = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideAbode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomFatherForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomFatherSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcGroomFatherOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideFatherForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideFatherSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBrideFatherOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcWitness1Forenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcWitness1Surname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcWitness2Forenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcWitness2Surname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcNotes2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.dlvBaptisms = New BrightIdeasSoftware.DataListView()
       Me.olvcRegNo = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcLoadOrder = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
@@ -80,40 +114,6 @@ Partial Class formFileWorkspace
       Me.olvcAge = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcAbode1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcNotes1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.dlvMarriages = New BrightIdeasSoftware.DataListView()
-      Me.olvcRegNo2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcLoadOrder2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcFiche2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcImage2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcCounty2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcPlace2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcChurch2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcMarriageDate = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomAge = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomParish = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomCondition = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomAbode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideAge = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideParish = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideCondition = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideAbode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomFatherForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomFatherSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcGroomFatherOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideFatherForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideFatherSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBrideFatherOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcWitness1Forenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcWitness1Surname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcWitness2Forenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcWitness2Surname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcNotes2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.baptismsContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
       Me.bapFreeREGTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.burialsContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -131,9 +131,9 @@ Partial Class formFileWorkspace
       Me.SplitContainer1.Panel1.SuspendLayout()
       Me.SplitContainer1.Panel2.SuspendLayout()
       Me.SplitContainer1.SuspendLayout()
+      CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.dlvBaptisms, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.dlvBurials, System.ComponentModel.ISupportInitialize).BeginInit()
-      CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.baptismsContextMenuStrip.SuspendLayout()
       Me.burialsContextMenuStrip.SuspendLayout()
       Me.marriagesContextMenuStrip.SuspendLayout()
@@ -284,12 +284,297 @@ Partial Class formFileWorkspace
       '
       'SplitContainer1.Panel2
       '
+      Me.SplitContainer1.Panel2.Controls.Add(Me.dlvMarriages)
       Me.SplitContainer1.Panel2.Controls.Add(Me.dlvBaptisms)
       Me.SplitContainer1.Panel2.Controls.Add(Me.dlvBurials)
-      Me.SplitContainer1.Panel2.Controls.Add(Me.dlvMarriages)
       Me.SplitContainer1.Size = New System.Drawing.Size(839, 560)
       Me.SplitContainer1.SplitterDistance = 25
       Me.SplitContainer1.TabIndex = 4
+      '
+      'dlvMarriages
+      '
+      Me.dlvMarriages.AllColumns.Add(Me.olvcRegNo2)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcLoadOrder2)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcFiche2)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcImage2)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcCounty2)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcPlace2)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcChurch2)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcMarriageDate)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomForenames)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomSurname)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomAge)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomParish)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomCondition)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomOccupation)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomAbode)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideForenames)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideSurname)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideAge)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideParish)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideCondition)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideOccupation)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideAbode)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomFatherForenames)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomFatherSurname)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomFatherOccupation)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideFatherForenames)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideFatherSurname)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideFatherOccupation)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcWitness1Forenames)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcWitness1Surname)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcWitness2Forenames)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcWitness2Surname)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcNotes2)
+      Me.dlvMarriages.AllowColumnReorder = True
+      Me.dlvMarriages.AlternateRowBackColor = System.Drawing.Color.Honeydew
+      Me.dlvMarriages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
+      Me.dlvMarriages.CellEditEnterChangesRows = True
+      Me.dlvMarriages.CellEditTabChangesRows = True
+      Me.dlvMarriages.CellEditUseWholeCell = False
+      Me.dlvMarriages.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo2, Me.olvcFiche2, Me.olvcImage2, Me.olvcMarriageDate, Me.olvcGroomForenames, Me.olvcGroomSurname, Me.olvcGroomAge, Me.olvcGroomParish, Me.olvcGroomCondition, Me.olvcGroomOccupation, Me.olvcGroomAbode, Me.olvcBrideForenames, Me.olvcBrideSurname, Me.olvcBrideAge, Me.olvcBrideParish, Me.olvcBrideCondition, Me.olvcBrideOccupation, Me.olvcBrideAbode, Me.olvcGroomFatherForenames, Me.olvcGroomFatherSurname, Me.olvcGroomFatherOccupation, Me.olvcBrideFatherForenames, Me.olvcBrideFatherSurname, Me.olvcBrideFatherOccupation, Me.olvcWitness1Forenames, Me.olvcWitness1Surname, Me.olvcWitness2Forenames, Me.olvcWitness2Surname, Me.olvcNotes2})
+      Me.dlvMarriages.Cursor = System.Windows.Forms.Cursors.Default
+      Me.dlvMarriages.DataSource = Me.bsMarriages
+      Me.dlvMarriages.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvMarriages.FullRowSelect = True
+      Me.dlvMarriages.GridLines = True
+      Me.dlvMarriages.HeaderWordWrap = True
+      Me.dlvMarriages.HideSelection = False
+      Me.dlvMarriages.Location = New System.Drawing.Point(0, 0)
+      Me.dlvMarriages.MultiSelect = False
+      Me.dlvMarriages.Name = "dlvMarriages"
+      Me.dlvMarriages.ShowCommandMenuOnRightClick = True
+      Me.dlvMarriages.ShowGroups = False
+      Me.dlvMarriages.ShowItemToolTips = True
+      Me.dlvMarriages.Size = New System.Drawing.Size(839, 531)
+      Me.dlvMarriages.SortGroupItemsByPrimaryColumn = False
+      Me.dlvMarriages.TabIndex = 2
+      Me.dlvMarriages.TintSortColumn = True
+      Me.dlvMarriages.UseAlternatingBackColors = True
+      Me.dlvMarriages.UseCompatibleStateImageBehavior = False
+      Me.dlvMarriages.View = System.Windows.Forms.View.Details
+      Me.dlvMarriages.Visible = False
+      '
+      'olvcRegNo2
+      '
+      Me.olvcRegNo2.AspectName = "RegNo"
+      Me.olvcRegNo2.Groupable = False
+      Me.olvcRegNo2.Text = "Register Number"
+      Me.olvcRegNo2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcRegNo2.WordWrap = True
+      '
+      'olvcLoadOrder2
+      '
+      Me.olvcLoadOrder2.AspectName = "LoadOrder"
+      Me.olvcLoadOrder2.Groupable = False
+      Me.olvcLoadOrder2.IsVisible = False
+      Me.olvcLoadOrder2.Text = "Load Order"
+      Me.olvcLoadOrder2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcFiche2
+      '
+      Me.olvcFiche2.AspectName = "LDSFiche"
+      Me.olvcFiche2.Groupable = False
+      Me.olvcFiche2.Text = "Fiche"
+      Me.olvcFiche2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcImage2
+      '
+      Me.olvcImage2.AspectName = "LDSImage"
+      Me.olvcImage2.Groupable = False
+      Me.olvcImage2.Text = "Image"
+      Me.olvcImage2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcCounty2
+      '
+      Me.olvcCounty2.AspectName = "County"
+      Me.olvcCounty2.DisplayIndex = 1
+      Me.olvcCounty2.Groupable = False
+      Me.olvcCounty2.IsEditable = False
+      Me.olvcCounty2.IsVisible = False
+      Me.olvcCounty2.Text = "County"
+      Me.olvcCounty2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcPlace2
+      '
+      Me.olvcPlace2.AspectName = "Place"
+      Me.olvcPlace2.DisplayIndex = 2
+      Me.olvcPlace2.Groupable = False
+      Me.olvcPlace2.IsEditable = False
+      Me.olvcPlace2.IsVisible = False
+      Me.olvcPlace2.Text = "Place"
+      '
+      'olvcChurch2
+      '
+      Me.olvcChurch2.AspectName = "Church"
+      Me.olvcChurch2.DisplayIndex = 3
+      Me.olvcChurch2.Groupable = False
+      Me.olvcChurch2.IsEditable = False
+      Me.olvcChurch2.IsVisible = False
+      Me.olvcChurch2.Text = "Church"
+      '
+      'olvcMarriageDate
+      '
+      Me.olvcMarriageDate.AspectName = "MarriageDate"
+      Me.olvcMarriageDate.Groupable = False
+      Me.olvcMarriageDate.Text = "Marriage Date"
+      Me.olvcMarriageDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcGroomForenames
+      '
+      Me.olvcGroomForenames.AspectName = "GroomForenames"
+      Me.olvcGroomForenames.Groupable = False
+      Me.olvcGroomForenames.Text = "Groom Forenames"
+      '
+      'olvcGroomSurname
+      '
+      Me.olvcGroomSurname.AspectName = "GroomSurname"
+      Me.olvcGroomSurname.Groupable = False
+      Me.olvcGroomSurname.Text = "Groom Surname"
+      '
+      'olvcGroomAge
+      '
+      Me.olvcGroomAge.AspectName = "GroomAge"
+      Me.olvcGroomAge.Groupable = False
+      Me.olvcGroomAge.Text = "Groom Age"
+      Me.olvcGroomAge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcGroomParish
+      '
+      Me.olvcGroomParish.AspectName = "GroomParish"
+      Me.olvcGroomParish.Groupable = False
+      Me.olvcGroomParish.Text = "Groom Parish"
+      '
+      'olvcGroomCondition
+      '
+      Me.olvcGroomCondition.AspectName = "GroomCondition"
+      Me.olvcGroomCondition.Groupable = False
+      Me.olvcGroomCondition.Text = "Groom Condition"
+      '
+      'olvcGroomOccupation
+      '
+      Me.olvcGroomOccupation.AspectName = "GroomOccupation"
+      Me.olvcGroomOccupation.Groupable = False
+      Me.olvcGroomOccupation.Text = "Groom Occupation"
+      '
+      'olvcGroomAbode
+      '
+      Me.olvcGroomAbode.AspectName = "GroomAbode"
+      Me.olvcGroomAbode.Groupable = False
+      Me.olvcGroomAbode.Text = "Groom Abode"
+      '
+      'olvcBrideForenames
+      '
+      Me.olvcBrideForenames.AspectName = "BrideForenames"
+      Me.olvcBrideForenames.Groupable = False
+      Me.olvcBrideForenames.Text = "Bride Forenames"
+      '
+      'olvcBrideSurname
+      '
+      Me.olvcBrideSurname.AspectName = "BrideSurname"
+      Me.olvcBrideSurname.Groupable = False
+      Me.olvcBrideSurname.Text = "Bride Surname"
+      '
+      'olvcBrideAge
+      '
+      Me.olvcBrideAge.AspectName = "BrideAge"
+      Me.olvcBrideAge.Groupable = False
+      Me.olvcBrideAge.Text = "Bride Age"
+      Me.olvcBrideAge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcBrideParish
+      '
+      Me.olvcBrideParish.AspectName = "BrideParish"
+      Me.olvcBrideParish.Groupable = False
+      Me.olvcBrideParish.Text = "Bride Parish"
+      '
+      'olvcBrideCondition
+      '
+      Me.olvcBrideCondition.AspectName = "BrideCondition"
+      Me.olvcBrideCondition.Groupable = False
+      Me.olvcBrideCondition.Text = "Bride Condition"
+      '
+      'olvcBrideOccupation
+      '
+      Me.olvcBrideOccupation.AspectName = "BrideOccupation"
+      Me.olvcBrideOccupation.Groupable = False
+      Me.olvcBrideOccupation.Text = "Bride Occupation"
+      '
+      'olvcBrideAbode
+      '
+      Me.olvcBrideAbode.AspectName = "BrideAbode"
+      Me.olvcBrideAbode.Groupable = False
+      Me.olvcBrideAbode.Text = "Bride Abode"
+      '
+      'olvcGroomFatherForenames
+      '
+      Me.olvcGroomFatherForenames.AspectName = "GroomFatherForenames"
+      Me.olvcGroomFatherForenames.Groupable = False
+      Me.olvcGroomFatherForenames.Text = "Groom Father Forenames"
+      '
+      'olvcGroomFatherSurname
+      '
+      Me.olvcGroomFatherSurname.AspectName = "GroomFatherSurname"
+      Me.olvcGroomFatherSurname.Groupable = False
+      Me.olvcGroomFatherSurname.Text = "Groom Father Surname"
+      '
+      'olvcGroomFatherOccupation
+      '
+      Me.olvcGroomFatherOccupation.AspectName = "GroomFatherOccupation"
+      Me.olvcGroomFatherOccupation.Groupable = False
+      Me.olvcGroomFatherOccupation.Text = "Groom Father Occupation"
+      '
+      'olvcBrideFatherForenames
+      '
+      Me.olvcBrideFatherForenames.AspectName = "BrideFatherForenames"
+      Me.olvcBrideFatherForenames.Groupable = False
+      Me.olvcBrideFatherForenames.Text = "Bride Father Forenames"
+      '
+      'olvcBrideFatherSurname
+      '
+      Me.olvcBrideFatherSurname.AspectName = "BrideFatherSurname"
+      Me.olvcBrideFatherSurname.Groupable = False
+      Me.olvcBrideFatherSurname.Text = "Bride Father Surname"
+      '
+      'olvcBrideFatherOccupation
+      '
+      Me.olvcBrideFatherOccupation.AspectName = "BrideFatherOccupation"
+      Me.olvcBrideFatherOccupation.Groupable = False
+      Me.olvcBrideFatherOccupation.Text = "Bride Father Occupation"
+      '
+      'olvcWitness1Forenames
+      '
+      Me.olvcWitness1Forenames.AspectName = "Witness1Forenames"
+      Me.olvcWitness1Forenames.Groupable = False
+      Me.olvcWitness1Forenames.Text = "Witness 1 Forenames"
+      '
+      'olvcWitness1Surname
+      '
+      Me.olvcWitness1Surname.AspectName = "Witness1Surname"
+      Me.olvcWitness1Surname.Groupable = False
+      Me.olvcWitness1Surname.Text = "Witness 1 Surname"
+      '
+      'olvcWitness2Forenames
+      '
+      Me.olvcWitness2Forenames.AspectName = "Witness2Forenames"
+      Me.olvcWitness2Forenames.Groupable = False
+      Me.olvcWitness2Forenames.Text = "Witness 2 Forenames"
+      '
+      'olvcWitness2Surname
+      '
+      Me.olvcWitness2Surname.AspectName = "Witness2Surname"
+      Me.olvcWitness2Surname.Groupable = False
+      Me.olvcWitness2Surname.Text = "Witness 2 Surname"
+      '
+      'olvcNotes2
+      '
+      Me.olvcNotes2.AspectName = "Notes"
+      Me.olvcNotes2.FillsFreeSpace = True
+      Me.olvcNotes2.Groupable = False
+      Me.olvcNotes2.Hideable = False
+      Me.olvcNotes2.Sortable = False
+      Me.olvcNotes2.Text = "Notes"
+      Me.olvcNotes2.UseFiltering = False
       '
       'dlvBaptisms
       '
@@ -643,291 +928,6 @@ Partial Class formFileWorkspace
       Me.olvcNotes1.Text = "Notes"
       Me.olvcNotes1.UseFiltering = False
       '
-      'dlvMarriages
-      '
-      Me.dlvMarriages.AllColumns.Add(Me.olvcRegNo2)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcLoadOrder2)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcFiche2)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcImage2)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcCounty2)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcPlace2)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcChurch2)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcMarriageDate)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomForenames)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomSurname)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomAge)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomParish)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomCondition)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomOccupation)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomAbode)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideForenames)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideSurname)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideAge)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideParish)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideCondition)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideOccupation)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideAbode)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomFatherForenames)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomFatherSurname)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcGroomFatherOccupation)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideFatherForenames)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideFatherSurname)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcBrideFatherOccupation)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcWitness1Forenames)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcWitness1Surname)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcWitness2Forenames)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcWitness2Surname)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcNotes2)
-      Me.dlvMarriages.AllowColumnReorder = True
-      Me.dlvMarriages.AlternateRowBackColor = System.Drawing.Color.Honeydew
-      Me.dlvMarriages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
-      Me.dlvMarriages.CellEditEnterChangesRows = True
-      Me.dlvMarriages.CellEditTabChangesRows = True
-      Me.dlvMarriages.CellEditUseWholeCell = False
-      Me.dlvMarriages.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo2, Me.olvcFiche2, Me.olvcImage2, Me.olvcMarriageDate, Me.olvcGroomForenames, Me.olvcGroomSurname, Me.olvcGroomAge, Me.olvcGroomParish, Me.olvcGroomCondition, Me.olvcGroomOccupation, Me.olvcGroomAbode, Me.olvcBrideForenames, Me.olvcBrideSurname, Me.olvcBrideAge, Me.olvcBrideParish, Me.olvcBrideCondition, Me.olvcBrideOccupation, Me.olvcBrideAbode, Me.olvcGroomFatherForenames, Me.olvcGroomFatherSurname, Me.olvcGroomFatherOccupation, Me.olvcBrideFatherForenames, Me.olvcBrideFatherSurname, Me.olvcBrideFatherOccupation, Me.olvcWitness1Forenames, Me.olvcWitness1Surname, Me.olvcWitness2Forenames, Me.olvcWitness2Surname, Me.olvcNotes2})
-      Me.dlvMarriages.Cursor = System.Windows.Forms.Cursors.Default
-      Me.dlvMarriages.DataSource = Me.bsMarriages
-      Me.dlvMarriages.Dock = System.Windows.Forms.DockStyle.Fill
-      Me.dlvMarriages.FullRowSelect = True
-      Me.dlvMarriages.GridLines = True
-      Me.dlvMarriages.HeaderWordWrap = True
-      Me.dlvMarriages.HideSelection = False
-      Me.dlvMarriages.Location = New System.Drawing.Point(0, 0)
-      Me.dlvMarriages.MultiSelect = False
-      Me.dlvMarriages.Name = "dlvMarriages"
-      Me.dlvMarriages.ShowCommandMenuOnRightClick = True
-      Me.dlvMarriages.ShowGroups = False
-      Me.dlvMarriages.ShowItemToolTips = True
-      Me.dlvMarriages.Size = New System.Drawing.Size(839, 531)
-      Me.dlvMarriages.SortGroupItemsByPrimaryColumn = False
-      Me.dlvMarriages.TabIndex = 2
-      Me.dlvMarriages.TintSortColumn = True
-      Me.dlvMarriages.UseAlternatingBackColors = True
-      Me.dlvMarriages.UseCompatibleStateImageBehavior = False
-      Me.dlvMarriages.View = System.Windows.Forms.View.Details
-      Me.dlvMarriages.Visible = False
-      '
-      'olvcRegNo2
-      '
-      Me.olvcRegNo2.AspectName = "RegNo"
-      Me.olvcRegNo2.Groupable = False
-      Me.olvcRegNo2.Text = "Register Number"
-      Me.olvcRegNo2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      Me.olvcRegNo2.WordWrap = True
-      '
-      'olvcLoadOrder2
-      '
-      Me.olvcLoadOrder2.AspectName = "LoadOrder"
-      Me.olvcLoadOrder2.Groupable = False
-      Me.olvcLoadOrder2.IsVisible = False
-      Me.olvcLoadOrder2.Text = "Load Order"
-      Me.olvcLoadOrder2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcFiche2
-      '
-      Me.olvcFiche2.AspectName = "LDSFiche"
-      Me.olvcFiche2.Groupable = False
-      Me.olvcFiche2.Text = "Fiche"
-      Me.olvcFiche2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcImage2
-      '
-      Me.olvcImage2.AspectName = "LDSImage"
-      Me.olvcImage2.Groupable = False
-      Me.olvcImage2.Text = "Image"
-      Me.olvcImage2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcCounty2
-      '
-      Me.olvcCounty2.AspectName = "County"
-      Me.olvcCounty2.DisplayIndex = 1
-      Me.olvcCounty2.Groupable = False
-      Me.olvcCounty2.IsEditable = False
-      Me.olvcCounty2.IsVisible = False
-      Me.olvcCounty2.Text = "County"
-      Me.olvcCounty2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcPlace2
-      '
-      Me.olvcPlace2.AspectName = "Place"
-      Me.olvcPlace2.DisplayIndex = 2
-      Me.olvcPlace2.Groupable = False
-      Me.olvcPlace2.IsEditable = False
-      Me.olvcPlace2.IsVisible = False
-      Me.olvcPlace2.Text = "Place"
-      '
-      'olvcChurch2
-      '
-      Me.olvcChurch2.AspectName = "Church"
-      Me.olvcChurch2.DisplayIndex = 3
-      Me.olvcChurch2.Groupable = False
-      Me.olvcChurch2.IsEditable = False
-      Me.olvcChurch2.IsVisible = False
-      Me.olvcChurch2.Text = "Church"
-      '
-      'olvcMarriageDate
-      '
-      Me.olvcMarriageDate.AspectName = "MarriageDate"
-      Me.olvcMarriageDate.Groupable = False
-      Me.olvcMarriageDate.Text = "Marriage Date"
-      Me.olvcMarriageDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcGroomForenames
-      '
-      Me.olvcGroomForenames.AspectName = "GroomForenames"
-      Me.olvcGroomForenames.Groupable = False
-      Me.olvcGroomForenames.Text = "Groom Forenames"
-      '
-      'olvcGroomSurname
-      '
-      Me.olvcGroomSurname.AspectName = "GroomSurname"
-      Me.olvcGroomSurname.Groupable = False
-      Me.olvcGroomSurname.Text = "Groom Surname"
-      '
-      'olvcGroomAge
-      '
-      Me.olvcGroomAge.AspectName = "GroomAge"
-      Me.olvcGroomAge.Groupable = False
-      Me.olvcGroomAge.Text = "Groom Age"
-      Me.olvcGroomAge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcGroomParish
-      '
-      Me.olvcGroomParish.AspectName = "GroomParish"
-      Me.olvcGroomParish.Groupable = False
-      Me.olvcGroomParish.Text = "Groom Parish"
-      '
-      'olvcGroomCondition
-      '
-      Me.olvcGroomCondition.AspectName = "GroomCondition"
-      Me.olvcGroomCondition.Groupable = False
-      Me.olvcGroomCondition.Text = "Groom Condition"
-      '
-      'olvcGroomOccupation
-      '
-      Me.olvcGroomOccupation.AspectName = "GroomOccupation"
-      Me.olvcGroomOccupation.Groupable = False
-      Me.olvcGroomOccupation.Text = "Groom Occupation"
-      '
-      'olvcGroomAbode
-      '
-      Me.olvcGroomAbode.AspectName = "GroomAbode"
-      Me.olvcGroomAbode.Groupable = False
-      Me.olvcGroomAbode.Text = "Groom Abode"
-      '
-      'olvcBrideForenames
-      '
-      Me.olvcBrideForenames.AspectName = "BrideForenames"
-      Me.olvcBrideForenames.Groupable = False
-      Me.olvcBrideForenames.Text = "Bride Forenames"
-      '
-      'olvcBrideSurname
-      '
-      Me.olvcBrideSurname.AspectName = "BrideSurname"
-      Me.olvcBrideSurname.Groupable = False
-      Me.olvcBrideSurname.Text = "Bride Surname"
-      '
-      'olvcBrideAge
-      '
-      Me.olvcBrideAge.AspectName = "BrideAge"
-      Me.olvcBrideAge.Groupable = False
-      Me.olvcBrideAge.Text = "Bride Age"
-      Me.olvcBrideAge.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcBrideParish
-      '
-      Me.olvcBrideParish.AspectName = "BrideParish"
-      Me.olvcBrideParish.Groupable = False
-      Me.olvcBrideParish.Text = "Bride Parish"
-      '
-      'olvcBrideCondition
-      '
-      Me.olvcBrideCondition.AspectName = "BrideCondition"
-      Me.olvcBrideCondition.Groupable = False
-      Me.olvcBrideCondition.Text = "Bride Condition"
-      '
-      'olvcBrideOccupation
-      '
-      Me.olvcBrideOccupation.AspectName = "BrideOccupation"
-      Me.olvcBrideOccupation.Groupable = False
-      Me.olvcBrideOccupation.Text = "Bride Occupation"
-      '
-      'olvcBrideAbode
-      '
-      Me.olvcBrideAbode.AspectName = "BrideAbode"
-      Me.olvcBrideAbode.Groupable = False
-      Me.olvcBrideAbode.Text = "Bride Abode"
-      '
-      'olvcGroomFatherForenames
-      '
-      Me.olvcGroomFatherForenames.AspectName = "GroomFatherForenames"
-      Me.olvcGroomFatherForenames.Groupable = False
-      Me.olvcGroomFatherForenames.Text = "Groom Father Forenames"
-      '
-      'olvcGroomFatherSurname
-      '
-      Me.olvcGroomFatherSurname.AspectName = "GroomFatherSurname"
-      Me.olvcGroomFatherSurname.Groupable = False
-      Me.olvcGroomFatherSurname.Text = "Groom Father Surname"
-      '
-      'olvcGroomFatherOccupation
-      '
-      Me.olvcGroomFatherOccupation.AspectName = "GroomFatherOccupation"
-      Me.olvcGroomFatherOccupation.Groupable = False
-      Me.olvcGroomFatherOccupation.Text = "Groom Father Occupation"
-      '
-      'olvcBrideFatherForenames
-      '
-      Me.olvcBrideFatherForenames.AspectName = "BrideFatherForenames"
-      Me.olvcBrideFatherForenames.Groupable = False
-      Me.olvcBrideFatherForenames.Text = "Bride Father Forenames"
-      '
-      'olvcBrideFatherSurname
-      '
-      Me.olvcBrideFatherSurname.AspectName = "BrideFatherSurname"
-      Me.olvcBrideFatherSurname.Groupable = False
-      Me.olvcBrideFatherSurname.Text = "Bride Father Surname"
-      '
-      'olvcBrideFatherOccupation
-      '
-      Me.olvcBrideFatherOccupation.AspectName = "BrideFatherOccupation"
-      Me.olvcBrideFatherOccupation.Groupable = False
-      Me.olvcBrideFatherOccupation.Text = "Bride Father Occupation"
-      '
-      'olvcWitness1Forenames
-      '
-      Me.olvcWitness1Forenames.AspectName = "Witness1Forenames"
-      Me.olvcWitness1Forenames.Groupable = False
-      Me.olvcWitness1Forenames.Text = "Witness 1 Forenames"
-      '
-      'olvcWitness1Surname
-      '
-      Me.olvcWitness1Surname.AspectName = "Witness1Surname"
-      Me.olvcWitness1Surname.Groupable = False
-      Me.olvcWitness1Surname.Text = "Witness 1 Surname"
-      '
-      'olvcWitness2Forenames
-      '
-      Me.olvcWitness2Forenames.AspectName = "Witness2Forenames"
-      Me.olvcWitness2Forenames.Groupable = False
-      Me.olvcWitness2Forenames.Text = "Witness 2 Forenames"
-      '
-      'olvcWitness2Surname
-      '
-      Me.olvcWitness2Surname.AspectName = "Witness2Surname"
-      Me.olvcWitness2Surname.Groupable = False
-      Me.olvcWitness2Surname.Text = "Witness 2 Surname"
-      '
-      'olvcNotes2
-      '
-      Me.olvcNotes2.AspectName = "Notes"
-      Me.olvcNotes2.FillsFreeSpace = True
-      Me.olvcNotes2.Groupable = False
-      Me.olvcNotes2.Hideable = False
-      Me.olvcNotes2.Sortable = False
-      Me.olvcNotes2.Text = "Notes"
-      Me.olvcNotes2.UseFiltering = False
-      '
       'baptismsContextMenuStrip
       '
       Me.baptismsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bapFreeREGTablesToolStripMenuItem})
@@ -1003,9 +1003,9 @@ Partial Class formFileWorkspace
       Me.SplitContainer1.Panel1.PerformLayout()
       Me.SplitContainer1.Panel2.ResumeLayout(False)
       Me.SplitContainer1.ResumeLayout(False)
+      CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.dlvBaptisms, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.dlvBurials, System.ComponentModel.ISupportInitialize).EndInit()
-      CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).EndInit()
       Me.baptismsContextMenuStrip.ResumeLayout(False)
       Me.burialsContextMenuStrip.ResumeLayout(False)
       Me.marriagesContextMenuStrip.ResumeLayout(False)
