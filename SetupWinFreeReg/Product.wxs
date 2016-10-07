@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+   <Product Id="*" Name="WinFreeREG !(bind.FileVersion.FILE_FreeRegBrowserDll)" Language="1033" Version="!(bind.FileVersion.FILE_FreeRegBrowserDll)" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
+
+      <Package InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" InstallScope="perMachine" Manufacturer="Free UK Genealogy"
+               Description="Installs the FreeREG Transcription Program"
+               Comments="(c) 2016 Free UK Genealogy" />
+
+      <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+      <MediaTemplate EmbedCab="yes" />
+
+      <Icon Id="icon.ico" SourceFile="$(var.WinFreeReg.ProjectDir)appico.ico" />
+      <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+      <UI>
+         <UIRef Id="WixUI_Minimal"/>
+         <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+      </UI>
+      <WixVariable Id="WixUILicenseRtf" Value="$(var.FreeREG2Browser.ProjectDir)Other Files\eula.rtf" />
+      <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch WinFreeReg" />
+
+      <!--Directory Structure-->
+      <Directory Id="TARGETDIR" Name="SourceDir">
+         <Directory Id="ProgramFilesFolder">
+            <Directory Id="FreeUKGenealogy" Name="FreeUKGenealogy">
+               <Directory Id="APPLICATIONFOLDER" Name="WinFreeREG" />
+            </Directory>
+         </Directory>
+
+         <Directory Id="LocalAppDataFolder">
+            <Directory Id="DATAFOLDER" Name="WinFreeReg">
+               <Directory Id="DOCFOLDER" Name="doc" />
+            </Directory>
+         </Directory>
+
+         <Directory Id="ProgramMenuFolder" Name="Programs">
+            <Directory Id="WinFreeRegShortcutsDirectory" Name="WinFreeREG"/>
+         </Directory>
+
+         <Directory Id="DesktopFolder" Name="Desktop" />
+      </Directory>
+
+      <DirectoryRef Id="WinFreeRegShortcutsDirectory">
+         <Component Id="CMP_Shortcut_WinFreeReg" Guid="{F8C7F922-D35B-454B-982A-8B648DA485E4}">
+            <Shortcut Id="UninstallProduct" Name="Uninstall My Application" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="Uninstalls [ProductName]" />
+            <RemoveFolder Id="WinFreeRegShortcutsDirectory" On="uninstall"/>
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Shortcuts" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+      </DirectoryRef>
+      
+      <!--Software Elements-->
+      <ComponentGroup Id="ProductComponents" Directory="APPLICATIONFOLDER">
+         <Component Id="CMP_Software_WinFreeReg" Guid="{6F82EA6D-3E19-47E4-885F-8E2D0B36C9DF}">
+            <File Id="FILE_WinFreeRegexe" Source="$(var.WinFreeReg.TargetDir)\WinFreeReg.exe" KeyPath="yes" Checksum="yes">
+               <Shortcut Id="SHORTCUT_DESKTOP_WinFreeReg" Directory="DesktopFolder" Name="FreeReg Transcription Program" Description="Start the FreeREG Transcription program" WorkingDirectory="APPLICATIONFOLDER" Icon="icon.ico" Advertise="yes" />
+               <Shortcut Id="SHORTCUT_WinFreeReg" Directory="WinFreeRegShortcutsDirectory" Name="FreeReg Transcription Program" Description="Start the FreeREG Transcription program" WorkingDirectory="APPLICATIONFOLDER" Icon="icon.ico" Advertise="yes" />
+            </File>
+         </Component>
+
+         <Component Id="CMP_Software_WinFreeRegConfig" Guid="{65BC16BC-E6B8-4712-A6DB-6622F014802A}">
+            <File Id="FILE_WinFreeRegexeConfig" Source="$(var.WinFreeReg.TargetDir)\WinFreeReg.exe.config" KeyPath="yes" />
+         </Component>
+
+         <Component Id="CMP_Software_FreeRegBrowser" Guid="{0915EEB2-3C5C-4C6C-BDC4-8720B9091698}">
+            <File Id="FILE_FreeRegBrowserDll" Source="$(var.FreeREG2Browser.TargetDir)\FreeREG2Browser.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+
+         <Component Id="CMP_Software_LookupTables" Guid="{4015D1E9-B150-4EBA-873B-444D94E14C4A}">
+            <File Id="FILE_RegexUtilitiesDll" Source="$(var.RegexUtilities.TargetDir)\RegexUtilities.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+
+         <Component Id="CMP_Software_RegexUtilities" Guid="{32C86213-47B5-4189-8E07-C786127099D2}">
+            <File Id="FILE_LookupTablesDll" Source="$(var.LookupTables.TargetDir)\LookupTables.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+
+         <Component Id="CMP_Software_TranscriptionTables" Guid="{18DEEED1-43F3-4C53-B8E4-97B140BFF1D7}">
+            <File Id="FILE_TranscriptionTablesDll" Source="$(var.TranscriptionTables.TargetDir)\TranscriptionTables.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+
+         <Component Id="CMP_Software_WinFreeRegControlLibrary" Guid="{909B07C1-78A0-492B-AB66-52B2F67ADBEE}">
+            <File Id="FILE_WinFreeRegControlLibraryDll" Source="$(var.WinFreeRegControlLibrary.TargetDir)\WinFreeRegControlLibrary.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+
+         <Component Id="CMP_HtmlAgilityPack" Guid="{8310B015-4C3B-4F64-A8E8-25E01B58EE5E}">
+            <File Id="FILE_HtmlAgilityPack.dll" Source="$(var.FreeREG2Browser.TargetDir)\HtmlAgilityPack.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+
+         <Component Id="CMP_ObjectListView" Guid="{0BF44A19-13CC-4E0A-9EDE-986B829EB782}">
+            <File Id="FILE_ObjectListView.dll" Source="$(var.WinFreeReg.TargetDir)\ObjectListView.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+
+         <Component Id="CMP_regexlib" Guid="{AD2B26E3-C3A5-458C-83AE-51671EE8375A}">
+            <File Id="FILE_regexlib.dll" Source="$(var.FreeREG2Browser.TargetDir)\regexlib.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+      </ComponentGroup>
+
+      <!--Documentation Elements-->
+      <DirectoryRef Id="DOCFOLDER" FileSource="$(var.FreeREG2Browser.ProjectDir)Documentation">
+         <Component Id="CMP_Doc_FreeRegBrowserCss" Guid="{D2E677D3-C6B3-4C86-A164-517A4204692E}">
+            <File Id="FILE_FreeRegBrowserCss" Name="FreeRegBrowser.css" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Css" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+            <RemoveFolder Id="DOCFOLDER" On="uninstall"/>
+         </Component>
+
+         <Component Id="CMP_Doc_BaptismErrors" Guid="{93B70100-C9CC-41A1-9E57-1D0F475AD5EB}">
+            <File Id="FILE_BaptismErrors" Name="BaptismErrors.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\BaptismErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_BurialErrors" Guid="{85634E9C-B739-4432-8308-D8CF5DDF668E}">
+            <File Id="FILE_BurialErrors" Name="BurialErrors.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\BurialErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_MarriageErrors" Guid="{6EB9D78F-F907-46C3-8B3C-C63693E70BD5}">
+            <File Id="FILE_MarriageErrors" Name="MarriageErrors.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\MarriageErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_CorrectTableError" Guid="{25E3D5B8-E04C-4BBF-AADC-E123772B41C8}">
+            <File Id="FILE_CorrectTableError" Name="CorrectTableError.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\CorrectTableError" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_DataErrors" Guid="{E4F48B1C-CAE6-4C4E-9B67-65D4BB125F71}">
+            <File Id="FILE_DataErrors" Name="DataErrors.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\DataErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_FileDetails" Guid="{594ED3A5-3DB3-4F30-8213-ADF22C629056}">
+            <File Id="FILE_FileDetails" Name="FileDetails.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\FileDetails" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_FileWorkspace" Guid="{5D421DBF-18E8-467B-94FC-3523B1439771}">
+            <File Id="FILE_FileWorkspace" Name="FileWorkspace.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Fileworkspace" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_FreeregTables" Guid="{6B8141DE-80A3-4C70-B7C0-B4E1493C1D4A}">
+            <File Id="FILE_FreeregTables" Name="FreeregTables.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\FreeregTables" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_Generalhelp" Guid="{21E6C45E-B063-4252-AC71-502547577FDF}">
+            <File Id="FILE_Generalhelp" Name="Generalhelp.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\GeneralHelp" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_LocalFiles" Guid="{350D0F8D-8444-4557-891D-B7D4FFCEA80F}">
+            <File Id="FILE_LocalFiles" Name="LocalFiles.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\LocalFiles" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_StartNewFile" Guid="{F14C7749-C9BF-4E9D-B5C5-6D7B45667BEF}">
+            <File Id="FILE_StartNewFile" Name="StartNewFile.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\StartNewFile" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_StartUp" Guid="{8F2C19E2-8920-4D24-B2A9-71308B1CBD03}">
+            <File Id="FILE_StartUp" Name="StartUp.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Startup" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_UploadedFiles" Guid="{EB916152-B3B6-4220-8314-51135368F55A}">
+            <File Id="FILE_UploadedFiles" Name="UploadedFiles.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UploadedFiles" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_UserDetails" Guid="{2822964C-CCB6-463A-BEF9-15D19F3C6ACB}">
+            <File Id="FILE_UserDetails" Name="UserDetails.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserDetails" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_UserTables" Guid="{2B5DD845-DCF5-441D-8931-7CA6895F1EBA}">
+            <File Id="FILE_UserTables" Name="UserTables.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserTables" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+      </DirectoryRef>
+
+      <!--Data Files-->
+      <DirectoryRef Id="DATAFOLDER" FileSource="$(var.FreeREG2Browser.ProjectDir)Other Files">
+         <Component Id ="CMP_Data_ErrorMessages" Guid="{FAEABA91-F35D-4AB2-B5EE-B0ECBC1CF843}">
+            <File Id="FILE_ErrorMessagesXml" Name="ErrorMessages.xml" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\ErrorMessages" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+            <RemoveFolder Id="DATAFOLDER" On="uninstall"/>
+         </Component>
+
+         <Component Id ="CMP_Data_GettingStarted" Guid="{2D537D3D-6073-42EB-863B-C0CAF8B945D8}">
+            <File Id="FILE_GettingStartedRtf" Name="GettingStarted.rtf" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\GettingStarted" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id ="CMP_Data_ToolTips" Guid="{26314D21-FCBE-4B0E-BD8E-BD26B0A04123}">
+            <File Id="FILE_ToolTipsXml" Name="ToolTips.xml"  />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\ToolTips" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+      </DirectoryRef>
+
+      <ComponentGroup Id="DocumentationComponents">
+         <ComponentRef Id="CMP_Doc_FreeRegBrowserCss" />
+         <ComponentRef Id="CMP_Doc_BaptismErrors" />
+         <ComponentRef Id="CMP_Doc_BurialErrors" />
+         <ComponentRef Id="CMP_Doc_MarriageErrors" />
+         <ComponentRef Id="CMP_Doc_CorrectTableError" />
+         <ComponentRef Id="CMP_Doc_DataErrors" />
+         <ComponentRef Id="CMP_Doc_FileDetails" />
+         <ComponentRef Id="CMP_Doc_FileWorkspace" />
+         <ComponentRef Id="CMP_Doc_FreeregTables" />
+         <ComponentRef Id="CMP_Doc_Generalhelp" />
+         <ComponentRef Id="CMP_Doc_LocalFiles" />
+         <ComponentRef Id="CMP_Doc_StartNewFile" />
+         <ComponentRef Id="CMP_Doc_StartUp" />
+         <ComponentRef Id="CMP_Doc_UploadedFiles" />
+         <ComponentRef Id="CMP_Doc_UserDetails" />
+         <ComponentRef Id="CMP_Doc_UserTables" />
+      </ComponentGroup>
+
+      <ComponentGroup Id="DataComponents">
+         <ComponentRef Id="CMP_Data_ErrorMessages"/>
+         <ComponentRef Id="CMP_Data_GettingStarted"/>
+         <ComponentRef Id="CMP_Data_ToolTips"/>
+      </ComponentGroup>
+
+      <Feature Id="WinFreeRegApplication" Title="WinFreeReg Application" Level="1">
+         <ComponentGroupRef Id="ProductComponents"/>
+         <ComponentGroupRef Id="DataComponents"/>
+         <ComponentGroupRef Id="DocumentationComponents"/>
+         <ComponentRef Id="CMP_Shortcut_WinFreeReg"/>
+      </Feature>
+
+      <Property Id="WixShellExecTarget" Value="[#FILE_WinFreeRegexe]" />
+      <CustomAction Id="LaunchApplication" BinaryKey="WixCA" DllEntry="WixShellExec" Impersonate="yes" />
+
+   </Product>
+</Wix>

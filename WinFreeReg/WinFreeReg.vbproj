@@ -92,6 +92,28 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>LOCAL=False</DefineConstants>
+    <DocumentationFile>WinFreeReg.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DocumentationFile>WinFreeReg.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -206,7 +228,7 @@
       <Project>{c3fc6c01-e52b-4766-a53b-02179b406333}</Project>
       <Name>RegexUtilities</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WindowsControlLibrary2\WinFreeRegControlLibrary.vbproj">
+    <ProjectReference Include="..\WinFreeRegControlLibrary\WinFreeRegControlLibrary.vbproj">
       <Project>{887aac62-10ed-4af7-bd7f-d1379272c6dd}</Project>
       <Name>WinFreeRegControlLibrary</Name>
     </ProjectReference>

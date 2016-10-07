@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+    <Fragment>
+        <DirectoryRef Id="WinFreeReg.Binaries">
+            <Component Id="cmp1E034B8C09DE94F626FFD7DB7DD3CA1E" Guid="*">
+                <File Id="filCC1683F5B5C8C5493D4907BC2F60289D" Source="$(var.WinFreeReg.TargetDir)\WinFreeReg.exe" />
+            </Component>
+            <Component Id="cmpBB765E0178CDEAE4F6A81F471E9AA483" Guid="*">
+                <File Id="fil38446F5E103B94E7A86E9B4CF86B4AB8" Source="$(var.WinFreeReg.TargetDir)\WinFreeReg.exe.config" />
+            </Component>
+        </DirectoryRef>
+    </Fragment>
+    <Fragment>
+        <ComponentGroup Id="WinFreeReg.Binaries">
+            <ComponentRef Id="cmp1E034B8C09DE94F626FFD7DB7DD3CA1E" />
+            <ComponentRef Id="cmpBB765E0178CDEAE4F6A81F471E9AA483" />
+        </ComponentGroup>
+    </Fragment>
+</Wix>

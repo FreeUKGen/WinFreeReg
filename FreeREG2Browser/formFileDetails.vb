@@ -106,8 +106,16 @@ Public Class formFileDetails
    End Sub
 
    Private Sub PlaceComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles PlaceComboBox.SelectedIndexChanged
-      ChurchesBindingSource.Filter = String.Format("ChapmanCode = '{0}' AND PlaceName = '{1}'", CountyComboBox.SelectedValue, PlaceComboBox.SelectedValue)
-      errorChurchName.SetError(ChurchComboBox, "")
+      If PlaceComboBox.SelectedValue IsNot Nothing Then
+         ChurchesBindingSource.Filter = ChurchFilter(CountyComboBox.SelectedValue, PlaceComboBox.SelectedValue)
+         errorChurchName.SetError(ChurchComboBox, "")
+         If ChurchesBindingSource.Count = 0 Then
+            MessageBox.Show(String.Format(My.Resources.msgNoChurchesForPlace, PlaceComboBox.SelectedValue), "Select Placename", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            ChurchesBindingSource.Filter = ChurchFilter(m_TranscriptionFile.FileHeader.County, m_TranscriptionFile.FileHeader.Place)
+            ChurchComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Church
+            PlaceComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Place
+         End If
+      End If
    End Sub
 
    Private Sub LinkLabel1_LinkClicked(sender As Object, e As Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
@@ -134,5 +142,13 @@ Public Class formFileDetails
 
       End Try
    End Sub
+
+   Private Function ChurchFilter(ByVal county As String, ByVal place As String) As String
+      ChurchFilter = "ChapmanCode = '" + county + "' AND PlaceName = '" + convertQuotes(place) + "'"
+   End Function
+
+   Public Function convertQuotes(ByVal str As String) As String
+      convertQuotes = IIf(str Is Nothing, String.Empty, str.Replace("'", "''"))
+   End Function
 
 End Class

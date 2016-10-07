@@ -313,6 +313,8 @@ Public Class FreeREG2Browser
       Me.backgroundBatches = New System.ComponentModel.BackgroundWorker()
       Me.panelUploadedFiles = New System.Windows.Forms.Panel()
       Me.IDTextBox = New System.Windows.Forms.TextBox()
+      Me.BatchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+      Me.BatchesDataSet = New WinFreeReg.Batches()
       Me.CountyNameTextBox = New System.Windows.Forms.TextBox()
       Me.PlaceNameTextBox = New System.Windows.Forms.TextBox()
       Me.ChurchNameTextBox = New System.Windows.Forms.TextBox()
@@ -367,8 +369,6 @@ Public Class FreeREG2Browser
       Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
       Me.CheckBox1 = New System.Windows.Forms.CheckBox()
       Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-      Me.BatchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-      Me.BatchesDataSet = New WinFreeReg.Batches()
       Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
@@ -405,6 +405,8 @@ Public Class FreeREG2Browser
       Me.bnavShowData.SuspendLayout()
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.panelUploadedFiles.SuspendLayout()
+      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SplitContainer1.Panel1.SuspendLayout()
       Me.SplitContainer1.Panel2.SuspendLayout()
       Me.SplitContainer1.SuspendLayout()
@@ -418,8 +420,6 @@ Public Class FreeREG2Browser
       CType(Me.dlvUploadedFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.localContextMenuStrip.SuspendLayout()
       Me.TableLayoutPanel1.SuspendLayout()
-      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
@@ -1037,6 +1037,17 @@ Public Class FreeREG2Browser
       Me.IDTextBox.TabIndex = 66
       Me.IDTextBox.Visible = False
       '
+      'BatchBindingSource
+      '
+      Me.BatchBindingSource.AllowNew = False
+      Me.BatchBindingSource.DataMember = "Batch"
+      Me.BatchBindingSource.DataSource = Me.BatchesDataSet
+      '
+      'BatchesDataSet
+      '
+      Me.BatchesDataSet.DataSetName = "Batches"
+      Me.BatchesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+      '
       'CountyNameTextBox
       '
       Me.CountyNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CountyName", True))
@@ -1385,7 +1396,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 389
+      Me.SplitContainer2.SplitterDistance = 390
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1410,7 +1421,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 389)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 390)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1568,11 +1579,11 @@ Public Class FreeREG2Browser
       Me.CheckBox1.AutoSize = True
       Me.CheckBox1.Checked = True
       Me.CheckBox1.CheckState = System.Windows.Forms.CheckState.Checked
-      Me.CheckBox1.Location = New System.Drawing.Point(792, 475)
+      Me.CheckBox1.Location = New System.Drawing.Point(773, 475)
       Me.CheckBox1.Name = "CheckBox1"
-      Me.CheckBox1.Size = New System.Drawing.Size(108, 17)
+      Me.CheckBox1.Size = New System.Drawing.Size(127, 17)
       Me.CheckBox1.TabIndex = 6
-      Me.CheckBox1.Text = "Continue to show"
+      Me.CheckBox1.Text = "Show Getting Started"
       Me.CheckBox1.UseVisualStyleBackColor = True
       '
       'TableLayoutPanel1
@@ -1588,17 +1599,6 @@ Public Class FreeREG2Browser
       Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.848485!))
       Me.TableLayoutPanel1.Size = New System.Drawing.Size(903, 495)
       Me.TableLayoutPanel1.TabIndex = 7
-      '
-      'BatchBindingSource
-      '
-      Me.BatchBindingSource.AllowNew = False
-      Me.BatchBindingSource.DataMember = "Batch"
-      Me.BatchBindingSource.DataSource = Me.BatchesDataSet
-      '
-      'BatchesDataSet
-      '
-      Me.BatchesDataSet.DataSetName = "Batches"
-      Me.BatchesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
       'FreeregTablesDataSet
       '
@@ -1630,6 +1630,8 @@ Public Class FreeREG2Browser
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).EndInit()
       Me.panelUploadedFiles.ResumeLayout(False)
       Me.panelUploadedFiles.PerformLayout()
+      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       Me.SplitContainer1.Panel1.ResumeLayout(False)
       Me.SplitContainer1.Panel1.PerformLayout()
       Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -1646,8 +1648,6 @@ Public Class FreeREG2Browser
       Me.localContextMenuStrip.ResumeLayout(False)
       Me.TableLayoutPanel1.ResumeLayout(False)
       Me.TableLayoutPanel1.PerformLayout()
-      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()

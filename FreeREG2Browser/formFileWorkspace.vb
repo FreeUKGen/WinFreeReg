@@ -129,6 +129,7 @@ Public Class formFileWorkspace
                olvcImage.IsVisible = False
             End If
             olvcSex.AspectToStringConverter = AddressOf SexDescription
+            dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
             dlvBaptisms.RebuildColumns()
             dlvBaptisms.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBaptisms.Visible = True
@@ -145,6 +146,7 @@ Public Class formFileWorkspace
                olvcImage1.IsVisible = False
             End If
             olvcRelationship.AspectToStringConverter = AddressOf RelationshipDescription
+            dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
             dlvBurials.RebuildColumns()
             dlvBurials.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBurials.Visible = True
@@ -162,6 +164,7 @@ Public Class formFileWorkspace
             End If
             olvcGroomCondition.AspectToStringConverter = AddressOf GroomConditionDescription
             olvcBrideCondition.AspectToStringConverter = AddressOf BrideConditionDescription
+            dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
             dlvMarriages.RebuildColumns()
             dlvMarriages.AddDecoration(New EditingCellBorderDecoration(True))
             dlvMarriages.Visible = True
@@ -402,10 +405,12 @@ Public Class formFileWorkspace
 
    End Sub
 
+#Region "Baptism Cells"
+
    Private Sub BaptismCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBaptisms.CellEditStarting
       If TypeOf e.Control Is System.Windows.Forms.TextBox Then
          If e.Column.AspectName.Contains("Surname") Then
-               CType(e.Control, System.Windows.Forms.TextBox).CharacterCasing = CharacterCasing.Upper
+            CType(e.Control, System.Windows.Forms.TextBox).CharacterCasing = CharacterCasing.Upper
          ElseIf e.Column.AspectName = "Sex" Then
             CType(e.Control, System.Windows.Forms.TextBox).CharacterCasing = CharacterCasing.Upper
          End If
@@ -443,7 +448,16 @@ Public Class formFileWorkspace
    End Sub
 
    Private Sub BaptismCellEditFinished(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBaptisms.CellEditFinished
+      If e.Column.AspectName = "Notes" Then
+         Dim x As DataRowView = e.RowObject
+         Dim r As TranscriptionTables.BaptismsRow = x.Row
+         If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem()
+      End If
    End Sub
+
+#End Region
+
+#Region "Burial Cells"
 
    Private Sub BurialCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBurials.CellEditStarting
       If e.Column.AspectName.Contains("Surname") Then
@@ -491,7 +505,16 @@ Public Class formFileWorkspace
    End Sub
 
    Private Sub BurialCellEditFinished(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBurials.CellEditFinished
+      If e.Column.AspectName = "Notes" Then
+         Dim x As DataRowView = e.RowObject
+         Dim r As TranscriptionTables.BurialsRow = x.Row
+         If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem()
+      End If
    End Sub
+
+#End Region
+
+#Region "Marriage Cells"
 
    Private Sub MarriageCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBurials.CellEditStarting, dlvMarriages.CellEditStarting
       If e.Column.AspectName.Contains("Surname") Then
@@ -556,7 +579,12 @@ Public Class formFileWorkspace
    End Sub
 
    Private Sub MarriageCellEditFinished(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvMarriages.CellEditFinished
+      Dim x As DataRowView = e.RowObject
+      Dim r As TranscriptionTables.MarriagesRow = x.Row
+      If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem()
    End Sub
+
+#End Region
 
    Private Sub BindingNavigatorAddNewItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItem.Click
       AddNewItem()
