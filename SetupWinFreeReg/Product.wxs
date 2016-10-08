@@ -2,20 +2,28 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
    <Product Id="*" Name="WinFreeREG !(bind.FileVersion.FILE_FreeRegBrowserDll)" Language="1033" Version="!(bind.FileVersion.FILE_FreeRegBrowserDll)" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
 
-      <Package InstallerVersion="200" Compressed="yes" InstallPrivileges="elevated" InstallScope="perMachine" Manufacturer="Free UK Genealogy"
+      <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Manufacturer="Free UK Genealogy"
                Description="Installs the FreeREG Transcription Program"
                Comments="(c) 2016 Free UK Genealogy" />
 
       <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
       <MediaTemplate EmbedCab="yes" />
 
+      <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />
       <Icon Id="icon.ico" SourceFile="$(var.WinFreeReg.ProjectDir)appico.ico" />
       <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 
       <UI>
-         <UIRef Id="WixUI_Minimal"/>
+         <UIRef Id="WixUI_InstallDir"/>
+
+         <!-- Skip license dialog -->
+         <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="InstallDirDlg" Order="2">1</Publish>
+         <Publish Dialog="InstallDirDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="2">1</Publish>
+         
+         <!--Provide option to start the program-->
          <Publish Dialog="ExitDialog" Control="Finish" Event="DoAction" Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
       </UI>
+      
       <WixVariable Id="WixUILicenseRtf" Value="$(var.FreeREG2Browser.ProjectDir)Other Files\eula.rtf" />
       <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch WinFreeReg" />
 
@@ -41,7 +49,7 @@
       </Directory>
 
       <DirectoryRef Id="WinFreeRegShortcutsDirectory">
-         <Component Id="CMP_Shortcut_WinFreeReg" Guid="{F8C7F922-D35B-454B-982A-8B648DA485E4}">
+         <Component Id="CMP_Uninstall" Guid="{F8C7F922-D35B-454B-982A-8B648DA485E4}">
             <Shortcut Id="UninstallProduct" Name="Uninstall My Application" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="Uninstalls [ProductName]" />
             <RemoveFolder Id="WinFreeRegShortcutsDirectory" On="uninstall"/>
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Shortcuts" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -226,7 +234,7 @@
          <ComponentGroupRef Id="ProductComponents"/>
          <ComponentGroupRef Id="DataComponents"/>
          <ComponentGroupRef Id="DocumentationComponents"/>
-         <ComponentRef Id="CMP_Shortcut_WinFreeReg"/>
+         <ComponentRef Id="CMP_Uninstall"/>
       </Feature>
 
       <Property Id="WixShellExecTarget" Value="[#FILE_WinFreeRegexe]" />
