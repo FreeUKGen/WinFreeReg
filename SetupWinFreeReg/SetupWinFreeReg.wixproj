@@ -75,6 +75,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
     <WixExtension Include="WixUtilExtension">
       <HintPath>$(WixExtDir)\WixUtilExtension.dll</HintPath>
       <Name>WixUtilExtension</Name>
@@ -91,19 +95,18 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
-
-   <Target Name="BeforeBuild">
-      <GetAssemblyIdentity AssemblyFiles="$(SolutionDir)FreeREG2Browser\bin\$(Platform)\$(Configuration)\FreeREG2Browser.dll">
-         <Output TaskParameter="Assemblies" ItemName="AssemblyVersions" />
-      </GetAssemblyIdentity>
-      <CreateProperty Value="$(OutputName).%(AssemblyVersions.Version)">
-         <Output TaskParameter="Value" PropertyName="TargetName"/>
-      </CreateProperty>
-      <CreateProperty Value="$(TargetName)$(TargetExt)">
-         <Output TaskParameter="Value" PropertyName="TargetFileName"/>
-      </CreateProperty>
-      <CreateProperty Value="$(TargetDir)$(TargetFileName)">
-         <Output TaskParameter="Value" PropertyName="TargetPath"/>
-      </CreateProperty>
-   </Target>
+  <Target Name="BeforeBuild">
+    <GetAssemblyIdentity AssemblyFiles="$(SolutionDir)FreeREG2Browser\bin\$(Platform)\$(Configuration)\FreeREG2Browser.dll">
+      <Output TaskParameter="Assemblies" ItemName="AssemblyVersions" />
+    </GetAssemblyIdentity>
+    <CreateProperty Value="$(OutputName).%(AssemblyVersions.Version)">
+      <Output TaskParameter="Value" PropertyName="TargetName" />
+    </CreateProperty>
+    <CreateProperty Value="$(TargetName)$(TargetExt)">
+      <Output TaskParameter="Value" PropertyName="TargetFileName" />
+    </CreateProperty>
+    <CreateProperty Value="$(TargetDir)$(TargetFileName)">
+      <Output TaskParameter="Value" PropertyName="TargetPath" />
+    </CreateProperty>
+  </Target>
 </Project>
