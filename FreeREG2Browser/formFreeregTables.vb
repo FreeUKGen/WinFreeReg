@@ -795,6 +795,16 @@ Public Class formFreeregTables
                               drow.Notes = row.Item("Notes")
                            End If
                         Next
+
+                        ' Get a list of all the unchanged Place records for the selected County
+                        ' These should be those records that are no longer present on FreeREG and can be deleted
+                        Dim places = From place As FreeregTables.PlacesRow In _tables.Places _
+                                     Where place.ChapmanCode = selectedCounty And place.RowState = DataRowState.Unchanged _
+                                     Select place
+                        For Each place In places
+                           _tables.Places.RemovePlacesRow(place)
+                        Next
+
                         _tables.Places.AcceptChanges()
                         _FileIsChanged = True
                         e.Result = String.Format(My.Resources.msgPlacesUpdated, selectedCounty)
@@ -978,6 +988,16 @@ Public Class formFreeregTables
                               rowExisting.Notes = newNotes
                            End If
                         Next
+
+                        ' Get a list of all the unchanged Church records for the selected County and Place
+                        ' These should be those records that are no longer present on FreeREG and can be deleted
+                        Dim churches = From church As FreeregTables.ChurchesRow In _tables.Churches _
+                                     Where church.ChapmanCode = params.County And church.PlaceName = params.Place And church.RowState = DataRowState.Unchanged _
+                                     Select church
+                        For Each church In churches
+                           _tables.Churches.RemoveChurchesRow(church)
+                        Next
+
                         _tables.Churches.AcceptChanges()
                         _FileIsChanged = True
                         e.Result = String.Format(My.Resources.msgChurchesUpdated, params.County, params.Place)
