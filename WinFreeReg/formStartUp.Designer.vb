@@ -204,7 +204,7 @@ Partial Class formStartUp
       Me.UserNameLabel.Name = "UserNameLabel"
       Me.UserNameLabel.Size = New System.Drawing.Size(89, 20)
       Me.UserNameLabel.TabIndex = 0
-      Me.UserNameLabel.Text = "User Name"
+      Me.UserNameLabel.Text = "Your Name"
       '
       'UserNameTextBox
       '

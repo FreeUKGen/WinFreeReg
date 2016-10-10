@@ -51,36 +51,38 @@ Public Class formUserDetails
    End Sub
 
    Private Sub FillFormFields(ThisUser As UserDetails.UserRow)
-      NameTextBox.Text = ThisUser.person_forename + " " + ThisUser.person_surname
-      Skill_levelTextBox.Text = ThisUser.skill_level
-      Number_of_filesTextBox.Text = ThisUser.number_of_files
-      Number_of_recordsTextBox.Text = ThisUser.number_of_records
-      Person_roleTextBox.Text = ThisUser.person_role
-      UseridTextBox.Text = ThisUser.userid
-      PasswordTextBox.Text = ThisUser.password
-      Email_addressTextBox.Text = ThisUser.email_address
-      If Not ThisUser.Isdisabled_dateNull Then Disabled_dateTextBox.Text = ThisUser.disabled_date.ToString("F")
-      Disabled_reasonTextBox.Text = ThisUser.disabled_reason
-      AddressTextBox.Text = ThisUser.address
-      Telephone_numberTextBox.Text = ThisUser.telephone_number
-      SyndicateTextBox.Text = ThisUser.syndicate
-      Submitter_numberTextBox.Text = ThisUser.submitter_number
-      Previous_syndicateTextBox.Text = ThisUser.previous_syndicate
-      DigestTextBox.Text = ThisUser.digest
-      Syndicate_groupsTextBox.Text = ThisUser.syndicate_groups
-      County_groupsTextBox.Text = ThisUser.county_groups
-      Country_groupsTextBox.Text = ThisUser.country_groups
-      Userid_lower_caseTextBox.Text = ThisUser.userid_lower_case
-      ActiveCheckBox.Checked = ThisUser.active
-      Fiche_readerCheckBox.Checked = ThisUser.fiche_reader
-      If Not ThisUser.Issign_up_dateNull Then Sign_up_dateTextBox.Text = ThisUser.sign_up_date.ToString("F")
-      If Not ThisUser.Isu_atNull Then U_atTextBox.Text = ThisUser.u_at.ToString("F")
-      If Not ThisUser.Isc_atNull Then C_atTextBox.Text = ThisUser.c_at.ToString("F")
-      If Not ThisUser.Islast_uploadNull Then Last_uploadTextBox.Text = ThisUser.last_upload.ToString("F")
-      Technical_agreementCheckBox.Checked = ThisUser.technical_agreement
-      Research_agreementCheckBox.Checked = ThisUser.research_agreement
-      Transcription_agreementCheckBox.Checked = ThisUser.transcription_agreement
-      Password_confirmationTextBox.Text = ThisUser.password_confirmation
+      If ThisUser IsNot Nothing Then
+         NameTextBox.Text = ThisUser.person_forename + " " + ThisUser.person_surname
+         Skill_levelTextBox.Text = ThisUser.skill_level
+         Number_of_filesTextBox.Text = ThisUser.number_of_files
+         Number_of_recordsTextBox.Text = ThisUser.number_of_records
+         Person_roleTextBox.Text = ThisUser.person_role
+         UseridTextBox.Text = ThisUser.userid
+         PasswordTextBox.Text = ThisUser.password
+         Email_addressTextBox.Text = ThisUser.email_address
+         If Not ThisUser.Isdisabled_dateNull Then Disabled_dateTextBox.Text = ThisUser.disabled_date.ToString("F")
+         Disabled_reasonTextBox.Text = ThisUser.disabled_reason
+         AddressTextBox.Text = ThisUser.address
+         Telephone_numberTextBox.Text = ThisUser.telephone_number
+         SyndicateTextBox.Text = ThisUser.syndicate
+         Submitter_numberTextBox.Text = ThisUser.submitter_number
+         Previous_syndicateTextBox.Text = ThisUser.previous_syndicate
+         DigestTextBox.Text = ThisUser.digest
+         Syndicate_groupsTextBox.Text = ThisUser.syndicate_groups
+         County_groupsTextBox.Text = ThisUser.county_groups
+         Country_groupsTextBox.Text = ThisUser.country_groups
+         Userid_lower_caseTextBox.Text = ThisUser.userid_lower_case
+         ActiveCheckBox.Checked = ThisUser.active
+         Fiche_readerCheckBox.Checked = ThisUser.fiche_reader
+         If Not ThisUser.Issign_up_dateNull Then Sign_up_dateTextBox.Text = ThisUser.sign_up_date.ToString("F")
+         If Not ThisUser.Isu_atNull Then U_atTextBox.Text = ThisUser.u_at.ToString("F")
+         If Not ThisUser.Isc_atNull Then C_atTextBox.Text = ThisUser.c_at.ToString("F")
+         If Not ThisUser.Islast_uploadNull Then Last_uploadTextBox.Text = ThisUser.last_upload.ToString("F")
+         Technical_agreementCheckBox.Checked = ThisUser.technical_agreement
+         Research_agreementCheckBox.Checked = ThisUser.research_agreement
+         Transcription_agreementCheckBox.Checked = ThisUser.transcription_agreement
+         Password_confirmationTextBox.Text = ThisUser.password_confirmation
+      End If
    End Sub
 
 

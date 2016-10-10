@@ -1396,7 +1396,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 390
+      Me.SplitContainer2.SplitterDistance = 391
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1421,7 +1421,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 390)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 391)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -3644,45 +3644,7 @@ Public Class FreeREG2Browser
 #End Region
 
    Private Sub dlvLocalFiles_ItemActivate(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles dlvLocalFiles.ItemActivate
-      Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
-      Try
-         Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
-            Me.Hide()
-            Try
-               dlg.Settings = MyAppSettings
-               dlg.DefaultCounty = _myDefaultCounty
-               dlg.FreeregTablesFile = FreeregTablesFile
-               dlg.UserTablesFile = TranscriberProfileFile
-               Dim rc = dlg.ShowDialog()
-               If rc = Windows.Forms.DialogResult.OK Then
-                  If File.Exists(dlg.TranscriptionFile.FullFileName) Then
-                     ' File has been edited
-                     ' Details need to be updated in the table
-                     Dim fi As FileInfo = New System.IO.FileInfo(dlg.TranscriptionFile.FullFileName)
-                     row("Attributes") = fi.Attributes
-                     row("IsReadOnly") = fi.IsReadOnly
-                     row("LastAccessTime") = fi.LastAccessTime
-                     row("LastAccessTimeUtc") = fi.LastAccessTimeUtc
-                     row("LastWriteTime") = fi.LastWriteTime
-                     row("LastWriteTimeUtc") = fi.LastWriteTimeUtc
-                     row("Length") = fi.Length
-                  End If
-               End If
-
-            Catch ex As Exception
-               Beep()
-               MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-
-            Finally
-
-            End Try
-            Me.Show()
-         End Using
-
-      Catch ex As FileHeaderException
-         MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-
-      End Try
+      OpenWorkspace()
    End Sub
 
    Private Sub dlvLocalFiles_CellToolTipShowing(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.ToolTipShowingEventArgs) Handles dlvLocalFiles.CellToolTipShowing
@@ -3774,4 +3736,51 @@ Public Class FreeREG2Browser
       If TableLayoutPanel1.Visible Then RichTextBox1.Visible = CheckBox1.Checked
       If MyAppSettings IsNot Nothing Then MyAppSettings.ShowGettingStarted = CheckBox1.Checked
    End Sub
+
+   Private Sub labFilename_DoubleClick(sender As Object, e As EventArgs) Handles labFilename.DoubleClick
+      OpenWorkspace()
+   End Sub
+
+   Private Sub OpenWorkspace()
+      Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
+      Try
+         Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+            Me.Hide()
+            Try
+               dlg.Settings = MyAppSettings
+               dlg.DefaultCounty = _myDefaultCounty
+               dlg.FreeregTablesFile = FreeregTablesFile
+               dlg.UserTablesFile = TranscriberProfileFile
+               Dim rc = dlg.ShowDialog()
+               If rc = Windows.Forms.DialogResult.OK Then
+                  If File.Exists(dlg.TranscriptionFile.FullFileName) Then
+                     ' File has been edited
+                     ' Details need to be updated in the table
+                     Dim fi As FileInfo = New System.IO.FileInfo(dlg.TranscriptionFile.FullFileName)
+                     row("Attributes") = fi.Attributes
+                     row("IsReadOnly") = fi.IsReadOnly
+                     row("LastAccessTime") = fi.LastAccessTime
+                     row("LastAccessTimeUtc") = fi.LastAccessTimeUtc
+                     row("LastWriteTime") = fi.LastWriteTime
+                     row("LastWriteTimeUtc") = fi.LastWriteTimeUtc
+                     row("Length") = fi.Length
+                  End If
+               End If
+
+            Catch ex As Exception
+               Beep()
+               MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+            Finally
+
+            End Try
+            Me.Show()
+         End Using
+
+      Catch ex As FileHeaderException
+         MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
+
 End Class

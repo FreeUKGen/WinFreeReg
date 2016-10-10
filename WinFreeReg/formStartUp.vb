@@ -8,9 +8,11 @@ Public Class formStartUp
    Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
    Public LookupTablesFile As String = Path.Combine(AppDataLocalFolder, "winfreereg.tables")
    Public ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
+   Public TranscriberProfileFile As String = Path.Combine(AppDataLocalFolder, "transcriber.xml")
    Dim strPersonalFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
-
+   Dim UserDataSet As UserDetails = New UserDetails()
    Private formHelp As New formHelp() With {.Visible = False}
+   Private currentTranscriber As WinFreeReg.UserDetails.UserRow
 
    Private Sub formStartUp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 #If DEBUG Then
@@ -28,12 +30,40 @@ Public Class formStartUp
       If String.IsNullOrEmpty(My.Settings.MyTranscriptionLibrary) Then
          My.Settings.MyTranscriptionLibrary = String.Format("{0}\FreeREG\WinREG for Windows\Transcripts", strPersonalFolder)
       End If
+
+      If File.Exists(TranscriberProfileFile) Then
+         UserDataSet.ReadXml(TranscriberProfileFile, XmlReadMode.ReadSchema)
+         UserDataSet.AcceptChanges()
+      End If
+
+      currentTranscriber = UserDataSet.User.FindByuserid(My.Settings.MyUserId)
+      If currentTranscriber IsNot Nothing Then
+         UserIdTextBox.Text = currentTranscriber.userid
+         PasswordTextBox.Text = currentTranscriber.PasswordInClear
+         UrlTextBox.Text = currentTranscriber.Url
+         LibraryTextBox.Text = currentTranscriber.DefaultFolder
+         If UserDataSet.User.Count > 1 Then
+            Dim sourceUserIds As New AutoCompleteStringCollection()
+            Dim users = From user As WinFreeReg.UserDetails.UserRow In UserDataSet.User.Rows _
+             Select user
+            For Each user In users
+               sourceUserIds.Add(user.userid)
+            Next
+            With UserIdTextBox
+               .AutoCompleteMode = AutoCompleteMode.SuggestAppend
+               .AutoCompleteSource = AutoCompleteSource.CustomSource
+               .AutoCompleteCustomSource = sourceUserIds
+            End With
+         End If
+      Else
+         UserIdTextBox.Text = My.Settings.MyUserId
+         PasswordTextBox.Text = My.Settings.MyPassword
+         UrlTextBox.Text = My.Settings.MyFreeREGUrl
+         LibraryTextBox.Text = String.Format("{0}\FreeREG\WinREG for Windows\Transcripts", strPersonalFolder)
+      End If
+
       UserNameTextBox.Text = My.Settings.MyUserName
       EmailAddressTextBox.Text = My.Settings.MyEmailAddress
-      UserIdTextBox.Text = My.Settings.MyUserId
-      PasswordTextBox.Text = My.Settings.MyPassword
-      UrlTextBox.Text = My.Settings.MyFreeREGUrl
-      LibraryTextBox.Text = My.Settings.MyTranscriptionLibrary
       TraceCheckBox.Checked = My.Settings.MyNetworkTrace
       linkPassword.Tag = True
 
@@ -77,8 +107,29 @@ Public Class formStartUp
          PasswordTextBox.Text = frm.Password
          UrlTextBox.Text = frm.FreeregUrl
          TraceCheckBox.Checked = frm.TraceNetwork
-         If Not KeepOpenCheckBox.Checked Then Me.Close()
-         Me.Show()
+
+         currentTranscriber.PasswordInClear = frm.Password
+         currentTranscriber.DefaultFolder = LibraryTextBox.Text
+         currentTranscriber.Url = frm.FreeregUrl
+         UserDataSet.AcceptChanges()
+         UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
+
+         Dim users = From user As WinFreeReg.UserDetails.UserRow In UserDataSet.User.Rows _
+          Select user
+
+         If users.Count > 1 Then
+            Dim sourceUserIds As New AutoCompleteStringCollection()
+            For Each user In users
+               sourceUserIds.Add(user.userid)
+            Next
+            UserIdTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource
+            UserIdTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+            UserIdTextBox.AutoCompleteCustomSource = sourceUserIds
+         Else
+            UserIdTextBox.AutoCompleteMode = AutoCompleteMode.None
+         End If
+
+         If Not KeepOpenCheckBox.Checked Then Me.Close() Else Me.Show()
       End Using
    End Sub
 
@@ -91,6 +142,11 @@ Public Class formStartUp
       My.Settings.MyFreeREGUrl = UrlTextBox.Text
       My.Settings.MyDefaultCounty = CType(CType(DefaultCountyComboBox.SelectedItem, DataRowView).Row, WinFreeReg.LookupTables.ChapmanCodesRow).Code
       My.Settings.MyNetworkTrace = TraceCheckBox.Checked
+
+      If UserDataSet.HasChanges Then
+         UserDataSet.AcceptChanges()
+         UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
+      End If
    End Sub
 
    Private Function IsValidEmailAddress(ByVal strEmailAddress As String) As Boolean
@@ -179,5 +235,14 @@ Public Class formStartUp
          MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
       End Try
+   End Sub
+
+   Private Sub UserIdTextBox_Validated(sender As Object, e As EventArgs) Handles UserIdTextBox.Validated
+      currentTranscriber = UserDataSet.User.FindByuserid(UserIdTextBox.Text)
+      If currentTranscriber IsNot Nothing Then
+         PasswordTextBox.Text = currentTranscriber.PasswordInClear
+         UrlTextBox.Text = currentTranscriber.Url
+         LibraryTextBox.Text = currentTranscriber.DefaultFolder
+      End If
    End Sub
 End Class
