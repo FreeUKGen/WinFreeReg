@@ -579,9 +579,11 @@ Public Class formFileWorkspace
    End Sub
 
    Private Sub MarriageCellEditFinished(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvMarriages.CellEditFinished
-      Dim x As DataRowView = e.RowObject
-      Dim r As TranscriptionTables.MarriagesRow = x.Row
-      If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem()
+      If e.Column.AspectName = "Notes" Then
+         Dim x As DataRowView = e.RowObject
+         Dim r As TranscriptionTables.MarriagesRow = x.Row
+         If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem()
+      End If
    End Sub
 
 #End Region

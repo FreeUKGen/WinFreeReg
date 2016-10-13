@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.Serialization.Formatters.Binary
+Imports System.Configuration
 Imports System.IO
 Imports WinFreeReg
 Imports System.Text
@@ -6,37 +7,49 @@ Imports System.Text
 Public Class formStartUp
 
    Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
-   Public LookupTablesFile As String = Path.Combine(AppDataLocalFolder, "winfreereg.tables")
-   Public ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
-   Public TranscriberProfileFile As String = Path.Combine(AppDataLocalFolder, "transcriber.xml")
-   Dim strPersonalFolder As String = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
+   Private PgmAppDataLocalFolder As String = AppDataLocalFolder
+
+   Public TranscriberProfileFile As String
+   Public SettingsFileName As String = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath
+
    Dim UserDataSet As UserDetails = New UserDetails()
    Private formHelp As New formHelp() With {.Visible = False}
-   Private currentTranscriber As WinFreeReg.UserDetails.UserRow
+   Private currentTranscriber As WinFreeReg.UserDetails.UserRow = Nothing
 
    Private Sub formStartUp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+      If String.IsNullOrEmpty(My.Settings.MyFreeREGUrl) Then
 #If DEBUG Then
 #If LOCAL Then
-      My.Settings.MyFreeREGUrl = My.Settings.MyLocalUrl
+         My.Settings.MyFreeREGUrl = My.Settings.MyLocalUrl
 #Else
-      My.Settings.MyFreeREGUrl = My.Settings.MyTestUrl
+         My.Settings.MyFreeREGUrl = My.Settings.MyTestUrl
 #End If
 #Else
-      My.Settings.MyFreeREGUrl = My.Settings.MyLiveUrl
+         My.Settings.MyFreeREGUrl = My.Settings.MyLiveUrl
 #End If
+      End If
 
-      Dim StartToolTip = New CustomToolTip(ToolTipsFile, Me)
+      If My.Settings.MyFreeREGUrl = My.Settings.MyTestUrl Then
+         PgmAppDataLocalFolder = Path.Combine(AppDataLocalFolder, "test")
+         If Not Directory.Exists(PgmAppDataLocalFolder) Then
+            Directory.CreateDirectory(PgmAppDataLocalFolder)
+         End If
+      End If
+
+      TranscriberProfileFile = Path.Combine(AppDataLocalFolder, "transcriber.xml")
+
+      Dim StartToolTip = New CustomToolTip(Path.Combine(AppDataLocalFolder, "ToolTips.xml"), Me)
 
       If String.IsNullOrEmpty(My.Settings.MyTranscriptionLibrary) Then
-         My.Settings.MyTranscriptionLibrary = String.Format("{0}\FreeREG\WinREG for Windows\Transcripts", strPersonalFolder)
+         My.Settings.MyTranscriptionLibrary = String.Format("{0}\FreeREG\WinREG for Windows\Transcripts", Environment.GetFolderPath(Environment.SpecialFolder.Personal))
       End If
 
       If File.Exists(TranscriberProfileFile) Then
          UserDataSet.ReadXml(TranscriberProfileFile, XmlReadMode.ReadSchema)
          UserDataSet.AcceptChanges()
+         currentTranscriber = UserDataSet.User.FindByuserid(My.Settings.MyUserId)
       End If
 
-      currentTranscriber = UserDataSet.User.FindByuserid(My.Settings.MyUserId)
       If currentTranscriber IsNot Nothing Then
          UserIdTextBox.Text = currentTranscriber.userid
          PasswordTextBox.Text = currentTranscriber.PasswordInClear
@@ -59,7 +72,7 @@ Public Class formStartUp
          UserIdTextBox.Text = My.Settings.MyUserId
          PasswordTextBox.Text = My.Settings.MyPassword
          UrlTextBox.Text = My.Settings.MyFreeREGUrl
-         LibraryTextBox.Text = String.Format("{0}\FreeREG\WinREG for Windows\Transcripts", strPersonalFolder)
+         LibraryTextBox.Text = My.Settings.MyTranscriptionLibrary
       End If
 
       UserNameTextBox.Text = My.Settings.MyUserName
@@ -67,7 +80,7 @@ Public Class formStartUp
       TraceCheckBox.Checked = My.Settings.MyNetworkTrace
       linkPassword.Tag = True
 
-      UserLookupTables.LoadXmlData(LookupTablesFile)
+      UserLookupTables.LoadXmlData(Path.Combine(AppDataLocalFolder, "winfreereg.tables"))
       DefaultCountyComboBox.DataSource = UserLookupTables.Tables("ChapmanCodes").DefaultView
       DefaultCountyComboBox.DisplayMember = "Code"
       DefaultCountyComboBox.BindingContext = Me.BindingContext
@@ -108,9 +121,14 @@ Public Class formStartUp
          UrlTextBox.Text = frm.FreeregUrl
          TraceCheckBox.Checked = frm.TraceNetwork
 
-         currentTranscriber.PasswordInClear = frm.Password
-         currentTranscriber.DefaultFolder = LibraryTextBox.Text
-         currentTranscriber.Url = frm.FreeregUrl
+         UserDataSet.Clear()
+         UserDataSet.ReadXml(TranscriberProfileFile, XmlReadMode.ReadSchema)
+         currentTranscriber = UserDataSet.User.FindByuserid(UserIdTextBox.Text)
+         If currentTranscriber IsNot Nothing Then
+            currentTranscriber.PasswordInClear = frm.Password
+            currentTranscriber.DefaultFolder = LibraryTextBox.Text
+            currentTranscriber.Url = frm.FreeregUrl
+         End If
          UserDataSet.AcceptChanges()
          UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
 

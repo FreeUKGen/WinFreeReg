@@ -48,6 +48,7 @@ Public Class FreeREG2Browser
    Private nameMachineConfig As String = RuntimeEnvironment.GetRuntimeDirectory() + "CONFIG\machine.config"
    Private nameAppConfig As String = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile
    Private AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
+   Private PgmAppDataLocalFolder As String = AppDataLocalFolder
    Private pathRoamingAppData As String = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
    Private pathUserConfig As String = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath()
 
@@ -61,10 +62,11 @@ Public Class FreeREG2Browser
 
    Public ErrorMessagesFileName As String = Path.Combine(AppDataLocalFolder, "ErrorMessages.xml")
    Public SettingsFileName As String = Path.Combine(AppDataLocalFolder, "FreeRegBrowserSetttings.dat")
-   Public TranscriberProfileFile As String = Path.Combine(AppDataLocalFolder, "transcriber.xml")
-   Public FreeregTablesFile As String = Path.Combine(AppDataLocalFolder, "FreeREGTables.xml")
-   Public LookupTablesFile As String = Path.Combine(AppDataLocalFolder, "winfreereg.tables")
    Public ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
+
+   Public TranscriberProfileFile As String
+   Public FreeregTablesFile As String
+   Public LookupTablesFile As String
 
    Private formHelp As New formGeneralHelp() With {.Visible = False}
 
@@ -193,6 +195,9 @@ Public Class FreeREG2Browser
       End Get
       Set(ByVal value As String)
          _myUrl = value
+         If _myUrl = "https://test3.freereg.org.uk" Then
+            PgmAppDataLocalFolder = Path.Combine(AppDataLocalFolder, "test")
+         End If
       End Set
    End Property
 
@@ -218,6 +223,7 @@ Public Class FreeREG2Browser
    Friend WithEvents RichTextBox1 As System.Windows.Forms.RichTextBox
    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+   Friend WithEvents RenameFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
    Public Property TranscriptionLibrary() As String
       Get
          Return _myTranscriptionLibrary
@@ -370,6 +376,7 @@ Public Class FreeREG2Browser
       Me.CheckBox1 = New System.Windows.Forms.CheckBox()
       Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
       Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
+      Me.RenameFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
       PlaceNameLabel = New System.Windows.Forms.Label()
@@ -1396,7 +1403,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 391
+      Me.SplitContainer2.SplitterDistance = 392
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1421,7 +1428,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 391)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 392)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1547,9 +1554,9 @@ Public Class FreeREG2Browser
       '
       'localContextMenuStrip
       '
-      Me.localContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenWithNotepadToolStripMenuItem, Me.DeleteFileToolStripMenuItem})
+      Me.localContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenWithNotepadToolStripMenuItem, Me.RenameFileToolStripMenuItem, Me.DeleteFileToolStripMenuItem})
       Me.localContextMenuStrip.Name = "localContextMenuStrip"
-      Me.localContextMenuStrip.Size = New System.Drawing.Size(164, 48)
+      Me.localContextMenuStrip.Size = New System.Drawing.Size(164, 92)
       '
       'OpenWithNotepadToolStripMenuItem
       '
@@ -1604,6 +1611,12 @@ Public Class FreeREG2Browser
       '
       Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
       Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+      '
+      'RenameFileToolStripMenuItem
+      '
+      Me.RenameFileToolStripMenuItem.Name = "RenameFileToolStripMenuItem"
+      Me.RenameFileToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+      Me.RenameFileToolStripMenuItem.Text = "Rename file"
       '
       'FreeREG2Browser
       '
@@ -1664,7 +1677,7 @@ Public Class FreeREG2Browser
       If BatchesDataSet.Batch.GetChanges() IsNot Nothing Then
          If Not BatchesDataSet.Batch.HasErrors Then
             BatchesDataSet.Batch.AcceptChanges()
-            BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
+            BatchesDataSet.WriteXml(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
          End If
       End If
 
@@ -1719,6 +1732,11 @@ Public Class FreeREG2Browser
    End Sub
 
    Private Sub FreeREG2Browser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+      TranscriberProfileFile = Path.Combine(AppDataLocalFolder, "transcriber.xml")
+      FreeregTablesFile = Path.Combine(PgmAppDataLocalFolder, "FreeREGTables.xml")
+      LookupTablesFile = Path.Combine(PgmAppDataLocalFolder, "winfreereg.tables")
+
       If File.Exists(SettingsFileName) Then
          Dim stream As Stream = Nothing
          Try
@@ -1768,7 +1786,7 @@ Public Class FreeREG2Browser
       End If
 
       CheckBox1.Checked = MyAppSettings.ShowGettingStarted
-      RichTextBox1.LoadFile(Path.Combine(AppDataLocalFolder, "GettingStarted.rtf"))
+      If File.Exists(Path.Combine(AppDataLocalFolder, "GettingStarted.rtf")) Then RichTextBox1.LoadFile(Path.Combine(AppDataLocalFolder, "GettingStarted.rtf"))
       If File.Exists(FreeregTablesFile) Then
          TablesDataSet.ReadXml(FreeregTablesFile, XmlReadMode.ReadSchema)
          TablesDataSet.AcceptChanges()
@@ -1782,8 +1800,8 @@ Public Class FreeREG2Browser
       If Not File.Exists(LookupTablesFile) Then LookUpsDataSet.SaveXmlData(LookupTablesFile)
 
       If Not String.IsNullOrEmpty(MyAppSettings.UserId) Then
-         If File.Exists(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
-            BatchesDataSet.ReadXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)))
+         If File.Exists(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
+            BatchesDataSet.ReadXml(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)))
             BatchesDataSet.AcceptChanges()
          End If
       End If
@@ -1888,7 +1906,7 @@ Public Class FreeREG2Browser
                       Select file
 
       Dim tableLocalFiles As DataTable = CreateDataTable(Of FileInfo)(fileQuery)
-      If File.Exists(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
+      If File.Exists(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
          Dim col As DataColumn = tableLocalFiles.Columns.Add("dateUploaded", Type.GetType("System.String"))
          col.Caption = "Date Uploaded"
          For Each row As DataRow In tableLocalFiles.Rows
@@ -3091,7 +3109,7 @@ Public Class FreeREG2Browser
          Dim drv As DataRowView() = dv.FindRows(res.Parameter)
          BatchesDataSet.Batch.RemoveBatchRow(drv(0).Row)
          BatchesDataSet.Batch.AcceptChanges()
-         BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
+         BatchesDataSet.WriteXml(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
 
          ' Refresh the user profile
          '
@@ -3353,7 +3371,7 @@ Public Class FreeREG2Browser
                   e.Result = My.Resources.msgNoBatchesForUser
                End If
                BatchesDataSet.AcceptChanges()
-               BatchesDataSet.WriteXml(Path.Combine(AppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
+               BatchesDataSet.WriteXml(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId)), XmlWriteMode.WriteSchema)
             Else
                Throw New BackgroundWorkerException("Getting Batch Details from FreeREG failed - Not logged on")
             End If
@@ -3700,9 +3718,18 @@ Public Class FreeREG2Browser
       selectedFile = Nothing
    End Sub
 
+   Private Sub RenameFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles RenameFileToolStripMenuItem.Click
+      If selectedFile IsNot Nothing Then
+         Dim tfile = New TranscriptionFileClass(selectedFile, LookUpsDataSet, TablesDataSet)
+         Using dlg As New formFileRename() With {.SelectedFile = selectedFile, .TranscriptionFile = tfile}
+            dlg.ShowDialog()
+         End Using
+      End If
+   End Sub
+
    Private Sub DeleteFileToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles DeleteFileToolStripMenuItem.Click
       If selectedFile IsNot Nothing Then
-         If MessageBox.Show(String.Format(My.Resources.msgConfirmDeleteFile, selectedFile("Name")), "Delete FIle", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+         If MessageBox.Show(String.Format(My.Resources.msgConfirmDeleteFile, selectedFile("Name")), "Delete File", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
             Try
                FileSystem.DeleteFile(selectedFile("FullName"), UIOption.AllDialogs, RecycleOption.SendToRecycleBin)
                MessageBox.Show(String.Format(My.Resources.msgFileRecycled, selectedFile("Name")), "File Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information)

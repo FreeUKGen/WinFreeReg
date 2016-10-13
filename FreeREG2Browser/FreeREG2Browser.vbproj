@@ -146,6 +146,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FileHeaderException.vb" />
+    <Compile Include="formFileRename.Designer.vb">
+      <DependentUpon>formFileRename.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formFileRename.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FreeReg2BrowserSettings.vb" />
     <Compile Include="BackgroundWorkerException.vb" />
     <Compile Include="Batches.Designer.vb">
@@ -287,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dlgCorrectTableError.resx">
       <DependentUpon>dlgCorrectTableError.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formFileRename.resx">
+      <DependentUpon>formFileRename.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formStartNewFile.resx">
       <DependentUpon>formStartNewFile.vb</DependentUpon>
