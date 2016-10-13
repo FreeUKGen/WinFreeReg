@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 
-   <Product Id="*" Name="WinFreeREG !(bind.FileVersion.FILE_FreeRegBrowserDll)" Language="1033" Version="!(bind.FileVersion.FILE_FreeRegBrowserDll)" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
+   <Product Id="*" Name="WinFreeREG 1.0.2" Language="1033" Version="1.0.2" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
 
       <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Manufacturer="Free UK Genealogy"
                Description="Installs the FreeREG Transcription Program"
@@ -14,10 +14,6 @@
       <Property Id="WIXUI_INSTALLDIR" Value="APPLICATIONFOLDER" />
       <Icon Id="icon.ico" SourceFile="$(var.WinFreeReg.ProjectDir)appico.ico" />
       <Property Id="ARPPRODUCTICON" Value="icon.ico" />
-
-      <Condition Message="This application requires .NET Framework 3.5 SP1. Please install the .NET Framework then run this installer again.">
-         <![CDATA[Installed OR (NETFRAMEWORK35_SP_LEVEL and NOT NETFRAMEWORK35_SP_LEVEL = "#1")]]>
-      </Condition>
 
       <UI>
          <UIRef Id="WixUI_InstallDir"/>
@@ -56,7 +52,7 @@
 
       <DirectoryRef Id="WinFreeRegShortcutsDirectory">
          <Component Id="CMP_Uninstall" Guid="{F8C7F922-D35B-454B-982A-8B648DA485E4}">
-            <Shortcut Id="UninstallProduct" Name="Uninstall My Application" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="Uninstalls [ProductName]" />
+            <Shortcut Id="UninstallProduct" Name="Uninstall WinFreeREG" Target="[SystemFolder]msiexec.exe" Arguments="/x [ProductCode]" Description="Uninstalls [ProductName]" />
             <RemoveFolder Id="WinFreeRegShortcutsDirectory" On="uninstall"/>
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Shortcuts" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>

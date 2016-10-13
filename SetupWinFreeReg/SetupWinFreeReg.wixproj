@@ -6,7 +6,7 @@
     <ProductVersion>3.10</ProductVersion>
     <ProjectGuid>8db346c1-2102-48f6-9757-d8383cfa6e8f</ProjectGuid>
     <SchemaVersion>2.0</SchemaVersion>
-    <OutputName>SetupWinFreeReg</OutputName>
+    <OutputName>WinFreeReg.1.0.2</OutputName>
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -95,18 +95,4 @@
 	<Target Name="AfterBuild">
 	</Target>
 	-->
-  <Target Name="BeforeBuild">
-    <GetAssemblyIdentity AssemblyFiles="$(SolutionDir)FreeREG2Browser\bin\$(Platform)\$(Configuration)\FreeREG2Browser.dll">
-      <Output TaskParameter="Assemblies" ItemName="AssemblyVersions" />
-    </GetAssemblyIdentity>
-    <CreateProperty Value="$(OutputName).%(AssemblyVersions.Version)">
-      <Output TaskParameter="Value" PropertyName="TargetName" />
-    </CreateProperty>
-    <CreateProperty Value="$(TargetName)$(TargetExt)">
-      <Output TaskParameter="Value" PropertyName="TargetFileName" />
-    </CreateProperty>
-    <CreateProperty Value="$(TargetDir)$(TargetFileName)">
-      <Output TaskParameter="Value" PropertyName="TargetPath" />
-    </CreateProperty>
-  </Target>
 </Project>
