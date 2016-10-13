@@ -35,6 +35,12 @@ Partial Public Class FreeregTables
     
     Private tableApprovedRegisterTypes As ApprovedRegisterTypesDataTable
     
+    Private relationPlacesInCounty As Global.System.Data.DataRelation
+    
+    Private relationChurchesInCounty As Global.System.Data.DataRelation
+    
+    Private relationChurchesInPlace As Global.System.Data.DataRelation
+    
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -290,6 +296,9 @@ Partial Public Class FreeregTables
                 Me.tableApprovedRegisterTypes.InitVars
             End If
         End If
+        Me.relationPlacesInCounty = Me.Relations("PlacesInCounty")
+        Me.relationChurchesInCounty = Me.Relations("ChurchesInCounty")
+        Me.relationChurchesInPlace = Me.Relations("ChurchesInPlace")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -310,6 +319,12 @@ Partial Public Class FreeregTables
         MyBase.Tables.Add(Me.tableChurches)
         Me.tableApprovedRegisterTypes = New ApprovedRegisterTypesDataTable()
         MyBase.Tables.Add(Me.tableApprovedRegisterTypes)
+        Me.relationPlacesInCounty = New Global.System.Data.DataRelation("PlacesInCounty", New Global.System.Data.DataColumn() {Me.tableCounties.ChapmanCodeColumn}, New Global.System.Data.DataColumn() {Me.tablePlaces.ChapmanCodeColumn}, false)
+        Me.Relations.Add(Me.relationPlacesInCounty)
+        Me.relationChurchesInCounty = New Global.System.Data.DataRelation("ChurchesInCounty", New Global.System.Data.DataColumn() {Me.tableCounties.ChapmanCodeColumn}, New Global.System.Data.DataColumn() {Me.tableChurches.ChapmanCodeColumn}, false)
+        Me.Relations.Add(Me.relationChurchesInCounty)
+        Me.relationChurchesInPlace = New Global.System.Data.DataRelation("ChurchesInPlace", New Global.System.Data.DataColumn() {Me.tablePlaces.PlaceNameColumn, Me.tablePlaces.ChapmanCodeColumn}, New Global.System.Data.DataColumn() {Me.tableChurches.PlaceNameColumn, Me.tableChurches.ChapmanCodeColumn}, false)
+        Me.Relations.Add(Me.relationChurchesInPlace)
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -427,2035 +442,2104 @@ Partial Public Class FreeregTables
         
         Private columnDescription As Global.System.Data.DataColumn
         
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub New()
-         MyBase.New()
-         Me.TableName = "RegisterTypes"
-         Me.BeginInit()
-         Me.InitClass()
-         Me.EndInit()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal table As Global.System.Data.DataTable)
-         MyBase.New()
-         Me.TableName = table.TableName
-         If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-            Me.CaseSensitive = table.CaseSensitive
-         End If
-         If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-            Me.Locale = table.Locale
-         End If
-         If (table.Namespace <> table.DataSet.Namespace) Then
-            Me.Namespace = table.Namespace
-         End If
-         Me.Prefix = table.Prefix
-         Me.MinimumCapacity = table.MinimumCapacity
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-         MyBase.New(info, context)
-         Me.InitVars()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property TypeColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnType
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property DescriptionColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnDescription
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-       Global.System.ComponentModel.Browsable(False)> _
-      Public ReadOnly Property Count() As Integer
-         Get
-            Return Me.Rows.Count
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Default Public ReadOnly Property Item(ByVal index As Integer) As RegisterTypesRow
-         Get
-            Return CType(Me.Rows(index), RegisterTypesRow)
-         End Get
-      End Property
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event RegisterTypesRowChanging As RegisterTypesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event RegisterTypesRowChanged As RegisterTypesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event RegisterTypesRowDeleting As RegisterTypesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event RegisterTypesRowDeleted As RegisterTypesRowChangeEventHandler
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Sub AddRegisterTypesRow(ByVal row As RegisterTypesRow)
-         Me.Rows.Add(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Function AddRegisterTypesRow(ByVal Type As String, ByVal Description As String) As RegisterTypesRow
-         Dim rowRegisterTypesRow As RegisterTypesRow = CType(Me.NewRow, RegisterTypesRow)
-         Dim columnValuesArray() As Object = New Object() {Type, Description}
-         rowRegisterTypesRow.ItemArray = columnValuesArray
-         Me.Rows.Add(rowRegisterTypesRow)
-         Return rowRegisterTypesRow
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function FindByType(ByVal Type As String) As RegisterTypesRow
-         Return CType(Me.Rows.Find(New Object() {Type}), RegisterTypesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overrides Function Clone() As Global.System.Data.DataTable
-         Dim cln As RegisterTypesDataTable = CType(MyBase.Clone, RegisterTypesDataTable)
-         cln.InitVars()
-         Return cln
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-         Return New RegisterTypesDataTable()
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub InitVars()
-         Me.columnType = MyBase.Columns("Type")
-         Me.columnDescription = MyBase.Columns("Description")
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Private Sub InitClass()
-         Me.columnType = New Global.System.Data.DataColumn("Type", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnType)
-         Me.columnDescription = New Global.System.Data.DataColumn("Description", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnDescription)
-         Me.Constraints.Add(New Global.System.Data.UniqueConstraint("RegisterTypeKey", New Global.System.Data.DataColumn() {Me.columnType}, True))
-         Me.columnType.AllowDBNull = False
-         Me.columnType.Unique = True
-         Me.columnType.MaxLength = 2
-         Me.columnDescription.MaxLength = 50
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function NewRegisterTypesRow() As RegisterTypesRow
-         Return CType(Me.NewRow, RegisterTypesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-         Return New RegisterTypesRow(builder)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function GetRowType() As Global.System.Type
-         Return GetType(RegisterTypesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanged(e)
-         If (Not (Me.RegisterTypesRowChangedEvent) Is Nothing) Then
-            RaiseEvent RegisterTypesRowChanged(Me, New RegisterTypesRowChangeEvent(CType(e.Row, RegisterTypesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanging(e)
-         If (Not (Me.RegisterTypesRowChangingEvent) Is Nothing) Then
-            RaiseEvent RegisterTypesRowChanging(Me, New RegisterTypesRowChangeEvent(CType(e.Row, RegisterTypesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleted(e)
-         If (Not (Me.RegisterTypesRowDeletedEvent) Is Nothing) Then
-            RaiseEvent RegisterTypesRowDeleted(Me, New RegisterTypesRowChangeEvent(CType(e.Row, RegisterTypesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleting(e)
-         If (Not (Me.RegisterTypesRowDeletingEvent) Is Nothing) Then
-            RaiseEvent RegisterTypesRowDeleting(Me, New RegisterTypesRowChangeEvent(CType(e.Row, RegisterTypesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub RemoveRegisterTypesRow(ByVal row As RegisterTypesRow)
-         Me.Rows.Remove(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
-         Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-         Dim ds As FreeregTables = New FreeregTables()
-         Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-         any1.MinOccurs = New Decimal(0)
-         any1.MaxOccurs = Decimal.MaxValue
-         any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any1)
-         Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-         any2.MinOccurs = New Decimal(1)
-         any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any2)
-         Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute1.Name = "namespace"
-         attribute1.FixedValue = ds.Namespace
-         type.Attributes.Add(attribute1)
-         Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute2.Name = "tableTypeName"
-         attribute2.FixedValue = "RegisterTypesDataTable"
-         type.Attributes.Add(attribute2)
-         type.Particle = sequence
-         Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-         If xs.Contains(dsSchema.TargetNamespace) Then
-            Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Try
-               Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-               dsSchema.Write(s1)
-               Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-               Do While schemas.MoveNext
-                  schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
-                  s2.SetLength(0)
-                  schema.Write(s2)
-                  If (s1.Length = s2.Length) Then
-                     s1.Position = 0
-                     s2.Position = 0
-
-                     Do While ((s1.Position <> s1.Length) _
-                                 AndAlso (s1.ReadByte = s2.ReadByte))
-
-
-                     Loop
-                     If (s1.Position = s1.Length) Then
-                        Return type
-                     End If
-                  End If
-
-               Loop
-            Finally
-               If (Not (s1) Is Nothing) Then
-                  s1.Close()
-               End If
-               If (Not (s2) Is Nothing) Then
-                  s2.Close()
-               End If
-            End Try
-         End If
-         xs.Add(dsSchema)
-         Return type
-      End Function
-   End Class
-
-   '''<summary>
-   '''Represents the strongly named DataTable class.
-   '''</summary>
-   <Global.System.Serializable(), _
-    Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")> _
-   Partial Public Class CountiesDataTable
-      Inherits Global.System.Data.TypedTableBase(Of CountiesRow)
-
-      Private columnChapmanCode As Global.System.Data.DataColumn
-
-      Private columnCountyName As Global.System.Data.DataColumn
-
-      Private columnNotes As Global.System.Data.DataColumn
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub New()
-         MyBase.New()
-         Me.TableName = "Counties"
-         Me.BeginInit()
-         Me.InitClass()
-         Me.EndInit()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal table As Global.System.Data.DataTable)
-         MyBase.New()
-         Me.TableName = table.TableName
-         If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-            Me.CaseSensitive = table.CaseSensitive
-         End If
-         If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-            Me.Locale = table.Locale
-         End If
-         If (table.Namespace <> table.DataSet.Namespace) Then
-            Me.Namespace = table.Namespace
-         End If
-         Me.Prefix = table.Prefix
-         Me.MinimumCapacity = table.MinimumCapacity
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-         MyBase.New(info, context)
-         Me.InitVars()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property ChapmanCodeColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnChapmanCode
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property CountyNameColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnCountyName
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property NotesColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnNotes
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-       Global.System.ComponentModel.Browsable(False)> _
-      Public ReadOnly Property Count() As Integer
-         Get
-            Return Me.Rows.Count
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Default Public ReadOnly Property Item(ByVal index As Integer) As CountiesRow
-         Get
-            Return CType(Me.Rows(index), CountiesRow)
-         End Get
-      End Property
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event CountiesRowChanging As CountiesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event CountiesRowChanged As CountiesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event CountiesRowDeleting As CountiesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event CountiesRowDeleted As CountiesRowChangeEventHandler
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Sub AddCountiesRow(ByVal row As CountiesRow)
-         Me.Rows.Add(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Function AddCountiesRow(ByVal ChapmanCode As String, ByVal CountyName As String, ByVal Notes As String) As CountiesRow
-         Dim rowCountiesRow As CountiesRow = CType(Me.NewRow, CountiesRow)
-         Dim columnValuesArray() As Object = New Object() {ChapmanCode, CountyName, Notes}
-         rowCountiesRow.ItemArray = columnValuesArray
-         Me.Rows.Add(rowCountiesRow)
-         Return rowCountiesRow
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function FindByChapmanCode(ByVal ChapmanCode As String) As CountiesRow
-         Return CType(Me.Rows.Find(New Object() {ChapmanCode}), CountiesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overrides Function Clone() As Global.System.Data.DataTable
-         Dim cln As CountiesDataTable = CType(MyBase.Clone, CountiesDataTable)
-         cln.InitVars()
-         Return cln
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-         Return New CountiesDataTable()
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub InitVars()
-         Me.columnChapmanCode = MyBase.Columns("ChapmanCode")
-         Me.columnCountyName = MyBase.Columns("CountyName")
-         Me.columnNotes = MyBase.Columns("Notes")
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Private Sub InitClass()
-         Me.columnChapmanCode = New Global.System.Data.DataColumn("ChapmanCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnChapmanCode)
-         Me.columnCountyName = New Global.System.Data.DataColumn("CountyName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnCountyName)
-         Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnNotes)
-         Me.Constraints.Add(New Global.System.Data.UniqueConstraint("CountyKey", New Global.System.Data.DataColumn() {Me.columnChapmanCode}, True))
-         Me.columnChapmanCode.AllowDBNull = False
-         Me.columnChapmanCode.Unique = True
-         Me.columnChapmanCode.Caption = "Chapman Code"
-         Me.columnChapmanCode.MaxLength = 3
-         Me.columnCountyName.MaxLength = 30
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function NewCountiesRow() As CountiesRow
-         Return CType(Me.NewRow, CountiesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-         Return New CountiesRow(builder)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function GetRowType() As Global.System.Type
-         Return GetType(CountiesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanged(e)
-         If (Not (Me.CountiesRowChangedEvent) Is Nothing) Then
-            RaiseEvent CountiesRowChanged(Me, New CountiesRowChangeEvent(CType(e.Row, CountiesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanging(e)
-         If (Not (Me.CountiesRowChangingEvent) Is Nothing) Then
-            RaiseEvent CountiesRowChanging(Me, New CountiesRowChangeEvent(CType(e.Row, CountiesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleted(e)
-         If (Not (Me.CountiesRowDeletedEvent) Is Nothing) Then
-            RaiseEvent CountiesRowDeleted(Me, New CountiesRowChangeEvent(CType(e.Row, CountiesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleting(e)
-         If (Not (Me.CountiesRowDeletingEvent) Is Nothing) Then
-            RaiseEvent CountiesRowDeleting(Me, New CountiesRowChangeEvent(CType(e.Row, CountiesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub RemoveCountiesRow(ByVal row As CountiesRow)
-         Me.Rows.Remove(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
-         Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-         Dim ds As FreeregTables = New FreeregTables()
-         Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-         any1.MinOccurs = New Decimal(0)
-         any1.MaxOccurs = Decimal.MaxValue
-         any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any1)
-         Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-         any2.MinOccurs = New Decimal(1)
-         any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any2)
-         Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute1.Name = "namespace"
-         attribute1.FixedValue = ds.Namespace
-         type.Attributes.Add(attribute1)
-         Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute2.Name = "tableTypeName"
-         attribute2.FixedValue = "CountiesDataTable"
-         type.Attributes.Add(attribute2)
-         type.Particle = sequence
-         Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-         If xs.Contains(dsSchema.TargetNamespace) Then
-            Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Try
-               Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-               dsSchema.Write(s1)
-               Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-               Do While schemas.MoveNext
-                  schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
-                  s2.SetLength(0)
-                  schema.Write(s2)
-                  If (s1.Length = s2.Length) Then
-                     s1.Position = 0
-                     s2.Position = 0
-
-                     Do While ((s1.Position <> s1.Length) _
-                                 AndAlso (s1.ReadByte = s2.ReadByte))
-
-
-                     Loop
-                     If (s1.Position = s1.Length) Then
-                        Return type
-                     End If
-                  End If
-
-               Loop
-            Finally
-               If (Not (s1) Is Nothing) Then
-                  s1.Close()
-               End If
-               If (Not (s2) Is Nothing) Then
-                  s2.Close()
-               End If
-            End Try
-         End If
-         xs.Add(dsSchema)
-         Return type
-      End Function
-   End Class
-
-   '''<summary>
-   '''Represents the strongly named DataTable class.
-   '''</summary>
-   <Global.System.Serializable(), _
-    Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")> _
-   Partial Public Class PlacesDataTable
-      Inherits Global.System.Data.TypedTableBase(Of PlacesRow)
-
-      Private columnPlaceName As Global.System.Data.DataColumn
-
-      Private columnChapmanCode As Global.System.Data.DataColumn
-
-      Private columnCountry As Global.System.Data.DataColumn
-
-      Private columnCountyName As Global.System.Data.DataColumn
-
-      Private columnNotes As Global.System.Data.DataColumn
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub New()
-         MyBase.New()
-         Me.TableName = "Places"
-         Me.BeginInit()
-         Me.InitClass()
-         Me.EndInit()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal table As Global.System.Data.DataTable)
-         MyBase.New()
-         Me.TableName = table.TableName
-         If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-            Me.CaseSensitive = table.CaseSensitive
-         End If
-         If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-            Me.Locale = table.Locale
-         End If
-         If (table.Namespace <> table.DataSet.Namespace) Then
-            Me.Namespace = table.Namespace
-         End If
-         Me.Prefix = table.Prefix
-         Me.MinimumCapacity = table.MinimumCapacity
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-         MyBase.New(info, context)
-         Me.InitVars()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property PlaceNameColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnPlaceName
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property ChapmanCodeColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnChapmanCode
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property CountryColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnCountry
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property CountyNameColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnCountyName
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property NotesColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnNotes
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-       Global.System.ComponentModel.Browsable(False)> _
-      Public ReadOnly Property Count() As Integer
-         Get
-            Return Me.Rows.Count
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Default Public ReadOnly Property Item(ByVal index As Integer) As PlacesRow
-         Get
-            Return CType(Me.Rows(index), PlacesRow)
-         End Get
-      End Property
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event PlacesRowChanging As PlacesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event PlacesRowChanged As PlacesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event PlacesRowDeleting As PlacesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event PlacesRowDeleted As PlacesRowChangeEventHandler
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Sub AddPlacesRow(ByVal row As PlacesRow)
-         Me.Rows.Add(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Function AddPlacesRow(ByVal PlaceName As String, ByVal ChapmanCode As String, ByVal Country As String, ByVal CountyName As String, ByVal Notes As String) As PlacesRow
-         Dim rowPlacesRow As PlacesRow = CType(Me.NewRow, PlacesRow)
-         Dim columnValuesArray() As Object = New Object() {PlaceName, ChapmanCode, Country, CountyName, Notes}
-         rowPlacesRow.ItemArray = columnValuesArray
-         Me.Rows.Add(rowPlacesRow)
-         Return rowPlacesRow
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function FindByPlaceNameChapmanCode(ByVal PlaceName As String, ByVal ChapmanCode As String) As PlacesRow
-         Return CType(Me.Rows.Find(New Object() {PlaceName, ChapmanCode}), PlacesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overrides Function Clone() As Global.System.Data.DataTable
-         Dim cln As PlacesDataTable = CType(MyBase.Clone, PlacesDataTable)
-         cln.InitVars()
-         Return cln
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-         Return New PlacesDataTable()
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub InitVars()
-         Me.columnPlaceName = MyBase.Columns("PlaceName")
-         Me.columnChapmanCode = MyBase.Columns("ChapmanCode")
-         Me.columnCountry = MyBase.Columns("Country")
-         Me.columnCountyName = MyBase.Columns("CountyName")
-         Me.columnNotes = MyBase.Columns("Notes")
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Private Sub InitClass()
-         Me.columnPlaceName = New Global.System.Data.DataColumn("PlaceName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnPlaceName)
-         Me.columnChapmanCode = New Global.System.Data.DataColumn("ChapmanCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnChapmanCode)
-         Me.columnCountry = New Global.System.Data.DataColumn("Country", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnCountry)
-         Me.columnCountyName = New Global.System.Data.DataColumn("CountyName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnCountyName)
-         Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnNotes)
-         Me.Constraints.Add(New Global.System.Data.UniqueConstraint("PlaceKey", New Global.System.Data.DataColumn() {Me.columnPlaceName, Me.columnChapmanCode}, True))
-         Me.columnPlaceName.AllowDBNull = False
-         Me.columnChapmanCode.AllowDBNull = False
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function NewPlacesRow() As PlacesRow
-         Return CType(Me.NewRow, PlacesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-         Return New PlacesRow(builder)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function GetRowType() As Global.System.Type
-         Return GetType(PlacesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanged(e)
-         If (Not (Me.PlacesRowChangedEvent) Is Nothing) Then
-            RaiseEvent PlacesRowChanged(Me, New PlacesRowChangeEvent(CType(e.Row, PlacesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanging(e)
-         If (Not (Me.PlacesRowChangingEvent) Is Nothing) Then
-            RaiseEvent PlacesRowChanging(Me, New PlacesRowChangeEvent(CType(e.Row, PlacesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleted(e)
-         If (Not (Me.PlacesRowDeletedEvent) Is Nothing) Then
-            RaiseEvent PlacesRowDeleted(Me, New PlacesRowChangeEvent(CType(e.Row, PlacesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleting(e)
-         If (Not (Me.PlacesRowDeletingEvent) Is Nothing) Then
-            RaiseEvent PlacesRowDeleting(Me, New PlacesRowChangeEvent(CType(e.Row, PlacesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub RemovePlacesRow(ByVal row As PlacesRow)
-         Me.Rows.Remove(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
-         Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-         Dim ds As FreeregTables = New FreeregTables()
-         Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-         any1.MinOccurs = New Decimal(0)
-         any1.MaxOccurs = Decimal.MaxValue
-         any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any1)
-         Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-         any2.MinOccurs = New Decimal(1)
-         any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any2)
-         Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute1.Name = "namespace"
-         attribute1.FixedValue = ds.Namespace
-         type.Attributes.Add(attribute1)
-         Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute2.Name = "tableTypeName"
-         attribute2.FixedValue = "PlacesDataTable"
-         type.Attributes.Add(attribute2)
-         type.Particle = sequence
-         Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-         If xs.Contains(dsSchema.TargetNamespace) Then
-            Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Try
-               Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-               dsSchema.Write(s1)
-               Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-               Do While schemas.MoveNext
-                  schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
-                  s2.SetLength(0)
-                  schema.Write(s2)
-                  If (s1.Length = s2.Length) Then
-                     s1.Position = 0
-                     s2.Position = 0
-
-                     Do While ((s1.Position <> s1.Length) _
-                                 AndAlso (s1.ReadByte = s2.ReadByte))
-
-
-                     Loop
-                     If (s1.Position = s1.Length) Then
-                        Return type
-                     End If
-                  End If
-
-               Loop
-            Finally
-               If (Not (s1) Is Nothing) Then
-                  s1.Close()
-               End If
-               If (Not (s2) Is Nothing) Then
-                  s2.Close()
-               End If
-            End Try
-         End If
-         xs.Add(dsSchema)
-         Return type
-      End Function
-   End Class
-
-   '''<summary>
-   '''Represents the strongly named DataTable class.
-   '''</summary>
-   <Global.System.Serializable(), _
-    Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")> _
-   Partial Public Class ChurchesDataTable
-      Inherits Global.System.Data.TypedTableBase(Of ChurchesRow)
-
-      Private columnChurchName As Global.System.Data.DataColumn
-
-      Private columnChapmanCode As Global.System.Data.DataColumn
-
-      Private columnPlaceName As Global.System.Data.DataColumn
-
-      Private columnFileCode As Global.System.Data.DataColumn
-
-      Private columnLocation As Global.System.Data.DataColumn
-
-      Private columnDenomination As Global.System.Data.DataColumn
-
-      Private columnWebsite As Global.System.Data.DataColumn
-
-      Private columnLastAmended As Global.System.Data.DataColumn
-
-      Private columnNotes As Global.System.Data.DataColumn
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub New()
-         MyBase.New()
-         Me.TableName = "Churches"
-         Me.BeginInit()
-         Me.InitClass()
-         Me.EndInit()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal table As Global.System.Data.DataTable)
-         MyBase.New()
-         Me.TableName = table.TableName
-         If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-            Me.CaseSensitive = table.CaseSensitive
-         End If
-         If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-            Me.Locale = table.Locale
-         End If
-         If (table.Namespace <> table.DataSet.Namespace) Then
-            Me.Namespace = table.Namespace
-         End If
-         Me.Prefix = table.Prefix
-         Me.MinimumCapacity = table.MinimumCapacity
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-         MyBase.New(info, context)
-         Me.InitVars()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property ChurchNameColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnChurchName
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property ChapmanCodeColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnChapmanCode
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property PlaceNameColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnPlaceName
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property FileCodeColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnFileCode
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property LocationColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnLocation
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property DenominationColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnDenomination
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property WebsiteColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnWebsite
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property LastAmendedColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnLastAmended
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property NotesColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnNotes
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-       Global.System.ComponentModel.Browsable(False)> _
-      Public ReadOnly Property Count() As Integer
-         Get
-            Return Me.Rows.Count
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Default Public ReadOnly Property Item(ByVal index As Integer) As ChurchesRow
-         Get
-            Return CType(Me.Rows(index), ChurchesRow)
-         End Get
-      End Property
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event ChurchesRowChanging As ChurchesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event ChurchesRowChanged As ChurchesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event ChurchesRowDeleting As ChurchesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event ChurchesRowDeleted As ChurchesRowChangeEventHandler
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Sub AddChurchesRow(ByVal row As ChurchesRow)
-         Me.Rows.Add(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Function AddChurchesRow(ByVal ChurchName As String, ByVal ChapmanCode As String, ByVal PlaceName As String, ByVal FileCode As String, ByVal Location As String, ByVal Denomination As String, ByVal Website As String, ByVal LastAmended As String, ByVal Notes As String) As ChurchesRow
-         Dim rowChurchesRow As ChurchesRow = CType(Me.NewRow, ChurchesRow)
-         Dim columnValuesArray() As Object = New Object() {ChurchName, ChapmanCode, PlaceName, FileCode, Location, Denomination, Website, LastAmended, Notes}
-         rowChurchesRow.ItemArray = columnValuesArray
-         Me.Rows.Add(rowChurchesRow)
-         Return rowChurchesRow
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function FindByChurchNameChapmanCodePlaceName(ByVal ChurchName As String, ByVal ChapmanCode As String, ByVal PlaceName As String) As ChurchesRow
-         Return CType(Me.Rows.Find(New Object() {ChurchName, ChapmanCode, PlaceName}), ChurchesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overrides Function Clone() As Global.System.Data.DataTable
-         Dim cln As ChurchesDataTable = CType(MyBase.Clone, ChurchesDataTable)
-         cln.InitVars()
-         Return cln
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-         Return New ChurchesDataTable()
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub InitVars()
-         Me.columnChurchName = MyBase.Columns("ChurchName")
-         Me.columnChapmanCode = MyBase.Columns("ChapmanCode")
-         Me.columnPlaceName = MyBase.Columns("PlaceName")
-         Me.columnFileCode = MyBase.Columns("FileCode")
-         Me.columnLocation = MyBase.Columns("Location")
-         Me.columnDenomination = MyBase.Columns("Denomination")
-         Me.columnWebsite = MyBase.Columns("Website")
-         Me.columnLastAmended = MyBase.Columns("LastAmended")
-         Me.columnNotes = MyBase.Columns("Notes")
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Private Sub InitClass()
-         Me.columnChurchName = New Global.System.Data.DataColumn("ChurchName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnChurchName)
-         Me.columnChapmanCode = New Global.System.Data.DataColumn("ChapmanCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnChapmanCode)
-         Me.columnPlaceName = New Global.System.Data.DataColumn("PlaceName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnPlaceName)
-         Me.columnFileCode = New Global.System.Data.DataColumn("FileCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnFileCode)
-         Me.columnLocation = New Global.System.Data.DataColumn("Location", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnLocation)
-         Me.columnDenomination = New Global.System.Data.DataColumn("Denomination", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnDenomination)
-         Me.columnWebsite = New Global.System.Data.DataColumn("Website", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnWebsite)
-         Me.columnLastAmended = New Global.System.Data.DataColumn("LastAmended", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnLastAmended)
-         Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnNotes)
-         Me.Constraints.Add(New Global.System.Data.UniqueConstraint("ChurchKey", New Global.System.Data.DataColumn() {Me.columnChurchName, Me.columnChapmanCode, Me.columnPlaceName}, True))
-         Me.columnChurchName.AllowDBNull = False
-         Me.columnChapmanCode.AllowDBNull = False
-         Me.columnPlaceName.AllowDBNull = False
-         Me.columnFileCode.Caption = "File Code"
-         Me.columnFileCode.MaxLength = 8
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function NewChurchesRow() As ChurchesRow
-         Return CType(Me.NewRow, ChurchesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-         Return New ChurchesRow(builder)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function GetRowType() As Global.System.Type
-         Return GetType(ChurchesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanged(e)
-         If (Not (Me.ChurchesRowChangedEvent) Is Nothing) Then
-            RaiseEvent ChurchesRowChanged(Me, New ChurchesRowChangeEvent(CType(e.Row, ChurchesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanging(e)
-         If (Not (Me.ChurchesRowChangingEvent) Is Nothing) Then
-            RaiseEvent ChurchesRowChanging(Me, New ChurchesRowChangeEvent(CType(e.Row, ChurchesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleted(e)
-         If (Not (Me.ChurchesRowDeletedEvent) Is Nothing) Then
-            RaiseEvent ChurchesRowDeleted(Me, New ChurchesRowChangeEvent(CType(e.Row, ChurchesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleting(e)
-         If (Not (Me.ChurchesRowDeletingEvent) Is Nothing) Then
-            RaiseEvent ChurchesRowDeleting(Me, New ChurchesRowChangeEvent(CType(e.Row, ChurchesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub RemoveChurchesRow(ByVal row As ChurchesRow)
-         Me.Rows.Remove(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
-         Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-         Dim ds As FreeregTables = New FreeregTables()
-         Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-         any1.MinOccurs = New Decimal(0)
-         any1.MaxOccurs = Decimal.MaxValue
-         any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any1)
-         Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-         any2.MinOccurs = New Decimal(1)
-         any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any2)
-         Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute1.Name = "namespace"
-         attribute1.FixedValue = ds.Namespace
-         type.Attributes.Add(attribute1)
-         Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute2.Name = "tableTypeName"
-         attribute2.FixedValue = "ChurchesDataTable"
-         type.Attributes.Add(attribute2)
-         type.Particle = sequence
-         Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-         If xs.Contains(dsSchema.TargetNamespace) Then
-            Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Try
-               Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-               dsSchema.Write(s1)
-               Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-               Do While schemas.MoveNext
-                  schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
-                  s2.SetLength(0)
-                  schema.Write(s2)
-                  If (s1.Length = s2.Length) Then
-                     s1.Position = 0
-                     s2.Position = 0
-
-                     Do While ((s1.Position <> s1.Length) _
-                                 AndAlso (s1.ReadByte = s2.ReadByte))
-
-
-                     Loop
-                     If (s1.Position = s1.Length) Then
-                        Return type
-                     End If
-                  End If
-
-               Loop
-            Finally
-               If (Not (s1) Is Nothing) Then
-                  s1.Close()
-               End If
-               If (Not (s2) Is Nothing) Then
-                  s2.Close()
-               End If
-            End Try
-         End If
-         xs.Add(dsSchema)
-         Return type
-      End Function
-   End Class
-
-   '''<summary>
-   '''Represents the strongly named DataTable class.
-   '''</summary>
-   <Global.System.Serializable(), _
-    Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")> _
-   Partial Public Class ApprovedRegisterTypesDataTable
-      Inherits Global.System.Data.TypedTableBase(Of ApprovedRegisterTypesRow)
-
-      Private columnType As Global.System.Data.DataColumn
-
-      Private columnDescription As Global.System.Data.DataColumn
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub New()
-         MyBase.New()
-         Me.TableName = "ApprovedRegisterTypes"
-         Me.BeginInit()
-         Me.InitClass()
-         Me.EndInit()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal table As Global.System.Data.DataTable)
-         MyBase.New()
-         Me.TableName = table.TableName
-         If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
-            Me.CaseSensitive = table.CaseSensitive
-         End If
-         If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
-            Me.Locale = table.Locale
-         End If
-         If (table.Namespace <> table.DataSet.Namespace) Then
-            Me.Namespace = table.Namespace
-         End If
-         Me.Prefix = table.Prefix
-         Me.MinimumCapacity = table.MinimumCapacity
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
-         MyBase.New(info, context)
-         Me.InitVars()
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property TypeColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnType
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public ReadOnly Property DescriptionColumn() As Global.System.Data.DataColumn
-         Get
-            Return Me.columnDescription
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-       Global.System.ComponentModel.Browsable(False)> _
-      Public ReadOnly Property Count() As Integer
-         Get
-            Return Me.Rows.Count
-         End Get
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Default Public ReadOnly Property Item(ByVal index As Integer) As ApprovedRegisterTypesRow
-         Get
-            Return CType(Me.Rows(index), ApprovedRegisterTypesRow)
-         End Get
-      End Property
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event ApprovedRegisterTypesRowChanging As ApprovedRegisterTypesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event ApprovedRegisterTypesRowChanged As ApprovedRegisterTypesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event ApprovedRegisterTypesRowDeleting As ApprovedRegisterTypesRowChangeEventHandler
-
-      <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Event ApprovedRegisterTypesRowDeleted As ApprovedRegisterTypesRowChangeEventHandler
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Sub AddApprovedRegisterTypesRow(ByVal row As ApprovedRegisterTypesRow)
-         Me.Rows.Add(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overloads Function AddApprovedRegisterTypesRow(ByVal Type As String, ByVal Description As String) As ApprovedRegisterTypesRow
-         Dim rowApprovedRegisterTypesRow As ApprovedRegisterTypesRow = CType(Me.NewRow, ApprovedRegisterTypesRow)
-         Dim columnValuesArray() As Object = New Object() {Type, Description}
-         rowApprovedRegisterTypesRow.ItemArray = columnValuesArray
-         Me.Rows.Add(rowApprovedRegisterTypesRow)
-         Return rowApprovedRegisterTypesRow
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function FindByType(ByVal Type As String) As ApprovedRegisterTypesRow
-         Return CType(Me.Rows.Find(New Object() {Type}), ApprovedRegisterTypesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Overrides Function Clone() As Global.System.Data.DataTable
-         Dim cln As ApprovedRegisterTypesDataTable = CType(MyBase.Clone, ApprovedRegisterTypesDataTable)
-         cln.InitVars()
-         Return cln
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
-         Return New ApprovedRegisterTypesDataTable()
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub InitVars()
-         Me.columnType = MyBase.Columns("Type")
-         Me.columnDescription = MyBase.Columns("Description")
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Private Sub InitClass()
-         Me.columnType = New Global.System.Data.DataColumn("Type", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnType)
-         Me.columnDescription = New Global.System.Data.DataColumn("Description", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-         MyBase.Columns.Add(Me.columnDescription)
-         Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnType}, True))
-         Me.columnType.AllowDBNull = False
-         Me.columnType.Unique = True
-         Me.columnType.MaxLength = 2
-         Me.columnDescription.MaxLength = 50
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function NewApprovedRegisterTypesRow() As ApprovedRegisterTypesRow
-         Return CType(Me.NewRow, ApprovedRegisterTypesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
-         Return New ApprovedRegisterTypesRow(builder)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Function GetRowType() As Global.System.Type
-         Return GetType(ApprovedRegisterTypesRow)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanged(e)
-         If (Not (Me.ApprovedRegisterTypesRowChangedEvent) Is Nothing) Then
-            RaiseEvent ApprovedRegisterTypesRowChanged(Me, New ApprovedRegisterTypesRowChangeEvent(CType(e.Row, ApprovedRegisterTypesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowChanging(e)
-         If (Not (Me.ApprovedRegisterTypesRowChangingEvent) Is Nothing) Then
-            RaiseEvent ApprovedRegisterTypesRowChanging(Me, New ApprovedRegisterTypesRowChangeEvent(CType(e.Row, ApprovedRegisterTypesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleted(e)
-         If (Not (Me.ApprovedRegisterTypesRowDeletedEvent) Is Nothing) Then
-            RaiseEvent ApprovedRegisterTypesRowDeleted(Me, New ApprovedRegisterTypesRowChangeEvent(CType(e.Row, ApprovedRegisterTypesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
-         MyBase.OnRowDeleting(e)
-         If (Not (Me.ApprovedRegisterTypesRowDeletingEvent) Is Nothing) Then
-            RaiseEvent ApprovedRegisterTypesRowDeleting(Me, New ApprovedRegisterTypesRowChangeEvent(CType(e.Row, ApprovedRegisterTypesRow), e.Action))
-         End If
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub RemoveApprovedRegisterTypesRow(ByVal row As ApprovedRegisterTypesRow)
-         Me.Rows.Remove(row)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
-         Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
-         Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
-         Dim ds As FreeregTables = New FreeregTables()
-         Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any1.Namespace = "http://www.w3.org/2001/XMLSchema"
-         any1.MinOccurs = New Decimal(0)
-         any1.MaxOccurs = Decimal.MaxValue
-         any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any1)
-         Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
-         any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
-         any2.MinOccurs = New Decimal(1)
-         any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
-         sequence.Items.Add(any2)
-         Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute1.Name = "namespace"
-         attribute1.FixedValue = ds.Namespace
-         type.Attributes.Add(attribute1)
-         Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
-         attribute2.Name = "tableTypeName"
-         attribute2.FixedValue = "ApprovedRegisterTypesDataTable"
-         type.Attributes.Add(attribute2)
-         type.Particle = sequence
-         Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
-         If xs.Contains(dsSchema.TargetNamespace) Then
-            Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
-            Try
-               Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
-               dsSchema.Write(s1)
-               Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
-               Do While schemas.MoveNext
-                  schema = CType(schemas.Current, Global.System.Xml.Schema.XmlSchema)
-                  s2.SetLength(0)
-                  schema.Write(s2)
-                  If (s1.Length = s2.Length) Then
-                     s1.Position = 0
-                     s2.Position = 0
-
-                     Do While ((s1.Position <> s1.Length) _
-                                 AndAlso (s1.ReadByte = s2.ReadByte))
-
-
-                     Loop
-                     If (s1.Position = s1.Length) Then
-                        Return type
-                     End If
-                  End If
-
-               Loop
-            Finally
-               If (Not (s1) Is Nothing) Then
-                  s1.Close()
-               End If
-               If (Not (s2) Is Nothing) Then
-                  s2.Close()
-               End If
-            End Try
-         End If
-         xs.Add(dsSchema)
-         Return type
-      End Function
-   End Class
-
-   '''<summary>
-   '''Represents strongly named DataRow class.
-   '''</summary>
-   Partial Public Class RegisterTypesRow
-      Inherits Global.System.Data.DataRow
-
-      Private tableRegisterTypes As RegisterTypesDataTable
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-         MyBase.New(rb)
-         Me.tableRegisterTypes = CType(Me.Table, RegisterTypesDataTable)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Type() As String
-         Get
-            Return CType(Me(Me.tableRegisterTypes.TypeColumn), String)
-         End Get
-         Set(value As String)
-            Me(Me.tableRegisterTypes.TypeColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Description() As String
-         Get
-            If Me.IsDescriptionNull Then
-               Return String.Empty
-            Else
-               Return CType(Me(Me.tableRegisterTypes.DescriptionColumn), String)
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "RegisterTypes"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
             End If
-         End Get
-         Set(value As String)
-            Me(Me.tableRegisterTypes.DescriptionColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsDescriptionNull() As Boolean
-         Return Me.IsNull(Me.tableRegisterTypes.DescriptionColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetDescriptionNull()
-         Me(Me.tableRegisterTypes.DescriptionColumn) = Global.System.Convert.DBNull
-      End Sub
-   End Class
-
-   '''<summary>
-   '''Represents strongly named DataRow class.
-   '''</summary>
-   Partial Public Class CountiesRow
-      Inherits Global.System.Data.DataRow
-
-      Private tableCounties As CountiesDataTable
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-         MyBase.New(rb)
-         Me.tableCounties = CType(Me.Table, CountiesDataTable)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property ChapmanCode() As String
-         Get
-            Return CType(Me(Me.tableCounties.ChapmanCodeColumn), String)
-         End Get
-         Set(value As String)
-            Me(Me.tableCounties.ChapmanCodeColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property CountyName() As String
-         Get
-            Try
-               Return CType(Me(Me.tableCounties.CountyNameColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'CountyName' in table 'Counties' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tableCounties.CountyNameColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Notes() As String
-         Get
-            Try
-               Return CType(Me(Me.tableCounties.NotesColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'Notes' in table 'Counties' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tableCounties.NotesColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsCountyNameNull() As Boolean
-         Return Me.IsNull(Me.tableCounties.CountyNameColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetCountyNameNull()
-         Me(Me.tableCounties.CountyNameColumn) = Global.System.Convert.DBNull
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsNotesNull() As Boolean
-         Return Me.IsNull(Me.tableCounties.NotesColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetNotesNull()
-         Me(Me.tableCounties.NotesColumn) = Global.System.Convert.DBNull
-      End Sub
-   End Class
-
-   '''<summary>
-   '''Represents strongly named DataRow class.
-   '''</summary>
-   Partial Public Class PlacesRow
-      Inherits Global.System.Data.DataRow
-
-      Private tablePlaces As PlacesDataTable
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-         MyBase.New(rb)
-         Me.tablePlaces = CType(Me.Table, PlacesDataTable)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property PlaceName() As String
-         Get
-            Return CType(Me(Me.tablePlaces.PlaceNameColumn), String)
-         End Get
-         Set(value As String)
-            Me(Me.tablePlaces.PlaceNameColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property ChapmanCode() As String
-         Get
-            Return CType(Me(Me.tablePlaces.ChapmanCodeColumn), String)
-         End Get
-         Set(value As String)
-            Me(Me.tablePlaces.ChapmanCodeColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Country() As String
-         Get
-            Try
-               Return CType(Me(Me.tablePlaces.CountryColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'Country' in table 'Places' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tablePlaces.CountryColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property CountyName() As String
-         Get
-            Try
-               Return CType(Me(Me.tablePlaces.CountyNameColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'CountyName' in table 'Places' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tablePlaces.CountyNameColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Notes() As String
-         Get
-            Try
-               Return CType(Me(Me.tablePlaces.NotesColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'Notes' in table 'Places' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tablePlaces.NotesColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsCountryNull() As Boolean
-         Return Me.IsNull(Me.tablePlaces.CountryColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetCountryNull()
-         Me(Me.tablePlaces.CountryColumn) = Global.System.Convert.DBNull
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsCountyNameNull() As Boolean
-         Return Me.IsNull(Me.tablePlaces.CountyNameColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetCountyNameNull()
-         Me(Me.tablePlaces.CountyNameColumn) = Global.System.Convert.DBNull
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsNotesNull() As Boolean
-         Return Me.IsNull(Me.tablePlaces.NotesColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetNotesNull()
-         Me(Me.tablePlaces.NotesColumn) = Global.System.Convert.DBNull
-      End Sub
-   End Class
-
-   '''<summary>
-   '''Represents strongly named DataRow class.
-   '''</summary>
-   Partial Public Class ChurchesRow
-      Inherits Global.System.Data.DataRow
-
-      Private tableChurches As ChurchesDataTable
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-         MyBase.New(rb)
-         Me.tableChurches = CType(Me.Table, ChurchesDataTable)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property ChurchName() As String
-         Get
-            Return CType(Me(Me.tableChurches.ChurchNameColumn), String)
-         End Get
-         Set(value As String)
-            Me(Me.tableChurches.ChurchNameColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property ChapmanCode() As String
-         Get
-            Return CType(Me(Me.tableChurches.ChapmanCodeColumn), String)
-         End Get
-         Set(value As String)
-            Me(Me.tableChurches.ChapmanCodeColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property PlaceName() As String
-         Get
-            Return CType(Me(Me.tableChurches.PlaceNameColumn), String)
-         End Get
-         Set(value As String)
-            Me(Me.tableChurches.PlaceNameColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property FileCode() As String
-         Get
-            If Me.IsFileCodeNull Then
-               Return Nothing
-            Else
-               Return CType(Me(Me.tableChurches.FileCodeColumn), String)
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
             End If
-         End Get
-         Set(value As String)
-            Me(Me.tableChurches.FileCodeColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Location() As String
-         Get
-            Try
-               Return CType(Me(Me.tableChurches.LocationColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'Location' in table 'Churches' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tableChurches.LocationColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Denomination() As String
-         Get
-            Try
-               Return CType(Me(Me.tableChurches.DenominationColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'Denomination' in table 'Churches' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tableChurches.DenominationColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Website() As String
-         Get
-            Try
-               Return CType(Me(Me.tableChurches.WebsiteColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'Website' in table 'Churches' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tableChurches.WebsiteColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property LastAmended() As String
-         Get
-            Try
-               Return CType(Me(Me.tableChurches.LastAmendedColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'LastAmended' in table 'Churches' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tableChurches.LastAmendedColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Notes() As String
-         Get
-            Try
-               Return CType(Me(Me.tableChurches.NotesColumn), String)
-            Catch e As Global.System.InvalidCastException
-               Throw New Global.System.Data.StrongTypingException("The value for column 'Notes' in table 'Churches' is DBNull.", e)
-            End Try
-         End Get
-         Set(value As String)
-            Me(Me.tableChurches.NotesColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsFileCodeNull() As Boolean
-         Return Me.IsNull(Me.tableChurches.FileCodeColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetFileCodeNull()
-         Me(Me.tableChurches.FileCodeColumn) = Global.System.Convert.DBNull
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsLocationNull() As Boolean
-         Return Me.IsNull(Me.tableChurches.LocationColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetLocationNull()
-         Me(Me.tableChurches.LocationColumn) = Global.System.Convert.DBNull
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsDenominationNull() As Boolean
-         Return Me.IsNull(Me.tableChurches.DenominationColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetDenominationNull()
-         Me(Me.tableChurches.DenominationColumn) = Global.System.Convert.DBNull
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsWebsiteNull() As Boolean
-         Return Me.IsNull(Me.tableChurches.WebsiteColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetWebsiteNull()
-         Me(Me.tableChurches.WebsiteColumn) = Global.System.Convert.DBNull
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsLastAmendedNull() As Boolean
-         Return Me.IsNull(Me.tableChurches.LastAmendedColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetLastAmendedNull()
-         Me(Me.tableChurches.LastAmendedColumn) = Global.System.Convert.DBNull
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsNotesNull() As Boolean
-         Return Me.IsNull(Me.tableChurches.NotesColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetNotesNull()
-         Me(Me.tableChurches.NotesColumn) = Global.System.Convert.DBNull
-      End Sub
-   End Class
-
-   '''<summary>
-   '''Represents strongly named DataRow class.
-   '''</summary>
-   Partial Public Class ApprovedRegisterTypesRow
-      Inherits Global.System.Data.DataRow
-
-      Private tableApprovedRegisterTypes As ApprovedRegisterTypesDataTable
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
-         MyBase.New(rb)
-         Me.tableApprovedRegisterTypes = CType(Me.Table, ApprovedRegisterTypesDataTable)
-      End Sub
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Type() As String
-         Get
-            Return CType(Me(Me.tableApprovedRegisterTypes.TypeColumn), String)
-         End Get
-         Set(value As String)
-            Me(Me.tableApprovedRegisterTypes.TypeColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Property Description() As String
-         Get
-            If Me.IsDescriptionNull Then
-               Return String.Empty
-            Else
-               Return CType(Me(Me.tableApprovedRegisterTypes.DescriptionColumn), String)
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
             End If
-         End Get
-         Set(value As String)
-            Me(Me.tableApprovedRegisterTypes.DescriptionColumn) = value
-         End Set
-      End Property
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Function IsDescriptionNull() As Boolean
-         Return Me.IsNull(Me.tableApprovedRegisterTypes.DescriptionColumn)
-      End Function
-
-      <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-       Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
-      Public Sub SetDescriptionNull()
-         Me(Me.tableApprovedRegisterTypes.DescriptionColumn) = Global.System.Convert.DBNull
-      End Sub
-   End Class
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TypeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnType
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property DescriptionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDescription
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As RegisterTypesRow
+            Get
+                Return CType(Me.Rows(index),RegisterTypesRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event RegisterTypesRowChanging As RegisterTypesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event RegisterTypesRowChanged As RegisterTypesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event RegisterTypesRowDeleting As RegisterTypesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event RegisterTypesRowDeleted As RegisterTypesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddRegisterTypesRow(ByVal row As RegisterTypesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddRegisterTypesRow(ByVal Type As String, ByVal Description As String) As RegisterTypesRow
+            Dim rowRegisterTypesRow As RegisterTypesRow = CType(Me.NewRow,RegisterTypesRow)
+            Dim columnValuesArray() As Object = New Object() {Type, Description}
+            rowRegisterTypesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowRegisterTypesRow)
+            Return rowRegisterTypesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByType(ByVal Type As String) As RegisterTypesRow
+            Return CType(Me.Rows.Find(New Object() {Type}),RegisterTypesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As RegisterTypesDataTable = CType(MyBase.Clone,RegisterTypesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New RegisterTypesDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnType = MyBase.Columns("Type")
+            Me.columnDescription = MyBase.Columns("Description")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnType = New Global.System.Data.DataColumn("Type", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnType)
+            Me.columnDescription = New Global.System.Data.DataColumn("Description", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDescription)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("RegisterTypeKey", New Global.System.Data.DataColumn() {Me.columnType}, true))
+            Me.columnType.AllowDBNull = false
+            Me.columnType.Unique = true
+            Me.columnType.MaxLength = 2
+            Me.columnDescription.MaxLength = 50
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewRegisterTypesRow() As RegisterTypesRow
+            Return CType(Me.NewRow,RegisterTypesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New RegisterTypesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(RegisterTypesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.RegisterTypesRowChangedEvent) Is Nothing) Then
+                RaiseEvent RegisterTypesRowChanged(Me, New RegisterTypesRowChangeEvent(CType(e.Row,RegisterTypesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.RegisterTypesRowChangingEvent) Is Nothing) Then
+                RaiseEvent RegisterTypesRowChanging(Me, New RegisterTypesRowChangeEvent(CType(e.Row,RegisterTypesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.RegisterTypesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent RegisterTypesRowDeleted(Me, New RegisterTypesRowChangeEvent(CType(e.Row,RegisterTypesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.RegisterTypesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent RegisterTypesRowDeleting(Me, New RegisterTypesRowChangeEvent(CType(e.Row,RegisterTypesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemoveRegisterTypesRow(ByVal row As RegisterTypesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As FreeregTables = New FreeregTables()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "RegisterTypesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class CountiesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of CountiesRow)
+        
+        Private columnChapmanCode As Global.System.Data.DataColumn
+        
+        Private columnCountyName As Global.System.Data.DataColumn
+        
+        Private columnNotes As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Counties"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ChapmanCodeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChapmanCode
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CountyNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCountyName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property NotesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNotes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As CountiesRow
+            Get
+                Return CType(Me.Rows(index),CountiesRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event CountiesRowChanging As CountiesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event CountiesRowChanged As CountiesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event CountiesRowDeleting As CountiesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event CountiesRowDeleted As CountiesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddCountiesRow(ByVal row As CountiesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddCountiesRow(ByVal ChapmanCode As String, ByVal CountyName As String, ByVal Notes As String) As CountiesRow
+            Dim rowCountiesRow As CountiesRow = CType(Me.NewRow,CountiesRow)
+            Dim columnValuesArray() As Object = New Object() {ChapmanCode, CountyName, Notes}
+            rowCountiesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowCountiesRow)
+            Return rowCountiesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByChapmanCode(ByVal ChapmanCode As String) As CountiesRow
+            Return CType(Me.Rows.Find(New Object() {ChapmanCode}),CountiesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As CountiesDataTable = CType(MyBase.Clone,CountiesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New CountiesDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnChapmanCode = MyBase.Columns("ChapmanCode")
+            Me.columnCountyName = MyBase.Columns("CountyName")
+            Me.columnNotes = MyBase.Columns("Notes")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnChapmanCode = New Global.System.Data.DataColumn("ChapmanCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnChapmanCode)
+            Me.columnCountyName = New Global.System.Data.DataColumn("CountyName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCountyName)
+            Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNotes)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("CountyKey", New Global.System.Data.DataColumn() {Me.columnChapmanCode}, true))
+            Me.columnChapmanCode.AllowDBNull = false
+            Me.columnChapmanCode.Unique = true
+            Me.columnChapmanCode.Caption = "Chapman Code"
+            Me.columnChapmanCode.MaxLength = 3
+            Me.columnCountyName.MaxLength = 30
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewCountiesRow() As CountiesRow
+            Return CType(Me.NewRow,CountiesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New CountiesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(CountiesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.CountiesRowChangedEvent) Is Nothing) Then
+                RaiseEvent CountiesRowChanged(Me, New CountiesRowChangeEvent(CType(e.Row,CountiesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.CountiesRowChangingEvent) Is Nothing) Then
+                RaiseEvent CountiesRowChanging(Me, New CountiesRowChangeEvent(CType(e.Row,CountiesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.CountiesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent CountiesRowDeleted(Me, New CountiesRowChangeEvent(CType(e.Row,CountiesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.CountiesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent CountiesRowDeleting(Me, New CountiesRowChangeEvent(CType(e.Row,CountiesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemoveCountiesRow(ByVal row As CountiesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As FreeregTables = New FreeregTables()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "CountiesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class PlacesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of PlacesRow)
+        
+        Private columnPlaceName As Global.System.Data.DataColumn
+        
+        Private columnChapmanCode As Global.System.Data.DataColumn
+        
+        Private columnCountry As Global.System.Data.DataColumn
+        
+        Private columnCountyName As Global.System.Data.DataColumn
+        
+        Private columnNotes As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Places"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PlaceNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPlaceName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ChapmanCodeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChapmanCode
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CountryColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCountry
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property CountyNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnCountyName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property NotesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNotes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As PlacesRow
+            Get
+                Return CType(Me.Rows(index),PlacesRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event PlacesRowChanging As PlacesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event PlacesRowChanged As PlacesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event PlacesRowDeleting As PlacesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event PlacesRowDeleted As PlacesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddPlacesRow(ByVal row As PlacesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddPlacesRow(ByVal PlaceName As String, ByVal parentCountiesRowByPlacesInCounty As CountiesRow, ByVal Country As String, ByVal CountyName As String, ByVal Notes As String) As PlacesRow
+            Dim rowPlacesRow As PlacesRow = CType(Me.NewRow,PlacesRow)
+            Dim columnValuesArray() As Object = New Object() {PlaceName, Nothing, Country, CountyName, Notes}
+            If (Not (parentCountiesRowByPlacesInCounty) Is Nothing) Then
+                columnValuesArray(1) = parentCountiesRowByPlacesInCounty(0)
+            End If
+            rowPlacesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowPlacesRow)
+            Return rowPlacesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByPlaceNameChapmanCode(ByVal PlaceName As String, ByVal ChapmanCode As String) As PlacesRow
+            Return CType(Me.Rows.Find(New Object() {PlaceName, ChapmanCode}),PlacesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As PlacesDataTable = CType(MyBase.Clone,PlacesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New PlacesDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnPlaceName = MyBase.Columns("PlaceName")
+            Me.columnChapmanCode = MyBase.Columns("ChapmanCode")
+            Me.columnCountry = MyBase.Columns("Country")
+            Me.columnCountyName = MyBase.Columns("CountyName")
+            Me.columnNotes = MyBase.Columns("Notes")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnPlaceName = New Global.System.Data.DataColumn("PlaceName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPlaceName)
+            Me.columnChapmanCode = New Global.System.Data.DataColumn("ChapmanCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnChapmanCode)
+            Me.columnCountry = New Global.System.Data.DataColumn("Country", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCountry)
+            Me.columnCountyName = New Global.System.Data.DataColumn("CountyName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnCountyName)
+            Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNotes)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("PlaceKey", New Global.System.Data.DataColumn() {Me.columnPlaceName, Me.columnChapmanCode}, true))
+            Me.columnPlaceName.AllowDBNull = false
+            Me.columnChapmanCode.AllowDBNull = false
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewPlacesRow() As PlacesRow
+            Return CType(Me.NewRow,PlacesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New PlacesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(PlacesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.PlacesRowChangedEvent) Is Nothing) Then
+                RaiseEvent PlacesRowChanged(Me, New PlacesRowChangeEvent(CType(e.Row,PlacesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.PlacesRowChangingEvent) Is Nothing) Then
+                RaiseEvent PlacesRowChanging(Me, New PlacesRowChangeEvent(CType(e.Row,PlacesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.PlacesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent PlacesRowDeleted(Me, New PlacesRowChangeEvent(CType(e.Row,PlacesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.PlacesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent PlacesRowDeleting(Me, New PlacesRowChangeEvent(CType(e.Row,PlacesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemovePlacesRow(ByVal row As PlacesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As FreeregTables = New FreeregTables()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "PlacesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class ChurchesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of ChurchesRow)
+        
+        Private columnChurchName As Global.System.Data.DataColumn
+        
+        Private columnChapmanCode As Global.System.Data.DataColumn
+        
+        Private columnPlaceName As Global.System.Data.DataColumn
+        
+        Private columnFileCode As Global.System.Data.DataColumn
+        
+        Private columnLocation As Global.System.Data.DataColumn
+        
+        Private columnDenomination As Global.System.Data.DataColumn
+        
+        Private columnWebsite As Global.System.Data.DataColumn
+        
+        Private columnLastAmended As Global.System.Data.DataColumn
+        
+        Private columnNotes As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Churches"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ChurchNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChurchName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property ChapmanCodeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnChapmanCode
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PlaceNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPlaceName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property FileCodeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnFileCode
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property LocationColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLocation
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property DenominationColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDenomination
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property WebsiteColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnWebsite
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property LastAmendedColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLastAmended
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property NotesColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNotes
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As ChurchesRow
+            Get
+                Return CType(Me.Rows(index),ChurchesRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ChurchesRowChanging As ChurchesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ChurchesRowChanged As ChurchesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ChurchesRowDeleting As ChurchesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ChurchesRowDeleted As ChurchesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddChurchesRow(ByVal row As ChurchesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddChurchesRow(ByVal ChurchName As String, ByVal parentCountiesRowByChurchesInCounty As CountiesRow, ByVal PlaceName As String, ByVal FileCode As String, ByVal Location As String, ByVal Denomination As String, ByVal Website As String, ByVal LastAmended As String, ByVal Notes As String) As ChurchesRow
+            Dim rowChurchesRow As ChurchesRow = CType(Me.NewRow,ChurchesRow)
+            Dim columnValuesArray() As Object = New Object() {ChurchName, Nothing, PlaceName, FileCode, Location, Denomination, Website, LastAmended, Notes}
+            If (Not (parentCountiesRowByChurchesInCounty) Is Nothing) Then
+                columnValuesArray(1) = parentCountiesRowByChurchesInCounty(0)
+            End If
+            rowChurchesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowChurchesRow)
+            Return rowChurchesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByChurchNameChapmanCodePlaceName(ByVal ChurchName As String, ByVal ChapmanCode As String, ByVal PlaceName As String) As ChurchesRow
+            Return CType(Me.Rows.Find(New Object() {ChurchName, ChapmanCode, PlaceName}),ChurchesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As ChurchesDataTable = CType(MyBase.Clone,ChurchesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New ChurchesDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnChurchName = MyBase.Columns("ChurchName")
+            Me.columnChapmanCode = MyBase.Columns("ChapmanCode")
+            Me.columnPlaceName = MyBase.Columns("PlaceName")
+            Me.columnFileCode = MyBase.Columns("FileCode")
+            Me.columnLocation = MyBase.Columns("Location")
+            Me.columnDenomination = MyBase.Columns("Denomination")
+            Me.columnWebsite = MyBase.Columns("Website")
+            Me.columnLastAmended = MyBase.Columns("LastAmended")
+            Me.columnNotes = MyBase.Columns("Notes")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnChurchName = New Global.System.Data.DataColumn("ChurchName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnChurchName)
+            Me.columnChapmanCode = New Global.System.Data.DataColumn("ChapmanCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnChapmanCode)
+            Me.columnPlaceName = New Global.System.Data.DataColumn("PlaceName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPlaceName)
+            Me.columnFileCode = New Global.System.Data.DataColumn("FileCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnFileCode)
+            Me.columnLocation = New Global.System.Data.DataColumn("Location", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLocation)
+            Me.columnDenomination = New Global.System.Data.DataColumn("Denomination", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDenomination)
+            Me.columnWebsite = New Global.System.Data.DataColumn("Website", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnWebsite)
+            Me.columnLastAmended = New Global.System.Data.DataColumn("LastAmended", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLastAmended)
+            Me.columnNotes = New Global.System.Data.DataColumn("Notes", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNotes)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("ChurchKey", New Global.System.Data.DataColumn() {Me.columnChurchName, Me.columnChapmanCode, Me.columnPlaceName}, true))
+            Me.columnChurchName.AllowDBNull = false
+            Me.columnChapmanCode.AllowDBNull = false
+            Me.columnPlaceName.AllowDBNull = false
+            Me.columnFileCode.Caption = "File Code"
+            Me.columnFileCode.MaxLength = 8
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewChurchesRow() As ChurchesRow
+            Return CType(Me.NewRow,ChurchesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New ChurchesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(ChurchesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.ChurchesRowChangedEvent) Is Nothing) Then
+                RaiseEvent ChurchesRowChanged(Me, New ChurchesRowChangeEvent(CType(e.Row,ChurchesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.ChurchesRowChangingEvent) Is Nothing) Then
+                RaiseEvent ChurchesRowChanging(Me, New ChurchesRowChangeEvent(CType(e.Row,ChurchesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.ChurchesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent ChurchesRowDeleted(Me, New ChurchesRowChangeEvent(CType(e.Row,ChurchesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.ChurchesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent ChurchesRowDeleting(Me, New ChurchesRowChangeEvent(CType(e.Row,ChurchesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemoveChurchesRow(ByVal row As ChurchesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As FreeregTables = New FreeregTables()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "ChurchesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class ApprovedRegisterTypesDataTable
+        Inherits Global.System.Data.TypedTableBase(Of ApprovedRegisterTypesRow)
+        
+        Private columnType As Global.System.Data.DataColumn
+        
+        Private columnDescription As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "ApprovedRegisterTypes"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property TypeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnType
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property DescriptionColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnDescription
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As ApprovedRegisterTypesRow
+            Get
+                Return CType(Me.Rows(index),ApprovedRegisterTypesRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ApprovedRegisterTypesRowChanging As ApprovedRegisterTypesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ApprovedRegisterTypesRowChanged As ApprovedRegisterTypesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ApprovedRegisterTypesRowDeleting As ApprovedRegisterTypesRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ApprovedRegisterTypesRowDeleted As ApprovedRegisterTypesRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddApprovedRegisterTypesRow(ByVal row As ApprovedRegisterTypesRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddApprovedRegisterTypesRow(ByVal Type As String, ByVal Description As String) As ApprovedRegisterTypesRow
+            Dim rowApprovedRegisterTypesRow As ApprovedRegisterTypesRow = CType(Me.NewRow,ApprovedRegisterTypesRow)
+            Dim columnValuesArray() As Object = New Object() {Type, Description}
+            rowApprovedRegisterTypesRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowApprovedRegisterTypesRow)
+            Return rowApprovedRegisterTypesRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByType(ByVal Type As String) As ApprovedRegisterTypesRow
+            Return CType(Me.Rows.Find(New Object() {Type}),ApprovedRegisterTypesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As ApprovedRegisterTypesDataTable = CType(MyBase.Clone,ApprovedRegisterTypesDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New ApprovedRegisterTypesDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnType = MyBase.Columns("Type")
+            Me.columnDescription = MyBase.Columns("Description")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnType = New Global.System.Data.DataColumn("Type", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnType)
+            Me.columnDescription = New Global.System.Data.DataColumn("Description", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnDescription)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnType}, true))
+            Me.columnType.AllowDBNull = false
+            Me.columnType.Unique = true
+            Me.columnType.MaxLength = 2
+            Me.columnDescription.MaxLength = 50
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewApprovedRegisterTypesRow() As ApprovedRegisterTypesRow
+            Return CType(Me.NewRow,ApprovedRegisterTypesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New ApprovedRegisterTypesRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(ApprovedRegisterTypesRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.ApprovedRegisterTypesRowChangedEvent) Is Nothing) Then
+                RaiseEvent ApprovedRegisterTypesRowChanged(Me, New ApprovedRegisterTypesRowChangeEvent(CType(e.Row,ApprovedRegisterTypesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.ApprovedRegisterTypesRowChangingEvent) Is Nothing) Then
+                RaiseEvent ApprovedRegisterTypesRowChanging(Me, New ApprovedRegisterTypesRowChangeEvent(CType(e.Row,ApprovedRegisterTypesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.ApprovedRegisterTypesRowDeletedEvent) Is Nothing) Then
+                RaiseEvent ApprovedRegisterTypesRowDeleted(Me, New ApprovedRegisterTypesRowChangeEvent(CType(e.Row,ApprovedRegisterTypesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.ApprovedRegisterTypesRowDeletingEvent) Is Nothing) Then
+                RaiseEvent ApprovedRegisterTypesRowDeleting(Me, New ApprovedRegisterTypesRowChangeEvent(CType(e.Row,ApprovedRegisterTypesRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemoveApprovedRegisterTypesRow(ByVal row As ApprovedRegisterTypesRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As FreeregTables = New FreeregTables()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "ApprovedRegisterTypesDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class RegisterTypesRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableRegisterTypes As RegisterTypesDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableRegisterTypes = CType(Me.Table,RegisterTypesDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Type() As String
+            Get
+                Return CType(Me(Me.tableRegisterTypes.TypeColumn),String)
+            End Get
+            Set
+                Me(Me.tableRegisterTypes.TypeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Description() As String
+            Get
+                If Me.IsDescriptionNull Then
+                    Return String.Empty
+                Else
+                    Return CType(Me(Me.tableRegisterTypes.DescriptionColumn),String)
+                End If
+            End Get
+            Set
+                Me(Me.tableRegisterTypes.DescriptionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsDescriptionNull() As Boolean
+            Return Me.IsNull(Me.tableRegisterTypes.DescriptionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetDescriptionNull()
+            Me(Me.tableRegisterTypes.DescriptionColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class CountiesRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableCounties As CountiesDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableCounties = CType(Me.Table,CountiesDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ChapmanCode() As String
+            Get
+                Return CType(Me(Me.tableCounties.ChapmanCodeColumn),String)
+            End Get
+            Set
+                Me(Me.tableCounties.ChapmanCodeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CountyName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCounties.CountyNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CountyName' in table 'Counties' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCounties.CountyNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Notes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableCounties.NotesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Notes' in table 'Counties' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableCounties.NotesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCountyNameNull() As Boolean
+            Return Me.IsNull(Me.tableCounties.CountyNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCountyNameNull()
+            Me(Me.tableCounties.CountyNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsNotesNull() As Boolean
+            Return Me.IsNull(Me.tableCounties.NotesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetNotesNull()
+            Me(Me.tableCounties.NotesColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function GetPlacesRows() As PlacesRow()
+            If (Me.Table.ChildRelations("PlacesInCounty") Is Nothing) Then
+                Return New PlacesRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("PlacesInCounty")),PlacesRow())
+            End If
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function GetChurchesRows() As ChurchesRow()
+            If (Me.Table.ChildRelations("ChurchesInCounty") Is Nothing) Then
+                Return New ChurchesRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("ChurchesInCounty")),ChurchesRow())
+            End If
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class PlacesRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tablePlaces As PlacesDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tablePlaces = CType(Me.Table,PlacesDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PlaceName() As String
+            Get
+                Return CType(Me(Me.tablePlaces.PlaceNameColumn),String)
+            End Get
+            Set
+                Me(Me.tablePlaces.PlaceNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ChapmanCode() As String
+            Get
+                Return CType(Me(Me.tablePlaces.ChapmanCodeColumn),String)
+            End Get
+            Set
+                Me(Me.tablePlaces.ChapmanCodeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Country() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablePlaces.CountryColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Country' in table 'Places' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablePlaces.CountryColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CountyName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablePlaces.CountyNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'CountyName' in table 'Places' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablePlaces.CountyNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Notes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tablePlaces.NotesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Notes' in table 'Places' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tablePlaces.NotesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CountiesRow() As CountiesRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("PlacesInCounty")),CountiesRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("PlacesInCounty"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCountryNull() As Boolean
+            Return Me.IsNull(Me.tablePlaces.CountryColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCountryNull()
+            Me(Me.tablePlaces.CountryColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsCountyNameNull() As Boolean
+            Return Me.IsNull(Me.tablePlaces.CountyNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetCountyNameNull()
+            Me(Me.tablePlaces.CountyNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsNotesNull() As Boolean
+            Return Me.IsNull(Me.tablePlaces.NotesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetNotesNull()
+            Me(Me.tablePlaces.NotesColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function GetChurchesRows() As ChurchesRow()
+            If (Me.Table.ChildRelations("ChurchesInPlace") Is Nothing) Then
+                Return New ChurchesRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("ChurchesInPlace")),ChurchesRow())
+            End If
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class ChurchesRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableChurches As ChurchesDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableChurches = CType(Me.Table,ChurchesDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ChurchName() As String
+            Get
+                Return CType(Me(Me.tableChurches.ChurchNameColumn),String)
+            End Get
+            Set
+                Me(Me.tableChurches.ChurchNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ChapmanCode() As String
+            Get
+                Return CType(Me(Me.tableChurches.ChapmanCodeColumn),String)
+            End Get
+            Set
+                Me(Me.tableChurches.ChapmanCodeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PlaceName() As String
+            Get
+                Return CType(Me(Me.tableChurches.PlaceNameColumn),String)
+            End Get
+            Set
+                Me(Me.tableChurches.PlaceNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property FileCode() As String
+            Get
+                If Me.IsFileCodeNull Then
+                    Return Nothing
+                Else
+                    Return CType(Me(Me.tableChurches.FileCodeColumn),String)
+                End If
+            End Get
+            Set
+                Me(Me.tableChurches.FileCodeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Location() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableChurches.LocationColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Location' in table 'Churches' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableChurches.LocationColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Denomination() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableChurches.DenominationColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Denomination' in table 'Churches' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableChurches.DenominationColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Website() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableChurches.WebsiteColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Website' in table 'Churches' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableChurches.WebsiteColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property LastAmended() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableChurches.LastAmendedColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LastAmended' in table 'Churches' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableChurches.LastAmendedColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Notes() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableChurches.NotesColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Notes' in table 'Churches' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableChurches.NotesColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property CountiesRow() As CountiesRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("ChurchesInCounty")),CountiesRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("ChurchesInCounty"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PlacesRowParent() As PlacesRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("ChurchesInPlace")),PlacesRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("ChurchesInPlace"))
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsFileCodeNull() As Boolean
+            Return Me.IsNull(Me.tableChurches.FileCodeColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetFileCodeNull()
+            Me(Me.tableChurches.FileCodeColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLocationNull() As Boolean
+            Return Me.IsNull(Me.tableChurches.LocationColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLocationNull()
+            Me(Me.tableChurches.LocationColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsDenominationNull() As Boolean
+            Return Me.IsNull(Me.tableChurches.DenominationColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetDenominationNull()
+            Me(Me.tableChurches.DenominationColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsWebsiteNull() As Boolean
+            Return Me.IsNull(Me.tableChurches.WebsiteColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetWebsiteNull()
+            Me(Me.tableChurches.WebsiteColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLastAmendedNull() As Boolean
+            Return Me.IsNull(Me.tableChurches.LastAmendedColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLastAmendedNull()
+            Me(Me.tableChurches.LastAmendedColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsNotesNull() As Boolean
+            Return Me.IsNull(Me.tableChurches.NotesColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetNotesNull()
+            Me(Me.tableChurches.NotesColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class ApprovedRegisterTypesRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableApprovedRegisterTypes As ApprovedRegisterTypesDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableApprovedRegisterTypes = CType(Me.Table,ApprovedRegisterTypesDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Type() As String
+            Get
+                Return CType(Me(Me.tableApprovedRegisterTypes.TypeColumn),String)
+            End Get
+            Set
+                Me(Me.tableApprovedRegisterTypes.TypeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Description() As String
+            Get
+                If Me.IsDescriptionNull Then
+                    Return String.Empty
+                Else
+                    Return CType(Me(Me.tableApprovedRegisterTypes.DescriptionColumn),String)
+                End If
+            End Get
+            Set
+                Me(Me.tableApprovedRegisterTypes.DescriptionColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsDescriptionNull() As Boolean
+            Return Me.IsNull(Me.tableApprovedRegisterTypes.DescriptionColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetDescriptionNull()
+            Me(Me.tableApprovedRegisterTypes.DescriptionColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
     
     '''<summary>
     '''Row event argument class

@@ -131,4 +131,11 @@
       <xs:field xpath="mstns:Type" />
     </xs:unique>
   </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="PlacesInCounty" msdata:parent="Counties" msdata:child="Places" msdata:parentkey="ChapmanCode" msdata:childkey="ChapmanCode" msprop:Generator_UserChildTable="Places" msprop:Generator_ChildPropName="GetPlacesRows" msprop:Generator_UserRelationName="PlacesInCounty" msprop:Generator_RelationVarName="relationPlacesInCounty" msprop:Generator_UserParentTable="Counties" msprop:Generator_ParentPropName="CountiesRow" />
+      <msdata:Relationship name="ChurchesInCounty" msdata:parent="Counties" msdata:child="Churches" msdata:parentkey="ChapmanCode" msdata:childkey="ChapmanCode" msprop:Generator_UserChildTable="Churches" msprop:Generator_ChildPropName="GetChurchesRows" msprop:Generator_UserRelationName="ChurchesInCounty" msprop:Generator_RelationVarName="relationChurchesInCounty" msprop:Generator_UserParentTable="Counties" msprop:Generator_ParentPropName="CountiesRow" />
+      <msdata:Relationship name="ChurchesInPlace" msdata:parent="Places" msdata:child="Churches" msdata:parentkey="PlaceName ChapmanCode" msdata:childkey="PlaceName ChapmanCode" msprop:Generator_UserChildTable="Churches" msprop:Generator_ChildPropName="GetChurchesRows" msprop:Generator_UserRelationName="ChurchesInPlace" msprop:Generator_ParentPropName="PlacesRowParent" msprop:Generator_RelationVarName="relationChurchesInPlace" msprop:Generator_UserParentTable="Places" />
+    </xs:appinfo>
+  </xs:annotation>
 </xs:schema>
