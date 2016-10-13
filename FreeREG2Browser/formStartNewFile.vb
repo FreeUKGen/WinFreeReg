@@ -130,6 +130,11 @@ Public Class formStartNewFile
          Dim row As WinFreeReg.FreeregTables.CountiesRow = CType(CountiesComboBox.SelectedItem(), DataRowView).Row
          m_SelectedCounty = row.ChapmanCode
 
+         Dim dtChurchesInCounty = m_TablesDataSet.Counties.FindByChapmanCode(row.ChapmanCode).GetChildRows("ChurchesInCounty").CopyToDataTable()
+         Dim dtPlacesWithChurchesInCounty = dtChurchesInCounty.DefaultView.ToTable(True, "PlaceName")
+
+         PlacesComboBox.DataSource = dtPlacesWithChurchesInCounty
+
          labPlace.Visible = True
          PlacesBindingSource.Filter = String.Format("ChapmanCode = '{0}'", m_SelectedCounty)
          PlacesComboBox.Enabled = True
@@ -139,7 +144,8 @@ Public Class formStartNewFile
 
    Private Sub PlacesComboBox_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PlacesComboBox.SelectedIndexChanged
       If PlacesComboBox.SelectedItem IsNot Nothing Then
-         Dim row As WinFreeReg.FreeregTables.PlacesRow = CType(PlacesComboBox.SelectedItem(), DataRowView).Row
+         '         Dim row As WinFreeReg.FreeregTables.PlacesRow = CType(PlacesComboBox.SelectedItem(), DataRowView).Row
+         Dim row As WinFreeReg.FreeregTables.PlacesRow = m_TablesDataSet.Places.FindByPlaceNameChapmanCode(PlacesComboBox.SelectedValue, m_SelectedCounty)
          m_SelectedPlace = row.PlaceName
 
          labChurch.Visible = True
