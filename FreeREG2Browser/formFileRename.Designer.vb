@@ -52,18 +52,20 @@ Partial Class formFileRename
       'labelPlace
       '
       Me.labelPlace.AutoSize = True
+      Me.labelPlace.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.labelPlace.Location = New System.Drawing.Point(62, 38)
       Me.labelPlace.Name = "labelPlace"
-      Me.labelPlace.Size = New System.Drawing.Size(33, 13)
+      Me.labelPlace.Size = New System.Drawing.Size(42, 15)
       Me.labelPlace.TabIndex = 2
       Me.labelPlace.Text = "place"
       '
       'labelChurch
       '
       Me.labelChurch.AutoSize = True
+      Me.labelChurch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.labelChurch.Location = New System.Drawing.Point(62, 62)
       Me.labelChurch.Name = "labelChurch"
-      Me.labelChurch.Size = New System.Drawing.Size(40, 13)
+      Me.labelChurch.Size = New System.Drawing.Size(50, 15)
       Me.labelChurch.TabIndex = 3
       Me.labelChurch.Text = "church"
       '
@@ -98,6 +100,7 @@ Partial Class formFileRename
       Me.Controls.Add(Me.labelFilename)
       Me.Controls.Add(Me.Label1)
       Me.Name = "formFileRename"
+      Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
       Me.Text = "Rename File"
       Me.ResumeLayout(False)
       Me.PerformLayout()

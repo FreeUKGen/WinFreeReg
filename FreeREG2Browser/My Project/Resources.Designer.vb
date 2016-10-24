@@ -135,6 +135,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to To start a new file requires that a File Code is allocated. This can either be done on a once-off basis per file, or a code can be allocated on the Church record and then used on each file that is created for that Church..
+        '''</summary>
+        Friend ReadOnly Property msgFileCodeIsRequired() As String
+            Get
+                Return ResourceManager.GetString("msgFileCodeIsRequired", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to The file {0} has been deleted and is currently in the Recycle Bin..
         '''</summary>
         Friend ReadOnly Property msgFileRecycled() As String

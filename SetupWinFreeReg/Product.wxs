@@ -186,6 +186,11 @@
             <File Id="FILE_UserTables" Name="UserTables.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserTables" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
+
+         <Component Id="CMP_Doc_UserOptions" Guid="{BD65DACA-D852-48DA-9C4D-FDF189139911}">
+            <File Id="FILE_UserOptions" Name="UserOptions.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserOptions" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
       </DirectoryRef>
 
       <!--Data Files-->
@@ -224,6 +229,7 @@
          <ComponentRef Id="CMP_Doc_UploadedFiles" />
          <ComponentRef Id="CMP_Doc_UserDetails" />
          <ComponentRef Id="CMP_Doc_UserTables" />
+         <ComponentRef Id="CMP_Doc_UserOptions" />
       </ComponentGroup>
 
       <ComponentGroup Id="DataComponents">

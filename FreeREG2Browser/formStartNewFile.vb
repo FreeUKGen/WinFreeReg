@@ -106,7 +106,7 @@ Public Class formStartNewFile
 #Else
       CodeTextBox.MaxLength = 3
 #End If
-      CodeTextBox.Size = New Drawing.Size(CodeTextBox.MaxLength * 10, 20)
+      CodeTextBox.Size = New Drawing.Size(CodeTextBox.MaxLength * 10 + 10, 20)
       linkUpdate.Location = New Drawing.Point(CodeTextBox.Location.X + CodeTextBox.Size.Width + 2, 100)
 
       CountiesBindingSource.DataSource = m_TablesDataSet
@@ -130,15 +130,22 @@ Public Class formStartNewFile
          Dim row As WinFreeReg.FreeregTables.CountiesRow = CType(CountiesComboBox.SelectedItem(), DataRowView).Row
          m_SelectedCounty = row.ChapmanCode
 
-         Dim dtChurchesInCounty = m_TablesDataSet.Counties.FindByChapmanCode(row.ChapmanCode).GetChildRows("ChurchesInCounty").CopyToDataTable()
-         Dim dtPlacesWithChurchesInCounty = dtChurchesInCounty.DefaultView.ToTable(True, "PlaceName")
+         Dim ChurchesInCounty() = m_TablesDataSet.Counties.FindByChapmanCode(row.ChapmanCode).GetChildRows("ChurchesInCounty")
+         If ChurchesInCounty.Length > 0 Then
+            Dim dtChurchesInCounty = ChurchesInCounty.CopyToDataTable()
+            Dim dtPlacesWithChurchesInCounty = dtChurchesInCounty.DefaultView.ToTable(True, "PlaceName")
+            labPlace.Visible = True
+            PlacesBindingSource.DataSource = dtPlacesWithChurchesInCounty
+            PlacesBindingSource.Sort = "PlaceName"
+            PlacesComboBox.Enabled = True
+            PlacesComboBox.Visible = True
+            labPlacesMessage.Visible = False
+         Else
+            PlacesComboBox.DataSource = Nothing
+            PlacesComboBox.Visible = False
+            labPlacesMessage.Visible = True
+         End If
 
-         PlacesComboBox.DataSource = dtPlacesWithChurchesInCounty
-
-         labPlace.Visible = True
-         PlacesBindingSource.Filter = String.Format("ChapmanCode = '{0}'", m_SelectedCounty)
-         PlacesComboBox.Enabled = True
-         PlacesComboBox.Visible = True
       End If
    End Sub
 
@@ -191,6 +198,11 @@ Public Class formStartNewFile
             Case Else
                ChurchesComboBox.Enabled = True
                ChurchesComboBox.Visible = True
+               ChurchTextBox.Enabled = False
+               ChurchTextBox.Visible = False
+               labCode.Visible = True
+               CodeTextBox.Visible = True
+               CodeTextBox.Text = String.Empty
          End Select
       End If
    End Sub
@@ -270,7 +282,7 @@ Public Class formStartNewFile
          labCreditEmail.Visible = True
          CreditEmailTextBox.Visible = True
 
-         StartFileButton.Visible = True
+         StartFileButton.Visible = AreAllComponentsValid()
       End If
    End Sub
 
@@ -407,5 +419,13 @@ Public Class formStartNewFile
 
       End Try
    End Sub
+
+   Private Function AreAllComponentsValid() As Boolean
+      AreAllComponentsValid = True
+      If String.IsNullOrEmpty(CodeTextBox.Text) Then
+         MessageBox.Show(My.Resources.msgFileCodeIsRequired, "Start New File", MessageBoxButtons.OK, MessageBoxIcon.Hand)
+         AreAllComponentsValid = False
+      End If
+   End Function
 
 End Class

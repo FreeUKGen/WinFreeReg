@@ -609,4 +609,44 @@
     <ControlName>btnSaveFile</ControlName>
     <ToolTipText>Click this button to save the displayed contents as a Transcription file on your PC.</ToolTipText>
   </ToolTips>
+  <ToolTips>
+    <FormName>dlgUserOptions</FormName>
+  </ToolTips>
+  <ToolTips>
+    <FormName>dlgUserOptions</FormName>
+    <ControlName>checkShowEditingCellBorder</ControlName>
+    <ToolTipText>Controls whether or a not a clearly visible border is shown around the editing field for a cell</ToolTipText>
+  </ToolTips>
+  <ToolTips>
+    <FormName>dlgUserOptions</FormName>
+    <ControlName>groupCellEditActivation</ControlName>
+  </ToolTips>
+  <ToolTips>
+    <FormName>dlgUserOptions</FormName>
+    <ControlName>radioF2Only</ControlName>
+    <ToolTipText>Pressing F2 edits the primary cell. Tab/Shift-Tab can be used to edit other cells. Clicking does not start any editing.</ToolTipText>
+  </ToolTips>
+  <ToolTips>
+    <FormName>dlgUserOptions</FormName>
+    <ControlName>radioDoubleClick</ControlName>
+    <ToolTipText>Double clicking any cell starts an edit operation on that cell, including the primary cell. Pressing F2 edits the primary cell.</ToolTipText>
+  </ToolTips>
+  <ToolTips>
+    <FormName>dlgUserOptions</FormName>
+    <ControlName>radioSingleClickAlways</ControlName>
+    <ToolTipText>Single clicking on any cell begins an edit operation on that cell, even the primary cell (unlike the similar mode SingleClick).</ToolTipText>
+  </ToolTips>
+  <ToolTips>
+    <FormName>dlgUserOptions</FormName>
+    <ControlName>radioSingleClick</ControlName>
+    <ToolTipText>Single clicking on any subitem cell begins an edit operation on that cell. Single clicking on the primary cell does not start an edit operation. It simply selects the row. Pressing F2 edits the primary cell.</ToolTipText>
+  </ToolTips>
+  <ToolTips>
+    <FormName>dlgUserOptions</FormName>
+    <ControlName>OK_Button</ControlName>
+  </ToolTips>
+  <ToolTips>
+    <FormName>dlgUserOptions</FormName>
+    <ControlName>Cancel_Button</ControlName>
+  </ToolTips>
 </ToolTips>

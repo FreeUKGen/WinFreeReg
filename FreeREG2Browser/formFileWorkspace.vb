@@ -95,6 +95,12 @@ Public Class formFileWorkspace
    Private Sub formFileDetails_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       Dim title = String.Format(Me.Text, m_TranscriptionFile.FileName)
       Me.Text = title
+      dlvBaptisms.CellEditActivation = My.Settings.optionCellEditing
+      dlvBaptisms.CellEditUseWholeCell = True
+      dlvBurials.CellEditActivation = My.Settings.optionCellEditing
+      dlvBurials.CellEditUseWholeCell = True
+      dlvMarriages.CellEditActivation = My.Settings.optionCellEditing
+      dlvMarriages.CellEditUseWholeCell = True
 
       m_fname = Path.Combine(BaseDirectory, STATEFILE)
       If File.Exists(m_fname) Then
@@ -130,8 +136,8 @@ Public Class formFileWorkspace
             End If
             olvcSex.AspectToStringConverter = AddressOf SexDescription
             dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
+            If My.Settings.optionEditingCellBorder Then dlvBaptisms.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBaptisms.RebuildColumns()
-            dlvBaptisms.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBaptisms.Visible = True
 
          Case TranscriptionFileClass.FileTypes.BURIALS
@@ -147,8 +153,8 @@ Public Class formFileWorkspace
             End If
             olvcRelationship.AspectToStringConverter = AddressOf RelationshipDescription
             dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
+            If My.Settings.optionEditingCellBorder Then dlvBurials.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBurials.RebuildColumns()
-            dlvBurials.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBurials.Visible = True
 
          Case TranscriptionFileClass.FileTypes.MARRIAGES
@@ -165,8 +171,8 @@ Public Class formFileWorkspace
             olvcGroomCondition.AspectToStringConverter = AddressOf GroomConditionDescription
             olvcBrideCondition.AspectToStringConverter = AddressOf BrideConditionDescription
             dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
+            If My.Settings.optionEditingCellBorder Then dlvMarriages.AddDecoration(New EditingCellBorderDecoration(True))
             dlvMarriages.RebuildColumns()
-            dlvMarriages.AddDecoration(New EditingCellBorderDecoration(True))
             dlvMarriages.Visible = True
 
       End Select
@@ -441,9 +447,10 @@ Public Class formFileWorkspace
                e.NewValue = tinfo.ToTitleCase(e.NewValue)
             Case "Notes"
                e.NewValue = ConvertToSentenceCase(e.NewValue)
-
             Case Else
          End Select
+
+         If e.Control.Text = e.Value Then e.Cancel = True
       End If
    End Sub
 
@@ -498,9 +505,10 @@ Public Class formFileWorkspace
                e.NewValue = tinfo.ToTitleCase(e.NewValue)
             Case "Notes"
                e.NewValue = ConvertToSentenceCase(e.NewValue)
-
             Case Else
          End Select
+
+         If e.Control.Text = e.Value Then e.Cancel = True
       End If
    End Sub
 
@@ -572,9 +580,10 @@ Public Class formFileWorkspace
                e.NewValue = tinfo.ToTitleCase(e.NewValue)
             Case "Notes"
                e.NewValue = ConvertToSentenceCase(e.NewValue)
-
             Case Else
          End Select
+
+         If e.Control.Text = e.Value Then e.Cancel = True
       End If
    End Sub
 

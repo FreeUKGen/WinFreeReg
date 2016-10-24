@@ -37,7 +37,6 @@ Public Class BackgroundWorkerException
 
    Sub New(p1 As String, page As String)
       MyBase.New(p1)
-      ' TODO: Complete member initialization 
       _page = page
    End Sub
 

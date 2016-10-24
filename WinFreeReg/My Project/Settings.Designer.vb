@@ -54,6 +54,33 @@ Namespace My
             End Get
         End Property
         
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost:3000")>  _
+        Public ReadOnly Property MyLocalUrl() As String
+            Get
+                Return CType(Me("MyLocalUrl"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://test3.freereg.org.uk")>  _
+        Public ReadOnly Property MyTestUrl() As String
+            Get
+                Return CType(Me("MyTestUrl"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://www.freereg.org.uk")>  _
+        Public ReadOnly Property MyLiveUrl() As String
+            Get
+                Return CType(Me("MyLiveUrl"),String)
+            End Get
+        End Property
+        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
@@ -102,33 +129,6 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("http://localhost:3000")>  _
-        Public ReadOnly Property MyLocalUrl() As String
-            Get
-                Return CType(Me("MyLocalUrl"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("https://test3.freereg.org.uk")>  _
-        Public ReadOnly Property MyTestUrl() As String
-            Get
-                Return CType(Me("MyTestUrl"),String)
-            End Get
-        End Property
-        
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("https://www.freereg.org.uk")>  _
-        Public ReadOnly Property MyLiveUrl() As String
-            Get
-                Return CType(Me("MyLiveUrl"),String)
-            End Get
-        End Property
-        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
@@ -144,9 +144,9 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property MyNetworkTrace() As Boolean
+        Public Property MyNetworkTrace() As String
             Get
-                Return CType(Me("MyNetworkTrace"),Boolean)
+                Return CType(Me("MyNetworkTrace"),String)
             End Get
             Set
                 Me("MyNetworkTrace") = value

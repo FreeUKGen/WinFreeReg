@@ -5,6 +5,23 @@
 '	WinFreeReg
 '
 
+' Waffle Board story - 985 -
+'
+' TODO:  1. The Fiche and the Image information does not automatically insert itself from last record
+' TODO:  2. Don't like that it doesn't enter Register increment automatically
+' TODO:  3. Not having a working down arrow to open next line is a draw back
+' TODO:  4. When a new line is opened, the first cell is not active, so you have to double-click with mouse, which is a pain.
+' TODO:  5. The edit box is small making it difficult to see what you are entering - especially in the Notes
+' TODO:  6. Don't like removal of colour backgrounds, the pink was always a reminder to save
+' TODO:  7. Capital letters are only possible on the first word in Notes. For example a name will appear as thomas bowker if within a note
+' TODO:  8. I am used to saving with Ctrl S every few records. Don't think that works with this program so have to click on the save icon.
+' TODO:  9. As an older person with poor sight I would  prefer larger text if that was possible.
+' TODO: 10. At the end of a file I always sort by date to make sure the date range is sensible and no obvious year typos.  Now however the date column sorts by day then month then year so not a lot of help to spot an error.
+' TODO: 11. If you have made an error and not changed say 'Image Nr' over several entries, I would normally type in first cell correct number and CTL C and CTL V to change several cells at once, can't do in latest.
+' TODO: 12. Automatically backup existing file as editing begins, to provide a recovery position if required.
+' TODO: 13. Add a "Save As" option that permits the current file to be saved somewhere different to where it was read from
+' TODO: 14. Replicate dates from previous record to give a starting point for the new record
+
 Imports System.Windows.Forms
 Imports System.ComponentModel
 Imports System.IO
@@ -224,6 +241,9 @@ Public Class FreeREG2Browser
    Friend WithEvents CheckBox1 As System.Windows.Forms.CheckBox
    Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
    Friend WithEvents RenameFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents UserOptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+
    Public Property TranscriptionLibrary() As String
       Get
          Return _myTranscriptionLibrary
@@ -290,6 +310,8 @@ Public Class FreeREG2Browser
       Me.miNetworkTrace = New System.Windows.Forms.ToolStripMenuItem()
       Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
       Me.miExit = New System.Windows.Forms.ToolStripMenuItem()
+      Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.UserOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.miTranscriptions = New System.Windows.Forms.ToolStripMenuItem()
       Me.miLocalFiles = New System.Windows.Forms.ToolStripMenuItem()
       Me.miUploadedFiles = New System.Windows.Forms.ToolStripMenuItem()
@@ -371,12 +393,12 @@ Public Class FreeREG2Browser
       Me.backgroundDelete = New System.ComponentModel.BackgroundWorker()
       Me.localContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
       Me.OpenWithNotepadToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.RenameFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.DeleteFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
       Me.CheckBox1 = New System.Windows.Forms.CheckBox()
       Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
       Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
-      Me.RenameFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
       PlaceNameLabel = New System.Windows.Forms.Label()
@@ -696,7 +718,7 @@ Public Class FreeREG2Browser
       '
       'BrowserMenuStrip
       '
-      Me.BrowserMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG, Me.miTranscriptions, Me.miTranscriptionData, Me.miGeneralHelp, Me.AboutToolStripMenuItem})
+      Me.BrowserMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG, Me.OptionsToolStripMenuItem, Me.miTranscriptions, Me.miTranscriptionData, Me.miGeneralHelp, Me.AboutToolStripMenuItem})
       Me.BrowserMenuStrip.Location = New System.Drawing.Point(0, 0)
       Me.BrowserMenuStrip.Name = "BrowserMenuStrip"
       Me.BrowserMenuStrip.Size = New System.Drawing.Size(903, 24)
@@ -769,6 +791,19 @@ Public Class FreeREG2Browser
       Me.miExit.Name = "miExit"
       Me.miExit.Size = New System.Drawing.Size(155, 22)
       Me.miExit.Text = "Exit"
+      '
+      'OptionsToolStripMenuItem
+      '
+      Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserOptionsToolStripMenuItem})
+      Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+      Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+      Me.OptionsToolStripMenuItem.Text = "Options"
+      '
+      'UserOptionsToolStripMenuItem
+      '
+      Me.UserOptionsToolStripMenuItem.Name = "UserOptionsToolStripMenuItem"
+      Me.UserOptionsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+      Me.UserOptionsToolStripMenuItem.Text = "User options"
       '
       'miTranscriptions
       '
@@ -1403,7 +1438,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 392
+      Me.SplitContainer2.SplitterDistance = 397
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1428,7 +1463,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 392)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 397)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1556,13 +1591,19 @@ Public Class FreeREG2Browser
       '
       Me.localContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenWithNotepadToolStripMenuItem, Me.RenameFileToolStripMenuItem, Me.DeleteFileToolStripMenuItem})
       Me.localContextMenuStrip.Name = "localContextMenuStrip"
-      Me.localContextMenuStrip.Size = New System.Drawing.Size(164, 92)
+      Me.localContextMenuStrip.Size = New System.Drawing.Size(164, 70)
       '
       'OpenWithNotepadToolStripMenuItem
       '
       Me.OpenWithNotepadToolStripMenuItem.Name = "OpenWithNotepadToolStripMenuItem"
       Me.OpenWithNotepadToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
       Me.OpenWithNotepadToolStripMenuItem.Text = "Open with Editor"
+      '
+      'RenameFileToolStripMenuItem
+      '
+      Me.RenameFileToolStripMenuItem.Name = "RenameFileToolStripMenuItem"
+      Me.RenameFileToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
+      Me.RenameFileToolStripMenuItem.Text = "Rename file"
       '
       'DeleteFileToolStripMenuItem
       '
@@ -1611,12 +1652,6 @@ Public Class FreeREG2Browser
       '
       Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
       Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-      '
-      'RenameFileToolStripMenuItem
-      '
-      Me.RenameFileToolStripMenuItem.Name = "RenameFileToolStripMenuItem"
-      Me.RenameFileToolStripMenuItem.Size = New System.Drawing.Size(163, 22)
-      Me.RenameFileToolStripMenuItem.Text = "Rename file"
       '
       'FreeREG2Browser
       '
@@ -1787,13 +1822,15 @@ Public Class FreeREG2Browser
 
       CheckBox1.Checked = MyAppSettings.ShowGettingStarted
       If File.Exists(Path.Combine(AppDataLocalFolder, "GettingStarted.rtf")) Then RichTextBox1.LoadFile(Path.Combine(AppDataLocalFolder, "GettingStarted.rtf"))
+      RichTextBox1.Visible = MyAppSettings.ShowGettingStarted
+
       If File.Exists(FreeregTablesFile) Then
          TablesDataSet.ReadXml(FreeregTablesFile, XmlReadMode.ReadSchema)
          TablesDataSet.AcceptChanges()
       Else
+         ScanTranscriptionsLibrary(_myTranscriptionLibrary)
          TableLayoutPanel1.Visible = True
       End If
-      RichTextBox1.Visible = MyAppSettings.ShowGettingStarted
 
       LookUpsDataSet.LoadXmlData(LookupTablesFile)
       LookUpsDataSet.AcceptChanges()
@@ -2253,8 +2290,8 @@ Public Class FreeREG2Browser
             Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_users/computer" + String.Format("?computerid={0}&computeridpassword={1}&transcriberid={2}&transcriberpassword={3}", MyAppSettings.TransregName, MyAppSettings.TransregPassword, MyAppSettings.UserId, MyAppSettings.Password)
             Dim login_page = webClient.DownloadString(addrRequest)
 
-            webClient.ShowResponseHeaders()
-            webClient.ShowCookies(uri)
+            '            webClient.ShowResponseHeaders()
+            '            webClient.ShowCookies(uri)
 
             '  Process any cookies
             '
@@ -3808,6 +3845,91 @@ Public Class FreeREG2Browser
          MessageBox.Show(ex.Message, "Open Local File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
 
       End Try
+   End Sub
+
+   Private Sub ScanTranscriptionsLibrary(root As String)
+      Dim m_Decoding As Encoding = Encoding.GetEncoding("iso-8859-1")
+      Dim dir As New DirectoryInfo(root)
+      Dim filelist = dir.GetFiles("*.*", IO.SearchOption.TopDirectoryOnly)
+      Dim filequery = From file In filelist _
+                      Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
+                      Order By file.Name _
+                      Select file
+
+      ' For each CSV file in the Default Transcriptions Library Folder
+      '
+      For Each csvfile In filequery
+         Beep()
+         '   a) Make sure the contents are of a Transcription
+         Using m_Reader As New TextFieldParser(csvfile.FullName, m_Decoding)
+            m_Reader.TextFieldType = FieldType.Delimited
+            m_Reader.SetDelimiters(",")
+            m_Reader.TrimWhiteSpace = True
+            m_Reader.HasFieldsEnclosedInQuotes = True
+
+            Dim hLine1() = m_Reader.ReadFields()
+            Dim hLine2() = m_Reader.ReadFields()
+            Dim hLine3() = m_Reader.ReadFields()
+            Dim hLine4() = m_Reader.ReadFields()
+            Dim dline() = m_Reader.ReadFields()
+            If dline(0) = "+LDS" Then
+               dline = m_Reader.ReadFields()
+            End If
+
+            '   b) Extract the County, Place and Church items of data
+            Dim County As String = dline(0)
+            Dim Place As String = dline(1)
+            Dim Church As String = dline(2)
+            Dim RType As String = ""
+            Dim X = Church.Split(New Char() {" "c}, StringSplitOptions.RemoveEmptyEntries)
+            If X(X.Length - 1).Length = 2 Then
+               Church = String.Join(" ", X, 0, X.Length - 1)
+               RType = X(X.Length - 1)
+            End If
+
+            '   c) Add them to the FreeregTables file as the
+            If TablesDataSet.ApprovedRegisterTypes.FindByType(RType) Is Nothing Then TablesDataSet.ApprovedRegisterTypes.AddApprovedRegisterTypesRow(RType, "")
+            If TablesDataSet.RegisterTypes.FindByType(RType) Is Nothing Then TablesDataSet.RegisterTypes.AddRegisterTypesRow(RType, "")
+            '      1) One or more County records
+            Dim Notes As String = "Added from Library scan"
+            Dim countyrow As FreeregTables.CountiesRow = TablesDataSet.Counties.FindByChapmanCode(County)
+            If countyrow Is Nothing Then
+               countyrow = TablesDataSet.Counties.NewCountiesRow()
+               countyrow.ChapmanCode = County
+               countyrow.CountyName = County
+               countyrow.Notes = Notes
+               TablesDataSet.Counties.AddCountiesRow(countyrow)
+            End If
+            '      2) One or more Place records
+            If TablesDataSet.Places.FindByPlaceNameChapmanCode(Place, County) Is Nothing Then
+               TablesDataSet.Places.AddPlacesRow(Place, countyrow, "", countyrow.CountyName, Notes)
+            End If
+            '      3) One of more Church records
+            If TablesDataSet.Churches.FindByChurchNameChapmanCodePlaceName(Church, County, Place) Is Nothing Then
+               TablesDataSet.Churches.AddChurchesRow(Church, countyrow, Place, "", "", "", "", "", Notes)
+            End If
+         End Using
+      Next
+   End Sub
+
+   Private Sub UserOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserOptionsToolStripMenuItem.Click
+      Using dlg As New dlgUserOptions(formHelp) With {.SelectedValue = My.Settings.optionCellEditing}
+         dlg.ShowDialog()
+         If dlg.DialogResult = Windows.Forms.DialogResult.OK Then
+            If dlg.SelectedValue <> My.Settings.optionCellEditing Then
+               My.Settings.optionCellEditing = dlg.SelectedValue
+            End If
+            My.Settings.optionEditingCellBorder = dlg.checkShowEditingCellBorder.Checked
+         End If
+      End Using
+   End Sub
+
+   Private Sub ChurchesToolStripMenuItem_Click(sender As Object, e As EventArgs)
+      Using dlg As New dlgChurches(formHelp) With {.FreeREGDataset = TablesDataSet, .DefaultCounty = TablesDataSet.Counties.FindByChapmanCode(_myDefaultCounty.Code)}
+         dlg.ShowDialog()
+         If dlg.DialogResult = Windows.Forms.DialogResult.OK Then
+         End If
+      End Using
    End Sub
 
 End Class

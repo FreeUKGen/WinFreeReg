@@ -172,4 +172,7 @@
   <data name="msgConfirmRemoveDatabaseFile" xml:space="preserve">
     <value>This will remove the selected file ({0}) from the FreeREG database. The data will no longer exist in the database and will not be found by researchers. Are you absolutely certain that you want to do this?</value>
   </data>
+  <data name="msgFileCodeIsRequired" xml:space="preserve">
+    <value>To start a new file requires that a File Code is allocated. This can either be done on a once-off basis per file, or a code can be allocated on the Church record and then used on each file that is created for that Church.</value>
+  </data>
 </root>

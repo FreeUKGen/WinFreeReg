@@ -56,6 +56,7 @@ Partial Class formStartNewFile
       Me.CreditEmailTextBox = New System.Windows.Forms.TextBox()
       Me.ldsCheckBox = New System.Windows.Forms.CheckBox()
       Me.linkUpdate = New System.Windows.Forms.LinkLabel()
+      Me.labPlacesMessage = New System.Windows.Forms.Label()
       CType(Me.FreeregTables, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.CountiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.PlacesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -83,6 +84,7 @@ Partial Class formStartNewFile
       '
       Me.CountiesBindingSource.DataMember = "Counties"
       Me.CountiesBindingSource.DataSource = Me.FreeregTables
+      Me.CountiesBindingSource.Sort = ""
       '
       'CountiesComboBox
       '
@@ -113,6 +115,7 @@ Partial Class formStartNewFile
       '
       Me.PlacesBindingSource.DataMember = "Places"
       Me.PlacesBindingSource.DataSource = Me.FreeregTables
+      Me.PlacesBindingSource.Sort = "PlaceName"
       '
       'PlacesComboBox
       '
@@ -145,6 +148,7 @@ Partial Class formStartNewFile
       '
       Me.ChurchesBindingSource.DataMember = "Churches"
       Me.ChurchesBindingSource.DataSource = Me.FreeregTables
+      Me.ChurchesBindingSource.Sort = "ChurchName"
       '
       'ChurchesComboBox
       '
@@ -385,11 +389,23 @@ Partial Class formStartNewFile
       Me.linkUpdate.Text = "Update"
       Me.linkUpdate.Visible = False
       '
+      'labPlacesMessage
+      '
+      Me.labPlacesMessage.AutoSize = True
+      Me.labPlacesMessage.ForeColor = System.Drawing.Color.Red
+      Me.labPlacesMessage.Location = New System.Drawing.Point(87, 68)
+      Me.labPlacesMessage.Name = "labPlacesMessage"
+      Me.labPlacesMessage.Size = New System.Drawing.Size(200, 13)
+      Me.labPlacesMessage.TabIndex = 24
+      Me.labPlacesMessage.Text = "County has no Places with any Churches"
+      Me.labPlacesMessage.Visible = False
+      '
       'formStartNewFile
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.ClientSize = New System.Drawing.Size(708, 357)
+      Me.Controls.Add(Me.labPlacesMessage)
       Me.Controls.Add(Me.linkUpdate)
       Me.Controls.Add(Me.StartFileButton)
       Me.Controls.Add(Me.CreditEmailTextBox)
@@ -463,4 +479,5 @@ Partial Class formStartNewFile
    Friend WithEvents CreditEmailTextBox As System.Windows.Forms.TextBox
    Friend WithEvents ldsCheckBox As System.Windows.Forms.CheckBox
    Private WithEvents linkUpdate As System.Windows.Forms.LinkLabel
+   Friend WithEvents labPlacesMessage As System.Windows.Forms.Label
 End Class
