@@ -330,10 +330,12 @@ Partial Class formFileWorkspace
       Me.dlvMarriages.AlternateRowBackColor = System.Drawing.Color.Honeydew
       Me.dlvMarriages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
       Me.dlvMarriages.CellEditTabChangesRows = True
+      Me.dlvMarriages.CellEditUseWholeCell = False
       Me.dlvMarriages.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo2, Me.olvcFiche2, Me.olvcImage2, Me.olvcMarriageDate, Me.olvcGroomForenames, Me.olvcGroomSurname, Me.olvcGroomAge, Me.olvcGroomParish, Me.olvcGroomCondition, Me.olvcGroomOccupation, Me.olvcGroomAbode, Me.olvcBrideForenames, Me.olvcBrideSurname, Me.olvcBrideAge, Me.olvcBrideParish, Me.olvcBrideCondition, Me.olvcBrideOccupation, Me.olvcBrideAbode, Me.olvcGroomFatherForenames, Me.olvcGroomFatherSurname, Me.olvcGroomFatherOccupation, Me.olvcBrideFatherForenames, Me.olvcBrideFatherSurname, Me.olvcBrideFatherOccupation, Me.olvcWitness1Forenames, Me.olvcWitness1Surname, Me.olvcWitness2Forenames, Me.olvcWitness2Surname, Me.olvcNotes2})
       Me.dlvMarriages.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvMarriages.DataSource = Me.bsMarriages
       Me.dlvMarriages.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvMarriages.Font = New System.Drawing.Font("Comic Sans MS", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.dlvMarriages.GridLines = True
       Me.dlvMarriages.HeaderWordWrap = True
       Me.dlvMarriages.HideSelection = False
@@ -597,10 +599,12 @@ Partial Class formFileWorkspace
       Me.dlvBaptisms.AlternateRowBackColor = System.Drawing.Color.LavenderBlush
       Me.dlvBaptisms.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
       Me.dlvBaptisms.CellEditTabChangesRows = True
+      Me.dlvBaptisms.CellEditUseWholeCell = False
       Me.dlvBaptisms.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo, Me.olvcFiche, Me.olvcImage, Me.olvcBirthDate, Me.olvcBaptismDate, Me.olvcForenames, Me.olvcSex, Me.olvcFathersName, Me.olvcFathersSurname, Me.olvcMothersName, Me.olvcMothersSurname, Me.olvcFathersOccupation, Me.olvcAbode, Me.olvcNotes})
       Me.dlvBaptisms.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvBaptisms.DataSource = Me.bsBaptisms
       Me.dlvBaptisms.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvBaptisms.Font = New System.Drawing.Font("Comic Sans MS", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.dlvBaptisms.GridLines = True
       Me.dlvBaptisms.HeaderWordWrap = True
       Me.dlvBaptisms.HideSelection = False
@@ -773,10 +777,12 @@ Partial Class formFileWorkspace
       Me.dlvBurials.AlternateRowBackColor = System.Drawing.Color.Gainsboro
       Me.dlvBurials.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
       Me.dlvBurials.CellEditTabChangesRows = True
+      Me.dlvBurials.CellEditUseWholeCell = False
       Me.dlvBurials.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo1, Me.olvcFiche1, Me.olvcImage1, Me.olvcBurialDate, Me.olvcForenames1, Me.olvcRelationship, Me.olvcMaleForenames, Me.olvcFemaleForenames, Me.olvcRelativeSurname, Me.olvcSurname, Me.olvcAge, Me.olvcAbode1, Me.olvcNotes1})
       Me.dlvBurials.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvBurials.DataSource = Me.bsBurials
       Me.dlvBurials.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvBurials.Font = New System.Drawing.Font("Comic Sans MS", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.dlvBurials.GridLines = True
       Me.dlvBurials.HeaderWordWrap = True
       Me.dlvBurials.HideSelection = False

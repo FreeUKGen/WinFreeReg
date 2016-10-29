@@ -31,6 +31,8 @@ Partial Class dlgUserOptions
       Me.radioSingleClickAlways = New System.Windows.Forms.RadioButton()
       Me.radioSingleClick = New System.Windows.Forms.RadioButton()
       Me.checkShowEditingCellBorder = New System.Windows.Forms.CheckBox()
+      Me.Label1 = New System.Windows.Forms.Label()
+      Me.labelFont = New System.Windows.Forms.LinkLabel()
       Me.TableLayoutPanel1.SuspendLayout()
       Me.groupCellEditActivation.SuspendLayout()
       Me.SuspendLayout()
@@ -132,6 +134,25 @@ Partial Class dlgUserOptions
       Me.checkShowEditingCellBorder.Text = "Show Editing Cell Border"
       Me.checkShowEditingCellBorder.UseVisualStyleBackColor = True
       '
+      'Label1
+      '
+      Me.Label1.AutoSize = True
+      Me.Label1.Location = New System.Drawing.Point(13, 120)
+      Me.Label1.Name = "Label1"
+      Me.Label1.Size = New System.Drawing.Size(31, 13)
+      Me.Label1.TabIndex = 4
+      Me.Label1.Text = "Font:"
+      '
+      'labelFont
+      '
+      Me.labelFont.AutoSize = True
+      Me.labelFont.Location = New System.Drawing.Point(40, 120)
+      Me.labelFont.Name = "labelFont"
+      Me.labelFont.Size = New System.Drawing.Size(25, 13)
+      Me.labelFont.TabIndex = 5
+      Me.labelFont.TabStop = True
+      Me.labelFont.Text = "font"
+      '
       'dlgUserOptions
       '
       Me.AcceptButton = Me.OK_Button
@@ -139,6 +160,8 @@ Partial Class dlgUserOptions
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.CancelButton = Me.Cancel_Button
       Me.ClientSize = New System.Drawing.Size(435, 315)
+      Me.Controls.Add(Me.labelFont)
+      Me.Controls.Add(Me.Label1)
       Me.Controls.Add(Me.checkShowEditingCellBorder)
       Me.Controls.Add(Me.groupCellEditActivation)
       Me.Controls.Add(Me.TableLayoutPanel1)
@@ -166,5 +189,7 @@ Partial Class dlgUserOptions
    Friend WithEvents radioSingleClickAlways As System.Windows.Forms.RadioButton
    Friend WithEvents radioSingleClick As System.Windows.Forms.RadioButton
    Friend WithEvents checkShowEditingCellBorder As System.Windows.Forms.CheckBox
+   Friend WithEvents Label1 As System.Windows.Forms.Label
+   Friend WithEvents labelFont As System.Windows.Forms.LinkLabel
 
 End Class

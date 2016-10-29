@@ -45,6 +45,9 @@ Public Class dlgUserOptions
 
       checkShowEditingCellBorder.Checked = My.Settings.optionEditingCellBorder
 
+      labelFont.Font = My.Settings.optionFont
+      labelFont.Text = String.Format("{0}, {1}, {2}", My.Settings.optionFont.Name, My.Settings.optionFont.SizeInPoints, My.Settings.optionFont.Style)
+
    End Sub
 
    Private Sub radio_CheckedChanged(sender As Object, e As EventArgs) Handles radioSingleClick.CheckedChanged, radioSingleClickAlways.CheckedChanged, radioF2Only.CheckedChanged, radioDoubleClick.CheckedChanged
@@ -65,4 +68,17 @@ Public Class dlgUserOptions
       End Try
    End Sub
 
+   Private Sub labelFont_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles labelFont.LinkClicked
+      Using dlg As New FontDialog()
+         dlg.Font = My.Settings.optionFont
+
+         If dlg.ShowDialog() = DialogResult.OK Then
+            If dlg.Font.Equals(My.Settings.optionFont) = False Then
+               My.Settings.optionFont = dlg.Font
+               labelFont.Font = My.Settings.optionFont
+               labelFont.Text = String.Format("{0}, {1}, {2}", My.Settings.optionFont.Name, My.Settings.optionFont.SizeInPoints, My.Settings.optionFont.Style)
+            End If
+         End If
+      End Using
+   End Sub
 End Class

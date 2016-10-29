@@ -95,12 +95,17 @@ Public Class formFileWorkspace
    Private Sub formFileDetails_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       Dim title = String.Format(Me.Text, m_TranscriptionFile.FileName)
       Me.Text = title
+
       dlvBaptisms.CellEditActivation = My.Settings.optionCellEditing
       dlvBaptisms.CellEditUseWholeCell = True
+      dlvBaptisms.Font = My.Settings.optionFont
       dlvBurials.CellEditActivation = My.Settings.optionCellEditing
       dlvBurials.CellEditUseWholeCell = True
+      dlvBurials.Font = My.Settings.optionFont
       dlvMarriages.CellEditActivation = My.Settings.optionCellEditing
       dlvMarriages.CellEditUseWholeCell = True
+      dlvMarriages.Font = My.Settings.optionFont
+
 
       m_fname = Path.Combine(BaseDirectory, STATEFILE)
       If File.Exists(m_fname) Then

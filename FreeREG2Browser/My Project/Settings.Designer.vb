@@ -77,6 +77,18 @@ Namespace My
                 Me("optionEditingCellBorder") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Comic Sans MS, 8.25pt")>  _
+        Public Property optionFont() As Global.System.Drawing.Font
+            Get
+                Return CType(Me("optionFont"),Global.System.Drawing.Font)
+            End Get
+            Set
+                Me("optionFont") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
