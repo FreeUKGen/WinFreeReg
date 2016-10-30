@@ -144,6 +144,7 @@ Public Class formFileWorkspace
             If My.Settings.optionEditingCellBorder Then dlvBaptisms.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBaptisms.RebuildColumns()
             dlvBaptisms.Visible = True
+            dlvBaptisms.CustomSorter = AddressOf BaptismsSorter
 
          Case TranscriptionFileClass.FileTypes.BURIALS
             Dim dt As TranscriptionTables.BurialsDataTable = TranscriptionFile.Items
@@ -161,6 +162,7 @@ Public Class formFileWorkspace
             If My.Settings.optionEditingCellBorder Then dlvBurials.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBurials.RebuildColumns()
             dlvBurials.Visible = True
+            dlvBurials.CustomSorter = AddressOf BurialsSorter
 
          Case TranscriptionFileClass.FileTypes.MARRIAGES
             Dim dt As TranscriptionTables.MarriagesDataTable = TranscriptionFile.Items
@@ -179,6 +181,7 @@ Public Class formFileWorkspace
             If My.Settings.optionEditingCellBorder Then dlvMarriages.AddDecoration(New EditingCellBorderDecoration(True))
             dlvMarriages.RebuildColumns()
             dlvMarriages.Visible = True
+            dlvMarriages.CustomSorter = AddressOf MarriagesSorter
 
       End Select
 
@@ -188,6 +191,35 @@ Public Class formFileWorkspace
       Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
       Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
 
+   End Sub
+
+   Private Sub BaptismsSorter(column As OLVColumn, order As SortOrder)
+      Select Case column.AspectName
+         Case "BirthDate"
+            dlvBaptisms.ListViewItemSorter = New DateColumnComparer(column, order)
+         Case "BaptismDate"
+            dlvBaptisms.ListViewItemSorter = New DateColumnComparer(column, order)
+         Case Else
+            dlvBaptisms.ListViewItemSorter = New ColumnComparer(column, order)
+      End Select
+   End Sub
+
+   Private Sub BurialsSorter(column As OLVColumn, order As SortOrder)
+      Select Case column.AspectName
+         Case "BurialDate"
+            dlvBurials.ListViewItemSorter = New DateColumnComparer(column, order)
+         Case Else
+            dlvBurials.ListViewItemSorter = New ColumnComparer(column, order)
+      End Select
+   End Sub
+
+   Private Sub MarriagesSorter(column As OLVColumn, order As SortOrder)
+      Select Case column.AspectName
+         Case "MarriageDate"
+            dlvMarriages.ListViewItemSorter = New DateColumnComparer(column, order)
+         Case Else
+            dlvMarriages.ListViewItemSorter = New ColumnComparer(column, order)
+      End Select
    End Sub
 
    Private Function SexDescription(ByVal model As Object) As String

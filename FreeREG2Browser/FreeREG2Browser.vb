@@ -15,8 +15,8 @@
 ' TODO:  6. Don't like removal of colour backgrounds, the pink was always a reminder to save
 ' TODO:  7. Capital letters are only possible on the first word in Notes. For example a name will appear as thomas bowker if within a note
 ' TODO:  8. I am used to saving with Ctrl S every few records. Don't think that works with this program so have to click on the save icon.
-' TODO:  9. As an older person with poor sight I would  prefer larger text if that was possible.
-' TODO: 10. At the end of a file I always sort by date to make sure the date range is sensible and no obvious year typos.  Now however the date column sorts by day then month then year so not a lot of help to spot an error.
+' DONE:  9. As an older person with poor sight I would  prefer larger text if that was possible.
+' DONE: 10. At the end of a file I always sort by date to make sure the date range is sensible and no obvious year typos.  Now however the date column sorts by day then month then year so not a lot of help to spot an error.
 ' TODO: 11. If you have made an error and not changed say 'Image Nr' over several entries, I would normally type in first cell correct number and CTL C and CTL V to change several cells at once, can't do in latest.
 ' TODO: 12. Automatically backup existing file as editing begins, to provide a recovery position if required.
 ' TODO: 13. Add a "Save As" option that permits the current file to be saved somewhere different to where it was read from
