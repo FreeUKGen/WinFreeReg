@@ -141,6 +141,7 @@ Public Class formFileWorkspace
             End If
             olvcSex.AspectToStringConverter = AddressOf SexDescription
             dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
+            dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Control, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
             If My.Settings.optionEditingCellBorder Then dlvBaptisms.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBaptisms.RebuildColumns()
             dlvBaptisms.Visible = True
@@ -159,6 +160,7 @@ Public Class formFileWorkspace
             End If
             olvcRelationship.AspectToStringConverter = AddressOf RelationshipDescription
             dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
+            dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Control, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
             If My.Settings.optionEditingCellBorder Then dlvBurials.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBurials.RebuildColumns()
             dlvBurials.Visible = True
@@ -178,6 +180,7 @@ Public Class formFileWorkspace
             olvcGroomCondition.AspectToStringConverter = AddressOf GroomConditionDescription
             olvcBrideCondition.AspectToStringConverter = AddressOf BrideConditionDescription
             dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
+            dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Control, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
             If My.Settings.optionEditingCellBorder Then dlvMarriages.AddDecoration(New EditingCellBorderDecoration(True))
             dlvMarriages.RebuildColumns()
             dlvMarriages.Visible = True
@@ -191,35 +194,6 @@ Public Class formFileWorkspace
       Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
       Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
 
-   End Sub
-
-   Private Sub BaptismsSorter(column As OLVColumn, order As SortOrder)
-      Select Case column.AspectName
-         Case "BirthDate"
-            dlvBaptisms.ListViewItemSorter = New DateColumnComparer(column, order)
-         Case "BaptismDate"
-            dlvBaptisms.ListViewItemSorter = New DateColumnComparer(column, order)
-         Case Else
-            dlvBaptisms.ListViewItemSorter = New ColumnComparer(column, order)
-      End Select
-   End Sub
-
-   Private Sub BurialsSorter(column As OLVColumn, order As SortOrder)
-      Select Case column.AspectName
-         Case "BurialDate"
-            dlvBurials.ListViewItemSorter = New DateColumnComparer(column, order)
-         Case Else
-            dlvBurials.ListViewItemSorter = New ColumnComparer(column, order)
-      End Select
-   End Sub
-
-   Private Sub MarriagesSorter(column As OLVColumn, order As SortOrder)
-      Select Case column.AspectName
-         Case "MarriageDate"
-            dlvMarriages.ListViewItemSorter = New DateColumnComparer(column, order)
-         Case Else
-            dlvMarriages.ListViewItemSorter = New ColumnComparer(column, order)
-      End Select
    End Sub
 
    Private Function SexDescription(ByVal model As Object) As String
@@ -450,6 +424,17 @@ Public Class formFileWorkspace
 
 #Region "Baptism Cells"
 
+   Private Sub BaptismsSorter(column As OLVColumn, order As SortOrder)
+      Select Case column.AspectName
+         Case "BirthDate"
+            dlvBaptisms.ListViewItemSorter = New DateColumnComparer(column, order)
+         Case "BaptismDate"
+            dlvBaptisms.ListViewItemSorter = New DateColumnComparer(column, order)
+         Case Else
+            dlvBaptisms.ListViewItemSorter = New ColumnComparer(column, order)
+      End Select
+   End Sub
+
    Private Sub BaptismCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBaptisms.CellEditStarting
       If TypeOf e.Control Is System.Windows.Forms.TextBox Then
          If e.Column.AspectName.Contains("Surname") Then
@@ -465,6 +450,7 @@ Public Class formFileWorkspace
 
    Private Sub BaptismCellEditFinishing(ByVal sender As Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBaptisms.CellEditFinishing
       If TypeOf e.Control Is TextBox Then
+         Dim x = e.ListViewItem.SubItems
          Select Case e.Column.AspectName
             Case "Forenames", "FathersName", "MothersName"
                Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
@@ -502,6 +488,15 @@ Public Class formFileWorkspace
 #End Region
 
 #Region "Burial Cells"
+
+   Private Sub BurialsSorter(column As OLVColumn, order As SortOrder)
+      Select Case column.AspectName
+         Case "BurialDate"
+            dlvBurials.ListViewItemSorter = New DateColumnComparer(column, order)
+         Case Else
+            dlvBurials.ListViewItemSorter = New ColumnComparer(column, order)
+      End Select
+   End Sub
 
    Private Sub BurialCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBurials.CellEditStarting
       If e.Column.AspectName.Contains("Surname") Then
@@ -560,6 +555,15 @@ Public Class formFileWorkspace
 #End Region
 
 #Region "Marriage Cells"
+
+   Private Sub MarriagesSorter(column As OLVColumn, order As SortOrder)
+      Select Case column.AspectName
+         Case "MarriageDate"
+            dlvMarriages.ListViewItemSorter = New DateColumnComparer(column, order)
+         Case Else
+            dlvMarriages.ListViewItemSorter = New ColumnComparer(column, order)
+      End Select
+   End Sub
 
    Private Sub MarriageCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBurials.CellEditStarting, dlvMarriages.CellEditStarting
       If e.Column.AspectName.Contains("Surname") Then
@@ -716,11 +720,21 @@ Public Class formFileWorkspace
 
    Private Sub FormatErrorRow(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.FormatRowEventArgs) Handles dlvBaptisms.FormatRow, dlvBurials.FormatRow, dlvMarriages.FormatRow
       Dim row = CType(e.Model, DataRowView).Row
-      If row.HasErrors Then e.UseCellFormatEvents = True
+      '      If row.HasErrors Then e.UseCellFormatEvents = True
+      e.UseCellFormatEvents = True
    End Sub
 
    Private Sub FormatErrorCell(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.FormatCellEventArgs) Handles dlvBaptisms.FormatCell, dlvBurials.FormatCell, dlvMarriages.FormatCell
       Dim row = CType(e.Model, DataRowView).Row
+
+      If row.RowState = DataRowState.Modified Then
+         Dim x = row(e.Column.AspectName, DataRowVersion.Current)
+         Dim y = row(e.Column.AspectName, DataRowVersion.Original)
+         If x <> y Then
+            e.SubItem.BackColor = Color.LightPink
+         End If
+      End If
+
       Dim cols = row.GetColumnsInError()
       If cols IsNot Nothing Then
          For Each col In cols

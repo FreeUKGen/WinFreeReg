@@ -12,7 +12,7 @@
 ' TODO:  3. Not having a working down arrow to open next line is a draw back
 ' TODO:  4. When a new line is opened, the first cell is not active, so you have to double-click with mouse, which is a pain.
 ' TODO:  5. The edit box is small making it difficult to see what you are entering - especially in the Notes
-' TODO:  6. Don't like removal of colour backgrounds, the pink was always a reminder to save
+' DONE:  6. Don't like removal of colour backgrounds, the pink was always a reminder to save
 ' TODO:  7. Capital letters are only possible on the first word in Notes. For example a name will appear as thomas bowker if within a note
 ' TODO:  8. I am used to saving with Ctrl S every few records. Don't think that works with this program so have to click on the save icon.
 ' DONE:  9. As an older person with poor sight I would  prefer larger text if that was possible.
