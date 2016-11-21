@@ -141,7 +141,8 @@ Public Class formFileWorkspace
             End If
             olvcSex.AspectToStringConverter = AddressOf SexDescription
             dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
-            dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Control, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
+            dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Alt, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
+            dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Down + Keys.Alt, CellEditCharacterBehaviour.ChangeRowDown, CellEditAtEdgeBehaviour.ChangeRow)
             If My.Settings.optionEditingCellBorder Then dlvBaptisms.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBaptisms.RebuildColumns()
             dlvBaptisms.Visible = True
@@ -160,7 +161,8 @@ Public Class formFileWorkspace
             End If
             olvcRelationship.AspectToStringConverter = AddressOf RelationshipDescription
             dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
-            dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Control, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
+            dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Alt, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
+            dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Down + Keys.Alt, CellEditCharacterBehaviour.ChangeRowDown, CellEditAtEdgeBehaviour.ChangeRow)
             If My.Settings.optionEditingCellBorder Then dlvBurials.AddDecoration(New EditingCellBorderDecoration(True))
             dlvBurials.RebuildColumns()
             dlvBurials.Visible = True
@@ -180,7 +182,8 @@ Public Class formFileWorkspace
             olvcGroomCondition.AspectToStringConverter = AddressOf GroomConditionDescription
             olvcBrideCondition.AspectToStringConverter = AddressOf BrideConditionDescription
             dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
-            dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Control, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
+            dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Alt, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
+            dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Down + Keys.Alt, CellEditCharacterBehaviour.ChangeRowDown, CellEditAtEdgeBehaviour.ChangeRow)
             If My.Settings.optionEditingCellBorder Then dlvMarriages.AddDecoration(New EditingCellBorderDecoration(True))
             dlvMarriages.RebuildColumns()
             dlvMarriages.Visible = True
@@ -188,7 +191,7 @@ Public Class formFileWorkspace
 
       End Select
 
-      If m_NewFile Then AddNewItem()
+      If m_NewFile Then AddNewItem("", "", "", "", "")
 
       Dim AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
       Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
@@ -468,8 +471,8 @@ Public Class formFileWorkspace
                Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
                Dim tinfo As TextInfo = culture.TextInfo()
                e.NewValue = tinfo.ToTitleCase(e.NewValue)
-            Case "Notes"
-               e.NewValue = ConvertToSentenceCase(e.NewValue)
+               'Case "Notes"
+               '   e.NewValue = ConvertToSentenceCase(e.NewValue)
             Case Else
          End Select
 
@@ -481,7 +484,7 @@ Public Class formFileWorkspace
       If e.Column.AspectName = "Notes" Then
          Dim x As DataRowView = e.RowObject
          Dim r As TranscriptionTables.BaptismsRow = x.Row
-         If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem()
+         If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem(r.RegNo, r.LDSFiche, r.LDSImage, r.BirthDate, r.BaptismDate)
       End If
    End Sub
 
@@ -535,8 +538,8 @@ Public Class formFileWorkspace
                Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
                Dim tinfo As TextInfo = culture.TextInfo()
                e.NewValue = tinfo.ToTitleCase(e.NewValue)
-            Case "Notes"
-               e.NewValue = ConvertToSentenceCase(e.NewValue)
+               'Case "Notes"
+               '   e.NewValue = ConvertToSentenceCase(e.NewValue)
             Case Else
          End Select
 
@@ -548,7 +551,7 @@ Public Class formFileWorkspace
       If e.Column.AspectName = "Notes" Then
          Dim x As DataRowView = e.RowObject
          Dim r As TranscriptionTables.BurialsRow = x.Row
-         If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem()
+         If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem(r.RegNo, r.LDSFiche, r.LDSImage, r.BurialDate, Nothing)
       End If
    End Sub
 
@@ -619,8 +622,8 @@ Public Class formFileWorkspace
                Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
                Dim tinfo As TextInfo = culture.TextInfo()
                e.NewValue = tinfo.ToTitleCase(e.NewValue)
-            Case "Notes"
-               e.NewValue = ConvertToSentenceCase(e.NewValue)
+               '            Case "Notes"
+               '               e.NewValue = ConvertToSentenceCase(e.NewValue)
             Case Else
          End Select
 
@@ -632,17 +635,27 @@ Public Class formFileWorkspace
       If e.Column.AspectName = "Notes" Then
          Dim x As DataRowView = e.RowObject
          Dim r As TranscriptionTables.MarriagesRow = x.Row
-         If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem()
+         If r.Table.Rows.Count = r.LoadOrder + 1 Then AddNewItem(r.RegNo, r.LDSFiche, r.LDSImage, r.MarriageDate, Nothing)
       End If
    End Sub
 
 #End Region
 
    Private Sub BindingNavigatorAddNewItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorAddNewItem.Click
-      AddNewItem()
+      Select m_TranscriptionFile.FileHeader.FileType
+         Case TranscriptionFileClass.FileTypes.BAPTISMS
+            Dim currentrecord As WinFreeReg.TranscriptionTables.BaptismsRow = dlvBaptisms.SelectedItem.RowObject.row
+            AddNewItem(currentrecord.RegNo, currentrecord.LDSFiche, currentrecord.LDSImage, currentrecord.BirthDate, currentrecord.BaptismDate)
+         Case TranscriptionFileClass.FileTypes.BURIALS
+            Dim currentrecord As WinFreeReg.TranscriptionTables.BurialsRow = dlvBaptisms.SelectedItem.RowObject.row
+            AddNewItem(currentrecord.RegNo, currentrecord.LDSFiche, currentrecord.LDSImage, currentrecord.BurialDate, Nothing)
+         Case TranscriptionFileClass.FileTypes.MARRIAGES
+            Dim currentrecord As WinFreeReg.TranscriptionTables.MarriagesRow = dlvBaptisms.SelectedItem.RowObject.row
+            AddNewItem(currentrecord.RegNo, currentrecord.LDSFiche, currentrecord.LDSImage, currentrecord.MarriageDate, Nothing)
+      End Select
    End Sub
 
-   Private Sub AddNewItem()
+   Private Sub AddNewItem(regno As String, ldsfiche As String, ldsimage As String, date1 As String, date2 As String)
       Select Case m_TranscriptionFile.FileHeader.FileType
          Case TranscriptionFileClass.FileTypes.BAPTISMS
             Dim dt As TranscriptionTables.BaptismsDataTable = CType(bsBaptisms.DataSource, TranscriptionTables.BaptismsDataTable)
@@ -650,6 +663,15 @@ Public Class formFileWorkspace
             row.County = m_TranscriptionFile.FileHeader.County()
             row.Place = m_TranscriptionFile.FileHeader.Place()
             row.Church = m_TranscriptionFile.FileHeader.Church()
+            row.RegNo = IIf(My.Settings.optionAutoIncrementRegisterNumber, NextInSequence(regno), "")
+            If My.Settings.optionReplicateFicheImage Then
+               row.LDSFiche = ldsfiche
+               row.LDSImage = ldsimage
+            End If
+            If My.Settings.optionReplicateDates Then
+               row.BirthDate = date1
+               row.BaptismDate = date2
+            End If
             dt.AddBaptismsRow(row)
 
             Dim model = dt.DefaultView.Item(row.LoadOrder)
@@ -663,6 +685,14 @@ Public Class formFileWorkspace
             row.County = m_TranscriptionFile.FileHeader.County()
             row.Place = m_TranscriptionFile.FileHeader.Place()
             row.Church = m_TranscriptionFile.FileHeader.Church()
+            row.RegNo = IIf(My.Settings.optionAutoIncrementRegisterNumber, NextInSequence(regno), "")
+            If My.Settings.optionReplicateFicheImage Then
+               row.LDSFiche = ldsfiche
+               row.LDSImage = ldsimage
+            End If
+            If My.Settings.optionReplicateDates Then
+               row.BurialDate = date1
+            End If
             dt.AddBurialsRow(row)
 
             Dim model = dt.DefaultView.Item(row.LoadOrder)
@@ -676,6 +706,14 @@ Public Class formFileWorkspace
             row.County = m_TranscriptionFile.FileHeader.County()
             row.Place = m_TranscriptionFile.FileHeader.Place()
             row.Church = m_TranscriptionFile.FileHeader.Church()
+            row.RegNo = IIf(My.Settings.optionAutoIncrementRegisterNumber, NextInSequence(regno), "")
+            If My.Settings.optionReplicateFicheImage Then
+               row.LDSFiche = ldsfiche
+               row.LDSImage = ldsimage
+            End If
+            If My.Settings.optionReplicateDates Then
+               row.MarriageDate = date1
+            End If
             dt.AddMarriagesRow(row)
 
             Dim model = dt.DefaultView.Item(row.LoadOrder)
@@ -685,6 +723,15 @@ Public Class formFileWorkspace
 
       End Select
    End Sub
+
+   Private Function NextInSequence(ByVal regno As String) As String
+      Dim x As Integer
+      If Integer.TryParse(regno, x) Then
+         x += 1
+         Return x.ToString()
+      End If
+      Return regno
+   End Function
 
    Private Sub BindingNavigatorSaveFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BindingNavigatorSaveFile.Click
 
@@ -882,4 +929,12 @@ Public Class formFileWorkspace
       Return sentenceRegex.Replace(str.ToLower(), Function(s) s.Value.ToUpper())
    End Function
 
+   Protected Overrides Function ProcessCmdKey(ByRef msg As Message, keyData As Keys) As Boolean
+      Select Case keyData
+         Case Keys.Control Or Keys.S
+            BindingNavigatorSaveFile.PerformClick()
+      End Select
+
+      Return MyBase.ProcessCmdKey(msg, keyData)
+   End Function
 End Class

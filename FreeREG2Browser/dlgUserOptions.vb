@@ -44,6 +44,9 @@ Public Class dlgUserOptions
       rButton.Checked = True
 
       checkShowEditingCellBorder.Checked = My.Settings.optionEditingCellBorder
+      checkReplicateFicheAndImage.Checked = My.Settings.optionReplicateFicheImage
+      checkReplicateDates.Checked = My.Settings.optionReplicateDates
+      checkAutoIncrementRegisterNumber.Checked = My.Settings.optionAutoIncrementRegisterNumber
 
       labelFont.Font = My.Settings.optionFont
       labelFont.Text = String.Format("{0}, {1}, {2}", My.Settings.optionFont.Name, My.Settings.optionFont.SizeInPoints, My.Settings.optionFont.Style)

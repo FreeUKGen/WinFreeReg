@@ -11,5 +11,14 @@
     <Setting Name="optionFont" Type="System.Drawing.Font" Scope="User">
       <Value Profile="(Default)">Comic Sans MS, 8.25pt</Value>
     </Setting>
+    <Setting Name="optionReplicateFicheImage" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="optionReplicateDates" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="optionAutoIncrementRegisterNumber" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

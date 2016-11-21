@@ -89,6 +89,42 @@ Namespace My
                 Me("optionFont") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property optionReplicateFicheImage() As Boolean
+            Get
+                Return CType(Me("optionReplicateFicheImage"),Boolean)
+            End Get
+            Set
+                Me("optionReplicateFicheImage") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property optionReplicateDates() As Boolean
+            Get
+                Return CType(Me("optionReplicateDates"),Boolean)
+            End Get
+            Set
+                Me("optionReplicateDates") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property optionAutoIncrementRegisterNumber() As Boolean
+            Get
+                Return CType(Me("optionAutoIncrementRegisterNumber"),Boolean)
+            End Get
+            Set
+                Me("optionAutoIncrementRegisterNumber") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

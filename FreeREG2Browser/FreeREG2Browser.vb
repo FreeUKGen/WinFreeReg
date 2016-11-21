@@ -7,20 +7,20 @@
 
 ' Waffle Board story - 985 -
 '
-' TODO:  1. The Fiche and the Image information does not automatically insert itself from last record
-' TODO:  2. Don't like that it doesn't enter Register increment automatically
-' TODO:  3. Not having a working down arrow to open next line is a draw back
+' DONE:  1. The Fiche and the Image information does not automatically insert itself from last record
+' DONE:  2. Don't like that it doesn't enter Register increment automatically
+' DONE:  3. Not having a working down arrow to open next line is a draw back
 ' TODO:  4. When a new line is opened, the first cell is not active, so you have to double-click with mouse, which is a pain.
-' TODO:  5. The edit box is small making it difficult to see what you are entering - especially in the Notes
+' DONE:  5. The edit box is small making it difficult to see what you are entering - especially in the Notes
 ' DONE:  6. Don't like removal of colour backgrounds, the pink was always a reminder to save
-' TODO:  7. Capital letters are only possible on the first word in Notes. For example a name will appear as thomas bowker if within a note
-' TODO:  8. I am used to saving with Ctrl S every few records. Don't think that works with this program so have to click on the save icon.
+' DONE:  7. Capital letters are only possible on the first word in Notes. For example a name will appear as thomas bowker if within a note
+' DONE:  8. I am used to saving with Ctrl S every few records. Don't think that works with this program so have to click on the save icon.
 ' DONE:  9. As an older person with poor sight I would  prefer larger text if that was possible.
 ' DONE: 10. At the end of a file I always sort by date to make sure the date range is sensible and no obvious year typos.  Now however the date column sorts by day then month then year so not a lot of help to spot an error.
 ' TODO: 11. If you have made an error and not changed say 'Image Nr' over several entries, I would normally type in first cell correct number and CTL C and CTL V to change several cells at once, can't do in latest.
 ' TODO: 12. Automatically backup existing file as editing begins, to provide a recovery position if required.
 ' TODO: 13. Add a "Save As" option that permits the current file to be saved somewhere different to where it was read from
-' TODO: 14. Replicate dates from previous record to give a starting point for the new record
+' DONE: 14. Replicate dates from previous record to give a starting point for the new record
 
 Imports System.Windows.Forms
 Imports System.ComponentModel
@@ -3920,6 +3920,9 @@ Public Class FreeREG2Browser
                My.Settings.optionCellEditing = dlg.SelectedValue
             End If
             My.Settings.optionEditingCellBorder = dlg.checkShowEditingCellBorder.Checked
+            My.Settings.optionReplicateFicheImage = dlg.checkReplicateFicheAndImage.Checked
+            My.Settings.optionReplicateDates = dlg.checkReplicateDates.Checked
+            My.Settings.optionAutoIncrementRegisterNumber = dlg.checkAutoIncrementRegisterNumber.Checked
          End If
       End Using
    End Sub

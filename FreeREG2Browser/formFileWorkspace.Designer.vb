@@ -330,6 +330,7 @@ Partial Class formFileWorkspace
       Me.dlvMarriages.AlternateRowBackColor = System.Drawing.Color.Honeydew
       Me.dlvMarriages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
       Me.dlvMarriages.CellEditTabChangesRows = True
+      Me.dlvMarriages.CellEditUseWholeCell = False
       Me.dlvMarriages.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo2, Me.olvcFiche2, Me.olvcImage2, Me.olvcMarriageDate, Me.olvcGroomForenames, Me.olvcGroomSurname, Me.olvcGroomAge, Me.olvcGroomParish, Me.olvcGroomCondition, Me.olvcGroomOccupation, Me.olvcGroomAbode, Me.olvcBrideForenames, Me.olvcBrideSurname, Me.olvcBrideAge, Me.olvcBrideParish, Me.olvcBrideCondition, Me.olvcBrideOccupation, Me.olvcBrideAbode, Me.olvcGroomFatherForenames, Me.olvcGroomFatherSurname, Me.olvcGroomFatherOccupation, Me.olvcBrideFatherForenames, Me.olvcBrideFatherSurname, Me.olvcBrideFatherOccupation, Me.olvcWitness1Forenames, Me.olvcWitness1Surname, Me.olvcWitness2Forenames, Me.olvcWitness2Surname, Me.olvcNotes2})
       Me.dlvMarriages.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvMarriages.DataSource = Me.bsMarriages
@@ -599,6 +600,7 @@ Partial Class formFileWorkspace
       Me.dlvBaptisms.AlternateRowBackColor = System.Drawing.Color.LavenderBlush
       Me.dlvBaptisms.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
       Me.dlvBaptisms.CellEditTabChangesRows = True
+      Me.dlvBaptisms.CellEditUseWholeCell = False
       Me.dlvBaptisms.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo, Me.olvcFiche, Me.olvcImage, Me.olvcBirthDate, Me.olvcBaptismDate, Me.olvcForenames, Me.olvcSex, Me.olvcFathersName, Me.olvcFathersSurname, Me.olvcMothersName, Me.olvcMothersSurname, Me.olvcFathersOccupation, Me.olvcAbode, Me.olvcNotes})
       Me.dlvBaptisms.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvBaptisms.DataSource = Me.bsBaptisms
@@ -777,6 +779,7 @@ Partial Class formFileWorkspace
       Me.dlvBurials.AlternateRowBackColor = System.Drawing.Color.Gainsboro
       Me.dlvBurials.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
       Me.dlvBurials.CellEditTabChangesRows = True
+      Me.dlvBurials.CellEditUseWholeCell = False
       Me.dlvBurials.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo1, Me.olvcFiche1, Me.olvcImage1, Me.olvcBurialDate, Me.olvcForenames1, Me.olvcRelationship, Me.olvcMaleForenames, Me.olvcFemaleForenames, Me.olvcRelativeSurname, Me.olvcSurname, Me.olvcAge, Me.olvcAbode1, Me.olvcNotes1})
       Me.dlvBurials.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvBurials.DataSource = Me.bsBurials

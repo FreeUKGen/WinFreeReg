@@ -33,6 +33,9 @@ Partial Class dlgUserOptions
       Me.checkShowEditingCellBorder = New System.Windows.Forms.CheckBox()
       Me.Label1 = New System.Windows.Forms.Label()
       Me.labelFont = New System.Windows.Forms.LinkLabel()
+      Me.checkReplicateFicheAndImage = New System.Windows.Forms.CheckBox()
+      Me.checkReplicateDates = New System.Windows.Forms.CheckBox()
+      Me.checkAutoIncrementRegisterNumber = New System.Windows.Forms.CheckBox()
       Me.TableLayoutPanel1.SuspendLayout()
       Me.groupCellEditActivation.SuspendLayout()
       Me.SuspendLayout()
@@ -153,6 +156,36 @@ Partial Class dlgUserOptions
       Me.labelFont.TabStop = True
       Me.labelFont.Text = "font"
       '
+      'checkReplicateFicheAndImage
+      '
+      Me.checkReplicateFicheAndImage.AutoSize = True
+      Me.checkReplicateFicheAndImage.Location = New System.Drawing.Point(219, 44)
+      Me.checkReplicateFicheAndImage.Name = "checkReplicateFicheAndImage"
+      Me.checkReplicateFicheAndImage.Size = New System.Drawing.Size(158, 17)
+      Me.checkReplicateFicheAndImage.TabIndex = 6
+      Me.checkReplicateFicheAndImage.Text = "Replicate Fiche/Image data"
+      Me.checkReplicateFicheAndImage.UseVisualStyleBackColor = True
+      '
+      'checkReplicateDates
+      '
+      Me.checkReplicateDates.AutoSize = True
+      Me.checkReplicateDates.Location = New System.Drawing.Point(219, 66)
+      Me.checkReplicateDates.Name = "checkReplicateDates"
+      Me.checkReplicateDates.Size = New System.Drawing.Size(102, 17)
+      Me.checkReplicateDates.TabIndex = 7
+      Me.checkReplicateDates.Text = "Replicate Dates"
+      Me.checkReplicateDates.UseVisualStyleBackColor = True
+      '
+      'checkAutoIncrementRegisterNumber
+      '
+      Me.checkAutoIncrementRegisterNumber.AutoSize = True
+      Me.checkAutoIncrementRegisterNumber.Location = New System.Drawing.Point(219, 88)
+      Me.checkAutoIncrementRegisterNumber.Name = "checkAutoIncrementRegisterNumber"
+      Me.checkAutoIncrementRegisterNumber.Size = New System.Drawing.Size(177, 17)
+      Me.checkAutoIncrementRegisterNumber.TabIndex = 8
+      Me.checkAutoIncrementRegisterNumber.Text = "AutoIncrement Register Number"
+      Me.checkAutoIncrementRegisterNumber.UseVisualStyleBackColor = True
+      '
       'dlgUserOptions
       '
       Me.AcceptButton = Me.OK_Button
@@ -160,6 +193,9 @@ Partial Class dlgUserOptions
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.CancelButton = Me.Cancel_Button
       Me.ClientSize = New System.Drawing.Size(435, 315)
+      Me.Controls.Add(Me.checkAutoIncrementRegisterNumber)
+      Me.Controls.Add(Me.checkReplicateDates)
+      Me.Controls.Add(Me.checkReplicateFicheAndImage)
       Me.Controls.Add(Me.labelFont)
       Me.Controls.Add(Me.Label1)
       Me.Controls.Add(Me.checkShowEditingCellBorder)
@@ -191,5 +227,8 @@ Partial Class dlgUserOptions
    Friend WithEvents checkShowEditingCellBorder As System.Windows.Forms.CheckBox
    Friend WithEvents Label1 As System.Windows.Forms.Label
    Friend WithEvents labelFont As System.Windows.Forms.LinkLabel
+   Friend WithEvents checkReplicateFicheAndImage As System.Windows.Forms.CheckBox
+   Friend WithEvents checkReplicateDates As System.Windows.Forms.CheckBox
+   Friend WithEvents checkAutoIncrementRegisterNumber As System.Windows.Forms.CheckBox
 
 End Class
