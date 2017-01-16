@@ -125,6 +125,78 @@ Namespace My
                 Me("optionAutoIncrementRegisterNumber") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
+        Public Property FreeREG2Browser_Location() As Global.System.Drawing.Point
+            Get
+                Return CType(Me("FreeREG2Browser_Location"),Global.System.Drawing.Point)
+            End Get
+            Set
+                Me("FreeREG2Browser_Location") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Normal")>  _
+        Public Property FreeREG2Browser_WindowState() As Global.System.Windows.Forms.FormWindowState
+            Get
+                Return CType(Me("FreeREG2Browser_WindowState"),Global.System.Windows.Forms.FormWindowState)
+            End Get
+            Set
+                Me("FreeREG2Browser_WindowState") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
+        Public Property FreeREG2Browser_Size() As Global.System.Drawing.Size
+            Get
+                Return CType(Me("FreeREG2Browser_Size"),Global.System.Drawing.Size)
+            End Get
+            Set
+                Me("FreeREG2Browser_Size") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
+        Public Property Workspace_Location() As Global.System.Drawing.Point
+            Get
+                Return CType(Me("Workspace_Location"),Global.System.Drawing.Point)
+            End Get
+            Set
+                Me("Workspace_Location") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Normal")>  _
+        Public Property Workspace_WindowState() As Global.System.Windows.Forms.FormWindowState
+            Get
+                Return CType(Me("Workspace_WindowState"),Global.System.Windows.Forms.FormWindowState)
+            End Get
+            Set
+                Me("Workspace_WindowState") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("0, 0")>  _
+        Public Property Workspace_Size() As Global.System.Drawing.Size
+            Get
+                Return CType(Me("Workspace_Size"),Global.System.Drawing.Size)
+            End Get
+            Set
+                Me("Workspace_Size") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

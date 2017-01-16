@@ -361,74 +361,82 @@ Partial Class formUserDetails
       '
       'Skill_levelTextBox
       '
-      Me.Skill_levelTextBox.Enabled = False
+      Me.Skill_levelTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Skill_levelTextBox.Location = New System.Drawing.Point(150, 327)
       Me.Skill_levelTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Skill_levelTextBox.Name = "Skill_levelTextBox"
+      Me.Skill_levelTextBox.ReadOnly = True
       Me.Skill_levelTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Skill_levelTextBox.TabIndex = 4
       '
       'Number_of_filesTextBox
       '
-      Me.Number_of_filesTextBox.Enabled = False
+      Me.Number_of_filesTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Number_of_filesTextBox.Location = New System.Drawing.Point(527, 148)
       Me.Number_of_filesTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Number_of_filesTextBox.Name = "Number_of_filesTextBox"
+      Me.Number_of_filesTextBox.ReadOnly = True
       Me.Number_of_filesTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Number_of_filesTextBox.TabIndex = 6
       '
       'Number_of_recordsTextBox
       '
-      Me.Number_of_recordsTextBox.Enabled = False
+      Me.Number_of_recordsTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Number_of_recordsTextBox.Location = New System.Drawing.Point(527, 174)
       Me.Number_of_recordsTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Number_of_recordsTextBox.Name = "Number_of_recordsTextBox"
+      Me.Number_of_recordsTextBox.ReadOnly = True
       Me.Number_of_recordsTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Number_of_recordsTextBox.TabIndex = 8
       '
       'Person_roleTextBox
       '
-      Me.Person_roleTextBox.Enabled = False
+      Me.Person_roleTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Person_roleTextBox.Location = New System.Drawing.Point(150, 353)
       Me.Person_roleTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Person_roleTextBox.Name = "Person_roleTextBox"
+      Me.Person_roleTextBox.ReadOnly = True
       Me.Person_roleTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Person_roleTextBox.TabIndex = 10
       '
       'NameTextBox
       '
-      Me.NameTextBox.Enabled = False
+      Me.NameTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.NameTextBox.Location = New System.Drawing.Point(150, 15)
       Me.NameTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.NameTextBox.Name = "NameTextBox"
+      Me.NameTextBox.ReadOnly = True
       Me.NameTextBox.Size = New System.Drawing.Size(199, 20)
       Me.NameTextBox.TabIndex = 12
       '
       'UseridTextBox
       '
-      Me.UseridTextBox.Enabled = False
+      Me.UseridTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.UseridTextBox.Location = New System.Drawing.Point(150, 41)
       Me.UseridTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.UseridTextBox.Name = "UseridTextBox"
+      Me.UseridTextBox.ReadOnly = True
       Me.UseridTextBox.Size = New System.Drawing.Size(199, 20)
       Me.UseridTextBox.TabIndex = 14
       '
       'PasswordTextBox
       '
-      Me.PasswordTextBox.Enabled = False
+      Me.PasswordTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.PasswordTextBox.Location = New System.Drawing.Point(150, 119)
       Me.PasswordTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.PasswordTextBox.Name = "PasswordTextBox"
+      Me.PasswordTextBox.ReadOnly = True
       Me.PasswordTextBox.Size = New System.Drawing.Size(199, 20)
       Me.PasswordTextBox.TabIndex = 16
       Me.PasswordTextBox.Visible = False
       '
       'Email_addressTextBox
       '
-      Me.Email_addressTextBox.Enabled = False
+      Me.Email_addressTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Email_addressTextBox.Location = New System.Drawing.Point(150, 67)
       Me.Email_addressTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Email_addressTextBox.Name = "Email_addressTextBox"
+      Me.Email_addressTextBox.ReadOnly = True
       Me.Email_addressTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Email_addressTextBox.TabIndex = 18
       '
@@ -456,101 +464,112 @@ Partial Class formUserDetails
       '
       'AddressTextBox
       '
-      Me.AddressTextBox.Enabled = False
+      Me.AddressTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.AddressTextBox.Location = New System.Drawing.Point(150, 171)
       Me.AddressTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.AddressTextBox.Name = "AddressTextBox"
+      Me.AddressTextBox.ReadOnly = True
       Me.AddressTextBox.Size = New System.Drawing.Size(199, 20)
       Me.AddressTextBox.TabIndex = 26
       '
       'SyndicateTextBox
       '
-      Me.SyndicateTextBox.Enabled = False
+      Me.SyndicateTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.SyndicateTextBox.Location = New System.Drawing.Point(150, 223)
       Me.SyndicateTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.SyndicateTextBox.Name = "SyndicateTextBox"
+      Me.SyndicateTextBox.ReadOnly = True
       Me.SyndicateTextBox.Size = New System.Drawing.Size(199, 20)
       Me.SyndicateTextBox.TabIndex = 28
       '
       'Submitter_numberTextBox
       '
-      Me.Submitter_numberTextBox.Enabled = False
+      Me.Submitter_numberTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Submitter_numberTextBox.Location = New System.Drawing.Point(527, 66)
       Me.Submitter_numberTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Submitter_numberTextBox.Name = "Submitter_numberTextBox"
+      Me.Submitter_numberTextBox.ReadOnly = True
       Me.Submitter_numberTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Submitter_numberTextBox.TabIndex = 30
       '
       'Previous_syndicateTextBox
       '
-      Me.Previous_syndicateTextBox.Enabled = False
+      Me.Previous_syndicateTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Previous_syndicateTextBox.Location = New System.Drawing.Point(527, 226)
       Me.Previous_syndicateTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Previous_syndicateTextBox.Name = "Previous_syndicateTextBox"
+      Me.Previous_syndicateTextBox.ReadOnly = True
       Me.Previous_syndicateTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Previous_syndicateTextBox.TabIndex = 34
       '
       'DigestTextBox
       '
-      Me.DigestTextBox.Enabled = False
+      Me.DigestTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.DigestTextBox.Location = New System.Drawing.Point(527, 251)
       Me.DigestTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.DigestTextBox.Name = "DigestTextBox"
+      Me.DigestTextBox.ReadOnly = True
       Me.DigestTextBox.Size = New System.Drawing.Size(199, 20)
       Me.DigestTextBox.TabIndex = 36
       '
       'Syndicate_groupsTextBox
       '
-      Me.Syndicate_groupsTextBox.Enabled = False
+      Me.Syndicate_groupsTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Syndicate_groupsTextBox.Location = New System.Drawing.Point(150, 249)
       Me.Syndicate_groupsTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Syndicate_groupsTextBox.Name = "Syndicate_groupsTextBox"
+      Me.Syndicate_groupsTextBox.ReadOnly = True
       Me.Syndicate_groupsTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Syndicate_groupsTextBox.TabIndex = 38
       '
       'County_groupsTextBox
       '
-      Me.County_groupsTextBox.Enabled = False
+      Me.County_groupsTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.County_groupsTextBox.Location = New System.Drawing.Point(150, 275)
       Me.County_groupsTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.County_groupsTextBox.Name = "County_groupsTextBox"
+      Me.County_groupsTextBox.ReadOnly = True
       Me.County_groupsTextBox.Size = New System.Drawing.Size(199, 20)
       Me.County_groupsTextBox.TabIndex = 40
       '
       'Country_groupsTextBox
       '
-      Me.Country_groupsTextBox.Enabled = False
+      Me.Country_groupsTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Country_groupsTextBox.Location = New System.Drawing.Point(150, 301)
       Me.Country_groupsTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Country_groupsTextBox.Name = "Country_groupsTextBox"
+      Me.Country_groupsTextBox.ReadOnly = True
       Me.Country_groupsTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Country_groupsTextBox.TabIndex = 42
       '
       'Userid_lower_caseTextBox
       '
-      Me.Userid_lower_caseTextBox.Enabled = False
+      Me.Userid_lower_caseTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Userid_lower_caseTextBox.Location = New System.Drawing.Point(527, 40)
       Me.Userid_lower_caseTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Userid_lower_caseTextBox.Name = "Userid_lower_caseTextBox"
+      Me.Userid_lower_caseTextBox.ReadOnly = True
       Me.Userid_lower_caseTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Userid_lower_caseTextBox.TabIndex = 48
       Me.Userid_lower_caseTextBox.Visible = False
       '
       'Telephone_numberTextBox
       '
-      Me.Telephone_numberTextBox.Enabled = False
+      Me.Telephone_numberTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Telephone_numberTextBox.Location = New System.Drawing.Point(150, 197)
       Me.Telephone_numberTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Telephone_numberTextBox.Name = "Telephone_numberTextBox"
+      Me.Telephone_numberTextBox.ReadOnly = True
       Me.Telephone_numberTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Telephone_numberTextBox.TabIndex = 52
       '
       'Disabled_reasonTextBox
       '
-      Me.Disabled_reasonTextBox.Enabled = False
+      Me.Disabled_reasonTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Disabled_reasonTextBox.Location = New System.Drawing.Point(527, 378)
       Me.Disabled_reasonTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Disabled_reasonTextBox.Name = "Disabled_reasonTextBox"
+      Me.Disabled_reasonTextBox.ReadOnly = True
       Me.Disabled_reasonTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Disabled_reasonTextBox.TabIndex = 54
       '
@@ -578,10 +597,11 @@ Partial Class formUserDetails
       '
       'Password_confirmationTextBox
       '
-      Me.Password_confirmationTextBox.Enabled = False
+      Me.Password_confirmationTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Password_confirmationTextBox.Location = New System.Drawing.Point(150, 145)
       Me.Password_confirmationTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Password_confirmationTextBox.Name = "Password_confirmationTextBox"
+      Me.Password_confirmationTextBox.ReadOnly = True
       Me.Password_confirmationTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Password_confirmationTextBox.TabIndex = 60
       Me.Password_confirmationTextBox.Visible = False
@@ -599,65 +619,72 @@ Partial Class formUserDetails
       '
       'Email_address_confirmationTextBox
       '
-      Me.Email_address_confirmationTextBox.Enabled = False
+      Me.Email_address_confirmationTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Email_address_confirmationTextBox.Location = New System.Drawing.Point(150, 93)
       Me.Email_address_confirmationTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Email_address_confirmationTextBox.Name = "Email_address_confirmationTextBox"
+      Me.Email_address_confirmationTextBox.ReadOnly = True
       Me.Email_address_confirmationTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Email_address_confirmationTextBox.TabIndex = 66
       Me.Email_address_confirmationTextBox.Visible = False
       '
       'Skill_notesTextBox
       '
-      Me.Skill_notesTextBox.Enabled = False
+      Me.Skill_notesTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Skill_notesTextBox.Location = New System.Drawing.Point(527, 329)
       Me.Skill_notesTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Skill_notesTextBox.Name = "Skill_notesTextBox"
+      Me.Skill_notesTextBox.ReadOnly = True
       Me.Skill_notesTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Skill_notesTextBox.TabIndex = 68
       '
       'Sign_up_dateTextBox
       '
-      Me.Sign_up_dateTextBox.Enabled = False
+      Me.Sign_up_dateTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Sign_up_dateTextBox.Location = New System.Drawing.Point(527, 96)
       Me.Sign_up_dateTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Sign_up_dateTextBox.Name = "Sign_up_dateTextBox"
+      Me.Sign_up_dateTextBox.ReadOnly = True
       Me.Sign_up_dateTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Sign_up_dateTextBox.TabIndex = 70
       '
       'Last_uploadTextBox
       '
-      Me.Last_uploadTextBox.Enabled = False
+      Me.Last_uploadTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Last_uploadTextBox.Location = New System.Drawing.Point(527, 122)
       Me.Last_uploadTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Last_uploadTextBox.Name = "Last_uploadTextBox"
+      Me.Last_uploadTextBox.ReadOnly = True
       Me.Last_uploadTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Last_uploadTextBox.TabIndex = 71
       '
       'U_atTextBox
       '
-      Me.U_atTextBox.Enabled = False
+      Me.U_atTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.U_atTextBox.Location = New System.Drawing.Point(527, 277)
       Me.U_atTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.U_atTextBox.Name = "U_atTextBox"
+      Me.U_atTextBox.ReadOnly = True
       Me.U_atTextBox.Size = New System.Drawing.Size(199, 20)
       Me.U_atTextBox.TabIndex = 72
       '
       'C_atTextBox
       '
-      Me.C_atTextBox.Enabled = False
+      Me.C_atTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.C_atTextBox.Location = New System.Drawing.Point(527, 301)
       Me.C_atTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.C_atTextBox.Name = "C_atTextBox"
+      Me.C_atTextBox.ReadOnly = True
       Me.C_atTextBox.Size = New System.Drawing.Size(199, 20)
       Me.C_atTextBox.TabIndex = 73
       '
       'Disabled_dateTextBox
       '
-      Me.Disabled_dateTextBox.Enabled = False
+      Me.Disabled_dateTextBox.ForeColor = System.Drawing.SystemColors.WindowText
       Me.Disabled_dateTextBox.Location = New System.Drawing.Point(150, 379)
       Me.Disabled_dateTextBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
       Me.Disabled_dateTextBox.Name = "Disabled_dateTextBox"
+      Me.Disabled_dateTextBox.ReadOnly = True
       Me.Disabled_dateTextBox.Size = New System.Drawing.Size(199, 20)
       Me.Disabled_dateTextBox.TabIndex = 74
       '

@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("FreeREG2Browser")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyDescription("Main FreeREG Transcription Program")> 
 <Assembly: AssemblyCompany("FreeUKGenealogy")> 
 <Assembly: AssemblyProduct("FreeREG2Browser")> 
 <Assembly: AssemblyCopyright("Copyright ©  2016 Free UK Genealogy")> 
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.2.*")> 
-<Assembly: AssemblyFileVersion("1.0.2")> 
+<Assembly: AssemblyVersion("1.1.1.*")> 
+<Assembly: AssemblyFileVersion("1.1.1")> 

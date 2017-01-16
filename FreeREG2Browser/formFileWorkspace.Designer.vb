@@ -116,13 +116,22 @@ Partial Class formFileWorkspace
       Me.olvcNotes1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.baptismsContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
       Me.bapFreeREGTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+      Me.bapDuplicateRecordMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.bapDeleteRecordMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.burialsContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
       Me.BurialRelationshipsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.burFreeREGTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
+      Me.burDuplicateRecordMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.burDeleteRecordMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.marriagesContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
       Me.GroomConditionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.BrideConditionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.marFreeREGTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
+      Me.marDuplicateRecordMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.marDeleteRecordMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       CType(Me.bsBaptisms, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.bsBurials, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.bsMarriages, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -294,7 +303,6 @@ Partial Class formFileWorkspace
       'dlvMarriages
       '
       Me.dlvMarriages.AllColumns.Add(Me.olvcRegNo2)
-      Me.dlvMarriages.AllColumns.Add(Me.olvcLoadOrder2)
       Me.dlvMarriages.AllColumns.Add(Me.olvcFiche2)
       Me.dlvMarriages.AllColumns.Add(Me.olvcImage2)
       Me.dlvMarriages.AllColumns.Add(Me.olvcCounty2)
@@ -326,6 +334,7 @@ Partial Class formFileWorkspace
       Me.dlvMarriages.AllColumns.Add(Me.olvcWitness2Forenames)
       Me.dlvMarriages.AllColumns.Add(Me.olvcWitness2Surname)
       Me.dlvMarriages.AllColumns.Add(Me.olvcNotes2)
+      Me.dlvMarriages.AllColumns.Add(Me.olvcLoadOrder2)
       Me.dlvMarriages.AllowColumnReorder = True
       Me.dlvMarriages.AlternateRowBackColor = System.Drawing.Color.Honeydew
       Me.dlvMarriages.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
@@ -579,7 +588,6 @@ Partial Class formFileWorkspace
       'dlvBaptisms
       '
       Me.dlvBaptisms.AllColumns.Add(Me.olvcRegNo)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcLoadOrder)
       Me.dlvBaptisms.AllColumns.Add(Me.olvcCounty)
       Me.dlvBaptisms.AllColumns.Add(Me.olvcPlace)
       Me.dlvBaptisms.AllColumns.Add(Me.olvcChurch)
@@ -596,6 +604,7 @@ Partial Class formFileWorkspace
       Me.dlvBaptisms.AllColumns.Add(Me.olvcFathersOccupation)
       Me.dlvBaptisms.AllColumns.Add(Me.olvcAbode)
       Me.dlvBaptisms.AllColumns.Add(Me.olvcNotes)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcLoadOrder)
       Me.dlvBaptisms.AllowColumnReorder = True
       Me.dlvBaptisms.AlternateRowBackColor = System.Drawing.Color.LavenderBlush
       Me.dlvBaptisms.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
@@ -637,6 +646,7 @@ Partial Class formFileWorkspace
       'olvcLoadOrder
       '
       Me.olvcLoadOrder.AspectName = "LoadOrder"
+      Me.olvcLoadOrder.DisplayIndex = 0
       Me.olvcLoadOrder.Groupable = False
       Me.olvcLoadOrder.IsEditable = False
       Me.olvcLoadOrder.IsVisible = False
@@ -759,7 +769,6 @@ Partial Class formFileWorkspace
       'dlvBurials
       '
       Me.dlvBurials.AllColumns.Add(Me.olvcRegNo1)
-      Me.dlvBurials.AllColumns.Add(Me.olvcLoadOrder1)
       Me.dlvBurials.AllColumns.Add(Me.olvcFiche1)
       Me.dlvBurials.AllColumns.Add(Me.olvcImage1)
       Me.dlvBurials.AllColumns.Add(Me.olvcCounty1)
@@ -775,6 +784,7 @@ Partial Class formFileWorkspace
       Me.dlvBurials.AllColumns.Add(Me.olvcAge)
       Me.dlvBurials.AllColumns.Add(Me.olvcAbode1)
       Me.dlvBurials.AllColumns.Add(Me.olvcNotes1)
+      Me.dlvBurials.AllColumns.Add(Me.olvcLoadOrder1)
       Me.dlvBurials.AllowColumnReorder = True
       Me.dlvBurials.AlternateRowBackColor = System.Drawing.Color.Gainsboro
       Me.dlvBurials.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
@@ -930,57 +940,114 @@ Partial Class formFileWorkspace
       '
       'baptismsContextMenuStrip
       '
-      Me.baptismsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bapFreeREGTablesToolStripMenuItem})
+      Me.baptismsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.bapFreeREGTablesToolStripMenuItem, Me.ToolStripSeparator1, Me.bapDuplicateRecordMenuItem, Me.bapDeleteRecordMenuItem})
       Me.baptismsContextMenuStrip.Name = "baptismsContextMenuStrip"
-      Me.baptismsContextMenuStrip.Size = New System.Drawing.Size(152, 26)
+      Me.baptismsContextMenuStrip.Size = New System.Drawing.Size(204, 76)
       '
       'bapFreeREGTablesToolStripMenuItem
       '
       Me.bapFreeREGTablesToolStripMenuItem.Name = "bapFreeREGTablesToolStripMenuItem"
-      Me.bapFreeREGTablesToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+      Me.bapFreeREGTablesToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
       Me.bapFreeREGTablesToolStripMenuItem.Text = "FreeREG tables"
+      '
+      'ToolStripSeparator1
+      '
+      Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+      Me.ToolStripSeparator1.Size = New System.Drawing.Size(200, 6)
+      '
+      'bapDuplicateRecordMenuItem
+      '
+      Me.bapDuplicateRecordMenuItem.Name = "bapDuplicateRecordMenuItem"
+      Me.bapDuplicateRecordMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
+      Me.bapDuplicateRecordMenuItem.Size = New System.Drawing.Size(203, 22)
+      Me.bapDuplicateRecordMenuItem.Text = "Duplicate record"
+      '
+      'bapDeleteRecordMenuItem
+      '
+      Me.bapDeleteRecordMenuItem.Name = "bapDeleteRecordMenuItem"
+      Me.bapDeleteRecordMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
+      Me.bapDeleteRecordMenuItem.Size = New System.Drawing.Size(203, 22)
+      Me.bapDeleteRecordMenuItem.Text = "Delete record "
       '
       'burialsContextMenuStrip
       '
-      Me.burialsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BurialRelationshipsToolStripMenuItem, Me.burFreeREGTablesToolStripMenuItem})
+      Me.burialsContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BurialRelationshipsToolStripMenuItem, Me.burFreeREGTablesToolStripMenuItem, Me.ToolStripSeparator2, Me.burDuplicateRecordMenuItem, Me.burDeleteRecordMenuItem})
       Me.burialsContextMenuStrip.Name = "burialsContextMenuStrip"
-      Me.burialsContextMenuStrip.Size = New System.Drawing.Size(178, 48)
+      Me.burialsContextMenuStrip.Size = New System.Drawing.Size(204, 98)
       '
       'BurialRelationshipsToolStripMenuItem
       '
       Me.BurialRelationshipsToolStripMenuItem.Name = "BurialRelationshipsToolStripMenuItem"
-      Me.BurialRelationshipsToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+      Me.BurialRelationshipsToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
       Me.BurialRelationshipsToolStripMenuItem.Text = "Burial Relationships"
       '
       'burFreeREGTablesToolStripMenuItem
       '
       Me.burFreeREGTablesToolStripMenuItem.Name = "burFreeREGTablesToolStripMenuItem"
-      Me.burFreeREGTablesToolStripMenuItem.Size = New System.Drawing.Size(177, 22)
+      Me.burFreeREGTablesToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
       Me.burFreeREGTablesToolStripMenuItem.Text = "FreeREG tables"
+      '
+      'ToolStripSeparator2
+      '
+      Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+      Me.ToolStripSeparator2.Size = New System.Drawing.Size(200, 6)
+      '
+      'burDuplicateRecordMenuItem
+      '
+      Me.burDuplicateRecordMenuItem.Name = "burDuplicateRecordMenuItem"
+      Me.burDuplicateRecordMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
+      Me.burDuplicateRecordMenuItem.Size = New System.Drawing.Size(203, 22)
+      Me.burDuplicateRecordMenuItem.Text = "Duplicate record"
+      '
+      'burDeleteRecordMenuItem
+      '
+      Me.burDeleteRecordMenuItem.Name = "burDeleteRecordMenuItem"
+      Me.burDeleteRecordMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
+      Me.burDeleteRecordMenuItem.Size = New System.Drawing.Size(203, 22)
+      Me.burDeleteRecordMenuItem.Text = "Delete record"
       '
       'marriagesContextMenuStrip
       '
-      Me.marriagesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GroomConditionsToolStripMenuItem, Me.BrideConditionsToolStripMenuItem, Me.marFreeREGTablesToolStripMenuItem})
+      Me.marriagesContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.GroomConditionsToolStripMenuItem, Me.BrideConditionsToolStripMenuItem, Me.marFreeREGTablesToolStripMenuItem, Me.ToolStripSeparator3, Me.marDuplicateRecordMenuItem, Me.marDeleteRecordMenuItem})
       Me.marriagesContextMenuStrip.Name = "marriagesContextMenuStrip"
-      Me.marriagesContextMenuStrip.Size = New System.Drawing.Size(173, 70)
+      Me.marriagesContextMenuStrip.Size = New System.Drawing.Size(204, 120)
       '
       'GroomConditionsToolStripMenuItem
       '
       Me.GroomConditionsToolStripMenuItem.Name = "GroomConditionsToolStripMenuItem"
-      Me.GroomConditionsToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+      Me.GroomConditionsToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
       Me.GroomConditionsToolStripMenuItem.Text = "Groom Conditions"
       '
       'BrideConditionsToolStripMenuItem
       '
       Me.BrideConditionsToolStripMenuItem.Name = "BrideConditionsToolStripMenuItem"
-      Me.BrideConditionsToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+      Me.BrideConditionsToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
       Me.BrideConditionsToolStripMenuItem.Text = "Bride Conditions"
       '
       'marFreeREGTablesToolStripMenuItem
       '
       Me.marFreeREGTablesToolStripMenuItem.Name = "marFreeREGTablesToolStripMenuItem"
-      Me.marFreeREGTablesToolStripMenuItem.Size = New System.Drawing.Size(172, 22)
+      Me.marFreeREGTablesToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
       Me.marFreeREGTablesToolStripMenuItem.Text = "FreeREG tables"
+      '
+      'ToolStripSeparator3
+      '
+      Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+      Me.ToolStripSeparator3.Size = New System.Drawing.Size(200, 6)
+      '
+      'marDuplicateRecordMenuItem
+      '
+      Me.marDuplicateRecordMenuItem.Name = "marDuplicateRecordMenuItem"
+      Me.marDuplicateRecordMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
+      Me.marDuplicateRecordMenuItem.Size = New System.Drawing.Size(203, 22)
+      Me.marDuplicateRecordMenuItem.Text = "Duplicate record"
+      '
+      'marDeleteRecordMenuItem
+      '
+      Me.marDeleteRecordMenuItem.Name = "marDeleteRecordMenuItem"
+      Me.marDeleteRecordMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
+      Me.marDeleteRecordMenuItem.Size = New System.Drawing.Size(203, 22)
+      Me.marDeleteRecordMenuItem.Text = "Delete record"
       '
       'formFileWorkspace
       '
@@ -1111,4 +1178,13 @@ Partial Class formFileWorkspace
    Friend WithEvents GroomConditionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents BrideConditionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents marFreeREGTablesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents bapDuplicateRecordMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents burDuplicateRecordMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+   Friend WithEvents marDuplicateRecordMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents bapDeleteRecordMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents burDeleteRecordMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents marDeleteRecordMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

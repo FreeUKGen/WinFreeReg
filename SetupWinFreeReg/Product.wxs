@@ -2,11 +2,11 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 
-   <Product Id="*" Name="WinFreeREG 1.0.2" Language="1033" Version="1.0.2" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
+   <Product Id="*" Name="WinFreeREG 1.1.1" Language="1033" Version="1.1.1" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
 
       <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Manufacturer="Free UK Genealogy"
                Description="Installs the FreeREG Transcription Program"
-               Comments="(c) 2016 Free UK Genealogy" />
+               Comments="(c) 2017 Free UK Genealogy" />
 
       <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
       <MediaTemplate EmbedCab="yes" />

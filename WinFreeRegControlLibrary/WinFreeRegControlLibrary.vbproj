@@ -105,6 +105,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ctlTextboxWithUCF.Designer.vb">
+      <DependentUpon>ctlTextboxWithUCF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ctlTextboxWithUCF.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dlgUCF.Designer.vb">
+      <DependentUpon>dlgUCF.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgUCF.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="formGeneralHelp.Designer.vb">
       <DependentUpon>formGeneralHelp.vb</DependentUpon>
     </Compile>
@@ -132,9 +144,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="UCFDataClass.vb" />
     <Compile Include="WinFormControlExtensions.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ctlTextboxWithUCF.resx">
+      <DependentUpon>ctlTextboxWithUCF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgUCF.resx">
+      <DependentUpon>dlgUCF.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="formGeneralHelp.resx">
       <DependentUpon>formGeneralHelp.vb</DependentUpon>
     </EmbeddedResource>
@@ -160,6 +179,7 @@
       <Link>ToolTips.xss</Link>
       <DependentUpon>ToolTips.xsd</DependentUpon>
     </None>
+    <None Include="app.config" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

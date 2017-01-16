@@ -18,9 +18,14 @@
 ' DONE:  9. As an older person with poor sight I would  prefer larger text if that was possible.
 ' DONE: 10. At the end of a file I always sort by date to make sure the date range is sensible and no obvious year typos.  Now however the date column sorts by day then month then year so not a lot of help to spot an error.
 ' TODO: 11. If you have made an error and not changed say 'Image Nr' over several entries, I would normally type in first cell correct number and CTL C and CTL V to change several cells at once, can't do in latest.
-' TODO: 12. Automatically backup existing file as editing begins, to provide a recovery position if required.
+' DONE: 12. Automatically backup existing file as editing begins, to provide a recovery position if required.
 ' TODO: 13. Add a "Save As" option that permits the current file to be saved somewhere different to where it was read from
 ' DONE: 14. Replicate dates from previous record to give a starting point for the new record
+
+' DONE: If a birth date is entered and then the column hidden, the date then gets replicated into each succeeding new record. Because the date column is hidden, the user does not see this.
+'       Automatically duplicating dates into the new record from the previous one should only work if the date column is being shown. This applies primarily to Baptisms where the Birth Date is not always available.
+
+' DONE: Add the File Backup function to save file contents upon starting to open a file for editing
 
 Imports System.Windows.Forms
 Imports System.ComponentModel
@@ -1438,7 +1443,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 397
+      Me.SplitContainer2.SplitterDistance = 406
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1463,7 +1468,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 397)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 406)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1591,7 +1596,7 @@ Public Class FreeREG2Browser
       '
       Me.localContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenWithNotepadToolStripMenuItem, Me.RenameFileToolStripMenuItem, Me.DeleteFileToolStripMenuItem})
       Me.localContextMenuStrip.Name = "localContextMenuStrip"
-      Me.localContextMenuStrip.Size = New System.Drawing.Size(164, 70)
+      Me.localContextMenuStrip.Size = New System.Drawing.Size(164, 92)
       '
       'OpenWithNotepadToolStripMenuItem
       '
@@ -1613,7 +1618,9 @@ Public Class FreeREG2Browser
       '
       'RichTextBox1
       '
-      Me.RichTextBox1.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.RichTextBox1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.RichTextBox1.Location = New System.Drawing.Point(3, 3)
       Me.RichTextBox1.Name = "RichTextBox1"
       Me.RichTextBox1.ReadOnly = True
@@ -1640,6 +1647,7 @@ Public Class FreeREG2Browser
       Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
       Me.TableLayoutPanel1.Controls.Add(Me.CheckBox1, 0, 1)
       Me.TableLayoutPanel1.Controls.Add(Me.RichTextBox1, 0, 0)
+      Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
       Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 24)
       Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
       Me.TableLayoutPanel1.RowCount = 2
@@ -1764,9 +1772,23 @@ Public Class FreeREG2Browser
             Application.DoEvents()
          End While
       End If
+
+      My.Settings.FreeREG2Browser_WindowState = Me.WindowState
+      My.Settings.FreeREG2Browser_Location = Me.Location
+      My.Settings.FreeREG2Browser_Size = Me.Size
+      My.Settings.Save()
    End Sub
 
    Private Sub FreeREG2Browser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+      If My.Settings.FreeREG2Browser_WindowState <> FormWindowState.Normal OrElse My.Settings.FreeREG2Browser_Location <> New Point(0, 0) OrElse My.Settings.FreeREG2Browser_Size <> New Size(0, 0) Then
+         Me.Location = My.Settings.FreeREG2Browser_Location
+         Me.Size = My.Settings.FreeREG2Browser_Size
+         If My.Settings.FreeREG2Browser_WindowState = FormWindowState.Minimized Then
+            Me.WindowState = FormWindowState.Normal
+         Else
+            Me.WindowState = My.Settings.FreeREG2Browser_WindowState
+         End If
+      End If
 
       TranscriberProfileFile = Path.Combine(AppDataLocalFolder, "transcriber.xml")
       FreeregTablesFile = Path.Combine(PgmAppDataLocalFolder, "FreeREGTables.xml")
@@ -3805,10 +3827,32 @@ Public Class FreeREG2Browser
       OpenWorkspace()
    End Sub
 
+   Private Sub CreateBackupFile(ByVal strFileName As String)
+      Dim pathBackups = String.Format("{0}\FreeREG\WinREG for Windows\Backup Files", Environment.GetFolderPath(Environment.SpecialFolder.Personal))
+      If Not Directory.Exists(pathBackups) Then Directory.CreateDirectory(pathBackups)
+
+      Dim fi As FileInfo = New FileInfo(strFileName)
+      Dim fdate As String = String.Format(" {0:yyyy-MM-dd HH.mm.ss}", fi.LastWriteTime)
+      Dim fname As String = Path.GetFileNameWithoutExtension(strFileName) + fdate + Path.GetExtension(strFileName)
+      Dim strBackupFilename As String = Path.Combine(pathBackups, fname)
+
+      Try
+         File.Copy(strFileName, strBackupFilename, True)
+
+      Catch ex As Exception
+         MessageBox.Show(ex.Message, "Create Backup File", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
+
    Private Sub OpenWorkspace()
       Dim row As DataRow = dlvLocalFiles.SelectedObject().Row
       Try
          Using dlg As New formFileWorkspace(formHelp) With {.TranscriptionFile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet), .SelectedRow = row, .BaseDirectory = AppDataLocalFolder, .ErrorMessageTable = ErrorMessagesDataSet.Tables("ErrorMessages")}
+
+            ' Create a backup of the file being edited
+            CreateBackupFile(dlg.TranscriptionFile.FullFileName)
+
             Me.Hide()
             Try
                dlg.Settings = MyAppSettings

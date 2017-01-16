@@ -11,8 +11,11 @@
 
       labelFilename.Text = SelectedFile("Name")
       labelPlace.Text = TranscriptionFile.FileHeader.Place
-      labelChurch.Text = String.Format("{0}, {1}", TranscriptionFile.FileHeader.Church, regType)
+      labelChurch.Text = String.Format("{0}, {1}, {2}", TranscriptionFile.FileHeader.Church, regType, TranscriptionFile.FileHeader.FileType)
       labelFileCode.Text = recChurch.FileCode
 
    End Sub
+
+   ' TODO: Complete FILE RENAME function
+
 End Class
