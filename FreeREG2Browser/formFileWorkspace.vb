@@ -1175,6 +1175,8 @@ Public Class formFileWorkspace
 
 #Region "Delete Record"
 
+   ' TODO: 15. Delete functions are incomplete
+
    Private Sub BindingNavigatorDeleteItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorDeleteItem.Click
       DeleteRecord()
    End Sub
@@ -1184,32 +1186,17 @@ Public Class formFileWorkspace
          Case TranscriptionFileClass.FileTypes.BAPTISMS
             ' Get the currently selected object
             Dim x As DataRowView = dlvBaptisms.SelectedObject()
-            If x IsNot Nothing Then
-               ' Get the currently selected Baptisms row
-               Dim row As TranscriptionTables.BaptismsRow = x.Row
-               ' Create a new, empty row
-               Dim dt As TranscriptionTables.BaptismsDataTable = CType(bsBaptisms.DataSource, TranscriptionTables.BaptismsDataTable)
-            End If
+            If x IsNot Nothing Then dlvBaptisms.RemoveObject(x)
 
          Case TranscriptionFileClass.FileTypes.BURIALS
             ' Get the currently selected object
             Dim x As DataRowView = dlvBurials.SelectedObject()
-            If x IsNot Nothing Then
-               ' Get the currently selected Burials row
-               Dim row As TranscriptionTables.BurialsRow = x.Row
-               ' Create a new, empty row
-               Dim dt As TranscriptionTables.BurialsDataTable = CType(bsBurials.DataSource, TranscriptionTables.BurialsDataTable)
-            End If
+            If x IsNot Nothing Then dlvBurials.RemoveObject(x)
 
          Case TranscriptionFileClass.FileTypes.MARRIAGES
             ' Get the currently selected object
             Dim x As DataRowView = dlvMarriages.SelectedObject()
-            If x IsNot Nothing Then
-               ' Get the currently selected Marriages row
-               Dim row As TranscriptionTables.MarriagesRow = x.Row
-               ' Create a new, empty row
-               Dim dt As TranscriptionTables.MarriagesDataTable = CType(bsMarriages.DataSource, TranscriptionTables.MarriagesDataTable)
-            End If
+            If x IsNot Nothing Then dlvMarriages.RemoveObject(x)
 
       End Select
    End Sub

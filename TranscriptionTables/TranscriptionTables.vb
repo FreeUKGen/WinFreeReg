@@ -29,7 +29,7 @@ Partial Class TranscriptionTables
 
 		Public Sub CopyPrivates(ByVal dst As BaptismsDataTable)
 			dst.tabBapSex = Me.tabBapSex
-		End Sub
+      End Sub
 
 		Private Sub BaptismsDataTable_ColumnChanging(ByVal sender As System.Object, ByVal e As System.Data.DataColumnChangeEventArgs) Handles Me.ColumnChanging
 			If (e.Column.ColumnName = Me.BirthDateColumn.ColumnName) Then
@@ -89,26 +89,25 @@ Partial Class TranscriptionTables
 
 		End Sub
 
-		Private Sub BaptismsDataTable_RowChanging(ByVal sender As Object, ByVal e As System.Data.DataRowChangeEventArgs) Handles Me.RowChanging
-			Dim row As BaptismsRow = CType(e.Row, BaptismsRow)
-
-			If row.HasErrors Then
-				Dim x = row.GetColumnsInError().ToLookup(Function(a) a.ColumnName)
-				If x.Contains("BirthDate") OrElse x.Contains("BaptismDate") Then Exit Sub
-			End If
-
-			If Not String.IsNullOrEmpty(row.BirthDate) And Not String.IsNullOrEmpty(row.BaptismDate) Then
-				If Not TranscriptionValidations.ValidateBirthAndBaptismDates(row.BirthDate, row.BaptismDate, MyAddErrorNumberToMessage) Then
-					e.Row.SetColumnError("BirthDate", IIf(MyAddErrorNumberToMessage, String.Format("0049:{0}", My.Resources.err0049), My.Resources.err0049))
-				End If
-			End If
-		End Sub
-
 		Private Sub BaptismsDataTable_BaptismsRowChanging(ByVal sender As System.Object, ByVal e As BaptismsRowChangeEvent) Handles Me.BaptismsRowChanging
+         If e.Row.HasErrors Then
+            Dim x = e.Row.GetColumnsInError().ToLookup(Function(a) a.ColumnName)
+            If x.Contains("BirthDate") OrElse x.Contains("BaptismDate") Then Exit Sub
+         End If
 
-		End Sub
+         If e.Row.RowState <> DataRowState.Deleted Then
+            If Not String.IsNullOrEmpty(e.Row.BirthDate) And Not String.IsNullOrEmpty(e.Row.BaptismDate) Then
+               If Not TranscriptionValidations.ValidateBirthAndBaptismDates(e.Row.BirthDate, e.Row.BaptismDate, MyAddErrorNumberToMessage) Then
+                  e.Row.SetColumnError("BirthDate", IIf(MyAddErrorNumberToMessage, String.Format("0049:{0}", My.Resources.err0049), My.Resources.err0049))
+               End If
+            End If
+         End If
+      End Sub
 
-	End Class
+      Private Sub BaptismsDataTable_BaptismsRowDeleting(sender As Object, e As BaptismsRowChangeEvent) Handles Me.BaptismsRowDeleting
+
+      End Sub
+   End Class
 
 	Partial Class BurialsDataTable
 		Private tabBurialRelationship As BurialRelationshipDataTable
@@ -121,7 +120,7 @@ Partial Class TranscriptionTables
 
 		Public Sub CopyPrivates(ByVal dst As BurialsDataTable)
 			dst.tabBurialRelationship = Me.tabBurialRelationship
-		End Sub
+      End Sub
 
 		Private Sub BurialsDataTable_ColumnChanging(ByVal sender As System.Object, ByVal e As System.Data.DataColumnChangeEventArgs) Handles Me.ColumnChanging
 			If (e.Column.ColumnName = Me.BurialDateColumn.ColumnName) Then
@@ -171,7 +170,14 @@ Partial Class TranscriptionTables
 
 		End Sub
 
-	End Class
+      Private Sub BurialsDataTable_BurialsRowChanging(sender As Object, e As BurialsRowChangeEvent) Handles Me.BurialsRowChanging
+
+      End Sub
+
+      Private Sub BurialsDataTable_BurialsRowDeleting(sender As Object, e As BurialsRowChangeEvent) Handles Me.BurialsRowDeleting
+
+      End Sub
+   End Class
 
 	Partial Class MarriagesDataTable
 		Private tabGroomCondition As GroomConditionDataTable
@@ -266,8 +272,15 @@ Partial Class TranscriptionTables
 				End If
 			End If
 
-		End Sub
+      End Sub
 
-	End Class
+      Private Sub MarriagesDataTable_MarriagesRowChanging(sender As Object, e As MarriagesRowChangeEvent) Handles Me.MarriagesRowChanging
+
+      End Sub
+
+      Private Sub MarriagesDataTable_MarriagesRowDeleting(sender As Object, e As MarriagesRowChangeEvent) Handles Me.MarriagesRowDeleting
+
+      End Sub
+   End Class
 
 End Class
