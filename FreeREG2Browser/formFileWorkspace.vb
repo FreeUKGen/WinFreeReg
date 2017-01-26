@@ -121,13 +121,32 @@ Public Class formFileWorkspace
       If File.Exists(m_fname) Then
          Dim binReader As New BinaryReader(File.Open(m_fname, FileMode.Open, FileAccess.Read, FileShare.Read))
          Try
-            m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS) = binReader.ReadBytes(m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS).Length)
-            m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS) = binReader.ReadBytes(m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS).Length)
-            m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES) = binReader.ReadBytes(m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES).Length)
+            Dim prefix = binReader.ReadString()
+            If prefix = "BA" Then
+               Dim len = binReader.ReadInt32()
+               If len = m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS).Length Then
+                  m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS) = binReader.ReadBytes(m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS).Length)
+                  Dim done = dlvBaptisms.RestoreState(m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS))
 
-            dlvBaptisms.RestoreState(m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS))
-            dlvBurials.RestoreState(m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS))
-            dlvMarriages.RestoreState(m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES))
+                  prefix = binReader.ReadString()
+                  If prefix = "BU" Then
+                     len = binReader.ReadInt32()
+                     If len = m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS).Length Then
+                        m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS) = binReader.ReadBytes(m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS).Length)
+                        done = dlvBurials.RestoreState(m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS))
+
+                        prefix = binReader.ReadString()
+                        If prefix = "MA" Then
+                           len = binReader.ReadInt32()
+                           If len = m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES).Length Then
+                              m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES) = binReader.ReadBytes(m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES).Length)
+                              done = dlvMarriages.RestoreState(m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES))
+                           End If
+                        End If
+                     End If
+                  End If
+               End If
+            End If
 
          Catch ex As Exception
             Throw
@@ -429,8 +448,14 @@ Public Class formFileWorkspace
          SaveDLVState(TranscriptionFileClass.FileTypes.BURIALS, dlvBurials.SaveState())
          SaveDLVState(TranscriptionFileClass.FileTypes.MARRIAGES, dlvMarriages.SaveState())
 
+         binWriter.Write("BA")
+         binWriter.Write(m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS).Length)
          binWriter.Write(m_dlvStates(TranscriptionFileClass.FileTypes.BAPTISMS))
+         binWriter.Write("BU")
+         binWriter.Write(m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS).Length)
          binWriter.Write(m_dlvStates(TranscriptionFileClass.FileTypes.BURIALS))
+         binWriter.Write("MA")
+         binWriter.Write(m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES).Length)
          binWriter.Write(m_dlvStates(TranscriptionFileClass.FileTypes.MARRIAGES))
 
       Catch ex As Exception
