@@ -45,7 +45,6 @@ Partial Class formFileWorkspace
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
       Me.dlvMarriages = New BrightIdeasSoftware.DataListView()
       Me.olvcRegNo2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcLoadOrder2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcFiche2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcImage2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcCounty2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
@@ -77,9 +76,9 @@ Partial Class formFileWorkspace
       Me.olvcWitness2Forenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcWitness2Surname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcNotes2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLoadOrder2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.dlvBaptisms = New BrightIdeasSoftware.DataListView()
       Me.olvcRegNo = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcLoadOrder = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcCounty = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcPlace = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcChurch = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
@@ -96,9 +95,9 @@ Partial Class formFileWorkspace
       Me.olvcFathersOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcAbode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcNotes = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLoadOrder = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.dlvBurials = New BrightIdeasSoftware.DataListView()
       Me.olvcRegNo1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcLoadOrder1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcFiche1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcImage1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcCounty1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
@@ -114,6 +113,7 @@ Partial Class formFileWorkspace
       Me.olvcAge = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcAbode1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcNotes1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLoadOrder1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.baptismsContextMenuStrip = New System.Windows.Forms.ContextMenuStrip(Me.components)
       Me.bapFreeREGTablesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -293,8 +293,8 @@ Partial Class formFileWorkspace
       '
       'SplitContainer1.Panel2
       '
-      Me.SplitContainer1.Panel2.Controls.Add(Me.dlvMarriages)
       Me.SplitContainer1.Panel2.Controls.Add(Me.dlvBaptisms)
+      Me.SplitContainer1.Panel2.Controls.Add(Me.dlvMarriages)
       Me.SplitContainer1.Panel2.Controls.Add(Me.dlvBurials)
       Me.SplitContainer1.Size = New System.Drawing.Size(839, 560)
       Me.SplitContainer1.SplitterDistance = 25
@@ -371,14 +371,6 @@ Partial Class formFileWorkspace
       Me.olvcRegNo2.Text = "Register Number"
       Me.olvcRegNo2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       Me.olvcRegNo2.WordWrap = True
-      '
-      'olvcLoadOrder2
-      '
-      Me.olvcLoadOrder2.AspectName = "LoadOrder"
-      Me.olvcLoadOrder2.Groupable = False
-      Me.olvcLoadOrder2.IsVisible = False
-      Me.olvcLoadOrder2.Text = "Load Order"
-      Me.olvcLoadOrder2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       '
       'olvcFiche2
       '
@@ -585,6 +577,14 @@ Partial Class formFileWorkspace
       Me.olvcNotes2.Text = "Notes"
       Me.olvcNotes2.UseFiltering = False
       '
+      'olvcLoadOrder2
+      '
+      Me.olvcLoadOrder2.AspectName = "LoadOrder"
+      Me.olvcLoadOrder2.Groupable = False
+      Me.olvcLoadOrder2.IsVisible = False
+      Me.olvcLoadOrder2.Text = "Load Order"
+      Me.olvcLoadOrder2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
       'dlvBaptisms
       '
       Me.dlvBaptisms.AllColumns.Add(Me.olvcRegNo)
@@ -642,16 +642,6 @@ Partial Class formFileWorkspace
       Me.olvcRegNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       Me.olvcRegNo.Width = 53
       Me.olvcRegNo.WordWrap = True
-      '
-      'olvcLoadOrder
-      '
-      Me.olvcLoadOrder.AspectName = "LoadOrder"
-      Me.olvcLoadOrder.DisplayIndex = 0
-      Me.olvcLoadOrder.Groupable = False
-      Me.olvcLoadOrder.IsEditable = False
-      Me.olvcLoadOrder.IsVisible = False
-      Me.olvcLoadOrder.Text = "Load Order"
-      Me.olvcLoadOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       '
       'olvcCounty
       '
@@ -766,6 +756,16 @@ Partial Class formFileWorkspace
       Me.olvcNotes.Text = "Notes"
       Me.olvcNotes.UseFiltering = False
       '
+      'olvcLoadOrder
+      '
+      Me.olvcLoadOrder.AspectName = "LoadOrder"
+      Me.olvcLoadOrder.DisplayIndex = 0
+      Me.olvcLoadOrder.Groupable = False
+      Me.olvcLoadOrder.IsEditable = False
+      Me.olvcLoadOrder.IsVisible = False
+      Me.olvcLoadOrder.Text = "Load Order"
+      Me.olvcLoadOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
       'dlvBurials
       '
       Me.dlvBurials.AllColumns.Add(Me.olvcRegNo1)
@@ -821,14 +821,6 @@ Partial Class formFileWorkspace
       Me.olvcRegNo1.Text = "Register Number"
       Me.olvcRegNo1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       Me.olvcRegNo1.WordWrap = True
-      '
-      'olvcLoadOrder1
-      '
-      Me.olvcLoadOrder1.AspectName = "LoadOrder"
-      Me.olvcLoadOrder1.Groupable = False
-      Me.olvcLoadOrder1.IsVisible = False
-      Me.olvcLoadOrder1.Text = "Load Order"
-      Me.olvcLoadOrder1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       '
       'olvcFiche1
       '
@@ -937,6 +929,14 @@ Partial Class formFileWorkspace
       Me.olvcNotes1.Sortable = False
       Me.olvcNotes1.Text = "Notes"
       Me.olvcNotes1.UseFiltering = False
+      '
+      'olvcLoadOrder1
+      '
+      Me.olvcLoadOrder1.AspectName = "LoadOrder"
+      Me.olvcLoadOrder1.Groupable = False
+      Me.olvcLoadOrder1.IsVisible = False
+      Me.olvcLoadOrder1.Text = "Load Order"
+      Me.olvcLoadOrder1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       '
       'baptismsContextMenuStrip
       '
