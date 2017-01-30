@@ -1,10 +1,4 @@
-﻿'	$Date: 2016-04-13 10:34:32 +0200 (Wed, 13 Apr 2016) $
-'	$Rev: 542 $
-'	$Id: FreeREG2Browser.vb 542 2016-04-13 08:34:32Z Mikefry $
-'
-'	WinFreeReg
-'
-
+﻿
 ' Waffle Board story - 985 -
 '
 ' DONE:  1. The Fiche and the Image information does not automatically insert itself from last record
@@ -248,6 +242,11 @@ Public Class FreeREG2Browser
    Friend WithEvents RenameFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents UserOptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents OpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents OpenFileWithEditorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents RenameFileToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents DeleteFileToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
 
    Public Property TranscriptionLibrary() As String
       Get
@@ -404,6 +403,11 @@ Public Class FreeREG2Browser
       Me.CheckBox1 = New System.Windows.Forms.CheckBox()
       Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
       Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
+      Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.OpenFileWithEditorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.RenameFileToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+      Me.DeleteFileToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
       PlaceNameLabel = New System.Windows.Forms.Label()
@@ -723,7 +727,7 @@ Public Class FreeREG2Browser
       '
       'BrowserMenuStrip
       '
-      Me.BrowserMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG, Me.OptionsToolStripMenuItem, Me.miTranscriptions, Me.miTranscriptionData, Me.miGeneralHelp, Me.AboutToolStripMenuItem})
+      Me.BrowserMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG, Me.miTranscriptions, Me.FileToolStripMenuItem, Me.miTranscriptionData, Me.OptionsToolStripMenuItem, Me.miGeneralHelp, Me.AboutToolStripMenuItem})
       Me.BrowserMenuStrip.Location = New System.Drawing.Point(0, 0)
       Me.BrowserMenuStrip.Name = "BrowserMenuStrip"
       Me.BrowserMenuStrip.Size = New System.Drawing.Size(903, 24)
@@ -807,7 +811,7 @@ Public Class FreeREG2Browser
       'UserOptionsToolStripMenuItem
       '
       Me.UserOptionsToolStripMenuItem.Name = "UserOptionsToolStripMenuItem"
-      Me.UserOptionsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+      Me.UserOptionsToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
       Me.UserOptionsToolStripMenuItem.Text = "User options"
       '
       'miTranscriptions
@@ -1443,7 +1447,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 406
+      Me.SplitContainer2.SplitterDistance = 407
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1468,7 +1472,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 406)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 407)
       Me.dlvLocalFiles.SpaceBetweenGroups = 5
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1596,7 +1600,7 @@ Public Class FreeREG2Browser
       '
       Me.localContextMenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenWithNotepadToolStripMenuItem, Me.RenameFileToolStripMenuItem, Me.DeleteFileToolStripMenuItem})
       Me.localContextMenuStrip.Name = "localContextMenuStrip"
-      Me.localContextMenuStrip.Size = New System.Drawing.Size(164, 92)
+      Me.localContextMenuStrip.Size = New System.Drawing.Size(164, 70)
       '
       'OpenWithNotepadToolStripMenuItem
       '
@@ -1660,6 +1664,39 @@ Public Class FreeREG2Browser
       '
       Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
       Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+      '
+      'FileToolStripMenuItem
+      '
+      Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.OpenFileWithEditorToolStripMenuItem, Me.RenameFileToolStripMenuItem1, Me.DeleteFileToolStripMenuItem1})
+      Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+      Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+      Me.FileToolStripMenuItem.Text = "File"
+      Me.FileToolStripMenuItem.Visible = False
+      '
+      'OpenToolStripMenuItem
+      '
+      Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+      Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+      Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+      Me.OpenToolStripMenuItem.Text = "Open file"
+      '
+      'OpenFileWithEditorToolStripMenuItem
+      '
+      Me.OpenFileWithEditorToolStripMenuItem.Name = "OpenFileWithEditorToolStripMenuItem"
+      Me.OpenFileWithEditorToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+      Me.OpenFileWithEditorToolStripMenuItem.Text = "Open file with Editor"
+      '
+      'RenameFileToolStripMenuItem1
+      '
+      Me.RenameFileToolStripMenuItem1.Name = "RenameFileToolStripMenuItem1"
+      Me.RenameFileToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+      Me.RenameFileToolStripMenuItem1.Text = "Rename File"
+      '
+      'DeleteFileToolStripMenuItem1
+      '
+      Me.DeleteFileToolStripMenuItem1.Name = "DeleteFileToolStripMenuItem1"
+      Me.DeleteFileToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+      Me.DeleteFileToolStripMenuItem1.Text = "Delete File"
       '
       'FreeREG2Browser
       '
@@ -2085,6 +2122,8 @@ Public Class FreeREG2Browser
             dlvcol.IsEditable = False
          End If
       End If
+
+      FileToolStripMenuItem.Visible = True
 
       dlvLocalFiles.RebuildColumns()
       SplitContainer2.Visible = True
@@ -3297,6 +3336,8 @@ Public Class FreeREG2Browser
          olvcFilename.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetFileNameGroupKey)
          olvcFilename.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetFileNameGroupTitle)
 
+         FileToolStripMenuItem.Visible = False
+
          MessageBox.Show(e.Result, "Uploaded Batches", MessageBoxButtons.OK, MessageBoxIcon.Information)
       End If
    End Sub
@@ -3979,4 +4020,60 @@ Public Class FreeREG2Browser
       End Using
    End Sub
 
+   Private Sub FileToolStripMenuItem_DropDownOpening(sender As Object, e As EventArgs) Handles FileToolStripMenuItem.DropDownOpening
+      If dlvLocalFiles.SelectedItem IsNot Nothing Then
+         Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
+         Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
+         Dim row As DataRow = dbi.Row
+         OpenToolStripMenuItem.Text = String.Format("Open {0}", row("Name"))
+         OpenFileWithEditorToolStripMenuItem.Text = String.Format("Open {0} with Notepad", row("Name"))
+         RenameFileToolStripMenuItem1.Text = String.Format("Rename {0}", row("Name"))
+         DeleteFileToolStripMenuItem1.Text = String.Format("Delete {0}", row("Name"))
+      End If
+   End Sub
+
+   Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
+      OpenWorkspace()
+   End Sub
+
+   Private Sub OpenFileWithEditorToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenFileWithEditorToolStripMenuItem.Click
+      If dlvLocalFiles.SelectedItem IsNot Nothing Then
+         Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
+         Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
+         Dim row As DataRow = dbi.Row
+         If row IsNot Nothing Then System.Diagnostics.Process.Start(row("FullName"))
+      End If
+   End Sub
+
+   Private Sub RenameFileToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles RenameFileToolStripMenuItem1.Click
+      If dlvLocalFiles.SelectedItem IsNot Nothing Then
+         Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
+         Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
+         Dim row As DataRow = dbi.Row
+         Dim tfile = New TranscriptionFileClass(row, LookUpsDataSet, TablesDataSet)
+         Using dlg As New formFileRename() With {.SelectedFile = row, .TranscriptionFile = tfile}
+            dlg.ShowDialog()
+         End Using
+      End If
+   End Sub
+
+   Private Sub DeleteFileToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles DeleteFileToolStripMenuItem1.Click
+      If dlvLocalFiles.SelectedItem IsNot Nothing Then
+         Dim olvItem As OLVListItem = dlvLocalFiles.SelectedItem
+         Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
+         Dim row As DataRow = dbi.Row
+         If MessageBox.Show(String.Format(My.Resources.msgConfirmDeleteFile, row("Name")), "Delete File", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+            Try
+               FileSystem.DeleteFile(row("FullName"), UIOption.AllDialogs, RecycleOption.SendToRecycleBin)
+               MessageBox.Show(String.Format(My.Resources.msgFileRecycled, row("Name")), "File Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information)
+               Dim tableLocalFiles As DataTable = bsrcLocalFiles.DataSource
+               tableLocalFiles.Rows.Remove(selectedFile)
+
+            Catch ex As Exception
+               MessageBox.Show(ex.Message, "Delete File Exception", MessageBoxButtons.OK, MessageBoxIcon.Error)
+
+            End Try
+         End If
+      End If
+   End Sub
 End Class

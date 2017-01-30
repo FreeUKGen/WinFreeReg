@@ -1,4 +1,40 @@
-﻿Imports BrightIdeasSoftware
+﻿
+' Waffle Board story - 906 - File format mismatch between version 1.0.1 and version 1.1.1
+'
+' Installing version 1.1.1 over the top of version 1.0.1, or after uninstalling version 1.0.1 firs, can give rise
+' to a crash when opening any local transcription file.
+
+' Causes
+' Investigations show that the crash (caused by an OutOfMemory Unhandled Exception) occurs when the program attempts
+' to restore the window layout corresponding to the record type of the transcription file. Between version 1.0.1 and
+' version 1.1.1 there must have been a change in the layout of the file containing the data that allows the window
+' layout to be saved and restored.
+
+' Background
+' WinFreeREG tries to be kind to users by maintaining a file that contains the appearance of the main editing screen
+' whenever a file closed. The appearance of the editing window consists of the columns, their order, width and
+' visibility. Separate layouts are kept for each of the 3 record types: Baptisms, Burials and Marriages. The data is
+' kept in the file AppData\local\WinFreeREG\FileDetailsState.dat
+
+' Workaround
+' A temporary workaround is available. Simply delete the affected file AppData\local\WinFreeREG\FileDetailsState.dat
+
+' Solution
+' Problem arises due to the nature of the information being saved and restored: 3, variable-length arrays of bytes.
+' If, between saving the state information and next restoring it the program changes and the changes affect the
+' length of one or more of the arrays, then the system fails with results seen.
+
+' Easiest solution is to apply a predictable format to the file. To this end, the file now prefixes each of the
+' variable-length arrays with
+'     a) a string containing the record type, and
+'     b) a 32-bit integer containing the number of byes in the array
+
+' The method used writes the string so that its length is included. The string can be thus be any length, but is
+' restricted to either "BA" or "BU" or "MA". If any string is missing, then the restore is aborted and the defaults
+' assumed. The inclusion of the length allows the program to read it and compare it with the size of the expected
+' array. Again, a mismatch aborts the restore and the the defaults are assumed.
+
+Imports BrightIdeasSoftware
 Imports System.Windows.Forms
 Imports System.IO
 Imports System.Drawing
@@ -176,6 +212,7 @@ Public Class formFileWorkspace
             dlvBaptisms.RebuildColumns()
             dlvBaptisms.Visible = True
             dlvBaptisms.CustomSorter = AddressOf BaptismsSorter
+            dlvBaptisms.Sort(olvcLoadOrder, SortOrder.Descending)
             dlvBaptisms.Select()
 
          Case TranscriptionFileClass.FileTypes.BURIALS
@@ -197,6 +234,7 @@ Public Class formFileWorkspace
             dlvBurials.RebuildColumns()
             dlvBurials.Visible = True
             dlvBurials.CustomSorter = AddressOf BurialsSorter
+            dlvBurials.Sort(olvcLoadOrder, SortOrder.Descending)
             dlvBurials.Select()
 
          Case TranscriptionFileClass.FileTypes.MARRIAGES
@@ -219,6 +257,7 @@ Public Class formFileWorkspace
             dlvMarriages.RebuildColumns()
             dlvMarriages.Visible = True
             dlvMarriages.CustomSorter = AddressOf MarriagesSorter
+            dlvMarriages.Sort(olvcLoadOrder, SortOrder.Descending)
             dlvMarriages.Select()
 
       End Select
@@ -542,7 +581,6 @@ Public Class formFileWorkspace
                   e.NewValue = tinfo.ToTitleCase(e.NewValue)
                Case Else
             End Select
-            e.Control.Dispose()
          End If
       End If
 
@@ -625,7 +663,6 @@ Public Class formFileWorkspace
                   e.NewValue = tinfo.ToTitleCase(e.NewValue)
                Case Else
             End Select
-            e.Control.Dispose()
          End If
 
       End If
@@ -736,7 +773,6 @@ Public Class formFileWorkspace
                   e.NewValue = tinfo.ToTitleCase(e.NewValue)
                Case Else
             End Select
-            e.Control.Dispose()
          End If
       End If
    End Sub
