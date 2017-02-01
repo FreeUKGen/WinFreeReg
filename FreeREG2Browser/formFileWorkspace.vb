@@ -522,7 +522,6 @@ Public Class formFileWorkspace
 
    Private Sub BaptismCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBaptisms.CellEditStarting
       If TypeOf e.Control Is System.Windows.Forms.TextBox Then
-         Console.WriteLine(String.Format("Start: {0}, Location: {1} Size: {2}", e.Column.AspectName, e.Control.Location, e.Control.Size))
          If e.Column.AspectName.Contains("Surname") Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
@@ -567,7 +566,6 @@ Public Class formFileWorkspace
          If TypeOf e.Control Is TextBox Then
 
          ElseIf TypeOf e.Control Is ctlTextboxWithUCF Then
-            Console.WriteLine(String.Format("Finish: {0}, Location: {1} Size: {2}", e.Column.AspectName, e.Control.Location, e.Control.Size))
             Select Case e.Column.AspectName
                Case "Forenames", "FathersName", "MothersName"
                   Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture

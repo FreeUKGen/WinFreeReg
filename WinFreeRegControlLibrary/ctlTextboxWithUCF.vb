@@ -28,7 +28,6 @@
       End Get
       Set(value As Point)
          m_TargetLocation = value
-         Console.WriteLine(String.Format("Create:: target: {0}", m_TargetLocation))
       End Set
    End Property
 
@@ -60,7 +59,6 @@
       txtField.Text = Value
       txtField.CharacterCasing = CharacterCasing
       Me.SetBounds(TargetLocation.X - txtField.Location.X - Margin.Left, TargetLocation.Y - txtField.Location.Y - Margin.Top, 0, 0, BoundsSpecified.Location)
-      Console.WriteLine(String.Format("Load: {0}, Location: {1} TextBox: {2}", CellName, Me.Location, txtField.Location))
       SelectNextControl(txtField, True, True, True, True)
    End Sub
 
