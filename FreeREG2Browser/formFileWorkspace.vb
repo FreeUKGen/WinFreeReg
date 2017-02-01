@@ -522,29 +522,30 @@ Public Class formFileWorkspace
 
    Private Sub BaptismCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBaptisms.CellEditStarting
       If TypeOf e.Control Is System.Windows.Forms.TextBox Then
+         Console.WriteLine(String.Format("Start: {0}, Location: {1} Size: {2}", e.Column.AspectName, e.Control.Location, e.Control.Size))
          If e.Column.AspectName.Contains("Surname") Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Upper
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Forenames" OrElse e.Column.AspectName = "FathersName" OrElse e.Column.AspectName = "MothersName" Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Abode" Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "FathersOccupation" Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          Else
             If e.Column.AspectName = "Sex" Then
@@ -566,6 +567,7 @@ Public Class formFileWorkspace
          If TypeOf e.Control Is TextBox Then
 
          ElseIf TypeOf e.Control Is ctlTextboxWithUCF Then
+            Console.WriteLine(String.Format("Finish: {0}, Location: {1} Size: {2}", e.Column.AspectName, e.Control.Location, e.Control.Size))
             Select Case e.Column.AspectName
                Case "Forenames", "FathersName", "MothersName"
                   Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
@@ -610,22 +612,22 @@ Public Class formFileWorkspace
    Private Sub BurialCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBurials.CellEditStarting
       If TypeOf e.Control Is System.Windows.Forms.TextBox Then
          If e.Column.AspectName.Contains("Surname") Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Upper
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Forenames" OrElse e.Column.AspectName = "MaleForenames" OrElse e.Column.AspectName = "FemaleForenames" Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Abode" Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Relationship" Then
             Dim tCtl As TextBox = e.Control
@@ -692,34 +694,34 @@ Public Class formFileWorkspace
    Private Sub MarriageCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvMarriages.CellEditStarting
       If TypeOf e.Control Is System.Windows.Forms.TextBox Then
          If e.Column.AspectName.Contains("Surname") Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Upper
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomForenames" OrElse e.Column.AspectName = "BrideForenames" OrElse e.Column.AspectName = "GroomFatherForenames" OrElse e.Column.AspectName = "BrideFatherForenames" OrElse e.Column.AspectName = "Witness1Forenames" OrElse e.Column.AspectName = "Witness2Forenames" Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomParish" OrElse e.Column.AspectName = "BrideParish" Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomOccupation" OrElse e.Column.AspectName = "BrideOccupation" OrElse e.Column.AspectName = "GroomFatherOccupation" OrElse e.Column.AspectName = "BrideFatherOccupation" Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomAbode" OrElse e.Column.AspectName = "BrideAbode" Then
-            Dim ucfBox = New ctlTextboxWithUCF()
+            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+            ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.SetBounds(e.CellBounds.X - e.CellBounds.Width - 1, e.CellBounds.Y, 0, 0, BoundsSpecified.Location)
-            ucfBox.Value = e.Value
+            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomCondition" Then
             Dim tCtl As TextBox = e.Control
@@ -1235,8 +1237,6 @@ Public Class formFileWorkspace
 #End Region
 
 #Region "Delete Record"
-
-   ' TODO: 15. Delete functions are incomplete
 
    Private Sub BindingNavigatorDeleteItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorDeleteItem.Click
       DeleteRecord()

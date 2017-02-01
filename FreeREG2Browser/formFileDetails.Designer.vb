@@ -65,6 +65,7 @@ Partial Class formFileDetails
       Me.Label1 = New System.Windows.Forms.Label()
       Me.errorChurchName = New System.Windows.Forms.ErrorProvider(Me.components)
       Me.btnCancel = New System.Windows.Forms.Button()
+      Me.btnHelp = New System.Windows.Forms.Button()
       ChurchLabel = New System.Windows.Forms.Label()
       Comment1Label = New System.Windows.Forms.Label()
       Comment2Label = New System.Windows.Forms.Label()
@@ -471,12 +472,21 @@ Partial Class formFileDetails
       'btnCancel
       '
       Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-      Me.btnCancel.Location = New System.Drawing.Point(531, 10)
+      Me.btnCancel.Location = New System.Drawing.Point(531, 43)
       Me.btnCancel.Name = "btnCancel"
       Me.btnCancel.Size = New System.Drawing.Size(75, 23)
       Me.btnCancel.TabIndex = 64
       Me.btnCancel.Text = "Cancel"
       Me.btnCancel.UseVisualStyleBackColor = True
+      '
+      'btnHelp
+      '
+      Me.btnHelp.Location = New System.Drawing.Point(531, 10)
+      Me.btnHelp.Name = "btnHelp"
+      Me.btnHelp.Size = New System.Drawing.Size(75, 23)
+      Me.btnHelp.TabIndex = 65
+      Me.btnHelp.Text = "Help"
+      Me.btnHelp.UseVisualStyleBackColor = True
       '
       'formFileDetails
       '
@@ -484,6 +494,7 @@ Partial Class formFileDetails
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.CancelButton = Me.btnCancel
       Me.ClientSize = New System.Drawing.Size(618, 288)
+      Me.Controls.Add(Me.btnHelp)
       Me.Controls.Add(Me.btnCancel)
       Me.Controls.Add(Me.Label1)
       Me.Controls.Add(Me.PlaceCodeTextBox)
@@ -563,4 +574,5 @@ Partial Class formFileDetails
    Friend WithEvents TranscriptionFileClassBindingSource As System.Windows.Forms.BindingSource
    Friend WithEvents errorChurchName As System.Windows.Forms.ErrorProvider
    Friend WithEvents btnCancel As System.Windows.Forms.Button
+   Friend WithEvents btnHelp As System.Windows.Forms.Button
 End Class

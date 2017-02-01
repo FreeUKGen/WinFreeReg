@@ -151,4 +151,16 @@ Public Class formFileDetails
       convertQuotes = IIf(str Is Nothing, String.Empty, str.Replace("'", "''"))
    End Function
 
+   Private Sub btnHelp_Click(sender As Object, e As EventArgs) Handles btnHelp.Click
+      Try
+         formHelp.Title = "FreeREG Browser"
+         formHelp.StartPage = "FileDetails.html"
+         formHelp.Show()
+
+      Catch ex As Exception
+         formHelp.Hide()
+         MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+      End Try
+   End Sub
 End Class

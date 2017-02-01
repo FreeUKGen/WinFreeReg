@@ -479,6 +479,7 @@
     <Content Include="Documentation\StartNewFile.html" />
     <Content Include="Documentation\StartUp.html" />
     <Content Include="Documentation\DataErrors.html" />
+    <Content Include="Documentation\UncertainCharacterFormat.html" />
     <Content Include="Documentation\UploadedFiles.html" />
     <Content Include="Documentation\UserDetails.html" />
     <Content Include="Documentation\UserOptions.html" />
