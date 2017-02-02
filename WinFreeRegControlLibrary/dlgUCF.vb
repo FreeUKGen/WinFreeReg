@@ -2,6 +2,7 @@
 
 Public Class dlgUCF
    Dim fRestoreComplete As Boolean = True
+   Property formHelp As formGeneralHelp
 
    Public _ucf As UCFDataClass = New UCFDataClass
 
@@ -153,4 +154,35 @@ Public Class dlgUCF
       Me._ucf.FieldText = txtDataField.Text
    End Sub
 
+   Private Sub dlgUCF_HelpButtonClicked(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles MyBase.HelpButtonClicked
+      If formHelp IsNot Nothing Then
+         Try
+            formHelp.Title = "UCF Helper"
+            formHelp.StartPage = "UncertainCharacterFormat.html"
+            formHelp.Show()
+
+         Catch ex As Exception
+            formHelp.Hide()
+            MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+         End Try
+      Else
+         e.Cancel = True
+      End If
+   End Sub
+
+   Private Sub dlgUCF_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles MyBase.HelpRequested
+      If formHelp IsNot Nothing Then
+         Try
+            formHelp.Title = "UCF Helper"
+            formHelp.StartPage = "UncertainCharacterFormat.html"
+            formHelp.Show()
+
+         Catch ex As Exception
+            formHelp.Hide()
+            MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+         End Try
+      End If
+   End Sub
 End Class

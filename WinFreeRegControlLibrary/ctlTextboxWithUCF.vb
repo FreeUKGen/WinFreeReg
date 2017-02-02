@@ -54,6 +54,8 @@
       CharacterCasing = Windows.Forms.CharacterCasing.Normal
    End Sub
 
+   Property HelpForm As formGeneralHelp
+
    Private Sub ctlTextboxWithUCF_Load(sender As Object, e As EventArgs) Handles Me.Load
       labColumn.Text = CellName
       txtField.Text = Value
@@ -71,6 +73,7 @@
          ' F5 is the key in WinREG that starts the UCF dialog
          '
          Using dlg As New dlgUCF
+            dlg.formHelp = HelpForm
             dlg._ucf.FieldName = CellName
             dlg._ucf.FieldText = Value
             dlg._ucf.InsertionPoint = txtField.SelectionStart

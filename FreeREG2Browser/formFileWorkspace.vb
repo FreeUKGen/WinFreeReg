@@ -527,24 +527,28 @@ Public Class formFileWorkspace
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Upper
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Forenames" OrElse e.Column.AspectName = "FathersName" OrElse e.Column.AspectName = "MothersName" Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Abode" Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "FathersOccupation" Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          Else
             If e.Column.AspectName = "Sex" Then
@@ -614,18 +618,21 @@ Public Class formFileWorkspace
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Upper
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Forenames" OrElse e.Column.AspectName = "MaleForenames" OrElse e.Column.AspectName = "FemaleForenames" Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Abode" Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "Relationship" Then
             Dim tCtl As TextBox = e.Control
@@ -696,30 +703,35 @@ Public Class formFileWorkspace
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Upper
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomForenames" OrElse e.Column.AspectName = "BrideForenames" OrElse e.Column.AspectName = "GroomFatherForenames" OrElse e.Column.AspectName = "BrideFatherForenames" OrElse e.Column.AspectName = "Witness1Forenames" OrElse e.Column.AspectName = "Witness2Forenames" Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomParish" OrElse e.Column.AspectName = "BrideParish" Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomOccupation" OrElse e.Column.AspectName = "BrideOccupation" OrElse e.Column.AspectName = "GroomFatherOccupation" OrElse e.Column.AspectName = "BrideFatherOccupation" Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomAbode" OrElse e.Column.AspectName = "BrideAbode" Then
             Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
             ucfBox.TargetLocation = e.Control.Location
             ucfBox.CharacterCasing = CharacterCasing.Normal
             ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+            ucfBox.HelpForm = formHelp
             e.Control = ucfBox
          ElseIf e.Column.AspectName = "GroomCondition" Then
             Dim tCtl As TextBox = e.Control
