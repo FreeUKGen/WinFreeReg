@@ -47,6 +47,8 @@ Public Class dlgUserOptions
       checkReplicateFicheAndImage.Checked = My.Settings.optionReplicateFicheImage
       checkReplicateDates.Checked = My.Settings.optionReplicateDates
       checkAutoIncrementRegisterNumber.Checked = My.Settings.optionAutoIncrementRegisterNumber
+      checkUCF.Checked = My.Settings.optionSeparateUCF
+      checkNormalRecordOrder.Checked = My.Settings.optionNormalRecordOrder
 
       labelFont.Font = My.Settings.optionFont
       labelFont.Text = String.Format("{0}, {1}, {2}", My.Settings.optionFont.Name, My.Settings.optionFont.SizeInPoints, My.Settings.optionFont.Style)

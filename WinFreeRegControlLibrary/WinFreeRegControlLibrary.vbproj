@@ -105,6 +105,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="ctlTextBox.Designer.vb">
+      <DependentUpon>ctlTextBox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ctlTextBox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ctlTextboxWithUCF.Designer.vb">
       <DependentUpon>ctlTextboxWithUCF.vb</DependentUpon>
     </Compile>
@@ -148,6 +154,9 @@
     <Compile Include="WinFormControlExtensions.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ctlTextBox.resx">
+      <DependentUpon>ctlTextBox.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ctlTextboxWithUCF.resx">
       <DependentUpon>ctlTextboxWithUCF.vb</DependentUpon>
     </EmbeddedResource>

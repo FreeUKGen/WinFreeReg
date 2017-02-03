@@ -145,6 +145,7 @@
     <Compile Include="AboutBox.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="AlphanumComparator.vb" />
     <Compile Include="DateColumnComparer.vb" />
     <Compile Include="dlgChurches.Designer.vb">
       <DependentUpon>dlgChurches.vb</DependentUpon>
@@ -469,6 +470,7 @@
     <Content Include="Documentation\BaptismErrors.html" />
     <Content Include="Documentation\BurialErrors.html" />
     <Content Include="Documentation\CorrectTableError.html" />
+    <Content Include="Documentation\Extended UCF textbox.jpg" />
     <Content Include="Documentation\FileDetails.html" />
     <Content Include="Documentation\FileWorkspace.html" />
     <Content Include="Documentation\FreeRegBrowser.css" />
@@ -476,6 +478,7 @@
     <Content Include="Documentation\GeneralHelp.html" />
     <Content Include="Documentation\LocalFiles.html" />
     <Content Include="Documentation\MarriageErrors.html" />
+    <Content Include="Documentation\Normal UCF textbox.jpg" />
     <Content Include="Documentation\StartNewFile.html" />
     <Content Include="Documentation\StartUp.html" />
     <Content Include="Documentation\DataErrors.html" />

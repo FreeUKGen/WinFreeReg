@@ -105,8 +105,11 @@ Partial Class TranscriptionTables
       End Sub
 
       Private Sub BaptismsDataTable_BaptismsRowDeleting(sender As Object, e As BaptismsRowChangeEvent) Handles Me.BaptismsRowDeleting
-
       End Sub
+
+      Private Sub BaptismsDataTable_BaptismsRowDeleted(sender As Object, e As BaptismsRowChangeEvent) Handles Me.BaptismsRowDeleted
+      End Sub
+
    End Class
 
 	Partial Class BurialsDataTable

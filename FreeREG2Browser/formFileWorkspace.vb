@@ -212,7 +212,7 @@ Public Class formFileWorkspace
             dlvBaptisms.RebuildColumns()
             dlvBaptisms.Visible = True
             dlvBaptisms.CustomSorter = AddressOf BaptismsSorter
-            dlvBaptisms.Sort(olvcLoadOrder, SortOrder.Descending)
+            dlvBaptisms.Sort(olvcLoadOrder, IIf(My.Settings.optionNormalRecordOrder, SortOrder.Ascending, SortOrder.Descending))
             dlvBaptisms.Select()
 
          Case TranscriptionFileClass.FileTypes.BURIALS
@@ -234,7 +234,7 @@ Public Class formFileWorkspace
             dlvBurials.RebuildColumns()
             dlvBurials.Visible = True
             dlvBurials.CustomSorter = AddressOf BurialsSorter
-            dlvBurials.Sort(olvcLoadOrder, SortOrder.Descending)
+            dlvBurials.Sort(olvcLoadOrder1, IIf(My.Settings.optionNormalRecordOrder, SortOrder.Ascending, SortOrder.Descending))
             dlvBurials.Select()
 
          Case TranscriptionFileClass.FileTypes.MARRIAGES
@@ -257,7 +257,7 @@ Public Class formFileWorkspace
             dlvMarriages.RebuildColumns()
             dlvMarriages.Visible = True
             dlvMarriages.CustomSorter = AddressOf MarriagesSorter
-            dlvMarriages.Sort(olvcLoadOrder, SortOrder.Descending)
+            dlvMarriages.Sort(olvcLoadOrder2, IIf(My.Settings.optionNormalRecordOrder, SortOrder.Ascending, SortOrder.Descending))
             dlvMarriages.Select()
 
       End Select
@@ -511,6 +511,8 @@ Public Class formFileWorkspace
 
    Private Sub BaptismsSorter(column As OLVColumn, order As SortOrder)
       Select Case column.AspectName
+         Case "RegNo"
+            dlvBaptisms.ListViewItemSorter = New AlphanumComparator(column, order)
          Case "BirthDate"
             dlvBaptisms.ListViewItemSorter = New DateColumnComparer(column, order)
          Case "BaptismDate"
@@ -523,33 +525,37 @@ Public Class formFileWorkspace
    Private Sub BaptismCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBaptisms.CellEditStarting
       If TypeOf e.Control Is System.Windows.Forms.TextBox Then
          If e.Column.AspectName.Contains("Surname") Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Upper
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Upper, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Upper, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "Forenames" OrElse e.Column.AspectName = "FathersName" OrElse e.Column.AspectName = "MothersName" Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "Abode" Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "FathersOccupation" Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            End If
          Else
             If e.Column.AspectName = "Sex" Then
                CType(e.Control, System.Windows.Forms.TextBox).CharacterCasing = CharacterCasing.Upper
@@ -569,7 +575,7 @@ Public Class formFileWorkspace
       Else
          If TypeOf e.Control Is TextBox Then
 
-         ElseIf TypeOf e.Control Is ctlTextboxWithUCF Then
+         ElseIf TypeOf e.Control Is ctlTextboxWithUCF OrElse TypeOf e.Control Is ctlTextBox Then
             Select Case e.Column.AspectName
                Case "Forenames", "FathersName", "MothersName"
                   Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
@@ -604,6 +610,8 @@ Public Class formFileWorkspace
 
    Private Sub BurialsSorter(column As OLVColumn, order As SortOrder)
       Select Case column.AspectName
+         Case "RegNo"
+            dlvBurials.ListViewItemSorter = New AlphanumComparator(column, order)
          Case "BurialDate"
             dlvBurials.ListViewItemSorter = New DateColumnComparer(column, order)
          Case Else
@@ -614,26 +622,29 @@ Public Class formFileWorkspace
    Private Sub BurialCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvBurials.CellEditStarting
       If TypeOf e.Control Is System.Windows.Forms.TextBox Then
          If e.Column.AspectName.Contains("Surname") Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Upper
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Upper, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Upper, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "Forenames" OrElse e.Column.AspectName = "MaleForenames" OrElse e.Column.AspectName = "FemaleForenames" Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "Abode" Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "Relationship" Then
             Dim tCtl As TextBox = e.Control
             tCtl.Bounds = e.CellBounds
@@ -658,7 +669,7 @@ Public Class formFileWorkspace
       Else
          If TypeOf e.Control Is TextBox Then
 
-         ElseIf TypeOf e.Control Is ctlTextboxWithUCF Then
+         ElseIf TypeOf e.Control Is ctlTextboxWithUCF OrElse TypeOf e.Control Is ctlTextBox Then
             Select Case e.Column.AspectName
                Case "Forenames", "MaleForenames", "FemaleForenames"
                   Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
@@ -689,6 +700,8 @@ Public Class formFileWorkspace
 
    Private Sub MarriagesSorter(column As OLVColumn, order As SortOrder)
       Select Case column.AspectName
+         Case "RegNo"
+            dlvMarriages.ListViewItemSorter = New AlphanumComparator(column, order)
          Case "MarriageDate"
             dlvMarriages.ListViewItemSorter = New DateColumnComparer(column, order)
          Case Else
@@ -699,40 +712,45 @@ Public Class formFileWorkspace
    Private Sub MarriageCellEditStarting(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.CellEditEventArgs) Handles dlvMarriages.CellEditStarting
       If TypeOf e.Control Is System.Windows.Forms.TextBox Then
          If e.Column.AspectName.Contains("Surname") Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Upper
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Upper, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Upper, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "GroomForenames" OrElse e.Column.AspectName = "BrideForenames" OrElse e.Column.AspectName = "GroomFatherForenames" OrElse e.Column.AspectName = "BrideFatherForenames" OrElse e.Column.AspectName = "Witness1Forenames" OrElse e.Column.AspectName = "Witness2Forenames" Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "GroomParish" OrElse e.Column.AspectName = "BrideParish" Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "GroomOccupation" OrElse e.Column.AspectName = "BrideOccupation" OrElse e.Column.AspectName = "GroomFatherOccupation" OrElse e.Column.AspectName = "BrideFatherOccupation" Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "GroomAbode" OrElse e.Column.AspectName = "BrideAbode" Then
-            Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
-            ucfBox.TargetLocation = e.Control.Location
-            ucfBox.CharacterCasing = CharacterCasing.Normal
-            ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
-            ucfBox.HelpForm = formHelp
-            e.Control = ucfBox
+            If My.Settings.optionSeparateUCF Then
+               Dim ucfBox = NewUCFEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            Else
+               Dim ucfBox = NewTextBoxEditControl(e, CharacterCasing.Normal, formHelp)
+               e.Control = ucfBox
+            End If
          ElseIf e.Column.AspectName = "GroomCondition" Then
             Dim tCtl As TextBox = e.Control
             tCtl.Bounds = e.CellBounds
@@ -765,7 +783,7 @@ Public Class formFileWorkspace
       Else
          If TypeOf e.Control Is TextBox Then
 
-         ElseIf TypeOf e.Control Is ctlTextboxWithUCF Then
+         ElseIf TypeOf e.Control Is ctlTextboxWithUCF OrElse TypeOf e.Control Is ctlTextBox Then
             Select Case e.Column.AspectName
                Case "GroomForenames", "BrideForenames", "GroomFatherForenames", "BrideFatherForenames", "Witness1Forenames", "Witness2Forenames"
                   Dim culture As CultureInfo = Thread.CurrentThread.CurrentCulture
@@ -807,10 +825,10 @@ Public Class formFileWorkspace
             Dim currentrecord As WinFreeReg.TranscriptionTables.BaptismsRow = dlvBaptisms.SelectedItem.RowObject.row
             AddNewItem(currentrecord.RegNo, currentrecord.LDSFiche, currentrecord.LDSImage, currentrecord.BirthDate, currentrecord.BaptismDate)
          Case TranscriptionFileClass.FileTypes.BURIALS
-            Dim currentrecord As WinFreeReg.TranscriptionTables.BurialsRow = dlvBaptisms.SelectedItem.RowObject.row
+            Dim currentrecord As WinFreeReg.TranscriptionTables.BurialsRow = dlvBurials.SelectedItem.RowObject.row
             AddNewItem(currentrecord.RegNo, currentrecord.LDSFiche, currentrecord.LDSImage, currentrecord.BurialDate, Nothing)
          Case TranscriptionFileClass.FileTypes.MARRIAGES
-            Dim currentrecord As WinFreeReg.TranscriptionTables.MarriagesRow = dlvBaptisms.SelectedItem.RowObject.row
+            Dim currentrecord As WinFreeReg.TranscriptionTables.MarriagesRow = dlvMarriages.SelectedItem.RowObject.row
             AddNewItem(currentrecord.RegNo, currentrecord.LDSFiche, currentrecord.LDSImage, currentrecord.MarriageDate, Nothing)
       End Select
    End Sub
@@ -895,6 +913,165 @@ Public Class formFileWorkspace
       End If
       Return regno
    End Function
+
+#End Region
+
+#Region "Duplicate Record"
+
+   Private Sub DuplicateRecordMenuItem_Click(sender As Object, e As EventArgs) Handles bapDuplicateRecordMenuItem.Click, marDuplicateRecordMenuItem.Click, burDuplicateRecordMenuItem.Click
+      DuplicateRecord()
+   End Sub
+
+   Private Sub DuplicateRecord()
+      Select Case m_TranscriptionFile.FileHeader.FileType
+         Case TranscriptionFileClass.FileTypes.BAPTISMS
+            ' Get the currently selected object
+            Dim x As DataRowView = dlvBaptisms.SelectedObject()
+            If x IsNot Nothing Then
+               ' Get the currently selected Baptisms row
+               Dim row As TranscriptionTables.BaptismsRow = x.Row
+               ' Create a new, empty row
+               Dim dt As TranscriptionTables.BaptismsDataTable = CType(bsBaptisms.DataSource, TranscriptionTables.BaptismsDataTable)
+               Dim newrow As TranscriptionTables.BaptismsRow = dt.NewRow()
+               newrow.County = row.County
+               newrow.Place = row.Place
+               newrow.Church = row.Church
+               newrow.RegNo = row.RegNo
+               newrow.BirthDate = row.BirthDate
+               newrow.BaptismDate = row.BaptismDate
+               newrow.Forenames = row.Forenames
+               newrow.Sex = row.Sex
+               newrow.FathersName = row.FathersName
+               newrow.FathersSurname = row.FathersSurname
+               newrow.FathersOccupation = row.FathersOccupation
+               newrow.MothersName = row.MothersName
+               newrow.MothersSurname = row.MothersSurname
+               newrow.Abode = row.Abode
+               newrow.Notes = row.Notes
+               newrow.LDSFiche = row.LDSFiche
+               newrow.LDSImage = row.LDSImage
+
+               dt.AddBaptismsRow(newrow)
+               Dim model = dt.DefaultView.Item(newrow.LoadOrder)
+               dlvBaptisms.EnsureModelVisible(model)
+               dlvBaptisms.SelectObject(model, True)
+               dlvBaptisms.Select()
+            End If
+
+         Case TranscriptionFileClass.FileTypes.BURIALS
+            ' Get the currently selected object
+            Dim x As DataRowView = dlvBurials.SelectedObject()
+            If x IsNot Nothing Then
+               ' Get the currently selected Burials row
+               Dim row As TranscriptionTables.BurialsRow = x.Row
+               ' Create a new, empty row
+               Dim dt As TranscriptionTables.BurialsDataTable = CType(bsBurials.DataSource, TranscriptionTables.BurialsDataTable)
+               Dim newrow As TranscriptionTables.BurialsRow = dt.NewRow()
+               newrow.County = row.County
+               newrow.Place = row.Place
+               newrow.Church = row.Church
+               newrow.RegNo = row.RegNo
+               newrow.BurialDate = row.BurialDate
+               newrow.Forenames = row.Forenames
+               newrow.Surname = row.Surname
+               newrow.Age = row.Age
+               newrow.Relationship = row.Relationship
+               newrow.MaleForenames = row.MaleForenames
+               newrow.FemaleForenames = row.FemaleForenames
+               newrow.RelativeSurname = row.RelativeSurname
+               newrow.Abode = row.Abode
+               newrow.Notes = row.Notes
+               newrow.LDSFiche = row.LDSFiche
+               newrow.LDSImage = row.LDSImage
+               dt.AddBurialsRow(newrow)
+               Dim model = dt.DefaultView.Item(newrow.LoadOrder)
+               dlvBurials.EnsureModelVisible(model)
+               dlvBurials.SelectObject(model, True)
+               dlvBurials.Select()
+            End If
+
+         Case TranscriptionFileClass.FileTypes.MARRIAGES
+            ' Get the currently selected object
+            Dim x As DataRowView = dlvMarriages.SelectedObject()
+            If x IsNot Nothing Then
+               ' Get the currently selected Marriages row
+               Dim row As TranscriptionTables.MarriagesRow = x.Row
+               ' Create a new, empty row
+               Dim dt As TranscriptionTables.MarriagesDataTable = CType(bsMarriages.DataSource, TranscriptionTables.MarriagesDataTable)
+               Dim newrow As TranscriptionTables.MarriagesRow = dt.NewRow()
+               newrow.County = row.County
+               newrow.Place = row.Place
+               newrow.Church = row.Church
+               newrow.RegNo = row.RegNo
+               newrow.MarriageDate = row.MarriageDate
+               newrow.GroomForenames = row.GroomForenames
+               newrow.GroomSurname = row.GroomSurname
+               newrow.GroomAge = row.GroomAge
+               newrow.GroomCondition = row.GroomCondition
+               newrow.GroomOccupation = row.GroomOccupation
+               newrow.GroomAbode = row.GroomAbode
+               newrow.GroomParish = row.GroomParish
+               newrow.BrideForenames = row.BrideForenames
+               newrow.BrideSurname = row.BrideSurname
+               newrow.BrideAge = row.BrideAge
+               newrow.BrideCondition = row.BrideCondition
+               newrow.BrideOccupation = row.BrideOccupation
+               newrow.BrideAbode = row.BrideAbode
+               newrow.BrideParish = row.BrideParish
+               newrow.GroomFatherForenames = row.GroomFatherForenames
+               newrow.GroomFatherSurname = row.GroomFatherSurname
+               newrow.GroomFatherOccupation = row.GroomFatherOccupation
+               newrow.BrideFatherForenames = row.BrideFatherForenames
+               newrow.BrideFatherSurname = row.BrideFatherSurname
+               newrow.BrideFatherOccupation = row.BrideFatherOccupation
+               newrow.Witness1Forenames = row.Witness1Forenames
+               newrow.Witness1Surname = row.Witness1Surname
+               newrow.Witness2Forenames = row.Witness2Forenames
+               newrow.Witness2Surname = row.Witness2Surname
+               newrow.Notes = row.Notes
+               newrow.LDSFiche = row.LDSFiche
+               newrow.LDSImage = row.LDSImage
+               dt.AddMarriagesRow(newrow)
+               Dim model = dt.DefaultView.Item(newrow.LoadOrder)
+               dlvMarriages.EnsureModelVisible(model)
+               dlvMarriages.SelectObject(model, True)
+               dlvMarriages.Select()
+            End If
+
+      End Select
+   End Sub
+
+#End Region
+
+#Region "Delete Record"
+
+   Private Sub BindingNavigatorDeleteItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorDeleteItem.Click
+      DeleteRecord()
+   End Sub
+
+   Private Sub DeleteRecord()
+      Select Case m_TranscriptionFile.FileHeader.FileType
+         Case TranscriptionFileClass.FileTypes.BAPTISMS
+            ' Get the currently selected object
+            Dim x As DataRowView = dlvBaptisms.SelectedObject()
+            If x IsNot Nothing Then dlvBaptisms.RemoveObject(x)
+
+         Case TranscriptionFileClass.FileTypes.BURIALS
+            ' Get the currently selected object
+            Dim x As DataRowView = dlvBurials.SelectedObject()
+            If x IsNot Nothing Then dlvBurials.RemoveObject(x)
+
+         Case TranscriptionFileClass.FileTypes.MARRIAGES
+            ' Get the currently selected object
+            Dim x As DataRowView = dlvMarriages.SelectedObject()
+            If x IsNot Nothing Then dlvMarriages.RemoveObject(x)
+
+      End Select
+   End Sub
+
+   Private Sub DeleteRecordMenuItem_Click(sender As Object, e As EventArgs) Handles marDeleteRecordMenuItem.Click, burDeleteRecordMenuItem.Click, bapDeleteRecordMenuItem.Click
+      DeleteRecord()
+   End Sub
 
 #End Region
 
@@ -1119,163 +1296,21 @@ Public Class formFileWorkspace
       Return MyBase.ProcessCmdKey(msg, keyData)
    End Function
 
-#Region "Duplicate Record"
+   Private Function NewUCFEditControl(e As CellEditEventArgs, characterCasing As CharacterCasing, formHelp As formGeneralHelp) As Object
+      Dim ucfBox = New ctlTextboxWithUCF(e.Column.Text, e.Value)
+      ucfBox.TargetLocation = e.Control.Location
+      ucfBox.CharacterCasing = characterCasing
+      ucfBox.Location = New Point(e.CellBounds.X, e.CellBounds.Y)
+      ucfBox.HelpForm = formHelp
+      Return ucfBox
+   End Function
 
-   Private Sub DuplicateRecordMenuItem_Click(sender As Object, e As EventArgs) Handles bapDuplicateRecordMenuItem.Click, marDuplicateRecordMenuItem.Click, burDuplicateRecordMenuItem.Click
-      DuplicateRecord()
-   End Sub
-
-   Private Sub DuplicateRecord()
-      Select Case m_TranscriptionFile.FileHeader.FileType
-         Case TranscriptionFileClass.FileTypes.BAPTISMS
-            ' Get the currently selected object
-            Dim x As DataRowView = dlvBaptisms.SelectedObject()
-            If x IsNot Nothing Then
-               ' Get the currently selected Baptisms row
-               Dim row As TranscriptionTables.BaptismsRow = x.Row
-               ' Create a new, empty row
-               Dim dt As TranscriptionTables.BaptismsDataTable = CType(bsBaptisms.DataSource, TranscriptionTables.BaptismsDataTable)
-               Dim newrow As TranscriptionTables.BaptismsRow = dt.NewRow()
-               newrow.County = row.County
-               newrow.Place = row.Place
-               newrow.Church = row.Church
-               newrow.RegNo = row.RegNo
-               newrow.BirthDate = row.BirthDate
-               newrow.BaptismDate = row.BaptismDate
-               newrow.Forenames = row.Forenames
-               newrow.Sex = row.Sex
-               newrow.FathersName = row.FathersName
-               newrow.FathersSurname = row.FathersSurname
-               newrow.FathersOccupation = row.FathersOccupation
-               newrow.MothersName = row.MothersName
-               newrow.MothersSurname = row.MothersSurname
-               newrow.Abode = row.Abode
-               newrow.Notes = row.Notes
-               newrow.LDSFiche = row.LDSFiche
-               newrow.LDSImage = row.LDSImage
-
-               dt.AddBaptismsRow(newrow)
-               Dim model = dt.DefaultView.Item(newrow.LoadOrder)
-               dlvBaptisms.EnsureModelVisible(model)
-               dlvBaptisms.SelectObject(model, True)
-               dlvBaptisms.Select()
-            End If
-
-         Case TranscriptionFileClass.FileTypes.BURIALS
-            ' Get the currently selected object
-            Dim x As DataRowView = dlvBurials.SelectedObject()
-            If x IsNot Nothing Then
-               ' Get the currently selected Burials row
-               Dim row As TranscriptionTables.BurialsRow = x.Row
-               ' Create a new, empty row
-               Dim dt As TranscriptionTables.BurialsDataTable = CType(bsBurials.DataSource, TranscriptionTables.BurialsDataTable)
-               Dim newrow As TranscriptionTables.BurialsRow = dt.NewRow()
-               newrow.County = row.County
-               newrow.Place = row.Place
-               newrow.Church = row.Church
-               newrow.RegNo = row.RegNo
-               newrow.BurialDate = row.BurialDate
-               newrow.Forenames = row.Forenames
-               newrow.Surname = row.Surname
-               newrow.Age = row.Age
-               newrow.Relationship = row.Relationship
-               newrow.MaleForenames = row.MaleForenames
-               newrow.FemaleForenames = row.FemaleForenames
-               newrow.RelativeSurname = row.RelativeSurname
-               newrow.Abode = row.Abode
-               newrow.Notes = row.Notes
-               newrow.LDSFiche = row.LDSFiche
-               newrow.LDSImage = row.LDSImage
-               dt.AddBurialsRow(newrow)
-               Dim model = dt.DefaultView.Item(newrow.LoadOrder)
-               dlvBurials.EnsureModelVisible(model)
-               dlvBurials.SelectObject(model, True)
-               dlvBurials.Select()
-            End If
-
-         Case TranscriptionFileClass.FileTypes.MARRIAGES
-            ' Get the currently selected object
-            Dim x As DataRowView = dlvMarriages.SelectedObject()
-            If x IsNot Nothing Then
-               ' Get the currently selected Marriages row
-               Dim row As TranscriptionTables.MarriagesRow = x.Row
-               ' Create a new, empty row
-               Dim dt As TranscriptionTables.MarriagesDataTable = CType(bsMarriages.DataSource, TranscriptionTables.MarriagesDataTable)
-               Dim newrow As TranscriptionTables.MarriagesRow = dt.NewRow()
-               newrow.County = row.County
-               newrow.Place = row.Place
-               newrow.Church = row.Church
-               newrow.RegNo = row.RegNo
-               newrow.MarriageDate = row.MarriageDate
-               newrow.GroomForenames = row.GroomForenames
-               newrow.GroomSurname = row.GroomSurname
-               newrow.GroomAge = row.GroomAge
-               newrow.GroomCondition = row.GroomCondition
-               newrow.GroomOccupation = row.GroomOccupation
-               newrow.GroomAbode = row.GroomAbode
-               newrow.GroomParish = row.GroomParish
-               newrow.BrideForenames = row.BrideForenames
-               newrow.BrideSurname = row.BrideSurname
-               newrow.BrideAge = row.BrideAge
-               newrow.BrideCondition = row.BrideCondition
-               newrow.BrideOccupation = row.BrideOccupation
-               newrow.BrideAbode = row.BrideAbode
-               newrow.BrideParish = row.BrideParish
-               newrow.GroomFatherForenames = row.GroomFatherForenames
-               newrow.GroomFatherSurname = row.GroomFatherSurname
-               newrow.GroomFatherOccupation = row.GroomFatherOccupation
-               newrow.BrideFatherForenames = row.BrideFatherForenames
-               newrow.BrideFatherSurname = row.BrideFatherSurname
-               newrow.BrideFatherOccupation = row.BrideFatherOccupation
-               newrow.Witness1Forenames = row.Witness1Forenames
-               newrow.Witness1Surname = row.Witness1Surname
-               newrow.Witness2Forenames = row.Witness2Forenames
-               newrow.Witness2Surname = row.Witness2Surname
-               newrow.Notes = row.Notes
-               newrow.LDSFiche = row.LDSFiche
-               newrow.LDSImage = row.LDSImage
-               dt.AddMarriagesRow(newrow)
-               Dim model = dt.DefaultView.Item(newrow.LoadOrder)
-               dlvMarriages.EnsureModelVisible(model)
-               dlvMarriages.SelectObject(model, True)
-               dlvMarriages.Select()
-            End If
-
-      End Select
-   End Sub
-
-#End Region
-
-#Region "Delete Record"
-
-   Private Sub BindingNavigatorDeleteItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorDeleteItem.Click
-      DeleteRecord()
-   End Sub
-
-   Private Sub DeleteRecord()
-      Select Case m_TranscriptionFile.FileHeader.FileType
-         Case TranscriptionFileClass.FileTypes.BAPTISMS
-            ' Get the currently selected object
-            Dim x As DataRowView = dlvBaptisms.SelectedObject()
-            If x IsNot Nothing Then dlvBaptisms.RemoveObject(x)
-
-         Case TranscriptionFileClass.FileTypes.BURIALS
-            ' Get the currently selected object
-            Dim x As DataRowView = dlvBurials.SelectedObject()
-            If x IsNot Nothing Then dlvBurials.RemoveObject(x)
-
-         Case TranscriptionFileClass.FileTypes.MARRIAGES
-            ' Get the currently selected object
-            Dim x As DataRowView = dlvMarriages.SelectedObject()
-            If x IsNot Nothing Then dlvMarriages.RemoveObject(x)
-
-      End Select
-   End Sub
-
-   Private Sub DeleteRecordMenuItem_Click(sender As Object, e As EventArgs) Handles marDeleteRecordMenuItem.Click, burDeleteRecordMenuItem.Click, bapDeleteRecordMenuItem.Click
-      DeleteRecord()
-   End Sub
-
-#End Region
+   Private Function NewTextBoxEditControl(e As CellEditEventArgs, characterCasing As CharacterCasing, formHelp As formGeneralHelp) As Object
+      Dim ucfBox = New ctlTextBox(e.Column.Text, e.Value, e.CellBounds)
+      ucfBox.TargetLocation = e.Control.Location
+      ucfBox.CharacterCasing = characterCasing
+      ucfBox.HelpForm = formHelp
+      Return ucfBox
+   End Function
 
 End Class

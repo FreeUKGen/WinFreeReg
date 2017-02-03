@@ -43,6 +43,25 @@ Partial Class formFileWorkspace
       Me.BindingNavigatorFileDetails = New System.Windows.Forms.ToolStripButton()
       Me.miGeneralHelp = New System.Windows.Forms.ToolStripMenuItem()
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
+      Me.dlvBaptisms = New BrightIdeasSoftware.DataListView()
+      Me.olvcRegNo = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcCounty = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcPlace = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcChurch = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcFiche = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcImage = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBirthDate = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcBaptismDate = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcSex = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcFathersName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcFathersSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcMothersName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcMothersSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcFathersOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcAbode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcNotes = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLoadOrder = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.dlvMarriages = New BrightIdeasSoftware.DataListView()
       Me.olvcRegNo2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcFiche2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
@@ -77,25 +96,6 @@ Partial Class formFileWorkspace
       Me.olvcWitness2Surname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcNotes2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcLoadOrder2 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.dlvBaptisms = New BrightIdeasSoftware.DataListView()
-      Me.olvcRegNo = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcCounty = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcPlace = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcChurch = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcFiche = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcImage = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBirthDate = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcBaptismDate = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcForenames = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcSex = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcFathersName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcFathersSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcMothersName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcMothersSurname = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcFathersOccupation = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcAbode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcNotes = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
-      Me.olvcLoadOrder = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.dlvBurials = New BrightIdeasSoftware.DataListView()
       Me.olvcRegNo1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.olvcFiche1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
@@ -140,8 +140,8 @@ Partial Class formFileWorkspace
       Me.SplitContainer1.Panel1.SuspendLayout()
       Me.SplitContainer1.Panel2.SuspendLayout()
       Me.SplitContainer1.SuspendLayout()
-      CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.dlvBaptisms, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.dlvBurials, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.baptismsContextMenuStrip.SuspendLayout()
       Me.burialsContextMenuStrip.SuspendLayout()
@@ -293,12 +293,193 @@ Partial Class formFileWorkspace
       '
       'SplitContainer1.Panel2
       '
-      Me.SplitContainer1.Panel2.Controls.Add(Me.dlvBaptisms)
       Me.SplitContainer1.Panel2.Controls.Add(Me.dlvMarriages)
       Me.SplitContainer1.Panel2.Controls.Add(Me.dlvBurials)
+      Me.SplitContainer1.Panel2.Controls.Add(Me.dlvBaptisms)
       Me.SplitContainer1.Size = New System.Drawing.Size(839, 560)
       Me.SplitContainer1.SplitterDistance = 25
       Me.SplitContainer1.TabIndex = 4
+      '
+      'dlvBaptisms
+      '
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcRegNo)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcCounty)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcPlace)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcChurch)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcFiche)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcImage)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcBirthDate)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcBaptismDate)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcForenames)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcSex)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcFathersName)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcFathersSurname)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcMothersName)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcMothersSurname)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcFathersOccupation)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcAbode)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcNotes)
+      Me.dlvBaptisms.AllColumns.Add(Me.olvcLoadOrder)
+      Me.dlvBaptisms.AllowColumnReorder = True
+      Me.dlvBaptisms.AlternateRowBackColor = System.Drawing.Color.LavenderBlush
+      Me.dlvBaptisms.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
+      Me.dlvBaptisms.CellEditTabChangesRows = True
+      Me.dlvBaptisms.CellEditUseWholeCell = False
+      Me.dlvBaptisms.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo, Me.olvcFiche, Me.olvcImage, Me.olvcBirthDate, Me.olvcBaptismDate, Me.olvcForenames, Me.olvcSex, Me.olvcFathersName, Me.olvcFathersSurname, Me.olvcMothersName, Me.olvcMothersSurname, Me.olvcFathersOccupation, Me.olvcAbode, Me.olvcNotes})
+      Me.dlvBaptisms.Cursor = System.Windows.Forms.Cursors.Default
+      Me.dlvBaptisms.DataSource = Me.bsBaptisms
+      Me.dlvBaptisms.Dock = System.Windows.Forms.DockStyle.Fill
+      Me.dlvBaptisms.Font = New System.Drawing.Font("Comic Sans MS", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.dlvBaptisms.FullRowSelect = True
+      Me.dlvBaptisms.GridLines = True
+      Me.dlvBaptisms.HeaderWordWrap = True
+      Me.dlvBaptisms.HideSelection = False
+      Me.dlvBaptisms.Location = New System.Drawing.Point(0, 0)
+      Me.dlvBaptisms.MultiSelect = False
+      Me.dlvBaptisms.Name = "dlvBaptisms"
+      Me.dlvBaptisms.ShowCommandMenuOnRightClick = True
+      Me.dlvBaptisms.ShowGroups = False
+      Me.dlvBaptisms.ShowItemToolTips = True
+      Me.dlvBaptisms.Size = New System.Drawing.Size(839, 531)
+      Me.dlvBaptisms.SortGroupItemsByPrimaryColumn = False
+      Me.dlvBaptisms.TabIndex = 0
+      Me.dlvBaptisms.TintSortColumn = True
+      Me.dlvBaptisms.UseAlternatingBackColors = True
+      Me.dlvBaptisms.UseCompatibleStateImageBehavior = False
+      Me.dlvBaptisms.View = System.Windows.Forms.View.Details
+      Me.dlvBaptisms.Visible = False
+      '
+      'olvcRegNo
+      '
+      Me.olvcRegNo.AspectName = "RegNo"
+      Me.olvcRegNo.Groupable = False
+      Me.olvcRegNo.Text = "Register Number"
+      Me.olvcRegNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcRegNo.Width = 53
+      Me.olvcRegNo.WordWrap = True
+      '
+      'olvcCounty
+      '
+      Me.olvcCounty.AspectName = "County"
+      Me.olvcCounty.Groupable = False
+      Me.olvcCounty.IsEditable = False
+      Me.olvcCounty.IsVisible = False
+      Me.olvcCounty.Text = "County"
+      Me.olvcCounty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcPlace
+      '
+      Me.olvcPlace.AspectName = "Place"
+      Me.olvcPlace.Groupable = False
+      Me.olvcPlace.IsEditable = False
+      Me.olvcPlace.IsVisible = False
+      Me.olvcPlace.Text = "Place"
+      '
+      'olvcChurch
+      '
+      Me.olvcChurch.AspectName = "Church"
+      Me.olvcChurch.Groupable = False
+      Me.olvcChurch.IsEditable = False
+      Me.olvcChurch.IsVisible = False
+      Me.olvcChurch.Text = "Church"
+      '
+      'olvcFiche
+      '
+      Me.olvcFiche.AspectName = "LDSFiche"
+      Me.olvcFiche.Groupable = False
+      Me.olvcFiche.Text = "Fiche"
+      Me.olvcFiche.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcImage
+      '
+      Me.olvcImage.AspectName = "LDSImage"
+      Me.olvcImage.Groupable = False
+      Me.olvcImage.Text = "Image"
+      Me.olvcImage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcBirthDate
+      '
+      Me.olvcBirthDate.AspectName = "BirthDate"
+      Me.olvcBirthDate.Groupable = False
+      Me.olvcBirthDate.Text = "Birth Date"
+      Me.olvcBirthDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcBaptismDate
+      '
+      Me.olvcBaptismDate.AspectName = "BaptismDate"
+      Me.olvcBaptismDate.Groupable = False
+      Me.olvcBaptismDate.Text = "Baptism Date"
+      Me.olvcBaptismDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcForenames
+      '
+      Me.olvcForenames.AspectName = "Forenames"
+      Me.olvcForenames.Groupable = False
+      Me.olvcForenames.Text = "Forenames"
+      '
+      'olvcSex
+      '
+      Me.olvcSex.AspectName = "Sex"
+      Me.olvcSex.AutoCompleteEditor = False
+      Me.olvcSex.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None
+      Me.olvcSex.Groupable = False
+      Me.olvcSex.Text = "Sex"
+      Me.olvcSex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcFathersName
+      '
+      Me.olvcFathersName.AspectName = "FathersName"
+      Me.olvcFathersName.Groupable = False
+      Me.olvcFathersName.Text = "Fathers Name"
+      '
+      'olvcFathersSurname
+      '
+      Me.olvcFathersSurname.AspectName = "FathersSurname"
+      Me.olvcFathersSurname.Groupable = False
+      Me.olvcFathersSurname.Text = "Fathers Surname"
+      '
+      'olvcMothersName
+      '
+      Me.olvcMothersName.AspectName = "MothersName"
+      Me.olvcMothersName.Groupable = False
+      Me.olvcMothersName.Text = "Mothers Name"
+      '
+      'olvcMothersSurname
+      '
+      Me.olvcMothersSurname.AspectName = "MothersSurname"
+      Me.olvcMothersSurname.Text = "Mothers Surname"
+      '
+      'olvcFathersOccupation
+      '
+      Me.olvcFathersOccupation.AspectName = "FathersOccupation"
+      Me.olvcFathersOccupation.Groupable = False
+      Me.olvcFathersOccupation.Text = "Fathers Occupation"
+      '
+      'olvcAbode
+      '
+      Me.olvcAbode.AspectName = "Abode"
+      Me.olvcAbode.Groupable = False
+      Me.olvcAbode.Text = "Abode"
+      '
+      'olvcNotes
+      '
+      Me.olvcNotes.AspectName = "Notes"
+      Me.olvcNotes.FillsFreeSpace = True
+      Me.olvcNotes.Groupable = False
+      Me.olvcNotes.Hideable = False
+      Me.olvcNotes.Sortable = False
+      Me.olvcNotes.Text = "Notes"
+      Me.olvcNotes.UseFiltering = False
+      '
+      'olvcLoadOrder
+      '
+      Me.olvcLoadOrder.AspectName = "LoadOrder"
+      Me.olvcLoadOrder.DisplayIndex = 0
+      Me.olvcLoadOrder.Groupable = False
+      Me.olvcLoadOrder.IsEditable = False
+      Me.olvcLoadOrder.IsVisible = False
+      Me.olvcLoadOrder.Text = "Load Order"
+      Me.olvcLoadOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       '
       'dlvMarriages
       '
@@ -584,187 +765,6 @@ Partial Class formFileWorkspace
       Me.olvcLoadOrder2.IsVisible = False
       Me.olvcLoadOrder2.Text = "Load Order"
       Me.olvcLoadOrder2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'dlvBaptisms
-      '
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcRegNo)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcCounty)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcPlace)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcChurch)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcFiche)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcImage)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcBirthDate)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcBaptismDate)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcForenames)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcSex)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcFathersName)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcFathersSurname)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcMothersName)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcMothersSurname)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcFathersOccupation)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcAbode)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcNotes)
-      Me.dlvBaptisms.AllColumns.Add(Me.olvcLoadOrder)
-      Me.dlvBaptisms.AllowColumnReorder = True
-      Me.dlvBaptisms.AlternateRowBackColor = System.Drawing.Color.LavenderBlush
-      Me.dlvBaptisms.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.SingleClickAlways
-      Me.dlvBaptisms.CellEditTabChangesRows = True
-      Me.dlvBaptisms.CellEditUseWholeCell = False
-      Me.dlvBaptisms.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcRegNo, Me.olvcFiche, Me.olvcImage, Me.olvcBirthDate, Me.olvcBaptismDate, Me.olvcForenames, Me.olvcSex, Me.olvcFathersName, Me.olvcFathersSurname, Me.olvcMothersName, Me.olvcMothersSurname, Me.olvcFathersOccupation, Me.olvcAbode, Me.olvcNotes})
-      Me.dlvBaptisms.Cursor = System.Windows.Forms.Cursors.Default
-      Me.dlvBaptisms.DataSource = Me.bsBaptisms
-      Me.dlvBaptisms.Dock = System.Windows.Forms.DockStyle.Fill
-      Me.dlvBaptisms.Font = New System.Drawing.Font("Comic Sans MS", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.dlvBaptisms.FullRowSelect = True
-      Me.dlvBaptisms.GridLines = True
-      Me.dlvBaptisms.HeaderWordWrap = True
-      Me.dlvBaptisms.HideSelection = False
-      Me.dlvBaptisms.Location = New System.Drawing.Point(0, 0)
-      Me.dlvBaptisms.MultiSelect = False
-      Me.dlvBaptisms.Name = "dlvBaptisms"
-      Me.dlvBaptisms.ShowCommandMenuOnRightClick = True
-      Me.dlvBaptisms.ShowGroups = False
-      Me.dlvBaptisms.ShowItemToolTips = True
-      Me.dlvBaptisms.Size = New System.Drawing.Size(839, 531)
-      Me.dlvBaptisms.SortGroupItemsByPrimaryColumn = False
-      Me.dlvBaptisms.TabIndex = 0
-      Me.dlvBaptisms.TintSortColumn = True
-      Me.dlvBaptisms.UseAlternatingBackColors = True
-      Me.dlvBaptisms.UseCompatibleStateImageBehavior = False
-      Me.dlvBaptisms.View = System.Windows.Forms.View.Details
-      Me.dlvBaptisms.Visible = False
-      '
-      'olvcRegNo
-      '
-      Me.olvcRegNo.AspectName = "RegNo"
-      Me.olvcRegNo.Groupable = False
-      Me.olvcRegNo.Text = "Register Number"
-      Me.olvcRegNo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      Me.olvcRegNo.Width = 53
-      Me.olvcRegNo.WordWrap = True
-      '
-      'olvcCounty
-      '
-      Me.olvcCounty.AspectName = "County"
-      Me.olvcCounty.Groupable = False
-      Me.olvcCounty.IsEditable = False
-      Me.olvcCounty.IsVisible = False
-      Me.olvcCounty.Text = "County"
-      Me.olvcCounty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcPlace
-      '
-      Me.olvcPlace.AspectName = "Place"
-      Me.olvcPlace.Groupable = False
-      Me.olvcPlace.IsEditable = False
-      Me.olvcPlace.IsVisible = False
-      Me.olvcPlace.Text = "Place"
-      '
-      'olvcChurch
-      '
-      Me.olvcChurch.AspectName = "Church"
-      Me.olvcChurch.Groupable = False
-      Me.olvcChurch.IsEditable = False
-      Me.olvcChurch.IsVisible = False
-      Me.olvcChurch.Text = "Church"
-      '
-      'olvcFiche
-      '
-      Me.olvcFiche.AspectName = "LDSFiche"
-      Me.olvcFiche.Groupable = False
-      Me.olvcFiche.Text = "Fiche"
-      Me.olvcFiche.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcImage
-      '
-      Me.olvcImage.AspectName = "LDSImage"
-      Me.olvcImage.Groupable = False
-      Me.olvcImage.Text = "Image"
-      Me.olvcImage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcBirthDate
-      '
-      Me.olvcBirthDate.AspectName = "BirthDate"
-      Me.olvcBirthDate.Groupable = False
-      Me.olvcBirthDate.Text = "Birth Date"
-      Me.olvcBirthDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcBaptismDate
-      '
-      Me.olvcBaptismDate.AspectName = "BaptismDate"
-      Me.olvcBaptismDate.Groupable = False
-      Me.olvcBaptismDate.Text = "Baptism Date"
-      Me.olvcBaptismDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcForenames
-      '
-      Me.olvcForenames.AspectName = "Forenames"
-      Me.olvcForenames.Groupable = False
-      Me.olvcForenames.Text = "Forenames"
-      '
-      'olvcSex
-      '
-      Me.olvcSex.AspectName = "Sex"
-      Me.olvcSex.AutoCompleteEditor = False
-      Me.olvcSex.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None
-      Me.olvcSex.Groupable = False
-      Me.olvcSex.Text = "Sex"
-      Me.olvcSex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-      '
-      'olvcFathersName
-      '
-      Me.olvcFathersName.AspectName = "FathersName"
-      Me.olvcFathersName.Groupable = False
-      Me.olvcFathersName.Text = "Fathers Name"
-      '
-      'olvcFathersSurname
-      '
-      Me.olvcFathersSurname.AspectName = "FathersSurname"
-      Me.olvcFathersSurname.Groupable = False
-      Me.olvcFathersSurname.Text = "Fathers Surname"
-      '
-      'olvcMothersName
-      '
-      Me.olvcMothersName.AspectName = "MothersName"
-      Me.olvcMothersName.Groupable = False
-      Me.olvcMothersName.Text = "Mothers Name"
-      '
-      'olvcMothersSurname
-      '
-      Me.olvcMothersSurname.AspectName = "MothersSurname"
-      Me.olvcMothersSurname.Text = "Mothers Surname"
-      '
-      'olvcFathersOccupation
-      '
-      Me.olvcFathersOccupation.AspectName = "FathersOccupation"
-      Me.olvcFathersOccupation.Groupable = False
-      Me.olvcFathersOccupation.Text = "Fathers Occupation"
-      '
-      'olvcAbode
-      '
-      Me.olvcAbode.AspectName = "Abode"
-      Me.olvcAbode.Groupable = False
-      Me.olvcAbode.Text = "Abode"
-      '
-      'olvcNotes
-      '
-      Me.olvcNotes.AspectName = "Notes"
-      Me.olvcNotes.FillsFreeSpace = True
-      Me.olvcNotes.Groupable = False
-      Me.olvcNotes.Hideable = False
-      Me.olvcNotes.Sortable = False
-      Me.olvcNotes.Text = "Notes"
-      Me.olvcNotes.UseFiltering = False
-      '
-      'olvcLoadOrder
-      '
-      Me.olvcLoadOrder.AspectName = "LoadOrder"
-      Me.olvcLoadOrder.DisplayIndex = 0
-      Me.olvcLoadOrder.Groupable = False
-      Me.olvcLoadOrder.IsEditable = False
-      Me.olvcLoadOrder.IsVisible = False
-      Me.olvcLoadOrder.Text = "Load Order"
-      Me.olvcLoadOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       '
       'dlvBurials
       '
@@ -1070,8 +1070,8 @@ Partial Class formFileWorkspace
       Me.SplitContainer1.Panel1.PerformLayout()
       Me.SplitContainer1.Panel2.ResumeLayout(False)
       Me.SplitContainer1.ResumeLayout(False)
-      CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.dlvBaptisms, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.dlvMarriages, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.dlvBurials, System.ComponentModel.ISupportInitialize).EndInit()
       Me.baptismsContextMenuStrip.ResumeLayout(False)
       Me.burialsContextMenuStrip.ResumeLayout(False)

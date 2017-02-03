@@ -36,6 +36,8 @@ Partial Class dlgUserOptions
       Me.checkReplicateFicheAndImage = New System.Windows.Forms.CheckBox()
       Me.checkReplicateDates = New System.Windows.Forms.CheckBox()
       Me.checkAutoIncrementRegisterNumber = New System.Windows.Forms.CheckBox()
+      Me.checkUCF = New System.Windows.Forms.CheckBox()
+      Me.checkNormalRecordOrder = New System.Windows.Forms.CheckBox()
       Me.TableLayoutPanel1.SuspendLayout()
       Me.groupCellEditActivation.SuspendLayout()
       Me.SuspendLayout()
@@ -186,6 +188,26 @@ Partial Class dlgUserOptions
       Me.checkAutoIncrementRegisterNumber.Text = "AutoIncrement Register Number"
       Me.checkAutoIncrementRegisterNumber.UseVisualStyleBackColor = True
       '
+      'checkUCF
+      '
+      Me.checkUCF.AutoSize = True
+      Me.checkUCF.Location = New System.Drawing.Point(219, 120)
+      Me.checkUCF.Name = "checkUCF"
+      Me.checkUCF.Size = New System.Drawing.Size(96, 17)
+      Me.checkUCF.TabIndex = 9
+      Me.checkUCF.Text = "Full UCF Editor"
+      Me.checkUCF.UseVisualStyleBackColor = True
+      '
+      'checkNormalRecordOrder
+      '
+      Me.checkNormalRecordOrder.AutoSize = True
+      Me.checkNormalRecordOrder.Location = New System.Drawing.Point(219, 144)
+      Me.checkNormalRecordOrder.Name = "checkNormalRecordOrder"
+      Me.checkNormalRecordOrder.Size = New System.Drawing.Size(126, 17)
+      Me.checkNormalRecordOrder.TabIndex = 10
+      Me.checkNormalRecordOrder.Text = "Normal Record Order"
+      Me.checkNormalRecordOrder.UseVisualStyleBackColor = True
+      '
       'dlgUserOptions
       '
       Me.AcceptButton = Me.OK_Button
@@ -193,6 +215,8 @@ Partial Class dlgUserOptions
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.CancelButton = Me.Cancel_Button
       Me.ClientSize = New System.Drawing.Size(448, 315)
+      Me.Controls.Add(Me.checkNormalRecordOrder)
+      Me.Controls.Add(Me.checkUCF)
       Me.Controls.Add(Me.checkAutoIncrementRegisterNumber)
       Me.Controls.Add(Me.checkReplicateDates)
       Me.Controls.Add(Me.checkReplicateFicheAndImage)
@@ -230,5 +254,7 @@ Partial Class dlgUserOptions
    Friend WithEvents checkReplicateFicheAndImage As System.Windows.Forms.CheckBox
    Friend WithEvents checkReplicateDates As System.Windows.Forms.CheckBox
    Friend WithEvents checkAutoIncrementRegisterNumber As System.Windows.Forms.CheckBox
+   Friend WithEvents checkUCF As System.Windows.Forms.CheckBox
+   Friend WithEvents checkNormalRecordOrder As System.Windows.Forms.CheckBox
 
 End Class

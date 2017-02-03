@@ -106,12 +106,6 @@
 
       <!--Documentation Elements-->
       <DirectoryRef Id="DOCFOLDER" FileSource="$(var.FreeREG2Browser.ProjectDir)Documentation">
-         <Component Id="CMP_Doc_FreeRegBrowserCss" Guid="{D2E677D3-C6B3-4C86-A164-517A4204692E}">
-            <File Id="FILE_FreeRegBrowserCss" Name="FreeRegBrowser.css" />
-            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Css" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
-            <RemoveFolder Id="DOCFOLDER" On="uninstall"/>
-         </Component>
-
          <Component Id="CMP_Doc_BaptismErrors" Guid="{93B70100-C9CC-41A1-9E57-1D0F475AD5EB}">
             <File Id="FILE_BaptismErrors" Name="BaptismErrors.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\BaptismErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -120,11 +114,6 @@
          <Component Id="CMP_Doc_BurialErrors" Guid="{85634E9C-B739-4432-8308-D8CF5DDF668E}">
             <File Id="FILE_BurialErrors" Name="BurialErrors.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\BurialErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
-         </Component>
-
-         <Component Id="CMP_Doc_MarriageErrors" Guid="{6EB9D78F-F907-46C3-8B3C-C63693E70BD5}">
-            <File Id="FILE_MarriageErrors" Name="MarriageErrors.html" />
-            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\MarriageErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
 
          <Component Id="CMP_Doc_CorrectTableError" Guid="{25E3D5B8-E04C-4BBF-AADC-E123772B41C8}">
@@ -137,6 +126,11 @@
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\DataErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
 
+         <Component Id="CMP_Doc_ExtendedUCFtextbox" Guid="{53E6C85F-F97D-448E-BB02-DA12B1E014F5}">
+            <File Id="FILE_ExtendedUCFtextbox" Name="Extended UCF textbox.jpg" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\ExtendedUCFtextbox" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
          <Component Id="CMP_Doc_FileDetails" Guid="{594ED3A5-3DB3-4F30-8213-ADF22C629056}">
             <File Id="FILE_FileDetails" Name="FileDetails.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\FileDetails" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -145,6 +139,12 @@
          <Component Id="CMP_Doc_FileWorkspace" Guid="{5D421DBF-18E8-467B-94FC-3523B1439771}">
             <File Id="FILE_FileWorkspace" Name="FileWorkspace.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Fileworkspace" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_FreeRegBrowserCss" Guid="{D2E677D3-C6B3-4C86-A164-517A4204692E}">
+            <File Id="FILE_FreeRegBrowserCss" Name="FreeRegBrowser.css" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Css" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+            <RemoveFolder Id="DOCFOLDER" On="uninstall"/>
          </Component>
 
          <Component Id="CMP_Doc_FreeregTables" Guid="{6B8141DE-80A3-4C70-B7C0-B4E1493C1D4A}">
@@ -162,6 +162,16 @@
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\LocalFiles" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
 
+         <Component Id="CMP_Doc_MarriageErrors" Guid="{6EB9D78F-F907-46C3-8B3C-C63693E70BD5}">
+            <File Id="FILE_MarriageErrors" Name="MarriageErrors.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\MarriageErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_NormalUCFtextbox" Guid="{8342E95C-CE75-4F1E-924F-27A38C279380}">
+            <File Id="FILE_NormalUCFtextbox" Name="Normal UCF textbox.jpg" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\NormalUCFtextbox" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
          <Component Id="CMP_Doc_StartNewFile" Guid="{F14C7749-C9BF-4E9D-B5C5-6D7B45667BEF}">
             <File Id="FILE_StartNewFile" Name="StartNewFile.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\StartNewFile" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -170,6 +180,11 @@
          <Component Id="CMP_Doc_StartUp" Guid="{8F2C19E2-8920-4D24-B2A9-71308B1CBD03}">
             <File Id="FILE_StartUp" Name="StartUp.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\Startup" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+         <Component Id="CMP_Doc_UncertainCharacterFormat" Guid="{33A2AB26-11F0-4E02-BC9A-81DED9207DEB}">
+            <File Id="FILE_UncertainCharacterFormat" Name="UncertainCharacterFormat.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UncertainCharacterFormat" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
 
          <Component Id="CMP_Doc_UploadedFiles" Guid="{EB916152-B3B6-4220-8314-51135368F55A}">
@@ -182,16 +197,17 @@
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserDetails" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
 
-         <Component Id="CMP_Doc_UserTables" Guid="{2B5DD845-DCF5-441D-8931-7CA6895F1EBA}">
-            <File Id="FILE_UserTables" Name="UserTables.html" />
-            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserTables" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
-         </Component>
-
          <Component Id="CMP_Doc_UserOptions" Guid="{BD65DACA-D852-48DA-9C4D-FDF189139911}">
             <File Id="FILE_UserOptions" Name="UserOptions.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserOptions" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
-      </DirectoryRef>
+
+               <Component Id="CMP_Doc_UserTables" Guid="{2B5DD845-DCF5-441D-8931-7CA6895F1EBA}">
+            <File Id="FILE_UserTables" Name="UserTables.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserTables" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
+</DirectoryRef>
 
       <!--Data Files-->
       <DirectoryRef Id="DATAFOLDER" FileSource="$(var.FreeREG2Browser.ProjectDir)Other Files">
@@ -213,23 +229,26 @@
       </DirectoryRef>
 
       <ComponentGroup Id="DocumentationComponents">
-         <ComponentRef Id="CMP_Doc_FreeRegBrowserCss" />
          <ComponentRef Id="CMP_Doc_BaptismErrors" />
          <ComponentRef Id="CMP_Doc_BurialErrors" />
-         <ComponentRef Id="CMP_Doc_MarriageErrors" />
          <ComponentRef Id="CMP_Doc_CorrectTableError" />
          <ComponentRef Id="CMP_Doc_DataErrors" />
+         <ComponentRef Id="CMP_Doc_ExtendedUCFtextbox" />
          <ComponentRef Id="CMP_Doc_FileDetails" />
          <ComponentRef Id="CMP_Doc_FileWorkspace" />
+         <ComponentRef Id="CMP_Doc_FreeRegBrowserCss" />
          <ComponentRef Id="CMP_Doc_FreeregTables" />
          <ComponentRef Id="CMP_Doc_Generalhelp" />
          <ComponentRef Id="CMP_Doc_LocalFiles" />
+         <ComponentRef Id="CMP_Doc_MarriageErrors" />
+         <ComponentRef Id="CMP_Doc_NormalUCFtextbox" />
          <ComponentRef Id="CMP_Doc_StartNewFile" />
          <ComponentRef Id="CMP_Doc_StartUp" />
+         <ComponentRef Id="CMP_Doc_UncertainCharacterFormat" />
          <ComponentRef Id="CMP_Doc_UploadedFiles" />
          <ComponentRef Id="CMP_Doc_UserDetails" />
-         <ComponentRef Id="CMP_Doc_UserTables" />
          <ComponentRef Id="CMP_Doc_UserOptions" />
+         <ComponentRef Id="CMP_Doc_UserTables" />
       </ComponentGroup>
 
       <ComponentGroup Id="DataComponents">

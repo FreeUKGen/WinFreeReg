@@ -1,4 +1,4 @@
-﻿Public Class ctlTextboxWithUCF
+﻿Public Class ctlTextBox
 
    Private m_CellValue As String
    Public Property Value() As String
@@ -20,16 +20,6 @@
       End Set
    End Property
 
-   Private m_TargetLocation As New Point(0, 0)
-   Public Property TargetLocation() As Point
-      Get
-         Return m_TargetLocation
-      End Get
-      Set(value As Point)
-         m_TargetLocation = value
-      End Set
-   End Property
-
    Private m_CellName As String
    Public Property CellName() As String
       Get
@@ -40,23 +30,33 @@
       End Set
    End Property
 
+   Private m_TargetLocation As New Point(0, 0)
+   Public Property TargetLocation() As Point
+      Get
+         Return m_TargetLocation
+      End Get
+      Set(value As Point)
+         m_TargetLocation = value
+      End Set
+   End Property
+
    Sub New()
       ' This call is required by the designer.
       InitializeComponent()
    End Sub
 
-   Sub New(ByVal columnName As String, ByVal columnValue As String)
+   Sub New(ByVal columnName As String, ByVal columnValue As String, cellBounds As Rectangle)
       InitializeComponent()
 
       CellName = columnName
       Value = columnValue
       CharacterCasing = Windows.Forms.CharacterCasing.Normal
+      Bounds = cellBounds
    End Sub
 
    Property HelpForm As formGeneralHelp
 
-   Private Sub ctlTextboxWithUCF_Load(sender As Object, e As EventArgs) Handles Me.Load
-      labColumn.Text = CellName
+   Private Sub ctlTextBox_Load(sender As Object, e As EventArgs) Handles Me.Load
       txtField.Text = Value
       txtField.CharacterCasing = CharacterCasing
       Me.SetBounds(TargetLocation.X - txtField.Location.X - Margin.Left, TargetLocation.Y - txtField.Location.Y - Margin.Top, 0, 0, BoundsSpecified.Location)

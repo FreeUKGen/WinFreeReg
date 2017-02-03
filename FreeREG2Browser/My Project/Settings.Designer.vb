@@ -197,6 +197,30 @@ Namespace My
                 Me("Workspace_Size") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property optionSeparateUCF() As Boolean
+            Get
+                Return CType(Me("optionSeparateUCF"),Boolean)
+            End Get
+            Set
+                Me("optionSeparateUCF") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property optionNormalRecordOrder() As Boolean
+            Get
+                Return CType(Me("optionNormalRecordOrder"),Boolean)
+            End Get
+            Set
+                Me("optionNormalRecordOrder") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

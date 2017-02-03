@@ -17,7 +17,11 @@ Public Class formStartUp
    Private currentTranscriber As WinFreeReg.UserDetails.UserRow = Nothing
 
    Private Sub formStartUp_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-      My.Settings.Upgrade()
+      If My.Settings.UpdateSettings Then
+         My.Settings.Upgrade()
+         My.Settings.UpdateSettings = False
+         My.Settings.Save()
+      End If
 
       If String.IsNullOrEmpty(My.Settings.MyFreeREGUrl) Then
 #If DEBUG Then

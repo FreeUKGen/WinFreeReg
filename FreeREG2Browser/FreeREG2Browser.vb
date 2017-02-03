@@ -4008,6 +4008,8 @@ Public Class FreeREG2Browser
             My.Settings.optionReplicateFicheImage = dlg.checkReplicateFicheAndImage.Checked
             My.Settings.optionReplicateDates = dlg.checkReplicateDates.Checked
             My.Settings.optionAutoIncrementRegisterNumber = dlg.checkAutoIncrementRegisterNumber.Checked
+            My.Settings.optionSeparateUCF = dlg.checkUCF.Checked
+            My.Settings.optionNormalRecordOrder = dlg.checkNormalRecordOrder.Checked
          End If
       End Using
    End Sub
