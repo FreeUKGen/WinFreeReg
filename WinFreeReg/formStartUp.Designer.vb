@@ -45,8 +45,9 @@ Partial Class formStartUp
       Me.EmailAddressLabel = New System.Windows.Forms.Label()
       Me.EmailAddressTextBox = New System.Windows.Forms.TextBox()
       Me.linkPassword = New System.Windows.Forms.LinkLabel()
-      Me.UserLookupTables = New WinFreeReg.LookupTables()
       Me.KeepOpenCheckBox = New System.Windows.Forms.CheckBox()
+      Me.UserLookupTables = New WinFreeReg.LookupTables()
+      Me.btnConfigureLibrary = New System.Windows.Forms.Button()
       CType(Me.urlErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.libraryErrorProvider, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.UserLookupTables, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -108,9 +109,9 @@ Partial Class formStartUp
       Me.TranscriptionLibraryLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.TranscriptionLibraryLabel.Location = New System.Drawing.Point(8, 237)
       Me.TranscriptionLibraryLabel.Name = "TranscriptionLibraryLabel"
-      Me.TranscriptionLibraryLabel.Size = New System.Drawing.Size(151, 20)
+      Me.TranscriptionLibraryLabel.Size = New System.Drawing.Size(157, 20)
       Me.TranscriptionLibraryLabel.TabIndex = 12
-      Me.TranscriptionLibraryLabel.Text = "Transcription Library"
+      Me.TranscriptionLibraryLabel.Text = "Transcriptions Folder"
       '
       'linkBrowse
       '
@@ -245,12 +246,6 @@ Partial Class formStartUp
       Me.linkPassword.Tag = ""
       Me.linkPassword.Text = "Show password"
       '
-      'UserLookupTables
-      '
-      Me.UserLookupTables.DataSetName = "LookupTables"
-      Me.UserLookupTables.Locale = New System.Globalization.CultureInfo("")
-      Me.UserLookupTables.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-      '
       'KeepOpenCheckBox
       '
       Me.KeepOpenCheckBox.AutoSize = True
@@ -264,12 +259,31 @@ Partial Class formStartUp
       Me.KeepOpenCheckBox.Text = "Keep open"
       Me.KeepOpenCheckBox.UseVisualStyleBackColor = True
       '
+      'UserLookupTables
+      '
+      Me.UserLookupTables.DataSetName = "LookupTables"
+      Me.UserLookupTables.Locale = New System.Globalization.CultureInfo("")
+      Me.UserLookupTables.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+      '
+      'btnConfigureLibrary
+      '
+      Me.btnConfigureLibrary.AutoSize = True
+      Me.btnConfigureLibrary.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+      Me.btnConfigureLibrary.Location = New System.Drawing.Point(97, 237)
+      Me.btnConfigureLibrary.Name = "btnConfigureLibrary"
+      Me.btnConfigureLibrary.Size = New System.Drawing.Size(274, 46)
+      Me.btnConfigureLibrary.TabIndex = 19
+      Me.btnConfigureLibrary.Text = "Configure Transcriptions Library"
+      Me.btnConfigureLibrary.UseVisualStyleBackColor = True
+      Me.btnConfigureLibrary.Visible = False
+      '
       'formStartUp
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
       Me.ClientSize = New System.Drawing.Size(468, 339)
+      Me.Controls.Add(Me.btnConfigureLibrary)
       Me.Controls.Add(Me.KeepOpenCheckBox)
       Me.Controls.Add(Me.linkPassword)
       Me.Controls.Add(Me.EmailAddressTextBox)
@@ -328,5 +342,6 @@ Partial Class formStartUp
    Friend WithEvents UserNameTextBox As System.Windows.Forms.TextBox
    Friend WithEvents linkPassword As System.Windows.Forms.LinkLabel
    Friend WithEvents KeepOpenCheckBox As System.Windows.Forms.CheckBox
+   Friend WithEvents btnConfigureLibrary As System.Windows.Forms.Button
 
 End Class

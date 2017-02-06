@@ -231,11 +231,11 @@ Namespace My
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
         
-        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.WinFreeReg.My.MySettings
-            Get
-                Return Global.WinFreeReg.My.MySettings.Default
-            End Get
-        End Property
+      <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")> _
+      Friend ReadOnly Property Settings() As Global.WinFreeReg.My.MySettings
+         Get
+            Return Global.WinFreeReg.My.MySettings.Default
+         End Get
+      End Property
     End Module
 End Namespace

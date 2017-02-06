@@ -91,6 +91,14 @@
             <File Id="FILE_WinFreeRegControlLibraryDll" Source="$(var.WinFreeRegControlLibrary.TargetDir)\WinFreeRegControlLibrary.dll" KeyPath="yes" Checksum="yes" />
          </Component>
 
+         <Component Id="CMP_Software_Microsoft_WindowsAPICodePack" Guid="{E1EB2ACC-D86F-4AEF-86D8-2B4A39761CAB}">
+            <File Id="FILE_Microsoft_WindowsAPICodePack" Source="$(var.FreeREG2Browser.TargetDir)\Microsoft.WindowsAPICodePack.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+
+         <Component Id="CMP_Software_Microsoft_WindowsAPICodePack_Shell" Guid="{F830F61E-F943-48EE-BBE4-371B828429E0}">
+            <File Id="FILE_Microsoft_WindowsAPICodePack_Shell" Source="$(var.FreeREG2Browser.TargetDir)\Microsoft.WindowsAPICodePack.Shell.dll" KeyPath="yes" Checksum="yes" />
+         </Component>
+
          <Component Id="CMP_HtmlAgilityPack" Guid="{8310B015-4C3B-4F64-A8E8-25E01B58EE5E}">
             <File Id="FILE_HtmlAgilityPack.dll" Source="$(var.FreeREG2Browser.TargetDir)\HtmlAgilityPack.dll" KeyPath="yes" Checksum="yes" />
          </Component>

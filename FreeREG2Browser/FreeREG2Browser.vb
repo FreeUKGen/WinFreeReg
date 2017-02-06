@@ -27,7 +27,6 @@ Imports System.IO
 Imports System.Xml
 Imports System.Text
 Imports System.Net
-Imports HtmlAgilityPack
 Imports System.Collections.Specialized
 Imports System.Runtime.InteropServices
 Imports System.Configuration
@@ -38,6 +37,7 @@ Imports System.Drawing
 Imports System.Globalization
 Imports System.Threading
 Imports Microsoft.VisualBasic.FileIO
+Imports Microsoft.WindowsAPICodePack.Shell
 
 Public Class FreeREG2Browser
    Inherits System.Windows.Forms.Form
@@ -271,6 +271,10 @@ Public Class FreeREG2Browser
       InitializeComponent()
    End Sub
 
+   Property UseLibrary As Boolean
+
+   Property LibraryName As String
+
    Private Sub InitializeComponent()
       Me.components = New System.ComponentModel.Container()
       Dim IDLabel As System.Windows.Forms.Label
@@ -314,14 +318,19 @@ Public Class FreeREG2Browser
       Me.miNetworkTrace = New System.Windows.Forms.ToolStripMenuItem()
       Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
       Me.miExit = New System.Windows.Forms.ToolStripMenuItem()
-      Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-      Me.UserOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.miTranscriptions = New System.Windows.Forms.ToolStripMenuItem()
       Me.miLocalFiles = New System.Windows.Forms.ToolStripMenuItem()
       Me.miUploadedFiles = New System.Windows.Forms.ToolStripMenuItem()
+      Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.OpenFileWithEditorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.RenameFileToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+      Me.DeleteFileToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
       Me.miTranscriptionData = New System.Windows.Forms.ToolStripMenuItem()
       Me.miFreeREG2Tables = New System.Windows.Forms.ToolStripMenuItem()
       Me.miUserTables = New System.Windows.Forms.ToolStripMenuItem()
+      Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+      Me.UserOptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.miGeneralHelp = New System.Windows.Forms.ToolStripMenuItem()
       Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
       Me.BrowserStatusStrip = New System.Windows.Forms.StatusStrip()
@@ -403,11 +412,6 @@ Public Class FreeREG2Browser
       Me.CheckBox1 = New System.Windows.Forms.CheckBox()
       Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
       Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
-      Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-      Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-      Me.OpenFileWithEditorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-      Me.RenameFileToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
-      Me.DeleteFileToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
       PlaceNameLabel = New System.Windows.Forms.Label()
@@ -801,19 +805,6 @@ Public Class FreeREG2Browser
       Me.miExit.Size = New System.Drawing.Size(155, 22)
       Me.miExit.Text = "Exit"
       '
-      'OptionsToolStripMenuItem
-      '
-      Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserOptionsToolStripMenuItem})
-      Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-      Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
-      Me.OptionsToolStripMenuItem.Text = "Options"
-      '
-      'UserOptionsToolStripMenuItem
-      '
-      Me.UserOptionsToolStripMenuItem.Name = "UserOptionsToolStripMenuItem"
-      Me.UserOptionsToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
-      Me.UserOptionsToolStripMenuItem.Text = "User options"
-      '
       'miTranscriptions
       '
       Me.miTranscriptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miLocalFiles, Me.miUploadedFiles})
@@ -833,6 +824,39 @@ Public Class FreeREG2Browser
       Me.miUploadedFiles.Size = New System.Drawing.Size(161, 22)
       Me.miUploadedFiles.Text = "Uploaded files ..."
       '
+      'FileToolStripMenuItem
+      '
+      Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.OpenFileWithEditorToolStripMenuItem, Me.RenameFileToolStripMenuItem1, Me.DeleteFileToolStripMenuItem1})
+      Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+      Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
+      Me.FileToolStripMenuItem.Text = "File"
+      Me.FileToolStripMenuItem.Visible = False
+      '
+      'OpenToolStripMenuItem
+      '
+      Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+      Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+      Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+      Me.OpenToolStripMenuItem.Text = "Open file"
+      '
+      'OpenFileWithEditorToolStripMenuItem
+      '
+      Me.OpenFileWithEditorToolStripMenuItem.Name = "OpenFileWithEditorToolStripMenuItem"
+      Me.OpenFileWithEditorToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
+      Me.OpenFileWithEditorToolStripMenuItem.Text = "Open file with Editor"
+      '
+      'RenameFileToolStripMenuItem1
+      '
+      Me.RenameFileToolStripMenuItem1.Name = "RenameFileToolStripMenuItem1"
+      Me.RenameFileToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+      Me.RenameFileToolStripMenuItem1.Text = "Rename File"
+      '
+      'DeleteFileToolStripMenuItem1
+      '
+      Me.DeleteFileToolStripMenuItem1.Name = "DeleteFileToolStripMenuItem1"
+      Me.DeleteFileToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
+      Me.DeleteFileToolStripMenuItem1.Text = "Delete File"
+      '
       'miTranscriptionData
       '
       Me.miTranscriptionData.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.miFreeREG2Tables, Me.miUserTables})
@@ -851,6 +875,19 @@ Public Class FreeREG2Browser
       Me.miUserTables.Name = "miUserTables"
       Me.miUserTables.Size = New System.Drawing.Size(153, 22)
       Me.miUserTables.Text = "User Tables"
+      '
+      'OptionsToolStripMenuItem
+      '
+      Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.UserOptionsToolStripMenuItem})
+      Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
+      Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
+      Me.OptionsToolStripMenuItem.Text = "Options"
+      '
+      'UserOptionsToolStripMenuItem
+      '
+      Me.UserOptionsToolStripMenuItem.Name = "UserOptionsToolStripMenuItem"
+      Me.UserOptionsToolStripMenuItem.Size = New System.Drawing.Size(140, 22)
+      Me.UserOptionsToolStripMenuItem.Text = "User options"
       '
       'miGeneralHelp
       '
@@ -1447,7 +1484,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 407
+      Me.SplitContainer2.SplitterDistance = 408
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1471,9 +1508,10 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowCommandMenuOnRightClick = True
       Me.dlvLocalFiles.ShowGroups = False
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
+      Me.dlvLocalFiles.ShowItemCountOnGroups = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 407)
-      Me.dlvLocalFiles.SpaceBetweenGroups = 5
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 408)
+      Me.dlvLocalFiles.SpaceBetweenGroups = 12
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
       Me.dlvLocalFiles.UseAlternatingBackColors = True
@@ -1665,46 +1703,13 @@ Public Class FreeREG2Browser
       Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
       Me.FreeregTablesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
-      'FileToolStripMenuItem
-      '
-      Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.OpenFileWithEditorToolStripMenuItem, Me.RenameFileToolStripMenuItem1, Me.DeleteFileToolStripMenuItem1})
-      Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-      Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
-      Me.FileToolStripMenuItem.Text = "File"
-      Me.FileToolStripMenuItem.Visible = False
-      '
-      'OpenToolStripMenuItem
-      '
-      Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-      Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-      Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-      Me.OpenToolStripMenuItem.Text = "Open file"
-      '
-      'OpenFileWithEditorToolStripMenuItem
-      '
-      Me.OpenFileWithEditorToolStripMenuItem.Name = "OpenFileWithEditorToolStripMenuItem"
-      Me.OpenFileWithEditorToolStripMenuItem.Size = New System.Drawing.Size(182, 22)
-      Me.OpenFileWithEditorToolStripMenuItem.Text = "Open file with Editor"
-      '
-      'RenameFileToolStripMenuItem1
-      '
-      Me.RenameFileToolStripMenuItem1.Name = "RenameFileToolStripMenuItem1"
-      Me.RenameFileToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
-      Me.RenameFileToolStripMenuItem1.Text = "Rename File"
-      '
-      'DeleteFileToolStripMenuItem1
-      '
-      Me.DeleteFileToolStripMenuItem1.Name = "DeleteFileToolStripMenuItem1"
-      Me.DeleteFileToolStripMenuItem1.Size = New System.Drawing.Size(182, 22)
-      Me.DeleteFileToolStripMenuItem1.Text = "Delete File"
-      '
       'FreeREG2Browser
       '
       Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.ClientSize = New System.Drawing.Size(903, 541)
-      Me.Controls.Add(Me.TableLayoutPanel1)
       Me.Controls.Add(Me.SplitContainer1)
+      Me.Controls.Add(Me.TableLayoutPanel1)
       Me.Controls.Add(Me.BrowserStatusStrip)
       Me.Controls.Add(Me.BrowserMenuStrip)
       Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1995,25 +2000,63 @@ Public Class FreeREG2Browser
 
    Private Sub miLocalFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLocalFiles.Click
       labelStatus.Text = ""
+      Dim tableLocalFiles As DataTable
+      Dim libtrans As ShellLibrary = ShellLibrary.Load(LibraryName, True)
 
-      Dim fileQuery = From file As FileInfo In ListFiles(_myTranscriptionLibrary) _
-                      Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
-                      Order By file.Name _
-                      Select file
+      If UseLibrary AndAlso libtrans.Count > 1 Then
+         Dim fileQuery = From file As FileInfo In ListFiles(libtrans.DefaultSaveFolder) _
+                         Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
+                         Order By file.Name _
+                         Select file
+         tableLocalFiles = CreateDataTable(Of FileInfo)(fileQuery)
 
-      Dim tableLocalFiles As DataTable = CreateDataTable(Of FileInfo)(fileQuery)
-      If File.Exists(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
-         Dim col As DataColumn = tableLocalFiles.Columns.Add("dateUploaded", Type.GetType("System.String"))
-         col.Caption = "Date Uploaded"
-         For Each row As DataRow In tableLocalFiles.Rows
-            Dim batchRow As Batches.BatchRow = BatchesDataSet.Batch.FindByFileName(row("Name"))
-            If batchRow IsNot Nothing Then
-               Dim dtUploaded As New DateTime()
-               If Date.TryParse(batchRow.UploadedDate, dtUploaded) Then
-                  row("dateUploaded") = dtUploaded.ToLocalTime.ToString()
-               End If
+         For Each folder In libtrans
+            If folder.Path <> libtrans.DefaultSaveFolder Then
+               Dim fileQry = From file As FileInfo In ListFiles(folder.Path) _
+                        Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
+                        Order By file.Name _
+                        Select file
+
+               Dim dt As DataTable = CreateDataTable(Of FileInfo)(fileQry)
+               tableLocalFiles.Merge(dt, True, MissingSchemaAction.Error)
             End If
          Next
+
+         If File.Exists(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
+            Dim col As DataColumn = tableLocalFiles.Columns.Add("dateUploaded", Type.GetType("System.String"))
+            col.Caption = "Date Uploaded"
+            For Each row As DataRow In tableLocalFiles.Rows
+               Dim batchRow As Batches.BatchRow = BatchesDataSet.Batch.FindByFileName(row("Name"))
+               If batchRow IsNot Nothing Then
+                  Dim dtUploaded As New DateTime()
+                  If Date.TryParse(batchRow.UploadedDate, dtUploaded) Then
+                     row("dateUploaded") = dtUploaded.ToLocalTime.ToString()
+                  End If
+               End If
+            Next
+         End If
+
+         dlvLocalFiles.ShowGroups = True
+      Else
+         Dim fileQuery = From file As FileInfo In ListFiles(_myTranscriptionLibrary) _
+                         Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
+                         Order By file.Name _
+                         Select file
+
+         tableLocalFiles = CreateDataTable(Of FileInfo)(fileQuery)
+         If File.Exists(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
+            Dim col As DataColumn = tableLocalFiles.Columns.Add("dateUploaded", Type.GetType("System.String"))
+            col.Caption = "Date Uploaded"
+            For Each row As DataRow In tableLocalFiles.Rows
+               Dim batchRow As Batches.BatchRow = BatchesDataSet.Batch.FindByFileName(row("Name"))
+               If batchRow IsNot Nothing Then
+                  Dim dtUploaded As New DateTime()
+                  If Date.TryParse(batchRow.UploadedDate, dtUploaded) Then
+                     row("dateUploaded") = dtUploaded.ToLocalTime.ToString()
+                  End If
+               End If
+            Next
+         End If
       End If
 
       Dim cnt = dlvLocalFiles.Columns.Count
@@ -2028,9 +2071,16 @@ Public Class FreeREG2Browser
 
          dlvcol = CType(dlvLocalFiles.Columns("Name"), OLVColumn)
          dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-         dlvcol.Groupable = False
-         dlvcol.Sortable = True
          dlvcol.IsEditable = False
+         If UseLibrary AndAlso libtrans.Count > 1 Then
+            dlvcol.Groupable = True
+            dlvcol.Sortable = True
+            dlvcol.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetNameKey)
+            dlvcol.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf GetNameTitle)
+         Else
+            dlvcol.Groupable = False
+            dlvcol.Sortable = True
+         End If
 
          dlvcol = CType(dlvLocalFiles.Columns("Length"), OLVColumn)
          dlvcol.Text = "Size"
@@ -2048,7 +2098,7 @@ Public Class FreeREG2Browser
 
          dlvcol = CType(dlvLocalFiles.Columns("Directory"), OLVColumn)
          dlvcol.IsVisible = False
-         dlvcol.Groupable = False
+         dlvcol.Groupable = True
          dlvcol.Sortable = False
 
          dlvcol = CType(dlvLocalFiles.Columns("IsReadOnly"), OLVColumn)
@@ -2123,15 +2173,15 @@ Public Class FreeREG2Browser
          End If
       End If
 
-      FileToolStripMenuItem.Visible = True
+         FileToolStripMenuItem.Visible = True
 
-      dlvLocalFiles.RebuildColumns()
-      SplitContainer2.Visible = True
-      If cboxProcess.Items.Count > 0 Then cboxProcess.SelectedIndex = 0
-      SplitContainer3.Visible = False
-      bnavShowData.Visible = True
-      Me.ClientSize = New Size(SplitContainer2.PreferredSize.Width, Me.ClientSize.Height)
-      btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
+         dlvLocalFiles.RebuildColumns()
+         SplitContainer2.Visible = True
+         If cboxProcess.Items.Count > 0 Then cboxProcess.SelectedIndex = 0
+         SplitContainer3.Visible = False
+         bnavShowData.Visible = True
+         Me.ClientSize = New Size(SplitContainer2.PreferredSize.Width, Me.ClientSize.Height)
+         btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
    End Sub
 
    Private Sub miUploadedFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUploadedFiles.Click
@@ -2213,19 +2263,43 @@ Public Class FreeREG2Browser
       Return "Error"
    End Function
 
+   Private Function LibraryFoldersList() As List(Of String)
+      Dim libtrans As ShellLibrary = ShellLibrary.Load(LibraryName, True)
+      Dim l As List(Of String) = New List(Of String)
+      For i As Integer = 0 To libtrans.Count - 1
+         l.Add(libtrans(i).Path)
+      Next
+      Return l
+   End Function
+
+   Private Function SetNameKey(ByVal rowObject As Object)
+      Dim drv As DataRowView = CType(rowObject, DataRowView)
+      Dim dr As DataRow = drv.Row
+      Dim folder As ShellFileSystemFolder = ShellFileSystemFolder.FromFolderPath(dr("DirectoryName"))
+      Dim indx = LibraryFoldersList.IndexOf(folder.Path)
+      Return indx
+   End Function
+
+   Private Function GetNameTitle(ByVal groupKey As Object)
+      Dim key = CInt(groupKey)
+      Return LibraryFoldersList(key)
+   End Function
+
    Private Sub dlvLocalFiles_FormatRow(ByVal sender As System.Object, ByVal e As BrightIdeasSoftware.FormatRowEventArgs) Handles dlvLocalFiles.FormatRow
       Dim model As DataRowView = CType(e.Model, DataRowView)
       Dim row As DataRow = CType(model.Row, DataRow)
-      Dim dtLastWritten As DateTime = row("LastWriteTime")
-      If row.Table.Columns.Contains("dateuploaded") Then
-         If DBNull.Value.Equals(row("dateuploaded")) Then
-            e.Item.BackColor = Color.LavenderBlush
-            e.Item.ForeColor = Color.Red
-         Else
-            Dim dtUploaded As DateTime = row("dateUploaded")
-            If DateTime.Compare(dtLastWritten, dtUploaded) > 0 Then
-               e.Item.BackColor = Color.Honeydew
-               e.Item.ForeColor = Color.Green
+      If Not DBNull.Value.Equals(row("LastWriteTime")) Then
+         Dim dtLastWritten As DateTime = row("LastWriteTime")
+         If row.Table.Columns.Contains("dateuploaded") Then
+            If DBNull.Value.Equals(row("dateuploaded")) Then
+               e.Item.BackColor = Color.LavenderBlush
+               e.Item.ForeColor = Color.Red
+            Else
+               Dim dtUploaded As DateTime = row("dateUploaded")
+               If DateTime.Compare(dtLastWritten, dtUploaded) > 0 Then
+                  e.Item.BackColor = Color.Honeydew
+                  e.Item.ForeColor = Color.Green
+               End If
             End If
          End If
       End If
@@ -4078,4 +4152,5 @@ Public Class FreeREG2Browser
          End If
       End If
    End Sub
+
 End Class

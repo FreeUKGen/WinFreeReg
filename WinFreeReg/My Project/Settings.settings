@@ -38,5 +38,11 @@
     <Setting Name="UpdateSettings" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="UseLibrary" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LibraryName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Transcriptions</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
