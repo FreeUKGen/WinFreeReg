@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports System.Collections.Generic
 Imports System.IO
+Imports Microsoft.WindowsAPICodePack.Shell
 
 Public Class formStartNewFile
 
@@ -99,6 +100,10 @@ Public Class formStartNewFile
 
    Property Settings As FreeReg2BrowserSettings
    Property UserTablesFile As String
+
+   Property LibraryName As String
+
+   Property UseLibrary As Boolean
 
    Private Sub formStartNewFile_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 #If USE_FILECODES Then
@@ -322,7 +327,28 @@ Public Class formStartNewFile
       Try
          Dim NewFile As New TranscriptionFileClass()
 
-         NewFile.Create(Path.Combine(_myTranscriptionLibrary, labFilename.Text.Replace(" ", "") + ".CSV"), dsLookupTables, dsFreeRegTables, m_RecordType)
+         If UseLibrary Then
+            Dim libtrans As ShellLibrary
+            libtrans = ShellLibrary.Load(LibraryName, True)
+            Dim listFolders As List(Of String) = New List(Of String)
+            For i As Integer = 0 To libtrans.Count - 1
+               listFolders.Add(libtrans(i).Path)
+            Next
+            Dim defFolder = listFolders.IndexOf(libtrans.DefaultSaveFolder)
+
+            Using dlg As New dlgSaveFile With {.ReturnFolder = True, .listFolders = listFolders, .DefaultFolder = defFolder, .FileName = labFilename.Text.Replace(" ", "") + ".CSV"}
+               dlg.Text = "Create New File"
+               Dim rc As DialogResult = dlg.ShowDialog()
+               If rc = DialogResult.OK Then
+                  NewFile.Create(Path.Combine(dlg.SelectedFileName, labFilename.Text.Replace(" ", "") + ".CSV"), dsLookupTables, dsFreeRegTables, m_RecordType)
+               Else
+                  NewFile.Create(Path.Combine(_myTranscriptionLibrary, labFilename.Text.Replace(" ", "") + ".CSV"), dsLookupTables, dsFreeRegTables, m_RecordType)
+               End If
+            End Using
+         Else
+            NewFile.Create(Path.Combine(_myTranscriptionLibrary, labFilename.Text.Replace(" ", "") + ".CSV"), dsLookupTables, dsFreeRegTables, m_RecordType)
+         End If
+
          NewFile.FileHeader.MyEmail = m_EmailAddress
          NewFile.FileHeader.MyName = m_UserName
          NewFile.FileHeader.MyPassword = "password"

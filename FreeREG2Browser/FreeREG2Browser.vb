@@ -3801,7 +3801,7 @@ Public Class FreeREG2Browser
    End Sub
 
    Private Sub btnNewFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNewFile.Click
-      Using dlg As New formStartNewFile(formHelp) With {.Username = _myUserName, .EmailAddress = _myEmailAddress, .dsFreeRegTables = TablesDataSet, .dsLookupTables = LookUpsDataSet, .DefaultCounty = _myDefaultCounty, .TranscriptionLibrary = _myTranscriptionLibrary}
+      Using dlg As New formStartNewFile(formHelp) With {.Username = _myUserName, .EmailAddress = _myEmailAddress, .dsFreeRegTables = TablesDataSet, .dsLookupTables = LookUpsDataSet, .DefaultCounty = _myDefaultCounty, .TranscriptionLibrary = _myTranscriptionLibrary, .UseLibrary = UseLibrary, .LibraryName = LibraryName}
          Try
             dlg.Settings = MyAppSettings
             dlg.UserTablesFile = TranscriberProfileFile

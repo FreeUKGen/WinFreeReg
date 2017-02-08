@@ -13,9 +13,15 @@ Public Class dlgSaveFile
 
    Property SelectedFileName As String
 
+   Property ReturnFolder As Boolean
+
    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-      Dim item = CType(DataListView1.SelectedItem.RowObject, DataRowView).Row
-      SelectedFileName = item("FullName")
+      If ReturnFolder Then
+         SelectedFileName = lboxFolders.SelectedItem.ToString()
+      Else
+         Dim item = CType(DataListView1.SelectedItem.RowObject, DataRowView).Row
+         SelectedFileName = item("FullName")
+      End If
       Me.DialogResult = System.Windows.Forms.DialogResult.OK
       Me.Close()
    End Sub
@@ -32,7 +38,7 @@ Public Class dlgSaveFile
       Next
       lboxFolders.SelectedIndex = DefaultFolder
       lboxFolders.EndUpdate()
-
+      DataListView1.Visible = Not ReturnFolder
    End Sub
 
    Private Sub lboxFolders_SelectedIndexChanged(sender As Object, e As EventArgs) Handles lboxFolders.SelectedIndexChanged
@@ -85,9 +91,4 @@ Public Class dlgSaveFile
       Return dataTable
    End Function
 
-   Private Sub DataListView1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles DataListView1.SelectedIndexChanged
-      If DataListView1.SelectedItem IsNot Nothing Then
-         txtFileName.Text = DataListView1.SelectedItem.Text
-      End If
-   End Sub
 End Class

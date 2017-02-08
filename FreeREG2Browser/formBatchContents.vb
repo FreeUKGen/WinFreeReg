@@ -50,7 +50,8 @@ Public Class formBatchContents
          Next
          Dim defFolder = listFolders.IndexOf(libtrans.DefaultSaveFolder)
 
-         Using dlg As New dlgSaveFile With {.listFolders = listFolders, .DefaultFolder = defFolder, .FileName = CurrentBatch.FileName}
+         Using dlg As New dlgSaveFile With {.ReturnFolder = False, .listFolders = listFolders, .DefaultFolder = defFolder, .FileName = CurrentBatch.FileName}
+            dlg.Text = "Save Downloaded File"
             Dim rc As DialogResult = dlg.ShowDialog()
             If rc = DialogResult.OK Then
                Try
