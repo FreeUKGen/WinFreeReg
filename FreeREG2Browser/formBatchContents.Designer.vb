@@ -26,6 +26,7 @@ Partial Class formBatchContents
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
       Me.FileContentsTextBox = New System.Windows.Forms.TextBox()
       Me.btnSaveFile = New System.Windows.Forms.Button()
+      Me.dlgSaveFile = New System.Windows.Forms.SaveFileDialog()
       Me.SplitContainer1.Panel1.SuspendLayout()
       Me.SplitContainer1.Panel2.SuspendLayout()
       Me.SplitContainer1.SuspendLayout()
@@ -49,7 +50,7 @@ Partial Class formBatchContents
       '
       Me.SplitContainer1.Panel2.Controls.Add(Me.btnSaveFile)
       Me.SplitContainer1.Size = New System.Drawing.Size(642, 500)
-      Me.SplitContainer1.SplitterDistance = 442
+      Me.SplitContainer1.SplitterDistance = 441
       Me.SplitContainer1.SplitterWidth = 5
       Me.SplitContainer1.TabIndex = 0
       '
@@ -62,7 +63,7 @@ Partial Class formBatchContents
       Me.FileContentsTextBox.Name = "FileContentsTextBox"
       Me.FileContentsTextBox.ReadOnly = True
       Me.FileContentsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both
-      Me.FileContentsTextBox.Size = New System.Drawing.Size(642, 442)
+      Me.FileContentsTextBox.Size = New System.Drawing.Size(642, 441)
       Me.FileContentsTextBox.TabIndex = 0
       Me.FileContentsTextBox.WordWrap = False
       '
@@ -75,6 +76,12 @@ Partial Class formBatchContents
       Me.btnSaveFile.TabIndex = 0
       Me.btnSaveFile.Text = "Save Transcription file to PC"
       Me.btnSaveFile.UseVisualStyleBackColor = True
+      '
+      'dlgSaveFile
+      '
+      Me.dlgSaveFile.AddExtension = False
+      Me.dlgSaveFile.Filter = "Transcription files|*.csv"
+      Me.dlgSaveFile.RestoreDirectory = True
       '
       'formBatchContents
       '
@@ -98,4 +105,5 @@ Partial Class formBatchContents
 	Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
 	Friend WithEvents FileContentsTextBox As System.Windows.Forms.TextBox
    Friend WithEvents btnSaveFile As System.Windows.Forms.Button
+   Friend WithEvents dlgSaveFile As System.Windows.Forms.SaveFileDialog
 End Class

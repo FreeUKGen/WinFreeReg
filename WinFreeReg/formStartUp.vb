@@ -335,7 +335,7 @@ Public Class formStartUp
 
    Private Sub btnConfigureLibrary_Click(sender As Object, e As EventArgs) Handles btnConfigureLibrary.Click
       Dim strTitle As String = "Configure The Transcriptions Library"
-      Dim strInstructions As String = "Instaructions"
+      Dim strInstructions As String = "Instructions"
 
       ShellLibrary.ShowManageLibraryUI(libTrans.Name, Me.Handle, strTitle, strInstructions, True)
       libTrans = ShellLibrary.Load(My.Settings.LibraryName, True)

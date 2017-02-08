@@ -354,8 +354,6 @@ Public Class FreeREG2Browser
       Me.backgroundBatches = New System.ComponentModel.BackgroundWorker()
       Me.panelUploadedFiles = New System.Windows.Forms.Panel()
       Me.IDTextBox = New System.Windows.Forms.TextBox()
-      Me.BatchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-      Me.BatchesDataSet = New WinFreeReg.Batches()
       Me.CountyNameTextBox = New System.Windows.Forms.TextBox()
       Me.PlaceNameTextBox = New System.Windows.Forms.TextBox()
       Me.ChurchNameTextBox = New System.Windows.Forms.TextBox()
@@ -411,6 +409,8 @@ Public Class FreeREG2Browser
       Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
       Me.CheckBox1 = New System.Windows.Forms.CheckBox()
       Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+      Me.BatchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+      Me.BatchesDataSet = New WinFreeReg.Batches()
       Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
@@ -447,8 +447,6 @@ Public Class FreeREG2Browser
       Me.bnavShowData.SuspendLayout()
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.panelUploadedFiles.SuspendLayout()
-      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SplitContainer1.Panel1.SuspendLayout()
       Me.SplitContainer1.Panel2.SuspendLayout()
       Me.SplitContainer1.SuspendLayout()
@@ -462,6 +460,8 @@ Public Class FreeREG2Browser
       CType(Me.dlvUploadedFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.localContextMenuStrip.SuspendLayout()
       Me.TableLayoutPanel1.SuspendLayout()
+      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
@@ -1125,17 +1125,6 @@ Public Class FreeREG2Browser
       Me.IDTextBox.TabIndex = 66
       Me.IDTextBox.Visible = False
       '
-      'BatchBindingSource
-      '
-      Me.BatchBindingSource.AllowNew = False
-      Me.BatchBindingSource.DataMember = "Batch"
-      Me.BatchBindingSource.DataSource = Me.BatchesDataSet
-      '
-      'BatchesDataSet
-      '
-      Me.BatchesDataSet.DataSetName = "Batches"
-      Me.BatchesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-      '
       'CountyNameTextBox
       '
       Me.CountyNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CountyName", True))
@@ -1484,7 +1473,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 408
+      Me.SplitContainer2.SplitterDistance = 409
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1510,7 +1499,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemCountOnGroups = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 408)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 409)
       Me.dlvLocalFiles.SpaceBetweenGroups = 12
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1698,6 +1687,17 @@ Public Class FreeREG2Browser
       Me.TableLayoutPanel1.Size = New System.Drawing.Size(903, 495)
       Me.TableLayoutPanel1.TabIndex = 7
       '
+      'BatchBindingSource
+      '
+      Me.BatchBindingSource.AllowNew = False
+      Me.BatchBindingSource.DataMember = "Batch"
+      Me.BatchBindingSource.DataSource = Me.BatchesDataSet
+      '
+      'BatchesDataSet
+      '
+      Me.BatchesDataSet.DataSetName = "Batches"
+      Me.BatchesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+      '
       'FreeregTablesDataSet
       '
       Me.FreeregTablesDataSet.DataSetName = "FreeregTables"
@@ -1728,8 +1728,6 @@ Public Class FreeREG2Browser
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).EndInit()
       Me.panelUploadedFiles.ResumeLayout(False)
       Me.panelUploadedFiles.PerformLayout()
-      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       Me.SplitContainer1.Panel1.ResumeLayout(False)
       Me.SplitContainer1.Panel1.PerformLayout()
       Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -1746,6 +1744,8 @@ Public Class FreeREG2Browser
       Me.localContextMenuStrip.ResumeLayout(False)
       Me.TableLayoutPanel1.ResumeLayout(False)
       Me.TableLayoutPanel1.PerformLayout()
+      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
@@ -3711,7 +3711,7 @@ Public Class FreeREG2Browser
             MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
 
             If contents.StartsWith("+INFO") Then
-               Using dlg As New formBatchContents() With {.PersonalPath = _myTranscriptionLibrary, .CurrentBatch = currentBatch, .Text = String.Format("Batch Contents - {0}", currentBatch.FileName)}
+               Using dlg As New formBatchContents() With {.UseLibrary = UseLibrary, .LibraryName = LibraryName, .PersonalPath = _myTranscriptionLibrary, .CurrentBatch = currentBatch, .Text = String.Format("Batch Contents - {0}", currentBatch.FileName)}
                   dlg.FileContentsTextBox.Text = contents.Replace(",""""", ",")
                   dlg.ShowDialog()
                End Using

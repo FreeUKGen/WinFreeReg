@@ -77,6 +77,9 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ObjectListView">
+      <HintPath>..\ObjectListViewFull-2.9.1\ObjectListViewDemo\ObjectListView\bin\Release\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -116,6 +119,12 @@
     </Compile>
     <Compile Include="ctlTextboxWithUCF.vb">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dlgSaveFIle.Designer.vb">
+      <DependentUpon>dlgSaveFIle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="dlgSaveFIle.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="dlgUCF.Designer.vb">
       <DependentUpon>dlgUCF.vb</DependentUpon>
@@ -159,6 +168,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ctlTextboxWithUCF.resx">
       <DependentUpon>ctlTextboxWithUCF.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="dlgSaveFIle.resx">
+      <DependentUpon>dlgSaveFIle.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="dlgUCF.resx">
       <DependentUpon>dlgUCF.vb</DependentUpon>

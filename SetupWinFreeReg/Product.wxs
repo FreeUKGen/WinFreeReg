@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 
-   <Product Id="*" Name="WinFreeREG 1.1.3" Language="1033" Version="1.1.3" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
+   <Product Id="*" Name="WinFreeREG 1.1.4" Language="1033" Version="1.1.4" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
 
       <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Manufacturer="Free UK Genealogy"
                Description="Installs the FreeREG Transcription Program"
@@ -97,10 +97,6 @@
 
          <Component Id="CMP_Software_Microsoft_WindowsAPICodePack_Shell" Guid="{F830F61E-F943-48EE-BBE4-371B828429E0}">
             <File Id="FILE_Microsoft_WindowsAPICodePack_Shell" Source="$(var.FreeREG2Browser.TargetDir)\Microsoft.WindowsAPICodePack.Shell.dll" KeyPath="yes" Checksum="yes" />
-         </Component>
-
-         <Component Id="CMP_HtmlAgilityPack" Guid="{8310B015-4C3B-4F64-A8E8-25E01B58EE5E}">
-            <File Id="FILE_HtmlAgilityPack.dll" Source="$(var.FreeREG2Browser.TargetDir)\HtmlAgilityPack.dll" KeyPath="yes" Checksum="yes" />
          </Component>
 
          <Component Id="CMP_ObjectListView" Guid="{0BF44A19-13CC-4E0A-9EDE-986B829EB782}">
@@ -210,12 +206,12 @@
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserOptions" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
 
-               <Component Id="CMP_Doc_UserTables" Guid="{2B5DD845-DCF5-441D-8931-7CA6895F1EBA}">
+         <Component Id="CMP_Doc_UserTables" Guid="{2B5DD845-DCF5-441D-8931-7CA6895F1EBA}">
             <File Id="FILE_UserTables" Name="UserTables.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\UserTables" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
 
-</DirectoryRef>
+      </DirectoryRef>
 
       <!--Data Files-->
       <DirectoryRef Id="DATAFOLDER" FileSource="$(var.FreeREG2Browser.ProjectDir)Other Files">
