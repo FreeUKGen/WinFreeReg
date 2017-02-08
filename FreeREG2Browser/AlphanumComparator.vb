@@ -32,6 +32,7 @@ Imports System
 Imports System.Collections
 Imports System.Text
 Imports BrightIdeasSoftware
+Imports System.Windows.Forms
 
 ' 
 ' * Please compare against the latest Java version at http://www.DaveKoelle.com
@@ -80,8 +81,10 @@ Public Class AlphanumComparator
 
       While (thisMarker < s1.Length) OrElse (thatMarker < s2.Length)
          If thisMarker >= s1.Length Then
+            If _order = SortOrder.Descending Then Return 1
             Return -1
          ElseIf thatMarker >= s2.Length Then
+            If _order = SortOrder.Descending Then Return -1
             Return 1
          End If
          Dim thisCh As Char = s1(thisMarker)
@@ -126,6 +129,7 @@ Public Class AlphanumComparator
          End If
 
          If result <> 0 Then
+            If _order = SortOrder.Descending Then result *= -1
             Return result
          End If
       End While

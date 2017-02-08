@@ -87,7 +87,7 @@
             <File Id="FILE_TranscriptionTablesDll" Source="$(var.TranscriptionTables.TargetDir)\TranscriptionTables.dll" KeyPath="yes" Checksum="yes" />
          </Component>
 
-         <Component Id="CMP_Software_WinFreeRegControlLibrary" Guid="{909B07C1-78A0-492B-AB66-52B2F67ADBEE}">
+         <Component Id="CMP_Software_WinFreeRegControlLibrary" Guid="{E7E3DF16-AAA2-4E99-B4B3-200FEAB74AE2}">
             <File Id="FILE_WinFreeRegControlLibraryDll" Source="$(var.WinFreeRegControlLibrary.TargetDir)\WinFreeRegControlLibrary.dll" KeyPath="yes" Checksum="yes" />
          </Component>
 
