@@ -2795,7 +2795,8 @@ Public Class FreeREG2Browser
          Try
             worker.ReportProgress(0, "Logging out...")
             webClient.SetTimeout(30000)
-            Dim addrRequest As String = MyAppSettings.BaseUrl + "/cms/refinery/logout"
+            '            Dim addrRequest As String = MyAppSettings.BaseUrl + "/cms/refinery/logout"
+            Dim addrRequest As String = MyAppSettings.BaseUrl + "/manage_resources/logout"
 
             '  Add the cookies to the request
             '
@@ -4072,7 +4073,7 @@ Public Class FreeREG2Browser
    End Sub
 
    Private Sub UserOptionsToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles UserOptionsToolStripMenuItem.Click
-      Using dlg As New dlgUserOptions(formHelp) With {.SelectedValue = My.Settings.optionCellEditing}
+      Using dlg As New dlgUserOptions(formHelp) With {.SelectedValue = My.Settings.optionCellEditing, .LibraryName = LibraryName}
          dlg.ShowDialog()
          If dlg.DialogResult = Windows.Forms.DialogResult.OK Then
             If dlg.SelectedValue <> My.Settings.optionCellEditing Then

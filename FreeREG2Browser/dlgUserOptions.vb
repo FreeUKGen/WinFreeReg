@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports BrightIdeasSoftware.ObjectListView
 Imports System.IO
+Imports Microsoft.WindowsAPICodePack.Shell
 
 Public Class dlgUserOptions
 
@@ -21,6 +22,8 @@ Public Class dlgUserOptions
          _selectedValue = value
       End Set
    End Property
+
+   Property LibraryName As String
 
    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
       Me.DialogResult = System.Windows.Forms.DialogResult.OK
@@ -85,5 +88,18 @@ Public Class dlgUserOptions
             End If
          End If
       End Using
+   End Sub
+
+   Private Sub Label1_Click(sender As Object, e As EventArgs) Handles Label1.Click
+
+   End Sub
+
+   Private Sub linkCfgTranscripitionsLibrary_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles linkCfgTranscripitionsLibrary.LinkClicked
+      Dim libTrans As ShellLibrary = ShellLibrary.Load(LibraryName, True)
+      Dim strTitle As String = "Configure The Transcriptions Library"
+      Dim strInstructions As String = "Add & Remove folders containing transcription files from the library"
+
+      ShellLibrary.ShowManageLibraryUI(libTrans.Name, Me.Handle, strTitle, strInstructions, True)
+      libTrans = ShellLibrary.Load(LibraryName, True)
    End Sub
 End Class

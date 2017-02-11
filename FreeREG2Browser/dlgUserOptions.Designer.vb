@@ -38,6 +38,7 @@ Partial Class dlgUserOptions
       Me.checkAutoIncrementRegisterNumber = New System.Windows.Forms.CheckBox()
       Me.checkUCF = New System.Windows.Forms.CheckBox()
       Me.checkNormalRecordOrder = New System.Windows.Forms.CheckBox()
+      Me.linkCfgTranscripitionsLibrary = New System.Windows.Forms.LinkLabel()
       Me.TableLayoutPanel1.SuspendLayout()
       Me.groupCellEditActivation.SuspendLayout()
       Me.SuspendLayout()
@@ -142,7 +143,7 @@ Partial Class dlgUserOptions
       'Label1
       '
       Me.Label1.AutoSize = True
-      Me.Label1.Location = New System.Drawing.Point(13, 120)
+      Me.Label1.Location = New System.Drawing.Point(17, 195)
       Me.Label1.Name = "Label1"
       Me.Label1.Size = New System.Drawing.Size(31, 13)
       Me.Label1.TabIndex = 4
@@ -151,7 +152,7 @@ Partial Class dlgUserOptions
       'labelFont
       '
       Me.labelFont.AutoSize = True
-      Me.labelFont.Location = New System.Drawing.Point(40, 120)
+      Me.labelFont.Location = New System.Drawing.Point(44, 195)
       Me.labelFont.Name = "labelFont"
       Me.labelFont.Size = New System.Drawing.Size(25, 13)
       Me.labelFont.TabIndex = 5
@@ -208,6 +209,16 @@ Partial Class dlgUserOptions
       Me.checkNormalRecordOrder.Text = "Normal Record Order"
       Me.checkNormalRecordOrder.UseVisualStyleBackColor = True
       '
+      'linkCfgTranscripitionsLibrary
+      '
+      Me.linkCfgTranscripitionsLibrary.AutoSize = True
+      Me.linkCfgTranscripitionsLibrary.Location = New System.Drawing.Point(17, 124)
+      Me.linkCfgTranscripitionsLibrary.Name = "linkCfgTranscripitionsLibrary"
+      Me.linkCfgTranscripitionsLibrary.Size = New System.Drawing.Size(155, 13)
+      Me.linkCfgTranscripitionsLibrary.TabIndex = 11
+      Me.linkCfgTranscripitionsLibrary.TabStop = True
+      Me.linkCfgTranscripitionsLibrary.Text = "Configure Transcriptions Library"
+      '
       'dlgUserOptions
       '
       Me.AcceptButton = Me.OK_Button
@@ -215,6 +226,7 @@ Partial Class dlgUserOptions
       Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
       Me.CancelButton = Me.Cancel_Button
       Me.ClientSize = New System.Drawing.Size(448, 315)
+      Me.Controls.Add(Me.linkCfgTranscripitionsLibrary)
       Me.Controls.Add(Me.checkNormalRecordOrder)
       Me.Controls.Add(Me.checkUCF)
       Me.Controls.Add(Me.checkAutoIncrementRegisterNumber)
@@ -256,5 +268,6 @@ Partial Class dlgUserOptions
    Friend WithEvents checkAutoIncrementRegisterNumber As System.Windows.Forms.CheckBox
    Friend WithEvents checkUCF As System.Windows.Forms.CheckBox
    Friend WithEvents checkNormalRecordOrder As System.Windows.Forms.CheckBox
+   Friend WithEvents linkCfgTranscripitionsLibrary As System.Windows.Forms.LinkLabel
 
 End Class

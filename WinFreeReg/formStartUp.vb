@@ -98,10 +98,10 @@ Public Class formStartUp
       If ShellLibrary.IsPlatformSupported Then
          If My.Settings.UseLibrary Then
             libTrans = CreateTranscriptionsLibrary(My.Settings.LibraryName, My.Settings.MyTranscriptionLibrary)
-            TranscriptionLibraryLabel.Visible = False
-            LibraryTextBox.Visible = False
-            linkBrowse.Visible = False
-            btnConfigureLibrary.Visible = True
+            '            TranscriptionLibraryLabel.Visible = False
+            '           LibraryTextBox.Visible = False
+            '          linkBrowse.Visible = False
+            '         btnConfigureLibrary.Visible = True
          End If
       Else
          My.Settings.UseLibrary = False
