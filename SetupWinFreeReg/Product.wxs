@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 
-   <Product Id="*" Name="WinFreeREG 1.1.4" Language="1033" Version="1.1.4" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
+   <Product Id="*" Name="WinFreeREG 1.1.5" Language="1033" Version="1.1.5" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
 
       <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Manufacturer="Free UK Genealogy"
                Description="Installs the FreeREG Transcription Program"
@@ -176,6 +176,11 @@
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\NormalUCFtextbox" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
 
+         <Component Id="CMP_Doc_SaveNewFile" Guid="{F54F1002-79B9-43C6-8202-10558A03B766}">
+            <File Id="FILE_SaveNewFile" Name="SaveNewFile.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\SsveNewFile" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
          <Component Id="CMP_Doc_StartNewFile" Guid="{F14C7749-C9BF-4E9D-B5C5-6D7B45667BEF}">
             <File Id="FILE_StartNewFile" Name="StartNewFile.html" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\StartNewFile" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -246,6 +251,7 @@
          <ComponentRef Id="CMP_Doc_LocalFiles" />
          <ComponentRef Id="CMP_Doc_MarriageErrors" />
          <ComponentRef Id="CMP_Doc_NormalUCFtextbox" />
+         <ComponentRef Id="CMP_Doc_SaveNewFile" />
          <ComponentRef Id="CMP_Doc_StartNewFile" />
          <ComponentRef Id="CMP_Doc_StartUp" />
          <ComponentRef Id="CMP_Doc_UncertainCharacterFormat" />

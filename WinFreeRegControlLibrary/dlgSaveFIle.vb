@@ -15,6 +15,8 @@ Public Class dlgSaveFile
 
    Property ReturnFolder As Boolean
 
+   Property formHelp As formGeneralHelp
+
    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
       If ReturnFolder Then
          SelectedFileName = lboxFolders.SelectedItem.ToString()
@@ -31,13 +33,47 @@ Public Class dlgSaveFile
       Me.Close()
    End Sub
 
-   Private Sub dlgSaveFIle_Load(sender As Object, e As EventArgs) Handles Me.Load
+   Private Sub dlgSaveFile_HelpButtonClicked(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles Me.HelpButtonClicked
+      If formHelp IsNot Nothing Then
+         Try
+            formHelp.Title = "Save File"
+            formHelp.StartPage = "SaveNewFile.html"
+            formHelp.Show()
+
+         Catch ex As Exception
+            formHelp.Hide()
+            MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+         End Try
+      Else
+         e.Cancel = True
+      End If
+   End Sub
+
+   Private Sub dlgSaveFile_HelpRequested(sender As Object, hlpevent As HelpEventArgs) Handles Me.HelpRequested
+      If formHelp IsNot Nothing Then
+         Try
+            formHelp.Title = "Save File"
+            formHelp.StartPage = "SaveNewFile.html"
+            formHelp.Show()
+
+         Catch ex As Exception
+            formHelp.Hide()
+            MessageBox.Show(ex.Message, "General Help", MessageBoxButtons.OK, MessageBoxIcon.Stop)
+
+         End Try
+      End If
+   End Sub
+
+   Private Sub dlgSaveFile_Load(sender As Object, e As EventArgs) Handles Me.Load
       lboxFolders.BeginUpdate()
       For Each folder In listFolders
          lboxFolders.Items.Add(folder)
       Next
       lboxFolders.SelectedIndex = DefaultFolder
       lboxFolders.EndUpdate()
+      txtFileName.Text = FileName
+      txtFileName.ReadOnly = ReturnFolder
       DataListView1.Visible = Not ReturnFolder
    End Sub
 

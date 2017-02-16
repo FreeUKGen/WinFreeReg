@@ -270,6 +270,7 @@ Partial Class formStartNewFile
       Me.Label1.Size = New System.Drawing.Size(49, 13)
       Me.Label1.TabIndex = 19
       Me.Label1.Text = "Filename"
+      Me.Label1.Visible = False
       '
       'labFilename
       '
@@ -280,6 +281,7 @@ Partial Class formStartNewFile
       Me.labFilename.Size = New System.Drawing.Size(106, 20)
       Me.labFilename.TabIndex = 20
       Me.labFilename.Text = "labFilename"
+      Me.labFilename.Visible = False
       '
       'labCode
       '

@@ -179,6 +179,7 @@ Partial Class dlgSaveFile
       Me.Controls.Add(Me.TableLayoutPanel1)
       Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
       Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+      Me.HelpButton = True
       Me.Margin = New System.Windows.Forms.Padding(4)
       Me.MaximizeBox = False
       Me.MinimizeBox = False

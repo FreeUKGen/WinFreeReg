@@ -661,21 +661,18 @@ Public Class formFreeregTables
                   dlvPlaces.DataSource = Nothing
                   If Not ds.Tables("Place") Is Nothing Then
                      If ds.Tables("Place").Rows.Count > 0 Then
-                        For Each row As DataRow In ds.Tables("Place").Rows
-                           Dim drow As FreeregTables.PlacesRow = _tables.Places.FindByPlaceNameChapmanCode(row.Item("PlaceName"), row.Item("ChapmanCode"))
-                           If drow IsNot Nothing Then
-                              _tables.Places.RemovePlacesRow(drow)
-                           End If
-                           _tables.Places.AddPlacesRow(row.Item("PlaceName"), selectedCounty, row.Item("Country"), row.Item("CountyName"), row.Item("Notes"))
-                        Next
 
-                        ' Get a list of all the unchanged Place records for the selected County
-                        ' These should be those records that are no longer present on FreeREG and can be deleted
-                        Dim places = From place As FreeregTables.PlacesRow In _tables.Places _
-                                     Where place.ChapmanCode = selectedCounty.ChapmanCode And place.RowState = DataRowState.Unchanged _
-                                     Select place
+                        ' Get a list of all the Place records for the selected County and delete then
+                        Dim places = (From place As FreeregTables.PlacesRow In _tables.Places _
+                                     Where place.ChapmanCode = selectedCounty.ChapmanCode _
+                                     Select place).ToList
                         For Each place In places
                            _tables.Places.RemovePlacesRow(place)
+                        Next
+
+                        ' Now, add all the incoming Places to the table
+                        For Each row As DataRow In ds.Tables("Place").Rows
+                           _tables.Places.AddPlacesRow(row.Item("PlaceName"), selectedCounty, row.Item("Country"), row.Item("CountyName"), row.Item("Notes"))
                         Next
 
                         _tables.Places.AcceptChanges()
@@ -827,33 +824,47 @@ Public Class formFreeregTables
 
                   If ds.Tables("Church") IsNot Nothing Then
                      If ds.Tables("Church").Rows.Count > 0 Then
-                        For Each rowIncoming As DataRow In ds.Tables("Church").Rows
-                           Dim newNotes As String = rowIncoming.Item("Notes").ToString.Replace(vbCrLf, " ")
-                           Dim newFileCode As String = String.Empty
+                        Try
+                           For Each rowIncoming As DataRow In ds.Tables("Church").Rows
+                              Dim newNotes As String = rowIncoming.Item("Notes").ToString.Replace(vbCrLf, " ")
+                              Dim newFileCode As String = String.Empty
 #If USE_FILECODES Then
-                        Dim reg As New Regex("FILE: (?<FileCode>\w{3,8})", RegexOptions.IgnoreCase)
-                        Dim mat As Match = reg.Match(newNotes)
-                        If mat.Success Then
-                           If mat.Groups("FileCode").Success Then
-                              Dim code = mat.Groups("FileCode").Value.Trim.ToUpper
-                              If code.Length = 8 Then
-                                 newFileCode = mat.Groups("FileCode").Value
+                           Dim reg As New Regex("FILE: (?<FileCode>\w{3,8})", RegexOptions.IgnoreCase)
+                           Dim mat As Match = reg.Match(newNotes)
+                           If mat.Success Then
+                              If mat.Groups("FileCode").Success Then
+                                 Dim code = mat.Groups("FileCode").Value.Trim.ToUpper
+                                 If code.Length = 8 Then
+                                    newFileCode = mat.Groups("FileCode").Value
+                                 Else
+                                    Beep()
+                                 End If
                               Else
                                  Beep()
                               End If
-                           Else
-                              Beep()
                            End If
-                        End If
 #End If
 
-                           Dim rowExisting As FreeregTables.ChurchesRow = _tables.Churches.FindByChurchNameChapmanCodePlaceName(rowIncoming.Item("ChurchName"), params.County.ChapmanCode, params.Place)
-                           If rowExisting IsNot Nothing Then
-                              newFileCode = rowExisting.FileCode
-                              _tables.Churches.RemoveChurchesRow(rowExisting)
-                           End If
-                           _tables.Churches.AddChurchesRow(rowIncoming.Item("ChurchName"), params.County, params.Place, newFileCode, rowIncoming.Item("Location"), rowIncoming.Item("Denomination"), rowIncoming.Item("Website"), rowIncoming.Item("LastAmended"), newNotes)
-                        Next
+                              Dim rowExisting As FreeregTables.ChurchesRow = _tables.Churches.FindByChurchNameChapmanCodePlaceName(rowIncoming.Item("ChurchName"), params.County.ChapmanCode, params.Place)
+                              If rowExisting Is Nothing Then
+                                 _tables.Churches.AddChurchesRow(rowIncoming.Item("ChurchName"), params.County, params.Place, newFileCode, rowIncoming.Item("Location"), rowIncoming.Item("Denomination"), rowIncoming.Item("Website"), rowIncoming.Item("LastAmended"), newNotes)
+                              Else
+                                 With rowExisting
+                                    .ChapmanCode = params.County.ChapmanCode
+                                    .PlaceName = params.Place
+                                    .ChurchName = rowIncoming.Item("ChurchName")
+                                    .Location = rowIncoming.Item("Location")
+                                    .Denomination = rowIncoming.Item("Denomination")
+                                    .Website = rowIncoming.Item("Website")
+                                    .LastAmended = rowIncoming.Item("LastAmended")
+                                    .Notes = newNotes
+                                 End With
+                              End If
+                           Next
+
+                        Catch ex As Exception
+
+                        End Try
 
                         ' Get a list of all the unchanged Church records for the selected County and Place
                         ' These should be those records that are no longer present on FreeREG and can be deleted

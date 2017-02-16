@@ -5,19 +5,60 @@
     <meta charset="utf-8" />
     <title></title>
     <link href="FreeRegBrowser.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+       .newStyle2
+       {
+          font-family: "Comic Sans MS";
+          font-size: 8.25pt;
+          color: #0000FF;
+       }
+    </style>
 </head>
 <body>
    <h1>User Options</h1>
 
    <p>This window shows those characteristics of the various displays that can be tailored to the user&#39;s requirements. At present, there are just two basic characteristics of the various lists that can be customised. These are, the method by which cells in the main data window can be edited, and whether or not a visible indicator is used whenever a data field is in the actual process of being edited.</p>
 
-   <h3>Cell Edit Activation Mode</h3>
+   <h3>Cell Edit Activate</h3>
    
    <p>The lists displaying the various data records function as a spreadsheet and as in a spreadsheet, the initiation of of an edit operation can be customised to suit the user&#39;s preference.</p>
 
-   <h3>Cell Edit Border</h3>
+   <h3>Show Editing Cell Border</h3>
    
    <p>As a visual aid for the user, the program is capable of displaying a coloured border surrounding the field currently being edited. This may or may not be of some use some transcribers. The display of the border is controlled by the status of the checkbox: ticked means that the border will be shown, and unticked means that no border will be visible. The default is for the border to be displayed.</p>
+
+   <h3>Replicate Fiche/Image data</h3>
+
+   <p>If the images being transcribed have unique identifiers, then they should be captured as part of the transcription process. Very often, each page of the register will contain multiple entries which should all have the exact same identifiers. This option enables the program to replicate the identifiers from one record to the next.</p>
+   <p>Care should be taken in cases where there is a combination of records with identifiers and records that don&#39;t. In this case, either switch the option off (and back on again if required) or, leave it on and hide the Fiche and Image columns. The columns can be reshown later but remember to also re-enter the identifiers for the first record, otherwise blanks will be copied into the new records.</p>
+
+   <h3>Replicate Dates</h3>
+
+   <p>Dates can also be replicated from one record to the next. This is useful for larger parishes where multiple events are likely to occur on the same day. It can also be used to provide a starting point for the date of the new record, avoiding having to type the full date.</p>
+
+   <h3>AutoIncrement Register Number</h3>
+
+   <p>Registers, particularing post-1812 registers, have entry numbers for each pre-printed form. In some older records, events are also numbered. This option can automatically generate the next sequential number for the new record, using the number of the previous record.</p>
+
+   <h3>Font</h3>
+
+   <p>Click on the blue description <span class="newStyle2">Comic Sans MS, 8.25</span>, Regular to change the font used in the Workspace. Doing so causes a standard, Windows Font Dialog to appear where a typeface can be selected as well as the size of individual characters and any emphasis that is deired. This allows the user to make the display of records more suitable to their screen and vision.</p>
+
+   <h3>Full UCF Editor</h3>
+
+   <p>The program offers the <a href="UncertainCharacterFormat.html">UCF Helper</a> dialog as a means of assisting the user in the construction and placement of various UCF elements. The dialog is reached through the use of the F5 function key whilst actually editing a particular field. Two methods of editing fields are provided by the program, the first of which closely matches the default means of editing for those fields that do not accept UCF elements, whilst an alternative method (the Full option) tries to preserve the context of the field being edited.</p>
+
+   <p>The Full HCF Editor differs from its little brother by including the name of column to which the field being edited belongs, and a helpful hint about which function key to press in order to invoke the UCF Help dialog   </p>
+
+      <img src="Extended UCF textbox.jpg" alt="Alternate Text" />
+
+   <p>The Normal UCF Editor on the other hand, simply shows a textbox for editing the contents of the underlying cell. The visual cue here is the coloured background.   </p>
+
+      <img src="Normal UCF textbox.jpg" alt="Alternate Text" />
+
+   <h3>Normal Record Order</h3>
+
+   <p>The program offers the user the ability to reverse the normal record sequence when initially opening a file. The Normal sequence shows the records from first to last, whilst the reverse sequence shows them last to first. Note that the sequence of the records will afect where a new record will appear in the displayed list. When the file is in its Normal sequence, additions will tend to take place at the end of the list. When a file is shown in revers esequence, additions will happen at the top of the list.</p>
 
 </body>
 </html>

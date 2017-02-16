@@ -28,6 +28,8 @@ Public Class formBatchContents
 
    Property LibraryName As String
 
+   Property formHelp As formGeneralHelp
+
    Private Sub formBatchContents_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
       FileContentsTextBox.Select(0, 0)
 
@@ -38,8 +40,6 @@ Public Class formBatchContents
 
    Private Sub btnSaveFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSaveFile.Click
       Dim contents As String = FileContentsTextBox.Text
-
-      ' TODO: Restrict the allowable folders in which the file can be saved to only those that are contained in the Transcriptions Library
 
       If UseLibrary Then
          Dim libtrans As ShellLibrary
@@ -52,6 +52,7 @@ Public Class formBatchContents
 
          Using dlg As New dlgSaveFile With {.ReturnFolder = False, .listFolders = listFolders, .DefaultFolder = defFolder, .FileName = CurrentBatch.FileName}
             dlg.Text = "Save Downloaded File"
+            dlg.formHelp = formHelp
             Dim rc As DialogResult = dlg.ShowDialog()
             If rc = DialogResult.OK Then
                Try

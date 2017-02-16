@@ -480,6 +480,7 @@
     <Content Include="Documentation\LocalFiles.html" />
     <Content Include="Documentation\MarriageErrors.html" />
     <Content Include="Documentation\Normal UCF textbox.jpg" />
+    <Content Include="Documentation\SaveNewFile.html" />
     <Content Include="Documentation\StartNewFile.html" />
     <Content Include="Documentation\StartUp.html" />
     <Content Include="Documentation\DataErrors.html" />

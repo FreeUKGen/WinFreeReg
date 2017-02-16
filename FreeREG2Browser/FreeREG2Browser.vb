@@ -354,6 +354,8 @@ Public Class FreeREG2Browser
       Me.backgroundBatches = New System.ComponentModel.BackgroundWorker()
       Me.panelUploadedFiles = New System.Windows.Forms.Panel()
       Me.IDTextBox = New System.Windows.Forms.TextBox()
+      Me.BatchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+      Me.BatchesDataSet = New WinFreeReg.Batches()
       Me.CountyNameTextBox = New System.Windows.Forms.TextBox()
       Me.PlaceNameTextBox = New System.Windows.Forms.TextBox()
       Me.ChurchNameTextBox = New System.Windows.Forms.TextBox()
@@ -409,8 +411,6 @@ Public Class FreeREG2Browser
       Me.RichTextBox1 = New System.Windows.Forms.RichTextBox()
       Me.CheckBox1 = New System.Windows.Forms.CheckBox()
       Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-      Me.BatchBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-      Me.BatchesDataSet = New WinFreeReg.Batches()
       Me.FreeregTablesDataSet = New WinFreeReg.FreeregTables()
       IDLabel = New System.Windows.Forms.Label()
       CountyNameLabel = New System.Windows.Forms.Label()
@@ -447,6 +447,8 @@ Public Class FreeREG2Browser
       Me.bnavShowData.SuspendLayout()
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.panelUploadedFiles.SuspendLayout()
+      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SplitContainer1.Panel1.SuspendLayout()
       Me.SplitContainer1.Panel2.SuspendLayout()
       Me.SplitContainer1.SuspendLayout()
@@ -460,8 +462,6 @@ Public Class FreeREG2Browser
       CType(Me.dlvUploadedFiles, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.localContextMenuStrip.SuspendLayout()
       Me.TableLayoutPanel1.SuspendLayout()
-      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
-      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
       Me.SuspendLayout()
       '
@@ -1125,6 +1125,17 @@ Public Class FreeREG2Browser
       Me.IDTextBox.TabIndex = 66
       Me.IDTextBox.Visible = False
       '
+      'BatchBindingSource
+      '
+      Me.BatchBindingSource.AllowNew = False
+      Me.BatchBindingSource.DataMember = "Batch"
+      Me.BatchBindingSource.DataSource = Me.BatchesDataSet
+      '
+      'BatchesDataSet
+      '
+      Me.BatchesDataSet.DataSetName = "Batches"
+      Me.BatchesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+      '
       'CountyNameTextBox
       '
       Me.CountyNameTextBox.DataBindings.Add(New System.Windows.Forms.Binding("Text", Me.BatchBindingSource, "CountyName", True))
@@ -1473,7 +1484,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 409
+      Me.SplitContainer2.SplitterDistance = 411
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1499,7 +1510,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemCountOnGroups = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 409)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 411)
       Me.dlvLocalFiles.SpaceBetweenGroups = 12
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1519,6 +1530,7 @@ Public Class FreeREG2Browser
       '
       'cboxProcess
       '
+      Me.cboxProcess.Enabled = False
       Me.cboxProcess.FormattingEnabled = True
       Me.cboxProcess.Location = New System.Drawing.Point(532, 12)
       Me.cboxProcess.MaxDropDownItems = 3
@@ -1682,21 +1694,10 @@ Public Class FreeREG2Browser
       Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 24)
       Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
       Me.TableLayoutPanel1.RowCount = 2
-      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.15151!))
-      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.848485!))
+      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.1515121!))
+      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.84848499!))
       Me.TableLayoutPanel1.Size = New System.Drawing.Size(903, 495)
       Me.TableLayoutPanel1.TabIndex = 7
-      '
-      'BatchBindingSource
-      '
-      Me.BatchBindingSource.AllowNew = False
-      Me.BatchBindingSource.DataMember = "Batch"
-      Me.BatchBindingSource.DataSource = Me.BatchesDataSet
-      '
-      'BatchesDataSet
-      '
-      Me.BatchesDataSet.DataSetName = "Batches"
-      Me.BatchesDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
       '
       'FreeregTablesDataSet
       '
@@ -1728,6 +1729,8 @@ Public Class FreeREG2Browser
       CType(Me.bsrcLocalFiles, System.ComponentModel.ISupportInitialize).EndInit()
       Me.panelUploadedFiles.ResumeLayout(False)
       Me.panelUploadedFiles.PerformLayout()
+      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       Me.SplitContainer1.Panel1.ResumeLayout(False)
       Me.SplitContainer1.Panel1.PerformLayout()
       Me.SplitContainer1.Panel2.ResumeLayout(False)
@@ -1744,8 +1747,6 @@ Public Class FreeREG2Browser
       Me.localContextMenuStrip.ResumeLayout(False)
       Me.TableLayoutPanel1.ResumeLayout(False)
       Me.TableLayoutPanel1.PerformLayout()
-      CType(Me.BatchBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
-      CType(Me.BatchesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       CType(Me.FreeregTablesDataSet, System.ComponentModel.ISupportInitialize).EndInit()
       Me.ResumeLayout(False)
       Me.PerformLayout()
@@ -1879,7 +1880,7 @@ Public Class FreeREG2Browser
             If currentUser.person_role = "trainee" Then
                cboxProcess.Items.Add("Check for errors")
             Else
-               cboxProcess.Items.AddRange(New Object() {"Process tonight", "As soon as possible"})
+               cboxProcess.Items.AddRange(New Object() {"As soon as possible", "Process tonight"})
             End If
          End If
       End If
@@ -2075,6 +2076,7 @@ Public Class FreeREG2Browser
          If UseLibrary AndAlso libtrans.Count > 1 Then
             dlvcol.Groupable = True
             dlvcol.Sortable = True
+            dlvcol.GroupFormatter = New GroupFormatterDelegate(AddressOf LibraryFormatter)
             dlvcol.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetNameKey)
             dlvcol.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf GetNameTitle)
          Else
@@ -2419,8 +2421,8 @@ Public Class FreeREG2Browser
             worker.ReportProgress(0, "Logging on...")
             webClient.SetTimeout(30000)
             webClient.AddCookie(uri, euDirective)
-            webClient.GetHttpRequest(uri).AllowAutoRedirect = True
-            webClient.GetHttpRequest(uri).KeepAlive = True
+            webClient.GetHttpWebRequest(uri).AllowAutoRedirect = True
+            webClient.GetHttpWebRequest(uri).KeepAlive = True
 
             Dim addrRequest As String = MyAppSettings.BaseUrl + "/transreg_users/computer" + String.Format("?computerid={0}&computeridpassword={1}&transcriberid={2}&transcriberpassword={3}", MyAppSettings.TransregName, MyAppSettings.TransregPassword, MyAppSettings.UserId, MyAppSettings.Password)
             Dim login_page = webClient.DownloadString(addrRequest)
@@ -3714,6 +3716,7 @@ Public Class FreeREG2Browser
             If contents.StartsWith("+INFO") Then
                Using dlg As New formBatchContents() With {.UseLibrary = UseLibrary, .LibraryName = LibraryName, .PersonalPath = _myTranscriptionLibrary, .CurrentBatch = currentBatch, .Text = String.Format("Batch Contents - {0}", currentBatch.FileName)}
                   dlg.FileContentsTextBox.Text = contents.Replace(",""""", ",")
+                  dlg.formHelp = formHelp
                   dlg.ShowDialog()
                End Using
             Else
@@ -4152,6 +4155,10 @@ Public Class FreeREG2Browser
             End Try
          End If
       End If
+   End Sub
+
+   Private Sub LibraryFormatter(group As BrightIdeasSoftware.OLVGroup, parms As BrightIdeasSoftware.GroupingParameters)
+      group.Collapsed = True
    End Sub
 
 End Class

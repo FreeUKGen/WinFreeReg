@@ -122,9 +122,6 @@ Public Class formStartNewFile
 
       If _myDefaultCounty IsNot Nothing Then CountiesComboBox.SelectedIndex = CountiesComboBox.FindString(_myDefaultCounty.County)
 
-      Label1.Visible = False
-      labFilename.Text = ""
-
       Dim AppDataLocalFolder = String.Format("{0}\{1}", Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), Application.ProductName)
       Dim ToolTipsFile As String = Path.Combine(AppDataLocalFolder, "ToolTips.xml")
       Dim MyToolTips = New CustomToolTip(ToolTipsFile, Me)
@@ -145,6 +142,8 @@ Public Class formStartNewFile
             PlacesComboBox.Enabled = True
             PlacesComboBox.Visible = True
             labPlacesMessage.Visible = False
+            PlacesComboBox.SelectedIndex = -1
+            PlacesComboBox.SelectedIndex = PlacesComboBox.FindString(dtPlacesWithChurchesInCounty(0).Item(0))
          Else
             PlacesComboBox.DataSource = Nothing
             PlacesComboBox.Visible = False
@@ -182,23 +181,25 @@ Public Class formStartNewFile
                CodeTextBox.Text = rowChurch.Code
                If Not String.IsNullOrEmpty(rowChurch.Code) Then
                   Label1.Visible = True
-                  labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
                   Dim strFileName As String = CodeTextBox.Text + m_SelectedRecordType
-                  labFilename.Text += " " + SuffixNumber(strFileName).ToString
+                  labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType + " " + SuffixNumber(strFileName).ToString
+                  labFilename.Visible = True
                End If
 #Else
                If rowChurch.FileCode.Length = 3 Then CodeTextBox.Text = rowChurch.FileCode Else CodeTextBox.Text = String.Empty
                If Not String.IsNullOrEmpty(CodeTextBox.Text) Then
                   Label1.Visible = True
-                  labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
                   Dim strFileName As String = m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType
-                  labFilename.Text += " " + SuffixNumber(strFileName).ToString
+                  labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType + " " + SuffixNumber(strFileName).ToString
+                  labFilename.Visible = True
                End If
 #End If
 
                labRegisterType.Visible = True
                RegisterTypesComboBox.Enabled = True
                RegisterTypesComboBox.Visible = True
+               RegisterTypesComboBox.SelectedIndex = -1
+               RegisterTypesComboBox.SelectedIndex = RegisterTypesComboBox.FindString(RegisterTypesComboBox.Text)
 
             Case Else
                ChurchesComboBox.Enabled = True
@@ -224,17 +225,17 @@ Public Class formStartNewFile
          CodeTextBox.Text = row.Code
          If Not String.IsNullOrEmpty(row.Code) Then
             Label1.Visible = True
-            labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
             Dim strFileName As String = CodeTextBox.Text + m_SelectedRecordType
-            labFilename.Text += " " + SuffixNumber(strFileName).ToString
+            labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType +" " + SuffixNumber(strFileName).ToString
+            labFilename.Visible = True
          End If
 #Else
          If row.FileCode.Length = 3 Then CodeTextBox.Text = row.FileCode Else CodeTextBox.Text = String.Empty
          If Not String.IsNullOrEmpty(CodeTextBox.Text) Then
             Label1.Visible = True
-            labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
             Dim strFileName As String = m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType
-            labFilename.Text += " " + SuffixNumber(strFileName).ToString
+            labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType + " " + SuffixNumber(strFileName).ToString
+            labFilename.Visible = True
          End If
 #End If
 
@@ -252,6 +253,9 @@ Public Class formStartNewFile
          labRecordType.Visible = True
          RecordTypesComboBox.Enabled = True
          RecordTypesComboBox.Visible = True
+         Dim x = CType(CType(RecordTypesComboBox.SelectedItem, DataRowView).Row, WinFreeReg.LookupTables.RecordTypesRow).Type
+         RecordTypesComboBox.SelectedIndex = -1
+         RecordTypesComboBox.SelectedIndex = RecordTypesComboBox.FindString(x)
       End If
    End Sub
 
@@ -264,14 +268,15 @@ Public Class formStartNewFile
 #If USE_FILECODES Then
          If Not String.IsNullOrEmpty(CodeTextBox.Text) Then
             Label1.Visible = True
-            labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
             Dim strFileName As String = CodeTextBox.Text + m_SelectedRecordType
-            labFilename.Text += " " + SuffixNumber(strFileName).ToString
+            labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType + " " + SuffixNumber(strFileName).ToString
+            labFilename.Visible = True
          End If
 #Else
-         labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
+         Label1.Visible = True
          Dim strFileName As String = m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType
-         labFilename.Text += " " + SuffixNumber(strFileName).ToString
+         labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType + " " + SuffixNumber(strFileName).ToString
+         labFilename.Visible = True
 #End If
 
          labComments.Visible = True
@@ -293,15 +298,14 @@ Public Class formStartNewFile
 
    Private Sub CodeTextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CodeTextBox.TextChanged
 #If USE_FILECODES Then
-      labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType
       Dim strFileName As String = CodeTextBox.Text + m_SelectedRecordType
-      labFilename.Text += " " + SuffixNumber(strFileName).ToString
+      labFilename.Text = CodeTextBox.Text + " " + m_SelectedRecordType + " " + SuffixNumber(strFileName).ToString
 #Else
-      labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType
       Dim strFileName As String = m_SelectedCounty + CodeTextBox.Text + m_SelectedRecordType
-      labFilename.Text += " " + SuffixNumber(strFileName).ToString
+      labFilename.Text = m_SelectedCounty + " " + CodeTextBox.Text + " " + m_SelectedRecordType + " " + SuffixNumber(strFileName).ToString
 #End If
       Label1.Visible = CodeTextBox.TextLength > 0
+      labFilename.Visible = True
       linkUpdate.Visible = (CodeTextBox.TextLength = CodeTextBox.MaxLength)
    End Sub
 
@@ -338,11 +342,12 @@ Public Class formStartNewFile
 
             Using dlg As New dlgSaveFile With {.ReturnFolder = True, .listFolders = listFolders, .DefaultFolder = defFolder, .FileName = labFilename.Text.Replace(" ", "") + ".CSV"}
                dlg.Text = "Create New File"
+               dlg.formHelp = formHelp
                Dim rc As DialogResult = dlg.ShowDialog()
                If rc = DialogResult.OK Then
                   NewFile.Create(Path.Combine(dlg.SelectedFileName, labFilename.Text.Replace(" ", "") + ".CSV"), dsLookupTables, dsFreeRegTables, m_RecordType)
                Else
-                  NewFile.Create(Path.Combine(_myTranscriptionLibrary, labFilename.Text.Replace(" ", "") + ".CSV"), dsLookupTables, dsFreeRegTables, m_RecordType)
+                  Return
                End If
             End Using
          Else

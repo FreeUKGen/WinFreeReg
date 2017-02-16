@@ -206,6 +206,7 @@ Public Class formFileWorkspace
             End If
             olvcSex.AspectToStringConverter = AddressOf SexDescription
             dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
+            dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Tab, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
             dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Alt, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
             dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Down + Keys.Alt, CellEditCharacterBehaviour.ChangeRowDown, CellEditAtEdgeBehaviour.ChangeRow)
             If My.Settings.optionEditingCellBorder Then dlvBaptisms.AddDecoration(New EditingCellBorderDecoration(True))
@@ -228,6 +229,7 @@ Public Class formFileWorkspace
             End If
             olvcRelationship.AspectToStringConverter = AddressOf RelationshipDescription
             dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
+            dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Tab, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
             dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Alt, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
             dlvBurials.CellEditKeyEngine.SetKeyBehaviour(Keys.Down + Keys.Alt, CellEditCharacterBehaviour.ChangeRowDown, CellEditAtEdgeBehaviour.ChangeRow)
             If My.Settings.optionEditingCellBorder Then dlvBurials.AddDecoration(New EditingCellBorderDecoration(True))
@@ -251,6 +253,7 @@ Public Class formFileWorkspace
             olvcGroomCondition.AspectToStringConverter = AddressOf GroomConditionDescription
             olvcBrideCondition.AspectToStringConverter = AddressOf BrideConditionDescription
             dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Enter, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
+            dlvBaptisms.CellEditKeyEngine.SetKeyBehaviour(Keys.Tab, CellEditCharacterBehaviour.ChangeColumnRight, CellEditAtEdgeBehaviour.Ignore)
             dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Up Or Keys.Alt, CellEditCharacterBehaviour.ChangeRowUp, CellEditAtEdgeBehaviour.ChangeRow)
             dlvMarriages.CellEditKeyEngine.SetKeyBehaviour(Keys.Down + Keys.Alt, CellEditCharacterBehaviour.ChangeRowDown, CellEditAtEdgeBehaviour.ChangeRow)
             If My.Settings.optionEditingCellBorder Then dlvMarriages.AddDecoration(New EditingCellBorderDecoration(True))
@@ -853,9 +856,9 @@ Public Class formFileWorkspace
             End If
             dt.AddBaptismsRow(row)
 
-            Dim model = dt.DefaultView.Item(row.LoadOrder)
-            dlvBaptisms.EnsureModelVisible(model)
+            Dim model = dt.DefaultView.Item(dt.Rows.Count - 1)
             dlvBaptisms.SelectObject(model, True)
+            dlvBaptisms.EnsureModelVisible(model)
             dlvBaptisms.Select()
 
          Case TranscriptionFileClass.FileTypes.BURIALS
@@ -875,9 +878,9 @@ Public Class formFileWorkspace
             End If
             dt.AddBurialsRow(row)
 
-            Dim model = dt.DefaultView.Item(row.LoadOrder)
-            dlvBurials.EnsureModelVisible(model)
+            Dim model = dt.DefaultView.Item(dt.Rows.Count - 1)
             dlvBurials.SelectObject(model, True)
+            dlvBurials.EnsureModelVisible(model)
             dlvBurials.Select()
 
          Case TranscriptionFileClass.FileTypes.MARRIAGES
@@ -897,9 +900,9 @@ Public Class formFileWorkspace
             End If
             dt.AddMarriagesRow(row)
 
-            Dim model = dt.DefaultView.Item(row.LoadOrder)
-            dlvMarriages.EnsureModelVisible(model)
+            Dim model = dt.DefaultView.Item(dt.Rows.Count - 1)
             dlvMarriages.SelectObject(model, True)
+            dlvMarriages.EnsureModelVisible(model)
             dlvMarriages.Select()
 
       End Select

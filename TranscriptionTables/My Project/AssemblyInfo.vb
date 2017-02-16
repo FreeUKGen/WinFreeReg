@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("FreeUKGenealogy")> 
 <Assembly: AssemblyProduct("TranscriptionTables")> 
-<Assembly: AssemblyCopyright("Copyright ©  2010-2016 Free UK Genealogy")> 
+<Assembly: AssemblyCopyright("Copyright ©  2010-2017 Free UK Genealogy")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

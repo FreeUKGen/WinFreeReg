@@ -48,6 +48,7 @@ Partial Class formFreeregTables
       Me.dlvChurches = New BrightIdeasSoftware.DataListView()
       Me.OlvColumn3 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.OlvColumn6 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.OlvColumn1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.OlvColumn7 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.ChurchesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
       Me.olvc3ChapmanCode = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
@@ -66,7 +67,6 @@ Partial Class formFreeregTables
       Me.backgroundCounties = New System.ComponentModel.BackgroundWorker()
       Me.backgroundPlaces = New System.ComponentModel.BackgroundWorker()
       Me.backgroundChurches = New System.ComponentModel.BackgroundWorker()
-      Me.OlvColumn1 = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.TabControl1.SuspendLayout()
       Me.tabRegisterTypes.SuspendLayout()
       CType(Me.dlvRegisterTypes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -370,6 +370,7 @@ Partial Class formFreeregTables
       Me.dlvChurches.AllColumns.Add(Me.OlvColumn1)
       Me.dlvChurches.AllColumns.Add(Me.OlvColumn7)
       Me.dlvChurches.AutoGenerateColumns = False
+      Me.dlvChurches.CellEditUseWholeCell = False
       Me.dlvChurches.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.OlvColumn3, Me.OlvColumn6, Me.OlvColumn1, Me.OlvColumn7})
       Me.dlvChurches.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvChurches.DataSource = Me.ChurchesBindingSource
@@ -379,6 +380,7 @@ Partial Class formFreeregTables
       Me.dlvChurches.Name = "dlvChurches"
       Me.dlvChurches.ShowGroups = False
       Me.dlvChurches.Size = New System.Drawing.Size(595, 270)
+      Me.dlvChurches.Sorting = System.Windows.Forms.SortOrder.Ascending
       Me.dlvChurches.TabIndex = 9
       Me.dlvChurches.UseCompatibleStateImageBehavior = False
       Me.dlvChurches.View = System.Windows.Forms.View.Details
@@ -396,6 +398,14 @@ Partial Class formFreeregTables
       Me.OlvColumn6.Groupable = False
       Me.OlvColumn6.IsEditable = False
       Me.OlvColumn6.Text = "Place"
+      '
+      'OlvColumn1
+      '
+      Me.OlvColumn1.AspectName = "FileCode"
+      Me.OlvColumn1.CellEditUseWholeCell = True
+      Me.OlvColumn1.Groupable = False
+      Me.OlvColumn1.Text = "File Code"
+      Me.OlvColumn1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
       '
       'OlvColumn7
       '
@@ -569,13 +579,6 @@ Partial Class formFreeregTables
       '
       'backgroundChurches
       '
-      '
-      'OlvColumn1
-      '
-      Me.OlvColumn1.AspectName = "FileCode"
-      Me.OlvColumn1.CellEditUseWholeCell = True
-      Me.OlvColumn1.Groupable = False
-      Me.OlvColumn1.Text = "File Code"
       '
       'formFreeregTables
       '

@@ -23,7 +23,7 @@ Public Class CookieAwareWebClient
 		_timeout = timeout
 	End Sub
 
-   Public Function GetHttpRequest(ByVal address As Uri) As HttpWebRequest
+   Public Function GetHttpWebRequest(ByVal address As Uri) As HttpWebRequest
       Return MyBase.GetWebRequest(address)
    End Function
 
