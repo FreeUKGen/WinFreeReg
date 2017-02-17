@@ -85,6 +85,8 @@ Public Class FreeREG2Browser
    Public LookupTablesFile As String
 
    Private formHelp As New formGeneralHelp() With {.Visible = False}
+   Private euDirective As New Cookie("cookiesDirective", "1")
+   Private AdministratorCookie As New Cookie("Administrator", "BAhJIhhJIEhhdmUgSXNzdWVzIDQgWW91BjoGRVQ%3D--14c43e8ebc0c4ae9d173476a6319351fc38690ec")
 
    Friend WithEvents bnavShowData As System.Windows.Forms.BindingNavigator
    Private components As System.ComponentModel.IContainer
@@ -2410,9 +2412,7 @@ Public Class FreeREG2Browser
       Dim uri = New Uri(MyAppSettings.BaseUrl)
       MyAppSettings.Cookies = New CookieCollection()
 
-      Dim euDirective As New Cookie("cookiesDirective", "1")
       MyAppSettings.Cookies.Add(euDirective)
-
 
       Using webClient As New CookieAwareWebClient()
          Try
@@ -2434,6 +2434,7 @@ Public Class FreeREG2Browser
             '
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")
             MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
+            MyAppSettings.Cookies.Add(AdministratorCookie)
 
             If login_page.StartsWith("<?xml", True, CultureInfo.InvariantCulture) Then
                Try
