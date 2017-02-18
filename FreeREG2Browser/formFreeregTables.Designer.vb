@@ -67,6 +67,8 @@ Partial Class formFreeregTables
       Me.backgroundCounties = New System.ComponentModel.BackgroundWorker()
       Me.backgroundPlaces = New System.ComponentModel.BackgroundWorker()
       Me.backgroundChurches = New System.ComponentModel.BackgroundWorker()
+      Me.ProgressBarPlaces = New System.Windows.Forms.ProgressBar()
+      Me.labelStatus = New System.Windows.Forms.Label()
       Me.TabControl1.SuspendLayout()
       Me.tabRegisterTypes.SuspendLayout()
       CType(Me.dlvRegisterTypes, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -489,6 +491,8 @@ Partial Class formFreeregTables
       '
       'SplitContainer1.Panel2
       '
+      Me.SplitContainer1.Panel2.Controls.Add(Me.labelStatus)
+      Me.SplitContainer1.Panel2.Controls.Add(Me.ProgressBarPlaces)
       Me.SplitContainer1.Panel2.Controls.Add(Me.labPlaces)
       Me.SplitContainer1.Panel2.Controls.Add(Me.cboxPlaces)
       Me.SplitContainer1.Panel2.Controls.Add(Me.labCounty)
@@ -576,9 +580,28 @@ Partial Class formFreeregTables
       '
       'backgroundPlaces
       '
+      Me.backgroundPlaces.WorkerReportsProgress = True
       '
       'backgroundChurches
       '
+      '
+      'ProgressBarPlaces
+      '
+      Me.ProgressBarPlaces.Location = New System.Drawing.Point(322, 12)
+      Me.ProgressBarPlaces.Name = "ProgressBarPlaces"
+      Me.ProgressBarPlaces.Size = New System.Drawing.Size(275, 23)
+      Me.ProgressBarPlaces.TabIndex = 9
+      Me.ProgressBarPlaces.Visible = False
+      '
+      'labelStatus
+      '
+      Me.labelStatus.AutoSize = True
+      Me.labelStatus.Location = New System.Drawing.Point(122, 17)
+      Me.labelStatus.Name = "labelStatus"
+      Me.labelStatus.Size = New System.Drawing.Size(37, 13)
+      Me.labelStatus.TabIndex = 10
+      Me.labelStatus.Text = "Status"
+      Me.labelStatus.Visible = False
       '
       'formFreeregTables
       '
@@ -657,4 +680,6 @@ Partial Class formFreeregTables
    Friend WithEvents labPlaces As System.Windows.Forms.Label
    Friend WithEvents cboxPlaces As System.Windows.Forms.ComboBox
    Friend WithEvents OlvColumn1 As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents labelStatus As System.Windows.Forms.Label
+   Friend WithEvents ProgressBarPlaces As System.Windows.Forms.ProgressBar
 End Class

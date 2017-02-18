@@ -18,6 +18,7 @@ Public Class formFreeregTables
    End Structure
 
    Private _tables As FreeregTables
+
    Public Property DataSet() As FreeregTables
       Get
          Return _tables
@@ -165,6 +166,8 @@ Public Class formFreeregTables
          Case "tabPlaces"
             Dim row As FreeregTables.CountiesRow = cboxCounties.SelectedItem().Row
             backgroundPlaces.RunWorkerAsync(row)
+            labelStatus.Visible = True
+            ProgressBarPlaces.Visible = True
 
          Case "tabChurches"
             Dim params As paramChurches = New paramChurches()
@@ -599,6 +602,11 @@ Public Class formFreeregTables
    End Sub
 
    Private Sub backgroundPlaces_ProgressChanged(ByVal sender As System.Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles backgroundPlaces.ProgressChanged
+      labelStatus.Text = e.UserState
+      If e.ProgressPercentage > 0 Then
+         ProgressBarPlaces.Text = e.ProgressPercentage
+         ProgressBarPlaces.Value = e.ProgressPercentage
+      End If
       Application.DoEvents()
    End Sub
 
@@ -624,6 +632,8 @@ Public Class formFreeregTables
          dlvPlaces.DataMember = "Places"
          MessageBox.Show(e.Result, "Get Places", MessageBoxButtons.OK, MessageBoxIcon.Information)
       End If
+      labelStatus.Visible = False
+      ProgressBarPlaces.Visible = False
    End Sub
 
    Private Sub GetPlaces(ByVal selectedCounty As FreeregTables.CountiesRow, ByVal worker As BackgroundWorker, ByVal e As DoWorkEventArgs)
@@ -639,7 +649,9 @@ Public Class formFreeregTables
             Dim query_data = New NameValueCollection()
             query_data.Add("county", selectedCounty.ChapmanCode)
             webClient.QueryString = query_data
+            worker.ReportProgress(0, "Waiting for response...")
             Dim contents As String = webClient.DownloadString(addrRequest)
+            worker.ReportProgress(0, "Response received...")
 
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")
             _settings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, _settings.BaseUrl))
@@ -661,6 +673,7 @@ Public Class formFreeregTables
                   dlvPlaces.DataSource = Nothing
                   If Not ds.Tables("Place") Is Nothing Then
                      If ds.Tables("Place").Rows.Count > 0 Then
+                        worker.ReportProgress(0, String.Format("Response received... {0} places listed", ds.Tables("Place").Rows.Count))
 
                         ' Get a list of all the Place records for the selected County and delete then
                         Dim places = (From place As FreeregTables.PlacesRow In _tables.Places _
@@ -668,11 +681,13 @@ Public Class formFreeregTables
                                      Select place).ToList
                         For Each place In places
                            _tables.Places.RemovePlacesRow(place)
+                           worker.ReportProgress(_tables.Places.Rows.Count / ds.Tables("Place").Rows.Count * 100, "Clearimg file information...")
                         Next
 
                         ' Now, add all the incoming Places to the table
                         For Each row As DataRow In ds.Tables("Place").Rows
                            _tables.Places.AddPlacesRow(row.Item("PlaceName"), selectedCounty, row.Item("Country"), row.Item("CountyName"), row.Item("Notes"))
+                           worker.ReportProgress(_tables.Places.Rows.Count / ds.Tables("Place").Rows.Count * 100, "Storing file information...")
                         Next
 
                         _tables.Places.AcceptChanges()
