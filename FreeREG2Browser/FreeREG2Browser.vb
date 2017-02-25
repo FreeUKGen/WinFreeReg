@@ -249,6 +249,25 @@ Public Class FreeREG2Browser
    Friend WithEvents OpenFileWithEditorToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents RenameFileToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
    Friend WithEvents DeleteFileToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+   Friend WithEvents olvcName As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcLength As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcDirectoryName As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcDirectory As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcIsReadOnly As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcExists As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcFullName As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcExtension As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcCreationTime As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcCreationTimeUtc As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcLastAccessTime As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcLastAccessTimeUtc As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcLastWriteTime As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcLastWriteTimeUtc As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcAttributes As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcLastUploadTime As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcPlace As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcChurch As BrightIdeasSoftware.OLVColumn
+   Friend WithEvents olvcRecordType As BrightIdeasSoftware.OLVColumn
 
    Public Property TranscriptionLibrary() As String
       Get
@@ -394,6 +413,25 @@ Public Class FreeREG2Browser
       Me.SplitContainer1 = New System.Windows.Forms.SplitContainer()
       Me.SplitContainer2 = New System.Windows.Forms.SplitContainer()
       Me.dlvLocalFiles = New BrightIdeasSoftware.DataListView()
+      Me.olvcName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLength = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcDirectoryName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcDirectory = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcIsReadOnly = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcExists = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcFullName = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcExtension = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcCreationTime = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcCreationTimeUtc = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLastAccessTime = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLastAccessTimeUtc = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLastWriteTime = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLastWriteTimeUtc = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcAttributes = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcLastUploadTime = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcPlace = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcChurch = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
+      Me.olvcRecordType = CType(New BrightIdeasSoftware.OLVColumn(), BrightIdeasSoftware.OLVColumn)
       Me.btnNewFile = New System.Windows.Forms.Button()
       Me.cboxProcess = New System.Windows.Forms.ComboBox()
       Me.labFilename = New System.Windows.Forms.Label()
@@ -1486,17 +1524,37 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 411
+      Me.SplitContainer2.SplitterDistance = 417
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
       '
       'dlvLocalFiles
       '
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcName)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcLength)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcDirectoryName)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcDirectory)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcIsReadOnly)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcExists)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcFullName)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcExtension)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcCreationTime)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcCreationTimeUtc)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcLastAccessTime)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcLastAccessTimeUtc)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcLastWriteTime)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcLastWriteTimeUtc)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcAttributes)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcLastUploadTime)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcPlace)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcChurch)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcRecordType)
       Me.dlvLocalFiles.AlternateRowBackColor = System.Drawing.Color.Wheat
       Me.dlvLocalFiles.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
       Me.dlvLocalFiles.CellEditUseWholeCell = False
       Me.dlvLocalFiles.CheckedAspectName = ""
+      Me.dlvLocalFiles.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcName, Me.olvcLength, Me.olvcIsReadOnly, Me.olvcCreationTime, Me.olvcLastAccessTime, Me.olvcLastWriteTime, Me.olvcLastUploadTime, Me.olvcPlace, Me.olvcChurch, Me.olvcRecordType})
       Me.dlvLocalFiles.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvLocalFiles.DataSource = Me.bsrcLocalFiles
       Me.dlvLocalFiles.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1512,7 +1570,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemCountOnGroups = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 411)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 417)
       Me.dlvLocalFiles.SpaceBetweenGroups = 12
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1521,9 +1579,200 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.UseSubItemCheckBoxes = True
       Me.dlvLocalFiles.View = System.Windows.Forms.View.Details
       '
+      'olvcName
+      '
+      Me.olvcName.AspectName = "Name"
+      Me.olvcName.Groupable = False
+      Me.olvcName.Hideable = False
+      Me.olvcName.IsEditable = False
+      Me.olvcName.Text = "File name"
+      '
+      'olvcLength
+      '
+      Me.olvcLength.AspectName = "Length"
+      Me.olvcLength.AspectToStringFormat = "{0:###,##0}"
+      Me.olvcLength.Groupable = False
+      Me.olvcLength.Hideable = False
+      Me.olvcLength.IsEditable = False
+      Me.olvcLength.Sortable = False
+      Me.olvcLength.Text = "Size"
+      Me.olvcLength.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+      '
+      'olvcDirectoryName
+      '
+      Me.olvcDirectoryName.AspectName = "DirectoryName"
+      Me.olvcDirectoryName.Groupable = False
+      Me.olvcDirectoryName.Hideable = False
+      Me.olvcDirectoryName.IsEditable = False
+      Me.olvcDirectoryName.IsVisible = False
+      Me.olvcDirectoryName.Sortable = False
+      Me.olvcDirectoryName.Text = "Directory name"
+      '
+      'olvcDirectory
+      '
+      Me.olvcDirectory.AspectName = "Directory"
+      Me.olvcDirectory.Groupable = False
+      Me.olvcDirectory.Hideable = False
+      Me.olvcDirectory.IsVisible = False
+      Me.olvcDirectory.Sortable = False
+      Me.olvcDirectory.Text = "Directory"
+      '
+      'olvcIsReadOnly
+      '
+      Me.olvcIsReadOnly.AspectName = "IsReadOnly"
+      Me.olvcIsReadOnly.CheckBoxes = True
+      Me.olvcIsReadOnly.Groupable = False
+      Me.olvcIsReadOnly.Hideable = False
+      Me.olvcIsReadOnly.IsEditable = False
+      Me.olvcIsReadOnly.Sortable = False
+      Me.olvcIsReadOnly.Text = "Read Only"
+      Me.olvcIsReadOnly.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcExists
+      '
+      Me.olvcExists.AspectName = "Exists"
+      Me.olvcExists.CheckBoxes = True
+      Me.olvcExists.Groupable = False
+      Me.olvcExists.Hideable = False
+      Me.olvcExists.IsEditable = False
+      Me.olvcExists.IsVisible = False
+      Me.olvcExists.Sortable = False
+      Me.olvcExists.Text = "Exists"
+      Me.olvcExists.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcFullName
+      '
+      Me.olvcFullName.AspectName = "FullName"
+      Me.olvcFullName.Groupable = False
+      Me.olvcFullName.IsEditable = False
+      Me.olvcFullName.IsVisible = False
+      Me.olvcFullName.Sortable = False
+      Me.olvcFullName.Text = "Full Name"
+      '
+      'olvcExtension
+      '
+      Me.olvcExtension.AspectName = "Extension"
+      Me.olvcExtension.Groupable = False
+      Me.olvcExtension.Hideable = False
+      Me.olvcExtension.IsEditable = False
+      Me.olvcExtension.IsVisible = False
+      Me.olvcExtension.Sortable = False
+      Me.olvcExtension.Text = "Extension"
+      Me.olvcExtension.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcCreationTime
+      '
+      Me.olvcCreationTime.AspectName = "CreationTime"
+      Me.olvcCreationTime.Groupable = False
+      Me.olvcCreationTime.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcCreationTime.Hideable = False
+      Me.olvcCreationTime.IsEditable = False
+      Me.olvcCreationTime.Sortable = False
+      Me.olvcCreationTime.Text = "Date Created"
+      Me.olvcCreationTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcCreationTimeUtc
+      '
+      Me.olvcCreationTimeUtc.AspectName = "CreationTimeUtc"
+      Me.olvcCreationTimeUtc.Groupable = False
+      Me.olvcCreationTimeUtc.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcCreationTimeUtc.Hideable = False
+      Me.olvcCreationTimeUtc.IsEditable = False
+      Me.olvcCreationTimeUtc.IsVisible = False
+      Me.olvcCreationTimeUtc.Sortable = False
+      Me.olvcCreationTimeUtc.Text = "Date Created"
+      Me.olvcCreationTimeUtc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcLastAccessTime
+      '
+      Me.olvcLastAccessTime.AspectName = "LastAccessTime"
+      Me.olvcLastAccessTime.Groupable = False
+      Me.olvcLastAccessTime.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcLastAccessTime.Hideable = False
+      Me.olvcLastAccessTime.IsEditable = False
+      Me.olvcLastAccessTime.Sortable = False
+      Me.olvcLastAccessTime.Text = "Last Accessed"
+      Me.olvcLastAccessTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcLastAccessTimeUtc
+      '
+      Me.olvcLastAccessTimeUtc.AspectName = "LastAccessTimeUtc"
+      Me.olvcLastAccessTimeUtc.Groupable = False
+      Me.olvcLastAccessTimeUtc.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcLastAccessTimeUtc.Hideable = False
+      Me.olvcLastAccessTimeUtc.IsEditable = False
+      Me.olvcLastAccessTimeUtc.IsVisible = False
+      Me.olvcLastAccessTimeUtc.Sortable = False
+      Me.olvcLastAccessTimeUtc.Text = "Last Accessed"
+      Me.olvcLastAccessTimeUtc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcLastWriteTime
+      '
+      Me.olvcLastWriteTime.AspectName = "LastWriteTime"
+      Me.olvcLastWriteTime.Groupable = False
+      Me.olvcLastWriteTime.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcLastWriteTime.Hideable = False
+      Me.olvcLastWriteTime.IsEditable = False
+      Me.olvcLastWriteTime.Sortable = False
+      Me.olvcLastWriteTime.Text = "Last Written"
+      Me.olvcLastWriteTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcLastWriteTimeUtc
+      '
+      Me.olvcLastWriteTimeUtc.AspectName = "LastWriteTimeUtc"
+      Me.olvcLastWriteTimeUtc.Groupable = False
+      Me.olvcLastWriteTimeUtc.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcLastWriteTimeUtc.Hideable = False
+      Me.olvcLastWriteTimeUtc.IsEditable = False
+      Me.olvcLastWriteTimeUtc.IsVisible = False
+      Me.olvcLastWriteTimeUtc.Sortable = False
+      Me.olvcLastWriteTimeUtc.Text = "Last Written"
+      Me.olvcLastWriteTimeUtc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcAttributes
+      '
+      Me.olvcAttributes.AspectName = "Attributes"
+      Me.olvcAttributes.Groupable = False
+      Me.olvcAttributes.Hideable = False
+      Me.olvcAttributes.IsEditable = False
+      Me.olvcAttributes.IsVisible = False
+      Me.olvcAttributes.Sortable = False
+      Me.olvcAttributes.Text = "Attributes"
+      Me.olvcAttributes.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+      '
+      'olvcLastUploadTime
+      '
+      Me.olvcLastUploadTime.AspectName = "LastUploadTime"
+      Me.olvcLastUploadTime.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcLastUploadTime.Hideable = False
+      Me.olvcLastUploadTime.IsEditable = False
+      Me.olvcLastUploadTime.Text = "Last Uploaded"
+      Me.olvcLastUploadTime.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
+      'olvcPlace
+      '
+      Me.olvcPlace.AspectName = "Place"
+      Me.olvcPlace.IsEditable = False
+      Me.olvcPlace.Text = "Place"
+      '
+      'olvcChurch
+      '
+      Me.olvcChurch.AspectName = "Church"
+      Me.olvcChurch.IsEditable = False
+      Me.olvcChurch.Text = "Church"
+      '
+      'olvcRecordType
+      '
+      Me.olvcRecordType.AspectName = "RecordType"
+      Me.olvcRecordType.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      Me.olvcRecordType.IsEditable = False
+      Me.olvcRecordType.Text = "Record Type"
+      Me.olvcRecordType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+      '
       'btnNewFile
       '
-      Me.btnNewFile.Location = New System.Drawing.Point(436, 10)
+      Me.btnNewFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+      Me.btnNewFile.Location = New System.Drawing.Point(436, 9)
       Me.btnNewFile.Name = "btnNewFile"
       Me.btnNewFile.Size = New System.Drawing.Size(91, 23)
       Me.btnNewFile.TabIndex = 10
@@ -1532,9 +1781,10 @@ Public Class FreeREG2Browser
       '
       'cboxProcess
       '
+      Me.cboxProcess.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.cboxProcess.Enabled = False
       Me.cboxProcess.FormattingEnabled = True
-      Me.cboxProcess.Location = New System.Drawing.Point(532, 12)
+      Me.cboxProcess.Location = New System.Drawing.Point(532, 10)
       Me.cboxProcess.MaxDropDownItems = 3
       Me.cboxProcess.Name = "cboxProcess"
       Me.cboxProcess.Size = New System.Drawing.Size(205, 21)
@@ -1542,15 +1792,18 @@ Public Class FreeREG2Browser
       '
       'labFilename
       '
+      Me.labFilename.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
       Me.labFilename.AutoSize = True
       Me.labFilename.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.labFilename.Location = New System.Drawing.Point(89, 13)
+      Me.labFilename.Location = New System.Drawing.Point(89, 10)
       Me.labFilename.Name = "labFilename"
-      Me.labFilename.Size = New System.Drawing.Size(0, 20)
+      Me.labFilename.Size = New System.Drawing.Size(82, 20)
       Me.labFilename.TabIndex = 8
+      Me.labFilename.Text = "Filename"
       '
       'Label1
       '
+      Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
       Me.Label1.AutoSize = True
       Me.Label1.Location = New System.Drawing.Point(12, 14)
       Me.Label1.Name = "Label1"
@@ -1560,8 +1813,9 @@ Public Class FreeREG2Browser
       '
       'btnUploadFile
       '
+      Me.btnUploadFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.btnUploadFile.Enabled = False
-      Me.btnUploadFile.Location = New System.Drawing.Point(742, 10)
+      Me.btnUploadFile.Location = New System.Drawing.Point(742, 9)
       Me.btnUploadFile.Name = "btnUploadFile"
       Me.btnUploadFile.Size = New System.Drawing.Size(75, 23)
       Me.btnUploadFile.TabIndex = 5
@@ -1570,8 +1824,9 @@ Public Class FreeREG2Browser
       '
       'btnReplaceFile
       '
+      Me.btnReplaceFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.btnReplaceFile.Enabled = False
-      Me.btnReplaceFile.Location = New System.Drawing.Point(824, 10)
+      Me.btnReplaceFile.Location = New System.Drawing.Point(824, 9)
       Me.btnReplaceFile.Name = "btnReplaceFile"
       Me.btnReplaceFile.Size = New System.Drawing.Size(75, 23)
       Me.btnReplaceFile.TabIndex = 6
@@ -1622,6 +1877,7 @@ Public Class FreeREG2Browser
       '
       Me.olvcFilename.AspectName = "FileName"
       Me.olvcFilename.Groupable = False
+      Me.olvcFilename.IsEditable = False
       Me.olvcFilename.Text = "Batch"
       Me.olvcFilename.Width = 100
       '
@@ -1696,8 +1952,8 @@ Public Class FreeREG2Browser
       Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 24)
       Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
       Me.TableLayoutPanel1.RowCount = 2
-      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.1515121!))
-      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.84848499!))
+      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.15151!))
+      Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.848485!))
       Me.TableLayoutPanel1.Size = New System.Drawing.Size(903, 495)
       Me.TableLayoutPanel1.TabIndex = 7
       '
@@ -1910,10 +2166,8 @@ Public Class FreeREG2Browser
          End If
       End If
 
-      Dim x = RecordTypeTextBox.DataBindings("Text")
-      AddHandler x.Format, AddressOf ExpandedRecordType
-      x = RegisterTypeTextBox.DataBindings("Text")
-      AddHandler x.Format, AddressOf ExpandedRegisterType
+      AddHandler RecordTypeTextBox.DataBindings("Text").Format, AddressOf ExpandedRecordType
+      AddHandler RegisterTypeTextBox.DataBindings("Text").Format, AddressOf ExpandedRegisterType
 
    End Sub
 
@@ -2003,16 +2257,17 @@ Public Class FreeREG2Browser
 
    Private Sub miLocalFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miLocalFiles.Click
       labelStatus.Text = ""
-      Dim tableLocalFiles As DataTable
+      Dim dsetLocalFiles As New LocalFilesDataSet()
       Dim libtrans As ShellLibrary = ShellLibrary.Load(LibraryName, True)
 
-      If UseLibrary AndAlso libtrans.Count > 1 Then
-         Dim fileQuery = From file As FileInfo In ListFiles(libtrans.DefaultSaveFolder) _
-                         Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
-                         Order By file.Name _
-                         Select file
-         tableLocalFiles = CreateDataTable(Of FileInfo)(fileQuery)
+      Dim fileQuery = From file As FileInfo In ListFiles(_myTranscriptionLibrary) _
+                      Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
+                      Order By file.Name _
+                      Select file
 
+      CreateNewLocalFilesRow(dsetLocalFiles.LocalFile, fileQuery)
+
+      If UseLibrary AndAlso libtrans.Count > 1 Then
          For Each folder In libtrans
             If folder.Path <> libtrans.DefaultSaveFolder Then
                Dim fileQry = From file As FileInfo In ListFiles(folder.Path) _
@@ -2020,172 +2275,88 @@ Public Class FreeREG2Browser
                         Order By file.Name _
                         Select file
 
-               Dim dt As DataTable = CreateDataTable(Of FileInfo)(fileQry)
-               tableLocalFiles.Merge(dt, True, MissingSchemaAction.Error)
+               CreateNewLocalFilesRow(dsetLocalFiles.LocalFile, fileQry)
             End If
          Next
 
-         If File.Exists(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
-            Dim col As DataColumn = tableLocalFiles.Columns.Add("dateUploaded", Type.GetType("System.String"))
-            col.Caption = "Date Uploaded"
-            For Each row As DataRow In tableLocalFiles.Rows
-               Dim batchRow As Batches.BatchRow = BatchesDataSet.Batch.FindByFileName(row("Name"))
-               If batchRow IsNot Nothing Then
-                  Dim dtUploaded As New DateTime()
-                  If Date.TryParse(batchRow.UploadedDate, dtUploaded) Then
-                     row("dateUploaded") = dtUploaded.ToLocalTime.ToString()
-                  End If
-               End If
-            Next
-         End If
-
          dlvLocalFiles.ShowGroups = True
-      Else
-         Dim fileQuery = From file As FileInfo In ListFiles(_myTranscriptionLibrary) _
-                         Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
-                         Order By file.Name _
-                         Select file
-
-         tableLocalFiles = CreateDataTable(Of FileInfo)(fileQuery)
-         If File.Exists(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
-            Dim col As DataColumn = tableLocalFiles.Columns.Add("dateUploaded", Type.GetType("System.String"))
-            col.Caption = "Date Uploaded"
-            For Each row As DataRow In tableLocalFiles.Rows
-               Dim batchRow As Batches.BatchRow = BatchesDataSet.Batch.FindByFileName(row("Name"))
-               If batchRow IsNot Nothing Then
-                  Dim dtUploaded As New DateTime()
-                  If Date.TryParse(batchRow.UploadedDate, dtUploaded) Then
-                     row("dateUploaded") = dtUploaded.ToLocalTime.ToString()
-                  End If
-               End If
-            Next
-         End If
       End If
 
-      Dim cnt = dlvLocalFiles.Columns.Count
+      If File.Exists(Path.Combine(PgmAppDataLocalFolder, String.Format("{0} batches.xml", MyAppSettings.UserId))) Then
+         For Each row As LocalFilesDataSet.LocalFileRow In dsetLocalFiles.LocalFile.Rows
+            ' Extract Place, Church and RecordType from the file
+            Using m_reader As New TextFieldParser(row.FullName)
+               m_reader.TextFieldType = FieldType.Delimited
+               m_reader.SetDelimiters(",")
+               m_reader.TrimWhiteSpace = True
+               m_reader.HasFieldsEnclosedInQuotes = True
+
+               Dim hdrLIne1 = m_reader.ReadFields()
+               Dim hdrLIne2 = m_reader.ReadFields()
+               Dim hdrLIne3 = m_reader.ReadFields()
+               Dim hdrLIne4 = m_reader.ReadFields()
+               Dim firstDataLine = m_reader.ReadFields()
+               If firstDataLine(0) = "+LDS" Then firstDataLine = m_reader.ReadFields()
+               row.Place = firstDataLine(1)
+               row.Church = firstDataLine(2)
+               row.RecordType = hdrLIne1(4)
+            End Using
+
+            ' Get any Date/Time the file was last uploaded
+            Dim batchRow As Batches.BatchRow = BatchesDataSet.Batch.FindByFileName(row("Name"))
+            If batchRow IsNot Nothing Then
+               Dim dtUploaded As New DateTime()
+               If Date.TryParse(batchRow.UploadedDate, dtUploaded) Then
+                  row.LastUploadTime = dtUploaded.ToLocalTime.ToString()
+               End If
+            End If
+         Next
+      End If
+
       TableLayoutPanel1.Visible = False
       SplitContainer1.Visible = True
       panelUploadedFiles.Visible = False
-      bsrcLocalFiles.DataSource = tableLocalFiles
+      bsrcLocalFiles.DataSource = dsetLocalFiles.LocalFile
       bnavShowData.BindingSource = bsrcLocalFiles
 
-      If cnt = 0 Then
-         Dim dlvcol As OLVColumn
-
-         dlvcol = CType(dlvLocalFiles.Columns("Name"), OLVColumn)
-         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-         dlvcol.IsEditable = False
-         If UseLibrary AndAlso libtrans.Count > 1 Then
-            dlvcol.Groupable = True
-            dlvcol.Sortable = True
-            dlvcol.GroupFormatter = New GroupFormatterDelegate(AddressOf LibraryFormatter)
-            dlvcol.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetNameKey)
-            dlvcol.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf GetNameTitle)
-         Else
-            dlvcol.Groupable = False
-            dlvcol.Sortable = True
-         End If
-
-         dlvcol = CType(dlvLocalFiles.Columns("Length"), OLVColumn)
-         dlvcol.Text = "Size"
-         dlvcol.TextAlign = HorizontalAlignment.Right
-         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-         dlvcol.AspectToStringFormat = "{0:###,##0}"
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-         dlvcol.IsEditable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("DirectoryName"), OLVColumn)
-         dlvcol.IsVisible = False
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("Directory"), OLVColumn)
-         dlvcol.IsVisible = False
-         dlvcol.Groupable = True
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("IsReadOnly"), OLVColumn)
-         dlvcol.Text = "Read Only"
-         dlvcol.AspectGetter = New AspectGetterDelegate(AddressOf GetReadOnlyStatus)
-         dlvcol.AspectPutter = New AspectPutterDelegate(AddressOf SetReadOnlyStatus)
-         dlvcol.AspectToStringConverter = New AspectToStringConverterDelegate(AddressOf ReadOnlyState)
-         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize)
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("Exists"), OLVColumn)
-         dlvcol.IsVisible = False
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("FullName"), OLVColumn)
-         dlvcol.IsVisible = False
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("Extension"), OLVColumn)
-         dlvcol.IsVisible = False
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("CreationTIme"), OLVColumn)
-         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-         dlvcol.IsEditable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("CreationTImeUtc"), OLVColumn)
-         dlvcol.IsVisible = False
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("LastAccessTime"), OLVColumn)
-         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-         dlvcol.IsEditable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("LastAccessTimeUtc"), OLVColumn)
-         dlvcol.IsVisible = False
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("LastWriteTime"), OLVColumn)
-         dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-         dlvcol.IsEditable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("LastWriteTimeUtc"), OLVColumn)
-         dlvcol.IsVisible = False
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("Attributes"), OLVColumn)
-         dlvcol.IsVisible = False
-         dlvcol.Groupable = False
-         dlvcol.Sortable = False
-
-         dlvcol = CType(dlvLocalFiles.Columns("dateUploaded"), OLVColumn)
-         If dlvcol IsNot Nothing Then
-            dlvcol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
-            dlvcol.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetGroupKey)
-            dlvcol.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetGroupTitle)
-            dlvcol.Sortable = True
-            dlvcol.IsEditable = False
-         End If
+      If UseLibrary AndAlso libtrans.Count > 1 Then
+         olvcName.Groupable = True
+         olvcName.GroupFormatter = New GroupFormatterDelegate(AddressOf LibraryFormatter)
+         olvcName.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetNameKey)
+         olvcName.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf GetNameTitle)
+      Else
+         olvcName.Groupable = False
       End If
+      olvcName.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
 
-         FileToolStripMenuItem.Visible = True
+      olvcLength.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
 
-         dlvLocalFiles.RebuildColumns()
-         SplitContainer2.Visible = True
-         If cboxProcess.Items.Count > 0 Then cboxProcess.SelectedIndex = 0
-         SplitContainer3.Visible = False
-         bnavShowData.Visible = True
-         Me.ClientSize = New Size(SplitContainer2.PreferredSize.Width, Me.ClientSize.Height)
-         btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
+      olvcIsReadOnly.AspectGetter = New AspectGetterDelegate(AddressOf GetReadOnlyStatus)
+      olvcIsReadOnly.AspectPutter = New AspectPutterDelegate(AddressOf SetReadOnlyStatus)
+      olvcIsReadOnly.AspectToStringConverter = New AspectToStringConverterDelegate(AddressOf ReadOnlyState)
+      olvcIsReadOnly.AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize)
+
+      olvcCreationTime.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+      olvcLastAccessTime.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+      olvcLastWriteTime.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+
+      olvcLastUploadTime.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+      olvcLastUploadTime.GroupKeyGetter = New GroupKeyGetterDelegate(AddressOf SetGroupKey)
+      olvcLastUploadTime.GroupKeyToTitleConverter = New GroupKeyToTitleConverterDelegate(AddressOf SetGroupTitle)
+
+      olvcPlace.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+      olvcChurch.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+      olvcRecordType.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent)
+
+      FileToolStripMenuItem.Visible = True
+
+      dlvLocalFiles.RebuildColumns()
+      SplitContainer2.Visible = True
+      If cboxProcess.Items.Count > 0 Then cboxProcess.SelectedIndex = 0
+      SplitContainer3.Visible = False
+      bnavShowData.Visible = True
+      Me.ClientSize = New Size(SplitContainer2.PreferredSize.Width, Me.ClientSize.Height)
+      btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
    End Sub
 
    Private Sub miUploadedFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUploadedFiles.Click
@@ -2201,28 +2372,26 @@ Public Class FreeREG2Browser
              Select New System.IO.FileInfo(file)
    End Function
 
-   Public Shared Function CreateDataTable(Of T)(ByVal list As IEnumerable(Of T)) As DataTable
-      Dim type As Type = GetType(T)
-      Dim properties = type.GetProperties()
-
-      Dim dataTable As New DataTable()
-      For Each info As PropertyInfo In properties
-         dataTable.Columns.Add(New DataColumn(info.Name, If(Nullable.GetUnderlyingType(info.PropertyType), info.PropertyType)))
+   Private Sub CreateNewLocalFilesRow(dt As LocalFilesDataSet.LocalFileDataTable, fileQuery As IEnumerable(Of FileInfo))
+      For Each finfo In fileQuery
+         Dim nrow = dt.NewLocalFileRow()
+         nrow.Name = finfo.Name
+         nrow.Length = finfo.Length
+         nrow.DirectoryName = finfo.DirectoryName
+         nrow.IsReadOnly = finfo.IsReadOnly
+         nrow.Exists = finfo.Exists
+         nrow.FullName = finfo.FullName
+         nrow.Extension = finfo.Extension
+         nrow.CreationTime = finfo.CreationTime
+         nrow.CreationTimeUtc = finfo.CreationTimeUtc
+         nrow.LastAccessTime = finfo.LastAccessTime
+         nrow.LastAccessTimeUtc = finfo.LastAccessTimeUtc
+         nrow.LastWriteTime = finfo.LastWriteTime
+         nrow.LastWriteTimeUtc = finfo.LastWriteTimeUtc
+         nrow.Attributes = finfo.Attributes
+         dt.AddLocalFileRow(nrow)
       Next
-
-      For Each entity As T In list
-         Dim values As Object() = New Object(properties.Length - 1) {}
-         Dim i As Integer = 0
-         While i < properties.Length
-            values(i) = properties(i).GetValue(entity, Nothing)
-            System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
-         End While
-
-         dataTable.Rows.Add(values)
-      Next
-
-      Return dataTable
-   End Function
+   End Sub
 
    Function ReadOnlyState(ByVal objState As Object)
       Dim state As Boolean = CType(objState, Boolean)
@@ -2248,10 +2417,10 @@ Public Class FreeREG2Browser
       Dim drv As DataRowView = CType(rowObject, DataRowView)
       Dim dr As DataRow = drv.Row
       Dim dtLastWritten As DateTime = dr("LastWriteTime")
-      If DBNull.Value.Equals(dr("dateuploaded")) Then
+      If DBNull.Value.Equals(dr("LastUploadTime")) Then
          Return -1
       Else
-         Dim dtUploaded As DateTime = dr("dateUploaded")
+         Dim dtUploaded As DateTime = dr("LastUploadTime")
          If DateTime.Compare(dtLastWritten, dtUploaded) > 0 Then
             Return 0
          End If
