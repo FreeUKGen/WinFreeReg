@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("This is the long-awaited replacement for WinREG, the FreeREG transcription program. This version is a somewhat simplified cousin to WinREG with the advantage that it interacts directly with the FreeREG web-site.")> 
 <Assembly: AssemblyCompany("FreeUKGenealogy")> 
 <Assembly: AssemblyProduct("WinFreeREG")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016 Free UK Genealogy")> 
+<Assembly: AssemblyCopyright("Copyright ©  2016-2017 Free UK Genealogy")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.1.5")> 
-<Assembly: AssemblyFileVersion("1.1.5")> 
+<Assembly: AssemblyVersion("1.1.6")> 
+<Assembly: AssemblyFileVersion("1.1.6")> 

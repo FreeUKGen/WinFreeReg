@@ -221,6 +221,30 @@ Namespace My
                 Me("optionNormalRecordOrder") = value
             End Set
         End Property
+        
+      <Global.System.Configuration.UserScopedSettingAttribute(), _
+       Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+       Global.System.Configuration.DefaultSettingValueAttribute("")> _
+      Public Property LocalFilesState() As String
+         Get
+            Return CType(Me("LocalFilesState"), String)
+         End Get
+         Set(value As String)
+            Me("LocalFilesState") = value
+         End Set
+      End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property UpdateSettings() As Boolean
+            Get
+                Return CType(Me("UpdateSettings"),Boolean)
+            End Get
+            Set
+                Me("UpdateSettings") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
@@ -231,11 +255,11 @@ Namespace My
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>  _
     Friend Module MySettingsProperty
         
-      <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")> _
-      Friend ReadOnly Property Settings() As Global.WinFreeReg.My.MySettings
-         Get
-            Return Global.WinFreeReg.My.MySettings.Default
-         End Get
-      End Property
+        <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
+        Friend ReadOnly Property Settings() As Global.WinFreeReg.My.MySettings
+            Get
+                Return Global.WinFreeReg.My.MySettings.Default
+            End Get
+        End Property
     End Module
 End Namespace

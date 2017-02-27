@@ -1524,7 +1524,7 @@ Public Class FreeREG2Browser
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnUploadFile)
       Me.SplitContainer2.Panel2.Controls.Add(Me.btnReplaceFile)
       Me.SplitContainer2.Size = New System.Drawing.Size(903, 460)
-      Me.SplitContainer2.SplitterDistance = 417
+      Me.SplitContainer2.SplitterDistance = 418
       Me.SplitContainer2.SplitterWidth = 3
       Me.SplitContainer2.TabIndex = 66
       Me.SplitContainer2.Visible = False
@@ -1537,6 +1537,9 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.AllColumns.Add(Me.olvcDirectory)
       Me.dlvLocalFiles.AllColumns.Add(Me.olvcIsReadOnly)
       Me.dlvLocalFiles.AllColumns.Add(Me.olvcExists)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcPlace)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcChurch)
+      Me.dlvLocalFiles.AllColumns.Add(Me.olvcRecordType)
       Me.dlvLocalFiles.AllColumns.Add(Me.olvcFullName)
       Me.dlvLocalFiles.AllColumns.Add(Me.olvcExtension)
       Me.dlvLocalFiles.AllColumns.Add(Me.olvcCreationTime)
@@ -1547,14 +1550,12 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.AllColumns.Add(Me.olvcLastWriteTimeUtc)
       Me.dlvLocalFiles.AllColumns.Add(Me.olvcAttributes)
       Me.dlvLocalFiles.AllColumns.Add(Me.olvcLastUploadTime)
-      Me.dlvLocalFiles.AllColumns.Add(Me.olvcPlace)
-      Me.dlvLocalFiles.AllColumns.Add(Me.olvcChurch)
-      Me.dlvLocalFiles.AllColumns.Add(Me.olvcRecordType)
+      Me.dlvLocalFiles.AllowColumnReorder = True
       Me.dlvLocalFiles.AlternateRowBackColor = System.Drawing.Color.Wheat
       Me.dlvLocalFiles.CellEditActivation = BrightIdeasSoftware.ObjectListView.CellEditActivateMode.DoubleClick
       Me.dlvLocalFiles.CellEditUseWholeCell = False
       Me.dlvLocalFiles.CheckedAspectName = ""
-      Me.dlvLocalFiles.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcName, Me.olvcLength, Me.olvcIsReadOnly, Me.olvcCreationTime, Me.olvcLastAccessTime, Me.olvcLastWriteTime, Me.olvcLastUploadTime, Me.olvcPlace, Me.olvcChurch, Me.olvcRecordType})
+      Me.dlvLocalFiles.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.olvcName, Me.olvcLength, Me.olvcIsReadOnly, Me.olvcPlace, Me.olvcChurch, Me.olvcRecordType, Me.olvcCreationTime, Me.olvcLastAccessTime, Me.olvcLastWriteTime, Me.olvcLastUploadTime})
       Me.dlvLocalFiles.Cursor = System.Windows.Forms.Cursors.Default
       Me.dlvLocalFiles.DataSource = Me.bsrcLocalFiles
       Me.dlvLocalFiles.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1570,7 +1571,7 @@ Public Class FreeREG2Browser
       Me.dlvLocalFiles.ShowImagesOnSubItems = True
       Me.dlvLocalFiles.ShowItemCountOnGroups = True
       Me.dlvLocalFiles.ShowItemToolTips = True
-      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 417)
+      Me.dlvLocalFiles.Size = New System.Drawing.Size(903, 418)
       Me.dlvLocalFiles.SpaceBetweenGroups = 12
       Me.dlvLocalFiles.TabIndex = 4
       Me.dlvLocalFiles.TintSortColumn = True
@@ -1663,6 +1664,7 @@ Public Class FreeREG2Browser
       'olvcCreationTime
       '
       Me.olvcCreationTime.AspectName = "CreationTime"
+      Me.olvcCreationTime.DisplayIndex = 3
       Me.olvcCreationTime.Groupable = False
       Me.olvcCreationTime.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
       Me.olvcCreationTime.Hideable = False
@@ -1686,6 +1688,7 @@ Public Class FreeREG2Browser
       'olvcLastAccessTime
       '
       Me.olvcLastAccessTime.AspectName = "LastAccessTime"
+      Me.olvcLastAccessTime.DisplayIndex = 4
       Me.olvcLastAccessTime.Groupable = False
       Me.olvcLastAccessTime.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
       Me.olvcLastAccessTime.Hideable = False
@@ -1709,6 +1712,7 @@ Public Class FreeREG2Browser
       'olvcLastWriteTime
       '
       Me.olvcLastWriteTime.AspectName = "LastWriteTime"
+      Me.olvcLastWriteTime.DisplayIndex = 5
       Me.olvcLastWriteTime.Groupable = False
       Me.olvcLastWriteTime.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
       Me.olvcLastWriteTime.Hideable = False
@@ -1743,6 +1747,7 @@ Public Class FreeREG2Browser
       'olvcLastUploadTime
       '
       Me.olvcLastUploadTime.AspectName = "LastUploadTime"
+      Me.olvcLastUploadTime.DisplayIndex = 6
       Me.olvcLastUploadTime.HeaderTextAlign = System.Windows.Forms.HorizontalAlignment.Center
       Me.olvcLastUploadTime.Hideable = False
       Me.olvcLastUploadTime.IsEditable = False
@@ -1772,7 +1777,7 @@ Public Class FreeREG2Browser
       'btnNewFile
       '
       Me.btnNewFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-      Me.btnNewFile.Location = New System.Drawing.Point(436, 9)
+      Me.btnNewFile.Location = New System.Drawing.Point(436, 8)
       Me.btnNewFile.Name = "btnNewFile"
       Me.btnNewFile.Size = New System.Drawing.Size(91, 23)
       Me.btnNewFile.TabIndex = 10
@@ -1784,7 +1789,7 @@ Public Class FreeREG2Browser
       Me.cboxProcess.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.cboxProcess.Enabled = False
       Me.cboxProcess.FormattingEnabled = True
-      Me.cboxProcess.Location = New System.Drawing.Point(532, 10)
+      Me.cboxProcess.Location = New System.Drawing.Point(532, 9)
       Me.cboxProcess.MaxDropDownItems = 3
       Me.cboxProcess.Name = "cboxProcess"
       Me.cboxProcess.Size = New System.Drawing.Size(205, 21)
@@ -1795,7 +1800,7 @@ Public Class FreeREG2Browser
       Me.labFilename.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
       Me.labFilename.AutoSize = True
       Me.labFilename.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-      Me.labFilename.Location = New System.Drawing.Point(89, 10)
+      Me.labFilename.Location = New System.Drawing.Point(89, 9)
       Me.labFilename.Name = "labFilename"
       Me.labFilename.Size = New System.Drawing.Size(82, 20)
       Me.labFilename.TabIndex = 8
@@ -1805,7 +1810,7 @@ Public Class FreeREG2Browser
       '
       Me.Label1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
       Me.Label1.AutoSize = True
-      Me.Label1.Location = New System.Drawing.Point(12, 14)
+      Me.Label1.Location = New System.Drawing.Point(12, 13)
       Me.Label1.Name = "Label1"
       Me.Label1.Size = New System.Drawing.Size(71, 13)
       Me.Label1.TabIndex = 7
@@ -1815,7 +1820,7 @@ Public Class FreeREG2Browser
       '
       Me.btnUploadFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.btnUploadFile.Enabled = False
-      Me.btnUploadFile.Location = New System.Drawing.Point(742, 9)
+      Me.btnUploadFile.Location = New System.Drawing.Point(742, 8)
       Me.btnUploadFile.Name = "btnUploadFile"
       Me.btnUploadFile.Size = New System.Drawing.Size(75, 23)
       Me.btnUploadFile.TabIndex = 5
@@ -1826,7 +1831,7 @@ Public Class FreeREG2Browser
       '
       Me.btnReplaceFile.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
       Me.btnReplaceFile.Enabled = False
-      Me.btnReplaceFile.Location = New System.Drawing.Point(824, 9)
+      Me.btnReplaceFile.Location = New System.Drawing.Point(824, 8)
       Me.btnReplaceFile.Name = "btnReplaceFile"
       Me.btnReplaceFile.Size = New System.Drawing.Size(75, 23)
       Me.btnReplaceFile.TabIndex = 6
@@ -2074,6 +2079,8 @@ Public Class FreeREG2Browser
          End While
       End If
 
+      My.Settings.LocalFilesState = Encoding.Default.GetString(dlvLocalFiles.SaveState())
+
       My.Settings.FreeREG2Browser_WindowState = Me.WindowState
       My.Settings.FreeREG2Browser_Location = Me.Location
       My.Settings.FreeREG2Browser_Size = Me.Size
@@ -2081,6 +2088,12 @@ Public Class FreeREG2Browser
    End Sub
 
    Private Sub FreeREG2Browser_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+      If My.Settings.UpdateSettings Then
+         My.Settings.Upgrade()
+         My.Settings.UpdateSettings = False
+         My.Settings.Save()
+      End If
+
       If My.Settings.FreeREG2Browser_WindowState <> FormWindowState.Normal OrElse My.Settings.FreeREG2Browser_Location <> New Point(0, 0) OrElse My.Settings.FreeREG2Browser_Size <> New Size(0, 0) Then
          Me.Location = My.Settings.FreeREG2Browser_Location
          Me.Size = My.Settings.FreeREG2Browser_Size
@@ -2261,20 +2274,14 @@ Public Class FreeREG2Browser
       Dim libtrans As ShellLibrary = ShellLibrary.Load(LibraryName, True)
 
       Dim fileQuery = From file As FileInfo In ListFiles(_myTranscriptionLibrary) _
-                      Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
-                      Order By file.Name _
-                      Select file
-
+            Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) Order By file.Name Select file
       CreateNewLocalFilesRow(dsetLocalFiles.LocalFile, fileQuery)
 
       If UseLibrary AndAlso libtrans.Count > 1 Then
          For Each folder In libtrans
             If folder.Path <> libtrans.DefaultSaveFolder Then
                Dim fileQry = From file As FileInfo In ListFiles(folder.Path) _
-                        Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) _
-                        Order By file.Name _
-                        Select file
-
+                     Where file.Extension.Equals(".csv", StringComparison.CurrentCultureIgnoreCase) Order By file.Name Select file
                CreateNewLocalFilesRow(dsetLocalFiles.LocalFile, fileQry)
             End If
          Next
@@ -2299,6 +2306,11 @@ Public Class FreeREG2Browser
                If firstDataLine(0) = "+LDS" Then firstDataLine = m_reader.ReadFields()
                row.Place = firstDataLine(1)
                row.Church = firstDataLine(2)
+               Dim parts = firstDataLine(2).Split({" "}, StringSplitOptions.RemoveEmptyEntries)
+               Dim regtype = LookUpsDataSet.RegisterTypes.FindByCode(parts(parts.Length - 1))
+               If regtype IsNot Nothing Then
+                  row.Church = String.Join(" ", parts, 0, parts.Length - 1)
+               End If
                row.RecordType = hdrLIne1(4)
             End Using
 
@@ -2357,6 +2369,8 @@ Public Class FreeREG2Browser
       bnavShowData.Visible = True
       Me.ClientSize = New Size(SplitContainer2.PreferredSize.Width, Me.ClientSize.Height)
       btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
+
+      dlvLocalFiles.RestoreState(Encoding.Default.GetBytes(My.Settings.LocalFilesState))
    End Sub
 
    Private Sub miUploadedFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUploadedFiles.Click

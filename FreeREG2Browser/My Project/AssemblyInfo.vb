@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Main FreeREG Transcription Program")> 
 <Assembly: AssemblyCompany("FreeUKGenealogy")> 
 <Assembly: AssemblyProduct("FreeREG2Browser")> 
-<Assembly: AssemblyCopyright("Copyright ©  2017 Free UK Genealogy")> 
+<Assembly: AssemblyCopyright("Copyright ©  2016-2017 Free UK Genealogy")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.1.5.*")> 
-<Assembly: AssemblyFileVersion("1.1.5")> 
+<Assembly: AssemblyVersion("1.1.6.*")> 
+<Assembly: AssemblyFileVersion("1.1.6")> 
