@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
 
-   <Product Id="*" Name="WinFreeREG 1.1.6" Language="1033" Version="1.1.6" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
+   <Product Id="*" Name="WinFreeREG 1.1.8" Language="1033" Version="1.1.8" Manufacturer="Free UK Genealogy" UpgradeCode="f1b6192c-0d17-4383-9f9d-841104e9a4ee">
 
       <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Manufacturer="Free UK Genealogy"
                Description="Installs the FreeREG Transcription Program"

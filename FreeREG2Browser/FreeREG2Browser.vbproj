@@ -168,6 +168,12 @@
     <Compile Include="formFileRename.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="formMissingDetails.Designer.vb">
+      <DependentUpon>formMissingDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="formMissingDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FreeReg2BrowserSettings.vb" />
     <Compile Include="BackgroundWorkerException.vb" />
     <Compile Include="Batches.Designer.vb">
@@ -326,6 +332,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="formFileRename.resx">
       <DependentUpon>formFileRename.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="formMissingDetails.resx">
+      <DependentUpon>formMissingDetails.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="formStartNewFile.resx">
       <DependentUpon>formStartNewFile.vb</DependentUpon>

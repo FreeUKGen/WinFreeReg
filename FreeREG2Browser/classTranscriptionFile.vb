@@ -127,53 +127,57 @@ Public Class TranscriptionFileClass
             m_fileHeader.RegisterType = X(X.Length - 1)
          End If
 
-         Dim Crec = freeregTables.Churches.FindByChurchNameChapmanCodePlaceName(m_fileHeader.Church, m_fileHeader.County, m_fileHeader.Place)
-         If Crec Is Nothing Then
-            m_PlaceCode = String.Empty
-            Throw New FileHeaderException(String.Format("Unable to find Church record for County:{0} Place:{1} Church:{2}", m_fileHeader.County, m_fileHeader.Place, m_fileHeader.Church))
-         Else
-            m_PlaceCode = Crec.FileCode
-         End If
+			Select Case m_fileHeader.FileType
+				Case FileTypes.BAPTISMS
+					Dim recordcollection = New TranscriptionTables.BaptismsDataTable
+					recordcollection.LinkLookupTables(True, True, lookups.BaptismSex)
+					AddNewBaptismRecord(recordcollection, rec)
 
-         Select Case m_fileHeader.FileType
-            Case FileTypes.BAPTISMS
-               Dim recordcollection = New TranscriptionTables.BaptismsDataTable
-               recordcollection.LinkLookupTables(True, True, lookups.BaptismSex)
-               AddNewBaptismRecord(recordcollection, rec)
+					While Not m_Reader.EndOfData
+						rec = m_Reader.ReadFields()
+						AddNewBaptismRecord(recordcollection, rec)
+					End While
+					recordcollection.AcceptChanges()
+					m_recordcollection = recordcollection
 
-               While Not m_Reader.EndOfData
-                  rec = m_Reader.ReadFields()
-                  AddNewBaptismRecord(recordcollection, rec)
-               End While
-               recordcollection.AcceptChanges()
-               m_recordcollection = recordcollection
+				Case FileTypes.BURIALS
+					Dim recordcollection = New TranscriptionTables.BurialsDataTable
+					recordcollection.LinkLookupTables(True, True, lookups.BurialRelationship)
+					AddNewBurialRecord(recordcollection, rec)
 
-            Case FileTypes.BURIALS
-               Dim recordcollection = New TranscriptionTables.BurialsDataTable
-               recordcollection.LinkLookupTables(True, True, lookups.BurialRelationship)
-               AddNewBurialRecord(recordcollection, rec)
+					While Not m_Reader.EndOfData
+						rec = m_Reader.ReadFields()
+						AddNewBurialRecord(recordcollection, rec)
+					End While
+					recordcollection.AcceptChanges()
+					m_recordcollection = recordcollection
 
-               While Not m_Reader.EndOfData
-                  rec = m_Reader.ReadFields()
-                  AddNewBurialRecord(recordcollection, rec)
-               End While
-               recordcollection.AcceptChanges()
-               m_recordcollection = recordcollection
+				Case FileTypes.MARRIAGES
+					Dim recordcollection = New TranscriptionTables.MarriagesDataTable
+					recordcollection.LinkLookupTables(True, True, lookups.GroomCondition, lookups.BrideCondition)
+					AddNewMarriageRecord(recordcollection, rec)
 
-            Case FileTypes.MARRIAGES
-               Dim recordcollection = New TranscriptionTables.MarriagesDataTable
-               recordcollection.LinkLookupTables(True, True, lookups.GroomCondition, lookups.BrideCondition)
-               AddNewMarriageRecord(recordcollection, rec)
+					While Not m_Reader.EndOfData
+						rec = m_Reader.ReadFields()
+						AddNewMarriageRecord(recordcollection, rec)
+					End While
+					recordcollection.AcceptChanges()
+					m_recordcollection = recordcollection
 
-               While Not m_Reader.EndOfData
-                  rec = m_Reader.ReadFields()
-                  AddNewMarriageRecord(recordcollection, rec)
-               End While
-               recordcollection.AcceptChanges()
-               m_recordcollection = recordcollection
+			End Select
+		End Using
 
-         End Select
-      End Using
+		Dim Crec = freeregTables.Churches.FindByChurchNameChapmanCodePlaceName(m_fileHeader.Church, m_fileHeader.County, m_fileHeader.Place)
+		If Crec Is Nothing Then
+			m_PlaceCode = String.Empty
+			Using dlg As New formMissingDetails With {.TranscriptionFile = Me, .Tables = freeregTables}
+				Dim rc = dlg.ShowDialog
+				If rc = DialogResult.Cancel Then Throw New FileHeaderException(String.Format("Unable to find Church record for County:{0} Place:{1} Church:{2}", m_fileHeader.County, m_fileHeader.Place, m_fileHeader.Church))
+				If dlg.FileCorrected Then Save()
+			End Using
+		Else
+			m_PlaceCode = Crec.FileCode
+		End If
 
    End Sub
 

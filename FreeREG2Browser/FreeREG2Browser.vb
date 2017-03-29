@@ -86,7 +86,8 @@ Public Class FreeREG2Browser
 
    Private formHelp As New formGeneralHelp() With {.Visible = False}
    Private euDirective As New Cookie("cookiesDirective", "1")
-   Private AdministratorCookie As New Cookie("Administrator", "BAhJIhhJIEhhdmUgSXNzdWVzIDQgWW91BjoGRVQ%3D--14c43e8ebc0c4ae9d173476a6319351fc38690ec")
+   Private TestAdministratorCookie As New Cookie("Administrator", "BAhJIhhJIEhhdmUgSXNzdWVzIDQgWW91BjoGRVQ%3D--14c43e8ebc0c4ae9d173476a6319351fc38690ec")
+   Private LiveAdministratorCookie As New Cookie("Administrator", "BAhJIhhJIEhhdmUgSXNzdWVzIDQgWW91BjoGRVQ%3D--6fd464225691aa27e14f95d72f386ff256d03364")
 
    Friend WithEvents bnavShowData As System.Windows.Forms.BindingNavigator
    Private components As System.ComponentModel.IContainer
@@ -2079,7 +2080,8 @@ Public Class FreeREG2Browser
          End While
       End If
 
-      My.Settings.LocalFilesState = Encoding.Default.GetString(dlvLocalFiles.SaveState())
+      Dim b = dlvLocalFiles.SaveState()
+      My.Settings.LocalFilesState = Encoding.Default.GetString(b)
 
       My.Settings.FreeREG2Browser_WindowState = Me.WindowState
       My.Settings.FreeREG2Browser_Location = Me.Location
@@ -2370,7 +2372,8 @@ Public Class FreeREG2Browser
       Me.ClientSize = New Size(SplitContainer2.PreferredSize.Width, Me.ClientSize.Height)
       btnReplaceFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
 
-      dlvLocalFiles.RestoreState(Encoding.Default.GetBytes(My.Settings.LocalFilesState))
+      Dim b = Encoding.Default.GetBytes(My.Settings.LocalFilesState)
+      dlvLocalFiles.RestoreState(b)
    End Sub
 
    Private Sub miUploadedFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles miUploadedFiles.Click
@@ -2477,12 +2480,12 @@ Public Class FreeREG2Browser
       Dim row As DataRow = CType(model.Row, DataRow)
       If Not DBNull.Value.Equals(row("LastWriteTime")) Then
          Dim dtLastWritten As DateTime = row("LastWriteTime")
-         If row.Table.Columns.Contains("dateuploaded") Then
-            If DBNull.Value.Equals(row("dateuploaded")) Then
+         If row.Table.Columns.Contains("LastUploadTime") Then
+            If DBNull.Value.Equals(row("LastUploadTime")) Then
                e.Item.BackColor = Color.LavenderBlush
                e.Item.ForeColor = Color.Red
             Else
-               Dim dtUploaded As DateTime = row("dateUploaded")
+               Dim dtUploaded As DateTime = row("LastUploadTime")
                If DateTime.Compare(dtLastWritten, dtUploaded) > 0 Then
                   e.Item.BackColor = Color.Honeydew
                   e.Item.ForeColor = Color.Green
@@ -2499,9 +2502,9 @@ Public Class FreeREG2Browser
          Dim dbi As DataRowView = CType(olvItem.RowObject, DataRowView)
          Dim row As DataRow = dbi.Row
          labFilename.Text = row("Name")
-         If row.Table.Columns.Contains("dateuploaded") Then
+         If row.Table.Columns.Contains("LastUploadTime") Then
             If cboxProcess.Items.Count > 0 Then cboxProcess.SelectedIndex = 0
-            If DBNull.Value.Equals(row("dateuploaded")) Then
+            If DBNull.Value.Equals(row("LastUploadTime")) Then
                btnUploadFile.Enabled = (pgmState = ProgramState.UserAuthenticated)
                btnReplaceFile.Enabled = False
             Else
@@ -2617,7 +2620,11 @@ Public Class FreeREG2Browser
             '
             Dim hdr = webClient.ResponseHeaders("Set-Cookie")
             MyAppSettings.Cookies.Add(webClient.GetAllCookiesFromHeader(hdr, MyAppSettings.BaseUrl))
-            MyAppSettings.Cookies.Add(AdministratorCookie)
+            If MyAppSettings.BaseUrl = "https://test3.freereg.org.uk" Then
+               MyAppSettings.Cookies.Add(TestAdministratorCookie)
+            Else
+               MyAppSettings.Cookies.Add(LiveAdministratorCookie)
+            End If
 
             If login_page.StartsWith("<?xml", True, CultureInfo.InvariantCulture) Then
                Try
