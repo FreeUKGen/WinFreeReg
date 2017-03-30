@@ -507,6 +507,7 @@
     <Content Include="Documentation\GeneralHelp.html" />
     <Content Include="Documentation\LocalFiles.html" />
     <Content Include="Documentation\MarriageErrors.html" />
+    <Content Include="Documentation\MissingFileDetails.html" />
     <Content Include="Documentation\Normal UCF textbox.jpg" />
     <Content Include="Documentation\SaveNewFile.html" />
     <Content Include="Documentation\StartNewFile.html" />

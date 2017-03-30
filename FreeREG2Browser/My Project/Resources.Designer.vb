@@ -153,6 +153,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to The selected file does not appear to be a valid Transcription FIle, even though outwardly the name and extension would indicate that it is. You can not open this file without examining it, and correcting it, outside of this program..
+        '''</summary>
+        Friend ReadOnly Property msgInvalidFileFormat() As String
+            Get
+                Return ResourceManager.GetString("msgInvalidFileFormat", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to You have successfully logged in to the FreeREGserver..
         '''</summary>
         Friend ReadOnly Property msgLoggedIn() As String

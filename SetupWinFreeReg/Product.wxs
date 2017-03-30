@@ -171,6 +171,11 @@
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\MarriageErrors" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
          </Component>
 
+         <Component Id="CMP_Doc_MissingFileDetails" Guid="{0593C1AF-8EEC-4BB9-B8B5-52A894D5376F}">
+            <File Id="FILE_MissingFileDetails" Name="MissingFileDetails.html" />
+            <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\MissingFileDetails" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+         </Component>
+
          <Component Id="CMP_Doc_NormalUCFtextbox" Guid="{8342E95C-CE75-4F1E-924F-27A38C279380}">
             <File Id="FILE_NormalUCFtextbox" Name="Normal UCF textbox.jpg" />
             <RegistryValue Root="HKCU" Key="Software\FreeUKGenealogy\WinFreeReg\NormalUCFtextbox" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
@@ -250,6 +255,7 @@
          <ComponentRef Id="CMP_Doc_Generalhelp" />
          <ComponentRef Id="CMP_Doc_LocalFiles" />
          <ComponentRef Id="CMP_Doc_MarriageErrors" />
+         <ComponentRef Id="CMP_Doc_MissingFileDetails" />
          <ComponentRef Id="CMP_Doc_NormalUCFtextbox" />
          <ComponentRef Id="CMP_Doc_SaveNewFile" />
          <ComponentRef Id="CMP_Doc_StartNewFile" />

@@ -8,7 +8,7 @@ Imports System.Windows.Forms
 
 Public Class TranscriptionFileClass
 
-   Private m_fileName As String
+	Private m_fileName As String
    Public Property FileName() As String
       Get
          Return m_fileName
@@ -88,6 +88,16 @@ Public Class TranscriptionFileClass
       End Set
    End Property
 
+	Private m_FormHelp As formGeneralHelp
+	Public Property FormHelp() As formGeneralHelp
+		Get
+			Return m_FormHelp
+		End Get
+		Set(ByVal value As formGeneralHelp)
+			m_FormHelp = value
+		End Set
+	End Property
+
    Private m_Decoding As Encoding = Encoding.GetEncoding("iso-8859-1")
    Private m_Encoding As Encoding = Encoding.GetEncoding("utf-8")
 
@@ -101,31 +111,35 @@ Public Class TranscriptionFileClass
       MyBase.New()
       m_pathName = ""
       m_fileName = ""
-      m_fullFilename = ""
-   End Sub
+		m_fullFilename = ""
+		m_FormHelp = Nothing
+	End Sub
 
-   Sub New(ByVal row As DataRow, ByVal lookups As LookupTables, ByVal freeregTables As FreeregTables)
-      MyBase.New()
-      m_fileName = row("Name")
-      m_pathName = row("DirectoryName")
-      m_fullFilename = Path.Combine(m_pathName, m_fileName)
-      m_Lookups = lookups
-      m_FreeregTables = freeregTables
+	Sub New(ByVal row As DataRow, ByVal lookups As LookupTables, ByVal freeregTables As FreeregTables, ByVal formHelp As formGeneralHelp)
+		MyBase.New()
+		m_fileName = row("Name")
+		m_pathName = row("DirectoryName")
+		m_fullFilename = Path.Combine(m_pathName, m_fileName)
+		m_Lookups = lookups
+		m_FreeregTables = freeregTables
+		m_FormHelp = formHelp
 
-      Using m_Reader As New TextFieldParser(m_fullFilename, m_Decoding)
-         m_Reader.TextFieldType = FieldType.Delimited
-         m_Reader.SetDelimiters(",")
-         m_Reader.TrimWhiteSpace = True
-         m_Reader.HasFieldsEnclosedInQuotes = True
+		Using m_Reader As New TextFieldParser(m_fullFilename, m_Decoding)
+			m_Reader.TextFieldType = FieldType.Delimited
+			m_Reader.SetDelimiters(",")
+			m_Reader.TrimWhiteSpace = True
+			m_Reader.HasFieldsEnclosedInQuotes = True
 
-         m_fileHeader = New FileHeaderClass(m_Reader)
-         Dim rec As String() = m_fileHeader.GetHeader()
-         If String.IsNullOrEmpty(m_fileHeader.InternalFilename) Then m_fileHeader.InternalFilename = m_fileName
-         Dim X = m_fileHeader.Church.Split(New Char() {" "c}, StringSplitOptions.RemoveEmptyEntries)
-         If m_FreeregTables.RegisterTypes.FindByType(X(X.Length - 1)) IsNot Nothing Then
-            m_fileHeader.Church = String.Join(" ", X, 0, X.Length - 1)
-            m_fileHeader.RegisterType = X(X.Length - 1)
-         End If
+			m_fileHeader = New FileHeaderClass(m_Reader)
+			Dim rec As String() = m_fileHeader.GetHeader()
+			If String.IsNullOrEmpty(m_fileHeader.InternalFilename) Then m_fileHeader.InternalFilename = m_fileName
+			Dim X = m_fileHeader.Church.Split(New Char() {" "c}, StringSplitOptions.RemoveEmptyEntries)
+			If X.Length > 0 Then
+				If m_FreeregTables.RegisterTypes.FindByType(X(X.Length - 1)) IsNot Nothing Then
+					m_fileHeader.Church = String.Join(" ", X, 0, X.Length - 1)
+					m_fileHeader.RegisterType = X(X.Length - 1)
+				End If
+			End If
 
 			Select Case m_fileHeader.FileType
 				Case FileTypes.BAPTISMS
@@ -171,6 +185,7 @@ Public Class TranscriptionFileClass
 		If Crec Is Nothing Then
 			m_PlaceCode = String.Empty
 			Using dlg As New formMissingDetails With {.TranscriptionFile = Me, .Tables = freeregTables}
+				dlg.FormHelp = formHelp
 				Dim rc = dlg.ShowDialog
 				If rc = DialogResult.Cancel Then Throw New FileHeaderException(String.Format("Unable to find Church record for County:{0} Place:{1} Church:{2}", m_fileHeader.County, m_fileHeader.Place, m_fileHeader.Church))
 				If dlg.FileCorrected Then Save()
@@ -179,7 +194,7 @@ Public Class TranscriptionFileClass
 			m_PlaceCode = Crec.FileCode
 		End If
 
-   End Sub
+	End Sub
 
    Sub Create(ByVal strFileName As String, ByVal tableLookups As LookupTables, ByVal tableFreereg As FreeregTables, ByVal strFileType As String)
       Try
@@ -507,7 +522,7 @@ Public Class TranscriptionFileClass
 
    Public Class FileHeaderClass
 
-      Private m_myReader As TextFieldParser
+		Private m_myReader As TextFieldParser
       Public Property MyReader() As TextFieldParser
          Get
             Return m_myReader
@@ -710,106 +725,118 @@ Public Class TranscriptionFileClass
       Public Sub New(ByVal _file As TextFieldParser)
          MyBase.New()
          m_myReader = _file
-      End Sub
+		End Sub
 
       Public Function GetHeader() As String()
          Dim FirstDataRecord() = New String() {""}
          Try
             ' +INFO,<email>,<password>,SEQUENCED,<filetype>,<charset>,<WinREG version>
-            _hdrLine1 = m_myReader.ReadFields()
-            m_fileType = [Enum].Parse(GetType(FileTypes), _hdrLine1(4), True)
-            m_myEmail = _hdrLine1(1)
-            m_myPassword = _hdrLine1(2)
-            If _hdrLine1.Length >= 5 Then
-               If _hdrLine1.Length > 6 Then
-                  m_VersionUsed = _hdrLine1(6)
-               End If
-            End If
+				_hdrLine1 = m_myReader.ReadFields()
+				If _hdrLine1(0) = "+INFO" Then
+					m_fileType = [Enum].Parse(GetType(FileTypes), _hdrLine1(4), True)
+					m_myEmail = _hdrLine1(1)
+					m_myPassword = _hdrLine1(2)
+					If _hdrLine1.Length >= 5 Then
+						If _hdrLine1.Length > 6 Then
+							m_VersionUsed = _hdrLine1(6)
+						End If
+					End If
+				Else
+				End If
 
-            ' #,CCC,<name>,<syndicate>,<internal name>,<date created>
-            _hdrLine2 = m_myReader.ReadFields()
-            If _hdrLine2.Length >= 3 Then
-               m_myName = _hdrLine2(2)
-               If _hdrLine2.Length >= 4 Then
-                  m_mySyndicate = _hdrLine2(3)
-                  If _hdrLine2.Length >= 5 Then
-                     m_internalFilename = _hdrLine2(4)
-                     If _hdrLine2.Length >= 6 Then
-                        m_dateCreated = [DateTime].Parse(_hdrLine2(5))
-                     Else
-                        m_dateCreated = Date.Now()
-                     End If
-                  Else
-                     m_internalFilename = String.Empty
-                     m_dateCreated = Date.Now()
-                  End If
-               Else
-                  m_mySyndicate = String.Empty
-                  m_internalFilename = String.Empty
-                  m_dateCreated = Date.Now()
-               End If
-            Else
-               m_mySyndicate = String.Empty
-               m_internalFilename = String.Empty
-               m_dateCreated = Date.Now()
-               m_myName = String.Empty
-            End If
+				' #,CCC,<name>,<syndicate>,<internal name>,<date created>
+				_hdrLine2 = m_myReader.ReadFields()
+				If _hdrLine2(0) = "#" AndAlso _hdrLine2(1) = "CCC" Then
+					If _hdrLine2.Length >= 3 Then
+						m_myName = _hdrLine2(2)
+						If _hdrLine2.Length >= 4 Then
+							m_mySyndicate = _hdrLine2(3)
+							If _hdrLine2.Length >= 5 Then
+								m_internalFilename = _hdrLine2(4)
+								If _hdrLine2.Length >= 6 Then
+									m_dateCreated = [DateTime].Parse(_hdrLine2(5))
+								Else
+									m_dateCreated = Date.Now()
+								End If
+							Else
+								m_internalFilename = String.Empty
+								m_dateCreated = Date.Now()
+							End If
+						Else
+							m_mySyndicate = String.Empty
+							m_internalFilename = String.Empty
+							m_dateCreated = Date.Now()
+						End If
+					Else
+						m_mySyndicate = String.Empty
+						m_internalFilename = String.Empty
+						m_dateCreated = Date.Now()
+						m_myName = String.Empty
+					End If
+				Else
+				End If
 
-            ' #,CREDIT,<credit name>,<credit email>
-            _hdrLine3 = m_myReader.ReadFields()
-            If _hdrLine3.Length >= 3 Then
-               m_creditName = _hdrLine3(2)
-               If _hdrLine3.Length >= 4 Then
-                  m_creditEmail = _hdrLine3(3)
-               Else
-                  m_creditEmail = String.Empty
-               End If
-            Else
-               m_creditName = String.Empty
-               m_creditEmail = String.Empty
-            End If
+				' #,CREDIT,<credit name>,<credit email>
+				_hdrLine3 = m_myReader.ReadFields()
+				If _hdrLine3(0) = "#" AndAlso _hdrLine3(1) = "CREDIT" Then
+					If _hdrLine3.Length >= 3 Then
+						m_creditName = _hdrLine3(2)
+						If _hdrLine3.Length >= 4 Then
+							m_creditEmail = _hdrLine3(3)
+						Else
+							m_creditEmail = String.Empty
+						End If
+					Else
+						m_creditName = String.Empty
+						m_creditEmail = String.Empty
+					End If
+				Else
+				End If
 
-            ' #,<date changed>,<comment 1>,<comment 2>
-            _hdrLine4 = m_myReader.ReadFields()
-            If _hdrLine4.Length >= 2 Then
-               m_dateLastChanged = [DateTime].Parse(_hdrLine4(1))
-               If _hdrLine4.Length >= 3 Then
-                  m_comment1 = _hdrLine4(2)
-                  If _hdrLine4.Length >= 4 Then
-                     m_comment2 = _hdrLine4(3)
-                  Else
-                     m_comment2 = String.Empty
-                  End If
-               Else
-                  m_comment2 = String.Empty
-                  m_comment1 = String.Empty
-               End If
-            Else
-               m_comment2 = String.Empty
-               m_comment1 = String.Empty
-               m_dateLastChanged = Date.Now()
-            End If
+				' #,<date changed>,<comment 1>,<comment 2>
+				_hdrLine4 = m_myReader.ReadFields()
+				If _hdrLine4(0) = "#" Then
+					If _hdrLine4.Length >= 2 Then
+						Dim f = [DateTime].TryParse(_hdrLine4(1), m_dateLastChanged)
+						If _hdrLine4.Length >= 3 Then
+							m_comment1 = _hdrLine4(2)
+							If _hdrLine4.Length >= 4 Then
+								m_comment2 = _hdrLine4(3)
+							Else
+								m_comment2 = String.Empty
+							End If
+						Else
+							m_comment2 = String.Empty
+							m_comment1 = String.Empty
+						End If
+					Else
+						m_comment2 = String.Empty
+						m_comment1 = String.Empty
+						m_dateLastChanged = Date.Now()
+					End If
+				Else
+				End If
 
-            ' +LDS
-            _hdrLine5 = m_myReader.ReadFields()
-            If _hdrLine5(0) = "+LDS" Then
-               m_isLDS = True
-               FirstDataRecord = m_myReader.ReadFields()
-            Else
-               m_isLDS = False
-               FirstDataRecord = _hdrLine5
-               _hdrLine5 = Nothing
-            End If
+				' +LDS
+				_hdrLine5 = m_myReader.ReadFields()
+				If _hdrLine5(0) = "+LDS" Then
+					m_isLDS = True
+					FirstDataRecord = m_myReader.ReadFields()
+				Else
+					m_isLDS = False
+					FirstDataRecord = _hdrLine5
+					_hdrLine5 = Nothing
+				End If
 
-            m_county = FirstDataRecord(0)
-            m_place = FirstDataRecord(1)
-            m_church = FirstDataRecord(2)
-            m_regType = ""
+				m_county = FirstDataRecord(0)
+				m_place = FirstDataRecord(1)
+				m_church = FirstDataRecord(2)
+				m_regType = ""
 
-         Catch ex As MalformedLineException
-            Throw
-            MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
-         End Try
+			Catch ex As MalformedLineException
+				Throw
+				MsgBox("Line " & ex.Message & "is not valid and will be skipped.")
+			End Try
 
          Return FirstDataRecord
       End Function

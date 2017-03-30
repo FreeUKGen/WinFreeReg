@@ -175,4 +175,7 @@
   <data name="msgFileCodeIsRequired" xml:space="preserve">
     <value>To start a new file requires that a File Code is allocated. This can either be done on a once-off basis per file, or a code can be allocated on the Church record and then used on each file that is created for that Church.</value>
   </data>
+  <data name="msgInvalidFileFormat" xml:space="preserve">
+    <value>The selected file does not appear to be a valid Transcription FIle, even though outwardly the name and extension would indicate that it is. You can not open this file without examining it, and correcting it, outside of this program.</value>
+  </data>
 </root>
