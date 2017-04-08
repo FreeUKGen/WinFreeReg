@@ -104,8 +104,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\ObjectListViewFull-2.9.1\ObjectListViewDemo\ObjectListView\bin\Release\ObjectListView.dll</HintPath>
     </Reference>
-    <Reference Include="regexlib">
-      <HintPath>..\..\..\..\Visual Studio 2008\Projects\WinREG_3.2\WinREG_3\bin\x86\Release\regexlib.dll</HintPath>
+    <Reference Include="regexlib, Version=1.0.0.1, Culture=neutral, PublicKeyToken=75614fed95403164, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Visual Studio 2008\Projects\RegexLibraryBuilder\bin\x86\Release\regexlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />

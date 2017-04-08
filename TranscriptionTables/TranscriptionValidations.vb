@@ -100,6 +100,15 @@ Public NotInheritable Class TranscriptionValidations
 	Private Sub New()
 	End Sub
 
+	Private Const month29 = "(0[1-9]|[12][0-9])-Feb"
+	Private Const month30 = "(0[1-9]|[12][0-9]|30)-(Sep|Apr|Jun|Nov)"
+	Private Const month31 = "(0[1-9]|[12][0-9]|3[01])-(Jan|Mar|May|Jul|Aug|Oct|Dec)"
+	Private Shared _Regex As Regex = New Regex(String.Format("({0}|{1}|{2})", _
+	month29, _
+	month30, _
+	month31 _
+	) + "-\d{4}")
+
 	Public Shared Function ValidateDate(ByRef strToValidate As String, ByRef strErrMessage As String, ByRef strBits As String(), ByVal MyLeadingZeroOnDates As Boolean, ByVal MyAddErrorNumberToMessage As Boolean) As Boolean
 		Dim e As Boolean
 
@@ -297,93 +306,93 @@ Public NotInheritable Class TranscriptionValidations
 
 		' Pre-1752 split year validation
 		'
-      If fValidYear AndAlso fValidMonth Then
-         If zz <> "*" And zz <> "" Then
-            If zz.Contains("_") = False Then
-               If mmm <> "Jan" And mmm <> "Feb" And mmm <> "Mar" And mmm <> "" And mmm <> "*" Then
-                  strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0016:{0}", My.Resources.err0016), My.Resources.err0016)
-                  e = False
-               Else
-                  If dd <> "*" And dd <> "" And dd.Contains("_") = False Then
-                     Dim ddd As Integer
-                     If Int16.TryParse(dd, ddd) Then
-                        If ddd >= 25 And mmm = "Mar" Then
-                           strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0017:{0}", My.Resources.err0017), My.Resources.err0017)
-                           e = False
-                        Else
-                           If zzi <= 99 Then
-                              If (yyi Mod 100) = 99 Then ' End of century - split must be "00"
-                                 If zz <> "00" Then
-                                    strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0018:{0}", My.Resources.err0018), My.Resources.err0018)
-                                    e = False
-                                 End If
-                              Else
-                                 Dim yyj As Integer = (yyi + 1) Mod 100
-                                 If yyj <> zzi Then
-                                    If zzi <> yyj Mod 10 Then
-                                       strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0019:{0}", My.Resources.err0019), My.Resources.err0019)
-                                       e = False
-                                    End If
-                                 End If
-                                 If e Then zz = yyj.ToString()
-                              End If
-                           Else                          ' Split-year can't be more than 99
-                              strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0020:{0}", My.Resources.err0020), My.Resources.err0020)
-                              e = False
-                           End If
-                        End If
-                     Else
-                        strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0021:{0}", My.Resources.err0021), My.Resources.err0021)
-                        e = False
-                     End If
-                  Else
-                     If zzi <= 99 Then
-                        If (yyi Mod 100) = 99 Then ' End of century - split must be "00"
-                           If zz <> "00" Then
-                              strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0018:{0}", My.Resources.err0018), My.Resources.err0018)
-                              e = False
-                           End If
-                        Else
-                           Dim yyj As Integer = (yyi + 1) Mod 100
+		If fValidYear AndAlso fValidMonth Then
+			If zz <> "*" And zz <> "" Then
+				If zz.Contains("_") = False Then
+					If mmm <> "Jan" And mmm <> "Feb" And mmm <> "Mar" And mmm <> "" And mmm <> "*" Then
+						strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0016:{0}", My.Resources.err0016), My.Resources.err0016)
+						e = False
+					Else
+						If dd <> "*" And dd <> "" And dd.Contains("_") = False Then
+							Dim ddd As Integer
+							If Int16.TryParse(dd, ddd) Then
+								If ddd >= 25 And mmm = "Mar" Then
+									strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0017:{0}", My.Resources.err0017), My.Resources.err0017)
+									e = False
+								Else
+									If zzi <= 99 Then
+										If (yyi Mod 100) = 99 Then	' End of century - split must be "00"
+											If zz <> "00" Then
+												strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0018:{0}", My.Resources.err0018), My.Resources.err0018)
+												e = False
+											End If
+										Else
+											Dim yyj As Integer = (yyi + 1) Mod 100
+											If yyj <> zzi Then
+												If zzi <> yyj Mod 10 Then
+													strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0019:{0}", My.Resources.err0019), My.Resources.err0019)
+													e = False
+												End If
+											End If
+											If e Then zz = yyj.ToString()
+										End If
+									Else									' Split-year can't be more than 99
+										strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0020:{0}", My.Resources.err0020), My.Resources.err0020)
+										e = False
+									End If
+								End If
+							Else
+								strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0021:{0}", My.Resources.err0021), My.Resources.err0021)
+								e = False
+							End If
+						Else
+							If zzi <= 99 Then
+								If (yyi Mod 100) = 99 Then	' End of century - split must be "00"
+									If zz <> "00" Then
+										strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0018:{0}", My.Resources.err0018), My.Resources.err0018)
+										e = False
+									End If
+								Else
+									Dim yyj As Integer = (yyi + 1) Mod 100
 
-                           If yyj <> zzi Then
-                              If zzi <> yyj Mod 10 Then
-                                 strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0019:{0}", My.Resources.err0019), My.Resources.err0019)
-                                 e = False
-                              End If
-                           End If
-                           If e Then zz = yyj.ToString()
-                        End If
-                     Else                          ' Split-year can't be more than 99
-                        strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0020:{0}", My.Resources.err0020), My.Resources.err0020)
-                        e = False
-                     End If
-                  End If
-               End If
-            End If
-         Else                                ' zz="" - Should be a split-year in this case
-            If mmm = "Jan" Or mmm = "Feb" Then
-               strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0023:{0}", My.Resources.err0023), My.Resources.err0023)
-               e = False
-            Else
-               If mmm = "Mar" Then
-                  If Not String.IsNullOrEmpty(dd) Then
-                     If dd <> "*" And dd <> "" And dd.Contains("_") = False Then
-                        Try
-                           If CInt(dd) <= 24 Then
-                              strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0023:{0}", My.Resources.err0023), My.Resources.err0023)
-                              e = False
-                           End If
-                        Catch ex As Exception
-                           strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0024:{0}", My.Resources.err0024), My.Resources.err0024)
-                           e = False
-                        End Try
-                     End If
-                  End If
-               End If
-            End If
-         End If
-      End If
+									If yyj <> zzi Then
+										If zzi <> yyj Mod 10 Then
+											strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0019:{0}", My.Resources.err0019), My.Resources.err0019)
+											e = False
+										End If
+									End If
+									If e Then zz = yyj.ToString()
+								End If
+							Else									' Split-year can't be more than 99
+								strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0020:{0}", My.Resources.err0020), My.Resources.err0020)
+								e = False
+							End If
+						End If
+					End If
+				End If
+			Else											' zz="" - Should be a split-year in this case
+				If mmm = "Jan" Or mmm = "Feb" Then
+					strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0023:{0}", My.Resources.err0023), My.Resources.err0023)
+					e = False
+				Else
+					If mmm = "Mar" Then
+						If Not String.IsNullOrEmpty(dd) Then
+							If dd <> "*" And dd <> "" And dd.Contains("_") = False Then
+								Try
+									If CInt(dd) <= 24 Then
+										strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0023:{0}", My.Resources.err0023), My.Resources.err0023)
+										e = False
+									End If
+								Catch ex As Exception
+									strErrMessage = IIf(MyAddErrorNumberToMessage, String.Format("0024:{0}", My.Resources.err0024), My.Resources.err0024)
+									e = False
+								End Try
+							End If
+						End If
+					End If
+				End If
+			End If
+		End If
 		If Not e Then Return False ' Date was invalid
 
 		' Special check for leap years

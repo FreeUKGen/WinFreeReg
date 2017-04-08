@@ -86,9 +86,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="regexlib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=75614fed95403164, processorArchitecture=MSIL">
+    <Reference Include="regexlib, Version=1.0.0.1, Culture=neutral, PublicKeyToken=75614fed95403164, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\Visual Studio 2008\Projects\WinREG_3.2\WinREG_3\bin\x86\Release\regexlib.dll</HintPath>
+      <HintPath>..\..\..\..\Visual Studio 2008\Projects\RegexLibraryBuilder\bin\x86\Release\regexlib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -107,8 +107,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Import Include="freereg" />
-    <Import Include="freereg.regex" />
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />

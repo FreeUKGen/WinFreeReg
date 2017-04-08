@@ -55,19 +55,19 @@ Public Class formMissingDetails
 	End Sub
 
 	Private Sub btnOK_Click(sender As Object, e As EventArgs) Handles btnOK.Click
-		If countiesComboBox.SelectedIndex > 0 Then
+		If countiesComboBox.SelectedIndex >= 0 Then
 			Dim selectedCounty As FreeregTables.CountiesRow = CType(countiesComboBox.SelectedItem(), DataRowView).Row
 			TranscriptionFile.FileHeader.County = selectedCounty.ChapmanCode
 			FileCorrected = True
 		End If
 
-		If placesComboBox.SelectedIndex > 0 Then
+		If placesComboBox.SelectedIndex >= 0 Then
 			Dim selectedPlace As DataRow = CType(placesComboBox.SelectedItem(), DataRowView).Row
 			TranscriptionFile.FileHeader.Place = selectedPlace.Item(0)
 			FileCorrected = True
 		End If
 
-		If churchesComboBox.SelectedIndex > 0 Then
+		If churchesComboBox.SelectedIndex >= 0 Then
 			Dim selectedChurch As DataRow = CType(churchesComboBox.SelectedItem(), DataRowView).Row
 			TranscriptionFile.FileHeader.Church = selectedChurch.Item(0)
 			TranscriptionFile.PlaceCode = selectedChurch.Item(3)
