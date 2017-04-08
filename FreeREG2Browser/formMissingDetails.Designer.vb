@@ -40,6 +40,7 @@ Partial Class formMissingDetails
 		Me.btnOK = New System.Windows.Forms.Button()
 		Me.btnCancel = New System.Windows.Forms.Button()
 		Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+		Me.textMessage = New System.Windows.Forms.TextBox()
 		CType(Me.FreeregTables, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.CountiesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
 		CType(Me.PlacesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -204,6 +205,17 @@ Partial Class formMissingDetails
 		Me.TableLayoutPanel1.Size = New System.Drawing.Size(162, 29)
 		Me.TableLayoutPanel1.TabIndex = 14
 		'
+		'textMessage
+		'
+		Me.textMessage.BorderStyle = System.Windows.Forms.BorderStyle.None
+		Me.textMessage.Location = New System.Drawing.Point(26, 153)
+		Me.textMessage.Multiline = True
+		Me.textMessage.Name = "textMessage"
+		Me.textMessage.ReadOnly = True
+		Me.textMessage.Size = New System.Drawing.Size(554, 73)
+		Me.textMessage.TabIndex = 15
+		Me.textMessage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+		'
 		'formMissingDetails
 		'
 		Me.AcceptButton = Me.btnOK
@@ -211,6 +223,7 @@ Partial Class formMissingDetails
 		Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
 		Me.CancelButton = Me.btnCancel
 		Me.ClientSize = New System.Drawing.Size(595, 289)
+		Me.Controls.Add(Me.textMessage)
 		Me.Controls.Add(Me.TableLayoutPanel1)
 		Me.Controls.Add(Me.labelMessage)
 		Me.Controls.Add(Me.textChurch)
@@ -252,4 +265,5 @@ Partial Class formMissingDetails
 	Friend WithEvents btnOK As System.Windows.Forms.Button
 	Friend WithEvents btnCancel As System.Windows.Forms.Button
 	Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
+	Friend WithEvents textMessage As System.Windows.Forms.TextBox
 End Class

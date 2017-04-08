@@ -675,6 +675,7 @@ Partial Public Class LocalFilesDataSet
 			Me.columnFullName.AllowDBNull = False
 			Me.columnFullName.Unique = True
 			Me.columnValidFile.Caption = "Valid"
+			Me.columnValidFile.DefaultValue = CType(True, Boolean)
 			Me.Locale = New Global.System.Globalization.CultureInfo("en")
 		End Sub
 

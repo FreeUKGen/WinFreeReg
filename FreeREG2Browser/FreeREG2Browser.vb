@@ -4062,8 +4062,8 @@ Public Class FreeREG2Browser
                      values(i) = properties(i).GetValue(fi, Nothing)
                      System.Math.Max(System.Threading.Interlocked.Increment(i), i - 1)
                   End While
-                  tableLocalFiles.Rows.Add(values)
-               End If
+						Dim newrow = tableLocalFiles.Rows.Add(values)
+					End If
             End If
             If dlg.TablesUpdated Then TablesDataSet.WriteXml(FreeregTablesFile, XmlWriteMode.WriteSchema)
 
@@ -4223,6 +4223,13 @@ Public Class FreeREG2Browser
 					dlg.UserTablesFile = TranscriberProfileFile
 					Dim rc = dlg.ShowDialog()
 					If rc = Windows.Forms.DialogResult.OK Then
+						If dlg.TranscriptionFile.FileCorrected Then
+							' If the file has been corrected here, then we also need to update in the underlying Local Files window in the Browser.
+
+							row.Place = dlg.TranscriptionFile.FileHeader.Place
+							row.Church = dlg.TranscriptionFile.FileHeader.Church
+						End If
+
 						If File.Exists(dlg.TranscriptionFile.FullFileName) Then
 							' File has been edited
 							' Details need to be updated in the table

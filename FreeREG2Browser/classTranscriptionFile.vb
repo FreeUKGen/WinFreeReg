@@ -98,7 +98,9 @@ Public Class TranscriptionFileClass
 		End Set
 	End Property
 
-   Private m_Decoding As Encoding = Encoding.GetEncoding("iso-8859-1")
+	Property FileCorrected As Boolean
+
+	Private m_Decoding As Encoding = Encoding.GetEncoding("iso-8859-1")
    Private m_Encoding As Encoding = Encoding.GetEncoding("utf-8")
 
    Enum FileTypes
@@ -188,7 +190,7 @@ Public Class TranscriptionFileClass
 				dlg.FormHelp = formHelp
 				Dim rc = dlg.ShowDialog
 				If rc = DialogResult.Cancel Then Throw New FileHeaderException(String.Format("Unable to find Church record for County:{0} Place:{1} Church:{2}", m_fileHeader.County, m_fileHeader.Place, m_fileHeader.Church))
-				If dlg.FileCorrected Then Save()
+				If FileCorrected Then Save()
 			End Using
 		Else
 			m_PlaceCode = Crec.FileCode

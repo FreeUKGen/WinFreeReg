@@ -12,7 +12,7 @@
   <xs:element name="LocalFilesDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="LocalFilesDataSet" msprop:Generator_UserDSName="LocalFilesDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="LocalFile" msdata:Locale="en" msprop:Generator_TableClassName="LocalFileDataTable" msprop:Generator_TableVarName="tableLocalFile" msprop:Generator_RowChangedName="LocalFileRowChanged" msprop:Generator_TablePropName="LocalFile" msprop:Generator_RowDeletingName="LocalFileRowDeleting" msprop:Generator_RowChangingName="LocalFileRowChanging" msprop:Generator_RowEvHandlerName="LocalFileRowChangeEventHandler" msprop:Generator_RowDeletedName="LocalFileRowDeleted" msprop:Generator_RowClassName="LocalFileRow" msprop:Generator_UserTableName="LocalFile" msprop:Generator_RowEvArgName="LocalFileRowChangeEvent">
+        <xs:element name="LocalFile" msdata:Locale="en" msprop:Generator_TableClassName="LocalFileDataTable" msprop:Generator_TableVarName="tableLocalFile" msprop:Generator_TablePropName="LocalFile" msprop:Generator_RowDeletingName="LocalFileRowDeleting" msprop:Generator_RowChangingName="LocalFileRowChanging" msprop:Generator_RowEvHandlerName="LocalFileRowChangeEventHandler" msprop:Generator_RowDeletedName="LocalFileRowDeleted" msprop:Generator_UserTableName="LocalFile" msprop:Generator_RowChangedName="LocalFileRowChanged" msprop:Generator_RowEvArgName="LocalFileRowChangeEvent" msprop:Generator_RowClassName="LocalFileRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
@@ -34,7 +34,7 @@
               <xs:element name="Place" msprop:Generator_ColumnVarNameInTable="columnPlace" msprop:Generator_ColumnPropNameInRow="Place" msprop:Generator_ColumnPropNameInTable="PlaceColumn" msprop:Generator_UserColumnName="Place" type="xs:string" minOccurs="0" />
               <xs:element name="Church" msprop:Generator_ColumnVarNameInTable="columnChurch" msprop:Generator_ColumnPropNameInRow="Church" msprop:Generator_ColumnPropNameInTable="ChurchColumn" msprop:Generator_UserColumnName="Church" type="xs:string" minOccurs="0" />
               <xs:element name="RecordType" msprop:Generator_ColumnVarNameInTable="columnRecordType" msprop:Generator_ColumnPropNameInRow="RecordType" msprop:Generator_ColumnPropNameInTable="RecordTypeColumn" msprop:Generator_UserColumnName="RecordType" type="xs:string" minOccurs="0" />
-              <xs:element name="ValidFile" msdata:Caption="Valid" msprop:Generator_ColumnVarNameInTable="columnValidFile" msprop:Generator_ColumnPropNameInRow="ValidFile" msprop:Generator_ColumnPropNameInTable="ValidFileColumn" msprop:Generator_UserColumnName="ValidFile" type="xs:boolean" minOccurs="0" />
+              <xs:element name="ValidFile" msdata:Caption="Valid" msprop:Generator_ColumnVarNameInTable="columnValidFile" msprop:Generator_ColumnPropNameInRow="ValidFile" msprop:Generator_ColumnPropNameInTable="ValidFileColumn" msprop:Generator_UserColumnName="ValidFile" type="xs:boolean" default="true" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

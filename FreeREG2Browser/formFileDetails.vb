@@ -52,7 +52,7 @@ Public Class formFileDetails
       CountyComboBox.SelectedValue = m_TranscriptionFile.FileHeader.County
       PlacesBindingSource.Filter = String.Format("ChapmanCode = '{0}'", m_TranscriptionFile.FileHeader.County)
       PlaceComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Place
-      ChurchesBindingSource.Filter = String.Format("ChapmanCode = '{0}' AND PlaceName = '{1}'", m_TranscriptionFile.FileHeader.County, m_TranscriptionFile.FileHeader.Place)
+		ChurchesBindingSource.Filter = String.Format("ChapmanCode = '{0}' AND PlaceName = '{1}'", m_TranscriptionFile.FileHeader.County, m_TranscriptionFile.FileHeader.Place.Replace("'", "''") + "'")
       ChurchComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Church
       RegisterTypeComboBox.SelectedValue = m_TranscriptionFile.FileHeader.RegisterType
       FileTypeComboBox.SelectedValue = [Enum].GetName(GetType(FileTypes), m_TranscriptionFile.FileHeader.FileType).Substring(0, 2)
@@ -111,7 +111,7 @@ Public Class formFileDetails
          errorChurchName.SetError(ChurchComboBox, "")
          If ChurchesBindingSource.Count = 0 Then
             MessageBox.Show(String.Format(My.Resources.msgNoChurchesForPlace, PlaceComboBox.SelectedValue), "Select Placename", MessageBoxButtons.OK, MessageBoxIcon.Stop)
-            ChurchesBindingSource.Filter = ChurchFilter(m_TranscriptionFile.FileHeader.County, m_TranscriptionFile.FileHeader.Place)
+				ChurchesBindingSource.Filter = ChurchFilter(m_TranscriptionFile.FileHeader.County, m_TranscriptionFile.FileHeader.Place)
             ChurchComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Church
             PlaceComboBox.SelectedValue = m_TranscriptionFile.FileHeader.Place
          End If
