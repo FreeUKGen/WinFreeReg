@@ -142,34 +142,43 @@ Public Class formStartUp
          UrlTextBox.Text = frm.FreeregUrl
          TraceCheckBox.Checked = frm.TraceNetwork
 
-         UserDataSet.Clear()
-         UserDataSet.ReadXml(TranscriberProfileFile, XmlReadMode.ReadSchema)
-         currentTranscriber = UserDataSet.User.FindByuserid(UserIdTextBox.Text)
-         If currentTranscriber IsNot Nothing Then
-            currentTranscriber.PasswordInClear = frm.Password
-            currentTranscriber.DefaultFolder = LibraryTextBox.Text
-            currentTranscriber.Url = frm.FreeregUrl
-         End If
-         UserDataSet.AcceptChanges()
-         UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
+			UserDataSet.Clear()
+			If File.Exists(TranscriberProfileFile) Then
+				UserDataSet.ReadXml(TranscriberProfileFile, XmlReadMode.ReadSchema)
+				currentTranscriber = UserDataSet.User.FindByuserid(UserIdTextBox.Text)
+				If currentTranscriber IsNot Nothing Then
+					currentTranscriber.PasswordInClear = frm.Password
+					currentTranscriber.DefaultFolder = LibraryTextBox.Text
+					currentTranscriber.Url = frm.FreeregUrl
+				End If
+			Else
+				currentTranscriber = UserDataSet.User.NewUserRow()
+				currentTranscriber.userid = UserIdTextBox.Text
+				currentTranscriber.PasswordInClear = frm.Password
+				currentTranscriber.DefaultFolder = LibraryTextBox.Text
+				currentTranscriber.Url = frm.FreeregUrl
+				UserDataSet.User.AddUserRow(currentTranscriber)
+			End If
+			UserDataSet.AcceptChanges()
+			UserDataSet.WriteXml(TranscriberProfileFile, XmlWriteMode.WriteSchema)
 
-         Dim users = From user As WinFreeReg.UserDetails.UserRow In UserDataSet.User.Rows _
-          Select user
+			Dim users = From user As WinFreeReg.UserDetails.UserRow In UserDataSet.User.Rows _
+			 Select user
 
-         If users.Count > 1 Then
-            Dim sourceUserIds As New AutoCompleteStringCollection()
-            For Each user In users
-               sourceUserIds.Add(user.userid)
-            Next
-            UserIdTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource
-            UserIdTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
-            UserIdTextBox.AutoCompleteCustomSource = sourceUserIds
-         Else
-            UserIdTextBox.AutoCompleteMode = AutoCompleteMode.None
-         End If
+			If users.Count > 1 Then
+				Dim sourceUserIds As New AutoCompleteStringCollection()
+				For Each user In users
+					sourceUserIds.Add(user.userid)
+				Next
+				UserIdTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource
+				UserIdTextBox.AutoCompleteMode = AutoCompleteMode.SuggestAppend
+				UserIdTextBox.AutoCompleteCustomSource = sourceUserIds
+			Else
+				UserIdTextBox.AutoCompleteMode = AutoCompleteMode.None
+			End If
 
-         If Not KeepOpenCheckBox.Checked Then Me.Close() Else Me.Show()
-      End Using
+			If Not KeepOpenCheckBox.Checked Then Me.Close() Else Me.Show()
+		End Using
    End Sub
 
    Private Sub formStartUp_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
